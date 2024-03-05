@@ -1,9 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>ECF_DGII.Models.snk</AssemblyOriginatorKeyFile>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Authors>SSD Smart Software Development SRL</Authors>
+		<Company>SSD Smart Software Development SRL</Company>
+		<Copyright>© SSD Smart Software Development SRL</Copyright>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+		<Title>ECF_DGII Models</Title>
+		<Description>Modelos POCO generados a partir de los XSD definidos por la DGII, para la facturación electrónica en República Dominicana.</Description>
+		<RepositoryType>git</RepositoryType>
+		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii</PackageProjectUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<RepositoryUrl>https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii</RepositoryUrl>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="XSD/ARECF v1.0.xsd" />
@@ -18,6 +39,12 @@
 		<EmbeddedResource Include="XSD/e-CF 45 v.1.0.xsd" />
 		<EmbeddedResource Include="XSD/e-CF 46 v.1.0.xsd" />
 		<EmbeddedResource Include="XSD/e-CF 47 v.1.0.xsd" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 
 </Project>

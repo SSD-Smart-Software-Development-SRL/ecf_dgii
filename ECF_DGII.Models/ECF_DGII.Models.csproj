@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="XSD/ARECF v1.0.xsd" />
+		<EmbeddedResource Include="XSD/Semilla v.1.0.xsd" />
+		<EmbeddedResource Include="XSD/e-CF 31 v.1.0.xsd" />
+		<EmbeddedResource Include="XSD/e-CF 32 v.1.0.xsd" />
+		<EmbeddedResource Include="XSD/e-CF 33 v.1.0.xsd" />
+		<EmbeddedResource Include="XSD/e-CF 34 v.1.0.xsd" />
+		<EmbeddedResource Include="XSD/e-CF 41 v.1.0.xsd" />
+		<EmbeddedResource Include="XSD/e-CF 43 v.1.0.xsd" />
+		<EmbeddedResource Include="XSD/e-CF 44 v.1.0.xsd" />
+		<EmbeddedResource Include="XSD/e-CF 45 v.1.0.xsd" />
+		<EmbeddedResource Include="XSD/e-CF 46 v.1.0.xsd" />
+		<EmbeddedResource Include="XSD/e-CF 47 v.1.0.xsd" />
+	</ItemGroup>
+
+</Project>

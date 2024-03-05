@@ -1,0 +1,1354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="ECF">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Encabezado" minOccurs="1" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Version" type="versionType" minOccurs="1" maxOccurs="1" />
+							<xs:element name="IdDoc" minOccurs="1" maxOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="TipoeCF" type="TipoeCFType" minOccurs="1" maxOccurs="1" />
+										<xs:element name="eNCF" type="eNCFValidationType" minOccurs="1" maxOccurs="1" />
+										<xs:element name="FechaVencimientoSecuencia" type="FechaValidationType" minOccurs="1" maxOccurs="1" />
+										<xs:element name="TipoPago" type="TipoPagoType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="TotalPaginas" type="Integer4ValidationTypeMayorUno" minOccurs="0" maxOccurs="1" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Emisor" minOccurs="1" maxOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="RNCEmisor" type="RNCValidationType" minOccurs="1" maxOccurs="1" />
+										<xs:element name="RazonSocialEmisor" type="AlfNum150Type" minOccurs="1" maxOccurs="1" />
+										<xs:element name="NombreComercial" type="AlfNum150Type" minOccurs="0" maxOccurs="1" />
+										<xs:element name="Sucursal" type="AlfNum20Type" minOccurs="0" maxOccurs="1" />
+										<xs:element name="DireccionEmisor" type="AlfNum100Type" minOccurs="1" maxOccurs="1" />
+										<xs:element name="Municipio" type="ProvinciaMunicipioType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="Provincia" type="ProvinciaMunicipioType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="TablaTelefonoEmisor" minOccurs="0" maxOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="TelefonoEmisor" type="TelefonoValidationType" minOccurs="1" maxOccurs="3" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="CorreoEmisor" type="CorreoValidationType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="WebSite" type="AlfNum50Type" minOccurs="0" maxOccurs="1" />
+										<xs:element name="ActividadEconomica" type="AlfNum100Type" minOccurs="0" maxOccurs="1" />
+										<xs:element name="NumeroFacturaInterna" type="AlfNum20Type" minOccurs="0" maxOccurs="1" />
+										<xs:element name="NumeroPedidoInterno" type="Integer20ValidationType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="InformacionAdicionalEmisor" type="AlfNum250Type" minOccurs="0" maxOccurs="1" />
+										<xs:element name="FechaEmision" type="FechaValidationType" minOccurs="1" maxOccurs="1" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Totales" minOccurs="1" maxOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="MontoExento" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="0" maxOccurs="1" />
+										<xs:element name="MontoTotal" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="1" maxOccurs="1" />
+										<xs:element name="MontoPeriodo" type="Decimal18D1or2ValidationTypeNegativoPositivo" minOccurs="0"
+										            maxOccurs="1" />
+										<xs:element name="SaldoAnterior" type="Decimal18D1or2ValidationTypeNegativoPositivo" minOccurs="0"
+										            maxOccurs="1" />
+										<xs:element name="MontoAvancePago" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="0"
+										            maxOccurs="1" />
+										<xs:element name="ValorPagar" type="Decimal18D1or2ValidationTypeNegativoPositivo" minOccurs="0" maxOccurs="1" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="OtraMoneda" minOccurs="0" maxOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="TipoMoneda" type="TipoMonedaType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="TipoCambio" type="Decimal7D1or4ValidationTypeMayorCero" minOccurs="0" maxOccurs="1" />
+										<xs:element name="MontoExentoOtraMoneda" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="0"
+										            maxOccurs="1" />
+										<xs:element name="MontoTotalOtraMoneda" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="0"
+										            maxOccurs="1" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="DetallesItems" minOccurs="1" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Item" minOccurs="1" maxOccurs="1000">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="NumeroLinea" type="NumeroLineaType" minOccurs="1" maxOccurs="1" />
+										<xs:element name="TablaCodigosItem" minOccurs="0" maxOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="CodigosItem" minOccurs="1" maxOccurs="5">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="TipoCodigo" type="AlfNum14Type" minOccurs="1" maxOccurs="1" />
+																<xs:element name="CodigoItem" type="AlfNum35Type" minOccurs="1" maxOccurs="1" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="IndicadorFacturacion" type="IndicadorFacturacionType" minOccurs="1" maxOccurs="1" />
+										<xs:element name="NombreItem" type="AlfNum80Type" minOccurs="1" maxOccurs="1" />
+										<xs:element name="IndicadorBienoServicio" type="IndicadorBienoServicioType" minOccurs="1" maxOccurs="1" />
+										<xs:element name="DescripcionItem" type="AlfNum1000Type" minOccurs="0" maxOccurs="1" />
+										<xs:element name="CantidadItem" type="Decimal18D1or2ValidationTypeMayorCero" minOccurs="1" maxOccurs="1" />
+										<xs:element name="UnidadMedida" type="UnidadMedidaType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="PrecioUnitarioItem" type="Decimal20D1or4ValidationTypeMayorIgualCero" minOccurs="1"
+										            maxOccurs="1" />
+										<xs:element name="OtraMonedaDetalle" minOccurs="0" maxOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="PrecioOtraMoneda" type="Decimal20D1or4ValidationTypeMayorIgualCero" minOccurs="0"
+													            maxOccurs="1" />
+													<xs:element name="DescuentoOtraMoneda" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="0"
+													            maxOccurs="1" />
+													<xs:element name="RecargoOtraMoneda" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="0"
+													            maxOccurs="1" />
+													<xs:element name="MontoItemOtraMoneda" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="0"
+													            maxOccurs="1" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="MontoItem" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="1" maxOccurs="1" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Subtotales" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Subtotal" minOccurs="1" maxOccurs="20">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="NumeroSubTotal" type="Integer2ValidationType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="DescripcionSubtotal" type="AlfNum40Type" minOccurs="0" maxOccurs="1" />
+										<xs:element name="Orden" type="Integer2ValidationType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="SubTotalExento" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="0"
+										            maxOccurs="1" />
+										<xs:element name="MontoSubTotal" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="0"
+										            maxOccurs="1" />
+										<xs:element name="Lineas" type="Integer2ValidationType" minOccurs="0" maxOccurs="1" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Paginacion" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Pagina" minOccurs="1" maxOccurs="1000">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="PaginaNo" type="Integer4V1To1000ValidationType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="NoLineaDesde" type="Integer4V1To1000ValidationType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="NoLineaHasta" type="Integer4V1To1000ValidationType" minOccurs="0" maxOccurs="1" />
+										<xs:element name="SubtotalExentoPagina" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="0"
+										            maxOccurs="1" />
+										<xs:element name="MontoSubtotalPagina" type="Decimal18D1or2ValidationTypeMayorIgualCero" minOccurs="0"
+										            maxOccurs="1" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="InformacionReferencia" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="NCFModificado" type="AlfNum11a19ValidationType" minOccurs="0" maxOccurs="1" />
+							<xs:element name="RNCOtroContribuyente" type="RNCValidationType" minOccurs="0" maxOccurs="1" />
+							<xs:element name="FechaNCFModificado" type="FechaValidationType" minOccurs="0" maxOccurs="1" />
+							<xs:element name="CodigoModificacion" type="CodigoModificacionType" minOccurs="0" maxOccurs="1" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="FechaHoraFirma" type="DateTimeValidationType" minOccurs="1" maxOccurs="1" />
+				<xs:any processContents="skip" minOccurs="1" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Definiciones de Tipos de datos -->
+
+	<xs:simpleType name="versionType">
+		<xs:restriction base="xs:decimal">
+			<xs:enumeration value="1.0" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TipoeCFType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="31" /> <!-- Factura de Crédito Fiscal Electrónica -->
+			<xs:enumeration value="32" /> <!-- Factura de Consumo Electrónica -->
+			<xs:enumeration value="33" /> <!-- Nota de Débito Electrónica -->
+			<xs:enumeration value="34" /> <!-- Nota de Crédito Electrónica -->
+			<xs:enumeration value="41" /> <!-- Compras Electrónico -->
+			<xs:enumeration value="43" /> <!-- Gastos Menores Electrónico -->
+			<xs:enumeration value="44" /> <!-- Regímenes Especiales Electrónico -->
+			<xs:enumeration value="45" /> <!-- Gubernamental Electrónico -->
+			<xs:enumeration value="46" /> <!-- Comprobante de Exportaciones Electrónico -->
+			<xs:enumeration value="47" /> <!-- Comprobante para Pagos al Exterior Electrónico -->
+			<xs:pattern value="[0-9]{2}" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="eNCFValidationType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([a-z0-9A-Z]{13})" />
+			<xs:minLength value="13" />
+			<xs:maxLength value="13" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TipoPagoType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="1" />
+			<!--Contado-->
+			<xs:enumeration value="2" />
+			<!--Crédito-->
+			<xs:enumeration value="3" />
+			<!--Gratuito -->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="RNCValidationType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{11}|[0-9]{9}" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TelefonoValidationType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{3}-\d{3}-\d{4}" />
+			<xs:maxLength value="12" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="CorreoValidationType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="80" />
+			<xs:pattern value="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="NumeroLineaType">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="4" />
+			<xs:pattern value='[0-9]{0,4}' />
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="1000" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="IndicadorFacturacionType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="0" /> <!--No Facturable (18%)-->
+			<xs:enumeration value="1" /> <!--ITBIS 1 (18%)-->
+			<xs:enumeration value="2" /> <!--ITBIS 2 (16%)-->
+			<xs:enumeration value="3" /> <!--ITBIS 3 (0%)-->
+			<xs:enumeration value="4" /> <!--Exento (E)-->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="IndicadorBienoServicioType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="1" /> <!--Bien-->
+			<xs:enumeration value="2" /> <!--Servicio-->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TipoDescuentoRecargoType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="$" />
+			<xs:enumeration value="%" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TipoAjusteType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="D" />
+			<xs:enumeration value="R" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="IndicadorFacturacionDRType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="1" /> <!--ITBIS 1 (18%)-->
+			<xs:enumeration value="2" /> <!--ITBIS 2 (16%)-->
+			<xs:enumeration value="3" /> <!--ITBIS 3 (0%)-->
+			<xs:enumeration value="4" /> <!--Exento (E)-->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="CodigoModificacionType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="1" /> <!--Anula el NCF modificado-->
+			<xs:enumeration value="2" /> <!--Corrige Texto del Comprobante Fiscal modificado -->
+			<xs:enumeration value="3" /> <!--Corrige montos del NCF modificado-->
+			<xs:enumeration value="4" /> <!--Reemplazo NCF emitido en contingencia-->
+			<xs:enumeration value="5" /> <!--Referencia Factura Consumo Electrónica-->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TipoMonedaType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BRL" /> <!-- REAL BRASILENO -->
+			<xs:enumeration value="CAD" /> <!-- DOLAR CANADIENSE -->
+			<xs:enumeration value="CHF" /> <!-- FRANCO SUIZO -->
+			<xs:enumeration value="CHY" /> <!-- YUAN CHINO -->
+			<xs:enumeration value="XDR" /> <!-- DERECHO ESPECIAL DE GIRO -->
+			<xs:enumeration value="DKK" /> <!-- CORONA DANESA -->
+			<xs:enumeration value="EUR" /> <!-- EURO -->
+			<xs:enumeration value="GBP" /> <!-- LIBRA ESTERLINA -->
+			<xs:enumeration value="JPY" /> <!-- YEN JAPONES -->
+			<xs:enumeration value="NOK" /> <!-- CORONA NORUEGA -->
+			<xs:enumeration value="SCP" /> <!-- LIBRA ESCOCESA -->
+			<xs:enumeration value="SEK" /> <!-- CORONA SUECA -->
+			<xs:enumeration value="USD" /> <!-- DOLAR ESTADOUNIDENSE -->
+			<xs:enumeration value="VEF" /> <!-- BOLIVAR FUERTE VENEZOLANO -->
+			<xs:enumeration value="HTG" /> <!-- GURDA HAITIANA -->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="IndicadorNorma1007Type">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="0" /> <!-- No incluir -->
+			<xs:enumeration value="1" /> <!-- Incluir -->
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:simpleType name="IndicadorAgenteRetencionoPercepcionType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="1" /> <!-- Retención -->
+			<xs:enumeration value="2" /> <!-- Percepción -->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="CodificacionTipoImpuestosType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="001" />	<!--Propina Legal                                                          -->
+			<xs:enumeration value="002" />	<!--Contribución al Desarrollo de las Telecomunicaciones Ley 153-98 Art. 45-->
+			<xs:enumeration value="003" />	<!--Servicios Seguros en general                                           -->
+			<xs:enumeration value="004" />	<!--Servicios de Telecomunicaciones                                        -->
+			<xs:enumeration value="005" />	<!--Expedición de la primera placa                                         -->
+			<xs:enumeration value="006" />	<!--Cerveza                                                                -->
+			<xs:enumeration value="007" />	<!--Vinos de uva                                                           -->
+			<xs:enumeration value="008" />	<!--Vermut y demás vinos de uvas frescas                                   -->
+			<xs:enumeration value="009" />	<!--Demás bebidas fermentadas                                              -->
+			<xs:enumeration value="010" />	<!--Alcohol Etílico sin desnaturalizar (Mayor o igual a 80%)               -->
+			<xs:enumeration value="011" />	<!--Alcohol Etílico sin desnaturalizar (inferior a 80%)                    -->
+			<xs:enumeration value="012" />	<!--Aguardientes de uva                                                    -->
+			<xs:enumeration value="013" />	<!--Whisky                                                                 -->
+			<xs:enumeration value="014" />	<!--Ron y demás aguardientes de caña                                       -->
+			<xs:enumeration value="015" />	<!--Gin y Ginebra                                                          -->
+			<xs:enumeration value="016" />	<!--Vodka                                                                  -->
+			<xs:enumeration value="017" />	<!--Licores                                                                -->
+			<xs:enumeration value="018" />	<!--Los demás (Bebidas y Alcoholes)                                        -->
+			<xs:enumeration value="019" />	<!--Cigarrillos que contengan tabaco cajetilla 20 unidades                 -->
+			<xs:enumeration value="020" />	<!--Los demás Cigarrillos que contengan 20 unidades                        -->
+			<xs:enumeration value="021" />	<!--Cigarrillos que contengan 10 unidades                                  -->
+			<xs:enumeration value="022" />	<!--Los demás Cigarrillos que contengan 10 unidades                        -->
+			<xs:enumeration value="023" />	<!--Cerveza                                                 -->
+			<xs:enumeration value="024" />	<!--Vinos de uva                                            -->
+			<xs:enumeration value="025" />	<!--Vermut y demás vinos de uvas frescas                    -->
+			<xs:enumeration value="026" />	<!--Demás bebidas fermentadas                               -->
+			<xs:enumeration value="027" />	<!--Alcohol Etílico sin desnaturalizar (Mayor o igual a 80%)-->
+			<xs:enumeration value="028" />	<!--Alcohol Etílico sin desnaturalizar (inferior a 80%)     -->
+			<xs:enumeration value="029" />	<!--Aguardientes de uva                                     -->
+			<xs:enumeration value="030" />	<!--Whisky                                                  -->
+			<xs:enumeration value="031" />	<!--Ron y demás aguardientes de caña                        -->
+			<xs:enumeration value="032" />	<!--Gin y Ginebra                                           -->
+			<xs:enumeration value="033" />	<!--Vodka                                                   -->
+			<xs:enumeration value="034" />	<!--Licores                                                 -->
+			<xs:enumeration value="035" />	<!--Los demás (Bebidas y Alcoholes)                         -->
+			<xs:enumeration value="036" />	<!--Cigarrillos que contengan tabaco cajetilla 20 unidades  -->
+			<xs:enumeration value="037" />	<!--Los demás Cigarrillos que contengan 20 unidades         -->
+			<xs:enumeration value="038" />	<!--Cigarrillos que contengan 10 unidades                   -->
+			<xs:enumeration value="039" />	<!--Los demás Cigarrillos que contengan 10 unidades         -->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="UnidadMedidaType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1" />	<!--BARR	Barril                       -->
+			<xs:enumeration value="2" />	<!--BOL	Bolsa                            -->
+			<xs:enumeration value="3" />	<!--BOT	Bote                             -->
+			<xs:enumeration value="4" />	<!--BULTO	Bultos                       -->
+			<xs:enumeration value="5" />	<!--BOTELLA	Botella                      -->
+			<xs:enumeration value="6" />	<!--CAJ	Caja/Cajón                       -->
+			<xs:enumeration value="7" />	<!--CAJETILLA 	Cajetilla                -->
+			<xs:enumeration value="8" />	<!--CM	Centímetro                       -->
+			<xs:enumeration value="9" />	<!--CIL	Cilindro                         -->
+			<xs:enumeration value="10" />	<!--CONJ	Conjunto                     -->
+			<xs:enumeration value="11" />	<!--CONT	Contenedor                   -->
+			<xs:enumeration value="12" />	<!--DÍA	Día                              -->
+			<xs:enumeration value="13" />	<!--DOC	Docena                           -->
+			<xs:enumeration value="14" />	<!--FARD	Fardo                        -->
+			<xs:enumeration value="15" />	<!--GL	Galones                          -->
+			<xs:enumeration value="16" />	<!--GRAD	Grado                        -->
+			<xs:enumeration value="17" />	<!--GR	Gramo                            -->
+			<xs:enumeration value="18" />	<!--GRAN	Granel                       -->
+			<xs:enumeration value="19" />	<!--HOR	Hora                             -->
+			<xs:enumeration value="20" />	<!--HUAC	Huacal                       -->
+			<xs:enumeration value="21" />	<!--KG	Kilogramo                        -->
+			<xs:enumeration value="22" />	<!--kWh	Kilovatio Hora                   -->
+			<xs:enumeration value="23" />	<!--LB	Libra                            -->
+			<xs:enumeration value="24" />	<!--LITRO	Litro                        -->
+			<xs:enumeration value="25" />	<!--LOT	Lote                             -->
+			<xs:enumeration value="26" />	<!--M	Metro                            -->
+			<xs:enumeration value="27" />	<!--M2	Metro Cuadrado                   -->
+			<xs:enumeration value="28" />	<!--M3	Metro Cúbico                     -->
+			<xs:enumeration value="29" />	<!--MMBTU	Millones de Unidades Térmicas-->
+			<xs:enumeration value="30" />	<!--MIN	Minuto                           -->
+			<xs:enumeration value="31" />	<!--PAQ	Paquete                          -->
+			<xs:enumeration value="32" />	<!--PAR	Par                              -->
+			<xs:enumeration value="33" />	<!--PIE	Pie                              -->
+			<xs:enumeration value="34" />	<!--PZA	Pieza                            -->
+			<xs:enumeration value="35" />	<!--ROL	Rollo                            -->
+			<xs:enumeration value="36" />	<!--SOBR	Sobre                        -->
+			<xs:enumeration value="37" />	<!--SEG	Segundo                          -->
+			<xs:enumeration value="38" />	<!--TANQUE	Tanque                       -->
+			<xs:enumeration value="39" />	<!--TONE	Tonelada                     -->
+			<xs:enumeration value="40" />	<!--TUB	Tubo                             -->
+			<xs:enumeration value="41" />	<!--YD	Yarda                            -->
+			<xs:enumeration value="42" />	<!--YD2	Yarda cuadrada                   -->
+			<xs:enumeration value="43" />	<!--UND	Unidad                           -->
+			<xs:enumeration value="44" />	<!--EA	Elemento                         -->
+			<xs:enumeration value="45" />	<!--MILLAR	Millar                       -->
+			<xs:enumeration value="46" />	<!--SAC	Saco                             -->
+			<xs:enumeration value="47" />	<!--LAT	Lata                             -->
+			<xs:enumeration value="48" />	<!--DIS	Display                          -->
+			<xs:enumeration value="49" />	<!--BID	Bidón                            -->
+			<xs:enumeration value="50" />	<!--RAC	Ración                           -->
+			<xs:enumeration value="51" /> <!--Q	  Quintal                          -->
+			<xs:enumeration value="52" /> <!--GRT	Toneladas de registro bruto      -->
+			<xs:enumeration value="53" /> <!--P2	Pie Cuadrado                     -->
+			<xs:enumeration value="54" /> <!--PAX	Pasajero                         -->
+			<xs:enumeration value="55" /> <!--PULG Pulgadas                        -->
+			<xs:enumeration value="56" /> <!--STAY Parqueo Barcos En Muelle        -->
+			<xs:enumeration value="57" /> <!--BDJ  Bandeja                         -->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ProvinciaMunicipioType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="010000" />	<!--DISTRITO NACIONAL                                  -->
+			<xs:enumeration value="010100" />	<!--MUNICIPIO SANTO DOMINGO DE GUZMÁN                  -->
+			<xs:enumeration value="010101" />	<!--SANTO DOMINGO DE GUZMÁN (D. M.).                   -->
+			<xs:enumeration value="020000" />	<!--PROVINCIA AZUA                                     -->
+			<xs:enumeration value="020100" />	<!--MUNICIPIO AZUA                                     -->
+			<xs:enumeration value="020101" />	<!--AZUA (D. M.).                                      -->
+			<xs:enumeration value="020102" />	<!--BARRO ARRIBA (D. M.).                              -->
+			<xs:enumeration value="020103" />	<!--LAS BARÍAS-LA ESTANCIA (D. M.).                    -->
+			<xs:enumeration value="020104" />	<!--LOS JOVILLOS (D. M.).                              -->
+			<xs:enumeration value="020105" />	<!--PUERTO VIEJO (D. M.).                              -->
+			<xs:enumeration value="020106" />	<!--BARRERAS (D. M.).                                  -->
+			<xs:enumeration value="020107" />	<!--DOÑA EMMA BALAGUER VIUDA VALLEJO (D. M.).          -->
+			<xs:enumeration value="020108" />	<!--CLAVELLINA (D. M.).                                -->
+			<xs:enumeration value="020109" />	<!--LAS LOMAS (D. M.).                                 -->
+			<xs:enumeration value="020200" />	<!--MUNICIPIO LAS CHARCAS                              -->
+			<xs:enumeration value="020201" />	<!--LAS CHARCAS (D. M.).                               -->
+			<xs:enumeration value="020202" />	<!--PALMAR DE OCOA (D. M.).                            -->
+			<xs:enumeration value="020300" />	<!--MUNICIPIO LAS YAYAS DE VIAJAMA                     -->
+			<xs:enumeration value="020301" />	<!--LAS YAYAS DE VIAJAMA (D. M.).                      -->
+			<xs:enumeration value="020302" />	<!--VILLARPANDO (D. M.).                               -->
+			<xs:enumeration value="020303" />	<!--HATO NUEVO CORTÉS (D. M.).                         -->
+			<xs:enumeration value="020400" />	<!--MUNICIPIO PADRE LAS CASAS                          -->
+			<xs:enumeration value="020401" />	<!--PADRE LAS CASAS (D. M.).                           -->
+			<xs:enumeration value="020402" />	<!--LAS LAGUNAS (D. M.).                               -->
+			<xs:enumeration value="020403" />	<!--LA SIEMBRA (D. M.).                                -->
+			<xs:enumeration value="020404" />	<!--MONTE BONITO (D. M.).                              -->
+			<xs:enumeration value="020405" />	<!--LOS FRÍOS (D. M.).                                 -->
+			<xs:enumeration value="020500" />	<!--MUNICIPIO PERALTA                                  -->
+			<xs:enumeration value="020501" />	<!--PERALTA (D. M.).                                   -->
+			<xs:enumeration value="020600" />	<!--MUNICIPIO SABANA YEGUA                             -->
+			<xs:enumeration value="020601" />	<!--SABANA YEGUA (D. M.).                              -->
+			<xs:enumeration value="020602" />	<!--PROYECTO 4 (D. M.).                                -->
+			<xs:enumeration value="020603" />	<!--GANADERO (D. M.).                                  -->
+			<xs:enumeration value="020604" />	<!--PROYECTO 2-C (D. M.).                              -->
+			<xs:enumeration value="020700" />	<!--MUNICIPIO PUEBLO VIEJO                             -->
+			<xs:enumeration value="020701" />	<!--PUEBLO VIEJO (D. M.).                              -->
+			<xs:enumeration value="020702" />	<!--EL ROSARIO (D. M.).                                -->
+			<xs:enumeration value="020800" />	<!--MUNICIPIO TÁBARA ARRIBA                            -->
+			<xs:enumeration value="020801" />	<!--TÁBARA ARRIBA (D. M.).                             -->
+			<xs:enumeration value="020802" />	<!--TÁBARA ABAJO (D. M.).                              -->
+			<xs:enumeration value="020803" />	<!--AMIAMA GÓMEZ (D. M.).                              -->
+			<xs:enumeration value="020804" />	<!--LOS TOROS (D. M.).                                 -->
+			<xs:enumeration value="020900" />	<!--MUNICIPIO GUAYABAL                                 -->
+			<xs:enumeration value="020901" />	<!--GUAYABAL (D. M.).                                  -->
+			<xs:enumeration value="021000" />	<!--MUNICIPIO ESTEBANÍA                                -->
+			<xs:enumeration value="021001" />	<!--ESTEBANÍA (D. M.).                                 -->
+			<xs:enumeration value="030000" />	<!--PROVINCIA BAHORUCO                                 -->
+			<xs:enumeration value="030001" />	<!--MUNICIPIO NEIBA                                    -->
+			<xs:enumeration value="030101" />	<!--NEIBA (D. M.).                                     -->
+			<xs:enumeration value="030102" />	<!--EL PALMAR  (D. M.).                                -->
+			<xs:enumeration value="030200" />	<!--MUNICIPIO GALVÁN                                   -->
+			<xs:enumeration value="030201" />	<!--GALVÁN (D. M.).                                    -->
+			<xs:enumeration value="030202" />	<!--EL SALADO (D. M.).                                 -->
+			<xs:enumeration value="030300" />	<!--MUNICIPIO TAMAYO                                   -->
+			<xs:enumeration value="030301" />	<!--TAMAYO (D. M.).                                    -->
+			<xs:enumeration value="030302" />	<!--UVILLA (D. M.).                                    -->
+			<xs:enumeration value="030303" />	<!--SANTANA (D. M.).                                   -->
+			<xs:enumeration value="030304" />	<!--MONSERRATE (MONTSERRAT) (D. M.).                   -->
+			<xs:enumeration value="030305" />	<!--CABEZA DE TORO (D. M.).                            -->
+			<xs:enumeration value="030306" />	<!--MENA (D. M.).                                      -->
+			<xs:enumeration value="030307" />	<!--SANTA BÁRBARA EL 6 (D. M.).                        -->
+			<xs:enumeration value="030400" />	<!--MUNICIPIO VILLA JARAGUA                            -->
+			<xs:enumeration value="030401" />	<!--VILLA JARAGUA (D. M.).                             -->
+			<xs:enumeration value="030500" />	<!--MUNICIPIO LOS RÍOS                                 -->
+			<xs:enumeration value="030501" />	<!--LOS RÍOS (D. M.).                                  -->
+			<xs:enumeration value="030502" />	<!--LAS CLAVELLINAS (D. M.).                           -->
+			<xs:enumeration value="040000" />	<!--PROVINCIA BARAHONA                                 -->
+			<xs:enumeration value="040100" />	<!--MUNICIPIO BARAHONA                                 -->
+			<xs:enumeration value="040101" />	<!--BARAHONA (D. M.).                                  -->
+			<xs:enumeration value="040102" />	<!--EL CACHÓN (D. M.).                                 -->
+			<xs:enumeration value="040103" />	<!--LA GUÁZARA (D. M.).                                -->
+			<xs:enumeration value="040104" />	<!--VILLA CENTRAL (D. M.).                             -->
+			<xs:enumeration value="040200" />	<!--MUNICIPIO CABRAL                                   -->
+			<xs:enumeration value="040201" />	<!--CABRAL (D. M.).                                    -->
+			<xs:enumeration value="040300" />	<!--MUNICIPIO ENRIQUILLO                               -->
+			<xs:enumeration value="040301" />	<!--ENRIQUILLO (D. M.).                                -->
+			<xs:enumeration value="040302" />	<!--ARROYO DULCE (D. M.).                              -->
+			<xs:enumeration value="040400" />	<!--MUNICIPIO PARAÍSO                                  -->
+			<xs:enumeration value="040401" />	<!--PARAÍSO (D. M.).                                   -->
+			<xs:enumeration value="040402" />	<!--LOS PATOS (D. M.).                                 -->
+			<xs:enumeration value="040500" />	<!--MUNICIPIO VICENTE NOBLE                            -->
+			<xs:enumeration value="040501" />	<!--VICENTE NOBLE (D. M.).                             -->
+			<xs:enumeration value="040502" />	<!--CANOA (D. M.).                                     -->
+			<xs:enumeration value="040503" />	<!--QUITA CORAZA (D. M.).                              -->
+			<xs:enumeration value="040504" />	<!--FONDO NEGRO (D. M.).                               -->
+			<xs:enumeration value="040600" />	<!--MUNICIPIO EL PEÑÓN                                 -->
+			<xs:enumeration value="040601" />	<!--EL PEÑÓN (D. M.).                                  -->
+			<xs:enumeration value="040700" />	<!--MUNICIPIO LA CIÉNAGA                               -->
+			<xs:enumeration value="040701" />	<!--LA CIÉNAGA (D. M.).                                -->
+			<xs:enumeration value="040702" />	<!--BAHORUCO (D. M.).                                  -->
+			<xs:enumeration value="040800" />	<!--MUNICIPIO FUNDACIÓN                                -->
+			<xs:enumeration value="040801" />	<!--FUNDACIÓN (D. M.).                                 -->
+			<xs:enumeration value="040802" />	<!--PESCADERÍA (D. M.).                                -->
+			<xs:enumeration value="040900" />	<!--MUNICIPIO LAS SALINAS                              -->
+			<xs:enumeration value="040901" />	<!--LAS SALINAS (D. M.).                               -->
+			<xs:enumeration value="041000" />	<!--MUNICIPIO POLO                                     -->
+			<xs:enumeration value="041001" />	<!--POLO (D. M.).                                      -->
+			<xs:enumeration value="041100" />	<!--MUNICIPIO JAQUIMEYES                               -->
+			<xs:enumeration value="041101" />	<!--JAQUIMEYES (D. M.).                                -->
+			<xs:enumeration value="041102" />	<!--PALO ALTO (D. M.).                                 -->
+			<xs:enumeration value="050000" />	<!--PROVINCIA DAJABÓN                                  -->
+			<xs:enumeration value="050100" />	<!--MUNICIPIO DAJABÓN                                  -->
+			<xs:enumeration value="050101" />	<!--DAJABÓN (D. M.).                                   -->
+			<xs:enumeration value="050102" />	<!--CAÑONGO (D. M.).                                   -->
+			<xs:enumeration value="050200" />	<!--MUNICIPIO LOMA DE CABRERA                          -->
+			<xs:enumeration value="050201" />	<!--LOMA DE CABRERA (D. M.).                           -->
+			<xs:enumeration value="050202" />	<!--CAPOTILLO (D. M.).                                 -->
+			<xs:enumeration value="050203" />	<!--SANTIAGO DE LA CRUZ (D. M.).                       -->
+			<xs:enumeration value="050300" />	<!--MUNICIPIO PARTIDO                                  -->
+			<xs:enumeration value="050301" />	<!--PARTIDO (D. M.).                                   -->
+			<xs:enumeration value="050400" />	<!--MUNICIPIO RESTAURACIÓN                             -->
+			<xs:enumeration value="050401" />	<!--RESTAURACIÓN (D. M.).                              -->
+			<xs:enumeration value="050500" />	<!--MUNICIPIO EL PINO                                  -->
+			<xs:enumeration value="050501" />	<!--EL PINO (D. M.).                                   -->
+			<xs:enumeration value="050502" />	<!--MANUEL BUENO (D. M.).                              -->
+			<xs:enumeration value="060000" />	<!--PROVINCIA DUARTE                                   -->
+			<xs:enumeration value="060100" />	<!--MUNICIPIO SAN FRANCISCO DE MACORÍS                 -->
+			<xs:enumeration value="060101" />	<!--SAN FRANCISCO DE MACORÍS (D. M.).                  -->
+			<xs:enumeration value="060102" />	<!--LA PEÑA (D. M.).                                   -->
+			<xs:enumeration value="060103" />	<!--CENOVÍ (D. M.).                                    -->
+			<xs:enumeration value="060104" />	<!--JAYA (D. M.).                                      -->
+			<xs:enumeration value="060105" />	<!--PRESIDENTE DON ANTONIO GUZMÁN FERNÁNDEZ (D. M.).   -->
+			<xs:enumeration value="060200" />	<!--MUNICIPIO ARENOSO                                  -->
+			<xs:enumeration value="060201" />	<!--ARENOSO (D. M.).                                   -->
+			<xs:enumeration value="060202" />	<!--LAS COLES (D. M.).                                 -->
+			<xs:enumeration value="060203" />	<!--EL AGUACATE (D. M.).                               -->
+			<xs:enumeration value="060300" />	<!--MUNICIPIO CASTILLO                                 -->
+			<xs:enumeration value="060301" />	<!--CASTILLO (D. M.).                                  -->
+			<xs:enumeration value="060400" />	<!--MUNICIPIO PIMENTEL                                 -->
+			<xs:enumeration value="060401" />	<!--PIMENTEL (D. M.).                                  -->
+			<xs:enumeration value="060500" />	<!--MUNICIPIO VILLA RIVA                               -->
+			<xs:enumeration value="060501" />	<!--VILLA RIVA (D. M.).                                -->
+			<xs:enumeration value="060502" />	<!--AGUA SANTA DEL YUNA  (D. M.).                      -->
+			<xs:enumeration value="060503" />	<!--CRISTO REY DE GUARAGUAO (D. M.).                   -->
+			<xs:enumeration value="060504" />	<!--LAS TARANAS (D. M.).                               -->
+			<xs:enumeration value="060505" />	<!--BARRAQUITO (D. M.).                                -->
+			<xs:enumeration value="060600" />	<!--MUNICIPIO LAS GUÁRANAS                             -->
+			<xs:enumeration value="060601" />	<!--LAS GUÁRANAS (D. M.).                              -->
+			<xs:enumeration value="060700" />	<!--MUNICIPIO EUGENIO MARÍA DE HOSTOS                  -->
+			<xs:enumeration value="060701" />	<!--EUGENIO MARÍA DE HOSTOS (D. M.).                   -->
+			<xs:enumeration value="060702" />	<!--SABANA GRANDE (D. M.).                             -->
+			<xs:enumeration value="070000" />	<!--PROVINCIA ELÍAS PIÑA                               -->
+			<xs:enumeration value="070100" />	<!--MUNICIPIO COMENDADOR                               -->
+			<xs:enumeration value="070101" />	<!--COMENDADOR (D. M.).                                -->
+			<xs:enumeration value="070102" />	<!--SABANA LARGA (D. M.).                              -->
+			<xs:enumeration value="070103" />	<!--GUAYABO  (D. M.).                                  -->
+			<xs:enumeration value="070200" />	<!--MUNICIPIO BÁNICA                                   -->
+			<xs:enumeration value="070201" />	<!--BÁNICA (D. M.).                                    -->
+			<xs:enumeration value="070202" />	<!--SABANA CRUZ (D. M.).                               -->
+			<xs:enumeration value="070203" />	<!--SABANA HIGÜERO (D. M.).                            -->
+			<xs:enumeration value="070300" />	<!--MUNICIPIO EL LLANO                                 -->
+			<xs:enumeration value="070301" />	<!--EL LLANO (D. M.).                                  -->
+			<xs:enumeration value="070302" />	<!--GUANITO (D. M.).                                   -->
+			<xs:enumeration value="070400" />	<!--MUNICIPIO HONDO VALLE                              -->
+			<xs:enumeration value="070401" />	<!--HONDO VALLE (D. M.).                               -->
+			<xs:enumeration value="070402" />	<!--RANCHO DE LA GUARDIA (D. M.).                      -->
+			<xs:enumeration value="070500" />	<!--MUNICIPIO PEDRO SANTANA                            -->
+			<xs:enumeration value="070501" />	<!--PEDRO SANTANA (D. M.).                             -->
+			<xs:enumeration value="070502" />	<!--RÍO LIMPIO (D. M.).                                -->
+			<xs:enumeration value="070600" />	<!--MUNICIPIO JUAN SANTIAGO                            -->
+			<xs:enumeration value="070601" />	<!--JUAN SANTIAGO (D. M.).                             -->
+			<xs:enumeration value="080000" />	<!--PROVINCIA EL SEIBO                                 -->
+			<xs:enumeration value="080100" />	<!--MUNICIPIO EL SEIBO                                 -->
+			<xs:enumeration value="080101" />	<!--EL SEIBO (D. M.).                                  -->
+			<xs:enumeration value="080102" />	<!--PEDRO SÁNCHEZ (D. M.).                             -->
+			<xs:enumeration value="080103" />	<!--SAN FRANCISCO-VICENTILLO (D. M.).                  -->
+			<xs:enumeration value="080104" />	<!--SANTA LUCÍA (D. M.).                               -->
+			<xs:enumeration value="080200" />	<!--MUNICIPIO MICHES                                   -->
+			<xs:enumeration value="080201" />	<!--MICHES (D. M.).                                    -->
+			<xs:enumeration value="080202" />	<!--EL CEDRO (D. M.).                                  -->
+			<xs:enumeration value="080203" />	<!--LA GINA (D. M.).                                   -->
+			<xs:enumeration value="090000" />	<!--PROVINCIA ESPAILLAT                                -->
+			<xs:enumeration value="090100" />	<!--MUNICIPIO MOCA                                     -->
+			<xs:enumeration value="090101" />	<!--MOCA (D. M.).                                      -->
+			<xs:enumeration value="090102" />	<!--JOSÉ CONTRERAS (D. M.).                            -->
+			<xs:enumeration value="090103" />	<!--SAN VÍCTOR (D. M.).                                -->
+			<xs:enumeration value="090104" />	<!--JUAN LÓPEZ (D. M.).                                -->
+			<xs:enumeration value="090105" />	<!--LAS LAGUNAS (D. M.).                               -->
+			<xs:enumeration value="090106" />	<!--CANCA LA REYNA  (D. M.).                           -->
+			<xs:enumeration value="090107" />	<!--EL HIGÜERITO (D. M.).                              -->
+			<xs:enumeration value="090108" />	<!--MONTE DE LA JAGUA (D. M.).                         -->
+			<xs:enumeration value="090109" />	<!--LA ORTEGA (D. M.).                                 -->
+			<xs:enumeration value="090200" />	<!--MUNICIPIO CAYETANO GERMOSÉN                        -->
+			<xs:enumeration value="090201" />	<!--CAYETANO GERMOSÉN (D. M.).                         -->
+			<xs:enumeration value="090300" />	<!--MUNICIPIO GASPAR HERNÁNDEZ                         -->
+			<xs:enumeration value="090301" />	<!--GASPAR HERNÁNDEZ (D. M.).                          -->
+			<xs:enumeration value="090302" />	<!--JOBA ARRIBA (D. M.).                               -->
+			<xs:enumeration value="090303" />	<!--VERAGUA (D. M.).                                   -->
+			<xs:enumeration value="090304" />	<!--VILLA MAGANTE (D. M.).                             -->
+			<xs:enumeration value="090400" />	<!--MUNICIPIO JAMAO AL NORTE                           -->
+			<xs:enumeration value="090401" />	<!--JAMAO AL NORTE (D. M.).                            -->
+			<xs:enumeration value="100000" />	<!--PROVINCIA INDEPENDENCIA                            -->
+			<xs:enumeration value="100100" />	<!--MUNICIPIO JIMANÍ                                   -->
+			<xs:enumeration value="100101" />	<!--JIMANÍ (D. M.).                                    -->
+			<xs:enumeration value="100102" />	<!--EL LIMÓN (D. M.).                                  -->
+			<xs:enumeration value="100103" />	<!--BOCA DE CACHÓN (D. M.).                            -->
+			<xs:enumeration value="100200" />	<!--MUNICIPIO DUVERGÉ                                  -->
+			<xs:enumeration value="100201" />	<!--DUVERGÉ (D. M.).                                   -->
+			<xs:enumeration value="100202" />	<!--VENGAN A VER (D. M.).                              -->
+			<xs:enumeration value="100300" />	<!--MUNICIPIO LA DESCUBIERTA                           -->
+			<xs:enumeration value="100301" />	<!--LA DESCUBIERTA (D. M.).                            -->
+			<xs:enumeration value="100400" />	<!--MUNICIPIO POSTRER RÍO                              -->
+			<xs:enumeration value="100401" />	<!--POSTRER RÍO (D. M.).                               -->
+			<xs:enumeration value="100402" />	<!--GUAYABAL (D. M.).                                  -->
+			<xs:enumeration value="100500" />	<!--MUNICIPIO CRISTÓBAL                                -->
+			<xs:enumeration value="100501" />	<!--CRISTÓBAL (D. M.).                                 -->
+			<xs:enumeration value="100502" />	<!--BATEY 8 (D. M.).                                   -->
+			<xs:enumeration value="100600" />	<!--MUNICIPIO MELLA                                    -->
+			<xs:enumeration value="100601" />	<!--MELLA (D. M.).                                     -->
+			<xs:enumeration value="100602" />	<!--LA COLONIA (D. M.).                                -->
+			<xs:enumeration value="110000" />	<!--PROVINCIA LA ALTAGRACIA                            -->
+			<xs:enumeration value="110100" />	<!--MUNICIPIO HIGÜEY                                   -->
+			<xs:enumeration value="110101" />	<!--HIGÜEY (D. M.).                                    -->
+			<xs:enumeration value="110102" />	<!--LAS LAGUNAS DE NISIBÓN (D. M.).                    -->
+			<xs:enumeration value="110103" />	<!--LA OTRA BANDA (D. M.).                             -->
+			<xs:enumeration value="110104" />	<!--VERÓN PUNTA CANA (D. M.) (Incluye Bávaro)          -->
+			<xs:enumeration value="110200" />	<!--MUNICIPIO SAN RAFAEL DEL YUMA                      -->
+			<xs:enumeration value="110201" />	<!--SAN RAFAEL DEL YUMA (D. M.).                       -->
+			<xs:enumeration value="110202" />	<!--BOCA DE YUMA (D. M.).                              -->
+			<xs:enumeration value="110203" />	<!--BAYAHÍBE (D. M.).                                  -->
+			<xs:enumeration value="120000" />	<!--PROVINCIA LA ROMANA                                -->
+			<xs:enumeration value="120100" />	<!--MUNICIPIO LA ROMANA                                -->
+			<xs:enumeration value="120101" />	<!--LA ROMANA (D. M.).                                 -->
+			<xs:enumeration value="120102" />	<!--CALETA (D. M.).                                    -->
+			<xs:enumeration value="120200" />	<!--MUNICIPIO GUAYMATE                                 -->
+			<xs:enumeration value="120201" />	<!--GUAYMATE (D. M.).                                  -->
+			<xs:enumeration value="120300" />	<!--MUNICIPIO VILLA HERMOSA                            -->
+			<xs:enumeration value="120301" />	<!--VILLA HERMOSA (D. M.).                             -->
+			<xs:enumeration value="120302" />	<!--CUMAYASA (D. M.).                                  -->
+			<xs:enumeration value="130000" />	<!--PROVINCIA LA VEGA                                  -->
+			<xs:enumeration value="130100" />	<!--MUNICIPIO LA VEGA                                  -->
+			<xs:enumeration value="130101" />	<!--LA VEGA (D. M.).                                   -->
+			<xs:enumeration value="130102" />	<!--RÍO VERDE ARRIBA (D. M.).                          -->
+			<xs:enumeration value="130103" />	<!--EL RANCHITO (D. M.).                               -->
+			<xs:enumeration value="130104" />	<!--TAVERAS (D. M.).                                   -->
+			<xs:enumeration value="130105" />	<!--DON JUAN RODRÍGUEZ (D.M.)                          -->
+			<xs:enumeration value="130200" />	<!--MUNICIPIO CONSTANZA                                -->
+			<xs:enumeration value="130201" />	<!--CONSTANZA (D. M.).                                 -->
+			<xs:enumeration value="130202" />	<!--TIREO (D. M.).                                     -->
+			<xs:enumeration value="130203" />	<!--LA SABINA (D. M.).                                 -->
+			<xs:enumeration value="130300" />	<!--MUNICIPIO JARABACOA                                -->
+			<xs:enumeration value="130301" />	<!--JARABACOA (D. M.).                                 -->
+			<xs:enumeration value="130302" />	<!--BUENA VISTA (D. M.).                               -->
+			<xs:enumeration value="130303" />	<!--MANABAO (D. M.).                                   -->
+			<xs:enumeration value="130400" />	<!--MUNICIPIO JIMA ABAJO                               -->
+			<xs:enumeration value="130401" />	<!--JIMA ABAJO (D. M.).                                -->
+			<xs:enumeration value="130402" />	<!--RINCÓN (D. M.).                                    -->
+			<xs:enumeration value="140000" />	<!--PROVINCIA MARÍA TRINIDAD SÁNCHEZ                   -->
+			<xs:enumeration value="140100" />	<!--MUNICIPIO NAGUA                                    -->
+			<xs:enumeration value="140101" />	<!--NAGUA (D. M.).                                     -->
+			<xs:enumeration value="140102" />	<!--SAN JOSÉ DE MATANZAS (D. M.).                      -->
+			<xs:enumeration value="140103" />	<!--LAS GORDAS (D. M.).                                -->
+			<xs:enumeration value="140104" />	<!--ARROYO AL MEDIO (D. M.).                           -->
+			<xs:enumeration value="140200" />	<!--MUNICIPIO CABRERA                                  -->
+			<xs:enumeration value="140201" />	<!--CABRERA (D. M.).                                   -->
+			<xs:enumeration value="140202" />	<!--ARROYO SALADO (D. M.).                             -->
+			<xs:enumeration value="140203" />	<!--LA ENTRADA (D. M.).                                -->
+			<xs:enumeration value="140300" />	<!--MUNICIPIO EL FACTOR                                -->
+			<xs:enumeration value="140301" />	<!--EL FACTOR (D. M.).                                 -->
+			<xs:enumeration value="140302" />	<!--EL POZO (D. M.).                                   -->
+			<xs:enumeration value="140400" />	<!--MUNICIPIO RÍO SAN JUAN                             -->
+			<xs:enumeration value="140401" />	<!--RÍO SAN JUAN (D. M.).                              -->
+			<xs:enumeration value="150000" />	<!--PROVINCIA MONTE CRISTI                             -->
+			<xs:enumeration value="150100" />	<!--MUNICIPIO MONTE CRISTI                             -->
+			<xs:enumeration value="150101" />	<!--MONTE CRISTI (D. M.).                              -->
+			<xs:enumeration value="150200" />	<!--MUNICIPIO CASTAÑUELAS                              -->
+			<xs:enumeration value="150201" />	<!--CASTAÑUELAS (D. M.).                               -->
+			<xs:enumeration value="150202" />	<!--PALO VERDE (D. M.).                                -->
+			<xs:enumeration value="150300" />	<!--MUNICIPIO GUAYUBÍN                                 -->
+			<xs:enumeration value="150301" />	<!--GUAYUBÍN (D. M.).                                  -->
+			<xs:enumeration value="150302" />	<!--VILLA ELISA (D. M.).                               -->
+			<xs:enumeration value="150303" />	<!--HATILLO PALMA (D. M.).                             -->
+			<xs:enumeration value="150304" />	<!--CANA CHAPETÓN (D. M.).                             -->
+			<xs:enumeration value="150400" />	<!--MUNICIPIO LAS MATAS DE SANTA CRUZ                  -->
+			<xs:enumeration value="150401" />	<!--LAS MATAS DE SANTA CRUZ (D. M.).                   -->
+			<xs:enumeration value="150500" />	<!--MUNICIPIO PEPILLO SALCEDO                          -->
+			<xs:enumeration value="150501" />	<!--PEPILLO SALCEDO (MANZANILLO)                       -->
+			<xs:enumeration value="150502" />	<!--SANTA MARÍA (D. M.)                                -->
+			<xs:enumeration value="150600" />	<!--MUNICIPIO VILLA VÁSQUEZ                            -->
+			<xs:enumeration value="150601" />	<!--VILLA VÁSQUEZ                                      -->
+			<xs:enumeration value="160000" />	<!--PROVINCIA PEDERNALES                               -->
+			<xs:enumeration value="160100" />	<!--MUNICIPIO PEDERNALES                               -->
+			<xs:enumeration value="160101" />	<!--PEDERNALES                                         -->
+			<xs:enumeration value="160102" />	<!--JOSÉ FRANCISCO PEÑA GÓMEZ (D. M.).                 -->
+			<xs:enumeration value="160200" />	<!--MUNICIPIO OVIEDO                                   -->
+			<xs:enumeration value="160201" />	<!--OVIEDO                                             -->
+			<xs:enumeration value="160202" />	<!--JUANCHO (D. M.).                                   -->
+			<xs:enumeration value="170000" />	<!--PROVINCIA PERAVIA                                  -->
+			<xs:enumeration value="170100" />	<!--MUNICIPIO BANÍ                                     -->
+			<xs:enumeration value="170101" />	<!--BANÍ (D. M.).                                      -->
+			<xs:enumeration value="170102" />	<!--MATANZAS (D. M.).                                  -->
+			<xs:enumeration value="170103" />	<!--VILLA FUNDACIÓN (D. M.).                           -->
+			<xs:enumeration value="170104" />	<!--SABANA BUEY (D. M.).                               -->
+			<xs:enumeration value="170105" />	<!--PAYA (D. M.).                                      -->
+			<xs:enumeration value="170106" />	<!--VILLA SOMBRERO (D. M.).                            -->
+			<xs:enumeration value="170107" />	<!--EL CARRETÓN (D. M.).                               -->
+			<xs:enumeration value="170108" />	<!--CATALINA (D. M.).                                  -->
+			<xs:enumeration value="170109" />	<!--EL LIMONAL (D. M.).                                -->
+			<xs:enumeration value="170110" />	<!--LAS BARÍAS (D. M.).                                -->
+			<xs:enumeration value="170200" />	<!--MUNICIPIO NIZAO                                    -->
+			<xs:enumeration value="170201" />	<!--NIZAO                                              -->
+			<xs:enumeration value="170202" />	<!--PIZARRETE (D. M.).                                 -->
+			<xs:enumeration value="170203" />	<!--SANTANA (D. M.).                                   -->
+			<xs:enumeration value="170300" />	<!--MATANZAS                                           -->
+			<xs:enumeration value="170301" />	<!--MATANZAS                                           -->
+			<xs:enumeration value="180000" />	<!--PROVINCIA PUERTO PLATA                             -->
+			<xs:enumeration value="180100" />	<!--MUNICIPIO PUERTO PLATA                             -->
+			<xs:enumeration value="180101" />	<!--PUERTO PLATA (D. M.).                              -->
+			<xs:enumeration value="180102" />	<!--YÁSICA ARRIBA (D. M.).                             -->
+			<xs:enumeration value="180103" />	<!--MAIMÓN (D. M.).                                    -->
+			<xs:enumeration value="180200" />	<!--MUNICIPIO ALTAMIRA                                 -->
+			<xs:enumeration value="180201" />	<!--ALTAMIRA                                           -->
+			<xs:enumeration value="180202" />	<!--RÍO GRANDE (D. M.).                                -->
+			<xs:enumeration value="180300" />	<!--MUNICIPIO GUANANICO                                -->
+			<xs:enumeration value="180301" />	<!--GUANANICO                                          -->
+			<xs:enumeration value="180400" />	<!--MUNICIPIO IMBERT                                   -->
+			<xs:enumeration value="180401" />	<!--IMBERT                                             -->
+			<xs:enumeration value="180500" />	<!--MUNICIPIO LOS HIDALGOS                             -->
+			<xs:enumeration value="180501" />	<!--LOS HIDALGOS                                       -->
+			<xs:enumeration value="180502" />	<!--NAVAS (D. M.).                                     -->
+			<xs:enumeration value="180600" />	<!--MUNICIPIO LUPERÓN                                  -->
+			<xs:enumeration value="180601" />	<!--LUPERÓN                                            -->
+			<xs:enumeration value="180602" />	<!--LA ISABELA (D. M.).                                -->
+			<xs:enumeration value="180603" />	<!--BELLOSO (D. M.).                                   -->
+			<xs:enumeration value="180604" />	<!--EL ESTRECHO DE LUPERÓN OMAR BROSS (D. M.).         -->
+			<xs:enumeration value="180700" />	<!--MUNICIPIO SOSÚA                                    -->
+			<xs:enumeration value="180701" />	<!--SOSÚA                                              -->
+			<xs:enumeration value="180702" />	<!--CABARETE (D. M.).                                  -->
+			<xs:enumeration value="180703" />	<!--SABANETA DE YÁSICA (D. M.).                        -->
+			<xs:enumeration value="180800" />	<!--MUNICIPIO VILLA ISABELA                            -->
+			<xs:enumeration value="180801" />	<!--VILLA ISABELA                                      -->
+			<xs:enumeration value="180802" />	<!--ESTERO HONDO (D. M.).                              -->
+			<xs:enumeration value="180803" />	<!--LA JAIBA (D. M.).                                  -->
+			<xs:enumeration value="180804" />	<!--GUALETE (D. M.).                                   -->
+			<xs:enumeration value="180900" />	<!--MUNICIPIO VILLA MONTELLANO                         -->
+			<xs:enumeration value="180901" />	<!--VILLA MONTELLANO                                   -->
+			<xs:enumeration value="190000" />	<!--PROVINCIA HERMANAS MIRABAL                         -->
+			<xs:enumeration value="190100" />	<!--MUNICIPIO SALCEDO                                  -->
+			<xs:enumeration value="190101" />	<!--SALCEDO                                            -->
+			<xs:enumeration value="190102" />	<!--JAMAO AFUERA (D. M.).                              -->
+			<xs:enumeration value="190200" />	<!--MUNICIPIO TENARES                                  -->
+			<xs:enumeration value="190201" />	<!--TENARES                                            -->
+			<xs:enumeration value="190202" />	<!--BLANCO (D. M.).                                    -->
+			<xs:enumeration value="190300" />	<!--MUNICIPIO VILLA TAPIA                              -->
+			<xs:enumeration value="190301" />	<!--VILLA TAPIA                                        -->
+			<xs:enumeration value="200000" />	<!--PROVINCIA SAMANÁ                                   -->
+			<xs:enumeration value="200100" />	<!--MUNICIPIO SAMANÁ                                   -->
+			<xs:enumeration value="200101" />	<!--SAMANÁ                                             -->
+			<xs:enumeration value="200102" />	<!--EL LIMÓN  (D. M.).                                 -->
+			<xs:enumeration value="200103" />	<!--ARROYO BARRIL (D. M.).                             -->
+			<xs:enumeration value="200104" />	<!--LAS GALERAS (D. M.).                               -->
+			<xs:enumeration value="200200" />	<!--MUNICIPIO SÁNCHEZ                                  -->
+			<xs:enumeration value="200201" />	<!--SÁNCHEZ (D. M.).                                   -->
+			<xs:enumeration value="200300" />	<!--MUNICIPIO LAS TERRENAS                             -->
+			<xs:enumeration value="200301" />	<!--LAS TERRENAS                                       -->
+			<xs:enumeration value="210000" />	<!--PROVINCIA SAN CRISTÓBAL                            -->
+			<xs:enumeration value="210100" />	<!--MUNICIPIO SAN CRISTÓBAL                            -->
+			<xs:enumeration value="210101" />	<!--SAN CRISTÓBAL (D. M.).                             -->
+			<xs:enumeration value="210102" />	<!--HATO DAMAS (D. M.).                                -->
+			<xs:enumeration value="210103" />	<!--HATILLO (D. M.).                                   -->
+			<xs:enumeration value="210200" />	<!--MUNICIPIO SABANA GRANDE DE PALENQUE                -->
+			<xs:enumeration value="210201" />	<!--SABANA GRANDE DE PALENQUE (D. M.).                 -->
+			<xs:enumeration value="210300" />	<!--MUNICIPIO BAJOS DE HAINA                           -->
+			<xs:enumeration value="210301" />	<!--BAJOS DE HAINA                                     -->
+			<xs:enumeration value="210302" />	<!--EL CARRIL (D. M.).                                 -->
+			<xs:enumeration value="210303" />	<!--QUITA SUEÑO (D. M.).                               -->
+			<xs:enumeration value="210400" />	<!--MUNICIPIO CAMBITA GARABITOS                        -->
+			<xs:enumeration value="210401" />	<!--CAMBITA GARABITOS                                  -->
+			<xs:enumeration value="210402" />	<!--CAMBITA EL PUEBLECITO (D. M.).                     -->
+			<xs:enumeration value="210500" />	<!--MUNICIPIO VILLA ALTAGRACIA                         -->
+			<xs:enumeration value="210501" />	<!--VILLA ALTAGRACIA                                   -->
+			<xs:enumeration value="210502" />	<!--SAN JOSÉ DEL PUERTO (D. M.).                       -->
+			<xs:enumeration value="210503" />	<!--MEDINA (D. M.).                                    -->
+			<xs:enumeration value="210504" />	<!--LA CUCHILLA (D. M.).                               -->
+			<xs:enumeration value="210600" />	<!--MUNICIPIO YAGUATE                                  -->
+			<xs:enumeration value="210601" />	<!--YAGUATE (D. M.).                                   -->
+			<xs:enumeration value="210602" />	<!--DOÑA ANA (D. M.)                                   -->
+			<xs:enumeration value="210700" />	<!--MUNICIPIO SAN GREGORIO DE NIGUA                    -->
+			<xs:enumeration value="210701" />	<!--SAN GREGORIO DE NIGUA                              -->
+			<xs:enumeration value="210800" />	<!--MUNICIPIO LOS CACAOS                               -->
+			<xs:enumeration value="210801" />	<!--LOS CACAOS (D. M.).                                -->
+			<xs:enumeration value="220000" />	<!--PROVINCIA SAN JUAN                                 -->
+			<xs:enumeration value="220100" />	<!--MUNICIPIO SAN JUAN                                 -->
+			<xs:enumeration value="220101" />	<!--SAN JUAN                                           -->
+			<xs:enumeration value="220102" />	<!--PEDRO CORTO (D. M.).                               -->
+			<xs:enumeration value="220103" />	<!--SABANETA (D. M.).                                  -->
+			<xs:enumeration value="220104" />	<!--SABANA ALTA (D. M.).                               -->
+			<xs:enumeration value="220105" />	<!--EL ROSARIO (D. M.).                                -->
+			<xs:enumeration value="220106" />	<!--HATO DEL PADRE (D. M.).                            -->
+			<xs:enumeration value="220107" />	<!--GUANITO (D. M.).                                   -->
+			<xs:enumeration value="220108" />	<!--LA JAGUA (D. M.).                                  -->
+			<xs:enumeration value="220109" />	<!--LAS MAGUANAS-HATO NUEVO (D. M.).                   -->
+			<xs:enumeration value="220110" />	<!--LAS CHARCAS DE MARÍA NOVA (D. M.).                 -->
+			<xs:enumeration value="220111" />	<!--LAS ZANJAS (D. M.)                                 -->
+			<xs:enumeration value="220200" />	<!--MUNICIPIO BOHECHÍO                                 -->
+			<xs:enumeration value="220201" />	<!--BOHECHÍO                                           -->
+			<xs:enumeration value="220202" />	<!--ARROYO CANO (D. M.).                               -->
+			<xs:enumeration value="220203" />	<!--YAQUE (D. M.).                                     -->
+			<xs:enumeration value="220300" />	<!--MUNICIPIO EL CERCADO                               -->
+			<xs:enumeration value="220301" />	<!--EL CERCADO                                         -->
+			<xs:enumeration value="220302" />	<!--DERRUMBADERO (D. M.)                               -->
+			<xs:enumeration value="220303" />	<!--BATISTA (D. M.)                                    -->
+			<xs:enumeration value="220400" />	<!--MUNICIPIO JUAN DE HERRERA                          -->
+			<xs:enumeration value="220401" />	<!--JUAN DE HERRERA                                    -->
+			<xs:enumeration value="220402" />	<!--JÍNOVA (D. M.).                                    -->
+			<xs:enumeration value="220500" />	<!--MUNICIPIO LAS MATAS DE FARFÁN                      -->
+			<xs:enumeration value="220501" />	<!--LAS MATAS DE FARFÁN                                -->
+			<xs:enumeration value="220502" />	<!--MATAYAYA (D. M.).                                  -->
+			<xs:enumeration value="220503" />	<!--CARRERA DE YEGUAS (D. M.).                         -->
+			<xs:enumeration value="220600" />	<!--MUNICIPIO VALLEJUELO                               -->
+			<xs:enumeration value="220601" />	<!--VALLEJUELO                                         -->
+			<xs:enumeration value="220602" />	<!--JORJILLO (D. M.).                                  -->
+			<xs:enumeration value="230000" />	<!--PROVINCIA SAN PEDRO DE MACORÍS                     -->
+			<xs:enumeration value="230100" />	<!--MUNICIPIO SAN PEDRO DE MACORÍS                     -->
+			<xs:enumeration value="230101" />	<!--SAN PEDRO DE MACORÍS                               -->
+			<xs:enumeration value="230200" />	<!--MUNICIPIO LOS LLANOS                               -->
+			<xs:enumeration value="230201" />	<!--LOS LLANOS                                         -->
+			<xs:enumeration value="230202" />	<!--EL PUERTO (D. M.).                                 -->
+			<xs:enumeration value="230203" />	<!--GAUTIER (D. M.).                                   -->
+			<xs:enumeration value="230300" />	<!--MUNICIPIO RAMÓN SANTANA                            -->
+			<xs:enumeration value="230301" />	<!--RAMÓN SANTANA                                      -->
+			<xs:enumeration value="230400" />	<!--MUNICIPIO CONSUELO                                 -->
+			<xs:enumeration value="230401" />	<!--CONSUELO                                           -->
+			<xs:enumeration value="230500" />	<!--MUNICIPIO QUISQUEYA                                -->
+			<xs:enumeration value="230501" />	<!--QUISQUEYA                                          -->
+			<xs:enumeration value="230600" />	<!--MUNICIPIO GUAYACANES                               -->
+			<xs:enumeration value="230601" />	<!--GUAYACANES                                         -->
+			<xs:enumeration value="240000" />	<!--PROVINCIA SANCHEZ RAMÍREZ                          -->
+			<xs:enumeration value="240100" />	<!--MUNICIPIO COTUÍ                                    -->
+			<xs:enumeration value="240101" />	<!--COTUÍ                                              -->
+			<xs:enumeration value="240102" />	<!--QUITA SUEÑO (D. M.).                               -->
+			<xs:enumeration value="240103" />	<!--CABALLERO (D. M.).                                 -->
+			<xs:enumeration value="240104" />	<!--COMEDERO ARRIBA (D. M.).                           -->
+			<xs:enumeration value="240105" />	<!--PLATANAL  (D. M.).                                 -->
+			<xs:enumeration value="240106" />	<!--ZAMBRANA ABAJO                                     -->
+			<xs:enumeration value="240200" />	<!--MUNICIPIO CEVICOS                                  -->
+			<xs:enumeration value="240201" />	<!--CEVICOS                                            -->
+			<xs:enumeration value="240202" />	<!--LA CUEVA (D. M.).                                  -->
+			<xs:enumeration value="240300" />	<!--MUNICIPIO FANTINO                                  -->
+			<xs:enumeration value="240301" />	<!--FANTINO                                            -->
+			<xs:enumeration value="240400" />	<!--MUNICIPIO LA MATA                                  -->
+			<xs:enumeration value="240401" />	<!--LA MATA                                            -->
+			<xs:enumeration value="240402" />	<!--LA BIJA (D. M.).                                   -->
+			<xs:enumeration value="240403" />	<!--ANGELINA (D. M.).                                  -->
+			<xs:enumeration value="240404" />	<!--HERNANDO ALONZO (D. M.).                           -->
+			<xs:enumeration value="250000" />	<!--PROVINCIA SANTIAGO                                 -->
+			<xs:enumeration value="250100" />	<!--MUNICIPIO SANTIAGO                                 -->
+			<xs:enumeration value="250101" />	<!--SANTIAGO                                           -->
+			<xs:enumeration value="250102" />	<!--PEDRO GARCÍA (D. M.).                              -->
+			<xs:enumeration value="250104" />	<!--BAITOA (D. M.).                                    -->
+			<xs:enumeration value="250105" />	<!--LA CANELA (D. M.).                                 -->
+			<xs:enumeration value="250106" />	<!--SAN FRANCISCO DE JACAGUA (D. M.).                  -->
+			<xs:enumeration value="250107" />	<!--HATO DEL YAQUE (D. M.).                            -->
+			<xs:enumeration value="250200" />	<!--MUNICIPIO BISONÓ                                   -->
+			<xs:enumeration value="250201" />	<!--VILLA BISONÓ (NAVARRETE) (D. M.).                  -->
+			<xs:enumeration value="250300" />	<!--MUNICIPIO JÁNICO                                   -->
+			<xs:enumeration value="250301" />	<!--JÁNICO                                             -->
+			<xs:enumeration value="250302" />	<!--JUNCALITO (D. M.).                                 -->
+			<xs:enumeration value="250303" />	<!--EL CAIMITO (D. M.).                                -->
+			<xs:enumeration value="250400" />	<!--MUNICIPIO LICEY AL MEDIO                           -->
+			<xs:enumeration value="250401" />	<!--LICEY AL MEDIO                                     -->
+			<xs:enumeration value="250402" />	<!--LAS PALOMAS (D. M.).                               -->
+			<xs:enumeration value="250500" />	<!--MUNICIPIO SAN JOSÉ DE LAS MATAS                    -->
+			<xs:enumeration value="250501" />	<!--SAN JOSÉ DE LAS MATAS                              -->
+			<xs:enumeration value="250502" />	<!--EL RUBIO (D. M.).                                  -->
+			<xs:enumeration value="250503" />	<!--LA CUESTA (D. M.).                                 -->
+			<xs:enumeration value="250504" />	<!--LAS PLACETAS (D. M.).                              -->
+			<xs:enumeration value="250600" />	<!--MUNICIPIO TAMBORIL                                 -->
+			<xs:enumeration value="250601" />	<!--TAMBORIL                                           -->
+			<xs:enumeration value="250602" />	<!--CANCA LA PIEDRA (D. M.).                           -->
+			<xs:enumeration value="250700" />	<!--MUNICIPIO VILLA GONZÁLEZ                           -->
+			<xs:enumeration value="250701" />	<!--VILLA GONZÁLEZ                                     -->
+			<xs:enumeration value="250702" />	<!--PALMAR ARRIBA (D. M.).                             -->
+			<xs:enumeration value="250703" />	<!--EL LIMÓN (D. M.).                                  -->
+			<xs:enumeration value="250800" />	<!--MUNICIPIO PUÑAL                                    -->
+			<xs:enumeration value="250801" />	<!--PUÑAL                                              -->
+			<xs:enumeration value="250802" />	<!--GUAYABAL (D. M.).                                  -->
+			<xs:enumeration value="250803" />	<!--CANABACOA (D. M.).                                 -->
+			<xs:enumeration value="250900" />	<!--MUNICIPIO SABANA IGLESIA                           -->
+			<xs:enumeration value="250901" />	<!--SABANA IGLESIA                                     -->
+			<xs:enumeration value="251000" />	<!--BAITOA                                             -->
+			<xs:enumeration value="251001" />	<!--BAITOA                                             -->
+			<xs:enumeration value="260000" />	<!--PROVINCIA SANTIAGO RODRÍGUEZ                       -->
+			<xs:enumeration value="260100" />	<!--MUNICIPIO SAN IGNACIO DE SABANETA                  -->
+			<xs:enumeration value="260101" />	<!--SAN IGNACIO DE SABANETA (D. M.).                   -->
+			<xs:enumeration value="260200" />	<!--MUNICIPIO VILLA LOS ALMÁCIGOS                      -->
+			<xs:enumeration value="260201" />	<!--VILLA LOS ALMÁCIGOS (D. M.).                       -->
+			<xs:enumeration value="260300" />	<!--MUNICIPIO MONCIÓN                                  -->
+			<xs:enumeration value="260301" />	<!--MONCIÓN (D. M.).                                   -->
+			<xs:enumeration value="270000" />	<!--PROVINCIA VALVERDE                                 -->
+			<xs:enumeration value="270100" />	<!--MUNICIPIO MAO                                      -->
+			<xs:enumeration value="270101" />	<!--MAO (D. M.).                                       -->
+			<xs:enumeration value="270102" />	<!--AMINA (D. M.).                                     -->
+			<xs:enumeration value="270103" />	<!--JAIBÓN (PUEBLO NUEVO) (D. M.).                     -->
+			<xs:enumeration value="270104" />	<!--GUATAPANAL (D. M.).                                -->
+			<xs:enumeration value="270200" />	<!--MUNICIPIO ESPERANZA                                -->
+			<xs:enumeration value="270201" />	<!--ESPERANZA                                          -->
+			<xs:enumeration value="270202" />	<!--MAIZAL (D. M.).                                    -->
+			<xs:enumeration value="270203" />	<!--JICOMÉ (D. M.).                                    -->
+			<xs:enumeration value="270204" />	<!--BOCA DE MAO (D. M.).                               -->
+			<xs:enumeration value="270205" />	<!--PARADERO (D. M.).                                  -->
+			<xs:enumeration value="270300" />	<!--MUNICIPIO LAGUNA SALADA                            -->
+			<xs:enumeration value="270301" />	<!--LAGUNA SALADA (D. M.).                             -->
+			<xs:enumeration value="270302" />	<!--JAIBÓN (D. M.).                                    -->
+			<xs:enumeration value="270303" />	<!--LA CAYA (D. M.).                                   -->
+			<xs:enumeration value="270304" />	<!--CRUCE DE GUAYACANES (D. M.).                       -->
+			<xs:enumeration value="280000" />	<!--PROVINCIA MONSEÑOR NOUEL                           -->
+			<xs:enumeration value="280100" />	<!--MUNICIPIO BONAO                                    -->
+			<xs:enumeration value="280101" />	<!--BONAO (D. M.).                                     -->
+			<xs:enumeration value="280102" />	<!--SABANA DEL PUERTO (D. M.).                         -->
+			<xs:enumeration value="280103" />	<!--JUMA BEJUCAL (D. M.).                              -->
+			<xs:enumeration value="280104" />	<!--ARROYO  TORO - MASIPEDRO (D. M.).                  -->
+			<xs:enumeration value="280105" />	<!--JAYACO (D. M.).                                    -->
+			<xs:enumeration value="280106" />	<!--LA SALVIA - LOS QUEMADOS (D. M.).                  -->
+			<xs:enumeration value="280200" />	<!--MUNICIPIO MAIMÓN                                   -->
+			<xs:enumeration value="280201" />	<!--MAIMÓN (D. M.).                                    -->
+			<xs:enumeration value="280300" />	<!--MUNICIPIO PIEDRA BLANCA                            -->
+			<xs:enumeration value="280301" />	<!--PIEDRA BLANCA (D. M.).                             -->
+			<xs:enumeration value="280302" />	<!--VILLA DE SONADOR (D. M.).                          -->
+			<xs:enumeration value="280303" />	<!--JUAN ADRIÁN (D. M.).                               -->
+			<xs:enumeration value="290000" />	<!--PROVINCIA MONTE PLATA                              -->
+			<xs:enumeration value="290100" />	<!--MUNICIPIO MONTE PLATA                              -->
+			<xs:enumeration value="290101" />	<!--MONTE PLATA (D. M.).                               -->
+			<xs:enumeration value="290102" />	<!--DON JUAN (D. M.).                                  -->
+			<xs:enumeration value="290103" />	<!--CHIRINO (D. M.).                                   -->
+			<xs:enumeration value="290104" />	<!--BOYÁ (D. M.).                                      -->
+			<xs:enumeration value="290200" />	<!--MUNICIPIO BAYAGUANA                                -->
+			<xs:enumeration value="290201" />	<!--BAYAGUANA (D. M.).                                 -->
+			<xs:enumeration value="290300" />	<!--MUNICIPIO SABANA GRANDE DE BOYÁ                    -->
+			<xs:enumeration value="290301" />	<!--SABANA GRANDE DE BOYÁ (D. M.).                     -->
+			<xs:enumeration value="290302" />	<!--GONZALO (D. M.).                                   -->
+			<xs:enumeration value="290303" />	<!--MAJAGUAL (D. M.).                                  -->
+			<xs:enumeration value="290400" />	<!--MUNICIPIO YAMASÁ                                   -->
+			<xs:enumeration value="290402" />	<!--LOS BOTADOS (D. M.).                               -->
+			<xs:enumeration value="290403" />	<!--MAMÁ TINGÓ (D. M.).                                -->
+			<xs:enumeration value="290500" />	<!--MUNICIPIO PERALVILLO                               -->
+			<xs:enumeration value="290501" />	<!--PERALVILLO (D. M.).                                -->
+			<xs:enumeration value="300000" />	<!--PROVINCIA HATO MAYOR                               -->
+			<xs:enumeration value="300100" />	<!--MUNICIPIO HATO MAYOR                               -->
+			<xs:enumeration value="300101" />	<!--HATO MAYOR (D. M.).                                -->
+			<xs:enumeration value="300102" />	<!--YERBA BUENA (D. M.).                               -->
+			<xs:enumeration value="300103" />	<!--MATA PALACIO (D. M.).                              -->
+			<xs:enumeration value="300104" />	<!--GUAYABO DULCE (D. M.).                             -->
+			<xs:enumeration value="300200" />	<!--MUNICIPIO SABANA DE LA MAR                         -->
+			<xs:enumeration value="300201" />	<!--SABANA DE LA MAR (D. M.).                          -->
+			<xs:enumeration value="300202" />	<!--ELUPINA CORDERO DE LAS CAÑITAS (D. M.).            -->
+			<xs:enumeration value="300300" />	<!--MUNICIPIO EL VALLE                                 -->
+			<xs:enumeration value="300301" />	<!--EL VALLE (D. M.).                                  -->
+			<xs:enumeration value="310000" />	<!--PROVINCIA SAN JOSÉ DE OCOA                         -->
+			<xs:enumeration value="310100" />	<!--MUNICIPIO SAN JOSÉ DE OCOA                         -->
+			<xs:enumeration value="310101" />	<!--SAN JOSÉ DE OCOA (D. M.).                          -->
+			<xs:enumeration value="310102" />	<!--LA CIÉNAGA (D. M.).                                -->
+			<xs:enumeration value="310103" />	<!--NIZAO - LAS AUYAMAS (D. M.).                       -->
+			<xs:enumeration value="310104" />	<!--EL PINAR (D. M.).                                  -->
+			<xs:enumeration value="310105" />	<!--EL NARANJAL (D. M.).                               -->
+			<xs:enumeration value="310200" />	<!--MUNICIPIO SABANA LARGA                             -->
+			<xs:enumeration value="310201" />	<!--SABANA LARGA (D. M.).                              -->
+			<xs:enumeration value="310300" />	<!--MUNICIPIO RANCHO ARRIBA                            -->
+			<xs:enumeration value="310301" />	<!--RANCHO ARRIBA (D. M.).                             -->
+			<xs:enumeration value="320000" />	<!--PROVINCIA SANTO DOMINGO                            -->
+			<xs:enumeration value="320100" />	<!--MUNICIPIO SANTO DOMINGO ESTE                       -->
+			<xs:enumeration value="320101" />	<!--SANTO DOMINGO ESTE (D. M.).                        -->
+			<xs:enumeration value="320102" />	<!--SAN LUIS (D. M.).                                  -->
+			<xs:enumeration value="320200" />	<!--MUNICIPIO SANTO DOMINGO OESTE                      -->
+			<xs:enumeration value="320201" />	<!--SANTO DOMINGO OESTE (D. M.).                       -->
+			<xs:enumeration value="320300" />	<!--MUNICIPIO SANTO DOMINGO NORTE                      -->
+			<xs:enumeration value="320301" />	<!--SANTO DOMINGO NORTE (D. M.).                       -->
+			<xs:enumeration value="320302" />	<!--LA VICTORIA (D. M.).                               -->
+			<xs:enumeration value="320400" />	<!--MUNICIPIO BOCA CHICA                               -->
+			<xs:enumeration value="320401" />	<!--BOCA CHICA (D. M.).                                -->
+			<xs:enumeration value="320402" />	<!--LA CALETA (D. M.).                                 -->
+			<xs:enumeration value="320500" />	<!--MUNICIPIO SAN ANTONIO DE GUERRA                    -->
+			<xs:enumeration value="320501" />	<!--SAN ANTONIO DE GUERRA (D. M.).                     -->
+			<xs:enumeration value="320502" />	<!--HATO VIEJO (D. M.).                                -->
+			<xs:enumeration value="320600" />	<!--MUNICIPIO LOS ALCARRIZOS                           -->
+			<xs:enumeration value="320601" />	<!--LOS ALCARRIZOS (D. M.).                            -->
+			<xs:enumeration value="320602" />	<!--PALMAREJO-VILLA LINDA (D. M.).                     -->
+			<xs:enumeration value="320603" />	<!--PANTOJA (D. M.).                                   -->
+			<xs:enumeration value="320700" />	<!--MUNICIPIO PEDRO BRAND                              -->
+			<xs:enumeration value="320701" />	<!--PEDRO BRAND (D. M.).                               -->
+			<xs:enumeration value="320702" />	<!--LA GUÁYIGA (D. M.).                                -->
+			<xs:enumeration value="320703" />	<!--LA CUABA (D. M.).                                  -->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!--General-->
+	<!--Date-->
+	<xs:simpleType name="FechaValidationType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(3[01]|[12][0-9]|0?[1-9])\-(1[012]|0?[1-9])\-((19|20)\d{2})" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="DateTimeValidationType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="19" />
+			<xs:pattern
+				value="(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-((19|20)\d{2}) (2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])" />
+		</xs:restriction>
+	</xs:simpleType>
+	<!--=================================================================-->
+
+	<!--Integer-->
+	<xs:simpleType name="Integer2ValidationType">
+		<xs:restriction base="xs:integer">
+			<xs:pattern value='[0-9]{1,2}' />
+			<xs:totalDigits value="2"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Integer4ValidationTypeMayorUno">
+		<xs:restriction base="xs:integer">
+			<xs:minExclusive value="1" />
+			<xs:pattern value='[0-9]{1,4}' />
+			<xs:totalDigits value="4"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Integer3ValidationTypeMayor">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1" />
+			<xs:pattern value='[0-9]{1,3}' />
+			<xs:totalDigits value="3"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Integer4V1To1000ValidationType">
+		<xs:restriction base="xs:integer">
+			<xs:pattern value='[0-9]{1,4}' />
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="1000" />
+			<xs:totalDigits value="4" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Integer20ValidationType">
+		<xs:restriction base="xs:integer">
+			<xs:pattern value='[0-9]{1,20}' />
+			<xs:totalDigits value="20"></xs:totalDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!--=================================================================-->
+	<!--Decimals-->
+
+	<xs:simpleType name="Decimal3D2ValidationType">
+		<xs:restriction base="xs:decimal">
+			<xs:pattern value="[0-9]{0,3}(\.[0-9]{0,2})?" />
+			<xs:totalDigits value="5"></xs:totalDigits>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal5D1or2ValidationTypeMayorCero">
+		<xs:restriction base="xs:decimal">
+			<xs:minExclusive value="0" />
+			<xs:pattern value="[0-9]{1,3}(.[0-9]{1,2})?" />
+			<xs:totalDigits value="5" />
+			<xs:fractionDigits value="2" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal7D1or4ValidationTypeMayorCero">
+		<xs:restriction base="xs:decimal">
+			<xs:minExclusive value="0" />
+			<xs:pattern value="[0-9]{1,3}(.[0-9]{1,4})?" />
+			<xs:totalDigits value="7" />
+			<xs:fractionDigits value="4" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal18D1or2ValidationTypeMayorIgualCero">
+		<xs:restriction base="xs:decimal">
+			<xs:pattern value="[0-9]{1,16}(\.[0-9]{1,2})?" />
+			<xs:totalDigits value="18" />
+			<xs:fractionDigits value="2" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal18D1or2ValidationTypeMayorCero">
+		<xs:restriction base="xs:decimal">
+			<xs:minExclusive value="0" />
+			<xs:pattern value="[0-9]{1,16}(\.[0-9]{1,2})?" />
+			<xs:totalDigits value="18" />
+			<xs:fractionDigits value="2" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal18D1or2ValidationTypeNegativoPositivo">
+		<xs:restriction base="xs:decimal">
+			<xs:pattern value="[+-]?[0-9]{1,16}(.[0-9]{1,2})?" />
+			<xs:totalDigits value="18" />
+			<xs:fractionDigits value="2" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal18D4ValidationType">
+		<xs:restriction base="xs:decimal">
+			<xs:pattern value="[0-9]{0,16}(\.[0-9]{0,4})?" />
+			<xs:totalDigits value="18"></xs:totalDigits>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal19D1or3ValidationTypeMayorIgualCero">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="19" />
+			<xs:fractionDigits value="3" />
+			<xs:pattern value="[0-9]{1,16}(.[0-9]{1,3})?" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Decimal20D1or4ValidationTypeMayorIgualCero">
+		<xs:restriction base="xs:decimal">
+			<xs:pattern value="(\d{1,16})(\.\d{1,4})?" />
+			<xs:totalDigits value="20" />
+			<xs:fractionDigits value="4" />
+		</xs:restriction>
+	</xs:simpleType>
+	<!--=================================================================-->
+
+	<!-- Alfa Numeric-->
+	<xs:simpleType name="AlfNum1ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum2ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="2" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum3ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="3" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum4ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="4" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum5ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="5" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum6ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="6" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum7Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="7" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum8ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="8" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum9ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="9" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum10Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="10" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum11a19ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="11" />
+			<xs:maxLength value="19" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum14Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="14" />
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:simpleType name="AlfNum20Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="20" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum25Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="25" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum30ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="30" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum35Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="35" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum40Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="40" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum45Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="45" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum50Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="50" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum70ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="70" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum80Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="80" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum90ValidationType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="90" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum100Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="100" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum150Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="150" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum250Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="250" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlfNum1000Type">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="1000" />
+		</xs:restriction>
+	</xs:simpleType>
+	<!--============================================================-->
+</xs:schema>

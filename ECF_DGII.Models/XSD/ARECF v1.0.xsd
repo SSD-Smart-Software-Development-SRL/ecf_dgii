@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ARECF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DetalleAcusedeRecibo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Version" type="VersionType" minOccurs = "1" maxOccurs ="1" />
+              <xs:element name="RNCEmisor" type="RNCType"  minOccurs = "1" maxOccurs ="1"/>
+              <xs:element name="RNCComprador" type="RNCType"  minOccurs = "1" maxOccurs ="1"/>              
+              <xs:element name="eNCF" type="eNCFType" minOccurs="1" maxOccurs="1"/>
+              <xs:element name="Estado" type="EstadoType" minOccurs="1" maxOccurs="1"/>
+              <xs:element name="CodigoMotivoNoRecibido" type="CodigoMotivoNoRecibidoType" minOccurs="0"/>
+              <xs:element name="FechaHoraAcuseRecibo" type="DateAndTimeType" minOccurs="1" maxOccurs="1"/>                                                             
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element> 
+        <xs:any minOccurs="0" processContents="skip" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Definiciones de Tipos de datos -->
+  <xs:simpleType name="VersionType">
+    <xs:restriction base="xs:decimal">
+      <xs:enumeration value="1.0"/>
+      <xs:totalDigits value='2'/>
+      <xs:fractionDigits value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RNCType">
+    <xs:restriction base="xs:integer" >
+      <xs:pattern value='[0-9]{11}|[0-9]{9}'/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="eNCFType">
+    <xs:restriction base="xs:string" >
+      <xs:pattern value="([a-z0-9A-Z]{13,13})|([a-z0-9A-Z]{11,11})|([a-z0-9A-Z]{9,9})*"/>
+      <xs:minLength value="9" />
+      <xs:maxLength value="13" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="EstadoType">
+    <xs:restriction base="xs:integer" >
+      <xs:enumeration value="0"/> <!-- e-CF Recibido -->
+      <xs:enumeration value="1"/> <!-- e-CF No Recibido -->
+    </xs:restriction>
+  </xs:simpleType>
+
+   <xs:simpleType name="CodigoMotivoNoRecibidoType">
+    <xs:restriction base="xs:integer" >
+      <xs:enumeration value="1"/> <!-- Error de Especificación -->
+      <xs:enumeration value="2"/> <!-- Error de Firma Digital -->
+      <xs:enumeration value="3"/> <!-- Envío Duplicado -->
+      <xs:enumeration value="4"/> <!-- RNC Comprador no Corresponde -->
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="DateAndTimeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-[0-9]{4} (2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>  

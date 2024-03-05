@@ -12,8 +12,6 @@
 		<Description>Modelos POCO generados a partir de los XSD definidos por la DGII, para la facturación electrónica en República Dominicana.</Description>
 		<RepositoryType>git</RepositoryType>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-		<IncludeSymbols>True</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii</PackageProjectUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -24,7 +22,9 @@
 		<EnablePackageValidation>true</EnablePackageValidation>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);CS1591</NoWarn>
-		<DebugType>portable</DebugType>
+		<DebugType>embedded</DebugType>
+		<PackageTags>dgii;republica dominicana;do;dominican republic;ecf;rnc;ncf;encf;direccion general de impuestos internos</PackageTags>
+		<PackageIcon>logo.png</PackageIcon>
 	</PropertyGroup>
 	
 	<ItemGroup>
@@ -56,7 +56,18 @@
 		<EmbeddedResource Include="XSD/e-CF 46 v.1.0.xsd" />
 		<EmbeddedResource Include="XSD/e-CF 47 v.1.0.xsd" />
 	</ItemGroup>
+
 	<ItemGroup>
+	  <None Include="..\logo.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="ECF-DGII.png">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
 		<None Update="README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>

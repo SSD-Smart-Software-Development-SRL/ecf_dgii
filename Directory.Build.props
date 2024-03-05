@@ -3,4 +3,7 @@
     <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
   </PropertyGroup>
   <Sdk Name="DotNet.ReproducibleBuilds.Isolated" Version="1.1.1" />
+  <ItemGroup>
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1" PrivateAssets="All"/>
+  </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<PackageId>ECF_DGII.Models</PackageId>
+		<PackageId>SSDDO.ECF_DGII.Models</PackageId>
 		<Authors>SSD Smart Software Development SRL</Authors>
 		<Company>SSD Smart Software Development SRL</Company>
 		<Copyright>© SSD Smart Software Development SRL</Copyright>

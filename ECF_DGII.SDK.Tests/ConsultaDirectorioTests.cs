@@ -18,6 +18,7 @@ public class ConsultaDirectorioTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenListadoTest()
     {
         // Act
@@ -31,6 +32,7 @@ public class ConsultaDirectorioTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenObtenerDirectorioPorRncTest()
     {
         // Act

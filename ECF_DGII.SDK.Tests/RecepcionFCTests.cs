@@ -17,6 +17,7 @@ public class RecepcionFCTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenRecepcionTest()
     {
         // Arrange

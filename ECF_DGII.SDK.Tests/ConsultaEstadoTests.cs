@@ -17,6 +17,7 @@ public class ConsultaEstadoTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenConsultaEstadoTest()
     {
         // Act

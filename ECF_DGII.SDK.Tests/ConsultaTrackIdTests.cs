@@ -17,6 +17,7 @@ public class ConsultaTrackIdTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenConsultaTrackIdTest()
     {
         // Act

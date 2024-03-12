@@ -17,6 +17,7 @@ public class RecepcionTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenFacturaElectronicaTest()
     {
         // Arrange

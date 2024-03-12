@@ -16,6 +16,7 @@ public class AutenticacionTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenGetSemillaTest()
     {
         // Act
@@ -30,11 +31,13 @@ public class AutenticacionTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenVerificaSemillaTest()
     {
         // Arrange
         using var certificate = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
+            .AddEnvironmentVariables()
             .AddUserSecrets<AutenticacionTests>()
             .Build()
             .ReadCertificateFromBase64();

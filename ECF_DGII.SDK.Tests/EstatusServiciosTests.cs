@@ -18,6 +18,7 @@ public class EstatusServiciosTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenObtenerEstatusTest()
     {
         // Act
@@ -31,6 +32,7 @@ public class EstatusServiciosTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenObtenerVentanasDeMantenimientoEstatusTest()
     {
         // Act
@@ -44,6 +46,7 @@ public class EstatusServiciosTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenObtenerVerificarEstadoTest()
     {
         // Act

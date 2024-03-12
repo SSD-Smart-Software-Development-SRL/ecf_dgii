@@ -17,6 +17,7 @@ public class AnulacionTests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenAprobacionComercialTest()
     {
         // Arrange

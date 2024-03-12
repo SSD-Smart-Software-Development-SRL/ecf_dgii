@@ -17,6 +17,7 @@ public class ConsultaRFCETests
     }
 
     [Fact]
+    [Trait("Type", "Integration")]
     public async Task WhenConsultaRFCE()
     {
         // Act

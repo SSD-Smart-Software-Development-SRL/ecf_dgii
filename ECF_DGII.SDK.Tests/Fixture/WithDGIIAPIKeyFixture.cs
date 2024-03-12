@@ -31,6 +31,7 @@ public sealed class WithDGIIAPIKeyFixture : IAsyncLifetime
     {
         using var certificate = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
+            .AddEnvironmentVariables()
             .AddUserSecrets<AutenticacionTests>()
             .Build()
             .ReadCertificateFromBase64();

@@ -33,7 +33,7 @@ public sealed class WithDGIIAPIKeyFixture : IAsyncLifetime
             .SetBasePath(AppContext.BaseDirectory)
             .AddUserSecrets<AutenticacionTests>()
             .Build()
-            .ReadCertificateFromBase64Secret();
+            .ReadCertificateFromBase64();
         using var semillaResponse = await autenticacionAPI.Semilla();
         await using var semillaStream = semillaResponse.Content
             .ToXmlDocument()

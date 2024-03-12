@@ -11,7 +11,7 @@ internal static class X509Certificate2Extensions
     private const string ECC = "1.2.840.10045.2.1";
     private const string ECDH = "1.2.840.10045.2.1.1";
 
-    public static X509Certificate2 ReadCertificateFromBase64Secret(
+    public static X509Certificate2 ReadCertificateFromBase64(
         this IConfiguration config,
         string base64CertificateKey = "Base64Certificate",
         string passwordKey = "CertificatePassword")

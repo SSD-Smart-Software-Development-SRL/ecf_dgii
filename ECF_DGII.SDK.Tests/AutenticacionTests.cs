@@ -37,7 +37,7 @@ public class AutenticacionTests
             .SetBasePath(AppContext.BaseDirectory)
             .AddUserSecrets<AutenticacionTests>()
             .Build()
-            .ReadCertificateFromBase64Secret();
+            .ReadCertificateFromBase64();
         using var semillaResponse = await api.Semilla();
         await using var semillaStream = semillaResponse.Content
             .ToXmlDocument()

@@ -5,6 +5,10 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECF_DGII.Models", "ECF_DGII.Models\ECF_DGII.Models.csproj", "{BEA0BC8A-02C9-45F9-8F77-FF279FF4E039}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECF_DGII.SDK", "ECF_DGII.SDK\ECF_DGII.SDK.csproj", "{FA89AAB7-9CE0-41C4-B383-1B7645CEA22A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECF_DGII.SDK.Tests", "ECF_DGII.SDK.Tests\ECF_DGII.SDK.Tests.csproj", "{93CF7772-C46C-455A-93AC-81E0F6D0ECA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{BEA0BC8A-02C9-45F9-8F77-FF279FF4E039}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEA0BC8A-02C9-45F9-8F77-FF279FF4E039}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEA0BC8A-02C9-45F9-8F77-FF279FF4E039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA89AAB7-9CE0-41C4-B383-1B7645CEA22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA89AAB7-9CE0-41C4-B383-1B7645CEA22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA89AAB7-9CE0-41C4-B383-1B7645CEA22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA89AAB7-9CE0-41C4-B383-1B7645CEA22A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93CF7772-C46C-455A-93AC-81E0F6D0ECA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93CF7772-C46C-455A-93AC-81E0F6D0ECA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93CF7772-C46C-455A-93AC-81E0F6D0ECA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93CF7772-C46C-455A-93AC-81E0F6D0ECA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

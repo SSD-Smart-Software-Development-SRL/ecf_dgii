@@ -3,11 +3,16 @@
 
 | Paquetes  |              |
 |-----------|--------------|
-| Modelos   |[![NuGet Downloads](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.Models)](https://www.nuget.org/packages/SSDDO.ECF_DGII.SDK)|
-| DGII SDK  |![NuGet Downloads](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.SDK)
+| Modelos   |[![NuGet Downloads](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.Models)](https://www.nuget.org/packages/SSDDO.ECF_DGII.Models)|
+| DGII SDK  |[![NuGet Downloads](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.SDK)](https://www.nuget.org/packages/SSDDO.ECF_DGII.SDK)|
 
 
-Libraria que puede ser utilizada para implementar la factura electrónica en República Dominicana, acorde a los lineamientos de la DGII
+Libraria para implementar la factura electr&oacute;nica en Rep&uacute;blica Dominicana, acorde a los lineamientos de la DGII. Hemos creados dos paquetes para facilitar la implementaci&oacute;n de la factura digital:
+
+1. `SSDDO.ECF_DGII.Models`: modelos C# generados a partir de los archivos XSD definidos por la DGII [aqu&iacute;](https://dgii.gov.do/cicloContribuyente/facturacion/comprobantesFiscalesElectronicosE-CF/Paginas/documentacionSobreE-CF.aspx). Adem&aacute;s, agregamos los modelos definidos en los Requests/Responses de las API de la DGII.
+2. `SSDDO.ECF_DGII.SDK`: endpoints de la DGII definidos utilizando la libreria Refit.
+
+La libreria `SSDDO.ECF_DGII.Models` puede ser utlizada de manera independiente en caso que solo necesites tener los modelos POCOs.
 
 ## Ejemplo
 
@@ -17,7 +22,7 @@ dotnet add package SSDDO.ECF_DGII.Models
 dotnet add package SSDDO.ECF_DGII.SDK
 ```
 
-2. Invocar el servicio requerido utilizando DGII SDK y de ser necesario parsear puedes utilizar los modelos ECF y serializarlos a xml para enviar la información de recepción EFC.
+2. Invocar el servicio requerido utilizando DGII SDK y de ser necesario parsear puedes utilizar los modelos ECF y serializarlos a xml para enviar la información de recepción ECF.
 
 ```csharp
 // Program.cs, C# 6.0+

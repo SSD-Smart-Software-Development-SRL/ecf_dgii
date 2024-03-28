@@ -3,7 +3,7 @@
     <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
   </PropertyGroup>
   <PropertyGroup>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <Authors>SSD Smart Software Development SRL</Authors>
     <Company>SSD Smart Software Development SRL</Company>
     <Copyright>© SSD Smart Software Development SRL</Copyright>

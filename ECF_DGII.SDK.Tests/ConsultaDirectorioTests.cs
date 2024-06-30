@@ -28,7 +28,14 @@ public class ConsultaDirectorioTests
         response.IsSuccessStatusCode.Should().BeTrue();
         response.Error.Should().BeNull();
         response.Content.Should().NotBeNullOrEmpty();
-        response.Content.Should().BeEquivalentTo([new Directorio("", "", "", "", "")]);
+        response.Content.Should().BeEquivalentTo([new Directorio()
+        {
+            Nombre = "",
+            Rnc = "",
+            UrlRecepcion = "",
+            UrlAceptacion = "",
+            UrlOpcional = "",
+        }]);
     }
 
     [Fact]
@@ -42,6 +49,13 @@ public class ConsultaDirectorioTests
         response.IsSuccessStatusCode.Should().BeTrue();
         response.Error.Should().BeNull();
         response.Content.Should().NotBeNullOrEmpty();
-        response.Content.Should().BeEquivalentTo([new DirectorioModel("", "", "", "", "")]);
+        response.Content.Should().BeEquivalentTo([new DirectorioModel()
+        {
+            Nombre = "",
+            Rnc = "",
+            UrlRecepcion = "",
+            UrlAceptacion = "",
+            UrlOpcional = "",
+        }]);
     }
 }

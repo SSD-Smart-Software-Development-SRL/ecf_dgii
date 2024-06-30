@@ -1,3 +1,7 @@
 namespace ECF_DGII.Models.ConsultaResultado;
 
-public record Mensaje(string? Valor, int Codigo);
+public record Mensaje
+{
+    public string? Valor { get; init; }
+    public int Codigo { get; init; }
+}

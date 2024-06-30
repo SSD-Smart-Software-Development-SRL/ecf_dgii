@@ -1,3 +1,6 @@
 namespace ECF_DGII.Models.EstatusServicios;
 
-public record RespuestaVentanaDeMantenimiento(VentanaDeMantenimiento[] VentanaMantenimientos);
+public record RespuestaVentanaDeMantenimiento
+{
+    public VentanaDeMantenimiento[] VentanaMantenimientos { get; init; }
+}

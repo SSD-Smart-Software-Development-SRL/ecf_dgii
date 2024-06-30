@@ -28,7 +28,12 @@ public class EstatusServiciosTests
         response.IsSuccessStatusCode.Should().BeTrue();
         response.Error.Should().BeNull();
         response.Content.Should().NotBeNullOrEmpty();
-        response.Content.Should().BeEquivalentTo([new RespuestaEstatusServicio("", "", "")]);
+        response.Content.Should().BeEquivalentTo([new RespuestaEstatusServicio()
+        {
+            Servicio = "",
+            Status = "",
+            Ambiente = ""
+        }]);
     }
 
     [Fact]
@@ -42,7 +47,13 @@ public class EstatusServiciosTests
         response.IsSuccessStatusCode.Should().BeTrue();
         response.Error.Should().BeNull();
         response.Content.Should().NotBeNull();
-        response.Content.VentanaMantenimientos.Should().BeEquivalentTo([new VentanaDeMantenimiento("", "", "", [])]);
+        response.Content.VentanaMantenimientos.Should().BeEquivalentTo([new VentanaDeMantenimiento()
+        {
+            Ambiente = "",
+            HoraInicio = "",
+            HoraFin = "",
+            Dias = [],
+        }]);
     }
 
     [Fact]

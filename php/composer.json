@@ -1,0 +1,43 @@
+{
+    "name": "ecfx/ecf-dgii-php",
+    "version": "1.0.0",
+    "description": "PHP SDK for the ECF DGII electronic fiscal receipt API (Dominican Republic)",
+    "keywords": [
+        "ecf",
+        "dgii",
+        "dominican-republic",
+        "fiscal",
+        "electronic-invoice",
+        "ncf",
+        "php",
+        "sdk"
+    ],
+    "homepage": "https://github.com/puntoos/ecf-dgii-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ECFX",
+            "email": "soporte@ecfx.com.do"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^7.3",
+        "guzzlehttp/psr7": "^1.7 || ^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "friendsofphp/php-cs-fixer": "^3.5"
+    },
+    "autoload": {
+        "psr-4": { "Ecfx\\EcfDgii\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Ecfx\\EcfDgii\\Test\\": "test/" }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

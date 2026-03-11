@@ -1,0 +1,13 @@
+{
+    "invokerPackage": "Ecfx\\EcfDgii",
+    "composerPackageName": "ecfx/ecf-dgii-php",
+    "apiPackage": "Api",
+    "modelPackage": "Model",
+    "packageName": "EcfDgiiPhp",
+    "srcBasePath": "src",
+    "artifactVersion": "1.0.0",
+    "licenseName": "MIT",
+    "library": "guzzle",
+    "phpVersion": "8.1",
+    "hideGenerationTimestamp": true
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@ecfx/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for the ECF DGII API (Dominican Republic electronic fiscal receipts)",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "generate": "openapi-typescript ../ecf_dgii/src/Apis/ECF_DGII.EcfApi/wwwroot/openapi/v1.json -o src/generated/v1.d.ts",
+    "build": "tsup",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "openapi-fetch": "^0.13.0"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.6.1",
+    "tsup": "^8.3.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ecf",
+    "dgii",
+    "dominican-republic",
+    "electronic-fiscal-receipts",
+    "factura-electronica"
+  ]
+}

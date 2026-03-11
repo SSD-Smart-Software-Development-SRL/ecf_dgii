@@ -1,0 +1,18 @@
+generatorName: java
+library: okhttp-gson
+inputSpec: /Users/dawlin/Developer/puntoos/ecf_dgii/src/Apis/ECF_DGII.EcfApi/wwwroot/openapi/v1.json
+outputDir: /Users/dawlin/Developer/puntoos/ecf_dgii_clients/java
+additionalProperties:
+  groupId: dom.com.ssd.ecfx
+  artifactId: ecf-dgii-client
+  artifactVersion: 1.0.0
+  invokerPackage: dom.com.ssd.ecfx.client
+  apiPackage: dom.com.ssd.ecfx.client.api
+  modelPackage: dom.com.ssd.ecfx.client.model
+  dateLibrary: threetenbp
+  java8: false
+  sourceFolder: src/main/java
+  useJakartaEe: false
+  hideGenerationTimestamp: true
+  openApiNullable: false
+  useOneOfDiscriminatorLookup: false

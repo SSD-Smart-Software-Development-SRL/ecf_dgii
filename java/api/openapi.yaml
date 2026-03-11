@@ -1,0 +1,5541 @@
+openapi: 3.1.1
+info:
+  description: ECF API (Electronic Fiscal Receipt).
+  title: ECF API
+  version: v1
+servers:
+- url: https://api.test.ecfx.ssd.com.do
+- url: https://api.cert.ecfx.ssd.com.do
+- url: https://api.prod.ecfx.ssd.com.do
+security:
+- Bearer: []
+tags:
+- name: Company
+- name: Ecf
+- name: Recepcion
+- name: Dgii
+- name: ApiKey
+paths:
+  /company:
+    get:
+      operationId: GetCompanies
+      parameters:
+      - explode: true
+        in: query
+        name: Rncs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Names
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Page
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Page_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: Limit
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Limit_parameter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedApiResultOfCompanyResponse"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Company
+      x-accepts:
+      - application/json
+      - application/problem+json
+    put:
+      operationId: UpsertCompany
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpsertCompanyRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Company
+      x-content-type: application/json
+      x-accepts:
+      - application/problem+json
+  /company/{rnc}:
+    delete:
+      operationId: DeleteCompany
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Company
+      x-accepts:
+      - application/problem+json
+    get:
+      operationId: GetCompanyByRnc
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompanyResponse"
+          description: OK
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Company
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /company/{rnc}/certificate:
+    get:
+      operationId: GetCurrentCertificate
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CertificateResponse"
+                type: array
+          description: OK
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Company
+      x-accepts:
+      - application/json
+      - application/problem+json
+    put:
+      operationId: UpdateCertificateCompany
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/UpdateCertificateCompany_request"
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Company
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/problem+json
+  /ecf/FirmarSemilla/{rnc}:
+    post:
+      operationId: FirmarSemilla
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/FirmarSemilla_request"
+        required: true
+      responses:
+        "200":
+          description: OK
+      tags:
+      - Ecf
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+  /ecf/31:
+    post:
+      operationId: RecepcionEcf31
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ECF"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EcfResponse"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/32:
+    post:
+      operationId: RecepcionEcf32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ECF"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EcfResponse"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/33:
+    post:
+      operationId: RecepcionEcf33
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ECF"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EcfResponse"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/34:
+    post:
+      operationId: RecepcionEcf34
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ECF"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EcfResponse"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/41:
+    post:
+      operationId: RecepcionEcf41
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ECF"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EcfResponse"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/43:
+    post:
+      operationId: RecepcionEcf43
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ECF"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EcfResponse"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/44:
+    post:
+      operationId: RecepcionEcf44
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ECF"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EcfResponse"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/45:
+    post:
+      operationId: RecepcionEcf45
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ECF"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EcfResponse"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/46:
+    post:
+      operationId: RecepcionEcf46
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ECF"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EcfResponse"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/47:
+    post:
+      operationId: RecepcionEcf47
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ECF"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EcfResponse"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/aprobacioncomercial/{rnc}/{encf}:
+    post:
+      operationId: AprobacionComercial
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: encf
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendAcecfRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/problem+json
+  /ecf/{rnc}/{encf}:
+    get:
+      operationId: QueryEcf
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: encf
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: includeEcfContent
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/EcfResponse"
+                type: array
+          description: OK
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/{rnc}/message/{id}:
+    get:
+      operationId: GetEcfById
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: includeEcfContent
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/EcfResponse"
+                type: array
+          description: OK
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/{rnc}:
+    get:
+      operationId: SearchEcfs
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: Encfs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: TiposEcfs
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/AllTipoECFTypes"
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: IncludeEcfContent
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: FromFechaEmision
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ToFechaEmision
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: AmountFrom
+        required: false
+        schema:
+          $ref: "#/components/schemas/SearchEcfs_AmountFrom_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: AmountTo
+        required: false
+        schema:
+          $ref: "#/components/schemas/SearchEcfs_AmountFrom_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: Page
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Page_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: Limit
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Limit_parameter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedApiResultOfEcfResponse"
+          description: OK
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf:
+    get:
+      operationId: SearchAllEcfs
+      parameters:
+      - explode: true
+        in: query
+        name: Encfs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: TiposEcfs
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/AllTipoECFTypes"
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: IncludeEcfContent
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: FromFechaEmision
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ToFechaEmision
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: AmountFrom
+        required: false
+        schema:
+          $ref: "#/components/schemas/SearchEcfs_AmountFrom_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: AmountTo
+        required: false
+        schema:
+          $ref: "#/components/schemas/SearchEcfs_AmountFrom_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: Page
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Page_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: Limit
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Limit_parameter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedApiResultOfEcfResponse"
+          description: OK
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /ecf/anularrango/{rnc}:
+    post:
+      operationId: AnulacionRangos
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnulacionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespuestaAnulacionRango"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/RespuestaAnulacionRango"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Ecf
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+      - text/xml
+  /ecf/anulaciones:
+    get:
+      operationId: ListAnulaciones
+      parameters:
+      - explode: true
+        in: query
+        name: TipoEcf
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/ECFType"
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Rncs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: FechaDesde
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: FechaHasta
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: Page
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Page_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: Limit
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Limit_parameter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedApiResultOfAnulacionListResponse"
+          description: OK
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Ecf
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /recepcion/ecf:
+    get:
+      operationId: SearchEcfReceptionRequests
+      parameters:
+      - explode: true
+        in: query
+        name: MessageIds
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Encfs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Rncs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Page
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Page_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: Limit
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Limit_parameter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedApiResultOfEcfReceptionRequestDto"
+          description: OK
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Recepcion
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /recepcion/acecf:
+    get:
+      operationId: SearchAcecfReceptionRequests
+      parameters:
+      - explode: true
+        in: query
+        name: MessageIds
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Encfs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Rncs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Page
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Page_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: Limit
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Limit_parameter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedApiResultOfAcecfReceptionRequestDto"
+          description: OK
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Recepcion
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /recepcion/{rnc}/ecf:
+    get:
+      operationId: SearchEcfReceptionRequestsByRnc
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: MessageIds
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Encfs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Page
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Page_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: Limit
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Limit_parameter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedApiResultOfEcfReceptionRequestDto"
+          description: OK
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Recepcion
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /recepcion/{rnc}/ecf/{messageId}:
+    get:
+      operationId: GetEcfReceptionRequest
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: messageId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Recepcion
+      x-accepts:
+      - application/problem+json
+  /recepcion/{rnc}/acecf:
+    get:
+      operationId: SearchAcecfReceptionRequestsByRnc
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: MessageIds
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Encfs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: Page
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Page_parameter"
+        style: form
+      - explode: true
+        in: query
+        name: Limit
+        required: false
+        schema:
+          $ref: "#/components/schemas/GetCompanies_Limit_parameter"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedApiResultOfAcecfReceptionRequestDto"
+          description: OK
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Recepcion
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /recepcion/{rnc}/acecf/{messageId}:
+    get:
+      operationId: GetAcecfReceptionRequest
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: messageId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: OK
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - Recepcion
+      x-accepts:
+      - application/problem+json
+  /dgii/{rnc}/consultadirectorio/listado:
+    get:
+      operationId: ConsultaDirectorioListado
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Directorio"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Dgii
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc:
+    get:
+      operationId: ConsultaDirectorioObtenerDirectorioPorRnc
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: RNC
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Directorio"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Dgii
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /dgii/{rnc}/consultaestado/estado:
+    get:
+      operationId: ConsultaEstado
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: rncEmisor
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ncfElectronico
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: rncComprador
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: codigoSeguridad
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespuestaConsultaEstado"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Dgii
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /dgii/{rnc}/consultaresultado/estado:
+    get:
+      operationId: ConsultaResultado
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: trackId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespuestaConsultaTrackId"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Dgii
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /dgii/{rnc}/consultarfce/consulta:
+    get:
+      operationId: ConsultaRFCE
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: RNC_Emisor
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ENCF
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: Cod_Seguridad_eCF
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespuestaConsultaRFCE"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Dgii
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /dgii/{rnc}/consultatimbre:
+    get:
+      operationId: ConsultaTimbre
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: rncemisor
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: encf
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: montototal
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: codigoseguridad
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespuestaConsultaTimbre"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Dgii
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /dgii/{rnc}/consultatimbrefc:
+    get:
+      operationId: ConsultaTimbreFC
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: rncemisor
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: encf
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: montototal
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: codigoseguridad
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespuestaConsultaTimbre"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Dgii
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /dgii/{rnc}/consultatrackids/consulta:
+    get:
+      operationId: ConsultaTrackId
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: rncEmisor
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: encf
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespuestaConsultaTrackId"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Dgii
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /dgii/{rnc}/estatusservicios/obtener-estatus:
+    get:
+      operationId: EstatusServiciosObtenerEstatus
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/RespuestaEstatusServicio"
+                type: array
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Dgii
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /dgii/{rnc}/estatusservicios/obtener-ventanas-mantenimiento:
+    get:
+      operationId: EstatusServiciosObtenerVentanasMantenimiento
+      parameters:
+      - explode: false
+        in: path
+        name: rnc
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RespuestaVentanaDeMantenimiento"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Internal Server Error
+      tags:
+      - Dgii
+      x-accepts:
+      - application/json
+      - application/problem+json
+  /apiKey:
+    post:
+      operationId: NewCompanyApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewCompanyApiKey"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+          description: OK
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+      - ApiKey
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+      - application/problem+json
+components:
+  schemas:
+    AcecfReceptionRequestDto:
+      example:
+        fileName: fileName
+        companyRnc: companyRnc
+        encf: encf
+        tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        errorMessage: errorMessage
+        messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        progress: 0
+        updatedOn: 2000-01-23T04:56:07.000+00:00
+        createdOn: 2000-01-23T04:56:07.000+00:00
+        rncEmisor: rncEmisor
+      properties:
+        messageId:
+          format: uuid
+          type: string
+        tenantId:
+          format: uuid
+          type: string
+        companyRnc:
+          type: string
+        fileName:
+          type: string
+        progress:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        createdOn:
+          format: date-time
+          type: string
+        updatedOn:
+          format: date-time
+          type: string
+        errorMessage:
+          nullable: true
+          type: string
+        encf:
+          nullable: true
+          type: string
+        rncEmisor:
+          nullable: true
+          type: string
+    AllTipoECFTypes:
+      enum:
+      - FacturaDeCreditoFiscalElectronica
+      - FacturaDeConsumoElectronica
+      - NotaDeDebitoElectronica
+      - NotaDeCreditoElectronica
+      - ComprasElectronico
+      - GastosMenoresElectronico
+      - RegimenesEspecialesElectronico
+      - GubernamentalElectronico
+      - ComprobanteDeExportacionesElectronico
+      - ComprobanteParaPagosAlExteriorElectronico
+      - RFCE
+      - ACECF
+      - ARECF
+      - ANECF
+      - null
+      type: string
+    AnulacionListResponse:
+      example:
+        fileName: fileName
+        updatedBy: updatedBy
+        detalleAnulacion:
+        - secuencias:
+          - hastaEncf: hastaEncf
+            desdeEncf: desdeEncf
+          - hastaEncf: hastaEncf
+            desdeEncf: desdeEncf
+          cantidadeNcfAnulados: null
+          tipoEcf: ECF31
+          noLinea:
+          - null
+          - null
+        - secuencias:
+          - hastaEncf: hastaEncf
+            desdeEncf: desdeEncf
+          - hastaEncf: hastaEncf
+            desdeEncf: desdeEncf
+          cantidadeNcfAnulados: null
+          tipoEcf: ECF31
+          noLinea:
+          - null
+          - null
+        updatedOn: 2000-01-23T04:56:07.000+00:00
+        createdOn: 2000-01-23T04:56:07.000+00:00
+        companyRnc: companyRnc
+        createdBy: createdBy
+        response: ""
+        fechaHoraAnulacioneNCF: 2000-01-23T04:56:07.000+00:00
+        tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        cantidadeNCFAnulados: 0
+        anulacionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        statusCode: null
+      properties:
+        anulacionId:
+          format: uuid
+          type: string
+        tenantId:
+          format: uuid
+          type: string
+        companyRnc:
+          type: string
+        cantidadeNCFAnulados:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        detalleAnulacion:
+          items:
+            $ref: "#/components/schemas/DetalleAnulacionRequestDto"
+          nullable: true
+          type: array
+        response:
+          allOf:
+          - $ref: "#/components/schemas/RespuestaAnulacionRango"
+          nullable: true
+        statusCode:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        fileName:
+          type: string
+        fechaHoraAnulacioneNCF:
+          format: date-time
+          type: string
+        createdOn:
+          format: date-time
+          type: string
+        updatedOn:
+          format: date-time
+          type: string
+        createdBy:
+          type: string
+        updatedBy:
+          type: string
+    AnulacionRequest:
+      example:
+        cantidaDeNcfAnulados: 0
+        detalleAnulacion:
+        - secuencias:
+          - hastaEncf: hastaEncf
+            desdeEncf: desdeEncf
+          - hastaEncf: hastaEncf
+            desdeEncf: desdeEncf
+          cantidadeNcfAnulados: null
+          tipoEcf: ECF31
+          noLinea:
+          - null
+          - null
+        - secuencias:
+          - hastaEncf: hastaEncf
+            desdeEncf: desdeEncf
+          - hastaEncf: hastaEncf
+            desdeEncf: desdeEncf
+          cantidadeNcfAnulados: null
+          tipoEcf: ECF31
+          noLinea:
+          - null
+          - null
+      properties:
+        cantidaDeNcfAnulados:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        detalleAnulacion:
+          items:
+            $ref: "#/components/schemas/DetalleAnulacionRequest"
+          type: array
+      required:
+      - cantidaDeNcfAnulados
+      - detalleAnulacion
+    CertificateResponse:
+      example:
+        serialNumber: serialNumber
+        createdBy: createdBy
+        subject: subject
+        notAfterUtc: 2000-01-23T04:56:07.000+00:00
+        rnc: rnc
+        thumbprint: thumbprint
+        createdOn: 2000-01-23T04:56:07.000+00:00
+        issuer: issuer
+        notBeforeUtc: 2000-01-23T04:56:07.000+00:00
+      properties:
+        thumbprint:
+          type: string
+        subject:
+          type: string
+        issuer:
+          type: string
+        notBeforeUtc:
+          format: date-time
+          type: string
+        notAfterUtc:
+          format: date-time
+          type: string
+        serialNumber:
+          type: string
+        rnc:
+          nullable: true
+          type: string
+        createdOn:
+          format: date-time
+          type: string
+        createdBy:
+          type: string
+      required:
+      - createdBy
+      - createdOn
+      - issuer
+      - notAfterUtc
+      - notBeforeUtc
+      - rnc
+      - serialNumber
+      - subject
+      - thumbprint
+    CodificacionTipoImpuestosType:
+      enum:
+      - "001"
+      - "002"
+      - "003"
+      - "004"
+      - "005"
+      - "006"
+      - "007"
+      - "008"
+      - "009"
+      - "010"
+      - "011"
+      - "012"
+      - "013"
+      - "014"
+      - "015"
+      - "016"
+      - "017"
+      - "018"
+      - "019"
+      - "020"
+      - "021"
+      - "022"
+      - "023"
+      - "024"
+      - "025"
+      - "026"
+      - "027"
+      - "028"
+      - "029"
+      - "030"
+      - "031"
+      - "032"
+      - "033"
+      - "034"
+      - "035"
+      - "036"
+      - "037"
+      - "038"
+      - "039"
+      type: string
+    CodigoModificacionType:
+      enum:
+      - AnulaElNCFModificado
+      - CorrigeTextoDelComprobanteFiscalModificado
+      - CorrigeMontosDelNCFModificado
+      - ReemplazoNCFEmitidoEnContingencia
+      - ReferenciaFacturaConsumoElectronica
+      - null
+      type: string
+    CodigosItem:
+      example:
+        codigoItem: codigoItem
+        tipoCodigo: tipoCodigo
+      properties:
+        tipoCodigo:
+          type: string
+        codigoItem:
+          type: string
+      required:
+      - codigoItem
+      - tipoCodigo
+    CompanyResponse:
+      example:
+        legalName: legalName
+        updatedBy: updatedBy
+        receptorId: receptorId
+        createdBy: createdBy
+        rnc: rnc
+        name: name
+        tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updatedOn: 2000-01-23T04:56:07.000+00:00
+        createdOn: 2000-01-23T04:56:07.000+00:00
+      properties:
+        rnc:
+          type: string
+        legalName:
+          type: string
+        name:
+          type: string
+        createdOn:
+          format: date-time
+          type: string
+        updatedOn:
+          format: date-time
+          type: string
+        createdBy:
+          type: string
+        updatedBy:
+          type: string
+        tenantId:
+          format: uuid
+          type: string
+        receptorId:
+          type: string
+    Comprador:
+      properties:
+        identificadorExtranjero:
+          nullable: true
+          type: string
+        razonSocialComprador:
+          nullable: true
+          type: string
+    DescuentoORecargo:
+      properties:
+        numeroLinea:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        tipoAjuste:
+          $ref: "#/components/schemas/TipoAjusteType"
+        descripcionDescuentooRecargo:
+          nullable: true
+          type: string
+        tipoValor:
+          allOf:
+          - $ref: "#/components/schemas/TipoDescuentoRecargoType"
+          nullable: true
+        valorDescuentooRecargo:
+          $ref: "#/components/schemas/DescuentoORecargo_valorDescuentooRecargo"
+        montoDescuentooRecargo:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        montoDescuentooRecargoOtraMoneda:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        indicadorFacturacionDescuentooRecargo:
+          allOf:
+          - $ref: "#/components/schemas/IndicadorFacturacionDRType"
+          nullable: true
+      required:
+      - numeroLinea
+      - tipoAjuste
+    DetalleAnulacionRequest:
+      example:
+        secuencias:
+        - hastaEncf: hastaEncf
+          desdeEncf: desdeEncf
+        - hastaEncf: hastaEncf
+          desdeEncf: desdeEncf
+        cantidadeNcfAnulados: null
+        tipoEcf: ECF31
+        noLinea:
+        - null
+        - null
+      properties:
+        tipoEcf:
+          $ref: "#/components/schemas/ECFType"
+        cantidadeNcfAnulados:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        noLinea:
+          items:
+            $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+          type: array
+        secuencias:
+          items:
+            $ref: "#/components/schemas/SecuenciaRequest"
+          type: array
+      required:
+      - cantidadeNcfAnulados
+      - noLinea
+      - secuencias
+      - tipoEcf
+    DetalleAnulacionRequestDto:
+      example:
+        secuencias:
+        - hastaEncf: hastaEncf
+          desdeEncf: desdeEncf
+        - hastaEncf: hastaEncf
+          desdeEncf: desdeEncf
+        cantidadeNcfAnulados: null
+        tipoEcf: ECF31
+        noLinea:
+        - null
+        - null
+      properties:
+        tipoEcf:
+          $ref: "#/components/schemas/ECFType"
+        cantidadeNcfAnulados:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        noLinea:
+          items:
+            $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+          type: array
+        secuencias:
+          items:
+            $ref: "#/components/schemas/SecuenciaRequestDto"
+          type: array
+    DGIIEnvironment:
+      enum:
+      - Test
+      - Certification
+      - Production
+      type: string
+    Directorio:
+      description: "Representa una entrada del directorio para contribuyentes electró\
+        nicos en el sistema de facturación electrónica \nde la República Dominicana.\
+        \ Este modelo contiene las URLs de servicios que los contribuyentes electró\
+        nicos \ndeben proporcionar para la comunicación entre contribuyentes."
+      example:
+        urlRecepcion: urlRecepcion
+        urlAceptacion: urlAceptacion
+        rnc: rnc
+        urlOpcional: urlOpcional
+        nombre: nombre
+      properties:
+        nombre:
+          description: |-
+            Obtiene el nombre legal o razón social del contribuyente electrónico.
+            La razón social registrada tal como aparece en el registro oficial del contribuyente.
+            Este campo es requerido y debe coincidir con el nombre de la entidad legal del contribuyente.
+          nullable: true
+          type: string
+        rnc:
+          description: "Obtiene el Número de Registro Nacional del Contribuyente (RNC)\
+            \ del contribuyente electrónico.\nUn número de 9 dígitos que identifica\
+            \ de forma única al contribuyente en el sistema tributario \nde la Repú\
+            blica Dominicana. Este campo es requerido y debe tener un formato de RNC\
+            \ válido."
+          nullable: true
+          type: string
+        urlRecepcion:
+          description: |-
+            Obtiene la URL del servicio de recepción de facturas electrónicas.
+            La URL completa donde otros contribuyentes pueden enviar facturas electrónicas (e-CF) a este contribuyente.
+            Debe seguir el formato estándar: https://host/ambiente/nombreservicio/fe/recepcion/api/ecf
+            Este campo es obligatorio para todos los contribuyentes electrónicos.
+          nullable: true
+          type: string
+        urlAceptacion:
+          description: |-
+            Obtiene la URL del servicio de aprobación comercial.
+            La URL completa donde otros contribuyentes pueden enviar aprobaciones comerciales para facturas recibidas.
+            Debe seguir el formato estándar: https://host/ambiente/nombreservicio/fe/aprobacioncomercial/api/ecf
+            Este campo es obligatorio para todos los contribuyentes electrónicos.
+          nullable: true
+          type: string
+        urlOpcional:
+          description: |-
+            Obtiene la URL del servicio opcional de autenticación.
+            La URL base del servicio de autenticación, si es implementado por el contribuyente.
+            Debe seguir el formato estándar: https://host/ambiente/nombreservicio/fe/autenticacion/api/
+            Este campo es opcional pero recomendado para mayor seguridad.
+          nullable: true
+          type: string
+    ECF:
+      example:
+        detallesItems:
+        - numeroLinea: 5
+          indicadorFacturacion: NoFacturable_18Percent
+          nombreItem: nombreItem
+          tablaCodigosItem:
+          - codigoItem: codigoItem
+            tipoCodigo: tipoCodigo
+          - codigoItem: codigoItem
+            tipoCodigo: tipoCodigo
+          cantidadItem: 2.3021358869347655
+          unidadMedida: ""
+          retencion:
+            montoISRRetenido: null
+            indicadorAgenteRetencionoPercepcion: Retencion
+          otraMonedaDetalle: ""
+          precioUnitarioItem: 7.061401241503109
+          indicadorBienoServicio: Bien
+          descripcionItem: descripcionItem
+          montoItem: null
+        - numeroLinea: 5
+          indicadorFacturacion: NoFacturable_18Percent
+          nombreItem: nombreItem
+          tablaCodigosItem:
+          - codigoItem: codigoItem
+            tipoCodigo: tipoCodigo
+          - codigoItem: codigoItem
+            tipoCodigo: tipoCodigo
+          cantidadItem: 2.3021358869347655
+          unidadMedida: ""
+          retencion:
+            montoISRRetenido: null
+            indicadorAgenteRetencionoPercepcion: Retencion
+          otraMonedaDetalle: ""
+          precioUnitarioItem: 7.061401241503109
+          indicadorBienoServicio: Bien
+          descripcionItem: descripcionItem
+          montoItem: null
+        informacionReferencia: ""
+        subtotales:
+        - lineas: null
+          descripcionSubtotal: descripcionSubtotal
+          numeroSubTotal: null
+          montoSubTotal: null
+          orden: null
+          subTotalExento: null
+        - lineas: null
+          descripcionSubtotal: descripcionSubtotal
+          numeroSubTotal: null
+          montoSubTotal: null
+          orden: null
+          subTotalExento: null
+        encabezado:
+          transporte: ""
+          comprador: ""
+          idDoc:
+            fechaLimitePago: 2000-01-23T04:56:07.000+00:00
+            encf: encf
+            fechaHasta: 2000-01-23T04:56:07.000+00:00
+            tipoCuentaPago: ""
+            fechaDesde: 2000-01-23T04:56:07.000+00:00
+            tipoeCF: FacturaDeCreditoFiscalElectronica
+            terminoPago: terminoPago
+            numeroCuentaPago: numeroCuentaPago
+            bancoPago: bancoPago
+            tipoPago: ""
+            totalPaginas: 6
+            fechaVencimientoSecuencia: 2000-01-23T04:56:07.000+00:00
+            tablaFormasPago:
+            - montoPago: 0.8008281904610115
+              formaPago: Efectivo
+            - montoPago: 0.8008281904610115
+              formaPago: Efectivo
+          otraMoneda: ""
+          version: Version1_0
+          emisor:
+            direccionEmisor: direccionEmisor
+            razonSocialEmisor: razonSocialEmisor
+            informacionAdicionalEmisor: informacionAdicionalEmisor
+            municipio: ""
+            fechaEmision: 2000-01-23
+            provincia: ""
+            actividadEconomica: actividadEconomica
+            rncEmisor: rncEmisor
+            correoEmisor: correoEmisor
+            webSite: webSite
+            tablaTelefonoEmisor:
+            - tablaTelefonoEmisor
+            - tablaTelefonoEmisor
+            sucursal: sucursal
+            numeroPedidoInterno: numeroPedidoInterno
+            numeroFacturaInterna: numeroFacturaInterna
+            nombreComercial: nombreComercial
+          totales:
+            montoPeriodo: 5.962133916683182
+            saldoAnterior: null
+            montoAvancePago: null
+            totalISRRetencion: null
+            montoExento: 1.4658129805029452
+            valorPagar: null
+            montoTotal: null
+        paginacion:
+        - noLineaHasta: null
+          paginaNo: null
+          montoSubtotalPagina: null
+          subtotalExentoPagina: null
+          noLineaDesde: null
+        - noLineaHasta: null
+          paginaNo: null
+          montoSubtotalPagina: null
+          subtotalExentoPagina: null
+          noLineaDesde: null
+      properties:
+        encabezado:
+          $ref: "#/components/schemas/Encabezado"
+        detallesItems:
+          items:
+            $ref: "#/components/schemas/Item"
+          type: array
+        subtotales:
+          items:
+            $ref: "#/components/schemas/Subtotal"
+          nullable: true
+          type: array
+        paginacion:
+          items:
+            $ref: "#/components/schemas/Pagina"
+          nullable: true
+          type: array
+        informacionReferencia:
+          allOf:
+          - $ref: "#/components/schemas/InformacionReferencia"
+          nullable: true
+      required:
+      - detallesItems
+      - encabezado
+    EcfEstado:
+      enum:
+      - NoEncontrado
+      - Aceptado
+      - Rechazado
+      - EnProceso
+      - AceptadoCondicional
+      - null
+      type: string
+    EcfProgress:
+      enum:
+      - New
+      - Processing
+      - UploadedToDgii
+      - Finished
+      - Error
+      type: string
+    EcfReceptionRequestDto:
+      example:
+        resultInternalFileName: resultInternalFileName
+        fileName: fileName
+        companyRnc: companyRnc
+        encf: encf
+        tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        errorMessage: errorMessage
+        messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        progress: 0
+        tipoEcf: ""
+        updatedOn: 2000-01-23T04:56:07.000+00:00
+        createdOn: 2000-01-23T04:56:07.000+00:00
+        rncEmisor: rncEmisor
+      properties:
+        messageId:
+          format: uuid
+          type: string
+        tenantId:
+          format: uuid
+          type: string
+        companyRnc:
+          type: string
+        fileName:
+          type: string
+        progress:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        createdOn:
+          format: date-time
+          type: string
+        updatedOn:
+          format: date-time
+          type: string
+        errorMessage:
+          nullable: true
+          type: string
+        encf:
+          nullable: true
+          type: string
+        rncEmisor:
+          nullable: true
+          type: string
+        tipoEcf:
+          allOf:
+          - $ref: "#/components/schemas/AllTipoECFTypes"
+          nullable: true
+        resultInternalFileName:
+          nullable: true
+          type: string
+    EcfResponse:
+      example:
+        fileName: fileName
+        encf: encf
+        codSec: codSec
+        rncReceptor: rncReceptor
+        dgiiEnvironment: Test
+        secuenciaUtilizada: true
+        messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ecfContent: ecfContent
+        tipoEcf: FacturaDeCreditoFiscalElectronica
+        fechaEmision: 2000-01-23
+        impresionUrl: impresionUrl
+        rncEmisor: rncEmisor
+        emisorReceptorErrors: emisorReceptorErrors
+        queueName: queueName
+        estatus: ""
+        includeEcfContent: true
+        fechaFirma: 2000-01-23T04:56:07.000+00:00
+        tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        progress: New
+        mensaje: mensaje
+        montoTotal: 0.8008281904610115
+        errors: errors
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        messageId:
+          format: uuid
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+        fechaEmision:
+          format: date
+          type: string
+        queueName:
+          type: string
+        includeEcfContent:
+          type: boolean
+        ecfContent:
+          type: string
+        tipoEcf:
+          $ref: "#/components/schemas/AllTipoECFTypes"
+        encf:
+          type: string
+        rncEmisor:
+          type: string
+        rncReceptor:
+          nullable: true
+          type: string
+        montoTotal:
+          $ref: "#/components/schemas/SearchEcfs_AmountFrom_parameter"
+        fileName:
+          nullable: true
+          type: string
+        tenantId:
+          format: uuid
+          type: string
+        estatus:
+          allOf:
+          - $ref: "#/components/schemas/EcfEstado"
+          nullable: true
+        codSec:
+          nullable: true
+          type: string
+        fechaFirma:
+          format: date-time
+          nullable: true
+          type: string
+        mensaje:
+          nullable: true
+          type: string
+        errors:
+          nullable: true
+          type: string
+        progress:
+          $ref: "#/components/schemas/EcfProgress"
+        emisorReceptorErrors:
+          nullable: true
+          type: string
+        secuenciaUtilizada:
+          nullable: true
+          type: boolean
+        dgiiEnvironment:
+          $ref: "#/components/schemas/DGIIEnvironment"
+        impresionUrl:
+          nullable: true
+          type: string
+      required:
+      - codSec
+      - dgiiEnvironment
+      - ecfContent
+      - emisorReceptorErrors
+      - encf
+      - errors
+      - estatus
+      - fechaEmision
+      - fechaFirma
+      - fileName
+      - includeEcfContent
+      - mensaje
+      - messageId
+      - montoTotal
+      - progress
+      - queueName
+      - rncEmisor
+      - rncReceptor
+      - secuenciaUtilizada
+      - tenantId
+      - timestamp
+      - tipoEcf
+    ECFType:
+      enum:
+      - ECF31
+      - ECF32
+      - ECF33
+      - ECF34
+      - ECF41
+      - ECF43
+      - ECF44
+      - ECF45
+      - ECF46
+      - ECF47
+      type: string
+    Emisor:
+      example:
+        direccionEmisor: direccionEmisor
+        razonSocialEmisor: razonSocialEmisor
+        informacionAdicionalEmisor: informacionAdicionalEmisor
+        municipio: ""
+        fechaEmision: 2000-01-23
+        provincia: ""
+        actividadEconomica: actividadEconomica
+        rncEmisor: rncEmisor
+        correoEmisor: correoEmisor
+        webSite: webSite
+        tablaTelefonoEmisor:
+        - tablaTelefonoEmisor
+        - tablaTelefonoEmisor
+        sucursal: sucursal
+        numeroPedidoInterno: numeroPedidoInterno
+        numeroFacturaInterna: numeroFacturaInterna
+        nombreComercial: nombreComercial
+      properties:
+        rncEmisor:
+          type: string
+        razonSocialEmisor:
+          type: string
+        nombreComercial:
+          nullable: true
+          type: string
+        sucursal:
+          nullable: true
+          type: string
+        direccionEmisor:
+          type: string
+        municipio:
+          allOf:
+          - $ref: "#/components/schemas/ProvinciaMunicipioType"
+          nullable: true
+        provincia:
+          allOf:
+          - $ref: "#/components/schemas/ProvinciaMunicipioType"
+          nullable: true
+        tablaTelefonoEmisor:
+          items:
+            type: string
+          nullable: true
+          type: array
+        correoEmisor:
+          nullable: true
+          type: string
+        webSite:
+          nullable: true
+          type: string
+        actividadEconomica:
+          nullable: true
+          type: string
+        numeroFacturaInterna:
+          nullable: true
+          type: string
+        numeroPedidoInterno:
+          nullable: true
+          pattern: "^[0-9]{1,20}$"
+          type: string
+        informacionAdicionalEmisor:
+          nullable: true
+          type: string
+        fechaEmision:
+          format: date
+          type: string
+      required:
+      - direccionEmisor
+      - razonSocialEmisor
+      - rncEmisor
+    Encabezado:
+      example:
+        transporte: ""
+        comprador: ""
+        idDoc:
+          fechaLimitePago: 2000-01-23T04:56:07.000+00:00
+          encf: encf
+          fechaHasta: 2000-01-23T04:56:07.000+00:00
+          tipoCuentaPago: ""
+          fechaDesde: 2000-01-23T04:56:07.000+00:00
+          tipoeCF: FacturaDeCreditoFiscalElectronica
+          terminoPago: terminoPago
+          numeroCuentaPago: numeroCuentaPago
+          bancoPago: bancoPago
+          tipoPago: ""
+          totalPaginas: 6
+          fechaVencimientoSecuencia: 2000-01-23T04:56:07.000+00:00
+          tablaFormasPago:
+          - montoPago: 0.8008281904610115
+            formaPago: Efectivo
+          - montoPago: 0.8008281904610115
+            formaPago: Efectivo
+        otraMoneda: ""
+        version: Version1_0
+        emisor:
+          direccionEmisor: direccionEmisor
+          razonSocialEmisor: razonSocialEmisor
+          informacionAdicionalEmisor: informacionAdicionalEmisor
+          municipio: ""
+          fechaEmision: 2000-01-23
+          provincia: ""
+          actividadEconomica: actividadEconomica
+          rncEmisor: rncEmisor
+          correoEmisor: correoEmisor
+          webSite: webSite
+          tablaTelefonoEmisor:
+          - tablaTelefonoEmisor
+          - tablaTelefonoEmisor
+          sucursal: sucursal
+          numeroPedidoInterno: numeroPedidoInterno
+          numeroFacturaInterna: numeroFacturaInterna
+          nombreComercial: nombreComercial
+        totales:
+          montoPeriodo: 5.962133916683182
+          saldoAnterior: null
+          montoAvancePago: null
+          totalISRRetencion: null
+          montoExento: 1.4658129805029452
+          valorPagar: null
+          montoTotal: null
+      properties:
+        version:
+          $ref: "#/components/schemas/VersionType"
+        idDoc:
+          $ref: "#/components/schemas/IdDoc"
+        emisor:
+          $ref: "#/components/schemas/Emisor"
+        comprador:
+          allOf:
+          - $ref: "#/components/schemas/Comprador"
+          nullable: true
+        transporte:
+          allOf:
+          - $ref: "#/components/schemas/Transporte"
+          nullable: true
+        totales:
+          $ref: "#/components/schemas/Totales"
+        otraMoneda:
+          allOf:
+          - $ref: "#/components/schemas/OtraMoneda"
+          nullable: true
+      required:
+      - emisor
+      - idDoc
+      - totales
+      - version
+    EstadoType:
+      enum:
+      - ECFAceptado
+      - ECFRechazado
+      type: string
+    FormaDePago:
+      example:
+        montoPago: 0.8008281904610115
+        formaPago: Efectivo
+      properties:
+        formaPago:
+          $ref: "#/components/schemas/FormaPagoType"
+        montoPago:
+          $ref: "#/components/schemas/FormaDePago_montoPago"
+      required:
+      - formaPago
+      - montoPago
+    FormaPagoType:
+      enum:
+      - Efectivo
+      - ChequeSlashTransferenciaSlashDeposito
+      - TarjetaDeDebitoSlashCredito
+      - VentaACredito
+      - BonosOCertificadosDeRegalo
+      - Permuta
+      - NotaDeCredito
+      - OtrasFormasDePago
+      type: string
+    IdDoc:
+      example:
+        fechaLimitePago: 2000-01-23T04:56:07.000+00:00
+        encf: encf
+        fechaHasta: 2000-01-23T04:56:07.000+00:00
+        tipoCuentaPago: ""
+        fechaDesde: 2000-01-23T04:56:07.000+00:00
+        tipoeCF: FacturaDeCreditoFiscalElectronica
+        terminoPago: terminoPago
+        numeroCuentaPago: numeroCuentaPago
+        bancoPago: bancoPago
+        tipoPago: ""
+        totalPaginas: 6
+        fechaVencimientoSecuencia: 2000-01-23T04:56:07.000+00:00
+        tablaFormasPago:
+        - montoPago: 0.8008281904610115
+          formaPago: Efectivo
+        - montoPago: 0.8008281904610115
+          formaPago: Efectivo
+      properties:
+        tipoeCF:
+          $ref: "#/components/schemas/TipoeCFType"
+        encf:
+          type: string
+        fechaVencimientoSecuencia:
+          format: date-time
+          type: string
+        tipoPago:
+          allOf:
+          - $ref: "#/components/schemas/TipoPagoType"
+          nullable: true
+        fechaLimitePago:
+          format: date-time
+          nullable: true
+          type: string
+        terminoPago:
+          nullable: true
+          type: string
+        tablaFormasPago:
+          items:
+            $ref: "#/components/schemas/FormaDePago"
+          nullable: true
+          type: array
+        tipoCuentaPago:
+          allOf:
+          - $ref: "#/components/schemas/TipoCuentaPagoType"
+          nullable: true
+        numeroCuentaPago:
+          nullable: true
+          type: string
+        bancoPago:
+          nullable: true
+          type: string
+        fechaDesde:
+          format: date-time
+          nullable: true
+          type: string
+        fechaHasta:
+          format: date-time
+          nullable: true
+          type: string
+        totalPaginas:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+      required:
+      - encf
+      - tipoeCF
+    IFormFile:
+      format: binary
+      type: string
+    ImpuestoAdicional:
+      properties:
+        tipoImpuesto:
+          $ref: "#/components/schemas/CodificacionTipoImpuestosType"
+      required:
+      - tipoImpuesto
+    ImpuestoAdicional2:
+      properties:
+        tipoImpuesto:
+          allOf:
+          - $ref: "#/components/schemas/CodificacionTipoImpuestosType"
+          nullable: true
+        tasaImpuestoAdicional:
+          $ref: "#/components/schemas/ImpuestoAdicional2_tasaImpuestoAdicional"
+        montoImpuestoSelectivoConsumoEspecifico:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+        montoImpuestoSelectivoConsumoAdvalorem:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+        otrosImpuestosAdicionales:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+      required:
+      - tasaImpuestoAdicional
+      - tipoImpuesto
+    ImpuestoAdicionalOtraMoneda:
+      properties:
+        tipoImpuestoOtraMoneda:
+          allOf:
+          - $ref: "#/components/schemas/CodificacionTipoImpuestosType"
+          nullable: true
+        tasaImpuestoAdicionalOtraMoneda:
+          $ref: "#/components/schemas/DescuentoORecargo_valorDescuentooRecargo"
+        montoImpuestoSelectivoConsumoEspecificoOtraMoneda:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+        montoImpuestoSelectivoConsumoAdvaloremOtraMoneda:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+        otrosImpuestosAdicionalesOtraMoneda:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+    IndicadorAgenteRetencionoPercepcionType:
+      enum:
+      - Retencion
+      - Percepcion
+      type: string
+    IndicadorBienoServicioType:
+      enum:
+      - Bien
+      - Servicio
+      type: string
+    IndicadorEnvioDiferidoType:
+      enum:
+      - EnvioDiferidoAutorizado
+      - null
+      type: string
+    IndicadorFacturacionDRType:
+      enum:
+      - ITBIS1_18Percent
+      - ITBIS2_16Percent
+      - ITBIS3_0Percent
+      - Exento_E
+      - null
+      type: string
+    IndicadorFacturacionType:
+      enum:
+      - NoFacturable_18Percent
+      - ITBIS1_18Percent
+      - ITBIS2_16Percent
+      - ITBIS3_0Percent
+      - Exento_E
+      type: string
+    IndicadorMontoGravadoType:
+      enum:
+      - SinITBISIncluido
+      - ConITBISIncluido
+      - null
+      type: string
+    IndicadorNorma1007Type:
+      enum:
+      - NoIncluir
+      - Incluir
+      - null
+      type: string
+    IndicadorServicioTodoIncluidoType:
+      enum:
+      - IndicadorServicioTodoIncluido
+      - null
+      type: string
+    InformacionesAdicionales:
+      properties:
+        fechaEmbarque:
+          format: date-time
+          nullable: true
+          type: string
+        numeroEmbarque:
+          nullable: true
+          type: string
+        numeroContenedor:
+          nullable: true
+          type: string
+        numeroReferencia:
+          nullable: true
+          pattern: "^[0-9]{1,20}$"
+          type: string
+        nombrePuertoEmbarque:
+          nullable: true
+          type: string
+        condicionesEntrega:
+          nullable: true
+          type: string
+        totalFob:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+        seguro:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+        flete:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+        otrosGastos:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+        totalCif:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        regimenAduanero:
+          nullable: true
+          type: string
+        nombrePuertoSalida:
+          nullable: true
+          type: string
+        nombrePuertoDesembarque:
+          nullable: true
+          type: string
+        pesoBruto:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        pesoNeto:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        unidadPesoBruto:
+          allOf:
+          - $ref: "#/components/schemas/UnidadMedidaType"
+          nullable: true
+        unidadPesoNeto:
+          allOf:
+          - $ref: "#/components/schemas/UnidadMedidaType"
+          nullable: true
+        cantidadBulto:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        unidadBulto:
+          allOf:
+          - $ref: "#/components/schemas/UnidadMedidaType"
+          nullable: true
+        volumenBulto:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+        unidadVolumen:
+          allOf:
+          - $ref: "#/components/schemas/UnidadMedidaType"
+          nullable: true
+    InformacionReferencia:
+      properties:
+        ncfModificado:
+          nullable: true
+          type: string
+        rncOtroContribuyente:
+          nullable: true
+          type: string
+        fechaNCFModificado:
+          format: date-time
+          nullable: true
+          type: string
+        codigoModificacion:
+          allOf:
+          - $ref: "#/components/schemas/CodigoModificacionType"
+          nullable: true
+    Item:
+      example:
+        numeroLinea: 5
+        indicadorFacturacion: NoFacturable_18Percent
+        nombreItem: nombreItem
+        tablaCodigosItem:
+        - codigoItem: codigoItem
+          tipoCodigo: tipoCodigo
+        - codigoItem: codigoItem
+          tipoCodigo: tipoCodigo
+        cantidadItem: 2.3021358869347655
+        unidadMedida: ""
+        retencion:
+          montoISRRetenido: null
+          indicadorAgenteRetencionoPercepcion: Retencion
+        otraMonedaDetalle: ""
+        precioUnitarioItem: 7.061401241503109
+        indicadorBienoServicio: Bien
+        descripcionItem: descripcionItem
+        montoItem: null
+      properties:
+        numeroLinea:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        tablaCodigosItem:
+          items:
+            $ref: "#/components/schemas/CodigosItem"
+          nullable: true
+          type: array
+        indicadorFacturacion:
+          $ref: "#/components/schemas/IndicadorFacturacionType"
+        retencion:
+          $ref: "#/components/schemas/Retencion"
+        nombreItem:
+          type: string
+        indicadorBienoServicio:
+          $ref: "#/components/schemas/IndicadorBienoServicioType"
+        descripcionItem:
+          nullable: true
+          type: string
+        cantidadItem:
+          $ref: "#/components/schemas/Item_cantidadItem"
+        unidadMedida:
+          allOf:
+          - $ref: "#/components/schemas/UnidadMedidaType"
+          nullable: true
+        precioUnitarioItem:
+          $ref: "#/components/schemas/Item_precioUnitarioItem"
+        otraMonedaDetalle:
+          allOf:
+          - $ref: "#/components/schemas/OtraMonedaDetalle"
+          nullable: true
+        montoItem:
+          $ref: "#/components/schemas/FormaDePago_montoPago"
+      required:
+      - cantidadItem
+      - indicadorBienoServicio
+      - indicadorFacturacion
+      - montoItem
+      - nombreItem
+      - numeroLinea
+      - precioUnitarioItem
+      - retencion
+    LiquidacionType:
+      enum:
+      - Provisional
+      - Final
+      - null
+      type: string
+    Mensaje:
+      description: |-
+        Representa un mensaje asociado al estado de validación de un comprobante fiscal electrónico (e-CF).
+        Este modelo se utiliza en las respuestas de consulta de resultado para proporcionar información
+        detallada sobre el estado de procesamiento y cualquier mensaje relacionado.
+      example:
+        codigo: 1
+        valor: El comprobante fue aceptado correctamente
+      properties:
+        valor:
+          description: |-
+            Obtiene el valor textual del mensaje que describe el estado o resultado de la validación.
+            El texto descriptivo del mensaje. Puede ser null si no hay mensaje disponible.
+          example: El comprobante fue aceptado correctamente
+          nullable: true
+          type: string
+        codigo:
+          $ref: "#/components/schemas/Mensaje_codigo"
+    Mineria:
+      properties:
+        pesoNetoKilogramo:
+          $ref: "#/components/schemas/Mineria_pesoNetoKilogramo"
+        pesoNetoMineria:
+          $ref: "#/components/schemas/Mineria_pesoNetoKilogramo"
+        tipoAfiliacion:
+          allOf:
+          - $ref: "#/components/schemas/TipoAfiliacionType"
+          nullable: true
+        liquidacion:
+          allOf:
+          - $ref: "#/components/schemas/LiquidacionType"
+          nullable: true
+    NewCompanyApiKey:
+      example:
+        rnc: rnc
+      properties:
+        rnc:
+          type: string
+      required:
+      - rnc
+    OtraMoneda:
+      properties:
+        tipoMoneda:
+          allOf:
+          - $ref: "#/components/schemas/TipoMonedaType"
+          nullable: true
+        tipoCambio:
+          $ref: "#/components/schemas/OtraMoneda_tipoCambio"
+        montoExentoOtraMoneda:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        montoTotalOtraMoneda:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+    OtraMonedaDetalle:
+      properties:
+        precioOtraMoneda:
+          $ref: "#/components/schemas/Mineria_pesoNetoKilogramo"
+        descuentoOtraMoneda:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        recargoOtraMoneda:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        montoItemOtraMoneda:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+    Pagina:
+      example:
+        noLineaHasta: null
+        paginaNo: null
+        montoSubtotalPagina: null
+        subtotalExentoPagina: null
+        noLineaDesde: null
+      properties:
+        paginaNo:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+        noLineaDesde:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+        noLineaHasta:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+        subtotalExentoPagina:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        montoSubtotalPagina:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+    PaginatedApiResultOfAcecfReceptionRequestDto:
+      example:
+        total: null
+        previousPage: null
+        nextPageUri: https://openapi-generator.tech
+        nextPage: 6
+        values:
+        - fileName: fileName
+          companyRnc: companyRnc
+          encf: encf
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          errorMessage: errorMessage
+          messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          progress: 0
+          updatedOn: 2000-01-23T04:56:07.000+00:00
+          createdOn: 2000-01-23T04:56:07.000+00:00
+          rncEmisor: rncEmisor
+        - fileName: fileName
+          companyRnc: companyRnc
+          encf: encf
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          errorMessage: errorMessage
+          messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          progress: 0
+          updatedOn: 2000-01-23T04:56:07.000+00:00
+          createdOn: 2000-01-23T04:56:07.000+00:00
+          rncEmisor: rncEmisor
+        limit: null
+        page: null
+      properties:
+        nextPageUri:
+          format: uri
+          nullable: true
+          type: string
+        values:
+          items:
+            $ref: "#/components/schemas/AcecfReceptionRequestDto"
+          type: array
+        total:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        page:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        limit:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        nextPage:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+        previousPage:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+      required:
+      - nextPageUri
+    PaginatedApiResultOfAnulacionListResponse:
+      example:
+        total: null
+        previousPage: null
+        nextPageUri: https://openapi-generator.tech
+        nextPage: 6
+        values:
+        - fileName: fileName
+          updatedBy: updatedBy
+          detalleAnulacion:
+          - secuencias:
+            - hastaEncf: hastaEncf
+              desdeEncf: desdeEncf
+            - hastaEncf: hastaEncf
+              desdeEncf: desdeEncf
+            cantidadeNcfAnulados: null
+            tipoEcf: ECF31
+            noLinea:
+            - null
+            - null
+          - secuencias:
+            - hastaEncf: hastaEncf
+              desdeEncf: desdeEncf
+            - hastaEncf: hastaEncf
+              desdeEncf: desdeEncf
+            cantidadeNcfAnulados: null
+            tipoEcf: ECF31
+            noLinea:
+            - null
+            - null
+          updatedOn: 2000-01-23T04:56:07.000+00:00
+          createdOn: 2000-01-23T04:56:07.000+00:00
+          companyRnc: companyRnc
+          createdBy: createdBy
+          response: ""
+          fechaHoraAnulacioneNCF: 2000-01-23T04:56:07.000+00:00
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          cantidadeNCFAnulados: 0
+          anulacionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          statusCode: null
+        - fileName: fileName
+          updatedBy: updatedBy
+          detalleAnulacion:
+          - secuencias:
+            - hastaEncf: hastaEncf
+              desdeEncf: desdeEncf
+            - hastaEncf: hastaEncf
+              desdeEncf: desdeEncf
+            cantidadeNcfAnulados: null
+            tipoEcf: ECF31
+            noLinea:
+            - null
+            - null
+          - secuencias:
+            - hastaEncf: hastaEncf
+              desdeEncf: desdeEncf
+            - hastaEncf: hastaEncf
+              desdeEncf: desdeEncf
+            cantidadeNcfAnulados: null
+            tipoEcf: ECF31
+            noLinea:
+            - null
+            - null
+          updatedOn: 2000-01-23T04:56:07.000+00:00
+          createdOn: 2000-01-23T04:56:07.000+00:00
+          companyRnc: companyRnc
+          createdBy: createdBy
+          response: ""
+          fechaHoraAnulacioneNCF: 2000-01-23T04:56:07.000+00:00
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          cantidadeNCFAnulados: 0
+          anulacionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          statusCode: null
+        limit: null
+        page: null
+      properties:
+        nextPageUri:
+          format: uri
+          nullable: true
+          type: string
+        values:
+          items:
+            $ref: "#/components/schemas/AnulacionListResponse"
+          type: array
+        total:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        page:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        limit:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        nextPage:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+        previousPage:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+      required:
+      - nextPageUri
+    PaginatedApiResultOfCompanyResponse:
+      example:
+        total: 0
+        previousPage: null
+        nextPageUri: https://openapi-generator.tech
+        nextPage: 6
+        values:
+        - legalName: legalName
+          updatedBy: updatedBy
+          receptorId: receptorId
+          createdBy: createdBy
+          rnc: rnc
+          name: name
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updatedOn: 2000-01-23T04:56:07.000+00:00
+          createdOn: 2000-01-23T04:56:07.000+00:00
+        - legalName: legalName
+          updatedBy: updatedBy
+          receptorId: receptorId
+          createdBy: createdBy
+          rnc: rnc
+          name: name
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updatedOn: 2000-01-23T04:56:07.000+00:00
+          createdOn: 2000-01-23T04:56:07.000+00:00
+        limit: null
+        page: null
+      properties:
+        nextPageUri:
+          format: uri
+          nullable: true
+          type: string
+        values:
+          items:
+            $ref: "#/components/schemas/CompanyResponse"
+          type: array
+        total:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        page:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        limit:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        nextPage:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+        previousPage:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+      required:
+      - nextPageUri
+    PaginatedApiResultOfEcfReceptionRequestDto:
+      example:
+        total: null
+        previousPage: null
+        nextPageUri: https://openapi-generator.tech
+        nextPage: 6
+        values:
+        - resultInternalFileName: resultInternalFileName
+          fileName: fileName
+          companyRnc: companyRnc
+          encf: encf
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          errorMessage: errorMessage
+          messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          progress: 0
+          tipoEcf: ""
+          updatedOn: 2000-01-23T04:56:07.000+00:00
+          createdOn: 2000-01-23T04:56:07.000+00:00
+          rncEmisor: rncEmisor
+        - resultInternalFileName: resultInternalFileName
+          fileName: fileName
+          companyRnc: companyRnc
+          encf: encf
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          errorMessage: errorMessage
+          messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          progress: 0
+          tipoEcf: ""
+          updatedOn: 2000-01-23T04:56:07.000+00:00
+          createdOn: 2000-01-23T04:56:07.000+00:00
+          rncEmisor: rncEmisor
+        limit: null
+        page: null
+      properties:
+        nextPageUri:
+          format: uri
+          nullable: true
+          type: string
+        values:
+          items:
+            $ref: "#/components/schemas/EcfReceptionRequestDto"
+          type: array
+        total:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        page:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        limit:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        nextPage:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+        previousPage:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+      required:
+      - nextPageUri
+    PaginatedApiResultOfEcfResponse:
+      example:
+        total: 0
+        previousPage: null
+        nextPageUri: https://openapi-generator.tech
+        nextPage: 6
+        values:
+        - fileName: fileName
+          encf: encf
+          codSec: codSec
+          rncReceptor: rncReceptor
+          dgiiEnvironment: Test
+          secuenciaUtilizada: true
+          messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ecfContent: ecfContent
+          tipoEcf: FacturaDeCreditoFiscalElectronica
+          fechaEmision: 2000-01-23
+          impresionUrl: impresionUrl
+          rncEmisor: rncEmisor
+          emisorReceptorErrors: emisorReceptorErrors
+          queueName: queueName
+          estatus: ""
+          includeEcfContent: true
+          fechaFirma: 2000-01-23T04:56:07.000+00:00
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          progress: New
+          mensaje: mensaje
+          montoTotal: 0.8008281904610115
+          errors: errors
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - fileName: fileName
+          encf: encf
+          codSec: codSec
+          rncReceptor: rncReceptor
+          dgiiEnvironment: Test
+          secuenciaUtilizada: true
+          messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ecfContent: ecfContent
+          tipoEcf: FacturaDeCreditoFiscalElectronica
+          fechaEmision: 2000-01-23
+          impresionUrl: impresionUrl
+          rncEmisor: rncEmisor
+          emisorReceptorErrors: emisorReceptorErrors
+          queueName: queueName
+          estatus: ""
+          includeEcfContent: true
+          fechaFirma: 2000-01-23T04:56:07.000+00:00
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          progress: New
+          mensaje: mensaje
+          montoTotal: 0.8008281904610115
+          errors: errors
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        limit: null
+        page: null
+      properties:
+        nextPageUri:
+          format: uri
+          nullable: true
+          type: string
+        values:
+          items:
+            $ref: "#/components/schemas/EcfResponse"
+          type: array
+        total:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        page:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        limit:
+          $ref: "#/components/schemas/AcecfReceptionRequestDto_progress"
+        nextPage:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+        previousPage:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+      required:
+      - nextPageUri
+    ProblemDetails:
+      properties:
+        type:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        status:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+        detail:
+          nullable: true
+          type: string
+        instance:
+          nullable: true
+          type: string
+    ProvinciaMunicipioType:
+      enum:
+      - "010000"
+      - "010100"
+      - "010101"
+      - "020000"
+      - "020100"
+      - "020101"
+      - "020102"
+      - "020103"
+      - "020104"
+      - "020105"
+      - "020106"
+      - "020107"
+      - "020108"
+      - "020109"
+      - "020200"
+      - "020201"
+      - "020202"
+      - "020300"
+      - "020301"
+      - "020302"
+      - "020303"
+      - "020400"
+      - "020401"
+      - "020402"
+      - "020403"
+      - "020404"
+      - "020405"
+      - "020500"
+      - "020501"
+      - "020600"
+      - "020601"
+      - "020602"
+      - "020603"
+      - "020604"
+      - "020700"
+      - "020701"
+      - "020702"
+      - "020800"
+      - "020801"
+      - "020802"
+      - "020803"
+      - "020804"
+      - "020900"
+      - "020901"
+      - "021000"
+      - "021001"
+      - "030000"
+      - "030001"
+      - "030101"
+      - "030102"
+      - "030200"
+      - "030201"
+      - "030202"
+      - "030300"
+      - "030301"
+      - "030302"
+      - "030303"
+      - "030304"
+      - "030305"
+      - "030306"
+      - "030307"
+      - "030400"
+      - "030401"
+      - "030500"
+      - "030501"
+      - "030502"
+      - "040000"
+      - "040100"
+      - "040101"
+      - "040102"
+      - "040103"
+      - "040104"
+      - "040200"
+      - "040201"
+      - "040300"
+      - "040301"
+      - "040302"
+      - "040400"
+      - "040401"
+      - "040402"
+      - "040500"
+      - "040501"
+      - "040502"
+      - "040503"
+      - "040504"
+      - "040600"
+      - "040601"
+      - "040700"
+      - "040701"
+      - "040702"
+      - "040800"
+      - "040801"
+      - "040802"
+      - "040900"
+      - "040901"
+      - "041000"
+      - "041001"
+      - "041100"
+      - "041101"
+      - "041102"
+      - "050000"
+      - "050100"
+      - "050101"
+      - "050102"
+      - "050200"
+      - "050201"
+      - "050202"
+      - "050203"
+      - "050300"
+      - "050301"
+      - "050400"
+      - "050401"
+      - "050500"
+      - "050501"
+      - "050502"
+      - "060000"
+      - "060100"
+      - "060101"
+      - "060102"
+      - "060103"
+      - "060104"
+      - "060105"
+      - "060200"
+      - "060201"
+      - "060202"
+      - "060203"
+      - "060300"
+      - "060301"
+      - "060400"
+      - "060401"
+      - "060500"
+      - "060501"
+      - "060502"
+      - "060503"
+      - "060504"
+      - "060505"
+      - "060600"
+      - "060601"
+      - "060700"
+      - "060701"
+      - "060702"
+      - "070000"
+      - "070100"
+      - "070101"
+      - "070102"
+      - "070103"
+      - "070200"
+      - "070201"
+      - "070202"
+      - "070203"
+      - "070300"
+      - "070301"
+      - "070302"
+      - "070400"
+      - "070401"
+      - "070402"
+      - "070500"
+      - "070501"
+      - "070502"
+      - "070600"
+      - "070601"
+      - "080000"
+      - "080100"
+      - "080101"
+      - "080102"
+      - "080103"
+      - "080104"
+      - "080200"
+      - "080201"
+      - "080202"
+      - "080203"
+      - "090000"
+      - "090100"
+      - "090101"
+      - "090102"
+      - "090103"
+      - "090104"
+      - "090105"
+      - "090106"
+      - "090107"
+      - "090108"
+      - "090109"
+      - "090200"
+      - "090201"
+      - "090300"
+      - "090301"
+      - "090302"
+      - "090303"
+      - "090304"
+      - "090400"
+      - "090401"
+      - "100000"
+      - "100100"
+      - "100101"
+      - "100102"
+      - "100103"
+      - "100200"
+      - "100201"
+      - "100202"
+      - "100300"
+      - "100301"
+      - "100400"
+      - "100401"
+      - "100402"
+      - "100500"
+      - "100501"
+      - "100502"
+      - "100600"
+      - "100601"
+      - "100602"
+      - "110000"
+      - "110100"
+      - "110101"
+      - "110102"
+      - "110103"
+      - "110104"
+      - "110200"
+      - "110201"
+      - "110202"
+      - "110203"
+      - "120000"
+      - "120100"
+      - "120101"
+      - "120102"
+      - "120200"
+      - "120201"
+      - "120300"
+      - "120301"
+      - "120302"
+      - "130000"
+      - "130100"
+      - "130101"
+      - "130102"
+      - "130103"
+      - "130104"
+      - "130105"
+      - "130200"
+      - "130201"
+      - "130202"
+      - "130203"
+      - "130300"
+      - "130301"
+      - "130302"
+      - "130303"
+      - "130400"
+      - "130401"
+      - "130402"
+      - "140000"
+      - "140100"
+      - "140101"
+      - "140102"
+      - "140103"
+      - "140104"
+      - "140200"
+      - "140201"
+      - "140202"
+      - "140203"
+      - "140300"
+      - "140301"
+      - "140302"
+      - "140400"
+      - "140401"
+      - "150000"
+      - "150100"
+      - "150101"
+      - "150200"
+      - "150201"
+      - "150202"
+      - "150300"
+      - "150301"
+      - "150302"
+      - "150303"
+      - "150304"
+      - "150400"
+      - "150401"
+      - "150500"
+      - "150501"
+      - "150502"
+      - "150600"
+      - "150601"
+      - "160000"
+      - "160100"
+      - "160101"
+      - "160102"
+      - "160200"
+      - "160201"
+      - "160202"
+      - "170000"
+      - "170100"
+      - "170101"
+      - "170102"
+      - "170103"
+      - "170104"
+      - "170105"
+      - "170106"
+      - "170107"
+      - "170108"
+      - "170109"
+      - "170110"
+      - "170200"
+      - "170201"
+      - "170202"
+      - "170203"
+      - "170300"
+      - "170301"
+      - "180000"
+      - "180100"
+      - "180101"
+      - "180102"
+      - "180103"
+      - "180200"
+      - "180201"
+      - "180202"
+      - "180300"
+      - "180301"
+      - "180400"
+      - "180401"
+      - "180500"
+      - "180501"
+      - "180502"
+      - "180600"
+      - "180601"
+      - "180602"
+      - "180603"
+      - "180604"
+      - "180700"
+      - "180701"
+      - "180702"
+      - "180703"
+      - "180800"
+      - "180801"
+      - "180802"
+      - "180803"
+      - "180804"
+      - "180900"
+      - "180901"
+      - "190000"
+      - "190100"
+      - "190101"
+      - "190102"
+      - "190200"
+      - "190201"
+      - "190202"
+      - "190300"
+      - "190301"
+      - "200000"
+      - "200100"
+      - "200101"
+      - "200102"
+      - "200103"
+      - "200104"
+      - "200200"
+      - "200201"
+      - "200300"
+      - "200301"
+      - "210000"
+      - "210100"
+      - "210101"
+      - "210102"
+      - "210103"
+      - "210200"
+      - "210201"
+      - "210300"
+      - "210301"
+      - "210302"
+      - "210303"
+      - "210400"
+      - "210401"
+      - "210402"
+      - "210500"
+      - "210501"
+      - "210502"
+      - "210503"
+      - "210504"
+      - "210600"
+      - "210601"
+      - "210602"
+      - "210700"
+      - "210701"
+      - "210800"
+      - "210801"
+      - "220000"
+      - "220100"
+      - "220101"
+      - "220102"
+      - "220103"
+      - "220104"
+      - "220105"
+      - "220106"
+      - "220107"
+      - "220108"
+      - "220109"
+      - "220110"
+      - "220111"
+      - "220200"
+      - "220201"
+      - "220202"
+      - "220203"
+      - "220300"
+      - "220301"
+      - "220302"
+      - "220303"
+      - "220400"
+      - "220401"
+      - "220402"
+      - "220500"
+      - "220501"
+      - "220502"
+      - "220503"
+      - "220600"
+      - "220601"
+      - "220602"
+      - "230000"
+      - "230100"
+      - "230101"
+      - "230200"
+      - "230201"
+      - "230202"
+      - "230203"
+      - "230300"
+      - "230301"
+      - "230400"
+      - "230401"
+      - "230500"
+      - "230501"
+      - "230600"
+      - "230601"
+      - "240000"
+      - "240100"
+      - "240101"
+      - "240102"
+      - "240103"
+      - "240104"
+      - "240105"
+      - "240106"
+      - "240200"
+      - "240201"
+      - "240202"
+      - "240300"
+      - "240301"
+      - "240400"
+      - "240401"
+      - "240402"
+      - "240403"
+      - "240404"
+      - "250000"
+      - "250100"
+      - "250101"
+      - "250102"
+      - "250104"
+      - "250105"
+      - "250106"
+      - "250107"
+      - "250200"
+      - "250201"
+      - "250300"
+      - "250301"
+      - "250302"
+      - "250303"
+      - "250400"
+      - "250401"
+      - "250402"
+      - "250500"
+      - "250501"
+      - "250502"
+      - "250503"
+      - "250504"
+      - "250600"
+      - "250601"
+      - "250602"
+      - "250700"
+      - "250701"
+      - "250702"
+      - "250703"
+      - "250800"
+      - "250801"
+      - "250802"
+      - "250803"
+      - "250900"
+      - "250901"
+      - "251000"
+      - "251001"
+      - "260000"
+      - "260100"
+      - "260101"
+      - "260200"
+      - "260201"
+      - "260300"
+      - "260301"
+      - "270000"
+      - "270100"
+      - "270101"
+      - "270102"
+      - "270103"
+      - "270104"
+      - "270200"
+      - "270201"
+      - "270202"
+      - "270203"
+      - "270204"
+      - "270205"
+      - "270300"
+      - "270301"
+      - "270302"
+      - "270303"
+      - "270304"
+      - "280000"
+      - "280100"
+      - "280101"
+      - "280102"
+      - "280103"
+      - "280104"
+      - "280105"
+      - "280106"
+      - "280200"
+      - "280201"
+      - "280300"
+      - "280301"
+      - "280302"
+      - "280303"
+      - "290000"
+      - "290100"
+      - "290101"
+      - "290102"
+      - "290103"
+      - "290104"
+      - "290200"
+      - "290201"
+      - "290300"
+      - "290301"
+      - "290302"
+      - "290303"
+      - "290400"
+      - "290402"
+      - "290403"
+      - "290500"
+      - "290501"
+      - "300000"
+      - "300100"
+      - "300101"
+      - "300102"
+      - "300103"
+      - "300104"
+      - "300200"
+      - "300201"
+      - "300202"
+      - "300300"
+      - "300301"
+      - "310000"
+      - "310100"
+      - "310101"
+      - "310102"
+      - "310103"
+      - "310104"
+      - "310105"
+      - "310200"
+      - "310201"
+      - "310300"
+      - "310301"
+      - "320000"
+      - "320100"
+      - "320101"
+      - "320102"
+      - "320200"
+      - "320201"
+      - "320300"
+      - "320301"
+      - "320302"
+      - "320400"
+      - "320401"
+      - "320402"
+      - "320500"
+      - "320501"
+      - "320502"
+      - "320600"
+      - "320601"
+      - "320602"
+      - "320603"
+      - "320700"
+      - "320701"
+      - "320702"
+      - "320703"
+      - null
+      type: string
+    RespuestaAnulacionRango:
+      description: |-
+        Respuesta de anulación de rango de secuencias de e-NCF.
+
+        Representa la respuesta del servicio de anulación de rangos de secuencias de comprobantes
+        fiscales electrónicos. Este modelo se utiliza para procesar la respuesta del servicio web
+        de anulación de e-NCF de la DGII.
+
+        Servicio Web:• Endpoint: /api/operaciones/anularrango• Método: POST• Formato de entrada: XML (formato ANECF)• Formato de respuesta: JSON o XMLValidaciones del Servicio:• Tipo de archivo válido (XML)• Firma del documento válida• Tipo de comprobante válido• Secuencias no utilizadas previamente• RNC autorizado para realizar transaccionesReferencia Oficial:• Descripción Técnica de Facturación Electrónica v1.6, Sección "Anulación de e-NCF"• Formato Anulación de e-NCF v1.0 - DGII
+      example:
+        codigo: 1
+        rnc: 123456789
+        mensajes:
+        - Las secuencias fueron anuladas correctamente
+        nombre: EMPRESA EJEMPLO SRL
+      properties:
+        rnc:
+          description: |-
+            Número de Registro Nacional del Contribuyente que envió la anulación.
+
+            Corresponde al RNC del contribuyente que solicitó la anulación de las secuencias.
+            Este valor debe coincidir con el RNC autorizado para realizar transacciones de anulación
+            y debe estar registrado como Facturador Electrónico en la DGII.
+          example: 123456789
+          nullable: true
+          type: string
+        codigo:
+          description: |-
+            Código asociado al resultado de la validación de la anulación.
+
+            Indica el código de estado del resultado de la operación de anulación.
+            Los códigos proporcionan información sobre el éxito o fallo de la operación
+            y los motivos específicos cuando hay errores.
+          example: 1
+          nullable: true
+          type: string
+        nombre:
+          description: |-
+            Razón social del contribuyente que realizó la anulación.
+
+            Nombre o razón social del contribuyente asociado al RNC que solicitó la anulación.
+            Este campo proporciona información adicional para identificación del contribuyente
+            y corresponde al nombre registrado en la DGII.
+          example: EMPRESA EJEMPLO SRL
+          nullable: true
+          type: string
+        mensajes:
+          description: |-
+            Mensajes asociados al resultado de la validación de la anulación.
+
+            Array de mensajes que proporcionan información detallada sobre el resultado de la operación.
+            Puede incluir mensajes de éxito, advertencias, o errores específicos que ocurrieron
+            durante el proceso de validación y anulación de las secuencias.
+          example:
+          - Las secuencias fueron anuladas correctamente
+          items:
+            type: string
+          nullable: true
+          type: array
+    RespuestaConsultaEstado:
+      description: |-
+        Representa la respuesta del servicio de consulta de estado de e-CF.
+        Este modelo contiene la información de validez y estado de un comprobante fiscal electrónico
+        consultado a través del servicio web de consulta estado de la DGII.
+      example:
+        codigo: 0
+        estado: estado
+        totalITBIS: 1.4658129805029452
+        codigoSeguridad: codigoSeguridad
+        fechaFirma: fechaFirma
+        idExtranjero: idExtranjero
+        fechaEmision: fechaEmision
+        ncfElectronico: ncfElectronico
+        montoTotal: 6.027456183070403
+        rncComprador: rncComprador
+        rncEmisor: rncEmisor
+      properties:
+        codigo:
+          $ref: "#/components/schemas/RespuestaConsultaEstado_codigo"
+        estado:
+          description: |-
+            Estado de validación otorgado por Impuestos Internos al e-CF recibido.
+            Descripción textual del estado del comprobante fiscal electrónico.
+          nullable: true
+          type: string
+        rncEmisor:
+          description: |-
+            Número de registro nacional del contribuyente que envió el e-CF.
+            RNC del emisor del comprobante fiscal electrónico.
+          nullable: true
+          type: string
+        ncfElectronico:
+          description: |-
+            Número de secuencia utilizada por el contribuyente en el e-CF.
+            Número de comprobante fiscal electrónico (e-NCF) utilizado en la transacción.
+          nullable: true
+          type: string
+        montoTotal:
+          $ref: "#/components/schemas/RespuestaConsultaEstado_montoTotal"
+        totalITBIS:
+          $ref: "#/components/schemas/RespuestaConsultaEstado_totalITBIS"
+        fechaEmision:
+          description: |-
+            Fecha de emisión extraída del e-CF recibido.
+            Fecha en que fue emitido el comprobante fiscal electrónico.
+          nullable: true
+          type: string
+        fechaFirma:
+          description: |-
+            Fecha de firma extraída del e-CF recibido.
+            Fecha en que fue firmado digitalmente el comprobante fiscal electrónico.
+          nullable: true
+          type: string
+        rncComprador:
+          description: |-
+            RNC del comprador extraído del e-CF recibido (si aplica).
+            Número de registro nacional del contribuyente comprador, cuando corresponde.
+          nullable: true
+          type: string
+        codigoSeguridad:
+          description: "Código de seguridad extraído de los primeros seis (6) dígitos\
+            \ del hash generado \nen el SignatureValue de la firma digital del e-CF\
+            \ recibido.\nCódigo de seguridad de 6 caracteres para validación del comprobante."
+          nullable: true
+          type: string
+        idExtranjero:
+          description: |-
+            Identificación de extranjero extraída del e-CF recibido (si aplica).
+            Número de identificación del comprador extranjero cuando corresponde.
+          nullable: true
+          type: string
+    RespuestaConsultaRFCE:
+      description: |-
+        Representa la respuesta del servicio de Consulta de Resumen de Factura (RFCE) de la DGII.
+        Este servicio permite validar la validez fiscal de un comprobante fiscal electrónico
+        a través del RNC emisor, e-NCF y código de seguridad.
+      example:
+        codigo: codigo
+        estado: estado
+        encf: encf
+        rnc: rnc
+        secuenciaUtilizada: true
+        mensajes:
+        - codigo: 1
+          valor: El comprobante fue aceptado correctamente
+        - codigo: 1
+          valor: El comprobante fue aceptado correctamente
+      properties:
+        rnc:
+          description: |-
+            Número de registro nacional del contribuyente que envió el e-CF.
+            RNC del emisor del comprobante fiscal electrónico consultado.
+          nullable: true
+          type: string
+        encf:
+          description: |-
+            Número de secuencia utilizada por el contribuyente en el ENCF.
+            Número de comprobante fiscal electrónico (e-NCF) consultado.
+          type: string
+        secuenciaUtilizada:
+          description: |-
+            Indica si el número de secuencia puede ser reutilizado.
+            `true` si la secuencia NO puede reutilizarse (rechazado por motivos específicos);
+                    `false` si la secuencia SÍ puede reutilizarse.
+          type: boolean
+        codigo:
+          description: |-
+            Código asociado al estado de validación del e-CF recibido.
+            Código numérico que indica el resultado de la validación:
+            - 0: No encontrado
+            - 1: Aceptado
+            - 2: Rechazado
+            - 4: Aceptado Condicional (solo para FC &lt; RD$ 250000.00)
+          nullable: true
+          type: string
+        estado:
+          description: |-
+            Estado de validación otorgado por Impuestos Internos al e-CF recibido.
+            Descripción textual del estado de validación del comprobante.
+          nullable: true
+          type: string
+        mensajes:
+          description: |-
+            Mensajes y códigos asociados al estado de validación del e-CF recibido.
+            Array de mensajes que proporcionan detalles adicionales sobre la validación.
+          items:
+            $ref: "#/components/schemas/Mensaje"
+          nullable: true
+          type: array
+    RespuestaConsultaTimbre:
+      description: |-
+        Representa la respuesta del servicio de Consulta Timbre Fiscal (QR) de la DGII.
+        Este servicio permite validar la validez de un e-CF remitido exclusivamente por el servicio web
+        de recepción de e-CF, a partir de los datos incluidos en el timbre de su representación impresa (RI).
+      example:
+        razonSocial: razonSocial
+        estado: estado
+        encf: encf
+        rncEmisor: rncEmisor
+      properties:
+        rncEmisor:
+          description: |-
+            Número de registro nacional del contribuyente que emitió el resumen de factura de consumo.
+            RNC del emisor del comprobante fiscal electrónico consultado.
+          nullable: true
+          type: string
+        razonSocial:
+          description: |-
+            Razón social del contribuyente que emitió el resumen de factura de consumo.
+            Nombre comercial o razón social del emisor del comprobante fiscal electrónico.
+          nullable: true
+          type: string
+        encf:
+          description: |-
+            Número de secuencia utilizada por el contribuyente, extraído del resumen de factura de consumo.
+            Número de comprobante fiscal electrónico (e-NCF) utilizado en la transacción.
+          nullable: true
+          type: string
+        estado:
+          description: |-
+            Estado de validación otorgado por Impuestos Internos al resumen de factura de consumo recibido.
+            Descripción textual del estado de validación del comprobante. Posibles valores:
+            - "No fue encontrada la factura (e-CF)": El e-CF no se encontró en la base de datos de la DGII.
+            - "Aceptado": Implica la validez del e-CF de la RI, incluyendo el aceptado condicional que corresponde
+              a que no cumplió en algún punto pero que no amerita el rechazo de este.
+            - "Rechazado": Corresponde a que el e-CF de la RI le fue rechazado al emisor.
+          nullable: true
+          type: string
+    RespuestaConsultaTrackId:
+      description: |-
+        Representa la respuesta del servicio de consulta de resultado de comprobantes fiscales electrónicos (e-CF).
+        Este modelo contiene la información completa sobre el estado de procesamiento y validación de un e-CF
+        que fue enviado previamente mediante el servicio de recepción.
+      example:
+        codigo: "1"
+        estado: Aceptado
+        encf: E310000000001
+        trackId: ddddd
+        rnc: "131880738"
+        secuenciaUtilizada: false
+        mensajes:
+        - codigo: 1
+          valor: El comprobante fue aceptado correctamente
+        - codigo: 1
+          valor: El comprobante fue aceptado correctamente
+        fechaRecepcion: 2020-12-17T11:19:06
+      properties:
+        trackId:
+          description: |-
+            Obtiene el número único generado por Impuestos Internos para identificar un e-CF recibido.
+            Este identificador se obtiene como respuesta del servicio de recepción de e-CF.
+            El identificador único del track. Puede ser null si no está disponible.
+          example: ddddd
+          nullable: true
+          type: string
+        codigo:
+          description: |-
+            Obtiene el código asociado al estado de validación del e-CF recibido.
+            Un código que indica el resultado de la validación. Los valores típicos son:
+            - "0": No encontrado
+            - "1": Aceptado
+            - "2": Rechazado
+            - "3": En Proceso
+            - "4": Aceptado Condicional
+          example: "1"
+          nullable: true
+          type: string
+        estado:
+          description: |-
+            Obtiene el estado de validación otorgado por Impuestos Internos al e-CF recibido.
+            Descripción textual del estado. Puede incluir valores como:
+            - "No encontrado": No se encontró el trackid en los registros
+            - "Aceptado": Implica la validez del e-CF
+            - "Rechazado": Implica la nulidad del comprobante para fines tributarios
+            - "En Proceso": El comprobante aún no ha sido validado
+            - "Aceptado Condicional": El comprobante no cumplió en algún punto pero no ameritó el rechazo
+          example: Aceptado
+          nullable: true
+          type: string
+        rnc:
+          description: |-
+            Obtiene el número de registro nacional del contribuyente que envió el e-CF.
+            El RNC del emisor del comprobante. Puede ser null si no está disponible.
+          example: "131880738"
+          nullable: true
+          type: string
+        encf:
+          description: |-
+            Obtiene el número de secuencia utilizada por el contribuyente en el e-CF.
+            El número de comprobante fiscal electrónico (e-NCF). Puede ser null si no está disponible.
+          example: E310000000001
+          nullable: true
+          type: string
+        secuenciaUtilizada:
+          description: |-
+            Indica si el número de secuencia puede ser reutilizada en otro e-CF.
+            True si la secuencia puede reutilizarse, False si no puede reutilizarse.
+
+            Este parámetro permite dar a conocer si el número de secuencia que fue recibido
+            por Impuestos Internos puede reutilizarse en otro Comprobante Fiscal Electrónico (e-CF)
+            en el escenario de que el resultado de la validación haya sido "Rechazado" por los siguientes motivos:
+            - Certificado y/o firma inválida
+            - Estructura del comprobante (XML) no es válida
+            - Firmante del comprobante fiscal electrónico no corresponde a un delegado autorizado
+            - El e-NCF no está autorizado para el RNC Emisor
+            - El e-NCF autorizado se encuentra vencido
+            - El RNC Emisor no corresponde a un emisor electrónico
+            - El RNC Emisor no existe o no se encuentra activo
+          example: false
+          type: boolean
+        fechaRecepcion:
+          description: |-
+            Obtiene la fecha en la cual Impuestos Internos recibió el e-CF.
+            La fecha de recepción del comprobante. Puede ser null si no está disponible.
+            El formato típico es ISO 8601 o un formato de fecha legible.
+          example: 2020-12-17T11:19:06
+          nullable: true
+          type: string
+        mensajes:
+          description: |-
+            Obtiene los mensajes asociados al estado de validación del e-CF recibido.
+            Un array de mensajes que proporcionan información detallada sobre el estado
+            de validación. Puede ser null si no hay mensajes disponibles.
+          items:
+            $ref: "#/components/schemas/Mensaje"
+          nullable: true
+          type: array
+    RespuestaEstatusServicio:
+      description: |-
+        Modelo de respuesta que representa el estado de un servicio específico de facturación electrónica en un ambiente específico.
+        Utilizado por el endpoint /api/estatusservicios/obtenerestatus.
+      example:
+        servicio: servicio
+        ambiente: ambiente
+        status: status
+      properties:
+        servicio:
+          description: |-
+            Nombre del servicio de facturación electrónica.
+            Valores posibles incluyen:
+            - "Autenticación"
+            - "Recepción"
+            - "Consulta Resultado"
+            - "Consulta Estado"
+            - "Consulta Directorio"
+            - "Consulta TrackIds"
+            - "Aprobación Comercial"
+            - "Anulación Rangos"
+            - "Recepción FC"
+          nullable: true
+          type: string
+        status:
+          description: |-
+            Estado actual del servicio.
+            Valores posibles:
+            - "Disponible": El servicio está disponible y operativo
+            - "No Disponible": El servicio no está disponible (probablemente en mantenimiento)
+          nullable: true
+          type: string
+        ambiente:
+          description: |-
+            Ambiente donde opera el servicio.
+            Valores posibles:
+            - "PreCertificacion": Ambiente de pre-certificación
+            - "Certificacion": Ambiente de certificación
+            - "Produccion": Ambiente de producción
+          nullable: true
+          type: string
+    RespuestaVentanaDeMantenimiento:
+      description: |-
+        Modelo de respuesta que contiene información de ventanas de mantenimiento para todos los ambientes.
+        Utilizado por el endpoint /api/estatusservicios/obtenerventanasmantenimiento.
+      example:
+        ventanaMantenimientos:
+        - horaFin: horaFin
+          ambiente: ambiente
+          dias:
+          - dias
+          - dias
+          horaInicio: horaInicio
+        - horaFin: horaFin
+          ambiente: ambiente
+          dias:
+          - dias
+          - dias
+          horaInicio: horaInicio
+      properties:
+        ventanaMantenimientos:
+          description: |-
+            Arreglo de información de ventanas de mantenimiento para cada ambiente.
+            Contiene períodos de mantenimiento programados cuando los servicios pueden no estar disponibles.
+          items:
+            $ref: "#/components/schemas/VentanaDeMantenimiento"
+          type: array
+    Retencion:
+      example:
+        montoISRRetenido: null
+        indicadorAgenteRetencionoPercepcion: Retencion
+      properties:
+        indicadorAgenteRetencionoPercepcion:
+          $ref: "#/components/schemas/IndicadorAgenteRetencionoPercepcionType"
+        montoISRRetenido:
+          $ref: "#/components/schemas/FormaDePago_montoPago"
+      required:
+      - indicadorAgenteRetencionoPercepcion
+      - montoISRRetenido
+    SecuenciaRequest:
+      example:
+        hastaEncf: hastaEncf
+        desdeEncf: desdeEncf
+      properties:
+        desdeEncf:
+          type: string
+        hastaEncf:
+          type: string
+      required:
+      - desdeEncf
+      - hastaEncf
+    SecuenciaRequestDto:
+      example:
+        hastaEncf: hastaEncf
+        desdeEncf: desdeEncf
+      properties:
+        desdeEncf:
+          type: string
+        hastaEncf:
+          type: string
+    SendAcecfRequest:
+      example:
+        estadoType: ECFAceptado
+        detalleMotivoRechazo: detalleMotivoRechazo
+      properties:
+        detalleMotivoRechazo:
+          nullable: true
+          type: string
+        estadoType:
+          $ref: "#/components/schemas/EstadoType"
+    SubcantidadItem:
+      properties:
+        subcantidad:
+          $ref: "#/components/schemas/Mineria_pesoNetoKilogramo"
+        codigoSubcantidad:
+          allOf:
+          - $ref: "#/components/schemas/UnidadMedidaType"
+          nullable: true
+    SubDescuento:
+      properties:
+        tipoSubDescuento:
+          $ref: "#/components/schemas/TipoDescuentoRecargoType"
+        subDescuentoPorcentaje:
+          $ref: "#/components/schemas/DescuentoORecargo_valorDescuentooRecargo"
+        montoSubDescuento:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+      required:
+      - tipoSubDescuento
+    SubRecargo:
+      properties:
+        tipoSubRecargo:
+          $ref: "#/components/schemas/TipoDescuentoRecargoType"
+        subRecargoPorcentaje:
+          $ref: "#/components/schemas/DescuentoORecargo_valorDescuentooRecargo"
+        montoSubRecargo:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+      required:
+      - tipoSubRecargo
+    Subtotal:
+      example:
+        lineas: null
+        descripcionSubtotal: descripcionSubtotal
+        numeroSubTotal: null
+        montoSubTotal: null
+        orden: null
+        subTotalExento: null
+      properties:
+        numeroSubTotal:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+        descripcionSubtotal:
+          nullable: true
+          type: string
+        orden:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+        subTotalExento:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        montoSubTotal:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        lineas:
+          $ref: "#/components/schemas/IdDoc_totalPaginas"
+    SubtotalImpuestoAdicional:
+      properties:
+        subtotalImpuestoSelectivoConsumoEspecificoPagina:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+        subtotalOtrosImpuesto:
+          $ref: "#/components/schemas/ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico"
+    TipoAfiliacionType:
+      enum:
+      - Afiliada
+      - NoAfiliada
+      - null
+      type: string
+    TipoAjusteType:
+      enum:
+      - D
+      - R
+      type: string
+    TipoCuentaPagoType:
+      enum:
+      - CT
+      - AH
+      - OT
+      - null
+      type: string
+    TipoDescuentoRecargoType:
+      enum:
+      - $
+      - '%'
+      - null
+      type: string
+    TipoeCFType:
+      enum:
+      - FacturaDeCreditoFiscalElectronica
+      - FacturaDeConsumoElectronica
+      - NotaDeDebitoElectronica
+      - NotaDeCreditoElectronica
+      - ComprasElectronico
+      - GastosMenoresElectronico
+      - RegimenesEspecialesElectronico
+      - GubernamentalElectronico
+      - ComprobanteDeExportacionesElectronico
+      - ComprobanteParaPagosAlExteriorElectronico
+      type: string
+    TipoIngresosValidationType:
+      enum:
+      - "01"
+      - "02"
+      - "03"
+      - "04"
+      - "05"
+      - "06"
+      type: string
+    TipoMonedaType:
+      enum:
+      - BRL
+      - CAD
+      - CHF
+      - CHY
+      - XDR
+      - DKK
+      - EUR
+      - GBP
+      - JPY
+      - NOK
+      - SCP
+      - SEK
+      - USD
+      - VEF
+      - HTG
+      - MXN
+      - null
+      type: string
+    TipoPagoType:
+      enum:
+      - Contado
+      - Credito
+      - Gratuito
+      - null
+      type: string
+    Token:
+      example:
+        jwt: jwt
+        validFrom: 2000-01-23T04:56:07.000+00:00
+        validTo: 2000-01-23T04:56:07.000+00:00
+      properties:
+        jwt:
+          type: string
+        validFrom:
+          format: date-time
+          type: string
+        validTo:
+          format: date-time
+          type: string
+      required:
+      - jwt
+      - validFrom
+      - validTo
+    Totales:
+      example:
+        montoPeriodo: 5.962133916683182
+        saldoAnterior: null
+        montoAvancePago: null
+        totalISRRetencion: null
+        montoExento: 1.4658129805029452
+        valorPagar: null
+        montoTotal: null
+      properties:
+        montoExento:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        montoTotal:
+          $ref: "#/components/schemas/FormaDePago_montoPago"
+        montoPeriodo:
+          $ref: "#/components/schemas/Totales_montoPeriodo"
+        saldoAnterior:
+          $ref: "#/components/schemas/Totales_montoPeriodo"
+        montoAvancePago:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+        valorPagar:
+          $ref: "#/components/schemas/Totales_montoPeriodo"
+        totalISRRetencion:
+          $ref: "#/components/schemas/DescuentoORecargo_montoDescuentooRecargo"
+      required:
+      - montoTotal
+    Transporte:
+      properties:
+        paisDestino:
+          nullable: true
+          type: string
+    UnidadMedidaType:
+      enum:
+      - Barril
+      - Bolsa
+      - Bote
+      - Bultos
+      - Botella
+      - CajaSlashCajon
+      - Cajetilla
+      - Centimetro
+      - Cilindro
+      - Conjunto
+      - Contenedor
+      - Dia
+      - Docena
+      - Fardo
+      - Galones
+      - Grado
+      - Gramo
+      - Granel
+      - Hora
+      - Huacal
+      - Kilogramo
+      - KilovatioHora
+      - Libra
+      - Litro
+      - Lote
+      - Metro
+      - MetroCuadrado
+      - MetroCubico
+      - MillonesDeUnidadesTermicas
+      - Minuto
+      - Paquete
+      - Par
+      - Pie
+      - Pieza
+      - Rollo
+      - Sobre
+      - Segundo
+      - Tanque
+      - Tonelada
+      - Tubo
+      - Yarda
+      - YardaCuadrada
+      - Unidad
+      - Elemento
+      - Millar
+      - Saco
+      - Lata
+      - Display
+      - Bidon
+      - Racion
+      - Quintal
+      - ToneladasDeRegistroBruto
+      - PieCuadrado
+      - Pasajero
+      - PULGPulgadas
+      - STAYParqueoBarcosEnMuelle
+      - BDJBandeja
+      - HAHectarea
+      - MLMililitro
+      - MGMiligramo
+      - OZOnzas
+      - OZTOnzasTroy
+      - null
+      type: string
+    UpsertCompanyRequest:
+      example:
+        legalName: legalName
+        rnc: rnc
+        name: name
+      properties:
+        rnc:
+          maxLength: 11
+          type: string
+        legalName:
+          maxLength: 2000
+          type: string
+        name:
+          maxLength: 2000
+          type: string
+      required:
+      - legalName
+      - name
+      - rnc
+    VentanaDeMantenimiento:
+      description: |-
+        Representa información de ventana de mantenimiento para un ambiente específico.
+        Contiene detalles sobre cuándo ocurrirá el mantenimiento programado.
+      example:
+        horaFin: horaFin
+        ambiente: ambiente
+        dias:
+        - dias
+        - dias
+        horaInicio: horaInicio
+      properties:
+        ambiente:
+          description: |-
+            Nombre del ambiente donde aplica la ventana de mantenimiento.
+            Valores posibles:
+            - "PreCertificacion": Ambiente de pre-certificación
+            - "Certificacion": Ambiente de certificación
+            - "Produccion": Ambiente de producción
+          nullable: true
+          type: string
+        horaInicio:
+          description: |-
+            Hora de inicio de la ventana de mantenimiento.
+            Formato: "H:MM AM/PM" (ejemplo: "9:00 AM", "1:00 PM")
+          nullable: true
+          type: string
+        horaFin:
+          description: |-
+            Hora de fin de la ventana de mantenimiento.
+            Formato: "H:MM AM/PM" (ejemplo: "12:00 PM", "4:00 PM")
+          nullable: true
+          type: string
+        dias:
+          description: |-
+            Arreglo de fechas específicas cuando están programadas las ventanas de mantenimiento.
+            Formato: "DD-MM-YYYY" (ejemplo: "06-08-2020", "20-08-2020")
+          items:
+            type: string
+          nullable: true
+          type: array
+    VersionType:
+      enum:
+      - Version1_0
+      type: string
+    ViaTransporteType:
+      enum:
+      - "01"
+      - "02"
+      - "03"
+      - null
+      type: string
+    GetCompanies_Page_parameter:
+      anyOf:
+      - format: int32
+        type: integer
+      - type: string
+      default: 1
+      format: int32
+      pattern: "^-?(?:0|[1-9]\\d*)$"
+    GetCompanies_Limit_parameter:
+      anyOf:
+      - format: int32
+        type: integer
+      - type: string
+      default: 25
+      format: int32
+      pattern: "^-?(?:0|[1-9]\\d*)$"
+    UpdateCertificateCompany_request:
+      allOf:
+      - properties:
+          certificate:
+            $ref: "#/components/schemas/IFormFile"
+      - properties:
+          password:
+            type: string
+      required:
+      - certificate
+      - password
+    FirmarSemilla_request:
+      properties:
+        xml:
+          $ref: "#/components/schemas/IFormFile"
+      required:
+      - xml
+    SearchEcfs_AmountFrom_parameter:
+      anyOf:
+      - type: number
+      - type: string
+      format: double
+      pattern: "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$"
+    AcecfReceptionRequestDto_progress:
+      anyOf:
+      - format: int32
+        type: integer
+      - type: string
+      format: int32
+      pattern: "^-?(?:0|[1-9]\\d*)$"
+    DescuentoORecargo_valorDescuentooRecargo:
+      anyOf:
+      - type: number
+      - type: string
+      format: double
+      minimum: 0.01
+      nullable: true
+      pattern: "^[0-9]{1,3}(\\.[0-9]{1,2})?$"
+    DescuentoORecargo_montoDescuentooRecargo:
+      anyOf:
+      - type: number
+      - type: string
+      format: double
+      minimum: 0
+      nullable: true
+      pattern: "^[0-9]{1,16}(\\.[0-9]{1,2})?$"
+    FormaDePago_montoPago:
+      anyOf:
+      - type: number
+      - type: string
+      format: double
+      minimum: 0
+      pattern: "^[0-9]{1,16}(\\.[0-9]{1,2})?$"
+    IdDoc_totalPaginas:
+      anyOf:
+      - format: int32
+        type: integer
+      - type: string
+      format: int32
+      nullable: true
+      pattern: "^-?(?:0|[1-9]\\d*)$"
+    ImpuestoAdicional2_tasaImpuestoAdicional:
+      anyOf:
+      - type: number
+      - type: string
+      format: double
+      minimum: 0.01
+      pattern: "^[0-9]{1,3}(\\.[0-9]{1,2})?$"
+    ImpuestoAdicional2_montoImpuestoSelectivoConsumoEspecifico:
+      anyOf:
+      - type: number
+      - type: string
+      format: double
+      minimum: 0.01
+      nullable: true
+      pattern: "^[0-9]{1,16}(\\.[0-9]{1,2})?$"
+    Item_cantidadItem:
+      anyOf:
+      - type: number
+      - type: string
+      format: double
+      minimum: 0.01
+      pattern: "^[0-9]{1,16}(\\.[0-9]{1,2})?$"
+    Item_precioUnitarioItem:
+      anyOf:
+      - type: number
+      - type: string
+      format: double
+      minimum: 0
+      pattern: "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$"
+    Mensaje_codigo:
+      anyOf:
+      - format: int32
+        type: integer
+      - type: string
+      description: |-
+        Obtiene el código numérico que identifica el tipo de mensaje o estado.
+        Un código entero que categoriza el mensaje. Los valores típicos incluyen:
+        - 0: No encontrado
+        - 1: Aceptado
+        - 2: Rechazado
+        - 3: En Proceso
+        - 4: Aceptado Condicional
+      example: 1
+      format: int32
+      pattern: "^-?(?:0|[1-9]\\d*)$"
+    Mineria_pesoNetoKilogramo:
+      anyOf:
+      - type: number
+      - type: string
+      format: double
+      minimum: 0
+      nullable: true
+      pattern: "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$"
+    OtraMoneda_tipoCambio:
+      anyOf:
+      - type: number
+      - type: string
+      format: double
+      minimum: 0.01
+      nullable: true
+      pattern: "^[0-9]{1,3}(\\.[0-9]{1,4})?$"
+    RespuestaConsultaEstado_codigo:
+      anyOf:
+      - format: int32
+        type: integer
+      - type: string
+      description: |-
+        Código asociado al estado de validación del e-CF recibido.
+                    Posibles valores:
+                    * 0No encontrado - No se encontró el comprobante en los registros
+        * 1Aceptado - El e-CF generado por el emisor fue aceptado y tiene validez fiscal
+        * 2Rechazado - Corresponde a la nulidad del comprobante generado por el emisor
+      format: int32
+      pattern: "^-?(?:0|[1-9]\\d*)$"
+    RespuestaConsultaEstado_montoTotal:
+      anyOf:
+      - type: number
+      - type: string
+      description: |-
+        Monto total extraído del e-CF recibido.
+        Valor total de la transacción en pesos dominicanos.
+      format: double
+      nullable: true
+      pattern: "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$"
+    RespuestaConsultaEstado_totalITBIS:
+      anyOf:
+      - type: number
+      - type: string
+      description: |-
+        Total de ITBIS extraído del e-CF recibido.
+        Monto total del Impuesto sobre Transferencias de Bienes Industrializados y Servicios.
+      format: double
+      nullable: true
+      pattern: "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$"
+    Totales_montoPeriodo:
+      anyOf:
+      - type: number
+      - type: string
+      format: double
+      nullable: true
+      pattern: "^[0-9]{1,16}(\\.[0-9]{1,2})?$"
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      description: JWT Authorization header using the Bearer scheme.
+      scheme: Bearer
+      type: http
+

@@ -1,0 +1,26 @@
+{
+  "name": "ecf-dgii-client",
+  "version": "0.1.0",
+  "description": "C++ SDK client for the ECF DGII API (Electronic Fiscal Receipt - Dominican Republic)",
+  "homepage": "https://github.com/puntoos/ecf_dgii_clients",
+  "license": "MIT",
+  "supports": "!uwp",
+  "dependencies": [
+    {
+      "name": "cpprestsdk",
+      "default-features": true
+    },
+    {
+      "name": "boost-headers",
+      "version>=": "1.75.0"
+    },
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
+}

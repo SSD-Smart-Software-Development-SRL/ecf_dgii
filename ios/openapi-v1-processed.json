@@ -1,0 +1,6512 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ECF API",
+    "description": "ECF API (Electronic Fiscal Receipt).",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://api.test.ecfx.ssd.com.do"
+    },
+    {
+      "url": "https://api.cert.ecfx.ssd.com.do"
+    },
+    {
+      "url": "https://api.prod.ecfx.ssd.com.do"
+    }
+  ],
+  "paths": {
+    "/company": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "GetCompanies",
+        "parameters": [
+          {
+            "name": "Rncs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Names",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedApiResultOfCompanyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "UpsertCompany",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertCompanyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/company/{rnc}": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "GetCompanyByRnc",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "DeleteCompany",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/company/{rnc}/certificate": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "GetCurrentCertificate",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CertificateResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "UpdateCertificateCompany",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "certificate",
+                  "password"
+                ],
+                "type": "object",
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "certificate": {
+                        "$ref": "#/components/schemas/IFormFile"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "password": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/FirmarSemilla/{rnc}": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "FirmarSemilla",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "xml"
+                ],
+                "type": "object",
+                "properties": {
+                  "xml": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ecf/31": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "RecepcionEcf31",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ECF"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcfResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/32": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "RecepcionEcf32",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ECF"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcfResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/33": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "RecepcionEcf33",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ECF"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcfResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/34": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "RecepcionEcf34",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ECF"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcfResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/41": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "RecepcionEcf41",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ECF"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcfResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/43": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "RecepcionEcf43",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ECF"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcfResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/44": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "RecepcionEcf44",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ECF"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcfResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/45": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "RecepcionEcf45",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ECF"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcfResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/46": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "RecepcionEcf46",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ECF"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcfResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/47": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "RecepcionEcf47",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ECF"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcfResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/aprobacioncomercial/{rnc}/{encf}": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "AprobacionComercial",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "encf",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAcecfRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/{rnc}/{encf}": {
+      "get": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "QueryEcf",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "encf",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeEcfContent",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EcfResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/{rnc}/message/{id}": {
+      "get": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "GetEcfById",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "includeEcfContent",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EcfResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/{rnc}": {
+      "get": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "SearchEcfs",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Encfs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "name": "TiposEcfs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AllTipoECFTypes"
+              }
+            }
+          },
+          {
+            "name": "IncludeEcfContent",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "FromFechaEmision",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "ToFechaEmision",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "AmountFrom",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "AmountTo",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedApiResultOfEcfResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf": {
+      "get": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "SearchAllEcfs",
+        "parameters": [
+          {
+            "name": "Encfs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "name": "TiposEcfs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AllTipoECFTypes"
+              }
+            }
+          },
+          {
+            "name": "IncludeEcfContent",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "FromFechaEmision",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "ToFechaEmision",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "AmountFrom",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "AmountTo",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedApiResultOfEcfResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/anularrango/{rnc}": {
+      "post": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "AnulacionRangos",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnulacionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaAnulacionRango"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaAnulacionRango"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecf/anulaciones": {
+      "get": {
+        "tags": [
+          "Ecf"
+        ],
+        "operationId": "ListAnulaciones",
+        "parameters": [
+          {
+            "name": "TipoEcf",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ECFType"
+              }
+            }
+          },
+          {
+            "name": "Rncs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "FechaDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "FechaHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedApiResultOfAnulacionListResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recepcion/ecf": {
+      "get": {
+        "tags": [
+          "Recepcion"
+        ],
+        "operationId": "SearchEcfReceptionRequests",
+        "parameters": [
+          {
+            "name": "MessageIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "name": "Encfs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Rncs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedApiResultOfEcfReceptionRequestDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recepcion/acecf": {
+      "get": {
+        "tags": [
+          "Recepcion"
+        ],
+        "operationId": "SearchAcecfReceptionRequests",
+        "parameters": [
+          {
+            "name": "MessageIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "name": "Encfs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Rncs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedApiResultOfAcecfReceptionRequestDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recepcion/{rnc}/ecf": {
+      "get": {
+        "tags": [
+          "Recepcion"
+        ],
+        "operationId": "SearchEcfReceptionRequestsByRnc",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MessageIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "name": "Encfs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedApiResultOfEcfReceptionRequestDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recepcion/{rnc}/ecf/{messageId}": {
+      "get": {
+        "tags": [
+          "Recepcion"
+        ],
+        "operationId": "GetEcfReceptionRequest",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recepcion/{rnc}/acecf": {
+      "get": {
+        "tags": [
+          "Recepcion"
+        ],
+        "operationId": "SearchAcecfReceptionRequestsByRnc",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MessageIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "name": "Encfs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedApiResultOfAcecfReceptionRequestDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recepcion/{rnc}/acecf/{messageId}": {
+      "get": {
+        "tags": [
+          "Recepcion"
+        ],
+        "operationId": "GetAcecfReceptionRequest",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dgii/{rnc}/consultadirectorio/listado": {
+      "get": {
+        "tags": [
+          "Dgii"
+        ],
+        "operationId": "ConsultaDirectorioListado",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Directorio"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc": {
+      "get": {
+        "tags": [
+          "Dgii"
+        ],
+        "operationId": "ConsultaDirectorioObtenerDirectorioPorRnc",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RNC",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Directorio"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dgii/{rnc}/consultaestado/estado": {
+      "get": {
+        "tags": [
+          "Dgii"
+        ],
+        "operationId": "ConsultaEstado",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rncEmisor",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ncfElectronico",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rncComprador",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "codigoSeguridad",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaConsultaEstado"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dgii/{rnc}/consultaresultado/estado": {
+      "get": {
+        "tags": [
+          "Dgii"
+        ],
+        "operationId": "ConsultaResultado",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "trackId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaConsultaTrackId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dgii/{rnc}/consultarfce/consulta": {
+      "get": {
+        "tags": [
+          "Dgii"
+        ],
+        "operationId": "ConsultaRFCE",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RNC_Emisor",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ENCF",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Cod_Seguridad_eCF",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaConsultaRFCE"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dgii/{rnc}/consultatimbre": {
+      "get": {
+        "tags": [
+          "Dgii"
+        ],
+        "operationId": "ConsultaTimbre",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rncemisor",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "encf",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "montototal",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "codigoseguridad",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaConsultaTimbre"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dgii/{rnc}/consultatimbrefc": {
+      "get": {
+        "tags": [
+          "Dgii"
+        ],
+        "operationId": "ConsultaTimbreFC",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rncemisor",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "encf",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "montototal",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "codigoseguridad",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaConsultaTimbre"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dgii/{rnc}/consultatrackids/consulta": {
+      "get": {
+        "tags": [
+          "Dgii"
+        ],
+        "operationId": "ConsultaTrackId",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rncEmisor",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "encf",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaConsultaTrackId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dgii/{rnc}/estatusservicios/obtener-estatus": {
+      "get": {
+        "tags": [
+          "Dgii"
+        ],
+        "operationId": "EstatusServiciosObtenerEstatus",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RespuestaEstatusServicio"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dgii/{rnc}/estatusservicios/obtener-ventanas-mantenimiento": {
+      "get": {
+        "tags": [
+          "Dgii"
+        ],
+        "operationId": "EstatusServiciosObtenerVentanasMantenimiento",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespuestaVentanaDeMantenimiento"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apiKey": {
+      "post": {
+        "tags": [
+          "ApiKey"
+        ],
+        "operationId": "NewCompanyApiKey",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCompanyApiKey"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AcecfReceptionRequestDto": {
+        "type": "object",
+        "properties": {
+          "messageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyRnc": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "progress": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "encf": {
+            "type": "string",
+            "nullable": true
+          },
+          "rncEmisor": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AllTipoECFTypes": {
+        "enum": [
+          "FacturaDeCreditoFiscalElectronica",
+          "FacturaDeConsumoElectronica",
+          "NotaDeDebitoElectronica",
+          "NotaDeCreditoElectronica",
+          "ComprasElectronico",
+          "GastosMenoresElectronico",
+          "RegimenesEspecialesElectronico",
+          "GubernamentalElectronico",
+          "ComprobanteDeExportacionesElectronico",
+          "ComprobanteParaPagosAlExteriorElectronico",
+          "RFCE",
+          "ACECF",
+          "ARECF",
+          "ANECF",
+          null
+        ]
+      },
+      "AnulacionListResponse": {
+        "type": "object",
+        "properties": {
+          "anulacionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyRnc": {
+            "type": "string"
+          },
+          "cantidadeNCFAnulados": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "detalleAnulacion": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetalleAnulacionRequestDto"
+            },
+            "nullable": true
+          },
+          "response": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RespuestaAnulacionRango"
+              }
+            ]
+          },
+          "statusCode": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "fechaHoraAnulacioneNCF": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          }
+        }
+      },
+      "AnulacionRequest": {
+        "required": [
+          "cantidaDeNcfAnulados",
+          "detalleAnulacion"
+        ],
+        "type": "object",
+        "properties": {
+          "cantidaDeNcfAnulados": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "detalleAnulacion": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetalleAnulacionRequest"
+            }
+          }
+        }
+      },
+      "CertificateResponse": {
+        "required": [
+          "thumbprint",
+          "subject",
+          "issuer",
+          "notBeforeUtc",
+          "notAfterUtc",
+          "serialNumber",
+          "rnc",
+          "createdOn",
+          "createdBy"
+        ],
+        "type": "object",
+        "properties": {
+          "thumbprint": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "issuer": {
+            "type": "string"
+          },
+          "notBeforeUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "notAfterUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "serialNumber": {
+            "type": "string"
+          },
+          "rnc": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          }
+        }
+      },
+      "CodificacionTipoImpuestosType": {
+        "enum": [
+          "001",
+          "002",
+          "003",
+          "004",
+          "005",
+          "006",
+          "007",
+          "008",
+          "009",
+          "010",
+          "011",
+          "012",
+          "013",
+          "014",
+          "015",
+          "016",
+          "017",
+          "018",
+          "019",
+          "020",
+          "021",
+          "022",
+          "023",
+          "024",
+          "025",
+          "026",
+          "027",
+          "028",
+          "029",
+          "030",
+          "031",
+          "032",
+          "033",
+          "034",
+          "035",
+          "036",
+          "037",
+          "038",
+          "039"
+        ]
+      },
+      "CodigoModificacionType": {
+        "enum": [
+          "AnulaElNCFModificado",
+          "CorrigeTextoDelComprobanteFiscalModificado",
+          "CorrigeMontosDelNCFModificado",
+          "ReemplazoNCFEmitidoEnContingencia",
+          "ReferenciaFacturaConsumoElectronica",
+          null
+        ]
+      },
+      "CodigosItem": {
+        "required": [
+          "tipoCodigo",
+          "codigoItem"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoCodigo": {
+            "type": "string"
+          },
+          "codigoItem": {
+            "type": "string"
+          }
+        }
+      },
+      "CompanyResponse": {
+        "type": "object",
+        "properties": {
+          "rnc": {
+            "type": "string"
+          },
+          "legalName": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "updatedBy": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "receptorId": {
+            "type": "string"
+          }
+        }
+      },
+      "Comprador": {
+        "type": "object",
+        "properties": {
+          "identificadorExtranjero": {
+            "type": "string",
+            "nullable": true
+          },
+          "razonSocialComprador": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "DescuentoORecargo": {
+        "required": [
+          "numeroLinea",
+          "tipoAjuste"
+        ],
+        "type": "object",
+        "properties": {
+          "numeroLinea": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoAjuste": {
+            "$ref": "#/components/schemas/TipoAjusteType"
+          },
+          "descripcionDescuentooRecargo": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoValor": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoDescuentoRecargoType"
+              }
+            ]
+          },
+          "valorDescuentooRecargo": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,3}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoDescuentooRecargo": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoDescuentooRecargoOtraMoneda": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "indicadorFacturacionDescuentooRecargo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IndicadorFacturacionDRType"
+              }
+            ]
+          }
+        }
+      },
+      "DetalleAnulacionRequest": {
+        "required": [
+          "tipoEcf",
+          "cantidadeNcfAnulados",
+          "noLinea",
+          "secuencias"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoEcf": {
+            "$ref": "#/components/schemas/ECFType"
+          },
+          "cantidadeNcfAnulados": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "noLinea": {
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "secuencias": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecuenciaRequest"
+            }
+          }
+        }
+      },
+      "DetalleAnulacionRequestDto": {
+        "type": "object",
+        "properties": {
+          "tipoEcf": {
+            "$ref": "#/components/schemas/ECFType"
+          },
+          "cantidadeNcfAnulados": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "noLinea": {
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "secuencias": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecuenciaRequestDto"
+            }
+          }
+        }
+      },
+      "DGIIEnvironment": {
+        "enum": [
+          "Test",
+          "Certification",
+          "Production"
+        ]
+      },
+      "Directorio": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Obtiene el nombre legal o raz\u00f3n social del contribuyente electr\u00f3nico.\nLa raz\u00f3n social registrada tal como aparece en el registro oficial del contribuyente.\nEste campo es requerido y debe coincidir con el nombre de la entidad legal del contribuyente.",
+            "nullable": true
+          },
+          "rnc": {
+            "type": "string",
+            "description": "Obtiene el N\u00famero de Registro Nacional del Contribuyente (RNC) del contribuyente electr\u00f3nico.\nUn n\u00famero de 9 d\u00edgitos que identifica de forma \u00fanica al contribuyente en el sistema tributario \nde la Rep\u00fablica Dominicana. Este campo es requerido y debe tener un formato de RNC v\u00e1lido.",
+            "nullable": true
+          },
+          "urlRecepcion": {
+            "type": "string",
+            "description": "Obtiene la URL del servicio de recepci\u00f3n de facturas electr\u00f3nicas.\nLa URL completa donde otros contribuyentes pueden enviar facturas electr\u00f3nicas (e-CF) a este contribuyente.\nDebe seguir el formato est\u00e1ndar: https://host/ambiente/nombreservicio/fe/recepcion/api/ecf\nEste campo es obligatorio para todos los contribuyentes electr\u00f3nicos.",
+            "nullable": true
+          },
+          "urlAceptacion": {
+            "type": "string",
+            "description": "Obtiene la URL del servicio de aprobaci\u00f3n comercial.\nLa URL completa donde otros contribuyentes pueden enviar aprobaciones comerciales para facturas recibidas.\nDebe seguir el formato est\u00e1ndar: https://host/ambiente/nombreservicio/fe/aprobacioncomercial/api/ecf\nEste campo es obligatorio para todos los contribuyentes electr\u00f3nicos.",
+            "nullable": true
+          },
+          "urlOpcional": {
+            "type": "string",
+            "description": "Obtiene la URL del servicio opcional de autenticaci\u00f3n.\nLa URL base del servicio de autenticaci\u00f3n, si es implementado por el contribuyente.\nDebe seguir el formato est\u00e1ndar: https://host/ambiente/nombreservicio/fe/autenticacion/api/\nEste campo es opcional pero recomendado para mayor seguridad.",
+            "nullable": true
+          }
+        },
+        "description": "Representa una entrada del directorio para contribuyentes electr\u00f3nicos en el sistema de facturaci\u00f3n electr\u00f3nica \nde la Rep\u00fablica Dominicana. Este modelo contiene las URLs de servicios que los contribuyentes electr\u00f3nicos \ndeben proporcionar para la comunicaci\u00f3n entre contribuyentes."
+      },
+      "ECF": {
+        "required": [
+          "encabezado",
+          "detallesItems"
+        ],
+        "type": "object",
+        "properties": {
+          "encabezado": {
+            "$ref": "#/components/schemas/Encabezado"
+          },
+          "detallesItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            }
+          },
+          "subtotales": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Subtotal"
+            },
+            "nullable": true
+          },
+          "paginacion": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Pagina"
+            },
+            "nullable": true
+          },
+          "informacionReferencia": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/InformacionReferencia"
+              }
+            ]
+          }
+        }
+      },
+      "EcfEstado": {
+        "enum": [
+          "NoEncontrado",
+          "Aceptado",
+          "Rechazado",
+          "EnProceso",
+          "AceptadoCondicional",
+          null
+        ]
+      },
+      "EcfProgress": {
+        "enum": [
+          "New",
+          "Processing",
+          "UploadedToDgii",
+          "Finished",
+          "Error"
+        ]
+      },
+      "EcfReceptionRequestDto": {
+        "type": "object",
+        "properties": {
+          "messageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyRnc": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "progress": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "encf": {
+            "type": "string",
+            "nullable": true
+          },
+          "rncEmisor": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoEcf": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AllTipoECFTypes"
+              }
+            ]
+          },
+          "resultInternalFileName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "EcfResponse": {
+        "required": [
+          "messageId",
+          "timestamp",
+          "fechaEmision",
+          "queueName",
+          "includeEcfContent",
+          "ecfContent",
+          "tipoEcf",
+          "encf",
+          "rncEmisor",
+          "rncReceptor",
+          "montoTotal",
+          "fileName",
+          "tenantId",
+          "estatus",
+          "codSec",
+          "fechaFirma",
+          "mensaje",
+          "errors",
+          "progress",
+          "emisorReceptorErrors",
+          "secuenciaUtilizada",
+          "dgiiEnvironment"
+        ],
+        "type": "object",
+        "properties": {
+          "messageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaEmision": {
+            "type": "string",
+            "format": "date"
+          },
+          "queueName": {
+            "type": "string"
+          },
+          "includeEcfContent": {
+            "type": "boolean"
+          },
+          "ecfContent": {
+            "type": "string"
+          },
+          "tipoEcf": {
+            "$ref": "#/components/schemas/AllTipoECFTypes"
+          },
+          "encf": {
+            "type": "string"
+          },
+          "rncEmisor": {
+            "type": "string"
+          },
+          "rncReceptor": {
+            "type": "string",
+            "nullable": true
+          },
+          "montoTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
+            "format": "double"
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "estatus": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EcfEstado"
+              }
+            ]
+          },
+          "codSec": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaFirma": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "mensaje": {
+            "type": "string",
+            "nullable": true
+          },
+          "errors": {
+            "type": "string",
+            "nullable": true
+          },
+          "progress": {
+            "$ref": "#/components/schemas/EcfProgress"
+          },
+          "emisorReceptorErrors": {
+            "type": "string",
+            "nullable": true
+          },
+          "secuenciaUtilizada": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "dgiiEnvironment": {
+            "$ref": "#/components/schemas/DGIIEnvironment"
+          },
+          "impresionUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ECFType": {
+        "enum": [
+          "ECF31",
+          "ECF32",
+          "ECF33",
+          "ECF34",
+          "ECF41",
+          "ECF43",
+          "ECF44",
+          "ECF45",
+          "ECF46",
+          "ECF47"
+        ]
+      },
+      "Emisor": {
+        "required": [
+          "rncEmisor",
+          "razonSocialEmisor",
+          "direccionEmisor"
+        ],
+        "type": "object",
+        "properties": {
+          "rncEmisor": {
+            "type": "string"
+          },
+          "razonSocialEmisor": {
+            "type": "string"
+          },
+          "nombreComercial": {
+            "type": "string",
+            "nullable": true
+          },
+          "sucursal": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccionEmisor": {
+            "type": "string"
+          },
+          "municipio": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ProvinciaMunicipioType"
+              }
+            ]
+          },
+          "provincia": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ProvinciaMunicipioType"
+              }
+            ]
+          },
+          "tablaTelefonoEmisor": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "correoEmisor": {
+            "type": "string",
+            "nullable": true
+          },
+          "webSite": {
+            "type": "string",
+            "nullable": true
+          },
+          "actividadEconomica": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroFacturaInterna": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroPedidoInterno": {
+            "pattern": "^[0-9]{1,20}$",
+            "type": "string",
+            "nullable": true
+          },
+          "informacionAdicionalEmisor": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaEmision": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "Encabezado": {
+        "required": [
+          "version",
+          "idDoc",
+          "emisor",
+          "totales"
+        ],
+        "type": "object",
+        "properties": {
+          "version": {
+            "$ref": "#/components/schemas/VersionType"
+          },
+          "idDoc": {
+            "$ref": "#/components/schemas/IdDoc"
+          },
+          "emisor": {
+            "$ref": "#/components/schemas/Emisor"
+          },
+          "comprador": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Comprador"
+              }
+            ]
+          },
+          "transporte": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Transporte"
+              }
+            ]
+          },
+          "totales": {
+            "$ref": "#/components/schemas/Totales"
+          },
+          "otraMoneda": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/OtraMoneda"
+              }
+            ]
+          }
+        }
+      },
+      "EstadoType": {
+        "enum": [
+          "ECFAceptado",
+          "ECFRechazado"
+        ]
+      },
+      "FormaDePago": {
+        "required": [
+          "formaPago",
+          "montoPago"
+        ],
+        "type": "object",
+        "properties": {
+          "formaPago": {
+            "$ref": "#/components/schemas/FormaPagoType"
+          },
+          "montoPago": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "FormaPagoType": {
+        "enum": [
+          "Efectivo",
+          "ChequeSlashTransferenciaSlashDeposito",
+          "TarjetaDeDebitoSlashCredito",
+          "VentaACredito",
+          "BonosOCertificadosDeRegalo",
+          "Permuta",
+          "NotaDeCredito",
+          "OtrasFormasDePago"
+        ]
+      },
+      "IdDoc": {
+        "required": [
+          "tipoeCF",
+          "encf"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoeCF": {
+            "$ref": "#/components/schemas/TipoeCFType"
+          },
+          "encf": {
+            "type": "string"
+          },
+          "fechaVencimientoSecuencia": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tipoPago": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoPagoType"
+              }
+            ]
+          },
+          "fechaLimitePago": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "terminoPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "tablaFormasPago": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormaDePago"
+            },
+            "nullable": true
+          },
+          "tipoCuentaPago": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoCuentaPagoType"
+              }
+            ]
+          },
+          "numeroCuentaPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "bancoPago": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaDesde": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaHasta": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalPaginas": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "IFormFile": {
+        "type": "string",
+        "format": "binary"
+      },
+      "ImpuestoAdicional": {
+        "required": [
+          "tipoImpuesto"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoImpuesto": {
+            "$ref": "#/components/schemas/CodificacionTipoImpuestosType"
+          }
+        }
+      },
+      "ImpuestoAdicional2": {
+        "required": [
+          "tipoImpuesto",
+          "tasaImpuestoAdicional"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoImpuesto": {
+            "$ref": "#/components/schemas/CodificacionTipoImpuestosType"
+          },
+          "tasaImpuestoAdicional": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,3}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double"
+          },
+          "montoImpuestoSelectivoConsumoEspecifico": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoImpuestoSelectivoConsumoAdvalorem": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "otrosImpuestosAdicionales": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        }
+      },
+      "ImpuestoAdicionalOtraMoneda": {
+        "type": "object",
+        "properties": {
+          "tipoImpuestoOtraMoneda": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CodificacionTipoImpuestosType"
+              }
+            ]
+          },
+          "tasaImpuestoAdicionalOtraMoneda": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,3}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoImpuestoSelectivoConsumoEspecificoOtraMoneda": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoImpuestoSelectivoConsumoAdvaloremOtraMoneda": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "otrosImpuestosAdicionalesOtraMoneda": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        }
+      },
+      "IndicadorAgenteRetencionoPercepcionType": {
+        "enum": [
+          "Retencion",
+          "Percepcion"
+        ]
+      },
+      "IndicadorBienoServicioType": {
+        "enum": [
+          "Bien",
+          "Servicio"
+        ]
+      },
+      "IndicadorEnvioDiferidoType": {
+        "enum": [
+          "EnvioDiferidoAutorizado",
+          null
+        ]
+      },
+      "IndicadorFacturacionDRType": {
+        "enum": [
+          "ITBIS1_18Percent",
+          "ITBIS2_16Percent",
+          "ITBIS3_0Percent",
+          "Exento_E",
+          null
+        ]
+      },
+      "IndicadorFacturacionType": {
+        "enum": [
+          "NoFacturable_18Percent",
+          "ITBIS1_18Percent",
+          "ITBIS2_16Percent",
+          "ITBIS3_0Percent",
+          "Exento_E"
+        ]
+      },
+      "IndicadorMontoGravadoType": {
+        "enum": [
+          "SinITBISIncluido",
+          "ConITBISIncluido",
+          null
+        ]
+      },
+      "IndicadorNorma1007Type": {
+        "enum": [
+          "NoIncluir",
+          "Incluir",
+          null
+        ]
+      },
+      "IndicadorServicioTodoIncluidoType": {
+        "enum": [
+          "IndicadorServicioTodoIncluido",
+          null
+        ]
+      },
+      "InformacionesAdicionales": {
+        "type": "object",
+        "properties": {
+          "fechaEmbarque": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "numeroEmbarque": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroContenedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroReferencia": {
+            "pattern": "^[0-9]{1,20}$",
+            "type": "string",
+            "nullable": true
+          },
+          "nombrePuertoEmbarque": {
+            "type": "string",
+            "nullable": true
+          },
+          "condicionesEntrega": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalFob": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "seguro": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "flete": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "otrosGastos": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "totalCif": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "regimenAduanero": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombrePuertoSalida": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombrePuertoDesembarque": {
+            "type": "string",
+            "nullable": true
+          },
+          "pesoBruto": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "pesoNeto": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "unidadPesoBruto": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/UnidadMedidaType"
+              }
+            ]
+          },
+          "unidadPesoNeto": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/UnidadMedidaType"
+              }
+            ]
+          },
+          "cantidadBulto": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "unidadBulto": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/UnidadMedidaType"
+              }
+            ]
+          },
+          "volumenBulto": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "unidadVolumen": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/UnidadMedidaType"
+              }
+            ]
+          }
+        }
+      },
+      "InformacionReferencia": {
+        "type": "object",
+        "properties": {
+          "ncfModificado": {
+            "type": "string",
+            "nullable": true
+          },
+          "rncOtroContribuyente": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaNCFModificado": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "codigoModificacion": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CodigoModificacionType"
+              }
+            ]
+          }
+        }
+      },
+      "Item": {
+        "required": [
+          "numeroLinea",
+          "indicadorFacturacion",
+          "retencion",
+          "nombreItem",
+          "indicadorBienoServicio",
+          "cantidadItem",
+          "precioUnitarioItem",
+          "montoItem"
+        ],
+        "type": "object",
+        "properties": {
+          "numeroLinea": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "tablaCodigosItem": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CodigosItem"
+            },
+            "nullable": true
+          },
+          "indicadorFacturacion": {
+            "$ref": "#/components/schemas/IndicadorFacturacionType"
+          },
+          "retencion": {
+            "$ref": "#/components/schemas/Retencion"
+          },
+          "nombreItem": {
+            "type": "string"
+          },
+          "indicadorBienoServicio": {
+            "$ref": "#/components/schemas/IndicadorBienoServicioType"
+          },
+          "descripcionItem": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidadItem": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double"
+          },
+          "unidadMedida": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/UnidadMedidaType"
+              }
+            ]
+          },
+          "precioUnitarioItem": {
+            "minimum": 0,
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
+            "format": "double"
+          },
+          "otraMonedaDetalle": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/OtraMonedaDetalle"
+              }
+            ]
+          },
+          "montoItem": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "LiquidacionType": {
+        "enum": [
+          "Provisional",
+          "Final",
+          null
+        ]
+      },
+      "Mensaje": {
+        "type": "object",
+        "properties": {
+          "valor": {
+            "type": "string",
+            "description": "Obtiene el valor textual del mensaje que describe el estado o resultado de la validaci\u00f3n.\nEl texto descriptivo del mensaje. Puede ser null si no hay mensaje disponible.",
+            "example": "El comprobante fue aceptado correctamente",
+            "nullable": true
+          },
+          "codigo": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "description": "Obtiene el c\u00f3digo num\u00e9rico que identifica el tipo de mensaje o estado.\nUn c\u00f3digo entero que categoriza el mensaje. Los valores t\u00edpicos incluyen:\n- 0: No encontrado\n- 1: Aceptado\n- 2: Rechazado\n- 3: En Proceso\n- 4: Aceptado Condicional",
+            "format": "int32",
+            "example": 1
+          }
+        },
+        "description": "Representa un mensaje asociado al estado de validaci\u00f3n de un comprobante fiscal electr\u00f3nico (e-CF).\nEste modelo se utiliza en las respuestas de consulta de resultado para proporcionar informaci\u00f3n\ndetallada sobre el estado de procesamiento y cualquier mensaje relacionado."
+      },
+      "Mineria": {
+        "type": "object",
+        "properties": {
+          "pesoNetoKilogramo": {
+            "minimum": 0,
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "pesoNetoMineria": {
+            "minimum": 0,
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tipoAfiliacion": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoAfiliacionType"
+              }
+            ]
+          },
+          "liquidacion": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/LiquidacionType"
+              }
+            ]
+          }
+        }
+      },
+      "NewCompanyApiKey": {
+        "required": [
+          "rnc"
+        ],
+        "type": "object",
+        "properties": {
+          "rnc": {
+            "type": "string"
+          }
+        }
+      },
+      "OtraMoneda": {
+        "type": "object",
+        "properties": {
+          "tipoMoneda": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoMonedaType"
+              }
+            ]
+          },
+          "tipoCambio": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,3}(\\.[0-9]{1,4})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoExentoOtraMoneda": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoTotalOtraMoneda": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        }
+      },
+      "OtraMonedaDetalle": {
+        "type": "object",
+        "properties": {
+          "precioOtraMoneda": {
+            "minimum": 0,
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "descuentoOtraMoneda": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "recargoOtraMoneda": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoItemOtraMoneda": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        }
+      },
+      "Pagina": {
+        "type": "object",
+        "properties": {
+          "paginaNo": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "noLineaDesde": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "noLineaHasta": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "subtotalExentoPagina": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoSubtotalPagina": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        }
+      },
+      "PaginatedApiResultOfAcecfReceptionRequestDto": {
+        "required": [
+          "nextPageUri"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPageUri": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AcecfReceptionRequestDto"
+            }
+          },
+          "total": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "limit": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "nextPage": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "previousPage": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "PaginatedApiResultOfAnulacionListResponse": {
+        "required": [
+          "nextPageUri"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPageUri": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnulacionListResponse"
+            }
+          },
+          "total": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "limit": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "nextPage": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "previousPage": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "PaginatedApiResultOfCompanyResponse": {
+        "required": [
+          "nextPageUri"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPageUri": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompanyResponse"
+            }
+          },
+          "total": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "limit": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "nextPage": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "previousPage": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "PaginatedApiResultOfEcfReceptionRequestDto": {
+        "required": [
+          "nextPageUri"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPageUri": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EcfReceptionRequestDto"
+            }
+          },
+          "total": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "limit": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "nextPage": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "previousPage": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "PaginatedApiResultOfEcfResponse": {
+        "required": [
+          "nextPageUri"
+        ],
+        "type": "object",
+        "properties": {
+          "nextPageUri": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EcfResponse"
+            }
+          },
+          "total": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "limit": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32"
+          },
+          "nextPage": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "previousPage": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ProvinciaMunicipioType": {
+        "enum": [
+          "010000",
+          "010100",
+          "010101",
+          "020000",
+          "020100",
+          "020101",
+          "020102",
+          "020103",
+          "020104",
+          "020105",
+          "020106",
+          "020107",
+          "020108",
+          "020109",
+          "020200",
+          "020201",
+          "020202",
+          "020300",
+          "020301",
+          "020302",
+          "020303",
+          "020400",
+          "020401",
+          "020402",
+          "020403",
+          "020404",
+          "020405",
+          "020500",
+          "020501",
+          "020600",
+          "020601",
+          "020602",
+          "020603",
+          "020604",
+          "020700",
+          "020701",
+          "020702",
+          "020800",
+          "020801",
+          "020802",
+          "020803",
+          "020804",
+          "020900",
+          "020901",
+          "021000",
+          "021001",
+          "030000",
+          "030001",
+          "030101",
+          "030102",
+          "030200",
+          "030201",
+          "030202",
+          "030300",
+          "030301",
+          "030302",
+          "030303",
+          "030304",
+          "030305",
+          "030306",
+          "030307",
+          "030400",
+          "030401",
+          "030500",
+          "030501",
+          "030502",
+          "040000",
+          "040100",
+          "040101",
+          "040102",
+          "040103",
+          "040104",
+          "040200",
+          "040201",
+          "040300",
+          "040301",
+          "040302",
+          "040400",
+          "040401",
+          "040402",
+          "040500",
+          "040501",
+          "040502",
+          "040503",
+          "040504",
+          "040600",
+          "040601",
+          "040700",
+          "040701",
+          "040702",
+          "040800",
+          "040801",
+          "040802",
+          "040900",
+          "040901",
+          "041000",
+          "041001",
+          "041100",
+          "041101",
+          "041102",
+          "050000",
+          "050100",
+          "050101",
+          "050102",
+          "050200",
+          "050201",
+          "050202",
+          "050203",
+          "050300",
+          "050301",
+          "050400",
+          "050401",
+          "050500",
+          "050501",
+          "050502",
+          "060000",
+          "060100",
+          "060101",
+          "060102",
+          "060103",
+          "060104",
+          "060105",
+          "060200",
+          "060201",
+          "060202",
+          "060203",
+          "060300",
+          "060301",
+          "060400",
+          "060401",
+          "060500",
+          "060501",
+          "060502",
+          "060503",
+          "060504",
+          "060505",
+          "060600",
+          "060601",
+          "060700",
+          "060701",
+          "060702",
+          "070000",
+          "070100",
+          "070101",
+          "070102",
+          "070103",
+          "070200",
+          "070201",
+          "070202",
+          "070203",
+          "070300",
+          "070301",
+          "070302",
+          "070400",
+          "070401",
+          "070402",
+          "070500",
+          "070501",
+          "070502",
+          "070600",
+          "070601",
+          "080000",
+          "080100",
+          "080101",
+          "080102",
+          "080103",
+          "080104",
+          "080200",
+          "080201",
+          "080202",
+          "080203",
+          "090000",
+          "090100",
+          "090101",
+          "090102",
+          "090103",
+          "090104",
+          "090105",
+          "090106",
+          "090107",
+          "090108",
+          "090109",
+          "090200",
+          "090201",
+          "090300",
+          "090301",
+          "090302",
+          "090303",
+          "090304",
+          "090400",
+          "090401",
+          "100000",
+          "100100",
+          "100101",
+          "100102",
+          "100103",
+          "100200",
+          "100201",
+          "100202",
+          "100300",
+          "100301",
+          "100400",
+          "100401",
+          "100402",
+          "100500",
+          "100501",
+          "100502",
+          "100600",
+          "100601",
+          "100602",
+          "110000",
+          "110100",
+          "110101",
+          "110102",
+          "110103",
+          "110104",
+          "110200",
+          "110201",
+          "110202",
+          "110203",
+          "120000",
+          "120100",
+          "120101",
+          "120102",
+          "120200",
+          "120201",
+          "120300",
+          "120301",
+          "120302",
+          "130000",
+          "130100",
+          "130101",
+          "130102",
+          "130103",
+          "130104",
+          "130105",
+          "130200",
+          "130201",
+          "130202",
+          "130203",
+          "130300",
+          "130301",
+          "130302",
+          "130303",
+          "130400",
+          "130401",
+          "130402",
+          "140000",
+          "140100",
+          "140101",
+          "140102",
+          "140103",
+          "140104",
+          "140200",
+          "140201",
+          "140202",
+          "140203",
+          "140300",
+          "140301",
+          "140302",
+          "140400",
+          "140401",
+          "150000",
+          "150100",
+          "150101",
+          "150200",
+          "150201",
+          "150202",
+          "150300",
+          "150301",
+          "150302",
+          "150303",
+          "150304",
+          "150400",
+          "150401",
+          "150500",
+          "150501",
+          "150502",
+          "150600",
+          "150601",
+          "160000",
+          "160100",
+          "160101",
+          "160102",
+          "160200",
+          "160201",
+          "160202",
+          "170000",
+          "170100",
+          "170101",
+          "170102",
+          "170103",
+          "170104",
+          "170105",
+          "170106",
+          "170107",
+          "170108",
+          "170109",
+          "170110",
+          "170200",
+          "170201",
+          "170202",
+          "170203",
+          "170300",
+          "170301",
+          "180000",
+          "180100",
+          "180101",
+          "180102",
+          "180103",
+          "180200",
+          "180201",
+          "180202",
+          "180300",
+          "180301",
+          "180400",
+          "180401",
+          "180500",
+          "180501",
+          "180502",
+          "180600",
+          "180601",
+          "180602",
+          "180603",
+          "180604",
+          "180700",
+          "180701",
+          "180702",
+          "180703",
+          "180800",
+          "180801",
+          "180802",
+          "180803",
+          "180804",
+          "180900",
+          "180901",
+          "190000",
+          "190100",
+          "190101",
+          "190102",
+          "190200",
+          "190201",
+          "190202",
+          "190300",
+          "190301",
+          "200000",
+          "200100",
+          "200101",
+          "200102",
+          "200103",
+          "200104",
+          "200200",
+          "200201",
+          "200300",
+          "200301",
+          "210000",
+          "210100",
+          "210101",
+          "210102",
+          "210103",
+          "210200",
+          "210201",
+          "210300",
+          "210301",
+          "210302",
+          "210303",
+          "210400",
+          "210401",
+          "210402",
+          "210500",
+          "210501",
+          "210502",
+          "210503",
+          "210504",
+          "210600",
+          "210601",
+          "210602",
+          "210700",
+          "210701",
+          "210800",
+          "210801",
+          "220000",
+          "220100",
+          "220101",
+          "220102",
+          "220103",
+          "220104",
+          "220105",
+          "220106",
+          "220107",
+          "220108",
+          "220109",
+          "220110",
+          "220111",
+          "220200",
+          "220201",
+          "220202",
+          "220203",
+          "220300",
+          "220301",
+          "220302",
+          "220303",
+          "220400",
+          "220401",
+          "220402",
+          "220500",
+          "220501",
+          "220502",
+          "220503",
+          "220600",
+          "220601",
+          "220602",
+          "230000",
+          "230100",
+          "230101",
+          "230200",
+          "230201",
+          "230202",
+          "230203",
+          "230300",
+          "230301",
+          "230400",
+          "230401",
+          "230500",
+          "230501",
+          "230600",
+          "230601",
+          "240000",
+          "240100",
+          "240101",
+          "240102",
+          "240103",
+          "240104",
+          "240105",
+          "240106",
+          "240200",
+          "240201",
+          "240202",
+          "240300",
+          "240301",
+          "240400",
+          "240401",
+          "240402",
+          "240403",
+          "240404",
+          "250000",
+          "250100",
+          "250101",
+          "250102",
+          "250104",
+          "250105",
+          "250106",
+          "250107",
+          "250200",
+          "250201",
+          "250300",
+          "250301",
+          "250302",
+          "250303",
+          "250400",
+          "250401",
+          "250402",
+          "250500",
+          "250501",
+          "250502",
+          "250503",
+          "250504",
+          "250600",
+          "250601",
+          "250602",
+          "250700",
+          "250701",
+          "250702",
+          "250703",
+          "250800",
+          "250801",
+          "250802",
+          "250803",
+          "250900",
+          "250901",
+          "251000",
+          "251001",
+          "260000",
+          "260100",
+          "260101",
+          "260200",
+          "260201",
+          "260300",
+          "260301",
+          "270000",
+          "270100",
+          "270101",
+          "270102",
+          "270103",
+          "270104",
+          "270200",
+          "270201",
+          "270202",
+          "270203",
+          "270204",
+          "270205",
+          "270300",
+          "270301",
+          "270302",
+          "270303",
+          "270304",
+          "280000",
+          "280100",
+          "280101",
+          "280102",
+          "280103",
+          "280104",
+          "280105",
+          "280106",
+          "280200",
+          "280201",
+          "280300",
+          "280301",
+          "280302",
+          "280303",
+          "290000",
+          "290100",
+          "290101",
+          "290102",
+          "290103",
+          "290104",
+          "290200",
+          "290201",
+          "290300",
+          "290301",
+          "290302",
+          "290303",
+          "290400",
+          "290402",
+          "290403",
+          "290500",
+          "290501",
+          "300000",
+          "300100",
+          "300101",
+          "300102",
+          "300103",
+          "300104",
+          "300200",
+          "300201",
+          "300202",
+          "300300",
+          "300301",
+          "310000",
+          "310100",
+          "310101",
+          "310102",
+          "310103",
+          "310104",
+          "310105",
+          "310200",
+          "310201",
+          "310300",
+          "310301",
+          "320000",
+          "320100",
+          "320101",
+          "320102",
+          "320200",
+          "320201",
+          "320300",
+          "320301",
+          "320302",
+          "320400",
+          "320401",
+          "320402",
+          "320500",
+          "320501",
+          "320502",
+          "320600",
+          "320601",
+          "320602",
+          "320603",
+          "320700",
+          "320701",
+          "320702",
+          "320703",
+          null
+        ]
+      },
+      "RespuestaAnulacionRango": {
+        "type": "object",
+        "properties": {
+          "rnc": {
+            "type": "string",
+            "description": "N\u00famero de Registro Nacional del Contribuyente que envi\u00f3 la anulaci\u00f3n.\n\nCorresponde al RNC del contribuyente que solicit\u00f3 la anulaci\u00f3n de las secuencias.\nEste valor debe coincidir con el RNC autorizado para realizar transacciones de anulaci\u00f3n\ny debe estar registrado como Facturador Electr\u00f3nico en la DGII.",
+            "example": 123456789,
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "description": "C\u00f3digo asociado al resultado de la validaci\u00f3n de la anulaci\u00f3n.\n\nIndica el c\u00f3digo de estado del resultado de la operaci\u00f3n de anulaci\u00f3n.\nLos c\u00f3digos proporcionan informaci\u00f3n sobre el \u00e9xito o fallo de la operaci\u00f3n\ny los motivos espec\u00edficos cuando hay errores.",
+            "example": 1,
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "description": "Raz\u00f3n social del contribuyente que realiz\u00f3 la anulaci\u00f3n.\n\nNombre o raz\u00f3n social del contribuyente asociado al RNC que solicit\u00f3 la anulaci\u00f3n.\nEste campo proporciona informaci\u00f3n adicional para identificaci\u00f3n del contribuyente\ny corresponde al nombre registrado en la DGII.",
+            "example": "EMPRESA EJEMPLO SRL",
+            "nullable": true
+          },
+          "mensajes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Mensajes asociados al resultado de la validaci\u00f3n de la anulaci\u00f3n.\n\nArray de mensajes que proporcionan informaci\u00f3n detallada sobre el resultado de la operaci\u00f3n.\nPuede incluir mensajes de \u00e9xito, advertencias, o errores espec\u00edficos que ocurrieron\ndurante el proceso de validaci\u00f3n y anulaci\u00f3n de las secuencias.",
+            "example": [
+              "Las secuencias fueron anuladas correctamente"
+            ],
+            "nullable": true
+          }
+        },
+        "description": "Respuesta de anulaci\u00f3n de rango de secuencias de e-NCF.\n\nRepresenta la respuesta del servicio de anulaci\u00f3n de rangos de secuencias de comprobantes\nfiscales electr\u00f3nicos. Este modelo se utiliza para procesar la respuesta del servicio web\nde anulaci\u00f3n de e-NCF de la DGII.\n\nServicio Web:\u2022 Endpoint: /api/operaciones/anularrango\u2022 M\u00e9todo: POST\u2022 Formato de entrada: XML (formato ANECF)\u2022 Formato de respuesta: JSON o XMLValidaciones del Servicio:\u2022 Tipo de archivo v\u00e1lido (XML)\u2022 Firma del documento v\u00e1lida\u2022 Tipo de comprobante v\u00e1lido\u2022 Secuencias no utilizadas previamente\u2022 RNC autorizado para realizar transaccionesReferencia Oficial:\u2022 Descripci\u00f3n T\u00e9cnica de Facturaci\u00f3n Electr\u00f3nica v1.6, Secci\u00f3n \"Anulaci\u00f3n de e-NCF\"\u2022 Formato Anulaci\u00f3n de e-NCF v1.0 - DGII"
+      },
+      "RespuestaConsultaEstado": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "description": "C\u00f3digo asociado al estado de validaci\u00f3n del e-CF recibido.\n            Posibles valores:\n            * 0No encontrado - No se encontr\u00f3 el comprobante en los registros\n* 1Aceptado - El e-CF generado por el emisor fue aceptado y tiene validez fiscal\n* 2Rechazado - Corresponde a la nulidad del comprobante generado por el emisor",
+            "format": "int32"
+          },
+          "estado": {
+            "type": "string",
+            "description": "Estado de validaci\u00f3n otorgado por Impuestos Internos al e-CF recibido.\nDescripci\u00f3n textual del estado del comprobante fiscal electr\u00f3nico.",
+            "nullable": true
+          },
+          "rncEmisor": {
+            "type": "string",
+            "description": "N\u00famero de registro nacional del contribuyente que envi\u00f3 el e-CF.\nRNC del emisor del comprobante fiscal electr\u00f3nico.",
+            "nullable": true
+          },
+          "ncfElectronico": {
+            "type": "string",
+            "description": "N\u00famero de secuencia utilizada por el contribuyente en el e-CF.\nN\u00famero de comprobante fiscal electr\u00f3nico (e-NCF) utilizado en la transacci\u00f3n.",
+            "nullable": true
+          },
+          "montoTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": "number",
+            "description": "Monto total extra\u00eddo del e-CF recibido.\nValor total de la transacci\u00f3n en pesos dominicanos.",
+            "format": "double",
+            "nullable": true
+          },
+          "totalITBIS": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": "number",
+            "description": "Total de ITBIS extra\u00eddo del e-CF recibido.\nMonto total del Impuesto sobre Transferencias de Bienes Industrializados y Servicios.",
+            "format": "double",
+            "nullable": true
+          },
+          "fechaEmision": {
+            "type": "string",
+            "description": "Fecha de emisi\u00f3n extra\u00edda del e-CF recibido.\nFecha en que fue emitido el comprobante fiscal electr\u00f3nico.",
+            "nullable": true
+          },
+          "fechaFirma": {
+            "type": "string",
+            "description": "Fecha de firma extra\u00edda del e-CF recibido.\nFecha en que fue firmado digitalmente el comprobante fiscal electr\u00f3nico.",
+            "nullable": true
+          },
+          "rncComprador": {
+            "type": "string",
+            "description": "RNC del comprador extra\u00eddo del e-CF recibido (si aplica).\nN\u00famero de registro nacional del contribuyente comprador, cuando corresponde.",
+            "nullable": true
+          },
+          "codigoSeguridad": {
+            "type": "string",
+            "description": "C\u00f3digo de seguridad extra\u00eddo de los primeros seis (6) d\u00edgitos del hash generado \nen el SignatureValue de la firma digital del e-CF recibido.\nC\u00f3digo de seguridad de 6 caracteres para validaci\u00f3n del comprobante.",
+            "nullable": true
+          },
+          "idExtranjero": {
+            "type": "string",
+            "description": "Identificaci\u00f3n de extranjero extra\u00edda del e-CF recibido (si aplica).\nN\u00famero de identificaci\u00f3n del comprador extranjero cuando corresponde.",
+            "nullable": true
+          }
+        },
+        "description": "Representa la respuesta del servicio de consulta de estado de e-CF.\nEste modelo contiene la informaci\u00f3n de validez y estado de un comprobante fiscal electr\u00f3nico\nconsultado a trav\u00e9s del servicio web de consulta estado de la DGII."
+      },
+      "RespuestaConsultaRFCE": {
+        "type": "object",
+        "properties": {
+          "rnc": {
+            "type": "string",
+            "description": "N\u00famero de registro nacional del contribuyente que envi\u00f3 el e-CF.\nRNC del emisor del comprobante fiscal electr\u00f3nico consultado.",
+            "nullable": true
+          },
+          "encf": {
+            "type": "string",
+            "description": "N\u00famero de secuencia utilizada por el contribuyente en el ENCF.\nN\u00famero de comprobante fiscal electr\u00f3nico (e-NCF) consultado."
+          },
+          "secuenciaUtilizada": {
+            "type": "boolean",
+            "description": "Indica si el n\u00famero de secuencia puede ser reutilizado.\n`true` si la secuencia NO puede reutilizarse (rechazado por motivos espec\u00edficos);\n        `false` si la secuencia S\u00cd puede reutilizarse."
+          },
+          "codigo": {
+            "type": "string",
+            "description": "C\u00f3digo asociado al estado de validaci\u00f3n del e-CF recibido.\nC\u00f3digo num\u00e9rico que indica el resultado de la validaci\u00f3n:\n- 0: No encontrado\n- 1: Aceptado\n- 2: Rechazado\n- 4: Aceptado Condicional (solo para FC &lt; RD$ 250000.00)",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "description": "Estado de validaci\u00f3n otorgado por Impuestos Internos al e-CF recibido.\nDescripci\u00f3n textual del estado de validaci\u00f3n del comprobante.",
+            "nullable": true
+          },
+          "mensajes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Mensaje"
+            },
+            "description": "Mensajes y c\u00f3digos asociados al estado de validaci\u00f3n del e-CF recibido.\nArray de mensajes que proporcionan detalles adicionales sobre la validaci\u00f3n.",
+            "nullable": true
+          }
+        },
+        "description": "Representa la respuesta del servicio de Consulta de Resumen de Factura (RFCE) de la DGII.\nEste servicio permite validar la validez fiscal de un comprobante fiscal electr\u00f3nico\na trav\u00e9s del RNC emisor, e-NCF y c\u00f3digo de seguridad."
+      },
+      "RespuestaConsultaTimbre": {
+        "type": "object",
+        "properties": {
+          "rncEmisor": {
+            "type": "string",
+            "description": "N\u00famero de registro nacional del contribuyente que emiti\u00f3 el resumen de factura de consumo.\nRNC del emisor del comprobante fiscal electr\u00f3nico consultado.",
+            "nullable": true
+          },
+          "razonSocial": {
+            "type": "string",
+            "description": "Raz\u00f3n social del contribuyente que emiti\u00f3 el resumen de factura de consumo.\nNombre comercial o raz\u00f3n social del emisor del comprobante fiscal electr\u00f3nico.",
+            "nullable": true
+          },
+          "encf": {
+            "type": "string",
+            "description": "N\u00famero de secuencia utilizada por el contribuyente, extra\u00eddo del resumen de factura de consumo.\nN\u00famero de comprobante fiscal electr\u00f3nico (e-NCF) utilizado en la transacci\u00f3n.",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "description": "Estado de validaci\u00f3n otorgado por Impuestos Internos al resumen de factura de consumo recibido.\nDescripci\u00f3n textual del estado de validaci\u00f3n del comprobante. Posibles valores:\n- \"No fue encontrada la factura (e-CF)\": El e-CF no se encontr\u00f3 en la base de datos de la DGII.\n- \"Aceptado\": Implica la validez del e-CF de la RI, incluyendo el aceptado condicional que corresponde\n  a que no cumpli\u00f3 en alg\u00fan punto pero que no amerita el rechazo de este.\n- \"Rechazado\": Corresponde a que el e-CF de la RI le fue rechazado al emisor.",
+            "nullable": true
+          }
+        },
+        "description": "Representa la respuesta del servicio de Consulta Timbre Fiscal (QR) de la DGII.\nEste servicio permite validar la validez de un e-CF remitido exclusivamente por el servicio web\nde recepci\u00f3n de e-CF, a partir de los datos incluidos en el timbre de su representaci\u00f3n impresa (RI)."
+      },
+      "RespuestaConsultaTrackId": {
+        "type": "object",
+        "properties": {
+          "trackId": {
+            "type": "string",
+            "description": "Obtiene el n\u00famero \u00fanico generado por Impuestos Internos para identificar un e-CF recibido.\nEste identificador se obtiene como respuesta del servicio de recepci\u00f3n de e-CF.\nEl identificador \u00fanico del track. Puede ser null si no est\u00e1 disponible.",
+            "example": "ddddd",
+            "nullable": true
+          },
+          "codigo": {
+            "type": "string",
+            "description": "Obtiene el c\u00f3digo asociado al estado de validaci\u00f3n del e-CF recibido.\nUn c\u00f3digo que indica el resultado de la validaci\u00f3n. Los valores t\u00edpicos son:\n- \"0\": No encontrado\n- \"1\": Aceptado\n- \"2\": Rechazado\n- \"3\": En Proceso\n- \"4\": Aceptado Condicional",
+            "example": "1",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "description": "Obtiene el estado de validaci\u00f3n otorgado por Impuestos Internos al e-CF recibido.\nDescripci\u00f3n textual del estado. Puede incluir valores como:\n- \"No encontrado\": No se encontr\u00f3 el trackid en los registros\n- \"Aceptado\": Implica la validez del e-CF\n- \"Rechazado\": Implica la nulidad del comprobante para fines tributarios\n- \"En Proceso\": El comprobante a\u00fan no ha sido validado\n- \"Aceptado Condicional\": El comprobante no cumpli\u00f3 en alg\u00fan punto pero no amerit\u00f3 el rechazo",
+            "example": "Aceptado",
+            "nullable": true
+          },
+          "rnc": {
+            "type": "string",
+            "description": "Obtiene el n\u00famero de registro nacional del contribuyente que envi\u00f3 el e-CF.\nEl RNC del emisor del comprobante. Puede ser null si no est\u00e1 disponible.",
+            "example": "131880738",
+            "nullable": true
+          },
+          "encf": {
+            "type": "string",
+            "description": "Obtiene el n\u00famero de secuencia utilizada por el contribuyente en el e-CF.\nEl n\u00famero de comprobante fiscal electr\u00f3nico (e-NCF). Puede ser null si no est\u00e1 disponible.",
+            "example": "E310000000001",
+            "nullable": true
+          },
+          "secuenciaUtilizada": {
+            "type": "boolean",
+            "description": "Indica si el n\u00famero de secuencia puede ser reutilizada en otro e-CF.\nTrue si la secuencia puede reutilizarse, False si no puede reutilizarse.\n\nEste par\u00e1metro permite dar a conocer si el n\u00famero de secuencia que fue recibido\npor Impuestos Internos puede reutilizarse en otro Comprobante Fiscal Electr\u00f3nico (e-CF)\nen el escenario de que el resultado de la validaci\u00f3n haya sido \"Rechazado\" por los siguientes motivos:\n- Certificado y/o firma inv\u00e1lida\n- Estructura del comprobante (XML) no es v\u00e1lida\n- Firmante del comprobante fiscal electr\u00f3nico no corresponde a un delegado autorizado\n- El e-NCF no est\u00e1 autorizado para el RNC Emisor\n- El e-NCF autorizado se encuentra vencido\n- El RNC Emisor no corresponde a un emisor electr\u00f3nico\n- El RNC Emisor no existe o no se encuentra activo",
+            "example": false
+          },
+          "fechaRecepcion": {
+            "type": "string",
+            "description": "Obtiene la fecha en la cual Impuestos Internos recibi\u00f3 el e-CF.\nLa fecha de recepci\u00f3n del comprobante. Puede ser null si no est\u00e1 disponible.\nEl formato t\u00edpico es ISO 8601 o un formato de fecha legible.",
+            "example": "2020-12-17T11:19:06",
+            "nullable": true
+          },
+          "mensajes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Mensaje"
+            },
+            "description": "Obtiene los mensajes asociados al estado de validaci\u00f3n del e-CF recibido.\nUn array de mensajes que proporcionan informaci\u00f3n detallada sobre el estado\nde validaci\u00f3n. Puede ser null si no hay mensajes disponibles.",
+            "nullable": true
+          }
+        },
+        "description": "Representa la respuesta del servicio de consulta de resultado de comprobantes fiscales electr\u00f3nicos (e-CF).\nEste modelo contiene la informaci\u00f3n completa sobre el estado de procesamiento y validaci\u00f3n de un e-CF\nque fue enviado previamente mediante el servicio de recepci\u00f3n."
+      },
+      "RespuestaEstatusServicio": {
+        "type": "object",
+        "properties": {
+          "servicio": {
+            "type": "string",
+            "description": "Nombre del servicio de facturaci\u00f3n electr\u00f3nica.\nValores posibles incluyen:\n- \"Autenticaci\u00f3n\"\n- \"Recepci\u00f3n\"\n- \"Consulta Resultado\"\n- \"Consulta Estado\"\n- \"Consulta Directorio\"\n- \"Consulta TrackIds\"\n- \"Aprobaci\u00f3n Comercial\"\n- \"Anulaci\u00f3n Rangos\"\n- \"Recepci\u00f3n FC\"",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "description": "Estado actual del servicio.\nValores posibles:\n- \"Disponible\": El servicio est\u00e1 disponible y operativo\n- \"No Disponible\": El servicio no est\u00e1 disponible (probablemente en mantenimiento)",
+            "nullable": true
+          },
+          "ambiente": {
+            "type": "string",
+            "description": "Ambiente donde opera el servicio.\nValores posibles:\n- \"PreCertificacion\": Ambiente de pre-certificaci\u00f3n\n- \"Certificacion\": Ambiente de certificaci\u00f3n\n- \"Produccion\": Ambiente de producci\u00f3n",
+            "nullable": true
+          }
+        },
+        "description": "Modelo de respuesta que representa el estado de un servicio espec\u00edfico de facturaci\u00f3n electr\u00f3nica en un ambiente espec\u00edfico.\nUtilizado por el endpoint /api/estatusservicios/obtenerestatus."
+      },
+      "RespuestaVentanaDeMantenimiento": {
+        "type": "object",
+        "properties": {
+          "ventanaMantenimientos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VentanaDeMantenimiento"
+            },
+            "description": "Arreglo de informaci\u00f3n de ventanas de mantenimiento para cada ambiente.\nContiene per\u00edodos de mantenimiento programados cuando los servicios pueden no estar disponibles."
+          }
+        },
+        "description": "Modelo de respuesta que contiene informaci\u00f3n de ventanas de mantenimiento para todos los ambientes.\nUtilizado por el endpoint /api/estatusservicios/obtenerventanasmantenimiento."
+      },
+      "Retencion": {
+        "required": [
+          "indicadorAgenteRetencionoPercepcion",
+          "montoISRRetenido"
+        ],
+        "type": "object",
+        "properties": {
+          "indicadorAgenteRetencionoPercepcion": {
+            "$ref": "#/components/schemas/IndicadorAgenteRetencionoPercepcionType"
+          },
+          "montoISRRetenido": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "SecuenciaRequest": {
+        "required": [
+          "desdeEncf",
+          "hastaEncf"
+        ],
+        "type": "object",
+        "properties": {
+          "desdeEncf": {
+            "type": "string"
+          },
+          "hastaEncf": {
+            "type": "string"
+          }
+        }
+      },
+      "SecuenciaRequestDto": {
+        "type": "object",
+        "properties": {
+          "desdeEncf": {
+            "type": "string"
+          },
+          "hastaEncf": {
+            "type": "string"
+          }
+        }
+      },
+      "SendAcecfRequest": {
+        "type": "object",
+        "properties": {
+          "detalleMotivoRechazo": {
+            "type": "string",
+            "nullable": true
+          },
+          "estadoType": {
+            "$ref": "#/components/schemas/EstadoType"
+          }
+        }
+      },
+      "SubcantidadItem": {
+        "type": "object",
+        "properties": {
+          "subcantidad": {
+            "minimum": 0,
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "codigoSubcantidad": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/UnidadMedidaType"
+              }
+            ]
+          }
+        }
+      },
+      "SubDescuento": {
+        "required": [
+          "tipoSubDescuento"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoSubDescuento": {
+            "$ref": "#/components/schemas/TipoDescuentoRecargoType"
+          },
+          "subDescuentoPorcentaje": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,3}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoSubDescuento": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        }
+      },
+      "SubRecargo": {
+        "required": [
+          "tipoSubRecargo"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoSubRecargo": {
+            "$ref": "#/components/schemas/TipoDescuentoRecargoType"
+          },
+          "subRecargoPorcentaje": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,3}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoSubRecargo": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        }
+      },
+      "Subtotal": {
+        "type": "object",
+        "properties": {
+          "numeroSubTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "descripcionSubtotal": {
+            "type": "string",
+            "nullable": true
+          },
+          "orden": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "subTotalExento": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoSubTotal": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "lineas": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "SubtotalImpuestoAdicional": {
+        "type": "object",
+        "properties": {
+          "subtotalImpuestoSelectivoConsumoEspecificoPagina": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "subtotalOtrosImpuesto": {
+            "minimum": 0.01,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        }
+      },
+      "TipoAfiliacionType": {
+        "enum": [
+          "Afiliada",
+          "NoAfiliada",
+          null
+        ]
+      },
+      "TipoAjusteType": {
+        "enum": [
+          "D",
+          "R"
+        ]
+      },
+      "TipoCuentaPagoType": {
+        "enum": [
+          "CT",
+          "AH",
+          "OT",
+          null
+        ]
+      },
+      "TipoDescuentoRecargoType": {
+        "enum": [
+          "$",
+          "%",
+          null
+        ]
+      },
+      "TipoeCFType": {
+        "enum": [
+          "FacturaDeCreditoFiscalElectronica",
+          "FacturaDeConsumoElectronica",
+          "NotaDeDebitoElectronica",
+          "NotaDeCreditoElectronica",
+          "ComprasElectronico",
+          "GastosMenoresElectronico",
+          "RegimenesEspecialesElectronico",
+          "GubernamentalElectronico",
+          "ComprobanteDeExportacionesElectronico",
+          "ComprobanteParaPagosAlExteriorElectronico"
+        ]
+      },
+      "TipoIngresosValidationType": {
+        "enum": [
+          "01",
+          "02",
+          "03",
+          "04",
+          "05",
+          "06"
+        ]
+      },
+      "TipoMonedaType": {
+        "enum": [
+          "BRL",
+          "CAD",
+          "CHF",
+          "CHY",
+          "XDR",
+          "DKK",
+          "EUR",
+          "GBP",
+          "JPY",
+          "NOK",
+          "SCP",
+          "SEK",
+          "USD",
+          "VEF",
+          "HTG",
+          "MXN",
+          null
+        ]
+      },
+      "TipoPagoType": {
+        "enum": [
+          "Contado",
+          "Credito",
+          "Gratuito",
+          null
+        ]
+      },
+      "Token": {
+        "required": [
+          "jwt",
+          "validFrom",
+          "validTo"
+        ],
+        "type": "object",
+        "properties": {
+          "jwt": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validTo": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Totales": {
+        "required": [
+          "montoTotal"
+        ],
+        "type": "object",
+        "properties": {
+          "montoExento": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoTotal": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double"
+          },
+          "montoPeriodo": {
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "saldoAnterior": {
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoAvancePago": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "valorPagar": {
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "totalISRRetencion": {
+            "minimum": 0,
+            "pattern": "^[0-9]{1,16}(\\.[0-9]{1,2})?$",
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        }
+      },
+      "Transporte": {
+        "type": "object",
+        "properties": {
+          "paisDestino": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UnidadMedidaType": {
+        "enum": [
+          "Barril",
+          "Bolsa",
+          "Bote",
+          "Bultos",
+          "Botella",
+          "CajaSlashCajon",
+          "Cajetilla",
+          "Centimetro",
+          "Cilindro",
+          "Conjunto",
+          "Contenedor",
+          "Dia",
+          "Docena",
+          "Fardo",
+          "Galones",
+          "Grado",
+          "Gramo",
+          "Granel",
+          "Hora",
+          "Huacal",
+          "Kilogramo",
+          "KilovatioHora",
+          "Libra",
+          "Litro",
+          "Lote",
+          "Metro",
+          "MetroCuadrado",
+          "MetroCubico",
+          "MillonesDeUnidadesTermicas",
+          "Minuto",
+          "Paquete",
+          "Par",
+          "Pie",
+          "Pieza",
+          "Rollo",
+          "Sobre",
+          "Segundo",
+          "Tanque",
+          "Tonelada",
+          "Tubo",
+          "Yarda",
+          "YardaCuadrada",
+          "Unidad",
+          "Elemento",
+          "Millar",
+          "Saco",
+          "Lata",
+          "Display",
+          "Bidon",
+          "Racion",
+          "Quintal",
+          "ToneladasDeRegistroBruto",
+          "PieCuadrado",
+          "Pasajero",
+          "PULGPulgadas",
+          "STAYParqueoBarcosEnMuelle",
+          "BDJBandeja",
+          "HAHectarea",
+          "MLMililitro",
+          "MGMiligramo",
+          "OZOnzas",
+          "OZTOnzasTroy",
+          null
+        ]
+      },
+      "UpsertCompanyRequest": {
+        "required": [
+          "rnc",
+          "legalName",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "rnc": {
+            "maxLength": 11,
+            "type": "string"
+          },
+          "legalName": {
+            "maxLength": 2000,
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 2000,
+            "type": "string"
+          }
+        }
+      },
+      "VentanaDeMantenimiento": {
+        "type": "object",
+        "properties": {
+          "ambiente": {
+            "type": "string",
+            "description": "Nombre del ambiente donde aplica la ventana de mantenimiento.\nValores posibles:\n- \"PreCertificacion\": Ambiente de pre-certificaci\u00f3n\n- \"Certificacion\": Ambiente de certificaci\u00f3n\n- \"Produccion\": Ambiente de producci\u00f3n",
+            "nullable": true
+          },
+          "horaInicio": {
+            "type": "string",
+            "description": "Hora de inicio de la ventana de mantenimiento.\nFormato: \"H:MM AM/PM\" (ejemplo: \"9:00 AM\", \"1:00 PM\")",
+            "nullable": true
+          },
+          "horaFin": {
+            "type": "string",
+            "description": "Hora de fin de la ventana de mantenimiento.\nFormato: \"H:MM AM/PM\" (ejemplo: \"12:00 PM\", \"4:00 PM\")",
+            "nullable": true
+          },
+          "dias": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Arreglo de fechas espec\u00edficas cuando est\u00e1n programadas las ventanas de mantenimiento.\nFormato: \"DD-MM-YYYY\" (ejemplo: \"06-08-2020\", \"20-08-2020\")",
+            "nullable": true
+          }
+        },
+        "description": "Representa informaci\u00f3n de ventana de mantenimiento para un ambiente espec\u00edfico.\nContiene detalles sobre cu\u00e1ndo ocurrir\u00e1 el mantenimiento programado."
+      },
+      "VersionType": {
+        "enum": [
+          "Version1_0"
+        ]
+      },
+      "ViaTransporteType": {
+        "enum": [
+          "01",
+          "02",
+          "03",
+          null
+        ]
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "JWT Authorization header using the Bearer scheme.",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Company"
+    },
+    {
+      "name": "Ecf"
+    },
+    {
+      "name": "Recepcion"
+    },
+    {
+      "name": "Dgii"
+    },
+    {
+      "name": "ApiKey"
+    }
+  ]
+}

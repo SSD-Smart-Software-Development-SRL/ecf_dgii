@@ -1,0 +1,41 @@
+<Project>
+
+  <!-- Redirect all build output to a single artifacts folder -->
+  <PropertyGroup>
+    <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
+  </PropertyGroup>
+
+  <!-- Shared package / assembly metadata -->
+  <PropertyGroup>
+    <Authors>SSD Smart Software Development SRL</Authors>
+    <Company>SSD Smart Software Development SRL</Company>
+    <Copyright>© SSD Smart Software Development SRL</Copyright>
+    <RepositoryUrl>https://github.com/puntoos/ecf-dgii-clients</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <!-- Build quality defaults -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <DebugType>embedded</DebugType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <!-- Deterministic / reproducible builds – auto-enable on CI -->
+  <PropertyGroup>
+    <ContinuousIntegrationBuild
+        Condition="'$(ContinuousIntegrationBuild)' == '' And '$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <!-- Reproducible builds SDK (isolated mode keeps settings out of the project output) -->
+  <Sdk Name="DotNet.ReproducibleBuilds.Isolated" Version="1.2.39" />
+
+  <ItemGroup>
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.2.39" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>

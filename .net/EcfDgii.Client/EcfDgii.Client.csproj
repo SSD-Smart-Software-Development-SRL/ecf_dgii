@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>EcfDgii.Client</PackageId>
-    <Description>Official .NET SDK client for the ECF DGII API (Electronic Fiscal Receipts - Dominican Republic). Provides strongly-typed models, a Kiota-generated HTTP client, and a high-level EcfClient with automatic ECF routing, polling, and error handling.</Description>
-    <PackageTags>ecf;dgii;factura;electronica;dominican-republic;fiscal;tax;comprobante</PackageTags>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <TargetFrameworks>net5.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>12.0</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\README.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
+  <PropertyGroup>
+    <PackageId>SSDDO.ECF_DGII.SDK</PackageId>
+    <Title>ECF DGII SDK - API Client</Title>
+    <Description>SDK oficial para integrar la facturación electrónica (e-CF) en República Dominicana a través del servicio ECF SSD. Incluye modelos tipados, cliente HTTP generado con Kiota, y un EcfClient de alto nivel con enrutamiento automático, polling y manejo de errores. Registrate en https://ecf.ssd.com.do, certifícate, y emite comprobantes electrónicos sin manejar XML, firmas, ni semillas.</Description>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Kiota.Authentication.Azure" Version="1.21.2" />

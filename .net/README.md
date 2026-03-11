@@ -107,6 +107,48 @@ catch (EcfException ex)
 
 **Eso es todo.** No necesitas manejar XML, firmar documentos, obtener semillas, ni reintentar requests. El servicio ECF SSD se encarga de todo.
 
+## Respuesta (`EcfResponse`)
+
+Cuando `SendEcfAsync` termina exitosamente, retorna un `EcfResponse` con toda la información que necesitas para cumplir con los requisitos de la DGII:
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `ImpresionUrl` | `string` | URL para generar el código QR requerido por la DGII en el comprobante impreso |
+| `CodSec` | `string` | Código de seguridad — debe aparecer en el comprobante impreso |
+| `FechaFirma` | `DateTimeOffset` | Fecha y hora en que el comprobante fue firmado digitalmente |
+| `Estatus` | `EcfEstado` | Estado asignado por la DGII (`Aceptado`, `AceptadoCondicional`, `Rechazado`) |
+| `Progress` | `EcfProgress` | Estado del procesamiento (`Queued`, `Sending`, `Polling`, `Finished`, `Error`) |
+| `Encf` | `string` | Número de comprobante fiscal electrónico (eNCF) |
+| `RncEmisor` | `string` | RNC del emisor |
+| `Mensaje` | `string` | Mensaje de respuesta de la DGII |
+| `Errors` | `string` | Detalle de errores (si los hay) |
+| `MontoTotal` | `double` | Monto total del comprobante |
+| `SecuenciaUtilizada` | `bool` | Indica si la secuencia fue utilizada |
+| `DgiiEnvironment` | `DGIIEnvironment` | Ambiente DGII donde fue procesado |
+| `MessageId` | `string` | Identificador único del mensaje |
+
+### QR e Impresión del Comprobante
+
+La DGII requiere que los comprobantes impresos incluyan un código QR. El `ImpresionUrl` contiene la URL que debe codificarse como QR:
+
+```csharp
+EcfResponse resultado = await client.SendEcfAsync(ecf);
+
+// Datos necesarios para el comprobante impreso
+string urlQr = resultado.ImpresionUrl;          // codificar como QR
+string codigoSeguridad = resultado.CodSec;      // imprimir en el comprobante
+DateTimeOffset fechaFirma = resultado.FechaFirma; // fecha de firma digital
+
+// Verificar aceptación
+if (resultado.Estatus == EcfEstado.Aceptado)
+{
+    Console.WriteLine("Comprobante aceptado por la DGII");
+    Console.WriteLine($"QR URL: {urlQr}");
+    Console.WriteLine($"Código seguridad: {codigoSeguridad}");
+    Console.WriteLine($"Firmado: {fechaFirma}");
+}
+```
+
 ## Configuración
 
 ### Variables de Entorno

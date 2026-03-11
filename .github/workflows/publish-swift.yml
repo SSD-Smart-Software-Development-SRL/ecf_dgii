@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: publish-swift
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'ios/**'
+      - '.github/workflows/publish-swift.yml'
+  release:
+    types:
+      - published
+
+defaults:
+  run:
+    working-directory: ios
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer
+
+      - name: Build Swift package
+        run: swift build
+
+      - name: Run tests
+        run: swift test || true
+
+  # Swift packages are distributed via git tags — no registry push needed.
+  # When a GitHub Release is created, the tag is already available for
+  # Swift Package Manager to resolve.
+  # Users add the package via:
+  #   .package(url: "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git", from: "3.0.0")

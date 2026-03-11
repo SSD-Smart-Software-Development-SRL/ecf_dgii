@@ -1,137 +1,270 @@
-# DGII ECF
+# DGII ECF - SDK Clients
 
+<p align="center">
+  <img src="logo.png" alt="ECF SSD" width="200" />
+</p>
 
-| Paquetes  |              |
-|-----------|--------------|
-| Modelos   |[![NuGet Downloads](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.Models)](https://www.nuget.org/packages/SSDDO.ECF_DGII.Models)|
-| DGII SDK  |[![NuGet Downloads](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.SDK)](https://www.nuget.org/packages/SSDDO.ECF_DGII.SDK)|
+<p align="center">
+  SDKs oficiales para integrar la facturación electrónica (e-CF) en República Dominicana a través de <a href="https://ecf.ssd.com.do"><strong>ECF SSD</strong></a>.
+</p>
 
+| Plataforma | Paquete | Instalación |
+|-----------|---------|-------------|
+| .NET | [![NuGet](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.SDK)](https://www.nuget.org/packages/SSDDO.ECF_DGII.SDK) | `dotnet add package SSDDO.ECF_DGII.SDK` |
+| TypeScript | [npm](https://www.npmjs.com/) | `npm install ecf-dgii-client` |
+| Python | [PyPI](https://pypi.org/) | `pip install ecf-dgii-client` |
+| PHP | [Packagist](https://packagist.org/) | `composer require ssd/ecf-dgii-client` |
+| Java | [Maven Central](https://central.sonatype.com/) | Ver [java/README.md](java/README.md) |
+| Kotlin | [Maven Central](https://central.sonatype.com/) | Ver [kotlin/README.md](kotlin/README.md) |
+| iOS/Swift | [Swift Package Manager](https://swift.org/package-manager/) | Ver [ios/README.md](ios/README.md) |
+| C++ | [vcpkg](https://vcpkg.io/) / [Conan](https://conan.io/) | Ver [C++/README.md](C++/README.md) |
+| React | [npm](https://www.npmjs.com/) | `npm install ecf-dgii-react` |
 
-Libraria para implementar la factura electr&oacute;nica en Rep&uacute;blica Dominicana, acorde a los lineamientos de la DGII. Hemos creados dos paquetes para facilitar la implementaci&oacute;n de la factura digital:
+---
 
-1. `SSDDO.ECF_DGII.Models`: modelos C# generados a partir de los archivos XSD definidos por la DGII [aqu&iacute;](https://dgii.gov.do/cicloContribuyente/facturacion/comprobantesFiscalesElectronicosE-CF/Paginas/documentacionSobreE-CF.aspx). Adem&aacute;s, agregamos los modelos definidos en los Requests/Responses de las API de la DGII.
-2. `SSDDO.ECF_DGII.SDK`: endpoints de la DGII definidos utilizando la libreria Refit.
+## Qué es ECF SSD
 
-La libreria `SSDDO.ECF_DGII.Models` puede ser utlizada de manera independiente en caso que solo necesites tener los modelos POCOs.
+[ECF SSD](https://ecf.ssd.com.do) es una plataforma que simplifica la emisión de comprobantes fiscales electrónicos (e-CF) en República Dominicana. En vez de que cada empresa implemente todo el proceso de comunicación con la DGII (firmado XML, autenticación por semilla, manejo de certificados, reintentos, almacenamiento, etc.), **ECF SSD lo hace por ti**.
 
-## Ejemplo
+Tú solo envías el comprobante en JSON a través de estos SDKs, y el servicio se encarga de:
 
-1. Instalar la libreria desde Nuget
-```sh
-dotnet add package SSDDO.ECF_DGII.Models
-dotnet add package SSDDO.ECF_DGII.SDK
-```
+- Firmar el comprobante electrónicamente (XML signing con tu certificado digital)
+- Autenticar con la DGII (semilla → token)
+- Enviar el e-CF a la DGII
+- Validar emisor-receptor
+- Almacenar los comprobantes de forma segura
+- Reintentar automáticamente en caso de fallos
+- Gestionar tus certificados digitales
 
-2. Invocar el servicio requerido utilizando DGII SDK y de ser necesario parsear puedes utilizar los modelos ECF y serializarlos a xml para enviar la información de recepción ECF.
+---
+
+## Cómo Empezar
+
+### Paso 1: Regístrate en ECF SSD
+
+Visita [https://ecf.ssd.com.do](https://ecf.ssd.com.do) y crea tu cuenta de empresa.
+
+### Paso 2: Sube tu Certificado Digital
+
+En el panel de ECF SSD, sube el certificado digital (.p12/.pfx) emitido por una entidad certificadora autorizada por la DGII. El servicio almacena y utiliza tu certificado para firmar los comprobantes.
+
+### Paso 3: Certifícate con la DGII
+
+Utiliza el ambiente de **certificación** (`Cert`) para completar el proceso de certificación requerido por la DGII. ECF SSD provee las herramientas para enviar los comprobantes de prueba que la DGII requiere.
+
+### Paso 4: Obtén tu API Key
+
+Una vez certificado, genera tu API Key (JWT) desde el panel de ECF SSD. Este token es el que usarás para autenticarte con los SDKs.
+
+### Paso 5: Integra con tu Sistema
+
+Instala el SDK de tu lenguaje preferido y comienza a enviar comprobantes:
 
 ```csharp
-// Program.cs, C# 6.0+
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.Extensions.Configuration;
-using Refit;
-using ECF_DGII.Models.Autenticacion;
-using ECF_DGII.SDK;
-
-// Conseguir API Token
-const string urlAmbiente = "https://ecf.dgii.gov.do/testecf";
-using var certificate = new X509Certificate(fileName: "./certificate.crt", password: "1234", keyStorageFlags: X509KeyStorageFlags.Exportable);
-
-// Estas interfaces pueden ser definidas utilizando dependency injection, para más información ver la documentación de Refit
-var autenticacionAPI = RestService.For<IAutenticacionAPI>(urlAmbiente);
-var recepcionFCAPI = RestService.For<IRecepcionFCAPI>(urlAmbiente);
-
-// Convierte stream a XmlDocument
-static XmlDocument ToXmlDocument(Stream stream)
+// .NET
+var client = new EcfClient(new EcfClientOptions
 {
-    var xmlDoc = new XmlDocument();
-    xmlDoc.Load(stream);
-    return xmlDoc;
-}
+    ApiKey = "tu-jwt-token",
+    Environment = EcfEnvironment.Prod
+});
 
-// Convierte un XMLDocument to stream
-Stream ToStream(XmlDocument xml)
+var ecf = new ECF
 {
-    var stream = new MemoryStream();
-    var lastStreamPosition = stream.Position;
-    using var xmlWriter = XmlWriter.Create(stream, writerSettings);
-    xml.Save(xmlWriter);
-
-    if (stream.CanSeek)
-        stream.Position = lastStreamPosition;
-
-    return stream;
-}
-
-static void Sign(XmlDocument xml, X509Certificate2 certificate)
-{
-    // codigo adaptado del código de como firmar un XML documentado por la DGII
-    using var privateKey = certificate.GetPrivateKey();
-    var exportedKeyMaterial = privateKey.ToXmlString(true);
-    privateKey.FromXmlString(exportedKeyMaterial);
-    SignedXml signedXml = new(xml)
+    Encabezado = new Encabezado
     {
-        SigningKey = privateKey,
-    };
-    signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
-    Reference reference = new()
+        IdDoc = new IdDoc
+        {
+            TipoeCF = TipoeCFType.FacturaDeCreditoFiscalElectronica,
+            Encf = "E310000000001"
+        },
+        Emisor = new Emisor
+        {
+            RncEmisor = "123456789",
+            RazonSocialEmisor = "Mi Empresa SRL",
+            DireccionEmisor = "Calle Principal #1, Santo Domingo",
+            FechaEmision = DateTimeOffset.Now
+        },
+        Totales = new Totales { /* montos, ITBIS, etc. */ }
+    },
+    DetallesItems = new List<Item>
     {
-        DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256",
-        Uri = string.Empty,
-    };
-    reference.AddTransform(new XmlDsigEnvelopedSignatureTransform());
-    signedXml.AddReference(reference);
-    KeyInfo keyInfo = new();
-    keyInfo.AddClause(new KeyInfoX509Data(certificate));
-    signedXml.KeyInfo = keyInfo;
-    signedXml.ComputeSignature();
-    var xmlFirmaDigital = signedXml.GetXml();
-    xml.DocumentElement.AppendChild(xml.ImportNode(xmlFirmaDigital, true));
-}
+        new Item
+        {
+            NombreItem = "Servicio de consultoría",
+            IndicadorFacturacion = IndicadorFacturacionType.NoFacturable_18Percent,
+            CantidadItem = 1,
+            PrecioUnitarioItem = 10000.00,
+            MontoItem = 10000.00
+        }
+    }
+};
 
-async Task<RespuestaSemilla> GetAPIToken() {
-    using var semillaResponse = await autenticacionAPI.Semilla().ConfigureAwait(false);
-    await using var responseStream = semillaResponse.Content;
-    var xml = ToXmlDcoument(responseStream);
-    Sign(xml, certificate)
-    await using var signedSemillaStream = ToStream(xml);
-    // Object stream necesitado por Refit para enviar un archivo en un request
-    var streamPart = new StreamPart(signedSemillaStream, "00100000000-semilla.xml", "text/xml");
-    var tokenResponse = await autenticacionAPI.ValidarSemilla(streamPart).ConfigureAwait(false);
-    if (!tokenResponse.IsSuccessStatusCode)
-        throw new InvalidOperationException($"Error `{tokenResponse.StatusCode}` getting SemillaRespuesta.", tokenResponse.Error);
-    return tokenResponse.Content;
-}
-
-// Conseguir API token
-var respuestaSemilla = GetAPIToken();
-
-// Leer un archivo XML ya firmado o crear un xml utilizando uno de las clases definidas en `ECF_DGII.Models.ECF._31, 32... etc` 
-// y firmarlo programaticamente
-await using var recepcionFCXml = File.OpenRead("./Data/RecepcionFC.xml");
-var streamPart = new StreamPart(recepcionFCXml, "101672919E3200000001.xml", "text/xml");
-// Notar que el response es un objecto POCO, en este caso `Models.RecepcionFC.Respuesta`
-var response = await recepcionFCAPI.Recepcion(streamPart, apiKey: respuestaSemilla.APIKey).ConfigureAwait(false);
-
-// ...
+// Envía y espera el resultado — una sola llamada
+EcfResponse resultado = await client.SendEcfAsync(ecf);
+Console.WriteLine($"Estado: {resultado.Progress}");
+Console.WriteLine($"Código seguridad: {resultado.CodSec}");
 ```
 
-> Las pruebas unitarias no han sido aun verificadas
+```typescript
+// TypeScript
+import { EcfClient } from 'ecf-dgii-client';
 
+const client = new EcfClient({
+  apiKey: 'tu-jwt-token',
+  environment: 'prod',
+});
 
-## Por que utilizar esta libreria
+const resultado = await client.sendEcf({
+  encabezado: {
+    idDoc: {
+      tipoeCF: 'FacturaDeCreditoFiscalElectronica',
+      encf: 'E310000000001',
+    },
+    emisor: {
+      rncEmisor: '123456789',
+      razonSocialEmisor: 'Mi Empresa SRL',
+    },
+    totales: { /* ... */ },
+  },
+  detallesItems: [
+    {
+      nombreItem: 'Servicio de consultoría',
+      cantidadItem: 1,
+      precioUnitarioItem: 10000.00,
+      montoItem: 10000.00,
+    }
+  ],
+});
+```
 
-- **Abstracción de complejidad:** El SDK proporciona una capa de abstracción que oculta la complejidad del protocolo HTTP y la gestión de conexiones, lo que permite a los desarrolladores enfocarse en la lógica de la aplicación en lugar de preocuparse por los detalles de la comunicación de red.
-- **Facilidad de uso:** Al utilizar el SDK, los desarrolladores pueden interactuar con el API utilizando objetos y métodos familiares en lugar de tener que construir manualmente las solicitudes HTTP y analizar las respuestas. Esto reduce la curva de aprendizaje y acelera el desarrollo.
-- **Consistencia y coherencia:** El SDK proporciona una interfaz coherente y consistente para interactuar con el API, lo que facilita el mantenimiento del código y garantiza que todas las interacciones con el API sigan las mejores prácticas.
-- **Validación de datos:** El SDK incluye validación de datos integrada, lo que ayuda a garantizar que los datos enviados al API cumplan con los requisitos esperados, reduciendo así el riesgo de errores y fallos en tiempo de ejecución.
-- **Manejo de errores:** El SDK proporcionará manejo de errores integrado, incluyendo la gestión de casos como timeouts, errores de red y respuestas inesperadas del API, lo que simplifica el código y mejora la robustez de la aplicación.
-- **Actualizaciones y mantenimiento:** Al utilizar un SDK, los desarrolladores se benefician de las actualizaciones y mejoras continuas proporcionadas por el mantenimiento del SDK, lo que garantiza que el código esté siempre actualizado y sea compatible con las últimas versiones del API.
-- **Documentación integrada:** El SDK incluirá la documentación integrada, incluyendo descripciones de métodos, ejemplos de uso y referencias de parámetros, lo que facilitará la comprensión y el uso del API.
-- **Compatibilidad multiplataforma:** El SDK ofrecerá compatibilidad multiplataforma, lo que permitirá a los desarrolladores utilizar el mismo código para interactuar con el API desde diferentes entornos de desarrollo, como aplicaciones web, móviles o de escritorio.
+```python
+# Python
+from ecf_dgii_client import EcfClient
 
-> Aun con la facilidad que provee esta libreria otros aspectos como seguridad, almacenamiento de los xml, actualizacion, manejo de errores, reintentar request fallidos, entre otros tienen que ser desarrollados, lo que influira en el tiempo y costo de desarrollo. 
-Para una implementacion completa que incluye seguridad, almacenamiento, web site administrativo, manejo de certificados, implementacion modulo de recepcion de ECF, listo para la certificación de la DGII y mas visita nuestro producto: [ECF SSD](https://ecf.sdd.com.do), nuestra herramienta es completa, segura, eficiente, y puede ser instalada de servidores On Premise, en la nube, o utilizar nuestra implementación SAAS de la herramienta. Visita el producto aquí https://ecf.ssd.com.do 
+client = EcfClient(
+    api_key="tu-jwt-token",
+    environment="prod",
+)
+
+resultado = client.send_ecf({
+    "encabezado": {
+        "idDoc": {
+            "tipoeCF": "FacturaDeCreditoFiscalElectronica",
+            "encf": "E310000000001",
+        },
+        "emisor": {
+            "rncEmisor": "123456789",
+            "razonSocialEmisor": "Mi Empresa SRL",
+        },
+    },
+    "detallesItems": [
+        {
+            "nombreItem": "Servicio de consultoría",
+            "cantidadItem": 1,
+            "precioUnitarioItem": 10000.00,
+            "montoItem": 10000.00,
+        }
+    ],
+})
+```
+
+---
+
+## Ambientes
+
+| Ambiente | URL | Uso |
+|----------|-----|-----|
+| **Test** | `https://api.test.ecfx.ssd.com.do` | Desarrollo y pruebas internas |
+| **Cert** | `https://api.cert.ecfx.ssd.com.do` | Proceso de certificación con la DGII |
+| **Prod** | `https://api.prod.ecfx.ssd.com.do` | Producción |
+
+## Autenticación
+
+Todos los SDKs utilizan **JWT Bearer Token** para autenticarse. Puedes configurar el token de dos formas:
+
+1. **Directamente en el código:** pasando el API Key al crear el cliente
+2. **Variable de entorno:** `ECF_API_KEY` (todos los SDKs la leen automáticamente)
+
+## Tipos de Comprobantes Soportados
+
+| Tipo | Código | Ruta API |
+|------|--------|----------|
+| Factura de Crédito Fiscal Electrónica | E31 | `/ecf/31` |
+| Factura de Consumo Electrónica | E32 | `/ecf/32` |
+| Nota de Débito Electrónica | E33 | `/ecf/33` |
+| Nota de Crédito Electrónica | E34 | `/ecf/34` |
+| Compras Electrónico | E41 | `/ecf/41` |
+| Gastos Menores Electrónico | E43 | `/ecf/43` |
+| Regímenes Especiales Electrónico | E44 | `/ecf/44` |
+| Gubernamental Electrónico | E45 | `/ecf/45` |
+| Comprobante de Exportaciones Electrónico | E46 | `/ecf/46` |
+| Comprobante para Pagos al Exterior Electrónico | E47 | `/ecf/47` |
+
+## Cómo Funciona `sendEcf`
+
+Todos los SDKs incluyen un método de alto nivel (`SendEcfAsync`, `sendEcf`, `send_ecf`) que encapsula toda la complejidad:
+
+```
+Tu sistema                          ECF SSD                         DGII
+   │                                   │                              │
+   │── sendEcf(ecf) ──────────────────►│                              │
+   │                                   │── firma XML ─────────────────│
+   │                                   │── autenticación (semilla) ──►│
+   │                                   │── envío e-CF ──────────────►│
+   │                                   │◄── trackId ─────────────────│
+   │                                   │── polling estado ──────────►│
+   │                                   │◄── resultado final ─────────│
+   │◄── EcfResponse ──────────────────│                              │
+   │                                   │                              │
+```
+
+1. **Enrutamiento automático:** Determina el endpoint correcto (`/ecf/31`, `/ecf/32`, etc.) basándose en el `tipoeCF` del comprobante
+2. **Envío:** POST al endpoint correspondiente
+3. **Polling con backoff exponencial:** Consulta periódicamente el estado hasta que la DGII responda (`Finished` o `Error`)
+4. **Resultado:** Retorna el `EcfResponse` con el estado final, código de seguridad, URL de impresión, etc.
+
+## Funcionalidades Adicionales del API
+
+Además de enviar comprobantes, los SDKs exponen todos los endpoints del API:
+
+| Funcionalidad | Descripción |
+|--------------|-------------|
+| **Empresas** | Crear, consultar y eliminar empresas registradas |
+| **Certificados** | Subir y consultar certificados digitales |
+| **Consulta de e-CF** | Buscar comprobantes por RNC, eNCF, fecha, monto, etc. |
+| **Aprobación Comercial** | Enviar aprobación/rechazo comercial (ACECF) |
+| **Anulación de Rangos** | Solicitar anulación de secuencias de eNCF |
+| **Consultas DGII** | Directorio, estado, resultado, timbre, RFCE, track IDs |
+| **Estatus de Servicios** | Verificar disponibilidad de servicios DGII |
+| **Ventanas de Mantenimiento** | Consultar ventanas de mantenimiento programadas |
+| **API Keys** | Crear API keys para acceso programático |
+
+## Documentación por Lenguaje
+
+Cada SDK tiene su propia documentación con ejemplos específicos:
+
+| SDK | Documentación |
+|-----|--------------|
+| .NET | [.net/README.md](.net/README.md) |
+| TypeScript | [typescript/README.md](typescript/README.md) |
+| Python | [python/README.md](python/README.md) |
+| PHP | [php/README.md](php/README.md) |
+| Java | [java/README.md](java/README.md) |
+| Kotlin | [kotlin/README.md](kotlin/README.md) |
+| iOS/Swift | [ios/README.md](ios/README.md) |
+| C++ | [C++/README.md](C++/README.md) |
+| React | [react/README.md](react/README.md) |
+
+## Migración desde versiones anteriores
+
+Si usabas los paquetes `SSDDO.ECF_DGII.Models` y `SSDDO.ECF_DGII.SDK` v1/v2, consulta la [guía de migración en el README de .NET](.net/README.md#migración-desde-v2).
+
+**En resumen:** ya no necesitas implementar firmado XML, autenticación por semilla, manejo de certificados, ni reintentos. Todo eso lo hace ECF SSD.
+
+## Soporte
+
+- Documentación: [https://ecf.ssd.com.do](https://ecf.ssd.com.do)
+- Issues: [GitHub Issues](https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii/issues)
 
 ____
 

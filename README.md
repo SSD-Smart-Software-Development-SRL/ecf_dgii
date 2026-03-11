@@ -223,6 +223,54 @@ Tu sistema                          ECF SSD                         DGII
 3. **Polling con backoff exponencial:** Consulta periódicamente el estado hasta que la DGII responda (`Finished` o `Error`)
 4. **Resultado:** Retorna el `EcfResponse` con el estado final, código de seguridad, URL de impresión, etc.
 
+## Respuesta (`EcfResponse`)
+
+Al completarse el envío, recibes un `EcfResponse` con los datos necesarios para cumplir con los requisitos de impresión de la DGII:
+
+| Campo | Descripción |
+|-------|-------------|
+| `ImpresionUrl` | URL para generar el código QR requerido por la DGII en el comprobante impreso |
+| `CodSec` | Código de seguridad — debe aparecer en el comprobante impreso |
+| `FechaFirma` | Fecha y hora de la firma digital del comprobante |
+| `Estatus` | Estado DGII: `Aceptado`, `AceptadoCondicional`, `Rechazado` |
+| `Progress` | Estado del procesamiento: `Queued`, `Sending`, `Polling`, `Finished`, `Error` |
+| `Encf` | Número de comprobante fiscal electrónico (eNCF) |
+| `Mensaje` | Mensaje de respuesta de la DGII |
+| `Errors` | Detalle de errores (si los hay) |
+| `MontoTotal` | Monto total del comprobante |
+| `SecuenciaUtilizada` | Indica si la secuencia fue utilizada |
+
+### QR e Impresión
+
+La DGII requiere que todo comprobante impreso incluya un **código QR**. El campo `ImpresionUrl` contiene la URL que debe codificarse como QR. Adicionalmente, el `CodSec` (código de seguridad) y la `FechaFirma` deben aparecer impresos en el comprobante.
+
+```csharp
+// .NET
+EcfResponse resultado = await client.SendEcfAsync(ecf);
+
+string urlQr = resultado.ImpresionUrl;          // codificar como QR
+string codigoSeguridad = resultado.CodSec;      // imprimir en el comprobante
+DateTimeOffset fechaFirma = resultado.FechaFirma; // fecha de firma digital
+```
+
+```typescript
+// TypeScript
+const resultado = await client.sendEcf(ecf);
+
+const urlQr = resultado.impresionUrl;          // codificar como QR
+const codigoSeguridad = resultado.codSec;      // imprimir en el comprobante
+const fechaFirma = resultado.fechaFirma;       // fecha de firma digital
+```
+
+```python
+# Python
+resultado = client.send_ecf(ecf)
+
+url_qr = resultado.impresion_url              # codificar como QR
+codigo_seguridad = resultado.cod_sec          # imprimir en el comprobante
+fecha_firma = resultado.fecha_firma           # fecha de firma digital
+```
+
 ## Funcionalidades Adicionales del API
 
 Además de enviar comprobantes, los SDKs exponen todos los endpoints del API:

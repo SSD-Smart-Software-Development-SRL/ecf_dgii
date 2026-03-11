@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: publish-pypi
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'python/**'
+      - '.github/workflows/publish-pypi.yml'
+  release:
+    types:
+      - published
+
+defaults:
+  run:
+    working-directory: python
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install build tools
+        run: pip install build twine
+
+      - name: Build package
+        run: python -m build
+
+      - name: Validate package
+        run: twine check dist/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pypi-package
+          if-no-files-found: error
+          retention-days: 7
+          path: python/dist/
+
+  deploy:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    permissions:
+      id-token: write  # Required for trusted publishing
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: pypi-package
+          path: dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}

@@ -1,27 +1,54 @@
-# EcfDgii.Client - .NET SDK
+# DGII ECF
 
-Official .NET SDK for the ECF DGII API (Electronic Fiscal Receipts - Dominican Republic).
+| Paquetes  |              |
+|-----------|--------------|
+| SDK  |[![NuGet Downloads](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.SDK)](https://www.nuget.org/packages/SSDDO.ECF_DGII.SDK)|
 
-## Installation
 
-```bash
-dotnet add package EcfDgii.Client
+SDK oficial para integrar la facturación electrónica (e-CF) en República Dominicana a través del servicio **[ECF SSD](https://ecf.ssd.com.do)**.
+
+## Qué cambió en v3
+
+Las versiones anteriores (`v1`, `v2`) requerían que cada empresa implementara la comunicación directa con la DGII: manejo de certificados, firmado de XML, semilla/token, envío de comprobantes, manejo de errores, reintentos, almacenamiento, etc. Todo eso era responsabilidad del desarrollador.
+
+**La v3 cambia el enfoque completamente.** Ahora el SDK se conecta a la plataforma [ECF SSD](https://ecf.ssd.com.do), que se encarga de:
+
+- ✅ Firmado de comprobantes (XML signing)
+- ✅ Autenticación con la DGII (semilla/token)
+- ✅ Envío y recepción de e-CF
+- ✅ Validación emisor-receptor
+- ✅ Almacenamiento seguro
+- ✅ Reintentos automáticos
+- ✅ Manejo de certificados digitales
+
+**Tu único trabajo es:** registrarte en [ecf.ssd.com.do](https://ecf.ssd.com.do), completar la certificación DGII, obtener tu API key, y enviar tus comprobantes con este SDK.
+
+## Comenzar
+
+### 1. Regístrate en [ecf.ssd.com.do](https://ecf.ssd.com.do)
+
+Crea tu cuenta, sube tu certificado digital, y completa el proceso de certificación con la DGII.
+
+### 2. Instala el paquete
+
+```sh
+dotnet add package SSDDO.ECF_DGII.SDK
 ```
 
-## Quick Start
+### 3. Envía tu primer comprobante
 
 ```csharp
 using EcfDgii.Client;
 using EcfDgii.Client.Generated.Models;
 
-// Create the client (reads ECF_API_KEY from environment by default)
+// Configura el cliente con tu API key (JWT obtenido en ecf.ssd.com.do)
 var client = new EcfClient(new EcfClientOptions
 {
-    ApiKey = "your-jwt-token",
-    Environment = EcfEnvironment.Cert // Test, Cert, or Prod
+    ApiKey = "tu-jwt-token",        // o usa la variable de entorno ECF_API_KEY
+    Environment = EcfEnvironment.Prod
 });
 
-// --- High-level: Send an ECF and wait for the result ---
+// Construye el comprobante
 var ecf = new ECF
 {
     Encabezado = new Encabezado
@@ -33,123 +60,112 @@ var ecf = new ECF
         },
         Emisor = new Emisor
         {
-            RncEmisor = "123456789"
+            RncEmisor = "123456789",
+            RazonSocialEmisor = "Mi Empresa SRL",
+            DireccionEmisor = "Calle Principal #1, Santo Domingo",
+            FechaEmision = DateTimeOffset.Now
+        },
+        Comprador = new Encabezado_compradorMember1
+        {
+            // datos del comprador...
+        },
+        Totales = new Totales
+        {
+            // montos, ITBIS, etc.
         }
     },
     DetallesItems = new List<Item>
     {
-        // ... your line items
+        new Item
+        {
+            NombreItem = "Servicio de consultoría",
+            IndicadorFacturacion = IndicadorFacturacionType.NoFacturable_18Percent,
+            CantidadItem = 1,
+            PrecioUnitarioItem = 10000.00,
+            MontoItem = 10000.00
+        }
     }
 };
 
+// Envía y espera el resultado
+// SendEcfAsync hace todo: enruta al endpoint correcto, envía, y espera hasta que la DGII responda
 try
 {
-    // SendEcfAsync routes to the correct endpoint, polls until done, and returns the result
-    EcfResponse result = await client.SendEcfAsync(ecf);
-    Console.WriteLine($"Status: {result.Progress}");
-    Console.WriteLine($"Message: {result.Mensaje}");
+    EcfResponse resultado = await client.SendEcfAsync(ecf);
+    Console.WriteLine($"Comprobante procesado exitosamente!");
+    Console.WriteLine($"Estado: {resultado.Progress}");
+    Console.WriteLine($"Mensaje DGII: {resultado.Mensaje}");
+    Console.WriteLine($"Código seguridad: {resultado.CodSec}");
+    Console.WriteLine($"URL impresión: {resultado.ImpresionUrl}");
 }
 catch (EcfException ex)
 {
-    Console.WriteLine($"ECF Error: {ex.Message}");
-    Console.WriteLine($"Errors: {ex.Response.Errors}");
+    Console.WriteLine($"Error: {ex.Message}");
+    Console.WriteLine($"Detalle: {ex.Response.Errors}");
 }
 ```
 
-## Configuration
+**Eso es todo.** No necesitas manejar XML, firmar documentos, obtener semillas, ni reintentar requests. El servicio ECF SSD se encarga de todo.
 
-### Environment Variables
+## Configuración
 
-| Variable       | Description                                      |
+### Variables de Entorno
+
+| Variable       | Descripción                                      |
 |---------------|--------------------------------------------------|
-| `ECF_API_KEY` | JWT Bearer token for API authentication           |
-| `ECF_API_URL` | Base URL override (takes precedence over environment) |
+| `ECF_API_KEY` | JWT Bearer token (obtenido en ecf.ssd.com.do)    |
+| `ECF_API_URL` | URL base (solo si necesitas override)             |
 
-### Options
+### Ambientes
+
+| Ambiente | URL | Uso |
+|----------|-----|-----|
+| Test     | `https://api.test.ecfx.ssd.com.do` | Desarrollo y pruebas |
+| Cert     | `https://api.cert.ecfx.ssd.com.do` | Proceso de certificación DGII |
+| Prod     | `https://api.prod.ecfx.ssd.com.do` | Producción |
+
+### Opciones de Polling
+
+`SendEcfAsync` espera automáticamente a que la DGII procese el comprobante. Puedes personalizar el comportamiento:
 
 ```csharp
-var client = new EcfClient(new EcfClientOptions
+var resultado = await client.SendEcfAsync(ecf, new PollingOptions
 {
-    ApiKey = "your-jwt-token",       // or set ECF_API_KEY env var
-    BaseUrl = "https://custom.url",  // or set ECF_API_URL env var
-    Environment = EcfEnvironment.Prod // Test (default), Cert, or Prod
+    InitialDelayMs = 1000,      // espera inicial entre consultas
+    MaxDelayMs = 30000,         // espera máxima entre consultas
+    MaxRetries = 60,            // máximo de reintentos
+    BackoffMultiplier = 2,      // multiplicador exponencial
+    TimeoutMs = 120000          // timeout total (2 minutos)
 });
 ```
 
-### Environments
+## Tipos de Comprobantes
 
-| Environment | URL |
-|------------|-----|
-| Test       | `https://api.test.ecfx.ssd.com.do` |
-| Cert       | `https://api.cert.ecfx.ssd.com.do` |
-| Prod       | `https://api.prod.ecfx.ssd.com.do` |
+| TipoeCF | Ruta | Descripción |
+|---------|------|-------------|
+| `FacturaDeCreditoFiscalElectronica` | `/ecf/31` | Factura de Crédito Fiscal |
+| `FacturaDeConsumoElectronica` | `/ecf/32` | Factura de Consumo |
+| `NotaDeDebitoElectronica` | `/ecf/33` | Nota de Débito |
+| `NotaDeCreditoElectronica` | `/ecf/34` | Nota de Crédito |
+| `ComprasElectronico` | `/ecf/41` | Compras |
+| `GastosMenoresElectronico` | `/ecf/43` | Gastos Menores |
+| `RegimenesEspecialesElectronico` | `/ecf/44` | Regímenes Especiales |
+| `GubernamentalElectronico` | `/ecf/45` | Gubernamental |
+| `ComprobanteDeExportacionesElectronico` | `/ecf/46` | Exportaciones |
+| `ComprobanteParaPagosAlExteriorElectronico` | `/ecf/47` | Pagos al Exterior |
 
-## Usage
+## Acceso Directo al API
 
-### High-Level: Send ECF with Automatic Routing and Polling
-
-The `SendEcfAsync` method handles everything:
-1. Routes to the correct endpoint based on `TipoeCF` (31, 32, 33, 34, 41, 43, 44, 45, 46, 47)
-2. Submits the ECF
-3. Polls the status endpoint with exponential backoff until processing completes
-4. Returns the final result or throws `EcfException` on error
-
-```csharp
-var result = await client.SendEcfAsync(ecf, new PollingOptions
-{
-    InitialDelayMs = 1000,
-    MaxDelayMs = 30000,
-    MaxRetries = 60,
-    BackoffMultiplier = 2,
-    TimeoutMs = 120000  // 2 minutes total timeout
-});
-```
-
-### Low-Level: Direct API Access
-
-Access all raw endpoints through the Kiota-generated `Api` property:
+Para operaciones que no cubre `SendEcfAsync`, usa `client.Api` directamente:
 
 ```csharp
-// Company operations
-var companies = await client.Api.Company.GetAsync();
-var company = await client.Api.Company["123456789"].GetAsync();
-await client.Api.Company.PutAsync(new UpsertCompanyRequest { /* ... */ });
-await client.Api.Company["123456789"].DeleteAsync();
+// Consultar comprobantes
+var comprobantes = await client.Api.Ecf["123456789"].GetAsync();
 
-// Certificate operations
-var certs = await client.Api.Company["123456789"].Certificate.GetAsync();
+// Buscar un comprobante específico
+var resultado = await client.Api.Ecf["123456789"]["E310000000001"].GetAsync();
 
-// ECF query operations
-var ecfList = await client.Api.Ecf["123456789"].GetAsync(config =>
-{
-    config.QueryParameters.Page = "1";
-    config.QueryParameters.Limit = "25";
-});
-var ecfByEncf = await client.Api.Ecf["123456789"]["E310000000001"].GetAsync();
-var ecfById = await client.Api.Ecf["123456789"].Message["message-guid"].GetAsync();
-
-// Search all ECFs
-var allEcfs = await client.Api.Ecf.GetAsync(config =>
-{
-    config.QueryParameters.Page = "1";
-    config.QueryParameters.Limit = "25";
-});
-
-// Aprobacion comercial
-await client.Api.Ecf.Aprobacioncomercial["123456789"]["E310000000001"]
-    .PostAsync(new SendAcecfRequest { /* ... */ });
-
-// Anulacion de rangos
-var anulacion = await client.Api.Ecf.Anularrango["123456789"]
-    .PostAsync(new AnulacionRequest { /* ... */ });
-var anulaciones = await client.Api.Ecf.Anulaciones.GetAsync();
-
-// Recepcion operations
-var ecfRequests = await client.Api.Recepcion.Ecf.GetAsync();
-var acecfRequests = await client.Api.Recepcion.Acecf.GetAsync();
-
-// DGII consultations
-var directorio = await client.Api.Dgii["123456789"].Consultadirectorio.Listado.GetAsync();
+// Consultar estado en la DGII
 var estado = await client.Api.Dgii["123456789"].Consultaestado.Estado.GetAsync(config =>
 {
     config.QueryParameters.RncEmisor = "123456789";
@@ -157,45 +173,84 @@ var estado = await client.Api.Dgii["123456789"].Consultaestado.Estado.GetAsync(c
     config.QueryParameters.RncComprador = "987654321";
     config.QueryParameters.CodigoSeguridad = "ABC123";
 });
-var estatus = await client.Api.Dgii["123456789"].Estatusservicios.ObtenerEstatus.GetAsync();
 
-// API Key management
-await client.Api.ApiKey.PostAsync(new NewCompanyApiKey { /* ... */ });
+// Gestión de empresas
+var empresas = await client.Api.Company.GetAsync();
+await client.Api.Company.PutAsync(new UpsertCompanyRequest { /* ... */ });
+
+// Aprobación comercial
+await client.Api.Ecf.Aprobacioncomercial["123456789"]["E310000000001"]
+    .PostAsync(new SendAcecfRequest { /* ... */ });
+
+// Anulación de rangos
+await client.Api.Ecf.Anularrango["123456789"]
+    .PostAsync(new AnulacionRequest { /* ... */ });
+
+// Estatus de servicios DGII
+var estatus = await client.Api.Dgii["123456789"].Estatusservicios.ObtenerEstatus.GetAsync();
 ```
 
-### Cancellation Support
+## Manejo de Errores
 
-All async methods support `CancellationToken`:
+| Excepción | Cuándo |
+|----------|--------|
+| `EcfException` | El comprobante fue procesado pero la DGII lo rechazó |
+| `PollingMaxRetriesException` | Se agotaron los reintentos esperando respuesta |
+| `PollingTimeoutException` | Se agotó el timeout esperando respuesta |
+
+```csharp
+try
+{
+    var resultado = await client.SendEcfAsync(ecf);
+}
+catch (EcfException ex)
+{
+    // La DGII rechazó el comprobante
+    Console.WriteLine($"Rechazado: {ex.Response.Errors}");
+    Console.WriteLine($"Estado DGII: {ex.Response.Estatus}");
+}
+catch (PollingTimeoutException)
+{
+    // El comprobante fue enviado pero no se recibió respuesta a tiempo
+    // Puedes consultar el estado después con client.Api.Ecf[rnc][encf].GetAsync()
+}
+```
+
+## Cancelación
+
+Todas las operaciones async soportan `CancellationToken`:
 
 ```csharp
 using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(5));
-var result = await client.SendEcfAsync(ecf, cancellationToken: cts.Token);
+var resultado = await client.SendEcfAsync(ecf, cancellationToken: cts.Token);
 ```
 
-## ECF Type Mapping
+## Migración desde v2
 
-| TipoeCFType | Route | Description |
-|------------|-------|-------------|
-| `FacturaDeCreditoFiscalElectronica` | `/ecf/31` | Factura de Credito Fiscal |
-| `FacturaDeConsumoElectronica` | `/ecf/32` | Factura de Consumo |
-| `NotaDeDebitoElectronica` | `/ecf/33` | Nota de Debito |
-| `NotaDeCreditoElectronica` | `/ecf/34` | Nota de Credito |
-| `ComprasElectronico` | `/ecf/41` | Compras |
-| `GastosMenoresElectronico` | `/ecf/43` | Gastos Menores |
-| `RegimenesEspecialesElectronico` | `/ecf/44` | Regimenes Especiales |
-| `GubernamentalElectronico` | `/ecf/45` | Gubernamental |
-| `ComprobanteDeExportacionesElectronico` | `/ecf/46` | Exportaciones |
-| `ComprobanteParaPagosAlExteriorElectronico` | `/ecf/47` | Pagos al Exterior |
+| v2 (implementación propia) | v3 (ECF SSD) |
+|---|---|
+| Manejar certificado digital (.p12/.pfx) | Subir certificado una vez en ecf.ssd.com.do |
+| Obtener semilla y firmarla | No necesario — el servicio lo maneja |
+| Serializar a XML y firmar | No necesario — envías JSON, el servicio firma |
+| Enviar XML a la DGII | `await client.SendEcfAsync(ecf)` |
+| Parsear respuesta XML | Respuesta tipada `EcfResponse` |
+| Implementar reintentos | Polling automático con backoff exponencial |
+| `SSDDO.ECF_DGII.Models` + `SSDDO.ECF_DGII.SDK` | Solo `SSDDO.ECF_DGII.SDK` v3 |
 
-## Error Handling
+## Por qué ECF SSD
 
-| Exception | When |
-|----------|------|
-| `EcfException` | ECF processing completed with `Error` status |
-| `PollingMaxRetriesException` | Polling exceeded max retries (default 60) |
-| `PollingTimeoutException` | Polling exceeded timeout |
-| `ProblemDetails` (Kiota) | HTTP 4xx/5xx responses from raw API calls |
+> Con la v2 tenías la librería, pero aún debías implementar seguridad, almacenamiento, firmado, manejo de certificados, módulo de recepción, reintentos, y más.
 
-## License
+**Con la v3 y [ECF SSD](https://ecf.ssd.com.do):**
+- Instalas el paquete NuGet
+- Te registras y certificas en [ecf.ssd.com.do](https://ecf.ssd.com.do)
+- Envías comprobantes con una línea de código
+- El servicio se encarga del firmado, validación, envío a DGII, almacenamiento, y más
 
-MIT
+Para más información visita [https://ecf.ssd.com.do](https://ecf.ssd.com.do)
+
+____
+
+🇩🇴 Hecho con plátano power
+
+_© Smart Software Development SSD SRL 2024_

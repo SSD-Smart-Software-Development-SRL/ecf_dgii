@@ -253,4 +253,4 @@ ____
 
 🇩🇴 Hecho con plátano power
 
-_© Smart Software Development SSD SRL 2024_
+_© Smart Software Development SSD SRL 2026_

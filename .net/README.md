@@ -196,6 +196,39 @@ var resultado = await client.SendEcfAsync(ecf, new PollingOptions
 | `ComprobanteDeExportacionesElectronico` | `/ecf/46` | Exportaciones |
 | `ComprobanteParaPagosAlExteriorElectronico` | `/ecf/47` | Pagos al Exterior |
 
+## Arquitectura Backend / Frontend
+
+En la mayoría de implementaciones, el backend envía el comprobante y el frontend consulta el estado directamente:
+
+1. **Backend** envía el e-CF usando su token principal → recibe un `messageId`
+2. **Backend** genera un token de solo lectura para el frontend via el endpoint de API Keys
+3. **Frontend** usa ese token para consultar el estado del comprobante directamente contra ECF SSD — sin pasar por el backend
+
+```csharp
+// Backend: enviar comprobante con token principal
+var backendClient = new EcfClient(new EcfClientOptions
+{
+    ApiKey = backendJwtToken,
+    Environment = EcfEnvironment.Prod
+});
+
+// POST individual sin polling — retorna messageId inmediatamente
+var response = await backendClient.Api.Ecf.E31[rnc].PostAsync(ecf);
+var messageId = response.MessageId;
+
+// Generar token de lectura para el frontend
+var apiKey = await backendClient.Api.ApiKey.PostAsync(new NewCompanyApiKeyRequest
+{
+    // token restringido al tenant y RNC, solo lectura
+});
+var frontendToken = apiKey.Token;
+// Retornar frontendToken y messageId al frontend
+```
+
+El frontend luego usa `frontendToken` para consultar el estado directamente (ver [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo).
+
+> **`SendEcfAsync`** es una conveniencia que encapsula envío + polling en una sola llamada. Ideal para scripts o backends simples. Para apps con frontend, usa los endpoints individuales.
+
 ## Acceso Directo al API
 
 Para operaciones que no cubre `SendEcfAsync`, usa `client.Api` directamente:

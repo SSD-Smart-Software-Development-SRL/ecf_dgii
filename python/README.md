@@ -99,6 +99,28 @@ result = await client.send_ecf(
 )
 ```
 
+### Backend / Frontend Architecture
+
+In most apps, the backend sends the ECF and the frontend queries the status directly:
+
+```python
+# Backend: send ECF with main token
+backend_client = EcfClient(api_key=os.environ["ECF_BACKEND_TOKEN"], environment="prod")
+
+# POST without polling — returns messageId immediately
+response = await backend_client.raw_post("/ecf/31", ecf_payload)
+message_id = response["messageId"]
+
+# Generate a read-only token for the frontend
+api_key = await backend_client.create_api_key({...})  # scoped to tenant/RNC
+frontend_token = api_key["token"]
+# Return frontend_token + message_id to the frontend
+```
+
+The frontend then uses `frontend_token` to query ECF SSD directly without going through your backend. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+
+> **`send_ecf`** is a convenience that wraps send + polling. For apps with a frontend, use the individual endpoints.
+
 ### Company management
 
 ```python

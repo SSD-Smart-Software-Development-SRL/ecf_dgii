@@ -113,6 +113,27 @@ try {
 }
 ```
 
+### Backend / Frontend Architecture
+
+In most apps, the backend sends the ECF and the frontend queries the status directly:
+
+```php
+// Backend: send ECF with main token — no polling
+$ecfApi = new EcfApi(new Client(), $config);
+$response = $ecfApi->recepcionEcf31($rnc, $ecf);
+$messageId = $response->getMessageId();
+
+// Generate a read-only token for the frontend
+$apiKeyApi = new ApiKeyApi(new Client(), $config);
+$apiKey = $apiKeyApi->newCompanyApiKey($request); // scoped to tenant/RNC
+$frontendToken = $apiKey->getToken();
+// Return $frontendToken + $messageId to the frontend
+```
+
+The frontend then uses `$frontendToken` to query ECF SSD directly without going through your backend. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+
+> **`EcfService::sendEcf`** is a convenience that wraps send + polling. For apps with a frontend, use the individual endpoints.
+
 ### Low-Level: Use API Clients Directly
 
 For full control, use the generated API classes directly:

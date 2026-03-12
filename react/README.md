@@ -131,6 +131,46 @@ Creates a typed React Query client for the ECF DGII API.
 - `$api` - The openapi-react-query client with `useQuery`, `useMutation`, `useSuspenseQuery`, etc.
 - `fetchClient` - The underlying openapi-fetch client for non-React usage.
 
+## Backend / Frontend Architecture
+
+The React SDK is designed for the **frontend** side of the recommended architecture:
+
+1. Your **backend** sends the e-CF using its main token (via `@ecfx/sdk` or any other SDK) and receives a `messageId`
+2. Your **backend** generates a **read-only API key** scoped to the tenant/RNC via the `/apikey` endpoint
+3. Your **frontend** uses this read-only token with `@ecfx/react` to query ECF status directly — without going through your backend
+
+```tsx
+// Get the read-only token from your backend
+const { token: frontendToken } = await fetch('/api/ecf-token').then(r => r.json());
+
+// Create the React client with the read-only token
+const { $api } = createEcfReactClient({
+  apiKey: frontendToken,  // read-only, scoped to tenant/RNC
+  environment: 'prod',
+});
+
+function EcfStatus({ rnc, encf }: { rnc: string; encf: string }) {
+  const { data } = $api.useQuery('get', '/ecf/{rnc}/{encf}', {
+    params: { path: { rnc, encf } },
+    refetchInterval: 3000,  // poll every 3s until finished
+  });
+
+  if (data?.progress === 'Finished') {
+    return (
+      <div>
+        <p>Comprobante aceptado</p>
+        <p>Código seguridad: {data.codSec}</p>
+        <QRCode value={data.impresionUrl} />
+      </div>
+    );
+  }
+
+  return <p>Procesando... ({data?.progress})</p>;
+}
+```
+
+This pattern offloads polling from your backend and lets the frontend talk directly to ECF SSD with a restricted token. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+
 ## Non-React Usage
 
 For server-side or non-React applications, use the base TypeScript SDK: [`@ecfx/sdk`](https://www.npmjs.com/package/@ecfx/sdk).

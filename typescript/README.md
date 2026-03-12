@@ -80,6 +80,32 @@ const result = await client.sendEcf(ecf, {
 });
 ```
 
+## Backend / Frontend Architecture
+
+In most real-world apps, the backend sends the invoice and the frontend queries the status directly:
+
+```typescript
+// Backend: send ECF with the main token
+const backendClient = new EcfClient({
+  apiKey: process.env.ECF_BACKEND_TOKEN,
+  environment: 'prod',
+});
+
+// POST without polling — returns messageId immediately
+const { data } = await backendClient.raw.POST('/ecf/31', { body: ecf });
+const messageId = data.messageId;
+
+// Generate a read-only token for the frontend
+const { data: apiKey } = await backendClient.createApiKey({
+  // scoped to tenant and RNC, read-only
+});
+// Return apiKey.token + messageId to frontend
+```
+
+The frontend uses the read-only token to query ECF SSD directly — no backend proxy needed. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+
+> **`sendEcf`** is a convenience method that wraps send + polling into a single call. Ideal for scripts or simple backends. For apps with a frontend, use the individual endpoints as shown above.
+
 ## Raw Client Access
 
 For direct access to all API endpoints with full type safety:

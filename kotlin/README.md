@@ -38,6 +38,12 @@ This runs all tests and packages the library.
 * Some Kotlin and Java types are fully qualified to avoid conflicts with types defined in OpenAPI definitions.
 * Implementation of ApiClient is intended to reduce method counts, specifically to benefit Android targets.
 
+## Backend / Frontend Architecture
+
+In most apps, the backend sends the ECF and the frontend queries the status directly using a read-only API key. The backend generates this restricted token (scoped to tenant/RNC) via the `ApiKeyApi.newCompanyApiKey` endpoint and passes it to the frontend. The frontend then queries ECF SSD directly without going through the backend.
+
+See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram and code examples.
+
 <a id="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
 

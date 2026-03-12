@@ -66,6 +66,25 @@ EcfClient client = new EcfClient.Builder()
     .build();
 ```
 
+## Backend / Frontend Architecture
+
+In most apps, the backend sends the ECF and the frontend queries the status directly:
+
+```java
+// Backend: send ECF with main token — no polling
+EcfResponse response = client.getEcfApi().recepcionEcf31(rnc, ecf);
+String messageId = response.getMessageId();
+
+// Generate a read-only token for the frontend (scoped to tenant/RNC)
+NewCompanyApiKeyResponse apiKey = client.getApiKeyApi().newCompanyApiKey(request);
+String frontendToken = apiKey.getToken();
+// Return frontendToken + messageId to the frontend
+```
+
+The frontend then uses `frontendToken` to query ECF SSD directly without going through your backend. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+
+> **`sendEcf`** is a convenience that wraps send + polling. For apps with a frontend, use the individual endpoints.
+
 ## Raw API Access
 
 All generated API classes are accessible for direct use:

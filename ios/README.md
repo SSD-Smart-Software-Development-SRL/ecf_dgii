@@ -86,6 +86,14 @@ let options = PollingOptions(
 let result = try await client.sendEcf(ecf: ecf, pollingOptions: options)
 ```
 
+### Backend / Frontend Architecture
+
+In most apps, the backend sends the ECF and a mobile/web frontend queries the status directly using a read-only API key. The backend generates this restricted token (scoped to tenant/RNC) via the API Keys endpoint and passes it to the client app. The app then queries ECF SSD directly without going through the backend.
+
+See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram and code examples.
+
+> **`sendEcf`** is a convenience that wraps send + polling. For apps where the frontend handles status display, use the individual endpoints.
+
 ### Raw API Access
 
 All generated endpoints are available via the static API classes:

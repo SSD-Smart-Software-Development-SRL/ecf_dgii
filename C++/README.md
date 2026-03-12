@@ -170,6 +170,14 @@ options.timeout = std::chrono::milliseconds(300000);  // 5 minutes
 auto result = client.sendEcf(ecf, options).get();
 ```
 
+### Backend / Frontend Architecture
+
+In most apps, the backend sends the ECF and the frontend queries the status directly using a read-only API key. The backend generates this restricted token (scoped to tenant/RNC) via the `ApiKeyApi::newCompanyApiKey` endpoint and passes it to the frontend. The frontend then queries ECF SSD directly without going through the backend.
+
+See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram and code examples.
+
+> **`sendEcf`** is a convenience that wraps send + polling. For apps with a frontend, use the individual endpoints.
+
 ### Direct API Access
 
 Access all raw API endpoints through the generated API objects:

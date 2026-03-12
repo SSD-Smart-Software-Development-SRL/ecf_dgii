@@ -271,6 +271,104 @@ codigo_seguridad = resultado.cod_sec          # imprimir en el comprobante
 fecha_firma = resultado.fecha_firma           # fecha de firma digital
 ```
 
+## Arquitectura Backend / Frontend
+
+En la mayoría de implementaciones, el flujo de facturación electrónica involucra un **backend** y un **frontend** con roles distintos:
+
+```
+Frontend                        Tu Backend                      ECF SSD
+   │                                │                              │
+   │── solicitar envío ────────────►│                              │
+   │                                │── POST /ecf/31 ─────────────►│
+   │                                │◄── { messageId } ────────────│
+   │                                │                              │
+   │── solicitar token lectura ────►│                              │
+   │                                │── POST /apikey ──────────────►│
+   │                                │◄── { frontendToken } ────────│
+   │◄── frontendToken ─────────────│                              │
+   │                                                               │
+   │── GET /ecf/{rnc}/{encf} ─────────────────────────────────────►│
+   │◄── { progress, codSec, impresionUrl, ... } ──────────────────│
+   │                                                               │
+```
+
+### Cómo funciona
+
+1. **El backend envía el comprobante** usando su token principal (JWT) — POST a `/ecf/31`, `/ecf/32`, etc. Recibe un `messageId`.
+
+2. **El backend genera un token de lectura** para el frontend usando el endpoint de API Keys (`/apikey`). Este token está restringido al tenant y RNC, y solo permite operaciones de lectura.
+
+3. **El backend retorna el token de lectura** al frontend junto con el `messageId` o los datos necesarios.
+
+4. **El frontend consulta directamente al API** de ECF SSD usando el token de lectura — sin pasar por el backend. Puede consultar el estado del comprobante, obtener el `ImpresionUrl` para el QR, el `CodSec`, etc.
+
+### Por qué este patrón
+
+- **Descarga el backend:** Las consultas de estado (polling) las hace el frontend directamente contra ECF SSD.
+- **Seguridad:** El token del frontend es de solo lectura y está limitado al tenant/RNC. No puede enviar comprobantes ni modificar datos.
+- **Tiempo real:** El frontend puede hacer polling del estado sin depender del backend.
+
+### Ejemplo
+
+```typescript
+// Backend (Node.js / TypeScript)
+import { EcfClient } from '@ecfx/sdk';
+
+const backendClient = new EcfClient({
+  apiKey: process.env.ECF_BACKEND_TOKEN,  // token principal
+  environment: 'prod',
+});
+
+// 1. Enviar comprobante
+app.post('/invoices', async (req, res) => {
+  const { data } = await backendClient.raw.POST('/ecf/31', {
+    body: req.body.ecf,
+  });
+  res.json({ messageId: data.messageId });
+});
+
+// 2. Generar token de lectura para el frontend
+app.post('/ecf-token', async (req, res) => {
+  const { data } = await backendClient.createApiKey({
+    // token restringido al tenant y RNC, solo lectura
+  });
+  res.json({ token: data.token });
+});
+```
+
+```tsx
+// Frontend (React)
+import { createEcfReactClient } from '@ecfx/react';
+
+// El frontend usa el token de lectura obtenido del backend
+const { $api } = createEcfReactClient({
+  apiKey: frontendToken,  // token de solo lectura
+  environment: 'prod',
+});
+
+function EcfStatus({ rnc, encf }: { rnc: string; encf: string }) {
+  // Consulta directa al API — sin pasar por el backend
+  const { data } = $api.useQuery('get', '/ecf/{rnc}/{encf}', {
+    params: { path: { rnc, encf } },
+    refetchInterval: 3000,  // polling cada 3s
+  });
+
+  if (data?.progress === 'Finished') {
+    return (
+      <div>
+        <p>Comprobante aceptado</p>
+        <p>Código seguridad: {data.codSec}</p>
+        <QRCode value={data.impresionUrl} />
+      </div>
+    );
+  }
+
+  return <p>Procesando... ({data?.progress})</p>;
+}
+```
+
+> **Nota:** El método `sendEcf` es una conveniencia que encapsula envío + polling en una sola llamada síncrona. Es ideal para scripts, CLIs, o backends simples. Para aplicaciones con frontend, usa los endpoints individuales como se muestra arriba.
+
 ## Funcionalidades Adicionales del API
 
 Además de enviar comprobantes, los SDKs exponen todos los endpoints del API:

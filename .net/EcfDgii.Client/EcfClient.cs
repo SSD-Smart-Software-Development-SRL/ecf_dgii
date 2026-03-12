@@ -68,6 +68,17 @@ namespace EcfDgii.Client
             Api = new EcfApiClient(adapter);
         }
 
+        /// <summary>
+        /// Creates a restricted, read-only <see cref="EcfFrontendClient"/> for frontend use.
+        /// The returned client only exposes GET endpoints — no mutations.
+        /// </summary>
+        /// <param name="options">Client configuration options.</param>
+        /// <returns>A new <see cref="EcfFrontendClient"/> instance.</returns>
+        public static EcfFrontendClient CreateFrontendClient(EcfClientOptions options)
+        {
+            return new EcfFrontendClient(options);
+        }
+
         // ---------------------------------------------------------------------------
         // ECF send + poll
         // ---------------------------------------------------------------------------

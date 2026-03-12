@@ -278,4 +278,58 @@ pplx::task<std::shared_ptr<EcfResponse>> EcfClient::pollUntilComplete(
     return pollOnce(state);
 }
 
+// ---------------------------------------------------------------------------
+// EcfFrontendClient
+// ---------------------------------------------------------------------------
+
+utility::string_t EcfFrontendClient::resolveBaseUrl(const EcfClientConfig& config) {
+    if (!config.baseUrl.empty()) {
+        return utility::conversions::to_string_t(config.baseUrl);
+    }
+
+    const char* envUrl = std::getenv("ECF_API_URL");
+    if (envUrl && envUrl[0] != '\0') {
+        return utility::conversions::to_string_t(std::string(envUrl));
+    }
+
+    static const std::map<std::string, std::string> ENVIRONMENT_URLS = {
+        { "test", "https://api.test.ecfx.ssd.com.do" },
+        { "cert", "https://api.cert.ecfx.ssd.com.do" },
+        { "prod", "https://api.prod.ecfx.ssd.com.do" },
+    };
+
+    auto it = ENVIRONMENT_URLS.find(config.environment);
+    if (it != ENVIRONMENT_URLS.end()) {
+        return utility::conversions::to_string_t(it->second);
+    }
+
+    return utility::conversions::to_string_t(std::string("https://api.test.ecfx.ssd.com.do"));
+}
+
+std::string EcfFrontendClient::resolveApiKey(const EcfClientConfig& config) {
+    if (!config.apiKey.empty()) {
+        return config.apiKey;
+    }
+
+    const char* envKey = std::getenv("ECF_API_KEY");
+    if (envKey && envKey[0] != '\0') {
+        return std::string(envKey);
+    }
+
+    throw std::invalid_argument("API key is required. Set it in EcfClientConfig.apiKey or ECF_API_KEY environment variable.");
+}
+
+EcfFrontendClient::EcfFrontendClient(const EcfClientConfig& config) {
+    auto apiConfig = std::make_shared<ApiConfiguration>();
+    apiConfig->setBaseUrl(resolveBaseUrl(config));
+
+    std::string apiKey = resolveApiKey(config);
+    apiConfig->getDefaultHeaders()[_XPLATSTR("Authorization")] =
+        utility::conversions::to_string_t("Bearer " + apiKey);
+
+    m_apiClient = std::make_shared<ApiClient>(apiConfig);
+    m_ecfApi = std::make_shared<EcfApi>(m_apiClient);
+    m_companyApi = std::make_shared<CompanyApi>(m_apiClient);
+}
+
 } // namespace ecf_dgii

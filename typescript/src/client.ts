@@ -454,3 +454,100 @@ export class EcfClient {
     return this.raw.POST('/apiKey', { body });
   }
 }
+
+// ---------------------------------------------------------------------------
+// Frontend-safe read-only client
+// ---------------------------------------------------------------------------
+
+/**
+ * A restricted, read-only client that only exposes GET endpoints.
+ * Suitable for use in frontend / browser code where write operations
+ * should not be available.
+ */
+export class EcfFrontendClient {
+  /** The underlying openapi-fetch client for direct endpoint access. */
+  private readonly raw: Client<paths>;
+
+  constructor(config: EcfClientConfig) {
+    const baseUrl =
+      config.baseUrl ??
+      ENVIRONMENT_URLS[config.environment ?? 'test'];
+
+    const authMiddleware: Middleware = {
+      async onRequest({ request }) {
+        request.headers.set('Authorization', `Bearer ${config.apiKey}`);
+        return request;
+      },
+    };
+
+    this.raw = createClient<paths>({ baseUrl });
+    this.raw.use(authMiddleware);
+  }
+
+  /** Query ECFs by RNC and eNCF. */
+  async queryEcf(rnc: string, encf: string) {
+    return this.raw.GET('/ecf/{rnc}/{encf}', { params: { path: { rnc, encf } } });
+  }
+
+  /** Search ECFs for a specific RNC. */
+  async searchEcfs(rnc: string, params?: {
+    Encfs?: string[];
+    Ids?: string[];
+    TiposEcfs?: AllTipoECFTypes[];
+    IncludeEcfContent?: boolean;
+    FromFechaEmision?: string;
+    ToFechaEmision?: string;
+    AmountFrom?: number | string;
+    AmountTo?: number | string;
+    Page?: number | string;
+    Limit?: number | string;
+  }) {
+    return this.raw.GET('/ecf/{rnc}', {
+      params: { path: { rnc }, query: params },
+    });
+  }
+
+  /** Search all ECFs across all companies. */
+  async searchAllEcfs(params?: {
+    Encfs?: string[];
+    Ids?: string[];
+    TiposEcfs?: AllTipoECFTypes[];
+    IncludeEcfContent?: boolean;
+    FromFechaEmision?: string;
+    ToFechaEmision?: string;
+    AmountFrom?: number | string;
+    AmountTo?: number | string;
+    Page?: number | string;
+    Limit?: number | string;
+  }) {
+    return this.raw.GET('/ecf', { params: { query: params } });
+  }
+
+  /** Get a specific ECF by message ID. */
+  async getEcfById(rnc: string, id: string) {
+    return this.raw.GET('/ecf/{rnc}/message/{id}', { params: { path: { rnc, id } } });
+  }
+
+  /** List companies with optional filters. */
+  async getCompanies(params?: {
+    Rncs?: string[];
+    Names?: string[];
+    Page?: number | string;
+    Limit?: number | string;
+  }) {
+    return this.raw.GET('/company', { params: { query: params } });
+  }
+
+  /** Get a company by RNC. */
+  async getCompanyByRnc(rnc: string) {
+    return this.raw.GET('/company/{rnc}', { params: { path: { rnc } } });
+  }
+}
+
+/**
+ * Factory that creates a restricted read-only client suitable for frontend use.
+ * Only GET endpoints are exposed.
+ */
+export function createFrontendClient(config: EcfClientConfig): EcfFrontendClient {
+  return new EcfFrontendClient(config);
+}

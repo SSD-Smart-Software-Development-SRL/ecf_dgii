@@ -1,0 +1,18 @@
+meta {
+  name: UpdateCertificateCompany
+  type: http
+  seq: 6
+  tags: [
+    Company
+  ]
+}
+
+put {
+  url: {{baseUrl}}/company/:rnc/certificate
+  body: multipartForm
+  auth: inherit
+}
+
+params:path {
+  rnc: 
+}

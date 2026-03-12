@@ -1,0 +1,24 @@
+meta {
+  name: ConsultaRFCE
+  type: http
+  seq: 5
+  tags: [
+    Dgii
+  ]
+}
+
+get {
+  url: {{baseUrl}}/dgii/:rnc/consultarfce/consulta
+  body: none
+  auth: inherit
+}
+
+params:query {
+  RNC_Emisor: 
+  ENCF: 
+  Cod_Seguridad_eCF: 
+}
+
+params:path {
+  rnc: 
+}

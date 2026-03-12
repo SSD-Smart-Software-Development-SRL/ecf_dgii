@@ -1,0 +1,41 @@
+meta {
+  name: SearchAllEcfs
+  type: http
+  seq: 16
+  tags: [
+    Ecf
+  ]
+}
+
+get {
+  url: {{baseUrl}}/ecf
+  body: none
+  auth: inherit
+}
+
+params:query {
+  IncludeEcfContent: false
+  Page: 1
+  Limit: 25
+  ~Encfs: []
+  ~Ids: []
+  ~TiposEcfs: FacturaDeCreditoFiscalElectronica
+  ~TiposEcfs: FacturaDeConsumoElectronica
+  ~TiposEcfs: NotaDeDebitoElectronica
+  ~TiposEcfs: NotaDeCreditoElectronica
+  ~TiposEcfs: ComprasElectronico
+  ~TiposEcfs: GastosMenoresElectronico
+  ~TiposEcfs: RegimenesEspecialesElectronico
+  ~TiposEcfs: GubernamentalElectronico
+  ~TiposEcfs: ComprobanteDeExportacionesElectronico
+  ~TiposEcfs: ComprobanteParaPagosAlExteriorElectronico
+  ~TiposEcfs: RFCE
+  ~TiposEcfs: ACECF
+  ~TiposEcfs: ARECF
+  ~TiposEcfs: ANECF
+  ~TiposEcfs: null
+  ~FromFechaEmision: 
+  ~ToFechaEmision: 
+  ~AmountFrom: 
+  ~AmountTo: 
+}

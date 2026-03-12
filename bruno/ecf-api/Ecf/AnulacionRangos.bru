@@ -1,0 +1,37 @@
+meta {
+  name: AnulacionRangos
+  type: http
+  seq: 17
+  tags: [
+    Ecf
+  ]
+}
+
+post {
+  url: {{baseUrl}}/ecf/anularrango/:rnc
+  body: json
+  auth: inherit
+}
+
+params:path {
+  rnc: 
+}
+
+body:json {
+  {
+    "cantidaDeNcfAnulados": "",
+    "detalleAnulacion": [
+      {
+        "tipoEcf": "ECF31",
+        "cantidadeNcfAnulados": "",
+        "noLinea": [],
+        "secuencias": [
+          {
+            "desdeEncf": "",
+            "hastaEncf": ""
+          }
+        ]
+      }
+    ]
+  }
+}

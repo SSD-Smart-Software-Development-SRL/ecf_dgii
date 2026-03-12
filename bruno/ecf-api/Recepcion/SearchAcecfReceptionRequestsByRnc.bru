@@ -1,0 +1,25 @@
+meta {
+  name: SearchAcecfReceptionRequestsByRnc
+  type: http
+  seq: 5
+  tags: [
+    Recepcion
+  ]
+}
+
+get {
+  url: {{baseUrl}}/recepcion/:rnc/acecf
+  body: none
+  auth: inherit
+}
+
+params:query {
+  Page: 1
+  Limit: 25
+  ~MessageIds: []
+  ~Encfs: []
+}
+
+params:path {
+  rnc: 
+}

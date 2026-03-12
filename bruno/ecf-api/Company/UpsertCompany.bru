@@ -1,0 +1,22 @@
+meta {
+  name: UpsertCompany
+  type: http
+  seq: 2
+  tags: [
+    Company
+  ]
+}
+
+put {
+  url: {{baseUrl}}/company
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "rnc": "",
+    "legalName": "",
+    "name": ""
+  }
+}

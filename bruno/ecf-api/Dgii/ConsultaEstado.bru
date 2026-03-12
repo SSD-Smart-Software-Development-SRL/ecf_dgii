@@ -1,0 +1,25 @@
+meta {
+  name: ConsultaEstado
+  type: http
+  seq: 3
+  tags: [
+    Dgii
+  ]
+}
+
+get {
+  url: {{baseUrl}}/dgii/:rnc/consultaestado/estado
+  body: none
+  auth: inherit
+}
+
+params:query {
+  rncEmisor: 
+  ncfElectronico: 
+  rncComprador: 
+  codigoSeguridad: 
+}
+
+params:path {
+  rnc: 
+}

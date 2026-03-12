@@ -1,0 +1,26 @@
+meta {
+  name: AprobacionComercial
+  type: http
+  seq: 12
+  tags: [
+    Ecf
+  ]
+}
+
+post {
+  url: {{baseUrl}}/ecf/aprobacioncomercial/:rnc/:encf
+  body: json
+  auth: inherit
+}
+
+params:path {
+  rnc: 
+  encf: 
+}
+
+body:json {
+  {
+    "detalleMotivoRechazo": "",
+    "estadoType": "ECFAceptado"
+  }
+}

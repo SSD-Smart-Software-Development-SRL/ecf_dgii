@@ -1,0 +1,20 @@
+meta {
+  name: NewCompanyApiKey
+  type: http
+  seq: 1
+  tags: [
+    ApiKey
+  ]
+}
+
+post {
+  url: {{baseUrl}}/apiKey
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "rnc": ""
+  }
+}

@@ -1,0 +1,19 @@
+meta {
+  name: GetAcecfReceptionRequest
+  type: http
+  seq: 6
+  tags: [
+    Recepcion
+  ]
+}
+
+get {
+  url: {{baseUrl}}/recepcion/:rnc/acecf/:messageId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  rnc: 
+  messageId: 
+}

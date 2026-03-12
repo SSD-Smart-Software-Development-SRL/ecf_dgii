@@ -309,6 +309,40 @@ Si usabas los paquetes `SSDDO.ECF_DGII.Models` y `SSDDO.ECF_DGII.SDK` v1/v2, con
 
 **En resumen:** ya no necesitas implementar firmado XML, autenticación por semilla, manejo de certificados, ni reintentos. Todo eso lo hace ECF SSD.
 
+## Probar el API con Bruno
+
+El repositorio incluye colecciones de [Bruno](https://www.usebruno.com/) (open source) para probar el API directamente sin escribir código:
+
+```
+bruno/
+├── ecf-api/          # API principal (comprobantes, empresas, DGII, etc.)
+└── recepcion-api/    # API de recepción emisor-receptor
+```
+
+### Usando Bruno App (GUI)
+
+1. Instala [Bruno](https://www.usebruno.com/downloads)
+2. Abre Bruno y selecciona **Open Collection**
+3. Navega a `bruno/ecf-api` o `bruno/recepcion-api`
+4. Selecciona el ambiente (**Test**, **Cert**, o **Prod**)
+5. Configura tu `apiKey` en las variables del ambiente
+6. Envía requests
+
+### Usando Bruno CLI
+
+```sh
+# Instalar Bruno CLI
+npm install -g @usebruno/cli
+
+# Ejecutar una request
+bru run bruno/ecf-api/Ecf/SearchAllEcfs.bru --env Prod
+
+# Ejecutar toda una carpeta
+bru run bruno/ecf-api/Ecf/ --env Test
+```
+
+Cada colección incluye 3 ambientes preconfigurados (Test, Cert, Prod) con las URLs correctas.
+
 ## Soporte
 
 - Documentación: [https://ecf.ssd.com.do](https://ecf.ssd.com.do)

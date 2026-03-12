@@ -1,0 +1,856 @@
+{
+  "name": "ECF Recepcion API",
+  "uid": "4LT5JDPCeM5NtbFFCytVY",
+  "version": "1",
+  "items": [
+    {
+      "uid": "Tk2o8GbXpeWZwh9vXEFqB",
+      "name": "Autenticacion",
+      "type": "folder",
+      "root": {
+        "request": {
+          "auth": {
+            "mode": "inherit",
+            "basic": null,
+            "bearer": null,
+            "digest": null,
+            "apikey": null,
+            "oauth2": null
+          }
+        },
+        "meta": {
+          "name": "Autenticacion"
+        }
+      },
+      "items": [
+        {
+          "uid": "VEOiwVExnkzRIZfegSxSb",
+          "name": "semilla",
+          "type": "http-request",
+          "tags": [
+            "Autenticacion"
+          ],
+          "request": {
+            "url": "{{baseUrl}}/:receptorIdentifier/fe/autenticacion/api/Semilla",
+            "method": "GET",
+            "auth": {
+              "mode": "inherit",
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "apikey": null,
+              "oauth2": null
+            },
+            "headers": [],
+            "params": [
+              {
+                "uid": "e8EqhgcFX6eh34pgi45co",
+                "name": "receptorIdentifier",
+                "value": "",
+                "description": "",
+                "enabled": true,
+                "type": "path"
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {
+              "res": null
+            }
+          },
+          "examples": [
+            {
+              "uid": "yjxlbOm5QYdZOvxmmJt6i",
+              "itemUid": "VEOiwVExnkzRIZfegSxSb",
+              "name": "200 Response",
+              "description": "OK",
+              "type": "http-request",
+              "request": {
+                "url": "{{baseUrl}}/:receptorIdentifier/fe/autenticacion/api/Semilla",
+                "method": "GET",
+                "headers": [],
+                "params": [
+                  {
+                    "uid": "e8EqhgcFX6eh34pgi45co",
+                    "name": "receptorIdentifier",
+                    "value": "",
+                    "description": "",
+                    "enabled": true,
+                    "type": "path"
+                  }
+                ],
+                "body": {
+                  "mode": "none",
+                  "json": null,
+                  "text": null,
+                  "xml": null,
+                  "sparql": null,
+                  "formUrlEncoded": [],
+                  "multipartForm": []
+                }
+              },
+              "response": {
+                "status": "200",
+                "statusText": "OK",
+                "headers": [],
+                "body": {
+                  "type": "text",
+                  "content": ""
+                }
+              }
+            }
+          ],
+          "seq": 1
+        },
+        {
+          "uid": "aXB9PvkOU771iuSTFO4D9",
+          "name": "validacionCertificado",
+          "type": "http-request",
+          "tags": [
+            "Autenticacion"
+          ],
+          "request": {
+            "url": "{{baseUrl}}/:receptorIdentifier/fe/Autenticacion/api/ValidacionCertificado",
+            "method": "POST",
+            "auth": {
+              "mode": "inherit",
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "apikey": null,
+              "oauth2": null
+            },
+            "headers": [],
+            "params": [
+              {
+                "uid": "IRrXGYPdYF6eApL2wzOkt",
+                "name": "receptorIdentifier",
+                "value": "",
+                "description": "",
+                "enabled": true,
+                "type": "path"
+              }
+            ],
+            "body": {
+              "mode": "multipartForm",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "uid": "a0jCKswaXRo23KewfPR47",
+                  "type": "file",
+                  "name": "xml",
+                  "value": [],
+                  "description": "",
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {
+              "res": null
+            }
+          },
+          "examples": [
+            {
+              "uid": "lpqmL1XZOOa0NFBgIuGqu",
+              "itemUid": "aXB9PvkOU771iuSTFO4D9",
+              "name": "200 Response",
+              "description": "OK",
+              "type": "http-request",
+              "request": {
+                "url": "{{baseUrl}}/:receptorIdentifier/fe/Autenticacion/api/ValidacionCertificado",
+                "method": "POST",
+                "headers": [],
+                "params": [
+                  {
+                    "uid": "IRrXGYPdYF6eApL2wzOkt",
+                    "name": "receptorIdentifier",
+                    "value": "",
+                    "description": "",
+                    "enabled": true,
+                    "type": "path"
+                  }
+                ],
+                "body": {
+                  "mode": "multipartForm",
+                  "json": null,
+                  "text": null,
+                  "xml": null,
+                  "sparql": null,
+                  "formUrlEncoded": [],
+                  "multipartForm": [
+                    {
+                      "uid": "PQf7CqkKmdsNhkNlLgddB",
+                      "type": "file",
+                      "name": "xml",
+                      "value": [],
+                      "description": "",
+                      "enabled": true
+                    }
+                  ]
+                }
+              },
+              "response": {
+                "status": "200",
+                "statusText": "OK",
+                "headers": [
+                  {
+                    "uid": "eQHO2SjnXoIvEF9vyLPzK",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "description": "",
+                    "enabled": true
+                  }
+                ],
+                "body": {
+                  "type": "json",
+                  "content": "{\n  \"token\": \"\",\n  \"expira\": \"\",\n  \"expedido\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "uid": "WZaIsievklaqVjH9Sc1ik",
+              "itemUid": "aXB9PvkOU771iuSTFO4D9",
+              "name": "200 Response",
+              "description": "OK",
+              "type": "http-request",
+              "request": {
+                "url": "{{baseUrl}}/:receptorIdentifier/fe/Autenticacion/api/ValidacionCertificado",
+                "method": "POST",
+                "headers": [],
+                "params": [
+                  {
+                    "uid": "IRrXGYPdYF6eApL2wzOkt",
+                    "name": "receptorIdentifier",
+                    "value": "",
+                    "description": "",
+                    "enabled": true,
+                    "type": "path"
+                  }
+                ],
+                "body": {
+                  "mode": "multipartForm",
+                  "json": null,
+                  "text": null,
+                  "xml": null,
+                  "sparql": null,
+                  "formUrlEncoded": [],
+                  "multipartForm": [
+                    {
+                      "uid": "pKJCSn4K4wGLOA6NeisYU",
+                      "type": "file",
+                      "name": "xml",
+                      "value": [],
+                      "description": "",
+                      "enabled": true
+                    }
+                  ]
+                }
+              },
+              "response": {
+                "status": "200",
+                "statusText": "OK",
+                "headers": [
+                  {
+                    "uid": "F1shPDh5wAPEHEdQ11fmp",
+                    "name": "Content-Type",
+                    "value": "text/xml",
+                    "description": "",
+                    "enabled": true
+                  }
+                ],
+                "body": {
+                  "type": "xml",
+                  "content": "{\n  \"token\": \"\",\n  \"expira\": \"\",\n  \"expedido\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "uid": "hwGb6V37dzc0hT4eotgG2",
+              "itemUid": "aXB9PvkOU771iuSTFO4D9",
+              "name": "400 Response",
+              "description": "Bad Request",
+              "type": "http-request",
+              "request": {
+                "url": "{{baseUrl}}/:receptorIdentifier/fe/Autenticacion/api/ValidacionCertificado",
+                "method": "POST",
+                "headers": [],
+                "params": [
+                  {
+                    "uid": "IRrXGYPdYF6eApL2wzOkt",
+                    "name": "receptorIdentifier",
+                    "value": "",
+                    "description": "",
+                    "enabled": true,
+                    "type": "path"
+                  }
+                ],
+                "body": {
+                  "mode": "multipartForm",
+                  "json": null,
+                  "text": null,
+                  "xml": null,
+                  "sparql": null,
+                  "formUrlEncoded": [],
+                  "multipartForm": [
+                    {
+                      "uid": "FCqXFmxi9NHnf5X5to4kZ",
+                      "type": "file",
+                      "name": "xml",
+                      "value": [],
+                      "description": "",
+                      "enabled": true
+                    }
+                  ]
+                }
+              },
+              "response": {
+                "status": "400",
+                "statusText": "Bad Request",
+                "headers": [
+                  {
+                    "uid": "ZPceL8uQC2xPiG7J3CXkP",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "description": "",
+                    "enabled": true
+                  }
+                ],
+                "body": {
+                  "type": "json",
+                  "content": "[\n  \"\"\n]"
+                }
+              }
+            },
+            {
+              "uid": "sjiD8TCxN5LTyrXjM2na0",
+              "itemUid": "aXB9PvkOU771iuSTFO4D9",
+              "name": "401 Response",
+              "description": "Unauthorized",
+              "type": "http-request",
+              "request": {
+                "url": "{{baseUrl}}/:receptorIdentifier/fe/Autenticacion/api/ValidacionCertificado",
+                "method": "POST",
+                "headers": [],
+                "params": [
+                  {
+                    "uid": "IRrXGYPdYF6eApL2wzOkt",
+                    "name": "receptorIdentifier",
+                    "value": "",
+                    "description": "",
+                    "enabled": true,
+                    "type": "path"
+                  }
+                ],
+                "body": {
+                  "mode": "multipartForm",
+                  "json": null,
+                  "text": null,
+                  "xml": null,
+                  "sparql": null,
+                  "formUrlEncoded": [],
+                  "multipartForm": [
+                    {
+                      "uid": "OsLLMDjJ1CJCi12dBWYtj",
+                      "type": "file",
+                      "name": "xml",
+                      "value": [],
+                      "description": "",
+                      "enabled": true
+                    }
+                  ]
+                }
+              },
+              "response": {
+                "status": "401",
+                "statusText": "Unauthorized",
+                "headers": [
+                  {
+                    "uid": "Db1vP4miygt4atjenG6DQ",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "description": "",
+                    "enabled": true
+                  }
+                ],
+                "body": {
+                  "type": "json",
+                  "content": ""
+                }
+              }
+            }
+          ],
+          "seq": 2
+        }
+      ]
+    },
+    {
+      "uid": "LTsSZ0sDsMohxDojlzWQa",
+      "name": "Recepcion",
+      "type": "folder",
+      "root": {
+        "request": {
+          "auth": {
+            "mode": "inherit",
+            "basic": null,
+            "bearer": null,
+            "digest": null,
+            "apikey": null,
+            "oauth2": null
+          }
+        },
+        "meta": {
+          "name": "Recepcion"
+        }
+      },
+      "items": [
+        {
+          "uid": "KJ7qpiXO1jeYUmpL4VAmD",
+          "name": "recepcion",
+          "type": "http-request",
+          "tags": [
+            "Recepcion"
+          ],
+          "request": {
+            "url": "{{baseUrl}}/:receptorIdentifier/fe/recepcion/api/ecf",
+            "method": "POST",
+            "auth": {
+              "mode": "inherit",
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "apikey": null,
+              "oauth2": null
+            },
+            "headers": [],
+            "params": [
+              {
+                "uid": "vFbRTkVuFyytEvLH1QQlg",
+                "name": "receptorIdentifier",
+                "value": "",
+                "description": "",
+                "enabled": true,
+                "type": "path"
+              }
+            ],
+            "body": {
+              "mode": "multipartForm",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "uid": "XW6aUnw5J8M4RLeqCFzTQ",
+                  "type": "file",
+                  "name": "xml",
+                  "value": [],
+                  "description": "",
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {
+              "res": null
+            }
+          },
+          "examples": [
+            {
+              "uid": "bbPMx37OXbifWWfR7sXh3",
+              "itemUid": "KJ7qpiXO1jeYUmpL4VAmD",
+              "name": "200 Response",
+              "description": "OK",
+              "type": "http-request",
+              "request": {
+                "url": "{{baseUrl}}/:receptorIdentifier/fe/recepcion/api/ecf",
+                "method": "POST",
+                "headers": [],
+                "params": [
+                  {
+                    "uid": "vFbRTkVuFyytEvLH1QQlg",
+                    "name": "receptorIdentifier",
+                    "value": "",
+                    "description": "",
+                    "enabled": true,
+                    "type": "path"
+                  }
+                ],
+                "body": {
+                  "mode": "multipartForm",
+                  "json": null,
+                  "text": null,
+                  "xml": null,
+                  "sparql": null,
+                  "formUrlEncoded": [],
+                  "multipartForm": [
+                    {
+                      "uid": "qnzrXXeQIqlKYwUchyFxN",
+                      "type": "file",
+                      "name": "xml",
+                      "value": [],
+                      "description": "",
+                      "enabled": true
+                    }
+                  ]
+                }
+              },
+              "response": {
+                "status": "200",
+                "statusText": "OK",
+                "headers": [],
+                "body": {
+                  "type": "text",
+                  "content": ""
+                }
+              }
+            },
+            {
+              "uid": "GjgUanSMkrbTOwVvaZ15G",
+              "itemUid": "KJ7qpiXO1jeYUmpL4VAmD",
+              "name": "401 Response",
+              "description": "Unauthorized",
+              "type": "http-request",
+              "request": {
+                "url": "{{baseUrl}}/:receptorIdentifier/fe/recepcion/api/ecf",
+                "method": "POST",
+                "headers": [],
+                "params": [
+                  {
+                    "uid": "vFbRTkVuFyytEvLH1QQlg",
+                    "name": "receptorIdentifier",
+                    "value": "",
+                    "description": "",
+                    "enabled": true,
+                    "type": "path"
+                  }
+                ],
+                "body": {
+                  "mode": "multipartForm",
+                  "json": null,
+                  "text": null,
+                  "xml": null,
+                  "sparql": null,
+                  "formUrlEncoded": [],
+                  "multipartForm": [
+                    {
+                      "uid": "lmRoaLejNanXlFz4GIh7e",
+                      "type": "file",
+                      "name": "xml",
+                      "value": [],
+                      "description": "",
+                      "enabled": true
+                    }
+                  ]
+                }
+              },
+              "response": {
+                "status": "401",
+                "statusText": "Unauthorized",
+                "headers": [
+                  {
+                    "uid": "wjMHhwCd3i2ZbFecUXRxt",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "description": "",
+                    "enabled": true
+                  }
+                ],
+                "body": {
+                  "type": "json",
+                  "content": ""
+                }
+              }
+            }
+          ],
+          "seq": 1
+        },
+        {
+          "uid": "BTN1PbwHrezGq4Yv6aC9q",
+          "name": "AprobacionComercial",
+          "type": "http-request",
+          "tags": [
+            "Recepcion"
+          ],
+          "request": {
+            "url": "{{baseUrl}}/:receptorIdentifier/fe/aprobacioncomercial/api/ecf",
+            "method": "POST",
+            "auth": {
+              "mode": "inherit",
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "apikey": null,
+              "oauth2": null
+            },
+            "headers": [],
+            "params": [
+              {
+                "uid": "2FlNcGz0hburD4SPiVfML",
+                "name": "receptorIdentifier",
+                "value": "",
+                "description": "",
+                "enabled": true,
+                "type": "path"
+              }
+            ],
+            "body": {
+              "mode": "multipartForm",
+              "json": null,
+              "text": null,
+              "xml": null,
+              "formUrlEncoded": [],
+              "multipartForm": [
+                {
+                  "uid": "xidwRdpwe5mk5HaQvLHqH",
+                  "type": "file",
+                  "name": "xml",
+                  "value": [],
+                  "description": "",
+                  "enabled": true
+                }
+              ]
+            },
+            "script": {
+              "res": null
+            }
+          },
+          "examples": [
+            {
+              "uid": "CeeiBH05TJcHIJrxaX1fz",
+              "itemUid": "BTN1PbwHrezGq4Yv6aC9q",
+              "name": "200 Response",
+              "description": "OK",
+              "type": "http-request",
+              "request": {
+                "url": "{{baseUrl}}/:receptorIdentifier/fe/aprobacioncomercial/api/ecf",
+                "method": "POST",
+                "headers": [],
+                "params": [
+                  {
+                    "uid": "2FlNcGz0hburD4SPiVfML",
+                    "name": "receptorIdentifier",
+                    "value": "",
+                    "description": "",
+                    "enabled": true,
+                    "type": "path"
+                  }
+                ],
+                "body": {
+                  "mode": "multipartForm",
+                  "json": null,
+                  "text": null,
+                  "xml": null,
+                  "sparql": null,
+                  "formUrlEncoded": [],
+                  "multipartForm": [
+                    {
+                      "uid": "4TBRTX8rYgwmoCATjGmkh",
+                      "type": "file",
+                      "name": "xml",
+                      "value": [],
+                      "description": "",
+                      "enabled": true
+                    }
+                  ]
+                }
+              },
+              "response": {
+                "status": "200",
+                "statusText": "OK",
+                "headers": [],
+                "body": {
+                  "type": "text",
+                  "content": ""
+                }
+              }
+            },
+            {
+              "uid": "4lQAI6aXn4CKToaimJlnI",
+              "itemUid": "BTN1PbwHrezGq4Yv6aC9q",
+              "name": "400 Response",
+              "description": "Bad Request",
+              "type": "http-request",
+              "request": {
+                "url": "{{baseUrl}}/:receptorIdentifier/fe/aprobacioncomercial/api/ecf",
+                "method": "POST",
+                "headers": [],
+                "params": [
+                  {
+                    "uid": "2FlNcGz0hburD4SPiVfML",
+                    "name": "receptorIdentifier",
+                    "value": "",
+                    "description": "",
+                    "enabled": true,
+                    "type": "path"
+                  }
+                ],
+                "body": {
+                  "mode": "multipartForm",
+                  "json": null,
+                  "text": null,
+                  "xml": null,
+                  "sparql": null,
+                  "formUrlEncoded": [],
+                  "multipartForm": [
+                    {
+                      "uid": "hgNhZ0yHOXfuODa1Yjuud",
+                      "type": "file",
+                      "name": "xml",
+                      "value": [],
+                      "description": "",
+                      "enabled": true
+                    }
+                  ]
+                }
+              },
+              "response": {
+                "status": "400",
+                "statusText": "Bad Request",
+                "headers": [
+                  {
+                    "uid": "lNWU3AcJwPPXf1LfqI8KQ",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "description": "",
+                    "enabled": true
+                  }
+                ],
+                "body": {
+                  "type": "json",
+                  "content": "[\n  \"\"\n]"
+                }
+              }
+            },
+            {
+              "uid": "r0wbAOYDSqr8ozbq7iSBX",
+              "itemUid": "BTN1PbwHrezGq4Yv6aC9q",
+              "name": "401 Response",
+              "description": "Unauthorized",
+              "type": "http-request",
+              "request": {
+                "url": "{{baseUrl}}/:receptorIdentifier/fe/aprobacioncomercial/api/ecf",
+                "method": "POST",
+                "headers": [],
+                "params": [
+                  {
+                    "uid": "2FlNcGz0hburD4SPiVfML",
+                    "name": "receptorIdentifier",
+                    "value": "",
+                    "description": "",
+                    "enabled": true,
+                    "type": "path"
+                  }
+                ],
+                "body": {
+                  "mode": "multipartForm",
+                  "json": null,
+                  "text": null,
+                  "xml": null,
+                  "sparql": null,
+                  "formUrlEncoded": [],
+                  "multipartForm": [
+                    {
+                      "uid": "BWTongSfMK6IFwUqrWj7a",
+                      "type": "file",
+                      "name": "xml",
+                      "value": [],
+                      "description": "",
+                      "enabled": true
+                    }
+                  ]
+                }
+              },
+              "response": {
+                "status": "401",
+                "statusText": "Unauthorized",
+                "headers": [
+                  {
+                    "uid": "hbSBnas9bWR0vbRp6gUik",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "description": "",
+                    "enabled": true
+                  }
+                ],
+                "body": {
+                  "type": "json",
+                  "content": ""
+                }
+              }
+            }
+          ],
+          "seq": 2
+        }
+      ]
+    }
+  ],
+  "environments": [
+    {
+      "uid": "rAR7vKJihiRgu3F9gnKNf",
+      "name": "Environment 1",
+      "variables": [
+        {
+          "uid": "8XenLcJMHRXZoWkTv2ZzA",
+          "name": "baseUrl",
+          "value": "https://recepcion.test.ecfx.ssd.com.do",
+          "type": "text",
+          "enabled": true,
+          "secret": false
+        }
+      ]
+    },
+    {
+      "uid": "jKhIgUxT9EaUn2888n7lx",
+      "name": "Environment 2",
+      "variables": [
+        {
+          "uid": "f3T3rLcBcm8LFU3gdCews",
+          "name": "baseUrl",
+          "value": "https://recepcion.cert.ecfx.ssd.com.do",
+          "type": "text",
+          "enabled": true,
+          "secret": false
+        }
+      ]
+    },
+    {
+      "uid": "bojXFK1zUJAn1OqNcVorx",
+      "name": "Environment 3",
+      "variables": [
+        {
+          "uid": "Un7NNJKgRddB3ecoZTHmZ",
+          "name": "baseUrl",
+          "value": "https://recepcion.prod.ecfx.ssd.com.do",
+          "type": "text",
+          "enabled": true,
+          "secret": false
+        }
+      ]
+    }
+  ],
+  "root": {
+    "request": {
+      "auth": {
+        "mode": "bearer",
+        "basic": null,
+        "bearer": {
+          "token": "{{token}}"
+        },
+        "digest": null,
+        "apikey": null,
+        "oauth2": null
+      }
+    },
+    "meta": {
+      "name": "Comunicación Emisor-Receptor"
+    }
+  }
+}

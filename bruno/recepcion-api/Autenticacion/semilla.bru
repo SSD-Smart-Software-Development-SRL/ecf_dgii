@@ -1,0 +1,18 @@
+meta {
+  name: semilla
+  type: http
+  seq: 1
+  tags: [
+    Autenticacion
+  ]
+}
+
+get {
+  url: {{baseUrl}}/:receptorIdentifier/fe/autenticacion/api/Semilla
+  body: none
+  auth: inherit
+}
+
+params:path {
+  receptorIdentifier: 
+}

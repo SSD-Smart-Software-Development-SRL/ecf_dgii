@@ -1,0 +1,21 @@
+meta {
+  name: GetCompanies
+  type: http
+  seq: 1
+  tags: [
+    Company
+  ]
+}
+
+get {
+  url: {{baseUrl}}/company
+  body: none
+  auth: inherit
+}
+
+params:query {
+  Page: 1
+  Limit: 25
+  ~Rncs: []
+  ~Names: []
+}

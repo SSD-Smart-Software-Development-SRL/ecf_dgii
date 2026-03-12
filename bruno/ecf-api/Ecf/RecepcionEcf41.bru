@@ -1,0 +1,88 @@
+meta {
+  name: RecepcionEcf41
+  type: http
+  seq: 6
+  tags: [
+    Ecf
+  ]
+}
+
+post {
+  url: {{baseUrl}}/ecf/41
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "encabezado": {
+      "version": "Version1_0",
+      "idDoc": {
+        "tipoeCF": "FacturaDeCreditoFiscalElectronica",
+        "encf": "",
+        "fechaVencimientoSecuencia": "",
+        "tipoPago": "",
+        "fechaLimitePago": "",
+        "terminoPago": "",
+        "tablaFormasPago": "",
+        "tipoCuentaPago": "",
+        "numeroCuentaPago": "",
+        "bancoPago": "",
+        "fechaDesde": "",
+        "fechaHasta": "",
+        "totalPaginas": ""
+      },
+      "emisor": {
+        "rncEmisor": "",
+        "razonSocialEmisor": "",
+        "nombreComercial": "",
+        "sucursal": "",
+        "direccionEmisor": "",
+        "municipio": "",
+        "provincia": "",
+        "tablaTelefonoEmisor": "",
+        "correoEmisor": "",
+        "webSite": "",
+        "actividadEconomica": "",
+        "numeroFacturaInterna": "",
+        "numeroPedidoInterno": "",
+        "informacionAdicionalEmisor": "",
+        "fechaEmision": ""
+      },
+      "comprador": "",
+      "transporte": "",
+      "totales": {
+        "montoExento": "",
+        "montoTotal": "",
+        "montoPeriodo": "",
+        "saldoAnterior": "",
+        "montoAvancePago": "",
+        "valorPagar": "",
+        "totalISRRetencion": ""
+      },
+      "otraMoneda": ""
+    },
+    "detallesItems": [
+      {
+        "numeroLinea": "",
+        "tablaCodigosItem": "",
+        "indicadorFacturacion": "NoFacturable_18Percent",
+        "retencion": {
+          "indicadorAgenteRetencionoPercepcion": "Retencion",
+          "montoISRRetenido": ""
+        },
+        "nombreItem": "",
+        "indicadorBienoServicio": "Bien",
+        "descripcionItem": "",
+        "cantidadItem": "",
+        "unidadMedida": "",
+        "precioUnitarioItem": "",
+        "otraMonedaDetalle": "",
+        "montoItem": ""
+      }
+    ],
+    "subtotales": "",
+    "paginacion": "",
+    "informacionReferencia": ""
+  }
+}

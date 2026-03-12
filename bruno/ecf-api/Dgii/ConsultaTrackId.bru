@@ -1,0 +1,23 @@
+meta {
+  name: ConsultaTrackId
+  type: http
+  seq: 8
+  tags: [
+    Dgii
+  ]
+}
+
+get {
+  url: {{baseUrl}}/dgii/:rnc/consultatrackids/consulta
+  body: none
+  auth: inherit
+}
+
+params:query {
+  rncEmisor: 
+  encf: 
+}
+
+params:path {
+  rnc: 
+}

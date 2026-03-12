@@ -1,0 +1,22 @@
+meta {
+  name: AprobacionComercial
+  type: http
+  seq: 2
+  tags: [
+    Recepcion
+  ]
+}
+
+post {
+  url: {{baseUrl}}/:receptorIdentifier/fe/aprobacioncomercial/api/ecf
+  body: multipartForm
+  auth: inherit
+}
+
+params:path {
+  receptorIdentifier: 
+}
+
+body:multipart-form {
+  xml: @file()
+}

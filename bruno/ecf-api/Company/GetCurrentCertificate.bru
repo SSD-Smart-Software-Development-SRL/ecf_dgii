@@ -1,0 +1,18 @@
+meta {
+  name: GetCurrentCertificate
+  type: http
+  seq: 5
+  tags: [
+    Company
+  ]
+}
+
+get {
+  url: {{baseUrl}}/company/:rnc/certificate
+  body: none
+  auth: inherit
+}
+
+params:path {
+  rnc: 
+}

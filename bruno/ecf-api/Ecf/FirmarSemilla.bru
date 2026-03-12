@@ -1,0 +1,22 @@
+meta {
+  name: FirmarSemilla
+  type: http
+  seq: 1
+  tags: [
+    Ecf
+  ]
+}
+
+post {
+  url: {{baseUrl}}/ecf/FirmarSemilla/:rnc
+  body: multipartForm
+  auth: inherit
+}
+
+params:path {
+  rnc: 
+}
+
+body:multipart-form {
+  xml: @file()
+}

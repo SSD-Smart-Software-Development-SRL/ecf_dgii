@@ -1,0 +1,18 @@
+meta {
+  name: GetCompanyByRnc
+  type: http
+  seq: 3
+  tags: [
+    Company
+  ]
+}
+
+get {
+  url: {{baseUrl}}/company/:rnc
+  body: none
+  auth: inherit
+}
+
+params:path {
+  rnc: 
+}

@@ -1,0 +1,23 @@
+meta {
+  name: QueryEcf
+  type: http
+  seq: 13
+  tags: [
+    Ecf
+  ]
+}
+
+get {
+  url: {{baseUrl}}/ecf/:rnc/:encf
+  body: none
+  auth: inherit
+}
+
+params:query {
+  includeEcfContent: false
+}
+
+params:path {
+  rnc: 
+  encf: 
+}

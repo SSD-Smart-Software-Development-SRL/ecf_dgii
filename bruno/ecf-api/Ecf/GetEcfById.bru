@@ -1,0 +1,23 @@
+meta {
+  name: GetEcfById
+  type: http
+  seq: 14
+  tags: [
+    Ecf
+  ]
+}
+
+get {
+  url: {{baseUrl}}/ecf/:rnc/message/:id
+  body: none
+  auth: inherit
+}
+
+params:query {
+  includeEcfContent: false
+}
+
+params:path {
+  rnc: 
+  id: 
+}

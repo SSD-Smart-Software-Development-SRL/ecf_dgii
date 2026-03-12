@@ -181,6 +181,32 @@ private:
     std::shared_ptr<ApiKeyApi> m_apiKeyApi;
 };
 
+/**
+ * Read-only frontend client for the ECF DGII API.
+ *
+ * Provides access only to EcfApi and CompanyApi for querying and searching
+ * ECFs and companies. Does not support sending ECFs, managing API keys,
+ * or any write/delete operations.
+ */
+class EcfFrontendClient {
+public:
+    explicit EcfFrontendClient(const EcfClientConfig& config);
+
+    /** Access the underlying EcfApi for direct endpoint calls. */
+    std::shared_ptr<EcfApi> ecfApi() const { return m_ecfApi; }
+
+    /** Access the underlying CompanyApi for direct endpoint calls. */
+    std::shared_ptr<CompanyApi> companyApi() const { return m_companyApi; }
+
+private:
+    static utility::string_t resolveBaseUrl(const EcfClientConfig& config);
+    static std::string resolveApiKey(const EcfClientConfig& config);
+
+    std::shared_ptr<ApiClient> m_apiClient;
+    std::shared_ptr<EcfApi> m_ecfApi;
+    std::shared_ptr<CompanyApi> m_companyApi;
+};
+
 } // namespace ecf_dgii
 
 #endif /* ECF_DGII_CLIENT_ECFCLIENT_H_ */

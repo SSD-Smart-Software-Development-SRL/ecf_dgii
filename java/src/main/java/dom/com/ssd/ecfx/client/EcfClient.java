@@ -155,6 +155,15 @@ public class EcfClient {
         throw new EcfClientException("Polling timed out after " + pollingMaxMs + "ms", null, messageId.toString(), null);
     }
 
+    /**
+     * Creates a new {@link EcfFrontendClient.Builder} for constructing a read-only frontend client.
+     *
+     * @return A new EcfFrontendClient builder
+     */
+    public static EcfFrontendClient.Builder frontendBuilder() {
+        return new EcfFrontendClient.Builder();
+    }
+
     // --- Raw API accessors ---
 
     public CompanyApi getCompanyApi() { return companyApi; }

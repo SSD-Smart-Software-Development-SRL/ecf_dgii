@@ -104,7 +104,7 @@ app.post('/api/v1/invoices', async (req, res) => {
 
 // Separate endpoint: generate read-only token for frontend
 app.get('/api/v1/ecf-token', async (req, res) => {
-  const { data } = await ecfClient.createApiKey({ /* scoped to tenant/RNC */ });
+  const { data } = await ecfClient.createApiKey({ rnc: tenant.rnc });
   res.json({ token: data.token });
 });
 ```
@@ -169,7 +169,7 @@ await client.consultaTimbre('123456789', { /* ... */ });
 await client.estatusServicios('123456789');
 
 // API Keys
-await client.createApiKey({ /* ... */ });
+await client.createApiKey({ rnc: '123456789' });
 ```
 
 ## Runtime Compatibility

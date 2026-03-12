@@ -115,24 +115,38 @@ try {
 
 ### Backend / Frontend Architecture
 
-In most apps, the backend sends the ECF and the frontend queries the status directly:
+In most apps, the backend handles business logic and sends the ECF. The frontend gets a read-only token to query status directly:
 
 ```php
-// Backend: send ECF with main token — no polling
-$ecfApi = new EcfApi(new Client(), $config);
-$response = $ecfApi->recepcionEcf31($rnc, $ecf);
-$messageId = $response->getMessageId();
+// Your invoice endpoint — business logic + send to ECF SSD
+public function createInvoice(Request $request)
+{
+    // 1. Validate and save your internal invoice
+    $invoice = $this->invoiceService->validateAndSave($request->all());
 
-// Generate a read-only token for the frontend
-$apiKeyApi = new ApiKeyApi(new Client(), $config);
-$apiKey = $apiKeyApi->newCompanyApiKey($request); // scoped to tenant/RNC
-$frontendToken = $apiKey->getToken();
-// Return $frontendToken + $messageId to the frontend
+    // 2. Convert to ECF format
+    $ecf = $this->mapper->toEcf($invoice);
+
+    // 3. Send to ECF SSD (no polling)
+    $ecfApi = new EcfApi(new Client(), $config);
+    $response = $ecfApi->recepcionEcf31($rnc, $ecf);
+    $this->invoiceService->updateMessageId($invoice->id, $response->getMessageId());
+
+    return response()->json(['id' => $invoice->id, 'messageId' => $response->getMessageId()]);
+}
+
+// Separate endpoint: generate read-only token for frontend
+public function getEcfToken()
+{
+    $apiKeyApi = new ApiKeyApi(new Client(), $config);
+    $apiKey = $apiKeyApi->newCompanyApiKey($request); // scoped to tenant/RNC
+    return response()->json(['token' => $apiKey->getToken()]);
+}
 ```
 
-The frontend then uses `$frontendToken` to query ECF SSD directly without going through your backend. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+The frontend stores the token securely, renews it on `401` or expiry, and queries ECF SSD directly. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
 
-> **`EcfService::sendEcf`** is a convenience that wraps send + polling. For apps with a frontend, use the individual endpoints.
+> **`EcfService::sendEcf`** wraps send + polling into a single call. For apps with a frontend, use the individual endpoints.
 
 ### Low-Level: Use API Clients Directly
 

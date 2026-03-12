@@ -280,14 +280,17 @@ En la mayoría de implementaciones, el flujo de facturación electrónica involu
 ```
 Frontend                        Tu Backend                      ECF SSD
    │                                │                              │
-   │── solicitar envío ────────────►│                              │
+   │── crear factura ──────────────►│                              │
+   │                                │── validar, guardar ──────────│
+   │                                │── convertir a ECF ───────────│
    │                                │── POST /ecf/31 ─────────────►│
-   │                                │◄── { messageId } ────────────│
-   │                                │                              │
-   │── solicitar token lectura ────►│                              │
-   │                                │── POST /apikey ──────────────►│
-   │                                │◄── { frontendToken } ────────│
-   │◄── frontendToken ─────────────│                              │
+   │                                │◄── { messageId, ... } ──────│
+   │◄── respuesta ─────────────────│                              │
+   │                                                               │
+   │── GET /api/v1/ecf-token ─────►│                              │
+   │                                │── POST /apikey ─────────────►│
+   │                                │◄── { ecfToken } ────────────│
+   │◄── { ecfToken } ─────────────│                              │
    │                                                               │
    │── GET /ecf/{rnc}/{encf} ─────────────────────────────────────►│
    │◄── { progress, codSec, impresionUrl, ... } ──────────────────│
@@ -296,13 +299,13 @@ Frontend                        Tu Backend                      ECF SSD
 
 ### Cómo funciona
 
-1. **El backend envía el comprobante** usando su token principal (JWT) — POST a `/ecf/31`, `/ecf/32`, etc. Recibe un `messageId`.
+1. **El frontend solicita crear una factura** a tu backend. Tu backend valida los datos, guarda la factura en tu base de datos, la convierte al formato ECF, y la envía a ECF SSD (POST `/ecf/31`, `/ecf/32`, etc.).
 
-2. **El backend genera un token de lectura** para el frontend usando el endpoint de API Keys (`/apikey`). Este token está restringido al tenant y RNC, y solo permite operaciones de lectura.
+2. **El frontend solicita un token de lectura** a tu backend (ej. `GET /api/v1/ecf-token`). Tu backend usa su token principal para llamar al endpoint de API Keys de ECF SSD y genera un token restringido al tenant y RNC, de solo lectura. El frontend almacena este token de forma segura (ej. `localStorage`, `sessionStorage`, o un store seguro en mobile).
 
-3. **El backend retorna el token de lectura** al frontend junto con el `messageId` o los datos necesarios.
+3. **El frontend consulta directamente al API** de ECF SSD usando el token de lectura — sin pasar por el backend. Puede consultar el estado del comprobante, obtener el `ImpresionUrl` para el QR, el `CodSec`, etc.
 
-4. **El frontend consulta directamente al API** de ECF SSD usando el token de lectura — sin pasar por el backend. Puede consultar el estado del comprobante, obtener el `ImpresionUrl` para el QR, el `CodSec`, etc.
+4. **El frontend gestiona el ciclo de vida del token** — si recibe un `401 Unauthorized` o el token expira, solicita uno nuevo a tu backend automáticamente.
 
 ### Por qué este patrón
 
@@ -310,49 +313,62 @@ Frontend                        Tu Backend                      ECF SSD
 - **Seguridad:** El token del frontend es de solo lectura y está limitado al tenant/RNC. No puede enviar comprobantes ni modificar datos.
 - **Tiempo real:** El frontend puede hacer polling del estado sin depender del backend.
 
-### Ejemplo
+### Ejemplo Backend (Node.js / TypeScript)
 
 ```typescript
-// Backend (Node.js / TypeScript)
 import { EcfClient } from '@ecfx/sdk';
 
-const backendClient = new EcfClient({
-  apiKey: process.env.ECF_BACKEND_TOKEN,  // token principal
+const ecfClient = new EcfClient({
+  apiKey: process.env.ECF_BACKEND_TOKEN,
   environment: 'prod',
 });
 
-// 1. Enviar comprobante
-app.post('/invoices', async (req, res) => {
-  const { data } = await backendClient.raw.POST('/ecf/31', {
-    body: req.body.ecf,
-  });
-  res.json({ messageId: data.messageId });
+// Tu endpoint de facturación — lógica de negocio + envío a ECF SSD
+app.post('/api/v1/invoices', async (req, res) => {
+  // 1. Validar datos de la factura según tu lógica de negocio
+  const invoice = await validateAndSave(req.body);
+
+  // 2. Convertir tu factura interna al formato ECF
+  const ecf = convertToEcf(invoice);
+
+  // 3. Enviar a ECF SSD (el tipo determina el endpoint: /ecf/31, /ecf/32, etc.)
+  const { data } = await ecfClient.raw.POST('/ecf/31', { body: ecf });
+
+  // 4. Guardar el messageId en tu base de datos
+  await updateInvoice(invoice.id, { messageId: data.messageId, encf: ecf.encabezado.idDoc.encf });
+
+  res.json({ id: invoice.id, messageId: data.messageId });
 });
 
-// 2. Generar token de lectura para el frontend
-app.post('/ecf-token', async (req, res) => {
-  const { data } = await backendClient.createApiKey({
+// Endpoint para generar token de lectura ECF para el frontend
+app.get('/api/v1/ecf-token', async (req, res) => {
+  const { data } = await ecfClient.createApiKey({
     // token restringido al tenant y RNC, solo lectura
   });
   res.json({ token: data.token });
 });
 ```
 
+### Ejemplo Frontend (React)
+
 ```tsx
-// Frontend (React)
 import { createEcfReactClient } from '@ecfx/react';
 
-// El frontend usa el token de lectura obtenido del backend
+// Gestión del token ECF — solicitar al backend, renovar si expira
+const ecfToken = useEcfToken(); // tu hook que llama a /api/v1/ecf-token,
+                                // almacena el token en storage, y lo renueva
+                                // automáticamente al recibir 401
+
 const { $api } = createEcfReactClient({
-  apiKey: frontendToken,  // token de solo lectura
+  apiKey: ecfToken,
   environment: 'prod',
 });
 
 function EcfStatus({ rnc, encf }: { rnc: string; encf: string }) {
-  // Consulta directa al API — sin pasar por el backend
+  // Consulta directa a ECF SSD — sin pasar por tu backend
   const { data } = $api.useQuery('get', '/ecf/{rnc}/{encf}', {
     params: { path: { rnc, encf } },
-    refetchInterval: 3000,  // polling cada 3s
+    refetchInterval: 3000,
   });
 
   if (data?.progress === 'Finished') {
@@ -369,7 +385,7 @@ function EcfStatus({ rnc, encf }: { rnc: string; encf: string }) {
 }
 ```
 
-> **Nota:** El método `sendEcf` es una conveniencia que encapsula envío + polling en una sola llamada síncrona. Es ideal para scripts, CLIs, o backends simples. Para aplicaciones con frontend, usa los endpoints individuales como se muestra arriba.
+> **Nota:** El método `sendEcf` es una conveniencia que encapsula envío + polling en una sola llamada. Es ideal para scripts, CLIs, o backends simples donde no hay frontend. Para aplicaciones con frontend, usa los endpoints individuales como se muestra arriba.
 
 ## Funcionalidades Adicionales del API
 

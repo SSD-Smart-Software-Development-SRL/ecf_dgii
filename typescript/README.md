@@ -82,29 +82,36 @@ const result = await client.sendEcf(ecf, {
 
 ## Backend / Frontend Architecture
 
-In most real-world apps, the backend sends the invoice and the frontend queries the status directly:
+In most real-world apps, the backend handles business logic (validation, storage, conversion) and sends the ECF. The frontend gets a read-only token to query status directly:
 
 ```typescript
-// Backend: send ECF with the main token
-const backendClient = new EcfClient({
+// Backend: your invoice endpoint
+const ecfClient = new EcfClient({
   apiKey: process.env.ECF_BACKEND_TOKEN,
   environment: 'prod',
 });
 
-// POST without polling — returns messageId immediately
-const { data } = await backendClient.raw.POST('/ecf/31', { body: ecf });
-const messageId = data.messageId;
-
-// Generate a read-only token for the frontend
-const { data: apiKey } = await backendClient.createApiKey({
-  // scoped to tenant and RNC, read-only
+app.post('/api/v1/invoices', async (req, res) => {
+  // 1. Validate and save your internal invoice
+  const invoice = await validateAndSave(req.body);
+  // 2. Convert to ECF format
+  const ecf = convertToEcf(invoice);
+  // 3. Send to ECF SSD
+  const { data } = await ecfClient.raw.POST('/ecf/31', { body: ecf });
+  await updateInvoice(invoice.id, { messageId: data.messageId });
+  res.json({ id: invoice.id, messageId: data.messageId });
 });
-// Return apiKey.token + messageId to frontend
+
+// Separate endpoint: generate read-only token for frontend
+app.get('/api/v1/ecf-token', async (req, res) => {
+  const { data } = await ecfClient.createApiKey({ /* scoped to tenant/RNC */ });
+  res.json({ token: data.token });
+});
 ```
 
-The frontend uses the read-only token to query ECF SSD directly — no backend proxy needed. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+The frontend stores the token securely, renews it on `401 Unauthorized` or expiry, and queries ECF SSD directly. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram and React example.
 
-> **`sendEcf`** is a convenience method that wraps send + polling into a single call. Ideal for scripts or simple backends. For apps with a frontend, use the individual endpoints as shown above.
+> **`sendEcf`** wraps send + polling into a single call. Ideal for scripts or simple backends without a frontend.
 
 ## Raw Client Access
 

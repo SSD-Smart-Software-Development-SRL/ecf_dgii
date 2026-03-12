@@ -68,22 +68,33 @@ EcfClient client = new EcfClient.Builder()
 
 ## Backend / Frontend Architecture
 
-In most apps, the backend sends the ECF and the frontend queries the status directly:
+In most apps, the backend handles business logic and sends the ECF. The frontend gets a read-only token to query status directly:
 
 ```java
-// Backend: send ECF with main token — no polling
-EcfResponse response = client.getEcfApi().recepcionEcf31(rnc, ecf);
-String messageId = response.getMessageId();
+// Your invoice endpoint — business logic + send to ECF SSD
+@PostMapping("/api/v1/invoices")
+public ResponseEntity<?> createInvoice(@RequestBody CreateInvoiceRequest request) {
+    // 1. Validate and save your internal invoice
+    Invoice invoice = invoiceService.validateAndSave(request);
+    // 2. Convert to ECF format
+    ECF ecf = mapper.toEcf(invoice);
+    // 3. Send to ECF SSD (no polling)
+    EcfResponse response = client.getEcfApi().recepcionEcf31(rnc, ecf);
+    invoiceService.updateMessageId(invoice.getId(), response.getMessageId());
+    return ResponseEntity.ok(Map.of("id", invoice.getId(), "messageId", response.getMessageId()));
+}
 
-// Generate a read-only token for the frontend (scoped to tenant/RNC)
-NewCompanyApiKeyResponse apiKey = client.getApiKeyApi().newCompanyApiKey(request);
-String frontendToken = apiKey.getToken();
-// Return frontendToken + messageId to the frontend
+// Separate endpoint: generate read-only token for frontend
+@GetMapping("/api/v1/ecf-token")
+public ResponseEntity<?> getEcfToken() {
+    NewCompanyApiKeyResponse apiKey = client.getApiKeyApi().newCompanyApiKey(request); // scoped to tenant/RNC
+    return ResponseEntity.ok(Map.of("token", apiKey.getToken()));
+}
 ```
 
-The frontend then uses `frontendToken` to query ECF SSD directly without going through your backend. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+The frontend stores the token securely, renews it on `401` or expiry, and queries ECF SSD directly. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
 
-> **`sendEcf`** is a convenience that wraps send + polling. For apps with a frontend, use the individual endpoints.
+> **`sendEcf`** wraps send + polling into a single call. For apps with a frontend, use the individual endpoints.
 
 ## Raw API Access
 

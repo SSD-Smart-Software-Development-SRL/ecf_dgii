@@ -135,24 +135,26 @@ Creates a typed React Query client for the ECF DGII API.
 
 The React SDK is designed for the **frontend** side of the recommended architecture:
 
-1. Your **backend** sends the e-CF using its main token (via `@ecfx/sdk` or any other SDK) and receives a `messageId`
-2. Your **backend** generates a **read-only API key** scoped to the tenant/RNC via the `/apikey` endpoint
-3. Your **frontend** uses this read-only token with `@ecfx/react` to query ECF status directly — without going through your backend
+1. Your **backend** validates, saves, and converts your internal invoice to ECF format, then sends it to ECF SSD using its main token
+2. Your **backend** exposes an endpoint (e.g. `GET /api/v1/ecf-token`) that generates a **read-only API key** scoped to the tenant/RNC via the ECF SSD `/apikey` endpoint
+3. Your **frontend** stores this token securely, renews it on `401` or expiry, and uses it with `@ecfx/react` to query ECF status directly
 
 ```tsx
-// Get the read-only token from your backend
-const { token: frontendToken } = await fetch('/api/ecf-token').then(r => r.json());
+// Token management — your custom hook
+// Calls your backend's /api/v1/ecf-token, stores the token securely,
+// and automatically renews it when it expires or gets a 401
+const ecfToken = useEcfToken();
 
-// Create the React client with the read-only token
 const { $api } = createEcfReactClient({
-  apiKey: frontendToken,  // read-only, scoped to tenant/RNC
+  apiKey: ecfToken,  // read-only, scoped to tenant/RNC
   environment: 'prod',
 });
 
 function EcfStatus({ rnc, encf }: { rnc: string; encf: string }) {
+  // Query ECF SSD directly — no backend proxy needed
   const { data } = $api.useQuery('get', '/ecf/{rnc}/{encf}', {
     params: { path: { rnc, encf } },
-    refetchInterval: 3000,  // poll every 3s until finished
+    refetchInterval: 3000,
   });
 
   if (data?.progress === 'Finished') {
@@ -169,7 +171,7 @@ function EcfStatus({ rnc, encf }: { rnc: string; encf: string }) {
 }
 ```
 
-This pattern offloads polling from your backend and lets the frontend talk directly to ECF SSD with a restricted token. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+This pattern offloads polling from your backend and lets the frontend talk directly to ECF SSD with a restricted token. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram and backend example.
 
 ## Non-React Usage
 

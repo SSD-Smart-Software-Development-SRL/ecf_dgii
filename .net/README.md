@@ -198,36 +198,47 @@ var resultado = await client.SendEcfAsync(ecf, new PollingOptions
 
 ## Arquitectura Backend / Frontend
 
-En la mayoría de implementaciones, el backend envía el comprobante y el frontend consulta el estado directamente:
-
-1. **Backend** envía el e-CF usando su token principal → recibe un `messageId`
-2. **Backend** genera un token de solo lectura para el frontend via el endpoint de API Keys
-3. **Frontend** usa ese token para consultar el estado del comprobante directamente contra ECF SSD — sin pasar por el backend
+En la mayoría de implementaciones, el backend maneja la lógica de negocio (validación, almacenamiento, conversión) y envía el comprobante. El frontend obtiene un token de solo lectura para consultar el estado directamente:
 
 ```csharp
-// Backend: enviar comprobante con token principal
-var backendClient = new EcfClient(new EcfClientOptions
+var ecfClient = new EcfClient(new EcfClientOptions
 {
     ApiKey = backendJwtToken,
     Environment = EcfEnvironment.Prod
 });
 
-// POST individual sin polling — retorna messageId inmediatamente
-var response = await backendClient.Api.Ecf.E31[rnc].PostAsync(ecf);
-var messageId = response.MessageId;
-
-// Generar token de lectura para el frontend
-var apiKey = await backendClient.Api.ApiKey.PostAsync(new NewCompanyApiKeyRequest
+// Endpoint de facturación — tu lógica de negocio + envío a ECF SSD
+[HttpPost("/api/v1/invoices")]
+public async Task<IActionResult> CreateInvoice(CreateInvoiceRequest request)
 {
-    // token restringido al tenant y RNC, solo lectura
-});
-var frontendToken = apiKey.Token;
-// Retornar frontendToken y messageId al frontend
+    // 1. Validar y guardar la factura en tu base de datos
+    var invoice = await _invoiceService.ValidateAndSave(request);
+
+    // 2. Convertir tu factura interna al formato ECF
+    var ecf = _mapper.ToEcf(invoice);
+
+    // 3. Enviar a ECF SSD (sin polling)
+    var response = await ecfClient.Api.Ecf.E31[rnc].PostAsync(ecf);
+    await _invoiceService.UpdateMessageId(invoice.Id, response.MessageId);
+
+    return Ok(new { invoice.Id, response.MessageId });
+}
+
+// Endpoint separado: generar token de lectura para el frontend
+[HttpGet("/api/v1/ecf-token")]
+public async Task<IActionResult> GetEcfToken()
+{
+    var apiKey = await ecfClient.Api.ApiKey.PostAsync(new NewCompanyApiKeyRequest
+    {
+        // token restringido al tenant y RNC, solo lectura
+    });
+    return Ok(new { apiKey.Token });
+}
 ```
 
-El frontend luego usa `frontendToken` para consultar el estado directamente (ver [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo).
+El frontend almacena el token de forma segura, lo renueva al recibir `401` o al expirar, y consulta ECF SSD directamente sin pasar por el backend. Ver [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo y ejemplo de frontend.
 
-> **`SendEcfAsync`** es una conveniencia que encapsula envío + polling en una sola llamada. Ideal para scripts o backends simples. Para apps con frontend, usa los endpoints individuales.
+> **`SendEcfAsync`** es una conveniencia que encapsula envío + polling en una sola llamada. Ideal para scripts o backends simples sin frontend.
 
 ## Acceso Directo al API
 

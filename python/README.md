@@ -101,25 +101,33 @@ result = await client.send_ecf(
 
 ### Backend / Frontend Architecture
 
-In most apps, the backend sends the ECF and the frontend queries the status directly:
+In most apps, the backend handles business logic and sends the ECF. The frontend gets a read-only token to query status directly:
 
 ```python
-# Backend: send ECF with main token
-backend_client = EcfClient(api_key=os.environ["ECF_BACKEND_TOKEN"], environment="prod")
+ecf_client = EcfClient(api_key=os.environ["ECF_BACKEND_TOKEN"], environment="prod")
 
-# POST without polling — returns messageId immediately
-response = await backend_client.raw_post("/ecf/31", ecf_payload)
-message_id = response["messageId"]
+# Your invoice endpoint — business logic + send to ECF SSD
+@app.post("/api/v1/invoices")
+async def create_invoice(request: CreateInvoiceRequest):
+    # 1. Validate and save your internal invoice
+    invoice = await validate_and_save(request)
+    # 2. Convert to ECF format
+    ecf = convert_to_ecf(invoice)
+    # 3. Send to ECF SSD (no polling)
+    response = await ecf_client.raw_post("/ecf/31", ecf)
+    await update_invoice(invoice.id, message_id=response["messageId"])
+    return {"id": invoice.id, "messageId": response["messageId"]}
 
-# Generate a read-only token for the frontend
-api_key = await backend_client.create_api_key({...})  # scoped to tenant/RNC
-frontend_token = api_key["token"]
-# Return frontend_token + message_id to the frontend
+# Separate endpoint: generate read-only token for frontend
+@app.get("/api/v1/ecf-token")
+async def get_ecf_token():
+    api_key = await ecf_client.create_api_key({...})  # scoped to tenant/RNC
+    return {"token": api_key["token"]}
 ```
 
-The frontend then uses `frontend_token` to query ECF SSD directly without going through your backend. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+The frontend stores the token securely, renews it on `401` or expiry, and queries ECF SSD directly. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
 
-> **`send_ecf`** is a convenience that wraps send + polling. For apps with a frontend, use the individual endpoints.
+> **`send_ecf`** wraps send + polling into a single call. For apps with a frontend, use the individual endpoints.
 
 ### Company management
 

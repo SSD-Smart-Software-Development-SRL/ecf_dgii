@@ -42,19 +42,21 @@ Tú solo envías el comprobante en JSON a través de estos SDKs, y el servicio s
 
 ### Paso 1: Regístrate en ECF SSD
 
-Visita [https://ecf.ssd.com.do](https://ecf.ssd.com.do) y crea tu cuenta de empresa.
+Visita [https://ecf.ssd.com.do](https://ecf.ssd.com.do) y crea tu cuenta.
 
-### Paso 2: Sube tu Certificado Digital
+### Paso 2: Obtén tu API Key
 
-En el panel de ECF SSD, sube el certificado digital (.p12/.pfx) emitido por una entidad certificadora autorizada por la DGII. El servicio almacena y utiliza tu certificado para firmar los comprobantes.
+Genera tu API Key (JWT) desde el panel de ECF SSD. Este token es el que usarás para autenticarte con los SDKs durante el desarrollo y la certificación.
 
-### Paso 3: Certifícate con la DGII
+### Paso 3: Contacta a ECF SSD para la Integración
 
-Utiliza el ambiente de **certificación** (`Cert`) para completar el proceso de certificación requerido por la DGII. ECF SSD provee las herramientas para enviar los comprobantes de prueba que la DGII requiere.
+Contacta al equipo de ECF SSD para iniciar el proceso de integración y certificación de tu **sistema** (no de las empresas de tus clientes — la certificación es para tu plataforma). El equipo te guiará a través del proceso usando el ambiente de **certificación** (`Cert`).
 
-### Paso 4: Obtén tu API Key
+### Paso 4: Usa Producción
 
-Una vez certificado, genera tu API Key (JWT) desde el panel de ECF SSD. Este token es el que usarás para autenticarte con los SDKs.
+Una vez que tu sistema esté integrado y certificado, podrás usar el ambiente de **producción** (`Prod`) para emitir comprobantes fiscales electrónicos reales para las empresas de tus clientes.
+
+> **¿Vienes de otro proveedor?** ECF SSD soporta migración desde otros proveedores de facturación electrónica. Contacta al equipo para coordinar la transición.
 
 ### Paso 5: Integra con tu Sistema
 

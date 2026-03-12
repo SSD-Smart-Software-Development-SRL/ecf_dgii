@@ -27,7 +27,7 @@ Las versiones anteriores (`v1`, `v2`) requerían que cada empresa implementara l
 
 ### 1. Regístrate en [ecf.ssd.com.do](https://ecf.ssd.com.do)
 
-Crea tu cuenta, sube tu certificado digital, y completa el proceso de certificación con la DGII.
+Crea tu cuenta y obtén tu API Key. Luego contacta al equipo de ECF SSD para integrar y certificar tu sistema (la certificación es para tu plataforma, no para las empresas de tus clientes). Una vez certificado, podrás usar el ambiente de producción. Si vienes de otro proveedor, ECF SSD soporta migración.
 
 ### 2. Instala el paquete
 

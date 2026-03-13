@@ -21,7 +21,17 @@ const ECF_TYPE_ROUTE_MAP: Record<string, string> = {
   ComprobanteParaPagosAlExteriorElectronico: '47',
 };
 
-type ECF = components['schemas']['ECF'];
+type ECF =
+  | components['schemas']['Ecf31ECF']
+  | components['schemas']['Ecf32ECF']
+  | components['schemas']['Ecf33ECF']
+  | components['schemas']['Ecf34ECF']
+  | components['schemas']['Ecf41ECF']
+  | components['schemas']['Ecf43ECF']
+  | components['schemas']['Ecf44ECF']
+  | components['schemas']['Ecf45ECF']
+  | components['schemas']['Ecf46ECF']
+  | components['schemas']['Ecf47ECF'];
 type EcfResponse = components['schemas']['EcfResponse'];
 type AllTipoECFTypes = components['schemas']['AllTipoECFTypes'];
 type ECFType = components['schemas']['ECFType'];

@@ -39,6 +39,125 @@ EcfResponse response = client.sendEcf("your-rnc", ecf);
 System.out.println("Status: " + response.getEstatus());
 ```
 
+## Full ECF Example
+
+```java
+import dom.com.ssd.ecfx.client.EcfClient;
+import dom.com.ssd.ecfx.client.model.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+
+EcfClient client = new EcfClient.Builder()
+    .baseUrl("https://api.prod.ecfx.ssd.com.do")
+    .apiKey("your-jwt-token")
+    .build();
+
+SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+// Build a Factura de Credito Fiscal Electronica (type 31)
+Ecf31ECF ecf = new Ecf31ECF();
+
+// Encabezado
+Ecf31Encabezado encabezado = new Ecf31Encabezado();
+
+// IdDoc
+Ecf31IdDoc idDoc = new Ecf31IdDoc();
+idDoc.setEncf("E310000051630");
+idDoc.setTipoeCF(TipoeCFType.FACTURA_DE_CREDITO_FISCAL_ELECTRONICA);
+idDoc.setTipoPago(Ecf31TipoPagoType.CONTADO);
+idDoc.setTipoIngresos(Ecf31TipoIngresosValidationType._01);
+idDoc.setIndicadorMontoGravado(IndicadorMontoGravadoType.CON_ITBIS_INCLUIDO);
+idDoc.setFechaVencimientoSecuencia(dateFormat.parse("2028-12-31"));
+
+Ecf31FormaDePago formaPago = new Ecf31FormaDePago();
+formaPago.setFormaPago(Ecf31FormaPagoType.EFECTIVO);
+formaPago.setMontoPago(new Ecf31FormaDePagoMontoPago(1015.25));
+idDoc.setTablaFormasPago(Arrays.asList(formaPago));
+
+encabezado.setIdDoc(idDoc);
+
+// Emisor
+Ecf31Emisor emisor = new Ecf31Emisor();
+emisor.setRncEmisor("131460941");
+emisor.setFechaEmision(dateFormat.parse("2026-01-10"));
+emisor.setDireccionEmisor("AVE. ISABEL AGUIAR NO. 269, ZONA INDUSTRIAL DE HERRERA");
+emisor.setRazonSocialEmisor("DOCUMENTOS ELECTRONICOS DE 02");
+encabezado.setEmisor(emisor);
+
+// Comprador
+Ecf31Comprador comprador = new Ecf31Comprador();
+comprador.setRncComprador("131880681");
+comprador.setRazonSocialComprador("DOCUMENTOS ELECTRONICOS DE 03");
+encabezado.setComprador(comprador);
+
+// Totales
+Ecf31Totales totales = new Ecf31Totales();
+totales.setItbiS1(new Ecf31IdDocTotalPaginas(18));
+totales.setMontoGravadoI1(new Ecf31DescuentoORecargoMontoDescuentooRecargo(762.71));
+totales.setMontoGravadoTotal(new Ecf31DescuentoORecargoMontoDescuentooRecargo(762.71));
+totales.setTotalITBIS1(new Ecf31DescuentoORecargoMontoDescuentooRecargo(137.29));
+totales.setTotalITBIS(new Ecf31DescuentoORecargoMontoDescuentooRecargo(137.29));
+totales.setMontoNoFacturable(new Ecf31TotalesMontoNoFacturable(100.0));
+totales.setMontoTotal(new Ecf31FormaDePagoMontoPago(1015.25));
+totales.setMontoPeriodo(new Ecf31TotalesMontoNoFacturable(1015.25));
+
+Ecf31ImpuestoAdicional2 impAdicional = new Ecf31ImpuestoAdicional2();
+impAdicional.setTipoImpuesto(Ecf31CodificacionTipoImpuestosType._002);
+impAdicional.setTasaImpuestoAdicional(new Ecf31ImpuestoAdicional2TasaImpuestoAdicional(2));
+impAdicional.setOtrosImpuestosAdicionales(
+    new Ecf31ImpuestoAdicional2MontoImpuestoSelectivoConsumoEspecifico(15.25));
+totales.setImpuestosAdicionales(Arrays.asList(impAdicional));
+totales.setMontoImpuestoAdicional(
+    new Ecf31ImpuestoAdicional2MontoImpuestoSelectivoConsumoEspecifico(15.25));
+encabezado.setTotales(totales);
+
+encabezado.setVersion(Ecf31VersionType.VERSION1_0);
+ecf.setEncabezado(encabezado);
+
+// DetallesItems
+Ecf31Item item1 = new Ecf31Item();
+item1.setMontoItem(new Ecf31FormaDePagoMontoPago(1016.95));
+item1.setNombreItem("Iphone 18 Pro max");
+item1.setNumeroLinea(new AcecfReceptionRequestDtoProgress(1));
+item1.setCantidadItem(new Ecf31ItemCantidadItem(1));
+item1.setUnidadMedida(UnidadMedidaType.UNIDAD);
+item1.setPrecioUnitarioItem(new Ecf31ItemPrecioUnitarioItem(1016.95));
+item1.setIndicadorFacturacion(Ecf31IndicadorFacturacionType.ITBIS1_18_PERCENT);
+item1.setIndicadorBienoServicio(Ecf31IndicadorBienoServicioType.BIEN);
+
+Ecf31ImpuestoAdicional tablaImp = new Ecf31ImpuestoAdicional();
+tablaImp.setTipoImpuesto(Ecf31CodificacionTipoImpuestosType._002);
+item1.setTablaImpuestoAdicional(Arrays.asList(tablaImp));
+
+Ecf31Item item2 = new Ecf31Item();
+item2.setMontoItem(new Ecf31FormaDePagoMontoPago(100.0));
+item2.setNombreItem("Costo de Envío");
+item2.setNumeroLinea(new AcecfReceptionRequestDtoProgress(2));
+item2.setCantidadItem(new Ecf31ItemCantidadItem(1));
+item2.setUnidadMedida(UnidadMedidaType.UNIDAD);
+item2.setPrecioUnitarioItem(new Ecf31ItemPrecioUnitarioItem(100.0));
+item2.setIndicadorFacturacion(Ecf31IndicadorFacturacionType.NO_FACTURABLE_18_PERCENT);
+item2.setIndicadorBienoServicio(Ecf31IndicadorBienoServicioType.SERVICIO);
+
+ecf.setDetallesItems(Arrays.asList(item1, item2));
+
+// DescuentosORecargos
+Ecf31DescuentoORecargo descuento = new Ecf31DescuentoORecargo();
+descuento.setTipoValor(TipoDescuentoRecargoType.DOLLAR);
+descuento.setTipoAjuste(Ecf31TipoAjusteType.D);
+descuento.setNumeroLinea(new AcecfReceptionRequestDtoProgress(1));
+descuento.setMontoDescuentooRecargo(new Ecf31DescuentoORecargoMontoDescuentooRecargo(84.75));
+descuento.setDescripcionDescuentooRecargo("Descuento");
+descuento.setIndicadorFacturacionDescuentooRecargo(IndicadorFacturacionDRType.ITBIS1_18_PERCENT);
+
+ecf.setDescuentosORecargos(Arrays.asList(descuento));
+
+// Send it
+EcfResponse response = client.sendEcf("131460941", ecf);
+System.out.println("Status: " + response.getEstatus());
+```
+
 ## Authentication
 
 The API uses JWT Bearer token authentication. Set your token via:

@@ -59,7 +59,7 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'type' => 'string',
         'title' => 'string',
-        'status' => '\Ecfx\EcfDgii\Model\IdDocTotalPaginas',
+        'status' => '\Ecfx\EcfDgii\Model\Ecf31IdDocTotalPaginas',
         'detail' => 'string',
         'instance' => 'string'
     ];
@@ -388,7 +388,7 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets status
      *
-     * @return \Ecfx\EcfDgii\Model\IdDocTotalPaginas|null
+     * @return \Ecfx\EcfDgii\Model\Ecf31IdDocTotalPaginas|null
      */
     public function getStatus()
     {
@@ -398,7 +398,7 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param \Ecfx\EcfDgii\Model\IdDocTotalPaginas|null $status status
+     * @param \Ecfx\EcfDgii\Model\Ecf31IdDocTotalPaginas|null $status status
      *
      * @return self
      */

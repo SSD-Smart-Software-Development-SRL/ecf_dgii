@@ -62,8 +62,8 @@ class PaginatedApiResultOfAcecfReceptionRequestDto implements ModelInterface, Ar
         'total' => '\Ecfx\EcfDgii\Model\AcecfReceptionRequestDtoProgress',
         'page' => '\Ecfx\EcfDgii\Model\AcecfReceptionRequestDtoProgress',
         'limit' => '\Ecfx\EcfDgii\Model\AcecfReceptionRequestDtoProgress',
-        'next_page' => '\Ecfx\EcfDgii\Model\IdDocTotalPaginas',
-        'previous_page' => '\Ecfx\EcfDgii\Model\IdDocTotalPaginas'
+        'next_page' => '\Ecfx\EcfDgii\Model\Ecf31IdDocTotalPaginas',
+        'previous_page' => '\Ecfx\EcfDgii\Model\Ecf31IdDocTotalPaginas'
     ];
 
     /**
@@ -479,7 +479,7 @@ class PaginatedApiResultOfAcecfReceptionRequestDto implements ModelInterface, Ar
     /**
      * Gets next_page
      *
-     * @return \Ecfx\EcfDgii\Model\IdDocTotalPaginas|null
+     * @return \Ecfx\EcfDgii\Model\Ecf31IdDocTotalPaginas|null
      */
     public function getNextPage()
     {
@@ -489,7 +489,7 @@ class PaginatedApiResultOfAcecfReceptionRequestDto implements ModelInterface, Ar
     /**
      * Sets next_page
      *
-     * @param \Ecfx\EcfDgii\Model\IdDocTotalPaginas|null $next_page next_page
+     * @param \Ecfx\EcfDgii\Model\Ecf31IdDocTotalPaginas|null $next_page next_page
      *
      * @return self
      */
@@ -513,7 +513,7 @@ class PaginatedApiResultOfAcecfReceptionRequestDto implements ModelInterface, Ar
     /**
      * Gets previous_page
      *
-     * @return \Ecfx\EcfDgii\Model\IdDocTotalPaginas|null
+     * @return \Ecfx\EcfDgii\Model\Ecf31IdDocTotalPaginas|null
      */
     public function getPreviousPage()
     {
@@ -523,7 +523,7 @@ class PaginatedApiResultOfAcecfReceptionRequestDto implements ModelInterface, Ar
     /**
      * Sets previous_page
      *
-     * @param \Ecfx\EcfDgii\Model\IdDocTotalPaginas|null $previous_page previous_page
+     * @param \Ecfx\EcfDgii\Model\Ecf31IdDocTotalPaginas|null $previous_page previous_page
      *
      * @return self
      */

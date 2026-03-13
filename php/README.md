@@ -219,6 +219,10 @@ $requests = $recepcionApi->searchEcfReceptionRequests();
 | ComprobanteDeExportacionesElectronico | /ecf/46 | Exportaciones |
 | ComprobanteParaPagosAlExteriorElectronico | /ecf/47 | Pagos al Exterior |
 
+## Examples
+
+See [`examples/ecf31-factura-credito-fiscal.json`](examples/ecf31-factura-credito-fiscal.json) for a complete ECF 31 (Factura de Credito Fiscal) payload with ITBIS, additional taxes, discounts, and non-billable items.
+
 ## Error Handling
 
 | Exception | When |

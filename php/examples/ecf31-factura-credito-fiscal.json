@@ -1,0 +1,84 @@
+{
+  "Encabezado": {
+    "IdDoc": {
+      "ENCF": "E310000051630",
+      "TipoeCF": "FacturaDeCreditoFiscalElectronica",
+      "TipoPago": "Contado",
+      "TipoIngresos": "01",
+      "TablaFormasPago": [
+        {
+          "FormaPago": "Efectivo",
+          "MontoPago": 1015.25
+        }
+      ],
+      "IndicadorMontoGravado": "ConITBISIncluido",
+      "FechaVencimientoSecuencia": "2028-12-31T00:00:00"
+    },
+    "Emisor": {
+      "RNCEmisor": "131460941",
+      "FechaEmision": "2026-01-10",
+      "DireccionEmisor": "AVE. ISABEL AGUIAR NO. 269, ZONA INDUSTRIAL DE HERRERA",
+      "RazonSocialEmisor": "DOCUMENTOS ELECTRONICOS DE 02"
+    },
+    "Totales": {
+      "ITBIS1": 18,
+      "MontoGravadoI1": 762.71,
+      "MontoGravadoTotal": 762.71,
+      "TotalITBIS1": 137.29,
+      "TotalITBIS": 137.29,
+      "MontoNoFacturable": 100.0,
+      "ImpuestosAdicionales": [
+        {
+          "TipoImpuesto": "002",
+          "TasaImpuestoAdicional": 2,
+          "OtrosImpuestosAdicionales": 15.25
+        }
+      ],
+      "MontoImpuestoAdicional": 15.25,
+      "MontoTotal": 1015.25,
+      "MontoPeriodo": 1015.25
+    },
+    "Version": "Version1_0",
+    "Comprador": {
+      "RNCComprador": "131880681",
+      "RazonSocialComprador": "DOCUMENTOS ELECTRONICOS DE 03"
+    }
+  },
+  "DetallesItems": [
+    {
+      "MontoItem": 1016.95,
+      "NombreItem": "Iphone 18 Pro max",
+      "NumeroLinea": 1,
+      "CantidadItem": 1,
+      "UnidadMedida": "Unidad",
+      "PrecioUnitarioItem": 1016.95,
+      "IndicadorFacturacion": "ITBIS1_18Percent",
+      "IndicadorBienoServicio": "Bien",
+      "TablaImpuestoAdicional": [
+        {
+          "TipoImpuesto": "002"
+        }
+      ]
+    },
+    {
+      "MontoItem": 100.0,
+      "NombreItem": "Costo de Envio",
+      "NumeroLinea": 2,
+      "CantidadItem": 1,
+      "UnidadMedida": "Unidad",
+      "PrecioUnitarioItem": 100.0,
+      "IndicadorFacturacion": "NoFacturable_18Percent",
+      "IndicadorBienoServicio": "Servicio"
+    }
+  ],
+  "DescuentosORecargos": [
+    {
+      "TipoValor": "$",
+      "TipoAjuste": "D",
+      "NumeroLinea": 1,
+      "MontoDescuentooRecargo": 84.75,
+      "DescripcionDescuentooRecargo": "Descuento",
+      "IndicadorFacturacionDescuentooRecargo": "ITBIS1_18Percent"
+    }
+  ]
+}

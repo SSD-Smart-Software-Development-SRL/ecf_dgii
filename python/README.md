@@ -12,33 +12,83 @@ pip install ecf-dgii
 
 ```python
 import asyncio
-from ecf_dgii import EcfClient, ECF, Encabezado, IdDoc, Emisor, Totales, Item
+from ecf_dgii import EcfClient, ECF, Encabezado, IdDoc, Emisor, Totales, Item, Comprador, FormaDePago, DescuentoORecargo, ImpuestoAdicional, ImpuestoAdicional2
 
 async def main():
     async with EcfClient(api_key="your-jwt-token", environment="test") as client:
         # Send an ECF with automatic routing and polling
         ecf = ECF(
             encabezado=Encabezado(
-                version="1.0",
-                idDoc=IdDoc(tipoeCF="FacturaDeCreditoFiscalElectronica", encf="E310000000001"),
-                emisor=Emisor(
-                    rncEmisor="123456789",
-                    razonSocialEmisor="Mi Empresa SRL",
-                    direccionEmisor="Calle Principal #1",
-                    fechaEmision="2024-01-15",
+                version="Version1_0",
+                idDoc=IdDoc(
+                    tipoeCF="FacturaDeCreditoFiscalElectronica",
+                    encf="E310000051630",
+                    tipoPago="Contado",
+                    tipoIngresos="01",
+                    tablaFormasPago=[FormaDePago(formaPago="Efectivo", montoPago=1015.25)],
+                    indicadorMontoGravado="ConITBISIncluido",
+                    fechaVencimientoSecuencia="2028-12-31T00:00:00",
                 ),
-                totales=Totales(montoTotal=1180.00),
+                emisor=Emisor(
+                    rncEmisor="131460941",
+                    razonSocialEmisor="DOCUMENTOS ELECTRONICOS DE 02",
+                    direccionEmisor="AVE. ISABEL AGUIAR NO. 269, ZONA INDUSTRIAL DE HERRERA",
+                    fechaEmision="2026-01-10",
+                ),
+                comprador=Comprador(
+                    rncComprador="131880681",
+                    razonSocialComprador="DOCUMENTOS ELECTRONICOS DE 03",
+                ),
+                totales=Totales(
+                    ITBIS1=18,
+                    montoGravadoI1=762.71,
+                    montoGravadoTotal=762.71,
+                    totalITBIS1=137.29,
+                    totalITBIS=137.29,
+                    montoNoFacturable=100.0,
+                    impuestosAdicionales=[
+                        ImpuestoAdicional2(
+                            tipoImpuesto="002",
+                            tasaImpuestoAdicional=2,
+                            otrosImpuestosAdicionales=15.25,
+                        )
+                    ],
+                    montoImpuestoAdicional=15.25,
+                    montoTotal=1015.25,
+                    montoPeriodo=1015.25,
+                ),
             ),
             detallesItems=[
                 Item(
                     numeroLinea=1,
-                    indicadorFacturacion="ITBIS1",
-                    retencion={},
-                    nombreItem="Servicio de consultoría",
+                    nombreItem="Iphone 18 Pro max",
+                    indicadorFacturacion="ITBIS1_18Percent",
+                    indicadorBienoServicio="Bien",
+                    cantidadItem=1,
+                    unidadMedida="Unidad",
+                    precioUnitarioItem=1016.95,
+                    montoItem=1016.95,
+                    tablaImpuestoAdicional=[ImpuestoAdicional(tipoImpuesto="002")],
+                ),
+                Item(
+                    numeroLinea=2,
+                    nombreItem="Costo de Envío",
+                    indicadorFacturacion="NoFacturable_18Percent",
                     indicadorBienoServicio="Servicio",
                     cantidadItem=1,
-                    precioUnitarioItem=1000.00,
-                    montoItem=1000.00,
+                    unidadMedida="Unidad",
+                    precioUnitarioItem=100.0,
+                    montoItem=100.0,
+                ),
+            ],
+            descuentosORecargos=[
+                DescuentoORecargo(
+                    tipoValor="$",
+                    tipoAjuste="D",
+                    numeroLinea=1,
+                    montoDescuentooRecargo=84.75,
+                    descripcionDescuentooRecargo="Descuento",
+                    indicadorFacturacionDescuentooRecargo="ITBIS1_18Percent",
                 ),
             ],
         )
@@ -185,10 +235,7 @@ from ecf_dgii import SendAcecfRequest, EstadoType
 await client.aprobacion_comercial(
     "123456789",
     "E310000000001",
-    SendAcecfRequest(
-        estado=EstadoType.ECF_ACEPTADO,
-        rncComprador="987654321",
-    ),
+    SendAcecfRequest(estadoType=EstadoType.ECF_ACEPTADO),
 )
 ```
 
@@ -205,7 +252,7 @@ result = await client.anulacion_rangos(
                 tipoEcf=ECFType.ECF31,
                 cantidadeNcfAnulados=5,
                 noLinea=[1],
-                secuencias=[SecuenciaRequest(secuenciaDesde="E310000000001", secuenciaHasta="E310000000005")],
+                secuencias=[SecuenciaRequest(desdeEncf="E310000000001", hastaEncf="E310000000005")],
             ),
         ],
     ),

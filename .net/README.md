@@ -63,11 +63,7 @@ var ecf = new ECF
             RncEmisor = "123456789",
             RazonSocialEmisor = "Mi Empresa SRL",
             DireccionEmisor = "Calle Principal #1, Santo Domingo",
-            FechaEmision = DateTimeOffset.Now
-        },
-        Comprador = new Encabezado_compradorMember1
-        {
-            // datos del comprador...
+            FechaEmision = new Date(2026, 1, 10)
         },
         Totales = new Totales
         {
@@ -80,9 +76,9 @@ var ecf = new ECF
         {
             NombreItem = "Servicio de consultoría",
             IndicadorFacturacion = IndicadorFacturacionType.NoFacturable_18Percent,
-            CantidadItem = 1,
-            PrecioUnitarioItem = 10000.00,
-            MontoItem = 10000.00
+            CantidadItem = new UntypedDouble(1),
+            PrecioUnitarioItem = new UntypedDouble(10000.00),
+            MontoItem = new UntypedDouble(10000.00)
         }
     }
 };
@@ -195,6 +191,97 @@ var resultado = await client.SendEcfAsync(ecf, new PollingOptions
 | `GubernamentalElectronico` | `/ecf/45` | Gubernamental |
 | `ComprobanteDeExportacionesElectronico` | `/ecf/46` | Exportaciones |
 | `ComprobanteParaPagosAlExteriorElectronico` | `/ecf/47` | Pagos al Exterior |
+
+## Ejemplo completo — Factura de Crédito Fiscal (e-CF 31)
+
+El SDK genera modelos específicos por tipo de comprobante (`Ecf31ECF`, `Ecf31Encabezado`, etc.) con todas las propiedades tipadas. Este es un ejemplo completo de una Factura de Crédito Fiscal con ITBIS, impuestos adicionales, descuentos y montos no facturables:
+
+```json
+{
+  "Encabezado": {
+    "IdDoc": {
+      "ENCF": "E310000051630",
+      "TipoeCF": "FacturaDeCreditoFiscalElectronica",
+      "TipoPago": "Contado",
+      "TipoIngresos": "01",
+      "TablaFormasPago": [
+        {
+          "FormaPago": "Efectivo",
+          "MontoPago": 1015.25
+        }
+      ],
+      "IndicadorMontoGravado": "ConITBISIncluido",
+      "FechaVencimientoSecuencia": "2028-12-31T00:00:00"
+    },
+    "Emisor": {
+      "RNCEmisor": "131460941",
+      "FechaEmision": "2026-01-10",
+      "DireccionEmisor": "AVE. ISABEL AGUIAR NO. 269, ZONA INDUSTRIAL DE HERRERA",
+      "RazonSocialEmisor": "DOCUMENTOS ELECTRONICOS DE 02"
+    },
+    "Totales": {
+      "ITBIS1": 18,
+      "MontoGravadoI1": 762.71,
+      "MontoGravadoTotal": 762.71,
+      "TotalITBIS1": 137.29,
+      "TotalITBIS": 137.29,
+      "MontoNoFacturable": 100.0,
+      "ImpuestosAdicionales": [
+        {
+          "TipoImpuesto": "002",
+          "TasaImpuestoAdicional": 2,
+          "OtrosImpuestosAdicionales": 15.25
+        }
+      ],
+      "MontoImpuestoAdicional": 15.25,
+      "MontoTotal": 1015.25,
+      "MontoPeriodo": 1015.25
+    },
+    "Version": "Version1_0",
+    "Comprador": {
+      "RNCComprador": "131880681",
+      "RazonSocialComprador": "DOCUMENTOS ELECTRONICOS DE 03"
+    }
+  },
+  "DetallesItems": [
+    {
+      "MontoItem": 1016.95,
+      "NombreItem": "Iphone 18 Pro max",
+      "NumeroLinea": 1,
+      "CantidadItem": 1,
+      "UnidadMedida": "Unidad",
+      "PrecioUnitarioItem": 1016.95,
+      "IndicadorFacturacion": "ITBIS1_18Percent",
+      "IndicadorBienoServicio": "Bien",
+      "TablaImpuestoAdicional": [
+        {
+          "TipoImpuesto": "002"
+        }
+      ]
+    },
+    {
+      "MontoItem": 100.0,
+      "NombreItem": "Costo de Envío",
+      "NumeroLinea": 2,
+      "CantidadItem": 1,
+      "UnidadMedida": "Unidad",
+      "PrecioUnitarioItem": 100.0,
+      "IndicadorFacturacion": "NoFacturable_18Percent",
+      "IndicadorBienoServicio": "Servicio"
+    }
+  ],
+  "DescuentosORecargos": [
+    {
+      "TipoValor": "$",
+      "TipoAjuste": "D",
+      "NumeroLinea": 1,
+      "MontoDescuentooRecargo": 84.75,
+      "DescripcionDescuentooRecargo": "Descuento",
+      "IndicadorFacturacionDescuentooRecargo": "ITBIS1_18Percent"
+    }
+  ]
+}
+```
 
 ## Arquitectura Backend / Frontend
 

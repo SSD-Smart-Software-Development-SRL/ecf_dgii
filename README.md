@@ -13,7 +13,7 @@
 | .NET | [![NuGet](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.SDK)](https://www.nuget.org/packages/SSDDO.ECF_DGII.SDK) | `dotnet add package SSDDO.ECF_DGII.SDK` |
 | TypeScript | [npm](https://www.npmjs.com/) | `npm install ecf-dgii-client` |
 | Python | [PyPI](https://pypi.org/) | `pip install ecf-dgii-client` |
-| PHP | [Packagist](https://packagist.org/) | `composer require ssd/ecf-dgii-client` |
+| PHP | [Packagist](https://packagist.org/) | `composer require ecfx/ecf-dgii-php` — Ver [ecf-dgii-php](https://github.com/SSD-Smart-Software-Development-SRL/ecf-dgii-php) |
 | Java | [Maven Central](https://central.sonatype.com/) | Ver [java/README.md](java/README.md) |
 | Kotlin | [Maven Central](https://central.sonatype.com/) | Ver [kotlin/README.md](kotlin/README.md) |
 | iOS/Swift | [Swift Package Manager](https://swift.org/package-manager/) | Ver [ios/README.md](ios/README.md) |
@@ -412,7 +412,7 @@ Cada SDK tiene su propia documentación con ejemplos específicos:
 | .NET | [.net/README.md](.net/README.md) |
 | TypeScript | [typescript/README.md](typescript/README.md) |
 | Python | [python/README.md](python/README.md) |
-| PHP | [php/README.md](php/README.md) |
+| PHP | [ecf-dgii-php](https://github.com/SSD-Smart-Software-Development-SRL/ecf-dgii-php) |
 | Java | [java/README.md](java/README.md) |
 | Kotlin | [kotlin/README.md](kotlin/README.md) |
 | iOS/Swift | [ios/README.md](ios/README.md) |

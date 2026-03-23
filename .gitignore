@@ -363,3 +363,23 @@ MigrationBackup/
 FodyWeavers.xsd
 
 !ECF_DGII.Models/ECF
+
+### Project-specific ###
+
+# Build outputs
+**/dist/
+**/build/
+
+# Generated types (can be regenerated from OpenAPI spec)
+**/src/generated/
+
+# Python
+python/dist/
+__pycache__/
+*.pyc
+
+# Kotlin/Gradle
+.gradle/
+
+# Claude Code
+.claude/

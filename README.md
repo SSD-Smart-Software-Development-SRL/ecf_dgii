@@ -1,5 +1,7 @@
 # DGII ECF - SDK Clients
 
+> **¿Buscas la versión anterior (v2.0.1)?** Los paquetes .NET (`SSDDO.ECF_DGII.Models` / `SSDDO.ECF_DGII.SDK`) están disponibles en la rama [`2.0.1-legacy`](https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii/tree/2.0.1-legacy).
+
 <p align="center">
   <img src="logo.png" alt="ECF SSD" width="200" />
 </p>

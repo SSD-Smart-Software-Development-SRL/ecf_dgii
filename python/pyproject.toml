@@ -10,7 +10,7 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 authors = [
-    { name = "Puntoos", email = "info@puntoos.com" },
+    { name = "SSD Smart Software Development", email = "contacto@ssd.com.do" },
 ]
 keywords = ["dgii", "ecf", "fiscal", "dominican-republic", "electronic-invoice", "tax"]
 classifiers = [

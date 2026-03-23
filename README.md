@@ -10,17 +10,17 @@
   SDKs oficiales para integrar la facturación electrónica (e-CF) en República Dominicana a través de <a href="https://ecf.ssd.com.do"><strong>ECF SSD</strong></a>.
 </p>
 
-| Plataforma | Paquete | Instalación |
-|-----------|---------|-------------|
-| .NET | [![NuGet](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.SDK)](https://www.nuget.org/packages/SSDDO.ECF_DGII.SDK) | `dotnet add package SSDDO.ECF_DGII.SDK` |
-| TypeScript | [npm](https://www.npmjs.com/) | `npm install ecf-dgii-client` |
-| Python | [PyPI](https://pypi.org/) | `pip install ecf-dgii-client` |
-| PHP | [Packagist](https://packagist.org/) | `composer require ecfx/ecf-dgii-php` — Ver [ecf-dgii-php](https://github.com/SSD-Smart-Software-Development-SRL/ecf-dgii-php) |
-| Java | [Maven Central](https://central.sonatype.com/) | Ver [java/README.md](java/README.md) |
-| Kotlin | [Maven Central](https://central.sonatype.com/) | Ver [kotlin/README.md](kotlin/README.md) |
-| iOS/Swift | [Swift Package Manager](https://swift.org/package-manager/) | Ver [ios/README.md](ios/README.md) |
-| C++ | [vcpkg](https://vcpkg.io/) / [Conan](https://conan.io/) | Ver [C++/README.md](C++/README.md) |
-| React | [npm](https://www.npmjs.com/) | `npm install ecf-dgii-react` |
+| Plataforma | Paquete | Instalación | Docs |
+|-----------|---------|-------------|------|
+| .NET | [![NuGet](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.SDK)](https://www.nuget.org/packages/SSDDO.ECF_DGII.SDK) | `dotnet add package SSDDO.ECF_DGII.SDK` | [README](.net/README.md) |
+| TypeScript | [npm](https://www.npmjs.com/) | `npm install ecf-dgii-client` | [README](typescript/README.md) |
+| Python | [![PyPI](https://img.shields.io/pypi/v/ecf-dgii)](https://pypi.org/project/ecf-dgii/) | `pip install ecf-dgii` | [README](python/README.md) |
+| PHP | [Packagist](https://packagist.org/) | `composer require ecfx/ecf-dgii-php` | [ecf-dgii-php](https://github.com/SSD-Smart-Software-Development-SRL/ecf-dgii-php) |
+| Java | [Maven Central](https://central.sonatype.com/) | Ver [java/README.md](java/README.md) | [README](java/README.md) |
+| Kotlin | [Maven Central](https://central.sonatype.com/) | Ver [kotlin/README.md](kotlin/README.md) | [README](kotlin/README.md) |
+| iOS/Swift | [Swift Package Manager](https://swift.org/package-manager/) | Ver [ios/README.md](ios/README.md) | [README](ios/README.md) |
+| C++ | [vcpkg](https://vcpkg.io/) / [Conan](https://conan.io/) | Ver [C++/README.md](C++/README.md) | [README](C++/README.md) |
+| React | [npm](https://www.npmjs.com/) | `npm install ecf-dgii-react` | [README](react/README.md) |
 
 ---
 

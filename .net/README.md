@@ -198,9 +198,9 @@ El SDK genera modelos específicos por tipo de comprobante (`Ecf31ECF`, `Ecf31En
 
 ```json
 {
-  "Encabezado": {
-    "IdDoc": {
-      "ENCF": "E310000051630",
+  "encabezado": {
+    "idDoc": {
+      "encf": "E310000051630",
       "TipoeCF": "FacturaDeCreditoFiscalElectronica",
       "TipoPago": "Contado",
       "TipoIngresos": "01",

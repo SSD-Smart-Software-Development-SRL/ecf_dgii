@@ -98,7 +98,7 @@ jobs:
         uses: NuGet/login@v1
         id: nuget-login
         with:
-          user: ssd
+          user: dawlin
 
       # Publish to NuGet using the temporary API key
       - name: Publish NuGet package

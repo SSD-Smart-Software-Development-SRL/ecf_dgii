@@ -1,59 +1,59 @@
-# @ecfx/react
+# @ssddo/ecf-react
 
-React Query hooks for the ECF DGII API (Dominican Republic electronic fiscal receipts). Built on top of `openapi-react-query` and `openapi-fetch` for fully typed API interactions.
+Hooks de React Query para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana). Construido sobre `openapi-react-query` y `openapi-fetch` para interacciones con la API completamente tipadas.
 
-## Installation
+## Instalación
 
 ```bash
-npm install @ecfx/react @tanstack/react-query
+npm install @ssddo/ecf-react @tanstack/react-query
 ```
 
-## Setup
+## Configuración
 
-Wrap your application with `QueryClientProvider` and create the ECF client:
+Envuelve tu aplicación con `QueryClientProvider` y crea el cliente ECF:
 
 ```tsx
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createEcfReactClient } from '@ecfx/react';
+import { createEcfReactClient } from '@ssddo/ecf-react';
 
 const queryClient = new QueryClient();
 
 const { $api } = createEcfReactClient({
-  apiKey: 'your-api-key',
+  apiKey: 'tu-api-key',
   environment: 'test', // 'test' | 'cert' | 'prod'
 });
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <YourApp />
+      <TuApp />
     </QueryClientProvider>
   );
 }
 ```
 
-You can also provide a custom base URL instead of using a preset environment:
+También puedes proporcionar una URL base personalizada en lugar de usar un entorno predefinido:
 
 ```tsx
 const { $api } = createEcfReactClient({
-  apiKey: 'your-api-key',
-  baseUrl: 'https://custom-api.example.com',
+  apiKey: 'tu-api-key',
+  baseUrl: 'https://api-personalizada.ejemplo.com',
 });
 ```
 
-## Usage
+## Uso
 
-### Querying Data
+### Consultar datos
 
-Use the `$api` object to access typed React Query hooks for every endpoint:
+Usa el objeto `$api` para acceder a hooks tipados de React Query para cada endpoint:
 
 ```tsx
-function Companies() {
+function Empresas() {
   const { data, isLoading, error } = $api.useQuery('get', '/company', {
     params: { query: { Page: 1, Limit: 10 } },
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
@@ -66,10 +66,10 @@ function Companies() {
 }
 ```
 
-### Searching ECFs
+### Buscar ECFs
 
 ```tsx
-function EcfSearch({ rnc }: { rnc: string }) {
+function BuscarEcf({ rnc }: { rnc: string }) {
   const { data } = $api.useQuery('get', '/ecf/{rnc}', {
     params: { path: { rnc } },
   });
@@ -78,10 +78,10 @@ function EcfSearch({ rnc }: { rnc: string }) {
 }
 ```
 
-### Sending ECFs (Mutations)
+### Enviar ECFs (Mutaciones)
 
 ```tsx
-function SendEcf() {
+function EnviarEcf() {
   const mutation = $api.useMutation('post', '/ecf/31');
 
   const handleSend = () => {
@@ -169,63 +169,63 @@ function SendEcf() {
   return (
     <div>
       <button onClick={handleSend} disabled={mutation.isPending}>
-        {mutation.isPending ? 'Sending...' : 'Send ECF'}
+        {mutation.isPending ? 'Enviando...' : 'Enviar ECF'}
       </button>
-      {mutation.isSuccess && <p>ECF sent successfully!</p>}
+      {mutation.isSuccess && <p>ECF enviado exitosamente!</p>}
       {mutation.isError && <p>Error: {mutation.error.message}</p>}
     </div>
   );
 }
 ```
 
-## Environments
+## Entornos
 
-| Environment | URL |
-|-------------|-----|
+| Entorno | URL |
+|---------|-----|
 | `test` | `https://api.test.ecfx.ssd.com.do` |
 | `cert` | `https://api.cert.ecfx.ssd.com.do` |
 | `prod` | `https://api.prod.ecfx.ssd.com.do` |
 
-## API Reference
+## Referencia de la API
 
 ### `createEcfReactClient(config)`
 
-Creates a typed React Query client for the ECF DGII API.
+Crea un cliente tipado de React Query para la API de ECF DGII.
 
-**Config options:**
+**Opciones de configuración:**
 
-| Option | Type | Required | Description |
-|--------|------|----------|-------------|
-| `apiKey` | `string` | Yes | Your API key for authentication |
-| `environment` | `'test' \| 'cert' \| 'prod'` | No | Target environment (default: `'test'`) |
-| `baseUrl` | `string` | No | Custom base URL (overrides `environment`) |
+| Opción | Tipo | Requerido | Descripción |
+|--------|------|-----------|-------------|
+| `apiKey` | `string` | Sí | Tu API key para autenticación |
+| `environment` | `'test' \| 'cert' \| 'prod'` | No | Entorno destino (por defecto: `'test'`) |
+| `baseUrl` | `string` | No | URL base personalizada (sobreescribe `environment`) |
 
-**Returns:** `{ $api, fetchClient }`
+**Retorna:** `{ $api, fetchClient }`
 
-- `$api` - The openapi-react-query client with `useQuery`, `useMutation`, `useSuspenseQuery`, etc.
-- `fetchClient` - The underlying openapi-fetch client for non-React usage.
+- `$api` - El cliente openapi-react-query con `useQuery`, `useMutation`, `useSuspenseQuery`, etc.
+- `fetchClient` - El cliente openapi-fetch subyacente para uso fuera de React.
 
-## Backend / Frontend Architecture
+## Arquitectura Backend / Frontend
 
-The React SDK is designed for the **frontend** side of the recommended architecture:
+El SDK de React está diseñado para el lado del **frontend** de la arquitectura recomendada:
 
-1. Your **backend** validates, saves, and converts your internal invoice to ECF format, then sends it to ECF SSD using its main token
-2. Your **backend** exposes an endpoint (e.g. `GET /api/v1/ecf-token`) that generates a **read-only API key** scoped to the tenant/RNC via the ECF SSD `/apikey` endpoint
-3. Your **frontend** stores this token securely, renews it on `401` or expiry, and uses it with `@ecfx/react` to query ECF status directly
+1. Tu **backend** valida, guarda y convierte tu factura interna al formato ECF, luego la envía a ECF SSD usando su token principal
+2. Tu **backend** expone un endpoint (ej. `GET /api/v1/ecf-token`) que genera un **API key de solo lectura** con alcance al tenant/RNC a través del endpoint `/apikey` de ECF SSD
+3. Tu **frontend** almacena este token de forma segura, lo renueva ante `401` o expiración, y lo usa con `@ssddo/ecf-react` para consultar el estado de los ECF directamente
 
 ```tsx
-// Token management — your custom hook
-// Calls your backend's /api/v1/ecf-token, stores the token securely,
-// and automatically renews it when it expires or gets a 401
+// Gestión de token — tu hook personalizado
+// Llama al endpoint /api/v1/ecf-token de tu backend, almacena el token de forma segura,
+// y lo renueva automáticamente cuando expira o recibe un 401
 const ecfToken = useEcfToken();
 
 const { $api } = createEcfReactClient({
-  apiKey: ecfToken,  // read-only, scoped to tenant/RNC
+  apiKey: ecfToken,  // solo lectura, con alcance al tenant/RNC
   environment: 'prod',
 });
 
-function EcfStatus({ rnc, encf }: { rnc: string; encf: string }) {
-  // Query ECF SSD directly — no backend proxy needed
+function EstadoEcf({ rnc, encf }: { rnc: string; encf: string }) {
+  // Consulta ECF SSD directamente — no se necesita proxy en el backend
   const { data } = $api.useQuery('get', '/ecf/{rnc}/{encf}', {
     params: { path: { rnc, encf } },
     refetchInterval: 3000,
@@ -245,8 +245,8 @@ function EcfStatus({ rnc, encf }: { rnc: string; encf: string }) {
 }
 ```
 
-This pattern offloads polling from your backend and lets the frontend talk directly to ECF SSD with a restricted token. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram and backend example.
+Este patrón descarga el polling de tu backend y permite que el frontend se comunique directamente con ECF SSD usando un token restringido. Consulta el [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo y ejemplo del backend.
 
-## Non-React Usage
+## Uso fuera de React
 
-For server-side or non-React applications, use the base TypeScript SDK: [`@ecfx/sdk`](https://www.npmjs.com/package/@ecfx/sdk).
+Para aplicaciones del lado del servidor o sin React, usa el SDK base de TypeScript: [`@ssddo/ecf-sdk`](https://www.npmjs.com/package/@ssddo/ecf-sdk).

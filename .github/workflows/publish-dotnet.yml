@@ -21,11 +21,13 @@ env:
 defaults:
   run:
     shell: pwsh
-    working-directory: .net
 
 jobs:
   build_and_pack:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .net
     steps:
     - uses: actions/checkout@v4
 

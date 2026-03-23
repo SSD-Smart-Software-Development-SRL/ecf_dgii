@@ -1,22 +1,22 @@
 # ecf-dgii
 
-Python SDK for the **ECF DGII API** — Dominican Republic Electronic Fiscal Receipts (Comprobantes Fiscales Electrónicos).
+SDK de Python para la **API ECF DGII** — Comprobantes Fiscales Electrónicos de la República Dominicana.
 
-## Installation
+## Instalación
 
 ```bash
 pip install ecf-dgii
 ```
 
-## Quick start
+## Inicio rápido
 
 ```python
 import asyncio
 from ecf_dgii import EcfClient, ECF, Encabezado, IdDoc, Emisor, Totales, Item, Comprador, FormaDePago, DescuentoORecargo, ImpuestoAdicional, ImpuestoAdicional2
 
 async def main():
-    async with EcfClient(api_key="your-jwt-token", environment="test") as client:
-        # Send an ECF with automatic routing and polling
+    async with EcfClient(api_key="tu-token-jwt", environment="test") as client:
+        # Enviar un ECF con enrutamiento automático y polling
         ecf = ECF(
             encabezado=Encabezado(
                 version="Version1_0",
@@ -94,45 +94,134 @@ async def main():
         )
 
         result = await client.send_ecf(ecf)
-        print(f"ECF accepted: {result.encf} - Status: {result.estatus}")
+        print(f"ECF aceptado: {result.encf} - Estatus: {result.estatus}")
 
 asyncio.run(main())
 ```
 
-## Configuration
+Este es el JSON equivalente que se envía a la API:
 
-### Authentication
+```json
+{
+  "encabezado": {
+    "idDoc": {
+      "encf": "E310000051630",
+      "TipoeCF": "FacturaDeCreditoFiscalElectronica",
+      "TipoPago": "Contado",
+      "TipoIngresos": "01",
+      "TablaFormasPago": [
+        {
+          "FormaPago": "Efectivo",
+          "MontoPago": 1015.25
+        }
+      ],
+      "IndicadorMontoGravado": "ConITBISIncluido",
+      "FechaVencimientoSecuencia": "2028-12-31T00:00:00"
+    },
+    "Emisor": {
+      "RNCEmisor": "131460941",
+      "FechaEmision": "2026-01-10",
+      "DireccionEmisor": "AVE. ISABEL AGUIAR NO. 269, ZONA INDUSTRIAL DE HERRERA",
+      "RazonSocialEmisor": "DOCUMENTOS ELECTRONICOS DE 02"
+    },
+    "Totales": {
+      "ITBIS1": 18,
+      "MontoGravadoI1": 762.71,
+      "MontoGravadoTotal": 762.71,
+      "TotalITBIS1": 137.29,
+      "TotalITBIS": 137.29,
+      "MontoNoFacturable": 100.0,
+      "ImpuestosAdicionales": [
+        {
+          "TipoImpuesto": "002",
+          "TasaImpuestoAdicional": 2,
+          "OtrosImpuestosAdicionales": 15.25
+        }
+      ],
+      "MontoImpuestoAdicional": 15.25,
+      "MontoTotal": 1015.25,
+      "MontoPeriodo": 1015.25
+    },
+    "Version": "Version1_0",
+    "Comprador": {
+      "RNCComprador": "131880681",
+      "RazonSocialComprador": "DOCUMENTOS ELECTRONICOS DE 03"
+    }
+  },
+  "DetallesItems": [
+    {
+      "MontoItem": 1016.95,
+      "NombreItem": "Iphone 18 Pro max",
+      "NumeroLinea": 1,
+      "CantidadItem": 1,
+      "UnidadMedida": "Unidad",
+      "PrecioUnitarioItem": 1016.95,
+      "IndicadorFacturacion": "ITBIS1_18Percent",
+      "IndicadorBienoServicio": "Bien",
+      "TablaImpuestoAdicional": [
+        {
+          "TipoImpuesto": "002"
+        }
+      ]
+    },
+    {
+      "MontoItem": 100.0,
+      "NombreItem": "Costo de Envío",
+      "NumeroLinea": 2,
+      "CantidadItem": 1,
+      "UnidadMedida": "Unidad",
+      "PrecioUnitarioItem": 100.0,
+      "IndicadorFacturacion": "NoFacturable_18Percent",
+      "IndicadorBienoServicio": "Servicio"
+    }
+  ],
+  "DescuentosORecargos": [
+    {
+      "TipoValor": "$",
+      "TipoAjuste": "D",
+      "NumeroLinea": 1,
+      "MontoDescuentooRecargo": 84.75,
+      "DescripcionDescuentooRecargo": "Descuento",
+      "IndicadorFacturacionDescuentooRecargo": "ITBIS1_18Percent"
+    }
+  ]
+}
+```
 
-The API key (JWT Bearer token) can be provided in two ways:
+## Configuración
+
+### Autenticación
+
+El API key (token JWT Bearer) se puede proporcionar de dos formas:
 
 ```python
-# Direct parameter
-client = EcfClient(api_key="your-jwt-token")
+# Parámetro directo
+client = EcfClient(api_key="tu-token-jwt")
 
-# Environment variable
-# export ECF_API_KEY=your-jwt-token
+# Variable de entorno
+# export ECF_API_KEY=tu-token-jwt
 client = EcfClient()
 ```
 
-### Environments
+### Ambientes
 
 ```python
-client = EcfClient(api_key="...", environment="test")   # Testing
-client = EcfClient(api_key="...", environment="cert")   # Certification
-client = EcfClient(api_key="...", environment="prod")   # Production
+client = EcfClient(api_key="...", environment="test")   # Pruebas
+client = EcfClient(api_key="...", environment="cert")   # Certificación
+client = EcfClient(api_key="...", environment="prod")   # Producción
 
-# Custom base URL
+# URL base personalizada
 client = EcfClient(api_key="...", base_url="https://custom.api.url")
 ```
 
-## Features
+## Funcionalidades
 
-### Send ECF with automatic polling
+### Enviar ECF con polling automático
 
-The `send_ecf` method handles:
-- **Routing** — automatically selects the correct endpoint based on the ECF type
-- **Polling** — waits for DGII processing with exponential backoff
-- **Error handling** — raises `EcfProcessingError` if DGII rejects the ECF
+El método `send_ecf` maneja:
+- **Enrutamiento** — selecciona automáticamente el endpoint correcto según el tipo de ECF
+- **Polling** — espera el procesamiento de DGII con backoff exponencial
+- **Manejo de errores** — lanza `EcfProcessingError` si DGII rechaza el ECF
 
 ```python
 from ecf_dgii import PollingOptions
@@ -140,55 +229,55 @@ from ecf_dgii import PollingOptions
 result = await client.send_ecf(
     ecf,
     polling_options=PollingOptions(
-        initial_delay=1.0,     # seconds
-        max_delay=30.0,        # seconds
+        initial_delay=1.0,     # segundos
+        max_delay=30.0,        # segundos
         max_retries=60,
         backoff_multiplier=2.0,
-        timeout=300.0,         # total timeout in seconds
+        timeout=300.0,         # timeout total en segundos
     ),
 )
 ```
 
-### Backend / Frontend Architecture
+### Arquitectura Backend / Frontend
 
-In most apps, the backend handles business logic and sends the ECF. The frontend gets a read-only token to query status directly:
+En la mayoría de aplicaciones, el backend maneja la lógica de negocio y envía el ECF. El frontend obtiene un token de solo lectura para consultar el estatus directamente:
 
 ```python
 ecf_client = EcfClient(api_key=os.environ["ECF_BACKEND_TOKEN"], environment="prod")
 
-# Your invoice endpoint — business logic + send to ECF SSD
+# Tu endpoint de facturas — lógica de negocio + envío a ECF SSD
 @app.post("/api/v1/invoices")
 async def create_invoice(request: CreateInvoiceRequest):
-    # 1. Validate and save your internal invoice
+    # 1. Validar y guardar tu factura interna
     invoice = await validate_and_save(request)
-    # 2. Convert to ECF format
+    # 2. Convertir a formato ECF
     ecf = convert_to_ecf(invoice)
-    # 3. Send to ECF SSD (no polling)
+    # 3. Enviar a ECF SSD (sin polling)
     response = await ecf_client.raw_post("/ecf/31", ecf)
     await update_invoice(invoice.id, message_id=response["messageId"])
     return {"id": invoice.id, "messageId": response["messageId"]}
 
-# Separate endpoint: generate read-only token for frontend
+# Endpoint separado: generar token de solo lectura para el frontend
 @app.get("/api/v1/ecf-token")
 async def get_ecf_token():
-    api_key = await ecf_client.create_api_key({...})  # scoped to tenant/RNC
+    api_key = await ecf_client.create_api_key({...})  # limitado al tenant/RNC
     return {"token": api_key["token"]}
 ```
 
-The frontend stores the token securely, renews it on `401` or expiry, and queries ECF SSD directly. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+El frontend almacena el token de forma segura, lo renueva en caso de `401` o expiración, y consulta ECF SSD directamente. Ver el [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo.
 
-> **`send_ecf`** wraps send + polling into a single call. For apps with a frontend, use the individual endpoints.
+> **`send_ecf`** envuelve envío + polling en una sola llamada. Para aplicaciones con frontend, usa los endpoints individuales.
 
-### Company management
+### Gestión de empresas
 
 ```python
-# List companies
+# Listar empresas
 companies = await client.get_companies(page=1, limit=10)
 
-# Get by RNC
+# Obtener por RNC
 company = await client.get_company_by_rnc("123456789")
 
-# Create or update
+# Crear o actualizar
 from ecf_dgii import UpsertCompanyRequest
 await client.upsert_company(UpsertCompanyRequest(
     rnc="123456789",
@@ -196,28 +285,28 @@ await client.upsert_company(UpsertCompanyRequest(
     name="Mi Empresa",
 ))
 
-# Delete
+# Eliminar
 await client.delete_company("123456789")
 ```
 
-### Certificate management
+### Gestión de certificados
 
 ```python
-# Get certificates
+# Obtener certificados
 certs = await client.get_certificate("123456789")
 
-# Upload certificate
+# Subir certificado
 with open("cert.p12", "rb") as f:
     await client.update_certificate("123456789", f, password="cert-password")
 ```
 
-### Query ECFs
+### Consultar ECFs
 
 ```python
-# Query by RNC and eNCF
+# Consultar por RNC y eNCF
 results = await client.query_ecf("123456789", "E310000000001")
 
-# Search with filters
+# Buscar con filtros
 from ecf_dgii import AllTipoECFTypes
 page = await client.search_ecfs(
     "123456789",
@@ -259,7 +348,7 @@ result = await client.anulacion_rangos(
 )
 ```
 
-### DGII consultations
+### Consultas DGII
 
 ```python
 # Directorio
@@ -278,7 +367,7 @@ estado = await client.consulta_estado(
 servicios = await client.estatus_servicios("123456789")
 ```
 
-## Error handling
+## Manejo de errores
 
 ```python
 from ecf_dgii import (
@@ -292,17 +381,17 @@ from ecf_dgii import (
 try:
     result = await client.send_ecf(ecf)
 except EcfValidationError as e:
-    print(f"Bad request: {e.detail}")
+    print(f"Solicitud inválida: {e.detail}")
 except EcfAuthenticationError:
-    print("Invalid API key")
+    print("API key inválido")
 except EcfProcessingError as e:
-    print(f"DGII rejected: {e.response.errors}")
+    print(f"DGII rechazó: {e.response.errors}")
 except PollingTimeoutError:
-    print("Processing took too long")
+    print("El procesamiento tomó demasiado tiempo")
 except EcfApiError as e:
-    print(f"API error {e.status_code}: {e}")
+    print(f"Error de API {e.status_code}: {e}")
 ```
 
-## License
+## Licencia
 
 MIT

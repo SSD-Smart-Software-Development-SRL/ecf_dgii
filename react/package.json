@@ -1,6 +1,6 @@
 {
   "name": "@ssddo/ecf-react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Hooks de React Query para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana)",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

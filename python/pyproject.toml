@@ -40,10 +40,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/puntoos/ecf-dgii-python"
-Documentation = "https://github.com/puntoos/ecf-dgii-python#readme"
-Repository = "https://github.com/puntoos/ecf-dgii-python"
-Issues = "https://github.com/puntoos/ecf-dgii-python/issues"
+Homepage = "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii"
+Documentation = "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii/tree/main/python#readme"
+Repository = "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii"
+Issues = "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["ecf_dgii"]

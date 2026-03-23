@@ -1,6 +1,6 @@
 {
   "name": "@ssddo/ecf-react",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Hooks de React Query para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana)",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -46,10 +46,30 @@
     "tsup": "^8.3.0",
     "typescript": "^5.7.0"
   },
+  "author": {
+    "name": "SSD Smart Software Development SRL",
+    "email": "contacto@ssd.com.do",
+    "url": "https://ssd.com.do"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii",
     "directory": "react"
   },
+  "homepage": "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii/tree/main/react#readme",
+  "bugs": {
+    "url": "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii/issues"
+  },
+  "keywords": [
+    "ecf",
+    "dgii",
+    "factura-electronica",
+    "comprobante-fiscal",
+    "republica-dominicana",
+    "react",
+    "react-query",
+    "openapi",
+    "ssd"
+  ],
   "license": "MIT"
 }

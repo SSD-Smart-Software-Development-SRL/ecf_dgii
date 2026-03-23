@@ -19,6 +19,7 @@ defaults:
 
 jobs:
   build:
+    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'react-v')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

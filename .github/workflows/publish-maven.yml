@@ -16,6 +16,7 @@ on:
 
 jobs:
   build-java:
+    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'maven-v')
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -40,6 +41,7 @@ jobs:
           path: java/target/*.jar
 
   build-kotlin:
+    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'maven-v')
     runs-on: ubuntu-latest
     defaults:
       run:

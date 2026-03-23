@@ -24,6 +24,7 @@ defaults:
 
 jobs:
   build_and_pack:
+    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'dotnet-v')
     runs-on: ubuntu-latest
     defaults:
       run:

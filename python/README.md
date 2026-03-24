@@ -240,7 +240,58 @@ result = await client.send_ecf(
 
 ### Arquitectura Backend / Frontend
 
-En la mayoría de aplicaciones, el backend maneja la lógica de negocio y envía el ECF. El frontend obtiene un token de solo lectura para consultar el estatus directamente:
+```mermaid
+sequenceDiagram
+    participant FE as Frontend
+    participant BE as Backend
+    participant ECF as ECF API
+
+    Note over BE,ECF: Backend (lectura/escritura)
+    BE->>ECF: POST /ecf/31 (enviar factura)
+    ECF-->>BE: { messageId }
+    BE->>ECF: POST /apikey (token solo lectura, scoped a RNC)
+    ECF-->>BE: { apiKey }
+    BE-->>FE: GET /ecf-token → { apiKey }
+
+    Note over FE,ECF: Frontend (solo lectura)
+    FE->>BE: POST /invoice, /order, /sale
+    BE-->>FE: { messageId }
+
+    alt Token en caché
+        FE->>FE: Usar token existente
+    else Sin token
+        FE->>BE: GET /ecf-token
+        BE->>ECF: POST /apikey (scoped a RNC)
+        ECF-->>BE: { apiKey }
+        BE-->>FE: { apiKey }
+        FE->>FE: Almacenar token en caché
+    end
+
+    FE->>ECF: GET /ecf/{rnc}/{encf} (con token solo lectura)
+    ECF-->>FE: { progress, codSec, ... }
+```
+
+### Flujo detallado
+
+**Backend** (usa `EcfClient` con permisos de lectura/escritura):
+
+1. Tu backend recibe la factura del usuario (ej. `POST /invoice`)
+2. Valida, guarda y convierte la factura interna al formato ECF
+3. Envía el ECF a la API usando el token principal → recibe `messageId`
+4. Expone un endpoint `GET /ecf-token` que llama a `POST /apikey` de ECF SSD y retorna un **token de solo lectura** con alcance al RNC del tenant
+
+**Frontend** (usa `EcfFrontendClient`):
+
+1. El usuario invoca un endpoint del backend (`/invoice`, `/order`, `/sale`) → recibe el `messageId`
+2. Verifica si hay un token en caché (memoria, localStorage, etc.)
+   - **Si existe**: lo usa directamente
+   - **Si no existe**: llama a `GET /ecf-token` del backend, almacena el token retornado en caché
+3. Crea el cliente de solo lectura con el token
+4. Consulta el estado del ECF directamente contra la API de ECF SSD
+
+### Ejemplo: Backend
+
+En la mayoría de aplicaciones, el backend maneja la lógica de negocio y envía el ECF:
 
 ```python
 ecf_client = EcfClient(api_key=os.environ["ECF_BACKEND_TOKEN"], environment="prod")

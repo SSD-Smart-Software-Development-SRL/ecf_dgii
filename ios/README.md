@@ -88,9 +88,54 @@ let result = try await client.sendEcf(ecf: ecf, pollingOptions: options)
 
 ### Arquitectura Backend / Frontend
 
-En la mayoría de aplicaciones, el backend envía el ECF y el frontend móvil/web consulta el estado directamente usando un API key de solo lectura. El backend genera este token restringido (limitado al tenant/RNC) mediante el endpoint de API Keys y lo pasa a la aplicación cliente. La app luego consulta ECF SSD directamente sin pasar por el backend.
+```mermaid
+sequenceDiagram
+    participant FE as Frontend
+    participant BE as Backend
+    participant ECF as ECF API
 
-Consulta el [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo y ejemplos de código.
+    Note over BE,ECF: Backend (lectura/escritura)
+    BE->>ECF: POST /ecf/31 (enviar factura)
+    ECF-->>BE: { messageId }
+    BE->>ECF: POST /apikey (token solo lectura, scoped a RNC)
+    ECF-->>BE: { apiKey }
+    BE-->>FE: GET /ecf-token → { apiKey }
+
+    Note over FE,ECF: Frontend (solo lectura)
+    FE->>BE: POST /invoice, /order, /sale
+    BE-->>FE: { messageId }
+
+    alt Token en caché
+        FE->>FE: Usar token existente
+    else Sin token
+        FE->>BE: GET /ecf-token
+        BE->>ECF: POST /apikey (scoped a RNC)
+        ECF-->>BE: { apiKey }
+        BE-->>FE: { apiKey }
+        FE->>FE: Almacenar token en caché
+    end
+
+    FE->>ECF: GET /ecf/{rnc}/{encf} (con token solo lectura)
+    ECF-->>FE: { progress, codSec, ... }
+```
+
+### Flujo detallado
+
+**Backend** (usa `EcfClient` con permisos de lectura/escritura):
+
+1. Tu backend recibe la factura del usuario (ej. `POST /invoice`)
+2. Valida, guarda y convierte la factura interna al formato ECF
+3. Envía el ECF a la API usando el token principal → recibe `messageId`
+4. Expone un endpoint `GET /ecf-token` que llama a `POST /apikey` de ECF SSD y retorna un **token de solo lectura** con alcance al RNC del tenant
+
+**Frontend** (usa `EcfFrontendClient`):
+
+1. El usuario invoca un endpoint del backend (`/invoice`, `/order`, `/sale`) → recibe el `messageId`
+2. Verifica si hay un token en caché (memoria, localStorage, etc.)
+   - **Si existe**: lo usa directamente
+   - **Si no existe**: llama a `GET /ecf-token` del backend, almacena el token retornado en caché
+3. Crea el cliente de solo lectura con el token
+4. Consulta el estado del ECF directamente contra la API de ECF SSD
 
 #### `EcfFrontendClient`
 

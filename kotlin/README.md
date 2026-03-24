@@ -41,12 +41,58 @@ Esto ejecuta todas las pruebas y empaqueta la biblioteca.
 
 ## Arquitectura Backend / Frontend
 
-En la mayoría de aplicaciones, el backend envía el ECF y el frontend consulta el estado directamente usando una API key de solo lectura. El backend genera este token restringido (limitado al tenant/RNC) a través del endpoint `ApiKeyApi.newCompanyApiKey` y se lo pasa al frontend. El frontend entonces consulta ECF SSD directamente sin pasar por el backend.
+```mermaid
+sequenceDiagram
+    participant FE as Frontend
+    participant BE as Backend
+    participant ECF as ECF API
 
-### Ejemplo: Backend (enviar ECF)
+    Note over BE,ECF: Backend (lectura/escritura)
+    BE->>ECF: POST /ecf/31 (enviar factura)
+    ECF-->>BE: { messageId }
+    BE->>ECF: POST /apikey (token solo lectura, scoped a RNC)
+    ECF-->>BE: { apiKey }
+    BE-->>FE: GET /ecf-token → { apiKey }
+
+    Note over FE,ECF: Frontend (solo lectura)
+    FE->>BE: POST /invoice, /order, /sale
+    BE-->>FE: { messageId }
+
+    alt Token en caché
+        FE->>FE: Usar token existente
+    else Sin token
+        FE->>BE: GET /ecf-token
+        BE->>ECF: POST /apikey (scoped a RNC)
+        ECF-->>BE: { apiKey }
+        BE-->>FE: { apiKey }
+        FE->>FE: Almacenar token en caché
+    end
+
+    FE->>ECF: GET /ecf/{rnc}/{encf} (con token solo lectura)
+    ECF-->>FE: { progress, codSec, ... }
+```
+
+### Flujo detallado
+
+**Backend** (usa `EcfClient` con permisos de lectura/escritura):
+
+1. Tu backend recibe la factura del usuario (ej. `POST /invoice`)
+2. Valida, guarda y convierte la factura interna al formato ECF
+3. Envía el ECF a la API usando el token principal → recibe `messageId`
+4. Expone un endpoint `GET /ecf-token` que llama a `POST /apikey` de ECF SSD y retorna un **token de solo lectura** con alcance al RNC del tenant
+
+**Frontend** (usa `EcfFrontendClient`):
+
+1. El usuario invoca un endpoint del backend (`/invoice`, `/order`, `/sale`) → recibe el `messageId`
+2. Verifica si hay un token en caché (memoria, localStorage, etc.)
+   - **Si existe**: lo usa directamente
+   - **Si no existe**: llama a `GET /ecf-token` del backend, almacena el token retornado en caché
+3. Crea el cliente de solo lectura con el token
+4. Consulta el estado del ECF directamente contra la API de ECF SSD
+
+### Ejemplo: Backend
 
 ```kotlin
-// Backend: enviar un ECF
 val backendClient = ApiClient()
 backendClient.setBearerToken("tu-token-jwt-backend")
 backendClient.basePath = "https://api.prod.ecfx.ssd.com.do"
@@ -55,24 +101,21 @@ val ecfApi = EcfApi(backendClient)
 val response = ecfApi.recepcionEcf31(ecf)
 ```
 
-### Ejemplo: Frontend (solo lectura con `EcfFrontendClient`)
-
-El frontend usa `EcfFrontendClient` (o instancia un `ApiClient` con el token restringido) para consultar el estado de los ECF sin acceso de escritura:
+### Ejemplo: Frontend (con `EcfFrontendClient`)
 
 ```kotlin
-// Frontend: consultar estado de ECF con token de solo lectura
-val frontendClient = ApiClient()
-frontendClient.setBearerToken("token-solo-lectura-del-frontend")
-frontendClient.basePath = "https://api.prod.ecfx.ssd.com.do"
+val frontendClient = EcfFrontendClient(EcfClientConfig(
+    apiKey = readOnlyToken,  // token de solo lectura, scoped al RNC
+    environment = "prod"
+))
 
-val ecfApi = EcfApi(frontendClient)
-
-// Solo operaciones de lectura
-val ecfStatus = ecfApi.queryEcf(rnc = "123456789", encf = "E320000000001")
-val ecfList = ecfApi.searchEcfs(rnc = "123456789")
+// Solo endpoints GET disponibles
+val ecfStatus = frontendClient.queryEcf("131880681", "E310000051630")
+val ecfList = frontendClient.searchEcfs("131880681")
+val company = frontendClient.getCompanyByRnc("131880681")
 ```
 
-Consulta el [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo y ejemplos de código.
+Consulta el [README principal](../README.md#arquitectura-backend--frontend) para más detalles.
 
 ## Entornos
 

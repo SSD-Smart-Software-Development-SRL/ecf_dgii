@@ -233,20 +233,72 @@ $api.useQuery('get', '/ecf/{rnc}/{encf}', { params: { path: { rnc, encf } } });
 
 ## Arquitectura Backend / Frontend
 
-El SDK de React está diseñado para el lado del **frontend** de la arquitectura recomendada:
+```mermaid
+sequenceDiagram
+    participant FE as Frontend
+    participant BE as Backend
+    participant ECF as ECF API
 
-1. Tu **backend** valida, guarda y convierte tu factura interna al formato ECF, luego la envía a ECF SSD usando su token principal
-2. Tu **backend** expone un endpoint (ej. `GET /api/v1/ecf-token`) que genera un **API key de solo lectura** con alcance al tenant/RNC a través del endpoint `/apikey` de ECF SSD
-3. Tu **frontend** almacena este token de forma segura, lo renueva ante `401` o expiración, y lo usa con `@ssddo/ecf-react` para consultar el estado de los ECF directamente
+    Note over BE,ECF: Backend (lectura/escritura)
+    BE->>ECF: POST /ecf/31 (enviar factura)
+    ECF-->>BE: { messageId }
+    BE->>ECF: POST /apikey (token solo lectura, scoped a RNC)
+    ECF-->>BE: { apiKey }
+    BE-->>FE: GET /ecf-token → { apiKey }
+
+    Note over FE,ECF: Frontend (solo lectura)
+    FE->>BE: POST /invoice, /order, /sale
+    BE-->>FE: { messageId }
+
+    alt Token en caché
+        FE->>FE: Usar token existente
+    else Sin token
+        FE->>BE: GET /ecf-token
+        BE->>ECF: POST /apikey (scoped a RNC)
+        ECF-->>BE: { apiKey }
+        BE-->>FE: { apiKey }
+        FE->>FE: Almacenar token en caché
+    end
+
+    FE->>ECF: GET /ecf/{rnc}/{encf} (con token solo lectura)
+    ECF-->>FE: { progress, codSec, ... }
+```
+
+### Flujo detallado
+
+**Backend** (usa `@ssddo/ecf-sdk` o la librería del lenguaje correspondiente con permisos de lectura/escritura):
+
+1. Tu backend recibe la factura del usuario (ej. `POST /invoice`)
+2. Valida, guarda y convierte la factura interna al formato ECF
+3. Envía el ECF a la API usando el token principal → recibe `messageId`
+4. Expone un endpoint `GET /ecf-token` que llama a `POST /apikey` de ECF SSD y retorna un **token de solo lectura** con alcance al RNC del tenant
+
+**Frontend** (usa `@ssddo/ecf-react` con `createEcfFrontendReactClient`):
+
+1. El usuario invoca un endpoint del backend (`/invoice`, `/order`, `/sale`) → recibe el `messageId`
+2. Verifica si hay un token en caché (memoria, localStorage, etc.)
+   - **Si existe**: lo usa directamente
+   - **Si no existe**: llama a `GET /ecf-token` del backend, almacena el token retornado en caché
+3. Crea el cliente de solo lectura con el token
+4. Consulta el estado del ECF directamente contra la API de ECF SSD
+
+### Ejemplo completo
 
 ```tsx
-// Gestión de token — tu hook personalizado
-// Llama al endpoint /api/v1/ecf-token de tu backend, almacena el token de forma segura,
-// y lo renueva automáticamente cuando expira o recibe un 401
+import { createEcfFrontendReactClient } from '@ssddo/ecf-react';
+
+// Hook personalizado para gestión de token
+function useEcfToken() {
+  // 1. Verificar caché local
+  // 2. Si no hay token o expiró → llamar a GET /ecf-token del backend
+  // 3. Almacenar en caché y retornar
+  // 4. Renovar ante 401 o expiración
+}
+
 const ecfToken = useEcfToken();
 
 const { $api } = createEcfFrontendReactClient({
-  apiKey: ecfToken,  // solo lectura, con alcance al tenant/RNC
+  apiKey: ecfToken,  // solo lectura, scoped al RNC del tenant
   environment: 'prod',
 });
 
@@ -271,7 +323,7 @@ function EstadoEcf({ rnc, encf }: { rnc: string; encf: string }) {
 }
 ```
 
-Este patrón descarga el polling de tu backend y permite que el frontend se comunique directamente con ECF SSD usando un token restringido. Consulta el [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo y ejemplo del backend.
+Este patrón descarga el polling de tu backend y permite que el frontend se comunique directamente con ECF SSD usando un token restringido. Consulta el [README principal](../README.md#arquitectura-backend--frontend) para más detalles.
 
 ## Uso fuera de React
 

@@ -208,18 +208,24 @@ Todos los SDKs utilizan **JWT Bearer Token** para autenticarse. Puedes configura
 
 Todos los SDKs incluyen un método de alto nivel (`SendEcfAsync`, `sendEcf`, `send_ecf`) que encapsula toda la complejidad:
 
-```
-Tu sistema                          ECF SSD                         DGII
-   │                                   │                              │
-   │── sendEcf(ecf) ──────────────────►│                              │
-   │                                   │── firma XML ─────────────────│
-   │                                   │── autenticación (semilla) ──►│
-   │                                   │── envío e-CF ──────────────►│
-   │                                   │◄── trackId ─────────────────│
-   │                                   │── polling estado ──────────►│
-   │                                   │◄── resultado final ─────────│
-   │◄── EcfResponse ──────────────────│                              │
-   │                                   │                              │
+```mermaid
+sequenceDiagram
+    participant App as Tu Sistema
+    participant ECF as ECF SSD
+    participant DGII as DGII
+
+    App->>ECF: sendEcf(ecf)
+    ECF->>ECF: Firma XML
+    ECF->>DGII: Autenticación (semilla)
+    ECF->>DGII: Envío e-CF
+    DGII-->>ECF: { trackId }
+
+    loop Polling con backoff exponencial
+        ECF->>DGII: Consulta estado
+        DGII-->>ECF: { estado }
+    end
+
+    ECF-->>App: EcfResponse { codSec, impresionUrl, ... }
 ```
 
 1. **Enrutamiento automático:** Determina el endpoint correcto (`/ecf/31`, `/ecf/32`, etc.) basándose en el `tipoeCF` del comprobante

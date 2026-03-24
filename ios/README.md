@@ -1,14 +1,14 @@
 # EcfDgiiClient
 
-Swift SDK for the **ECF DGII API** — electronic fiscal receipt (e-CF) processing for the Dominican Republic.
+SDK de Swift para la **API de ECF DGII** — procesamiento de comprobantes fiscales electrónicos (e-CF) de República Dominicana.
 
-Certified by DGII. Compatible with iOS, macOS, tvOS, and watchOS.
+Certificado por la DGII. Compatible con iOS, macOS, tvOS y watchOS.
 
-## Installation
+## Instalación
 
-### Swift Package Manager (recommended)
+### Swift Package Manager (recomendado)
 
-Add to your `Package.swift`:
+Agrega a tu `Package.swift`:
 
 ```swift
 dependencies: [
@@ -16,7 +16,7 @@ dependencies: [
 ]
 ```
 
-Or in Xcode: **File > Add Package Dependencies** and enter the repository URL.
+O en Xcode: **File > Add Package Dependencies** e ingresa la URL del repositorio.
 
 ### CocoaPods
 
@@ -24,18 +24,18 @@ Or in Xcode: **File > Add Package Dependencies** and enter the repository URL.
 pod 'EcfDgiiClient', '~> 0.1.0'
 ```
 
-## Quick Start
+## Inicio rápido
 
 ```swift
 import EcfDgiiClient
 
-// Initialize the client
+// Inicializar el cliente
 let client = EcfClient(
-    apiKey: "your-jwt-bearer-token",
-    environment: .prod  // .test, .cert, or .prod
+    apiKey: "tu-token-jwt-bearer",
+    environment: .prod  // .test, .cert o .prod
 )
 
-// Send an ECF with automatic routing and polling
+// Enviar un ECF con enrutamiento automático y polling
 let ecf = ECF(
     encabezado: Encabezado(
         version: .e10,
@@ -55,142 +55,201 @@ let ecf = ECF(
 
 do {
     let result = try await client.sendEcf(ecf: ecf)
-    print("ECF accepted: \(result.encf), status: \(result.estatus)")
+    print("ECF aceptado: \(result.encf), estado: \(result.estatus)")
 } catch let error as EcfProcessingError {
-    print("ECF rejected: \(error.message)")
-    print("DGII response: \(error.response)")
+    print("ECF rechazado: \(error.message)")
+    print("Respuesta DGII: \(error.response)")
 }
 ```
 
-## Features
+## Características
 
-### High-Level Client (`EcfClient`)
+### Cliente de alto nivel (`EcfClient`)
 
-The `EcfClient` provides a simplified interface that handles:
+`EcfClient` proporciona una interfaz simplificada que maneja:
 
-- **Automatic routing** — determines the correct endpoint (31-47) from `encabezado.idDoc.tipoeCF`
-- **Polling with exponential backoff** — waits for DGII processing to complete
-- **Error handling** — throws `EcfProcessingError` with the full DGII response on rejection
-- **Cancellation support** — via Swift structured concurrency (`Task.cancel()`)
+- **Enrutamiento automático** — determina el endpoint correcto (31-47) a partir de `encabezado.idDoc.tipoeCF`
+- **Polling con backoff exponencial** — espera a que la DGII termine de procesar
+- **Manejo de errores** — lanza `EcfProcessingError` con la respuesta completa de la DGII en caso de rechazo
+- **Soporte de cancelación** — mediante concurrencia estructurada de Swift (`Task.cancel()`)
 
 ```swift
-// Custom polling options
+// Opciones de polling personalizadas
 let options = PollingOptions(
-    initialDelay: 2.0,      // seconds
-    maxDelay: 60.0,          // max seconds between polls
+    initialDelay: 2.0,      // segundos
+    maxDelay: 60.0,          // máximo de segundos entre polls
     maxRetries: 30,
     backoffMultiplier: 1.5,
-    timeout: 300             // total timeout in seconds
+    timeout: 300             // timeout total en segundos
 )
 
 let result = try await client.sendEcf(ecf: ecf, pollingOptions: options)
 ```
 
-### Backend / Frontend Architecture
+### Arquitectura Backend / Frontend
 
-In most apps, the backend sends the ECF and a mobile/web frontend queries the status directly using a read-only API key. The backend generates this restricted token (scoped to tenant/RNC) via the API Keys endpoint and passes it to the client app. The app then queries ECF SSD directly without going through the backend.
+En la mayoría de aplicaciones, el backend envía el ECF y el frontend móvil/web consulta el estado directamente usando un API key de solo lectura. El backend genera este token restringido (limitado al tenant/RNC) mediante el endpoint de API Keys y lo pasa a la aplicación cliente. La app luego consulta ECF SSD directamente sin pasar por el backend.
 
-See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram and code examples.
+Consulta el [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo y ejemplos de código.
 
-> **`sendEcf`** is a convenience that wraps send + polling. For apps where the frontend handles status display, use the individual endpoints.
+#### `EcfFrontendClient`
 
-### Raw API Access
-
-All generated endpoints are available via the static API classes:
+Para el frontend, usa `EcfFrontendClient` que expone únicamente los métodos de consulta (solo lectura):
 
 ```swift
-// Company operations
+import EcfDgiiClient
+
+// Inicializar el cliente frontend con el token de solo lectura
+let frontendClient = EcfFrontendClient(
+    apiKey: "token-solo-lectura",
+    environment: .prod  // .test, .cert o .prod
+)
+
+// Consultar el estado de un ECF
+let ecfStatus = try await frontendClient.queryEcf(
+    rnc: "123456789",
+    encf: "E310000000001"
+)
+
+// Buscar ECFs con filtros
+let results = try await frontendClient.searchEcfs(
+    rnc: "123456789",
+    tiposEcfs: [.facturaDeCreditoFiscalElectronica],
+    fromFechaEmision: "2026-01-01",
+    toFechaEmision: "2026-03-31",
+    page: 1,
+    limit: 20
+)
+
+// Buscar todos los ECFs (sin filtro por RNC)
+let allEcfs = try await frontendClient.searchAllEcfs(
+    tiposEcfs: [.facturaDeConsumoElectronica],
+    page: 1,
+    limit: 50
+)
+
+// Obtener un ECF por su ID de mensaje
+let ecfById = try await frontendClient.getEcfById(
+    rnc: "123456789",
+    id: "message-uuid",
+    includeEcfContent: true
+)
+
+// Consultar empresas
+let companies = try await frontendClient.getCompanies(page: 1, limit: 10)
+let company = try await frontendClient.getCompanyByRnc(rnc: "123456789")
+```
+
+**Métodos disponibles en `EcfFrontendClient`:**
+
+| Método | Descripción |
+|---|---|
+| `queryEcf(rnc:encf:includeEcfContent:)` | Consultar el estado de un ECF específico |
+| `searchEcfs(rnc:encfs:ids:tiposEcfs:includeEcfContent:fromFechaEmision:toFechaEmision:amountFrom:amountTo:page:limit:)` | Buscar ECFs con filtros |
+| `searchAllEcfs(...)` | Buscar todos los ECFs sin filtro por RNC |
+| `getEcfById(rnc:id:includeEcfContent:)` | Obtener un ECF por su ID de mensaje |
+| `getCompanies(rncs:names:page:limit:)` | Listar empresas |
+| `getCompanyByRnc(rnc:)` | Obtener una empresa por su RNC |
+
+> **`sendEcf`** es una conveniencia que envuelve envío + polling. Para aplicaciones donde el frontend maneja la visualización del estado, usa `EcfFrontendClient` con los endpoints individuales de consulta.
+
+### Acceso directo a la API
+
+Todos los endpoints generados están disponibles mediante las clases estáticas de la API:
+
+```swift
+// Operaciones de empresa
 let companies = try await CompanyAPI.getCompanies(apiConfiguration: client.apiConfiguration)
 let company = try await CompanyAPI.getCompanyByRnc(rnc: "123456789", apiConfiguration: client.apiConfiguration)
 
-// ECF queries
+// Consultas ECF
 let ecfs = try await EcfAPI.searchEcfs(rnc: "123456789", apiConfiguration: client.apiConfiguration)
 let status = try await EcfAPI.queryEcf(rnc: "123456789", encf: "E310000000001", apiConfiguration: client.apiConfiguration)
 
-// DGII services
+// Servicios DGII
 let directorio = try await DgiiAPI.consultaDirectorioListado(rnc: "123456789", apiConfiguration: client.apiConfiguration)
 let estado = try await DgiiAPI.consultaEstado(rnc: "123456789", rncEmisor: "...", ncfElectronico: "...", rncComprador: "...", codigoSeguridad: "...", apiConfiguration: client.apiConfiguration)
 
-// Reception
+// Recepción
 let requests = try await RecepcionAPI.searchEcfReceptionRequests(apiConfiguration: client.apiConfiguration)
 ```
 
-### Environments
+### Entornos
 
-| Environment | Base URL |
+| Entorno | URL base |
 |---|---|
 | `.test` | `https://api.test.ecfx.ssd.com.do` |
 | `.cert` | `https://api.cert.ecfx.ssd.com.do` |
 | `.prod` | `https://api.prod.ecfx.ssd.com.do` |
 
 ```swift
-// Or use a custom base URL
-let client = EcfClient(apiKey: "token", baseUrl: "https://custom-url.com")
+// O usa una URL base personalizada
+let client = EcfClient(apiKey: "token", baseUrl: "https://url-personalizada.com")
 ```
 
-## ECF Types
+## Tipos de ECF
 
-| Type | Code | Description |
+| Tipo | Código | Descripción |
 |---|---|---|
-| `facturaDeCreditoFiscalElectronica` | 31 | Factura de Credito Fiscal Electronica |
-| `facturaDeConsumoElectronica` | 32 | Factura de Consumo Electronica |
-| `notaDeDebitoElectronica` | 33 | Nota de Debito Electronica |
-| `notaDeCreditoElectronica` | 34 | Nota de Credito Electronica |
-| `comprasElectronico` | 41 | Compras Electronico |
-| `gastosMenoresElectronico` | 43 | Gastos Menores Electronico |
-| `regimenesEspecialesElectronico` | 44 | Regimenes Especiales Electronico |
-| `gubernamentalElectronico` | 45 | Gubernamental Electronico |
-| `comprobanteDeExportacionesElectronico` | 46 | Comprobante de Exportaciones Electronico |
-| `comprobanteParaPagosAlExteriorElectronico` | 47 | Comprobante para Pagos al Exterior Electronico |
+| `facturaDeCreditoFiscalElectronica` | 31 | Factura de Crédito Fiscal Electrónica |
+| `facturaDeConsumoElectronica` | 32 | Factura de Consumo Electrónica |
+| `notaDeDebitoElectronica` | 33 | Nota de Débito Electrónica |
+| `notaDeCreditoElectronica` | 34 | Nota de Crédito Electrónica |
+| `comprasElectronico` | 41 | Compras Electrónico |
+| `gastosMenoresElectronico` | 43 | Gastos Menores Electrónico |
+| `regimenesEspecialesElectronico` | 44 | Regímenes Especiales Electrónico |
+| `gubernamentalElectronico` | 45 | Gubernamental Electrónico |
+| `comprobanteDeExportacionesElectronico` | 46 | Comprobante de Exportaciones Electrónico |
+| `comprobanteParaPagosAlExteriorElectronico` | 47 | Comprobante para Pagos al Exterior Electrónico |
 
-## API Endpoints
+## Endpoints de la API
 
-### ECF Operations
-| Method | Endpoint | Description |
+### Operaciones de ECF
+| Método | Endpoint | Descripción |
 |---|---|---|
-| POST | `/ecf/{31-47}` | Send ECF by type |
-| GET | `/ecf/{rnc}/{encf}` | Query ECF status |
-| GET | `/ecf/{rnc}` | Search ECFs |
-| GET | `/ecf` | Search all ECFs |
-| GET | `/ecf/{rnc}/message/{id}` | Get ECF by message ID |
-| POST | `/ecf/aprobacioncomercial/{rnc}/{encf}` | Commercial approval |
-| POST | `/ecf/anularrango/{rnc}` | Range annulment |
-| GET | `/ecf/anulaciones` | List annulments |
-| POST | `/ecf/FirmarSemilla/{rnc}` | Sign seed |
+| POST | `/ecf/{31-47}` | Enviar ECF por tipo |
+| GET | `/ecf/{rnc}/{encf}` | Consultar estado de ECF |
+| GET | `/ecf/{rnc}` | Buscar ECFs |
+| GET | `/ecf` | Buscar todos los ECFs |
+| GET | `/ecf/{rnc}/message/{id}` | Obtener ECF por ID de mensaje |
+| POST | `/ecf/aprobacioncomercial/{rnc}/{encf}` | Aprobación comercial |
+| POST | `/ecf/anularrango/{rnc}` | Anulación de rango |
+| GET | `/ecf/anulaciones` | Listar anulaciones |
+| POST | `/ecf/FirmarSemilla/{rnc}` | Firmar semilla |
 
-### Company Operations
-| Method | Endpoint | Description |
+### Operaciones de empresa
+| Método | Endpoint | Descripción |
 |---|---|---|
-| GET | `/company` | List companies |
-| GET | `/company/{rnc}` | Get company by RNC |
-| PUT | `/company` | Create/update company |
-| DELETE | `/company/{rnc}` | Delete company |
-| GET | `/company/{rnc}/certificate` | Get certificate |
-| PUT | `/company/{rnc}/certificate` | Update certificate |
+| GET | `/company` | Listar empresas |
+| GET | `/company/{rnc}` | Obtener empresa por RNC |
+| PUT | `/company` | Crear/actualizar empresa |
+| DELETE | `/company/{rnc}` | Eliminar empresa |
+| GET | `/company/{rnc}/certificate` | Obtener certificado |
+| PUT | `/company/{rnc}/certificate` | Actualizar certificado |
 
-### DGII Operations
-| Method | Endpoint | Description |
+### Operaciones DGII
+| Método | Endpoint | Descripción |
 |---|---|---|
-| GET | `/dgii/{rnc}/consultadirectorio/listado` | Directory listing |
-| GET | `/dgii/{rnc}/consultaestado/estado` | Status query |
-| GET | `/dgii/{rnc}/consultaresultado/estado` | Result query |
-| GET | `/dgii/{rnc}/consultatimbre` | Stamp query |
-| GET | `/dgii/{rnc}/estatusservicios/obtener-estatus` | Service status |
+| GET | `/dgii/{rnc}/consultadirectorio/listado` | Listado de directorio |
+| GET | `/dgii/{rnc}/consultaestado/estado` | Consulta de estado |
+| GET | `/dgii/{rnc}/consultaresultado/estado` | Consulta de resultado |
+| GET | `/dgii/{rnc}/consultatimbre` | Consulta de timbre |
+| GET | `/dgii/{rnc}/estatusservicios/obtener-estatus` | Estado de servicios |
 
-## Requirements
+## Requisitos
 
 - iOS 13.0+ / macOS 10.15+ / tvOS 13.0+ / watchOS 6.0+
 - Swift 6.0+
 - Xcode 16.0+
 
-## Authentication
+## Autenticación
 
-The API uses JWT Bearer token authentication. Pass your API key when initializing the client:
+La API usa autenticación con token JWT Bearer. Pasa tu API key al inicializar el cliente:
 
 ```swift
-let client = EcfClient(apiKey: "your-jwt-token", environment: .prod)
+let client = EcfClient(apiKey: "tu-token-jwt", environment: .prod)
 ```
 
-## License
+## Licencia
 
 MIT

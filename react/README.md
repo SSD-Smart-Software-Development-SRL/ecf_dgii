@@ -205,6 +205,32 @@ Crea un cliente tipado de React Query para la API de ECF DGII.
 - `$api` - El cliente openapi-react-query con `useQuery`, `useMutation`, `useSuspenseQuery`, etc.
 - `fetchClient` - El cliente openapi-fetch subyacente para uso fuera de React.
 
+### `createEcfFrontendReactClient(config)`
+
+Crea un cliente de solo lectura restringido a endpoints GET. No expone `useMutation`. Diseñado para el frontend donde solo se consultan ECFs con un token de solo lectura.
+
+**Opciones de configuración:** mismas que `createEcfReactClient`.
+
+**Retorna:** `{ $api, fetchClient }`
+
+- `$api` - Cliente con solo `useQuery`, `useSuspenseQuery`, y `queryOptions` (sin `useMutation`)
+- `fetchClient` - El cliente openapi-fetch subyacente (restringido a paths GET)
+
+```tsx
+import { createEcfFrontendReactClient } from '@ssddo/ecf-react';
+
+const { $api } = createEcfFrontendReactClient({
+  apiKey: token,
+  environment: 'prod',
+});
+
+// ✅ Funciona — endpoint GET
+$api.useQuery('get', '/ecf/{rnc}/{encf}', { params: { path: { rnc, encf } } });
+
+// ❌ Error de tipo — useMutation no está disponible
+// $api.useMutation('post', '/ecf/31');
+```
+
 ## Arquitectura Backend / Frontend
 
 El SDK de React está diseñado para el lado del **frontend** de la arquitectura recomendada:
@@ -219,7 +245,7 @@ El SDK de React está diseñado para el lado del **frontend** de la arquitectura
 // y lo renueva automáticamente cuando expira o recibe un 401
 const ecfToken = useEcfToken();
 
-const { $api } = createEcfReactClient({
+const { $api } = createEcfFrontendReactClient({
   apiKey: ecfToken,  // solo lectura, con alcance al tenant/RNC
   environment: 'prod',
 });

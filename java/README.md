@@ -1,8 +1,8 @@
 # ECF DGII Java SDK
 
-Java SDK for the ECF DGII API (Dominican Republic Electronic Fiscal Receipt system).
+SDK de Java para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana).
 
-## Installation
+## Instalación
 
 ### Maven
 
@@ -20,26 +20,26 @@ Java SDK for the ECF DGII API (Dominican Republic Electronic Fiscal Receipt syst
 implementation 'dom.com.ssd.ecfx:ecf-dgii-client:1.0.0'
 ```
 
-## Quick Start
+## Inicio rápido
 
 ```java
 import dom.com.ssd.ecfx.client.EcfClient;
 import dom.com.ssd.ecfx.client.model.*;
 
-// Create client
+// Crear cliente
 EcfClient client = new EcfClient.Builder()
     .baseUrl("https://api.prod.ecfx.ssd.com.do")
-    .apiKey("your-jwt-token")
+    .apiKey("tu-token-jwt")
     .build();
 
-// Send an ECF (routes automatically, polls for completion)
+// Enviar un ECF (enruta automáticamente, hace polling hasta completar)
 ECF ecf = new ECF();
-// ... build your ECF document ...
-EcfResponse response = client.sendEcf("your-rnc", ecf);
+// ... construir tu documento ECF ...
+EcfResponse response = client.sendEcf("tu-rnc", ecf);
 System.out.println("Status: " + response.getEstatus());
 ```
 
-## Full ECF Example
+## Ejemplo completo de ECF
 
 ```java
 import dom.com.ssd.ecfx.client.EcfClient;
@@ -50,12 +50,12 @@ import java.util.Arrays;
 
 EcfClient client = new EcfClient.Builder()
     .baseUrl("https://api.prod.ecfx.ssd.com.do")
-    .apiKey("your-jwt-token")
+    .apiKey("tu-token-jwt")
     .build();
 
 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-// Build a Factura de Credito Fiscal Electronica (type 31)
+// Construir una Factura de Crédito Fiscal Electrónica (tipo 31)
 Ecf31ECF ecf = new Ecf31ECF();
 
 // Encabezado
@@ -153,91 +153,91 @@ descuento.setIndicadorFacturacionDescuentooRecargo(IndicadorFacturacionDRType.IT
 
 ecf.setDescuentosORecargos(Arrays.asList(descuento));
 
-// Send it
+// Enviar
 EcfResponse response = client.sendEcf("131460941", ecf);
 System.out.println("Status: " + response.getEstatus());
 ```
 
-## Authentication
+## Autenticación
 
-The API uses JWT Bearer token authentication. Set your token via:
+La API usa autenticación con token JWT Bearer. Configura tu token mediante:
 
-1. **Builder**: `.apiKey("your-token")`
-2. **Environment variable**: `ECF_DGII_API_KEY`
+1. **Builder**: `.apiKey("tu-token")`
+2. **Variable de entorno**: `ECF_DGII_API_KEY`
 
-## High-Level API: sendEcf
+## API de alto nivel: sendEcf
 
-`sendEcf(rnc, ecf)` encapsulates the full ECF submission workflow:
+`sendEcf(rnc, ecf)` encapsula el flujo completo de envío de un ECF:
 
-1. Routes the ECF to the correct endpoint based on `tipoeCF`
-2. Submits the document
-3. Polls for completion with exponential backoff
-4. Returns the final `EcfResponse` when done
+1. Enruta el ECF al endpoint correcto según el `tipoeCF`
+2. Envía el documento
+3. Hace polling hasta completar con backoff exponencial
+4. Devuelve el `EcfResponse` final cuando termina
 
-### Polling Configuration
+### Configuración de polling
 
 ```java
 EcfClient client = new EcfClient.Builder()
     .baseUrl("https://api.prod.ecfx.ssd.com.do")
-    .apiKey("your-token")
-    .pollingMaxDurationMs(120_000)  // 2 minutes (default)
-    .pollingIntervalMs(1_000)       // 1 second initial (default)
+    .apiKey("tu-token")
+    .pollingMaxDurationMs(120_000)  // 2 minutos (por defecto)
+    .pollingIntervalMs(1_000)       // 1 segundo inicial (por defecto)
     .build();
 ```
 
-## Backend / Frontend Architecture
+## Arquitectura Backend / Frontend
 
-In most apps, the backend handles business logic and sends the ECF. The frontend gets a read-only token to query status directly:
+En la mayoría de aplicaciones, el backend maneja la lógica de negocio (validación, almacenamiento, conversión) y envía el ECF. El frontend obtiene un token de solo lectura para consultar el estado directamente con `EcfFrontendClient`:
 
 ```java
-// Your invoice endpoint — business logic + send to ECF SSD
+// Tu endpoint de facturas — lógica de negocio + envío a ECF SSD
 @PostMapping("/api/v1/invoices")
 public ResponseEntity<?> createInvoice(@RequestBody CreateInvoiceRequest request) {
-    // 1. Validate and save your internal invoice
+    // 1. Validar y guardar tu factura interna
     Invoice invoice = invoiceService.validateAndSave(request);
-    // 2. Convert to ECF format
+    // 2. Convertir a formato ECF
     ECF ecf = mapper.toEcf(invoice);
-    // 3. Send to ECF SSD (no polling)
+    // 3. Enviar a ECF SSD (sin polling)
     EcfResponse response = client.getEcfApi().recepcionEcf31(rnc, ecf);
     invoiceService.updateMessageId(invoice.getId(), response.getMessageId());
     return ResponseEntity.ok(Map.of("id", invoice.getId(), "messageId", response.getMessageId()));
 }
 
-// Separate endpoint: generate read-only token for frontend
+// Endpoint separado: generar token de solo lectura para el frontend
 @GetMapping("/api/v1/ecf-token")
 public ResponseEntity<?> getEcfToken() {
-    NewCompanyApiKeyResponse apiKey = client.getApiKeyApi().newCompanyApiKey(request); // scoped to tenant/RNC
+    NewCompanyApiKeyResponse apiKey = client.getApiKeyApi().newCompanyApiKey(request); // alcance por tenant/RNC
     return ResponseEntity.ok(Map.of("token", apiKey.getToken()));
 }
 ```
 
-The frontend stores the token securely, renews it on `401` or expiry, and queries ECF SSD directly. See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram.
+El frontend almacena el token de forma segura, lo renueva ante `401 Unauthorized` o expiración, y consulta ECF SSD directamente. En React, se puede usar `createEcfFrontendReactClient` para consultas de solo lectura. Consulta el [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo.
 
-> **`sendEcf`** wraps send + polling into a single call. For apps with a frontend, use the individual endpoints.
+> **`sendEcf`** envuelve envío + polling en una sola llamada. Para aplicaciones con frontend, usa los endpoints individuales.
 
-## Raw API Access
+## Acceso directo a la API
 
-All generated API classes are accessible for direct use:
+Todas las clases de API generadas están disponibles para uso directo:
 
 ```java
-// Company management
+// Gestión de empresas
 client.getCompanyApi().getCompanies(null, null, 1, 25);
 client.getCompanyApi().getCompanyByRnc("123456789");
 
-// ECF operations
+// Operaciones ECF
 client.getEcfApi().searchEcfs("123456789", null, null, null, false, null, null, null, null, 1, 25);
 
-// DGII queries
+// Consultas DGII
 client.getDgiiApi().consultaEstado("rnc", "encf");
 
-// Reception
+// Recepción
 client.getRecepcionApi().searchEcfReceptionRequests(null, null, null, 1, 25);
 ```
 
-## Supported ECF Types
+## Tipos de ECF soportados
 
-| Type | Code | Endpoint |
-|------|------|----------|
+| Tipo | Código | Endpoint |
+|------|--------|----------|
 | Factura de Credito Fiscal Electronica | 31 | `/ecf/31` |
 | Factura de Consumo Electronica | 32 | `/ecf/32` |
 | Nota de Debito Electronica | 33 | `/ecf/33` |
@@ -249,22 +249,22 @@ client.getRecepcionApi().searchEcfReceptionRequests(null, null, null, 1, 25);
 | Comprobante de Exportaciones Electronico | 46 | `/ecf/46` |
 | Comprobante para Pagos al Exterior Electronico | 47 | `/ecf/47` |
 
-## Android Compatibility
+## Compatibilidad con Android
 
-This SDK is compatible with Android API 21+ (Android 5.0). It uses:
-- OkHttp (native Android HTTP support)
-- ThreeTenBP (Java 8 date/time backport for Android)
+Este SDK es compatible con Android API 21+ (Android 5.0). Utiliza:
+- OkHttp (soporte HTTP nativo de Android)
+- ThreeTenBP (backport de date/time de Java 8 para Android)
 
-## Building from Source
+## Compilar desde el código fuente
 
 ```bash
 ./mvnw clean install
 ```
 
-## API Environments
+## Entornos
 
-| Environment | URL |
-|-------------|-----|
+| Entorno | URL |
+|---------|-----|
 | Test | `https://api.test.ecfx.ssd.com.do` |
-| Certification | `https://api.cert.ecfx.ssd.com.do` |
-| Production | `https://api.prod.ecfx.ssd.com.do` |
+| Certificación | `https://api.cert.ecfx.ssd.com.do` |
+| Producción | `https://api.prod.ecfx.ssd.com.do` |

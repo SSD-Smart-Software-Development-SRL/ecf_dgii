@@ -1,20 +1,20 @@
 # ECF DGII C++ SDK Client
 
-C++ SDK client for the ECF DGII API (Electronic Fiscal Receipt - Dominican Republic).
+SDK de C++ para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana).
 
-## Overview
+## Descripción general
 
-This library provides a high-level C++ client for submitting electronic fiscal receipts (e-CF) to the DGII through the ECF API. It includes:
+Esta biblioteca proporciona un cliente de alto nivel en C++ para enviar comprobantes fiscales electrónicos (e-CF) a la DGII a través de la API de ECF. Incluye:
 
-- **Auto-generated models and API classes** from the OpenAPI specification using [OpenAPI Generator](https://openapi-generator.tech) (`cpp-restsdk`)
-- **High-level `EcfClient`** with a `sendEcf()` method that handles routing, polling, and error handling automatically
-- **Direct API access** to all raw endpoints via the underlying generated API objects
+- **Modelos y clases de API autogenerados** a partir de la especificación OpenAPI usando [OpenAPI Generator](https://openapi-generator.tech) (`cpp-restsdk`)
+- **`EcfClient` de alto nivel** con un método `sendEcf()` que maneja el enrutamiento, polling y manejo de errores automáticamente
+- **Acceso directo a la API** a todos los endpoints crudos mediante los objetos de API generados
 
-## Installation
+## Instalación
 
-### Option 1: vcpkg (Recommended)
+### Opción 1: vcpkg (Recomendado)
 
-Add to your `vcpkg.json`:
+Agregar a tu `vcpkg.json`:
 
 ```json
 {
@@ -22,22 +22,22 @@ Add to your `vcpkg.json`:
 }
 ```
 
-Or install directly:
+O instalar directamente:
 
 ```sh
 vcpkg install ecf-dgii-client
 ```
 
-Then in your CMakeLists.txt:
+Luego en tu CMakeLists.txt:
 
 ```cmake
 find_package(ecf-dgii-client REQUIRED)
 target_link_libraries(your_target PRIVATE ecf-dgii-client::ecf-dgii-client)
 ```
 
-### Option 2: Conan
+### Opción 2: Conan
 
-Add to your `conanfile.txt`:
+Agregar a tu `conanfile.txt`:
 
 ```ini
 [requires]
@@ -48,39 +48,39 @@ CMakeDeps
 CMakeToolchain
 ```
 
-Or in `conanfile.py`:
+O en `conanfile.py`:
 
 ```python
 def requirements(self):
     self.requires("ecf-dgii-client/0.1.0")
 ```
 
-Then in your CMakeLists.txt:
+Luego en tu CMakeLists.txt:
 
 ```cmake
 find_package(ecf-dgii-client REQUIRED)
 target_link_libraries(your_target PRIVATE ecf-dgii-client::ecf-dgii-client)
 ```
 
-### Option 3: NuGet (Visual Studio / Windows)
+### Opción 3: NuGet (Visual Studio / Windows)
 
 ```sh
 nuget install ecf-dgii-client.cpp
 ```
 
-Or via the Visual Studio NuGet Package Manager, search for `ecf-dgii-client.cpp`.
+O mediante el administrador de paquetes NuGet de Visual Studio, buscar `ecf-dgii-client.cpp`.
 
-### Option 4: Build from Source
+### Opción 4: Compilar desde el código fuente
 
-#### Prerequisites
+#### Requisitos previos
 
-Install [cpprestsdk](https://github.com/Microsoft/cpprestsdk) and [Boost](https://www.boost.org/):
+Instalar [cpprestsdk](https://github.com/Microsoft/cpprestsdk) y [Boost](https://www.boost.org/):
 
 - **macOS**: `brew install cpprestsdk boost`
 - **Linux (Debian/Ubuntu)**: `sudo apt-get install libcpprest-dev libboost-all-dev`
 - **Windows**: `vcpkg install cpprestsdk cpprestsdk:x64-windows boost-uuid boost-uuid:x64-windows`
 
-#### Build & Install
+#### Compilar e instalar
 
 ```sh
 mkdir build && cd build
@@ -89,18 +89,18 @@ cmake --build .
 sudo cmake --install .
 ```
 
-Then in your CMakeLists.txt:
+Luego en tu CMakeLists.txt:
 
 ```cmake
 find_package(ecf-dgii-client REQUIRED)
 target_link_libraries(your_target PRIVATE ecf-dgii-client::ecf-dgii-client)
 ```
 
-## Quick Start
+## Inicio rápido
 
-### High-Level Client (Recommended)
+### Cliente de alto nivel (Recomendado)
 
-The `EcfClient` provides a simple interface that handles routing to the correct endpoint, polling for completion, and error handling:
+`EcfClient` proporciona una interfaz simple que maneja el enrutamiento al endpoint correcto, polling hasta completar y manejo de errores:
 
 ```cpp
 #include <ecf-dgii-client/EcfClient.h>
@@ -109,14 +109,14 @@ using namespace ecf_dgii;
 using namespace org::openapitools::client::model;
 
 int main() {
-    // Configure the client
+    // Configurar el cliente
     EcfClientConfig config;
-    config.apiKey = "your-jwt-token";   // or set ECF_API_KEY env var
-    config.environment = "test";         // "test", "cert", or "prod"
+    config.apiKey = "tu-token-jwt";      // o usar la variable de entorno ECF_API_KEY
+    config.environment = "test";          // "test", "cert" o "prod"
 
     EcfClient client(config);
 
-    // Build an ECF
+    // Construir un ECF
     auto ecf = std::make_shared<ECF>();
     auto encabezado = std::make_shared<Encabezado>();
     auto idDoc = std::make_shared<IdDoc>();
@@ -134,30 +134,30 @@ int main() {
     encabezado->setEmisor(emisor);
     ecf->setEncabezado(encabezado);
 
-    // ... set items, totals, etc.
+    // ... establecer items, totales, etc.
 
-    // Send and wait for result (handles routing + polling automatically)
+    // Enviar y esperar el resultado (maneja enrutamiento + polling automáticamente)
     try {
         auto result = client.sendEcf(ecf).get();
-        std::cout << "ECF processed! Message ID: "
+        std::cout << "ECF procesado! Message ID: "
                   << utility::conversions::to_utf8string(result->getMessageId())
                   << std::endl;
     } catch (const EcfError& e) {
-        std::cerr << "ECF Error: " << e.what() << std::endl;
-        // Access the full response: e.getResponse()
+        std::cerr << "Error ECF: " << e.what() << std::endl;
+        // Acceder a la respuesta completa: e.getResponse()
     } catch (const PollingTimeoutError& e) {
-        std::cerr << "Polling timed out" << std::endl;
+        std::cerr << "Tiempo de polling agotado" << std::endl;
     } catch (const PollingMaxRetriesError& e) {
-        std::cerr << "Max retries exceeded" << std::endl;
+        std::cerr << "Máximo de reintentos excedido" << std::endl;
     }
 
     return 0;
 }
 ```
 
-### Polling Options
+### Opciones de polling
 
-Customize polling behavior:
+Personalizar el comportamiento de polling:
 
 ```cpp
 PollingOptions options;
@@ -165,89 +165,109 @@ options.initialDelay = std::chrono::milliseconds(2000);
 options.maxDelay = std::chrono::milliseconds(60000);
 options.maxRetries = 30;
 options.backoffMultiplier = 1.5;
-options.timeout = std::chrono::milliseconds(300000);  // 5 minutes
+options.timeout = std::chrono::milliseconds(300000);  // 5 minutos
 
 auto result = client.sendEcf(ecf, options).get();
 ```
 
-### Backend / Frontend Architecture
+### Arquitectura Backend / Frontend
 
-In most apps, the backend sends the ECF and the frontend queries the status directly using a read-only API key. The backend generates this restricted token (scoped to tenant/RNC) via the `ApiKeyApi::newCompanyApiKey` endpoint and passes it to the frontend. The frontend then queries ECF SSD directly without going through the backend.
+En la mayoría de aplicaciones, el backend envía el ECF y el frontend consulta el estado directamente usando un API key de solo lectura. El backend genera este token restringido (limitado al tenant/RNC) mediante el endpoint `ApiKeyApi::newCompanyApiKey` y lo pasa al frontend. El frontend entonces consulta ECF SSD directamente sin pasar por el backend.
 
-See the [main README](../README.md#arquitectura-backend--frontend) for the full diagram and code examples.
+Para el frontend, usa `EcfFrontendClient` que expone solo los endpoints de consulta (solo lectura):
 
-> **`sendEcf`** is a convenience that wraps send + polling. For apps with a frontend, use the individual endpoints.
+```cpp
+#include <ecf-dgii-client/EcfClient.h>
 
-### Direct API Access
+using namespace ecf_dgii;
 
-Access all raw API endpoints through the generated API objects:
+// Frontend: cliente de solo lectura
+EcfClientConfig frontendConfig;
+frontendConfig.apiKey = "token-solo-lectura-del-frontend";
+frontendConfig.environment = "prod";
+
+EcfFrontendClient frontendClient(frontendConfig);
+
+// Solo operaciones de lectura disponibles
+auto ecfResults = frontendClient.ecfApi()->queryEcf(
+    _XPLATSTR("123456789"), _XPLATSTR("E310000000001"), boost::optional<bool>(false)
+).get();
+```
+
+Consulta el [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo y ejemplos de código.
+
+> **`sendEcf`** envuelve envío + polling en una sola llamada. Para aplicaciones con frontend, usa los endpoints individuales.
+
+### Acceso directo a la API
+
+Acceder a todos los endpoints crudos de la API mediante los objetos de API generados:
 
 ```cpp
 EcfClient client(config);
 
-// Company operations
+// Operaciones de empresa
 auto companies = client.companyApi()->getCompanies(
     boost::none, boost::none, boost::optional<int32_t>(1), boost::optional<int32_t>(25)
 ).get();
 
-// ECF query
+// Consulta de ECF
 auto ecfResults = client.ecfApi()->queryEcf(
     _XPLATSTR("123456789"), _XPLATSTR("E310000000001"), boost::optional<bool>(false)
 ).get();
 
-// DGII operations
+// Operaciones DGII
 auto status = client.dgiiApi()->estatusServicios(_XPLATSTR("123456789")).get();
 
-// Reception operations
+// Operaciones de recepción
 auto requests = client.recepcionApi()->searchEcfReceptionRequests(
     boost::none, boost::none, boost::none, boost::none, boost::none
 ).get();
 ```
 
-## Authentication
+## Autenticación
 
-The API uses JWT Bearer token authentication. Provide your API key in one of two ways:
+La API usa autenticación con token Bearer JWT. Proporciona tu API key de una de estas dos formas:
 
-1. **Direct configuration**: `config.apiKey = "your-jwt-token";`
-2. **Environment variable**: `export ECF_API_KEY="your-jwt-token"`
+1. **Configuración directa**: `config.apiKey = "tu-token-jwt";`
+2. **Variable de entorno**: `export ECF_API_KEY="tu-token-jwt"`
 
-## Environments
+## Entornos
 
-| Environment | URL |
-|-------------|-----|
+| Entorno | URL |
+|---------|-----|
 | `test` | `https://api.test.ecfx.ssd.com.do` |
 | `cert` | `https://api.cert.ecfx.ssd.com.do` |
 | `prod` | `https://api.prod.ecfx.ssd.com.do` |
 
-You can also set a custom base URL via `config.baseUrl` or the `ECF_API_URL` environment variable.
+También puedes establecer una URL base personalizada mediante `config.baseUrl` o la variable de entorno `ECF_API_URL`.
 
-## ECF Type Routing
+## Enrutamiento por tipo de ECF
 
-The `sendEcf()` method automatically routes to the correct endpoint based on `tipoeCF`:
+El método `sendEcf()` enruta automáticamente al endpoint correcto según el `tipoeCF`:
 
-| ECF Type | Route | Description |
-|----------|-------|-------------|
-| FacturaDeCreditoFiscalElectronica | `/ecf/31` | Electronic fiscal credit invoice |
-| FacturaDeConsumoElectronica | `/ecf/32` | Electronic consumer invoice |
-| NotaDeDebitoElectronica | `/ecf/33` | Electronic debit note |
-| NotaDeCreditoElectronica | `/ecf/34` | Electronic credit note |
-| ComprasElectronico | `/ecf/41` | Electronic purchases |
-| GastosMenoresElectronico | `/ecf/43` | Electronic minor expenses |
-| RegimenesEspecialesElectronico | `/ecf/44` | Electronic special regimes |
-| GubernamentalElectronico | `/ecf/45` | Electronic governmental |
-| ComprobanteDeExportacionesElectronico | `/ecf/46` | Electronic export receipt |
-| ComprobanteParaPagosAlExteriorElectronico | `/ecf/47` | Electronic foreign payment receipt |
+| Tipo de ECF | Ruta | Descripción |
+|-------------|------|-------------|
+| FacturaDeCreditoFiscalElectronica | `/ecf/31` | Factura de crédito fiscal electrónica |
+| FacturaDeConsumoElectronica | `/ecf/32` | Factura de consumo electrónica |
+| NotaDeDebitoElectronica | `/ecf/33` | Nota de débito electrónica |
+| NotaDeCreditoElectronica | `/ecf/34` | Nota de crédito electrónica |
+| ComprasElectronico | `/ecf/41` | Compras electrónico |
+| GastosMenoresElectronico | `/ecf/43` | Gastos menores electrónico |
+| RegimenesEspecialesElectronico | `/ecf/44` | Regímenes especiales electrónico |
+| GubernamentalElectronico | `/ecf/45` | Gubernamental electrónico |
+| ComprobanteDeExportacionesElectronico | `/ecf/46` | Comprobante de exportaciones electrónico |
+| ComprobanteParaPagosAlExteriorElectronico | `/ecf/47` | Comprobante para pagos al exterior electrónico |
 
-## Publishing
+## Publicación
 
 ### ConanCenter
 
-1. Fork [conan-center-index](https://github.com/conan-io/conan-center-index)
-2. Create `recipes/ecf-dgii-client/all/conanfile.py` using the `conanfile.py` in this repo as a starting point (adapted for conan-center-index conventions)
-3. Add `recipes/ecf-dgii-client/config.yml` with version mappings
-4. Submit a pull request
+1. Hacer fork de [conan-center-index](https://github.com/conan-io/conan-center-index)
+2. Crear `recipes/ecf-dgii-client/all/conanfile.py` usando el `conanfile.py` de este repositorio como punto de partida (adaptado a las convenciones de conan-center-index)
+3. Agregar `recipes/ecf-dgii-client/config.yml` con los mapeos de versiones
+4. Enviar un pull request
 
-Test locally first:
+Probar localmente primero:
 
 ```sh
 conan create . --build=missing
@@ -256,14 +276,14 @@ conan test test_package ecf-dgii-client/0.1.0
 
 ### vcpkg
 
-1. Fork [vcpkg](https://github.com/microsoft/vcpkg)
-2. Copy `vcpkg/portfile.cmake` to `ports/ecf-dgii-client/portfile.cmake`
-3. Copy `vcpkg.json` to `ports/ecf-dgii-client/vcpkg.json`
-4. Update the `SHA512` in `portfile.cmake` with the actual hash after creating the release tag
-5. Run `vcpkg x-add-version ecf-dgii-client` to update version database
-6. Submit a pull request
+1. Hacer fork de [vcpkg](https://github.com/microsoft/vcpkg)
+2. Copiar `vcpkg/portfile.cmake` a `ports/ecf-dgii-client/portfile.cmake`
+3. Copiar `vcpkg.json` a `ports/ecf-dgii-client/vcpkg.json`
+4. Actualizar el `SHA512` en `portfile.cmake` con el hash real después de crear el tag de release
+5. Ejecutar `vcpkg x-add-version ecf-dgii-client` para actualizar la base de datos de versiones
+6. Enviar un pull request
 
-Test locally:
+Probar localmente:
 
 ```sh
 vcpkg install ecf-dgii-client --overlay-ports=./vcpkg
@@ -276,9 +296,9 @@ nuget pack ecf-dgii-client.nuspec
 nuget push ecf-dgii-client.cpp.0.1.0.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey YOUR_API_KEY
 ```
 
-## Example ECF Payload
+## Ejemplo de payload ECF
 
-A complete ECF JSON payload with items, discounts, additional taxes, and non-billable items:
+Un payload ECF JSON completo con items, descuentos, impuestos adicionales y items no facturables:
 
 ```json
 {
@@ -367,8 +387,8 @@ A complete ECF JSON payload with items, discounts, additional taxes, and non-bil
 }
 ```
 
-## Generator Info
+## Información del generador
 
-- API version: v1
-- Generator version: 7.20.0
-- Build package: `org.openapitools.codegen.languages.CppRestSdkClientCodegen`
+- Versión de la API: v1
+- Versión del generador: 7.20.0
+- Paquete de compilación: `org.openapitools.codegen.languages.CppRestSdkClientCodegen`

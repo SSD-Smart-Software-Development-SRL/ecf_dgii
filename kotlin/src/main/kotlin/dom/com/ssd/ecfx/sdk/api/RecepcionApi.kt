@@ -19,8 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesLimitParameter
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesPageParameter
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfAcecfReceptionRequestDto
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfReceptionRequestDto
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
@@ -219,7 +217,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    suspend fun searchAcecfReceptionRequests(messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncs: kotlin.collections.List<kotlin.String>? = null, page: GetCompaniesPageParameter? = null, limit: GetCompaniesLimitParameter? = null) : PaginatedApiResultOfAcecfReceptionRequestDto = withContext(Dispatchers.IO) {
+    suspend fun searchAcecfReceptionRequests(messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncs: kotlin.collections.List<kotlin.String>? = null, page: Int? = null, limit: Int? = null) : PaginatedApiResultOfAcecfReceptionRequestDto = withContext(Dispatchers.IO) {
         val localVarResponse = searchAcecfReceptionRequestsWithHttpInfo(messageIds = messageIds, encfs = encfs, rncs = rncs, page = page, limit = limit)
 
         return@withContext when (localVarResponse.responseType) {
@@ -252,7 +250,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    suspend fun searchAcecfReceptionRequestsWithHttpInfo(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: GetCompaniesPageParameter?, limit: GetCompaniesLimitParameter?) : ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto?> = withContext(Dispatchers.IO) {
+    suspend fun searchAcecfReceptionRequestsWithHttpInfo(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto?> = withContext(Dispatchers.IO) {
         val localVariableConfig = searchAcecfReceptionRequestsRequestConfig(messageIds = messageIds, encfs = encfs, rncs = rncs, page = page, limit = limit)
 
         return@withContext request<Unit, PaginatedApiResultOfAcecfReceptionRequestDto>(
@@ -270,7 +268,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchAcecfReceptionRequestsRequestConfig(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: GetCompaniesPageParameter?, limit: GetCompaniesLimitParameter?) : RequestConfig<Unit> {
+    fun searchAcecfReceptionRequestsRequestConfig(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -319,7 +317,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    suspend fun searchAcecfReceptionRequestsByRnc(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, page: GetCompaniesPageParameter? = null, limit: GetCompaniesLimitParameter? = null) : PaginatedApiResultOfAcecfReceptionRequestDto = withContext(Dispatchers.IO) {
+    suspend fun searchAcecfReceptionRequestsByRnc(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, page: Int? = null, limit: Int? = null) : PaginatedApiResultOfAcecfReceptionRequestDto = withContext(Dispatchers.IO) {
         val localVarResponse = searchAcecfReceptionRequestsByRncWithHttpInfo(rnc = rnc, messageIds = messageIds, encfs = encfs, page = page, limit = limit)
 
         return@withContext when (localVarResponse.responseType) {
@@ -352,7 +350,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    suspend fun searchAcecfReceptionRequestsByRncWithHttpInfo(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: GetCompaniesPageParameter?, limit: GetCompaniesLimitParameter?) : ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto?> = withContext(Dispatchers.IO) {
+    suspend fun searchAcecfReceptionRequestsByRncWithHttpInfo(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto?> = withContext(Dispatchers.IO) {
         val localVariableConfig = searchAcecfReceptionRequestsByRncRequestConfig(rnc = rnc, messageIds = messageIds, encfs = encfs, page = page, limit = limit)
 
         return@withContext request<Unit, PaginatedApiResultOfAcecfReceptionRequestDto>(
@@ -370,7 +368,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchAcecfReceptionRequestsByRncRequestConfig(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: GetCompaniesPageParameter?, limit: GetCompaniesLimitParameter?) : RequestConfig<Unit> {
+    fun searchAcecfReceptionRequestsByRncRequestConfig(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -416,7 +414,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    suspend fun searchEcfReceptionRequests(messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncs: kotlin.collections.List<kotlin.String>? = null, page: GetCompaniesPageParameter? = null, limit: GetCompaniesLimitParameter? = null) : PaginatedApiResultOfEcfReceptionRequestDto = withContext(Dispatchers.IO) {
+    suspend fun searchEcfReceptionRequests(messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncs: kotlin.collections.List<kotlin.String>? = null, page: Int? = null, limit: Int? = null) : PaginatedApiResultOfEcfReceptionRequestDto = withContext(Dispatchers.IO) {
         val localVarResponse = searchEcfReceptionRequestsWithHttpInfo(messageIds = messageIds, encfs = encfs, rncs = rncs, page = page, limit = limit)
 
         return@withContext when (localVarResponse.responseType) {
@@ -449,7 +447,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    suspend fun searchEcfReceptionRequestsWithHttpInfo(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: GetCompaniesPageParameter?, limit: GetCompaniesLimitParameter?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> = withContext(Dispatchers.IO) {
+    suspend fun searchEcfReceptionRequestsWithHttpInfo(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> = withContext(Dispatchers.IO) {
         val localVariableConfig = searchEcfReceptionRequestsRequestConfig(messageIds = messageIds, encfs = encfs, rncs = rncs, page = page, limit = limit)
 
         return@withContext request<Unit, PaginatedApiResultOfEcfReceptionRequestDto>(
@@ -467,7 +465,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchEcfReceptionRequestsRequestConfig(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: GetCompaniesPageParameter?, limit: GetCompaniesLimitParameter?) : RequestConfig<Unit> {
+    fun searchEcfReceptionRequestsRequestConfig(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -516,7 +514,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    suspend fun searchEcfReceptionRequestsByRnc(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, page: GetCompaniesPageParameter? = null, limit: GetCompaniesLimitParameter? = null) : PaginatedApiResultOfEcfReceptionRequestDto = withContext(Dispatchers.IO) {
+    suspend fun searchEcfReceptionRequestsByRnc(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, page: Int? = null, limit: Int? = null) : PaginatedApiResultOfEcfReceptionRequestDto = withContext(Dispatchers.IO) {
         val localVarResponse = searchEcfReceptionRequestsByRncWithHttpInfo(rnc = rnc, messageIds = messageIds, encfs = encfs, page = page, limit = limit)
 
         return@withContext when (localVarResponse.responseType) {
@@ -549,7 +547,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    suspend fun searchEcfReceptionRequestsByRncWithHttpInfo(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: GetCompaniesPageParameter?, limit: GetCompaniesLimitParameter?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> = withContext(Dispatchers.IO) {
+    suspend fun searchEcfReceptionRequestsByRncWithHttpInfo(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> = withContext(Dispatchers.IO) {
         val localVariableConfig = searchEcfReceptionRequestsByRncRequestConfig(rnc = rnc, messageIds = messageIds, encfs = encfs, page = page, limit = limit)
 
         return@withContext request<Unit, PaginatedApiResultOfEcfReceptionRequestDto>(
@@ -567,7 +565,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchEcfReceptionRequestsByRncRequestConfig(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: GetCompaniesPageParameter?, limit: GetCompaniesLimitParameter?) : RequestConfig<Unit> {
+    fun searchEcfReceptionRequestsByRncRequestConfig(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {

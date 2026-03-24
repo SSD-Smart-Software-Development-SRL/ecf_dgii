@@ -21,8 +21,6 @@ import okhttp3.HttpUrl
 
 import dom.com.ssd.ecfx.sdk.models.CertificateResponse
 import dom.com.ssd.ecfx.sdk.models.CompanyResponse
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesLimitParameter
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesPageParameter
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfCompanyResponse
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
 import dom.com.ssd.ecfx.sdk.models.UpsertCompanyRequest
@@ -143,7 +141,7 @@ open class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    suspend fun getCompanies(rncs: kotlin.collections.List<kotlin.String>? = null, names: kotlin.collections.List<kotlin.String>? = null, page: GetCompaniesPageParameter? = null, limit: GetCompaniesLimitParameter? = null) : PaginatedApiResultOfCompanyResponse = withContext(Dispatchers.IO) {
+    suspend fun getCompanies(rncs: kotlin.collections.List<kotlin.String>? = null, names: kotlin.collections.List<kotlin.String>? = null, page: Int? = null, limit: Int? = null) : PaginatedApiResultOfCompanyResponse = withContext(Dispatchers.IO) {
         val localVarResponse = getCompaniesWithHttpInfo(rncs = rncs, names = names, page = page, limit = limit)
 
         return@withContext when (localVarResponse.responseType) {
@@ -175,7 +173,7 @@ open class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    suspend fun getCompaniesWithHttpInfo(rncs: kotlin.collections.List<kotlin.String>?, names: kotlin.collections.List<kotlin.String>?, page: GetCompaniesPageParameter?, limit: GetCompaniesLimitParameter?) : ApiResponse<PaginatedApiResultOfCompanyResponse?> = withContext(Dispatchers.IO) {
+    suspend fun getCompaniesWithHttpInfo(rncs: kotlin.collections.List<kotlin.String>?, names: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfCompanyResponse?> = withContext(Dispatchers.IO) {
         val localVariableConfig = getCompaniesRequestConfig(rncs = rncs, names = names, page = page, limit = limit)
 
         return@withContext request<Unit, PaginatedApiResultOfCompanyResponse>(
@@ -192,7 +190,7 @@ open class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun getCompaniesRequestConfig(rncs: kotlin.collections.List<kotlin.String>?, names: kotlin.collections.List<kotlin.String>?, page: GetCompaniesPageParameter?, limit: GetCompaniesLimitParameter?) : RequestConfig<Unit> {
+    fun getCompaniesRequestConfig(rncs: kotlin.collections.List<kotlin.String>?, names: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {

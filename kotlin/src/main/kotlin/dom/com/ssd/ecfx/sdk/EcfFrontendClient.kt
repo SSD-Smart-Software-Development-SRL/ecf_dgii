@@ -5,8 +5,6 @@ import dom.com.ssd.ecfx.sdk.api.EcfApi
 import dom.com.ssd.ecfx.sdk.models.AllTipoECFTypes
 import dom.com.ssd.ecfx.sdk.models.CompanyResponse
 import dom.com.ssd.ecfx.sdk.models.EcfResponse
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesLimitParameter
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesPageParameter
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfCompanyResponse
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfResponse
 import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
@@ -165,8 +163,8 @@ class EcfFrontendClient(private val config: EcfFrontendClientConfig) {
         toFechaEmision: OffsetDateTime? = null,
         amountFrom: SearchEcfsAmountFromParameter? = null,
         amountTo: SearchEcfsAmountFromParameter? = null,
-        page: GetCompaniesPageParameter? = null,
-        limit: GetCompaniesLimitParameter? = null,
+        page: Int? = null,
+        limit: Int? = null,
     ): PaginatedApiResultOfEcfResponse = runBlocking {
         ecfApi.searchEcfs(
             rnc, encfs, ids, tiposEcfs, includeEcfContent,
@@ -198,8 +196,8 @@ class EcfFrontendClient(private val config: EcfFrontendClientConfig) {
         toFechaEmision: OffsetDateTime? = null,
         amountFrom: SearchEcfsAmountFromParameter? = null,
         amountTo: SearchEcfsAmountFromParameter? = null,
-        page: GetCompaniesPageParameter? = null,
-        limit: GetCompaniesLimitParameter? = null,
+        page: Int? = null,
+        limit: Int? = null,
     ): PaginatedApiResultOfEcfResponse = runBlocking {
         ecfApi.searchAllEcfs(
             encfs, ids, tiposEcfs, includeEcfContent,
@@ -235,8 +233,8 @@ class EcfFrontendClient(private val config: EcfFrontendClientConfig) {
     fun getCompanies(
         rncs: List<String>? = null,
         names: List<String>? = null,
-        page: GetCompaniesPageParameter? = null,
-        limit: GetCompaniesLimitParameter? = null,
+        page: Int? = null,
+        limit: Int? = null,
     ): PaginatedApiResultOfCompanyResponse = runBlocking {
         companyApi.getCompanies(rncs, names, page, limit)
     }

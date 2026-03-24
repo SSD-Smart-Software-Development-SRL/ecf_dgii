@@ -7,7 +7,7 @@
 
   <!-- Shared package / assembly metadata -->
   <PropertyGroup>
-    <Version>3.0.0</Version>
+    <Version>3.1.0</Version>
     <Authors>SSD Smart Software Development SRL</Authors>
     <Company>SSD Smart Software Development SRL</Company>
     <Copyright>© SSD Smart Software Development SRL</Copyright>

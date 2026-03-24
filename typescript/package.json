@@ -1,6 +1,6 @@
 {
   "name": "@ssddo/ecf-sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "SDK de TypeScript para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana)",
   "type": "module",
   "main": "./dist/index.cjs",

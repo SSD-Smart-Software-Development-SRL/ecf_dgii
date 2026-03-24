@@ -16,8 +16,7 @@ on:
 
 jobs:
   build-java:
-    # TODO: Re-enable after EcfClient.java is updated for new per-type ECF models
-    if: false && (github.event_name != 'release' || startsWith(github.event.release.tag_name, 'maven-v'))
+    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'maven-v')
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -70,8 +69,7 @@ jobs:
           path: kotlin/build/libs/*.jar
 
   deploy-java:
-    # TODO: Re-enable after EcfClient.java is updated for new per-type ECF models
-    if: false && github.event_name == 'release' && startsWith(github.event.release.tag_name, 'maven-v')
+    if: github.event_name == 'release' && startsWith(github.event.release.tag_name, 'maven-v')
     runs-on: ubuntu-latest
     needs: [ build-java ]
     defaults:

@@ -6,12 +6,12 @@ import dom.com.ssd.ecfx.client.model.*;
 import java.util.List;
 import java.util.UUID;
 
+
 /**
  * High-level client for the ECF DGII API.
  *
- * <p>Provides {@link #sendEcf(String, ECF)} which automatically routes the ECF
- * to the correct endpoint based on its type, submits it, polls for completion,
- * and returns the final result.</p>
+ * <p>Provides overloaded {@code sendEcf} methods for each ECF type (Ecf31ECF, Ecf32ECF, etc.)
+ * which automatically submit, poll for completion, and return the final result.</p>
  *
  * <p>All raw generated API classes are also accessible via getters.</p>
  *
@@ -63,62 +63,64 @@ public class EcfClient {
         this.pollingIntervalMs = builder.pollingIntervalMs;
     }
 
-    /**
-     * Sends an ECF, automatically routing by type, then polls until completion.
-     *
-     * @param rnc The company RNC
-     * @param ecf The ECF document to send
-     * @return The final EcfResponse when processing is complete
-     * @throws EcfClientException if routing fails, polling times out, or DGII returns an error
-     * @throws ApiException if the HTTP request fails
-     */
-    public EcfResponse sendEcf(String rnc, ECF ecf) throws EcfClientException, ApiException {
-        if (ecf == null || ecf.getEncabezado() == null || ecf.getEncabezado().getIdDoc() == null) {
-            throw new EcfClientException("ECF, encabezado, and idDoc must not be null");
-        }
+    // --- Type-specific sendEcf overloads ---
 
-        TipoeCFType tipo = ecf.getEncabezado().getIdDoc().getTipoeCF();
-        if (tipo == null) {
-            throw new EcfClientException("tipoeCF must not be null in encabezado.idDoc");
-        }
+    /** Sends a Factura de Crédito Fiscal Electrónica (e-CF 31). */
+    public EcfResponse sendEcf(String rnc, Ecf31ECF ecf) throws EcfClientException, ApiException {
+        return sendAndPoll(rnc, ecfApi.recepcionEcf31(ecf));
+    }
 
-        // Step 1: Route and send
-        EcfResponse initialResponse = routeAndSend(tipo, ecf);
+    /** Sends a Factura de Consumo Electrónica (e-CF 32). */
+    public EcfResponse sendEcf(String rnc, Ecf32ECF ecf) throws EcfClientException, ApiException {
+        return sendAndPoll(rnc, ecfApi.recepcionEcf32(ecf));
+    }
 
+    /** Sends a Nota de Débito Electrónica (e-CF 33). */
+    public EcfResponse sendEcf(String rnc, Ecf33ECF ecf) throws EcfClientException, ApiException {
+        return sendAndPoll(rnc, ecfApi.recepcionEcf33(ecf));
+    }
+
+    /** Sends a Nota de Crédito Electrónica (e-CF 34). */
+    public EcfResponse sendEcf(String rnc, Ecf34ECF ecf) throws EcfClientException, ApiException {
+        return sendAndPoll(rnc, ecfApi.recepcionEcf34(ecf));
+    }
+
+    /** Sends a Compras Electrónico (e-CF 41). */
+    public EcfResponse sendEcf(String rnc, Ecf41ECF ecf) throws EcfClientException, ApiException {
+        return sendAndPoll(rnc, ecfApi.recepcionEcf41(ecf));
+    }
+
+    /** Sends a Gastos Menores Electrónico (e-CF 43). */
+    public EcfResponse sendEcf(String rnc, Ecf43ECF ecf) throws EcfClientException, ApiException {
+        return sendAndPoll(rnc, ecfApi.recepcionEcf43(ecf));
+    }
+
+    /** Sends a Regímenes Especiales Electrónico (e-CF 44). */
+    public EcfResponse sendEcf(String rnc, Ecf44ECF ecf) throws EcfClientException, ApiException {
+        return sendAndPoll(rnc, ecfApi.recepcionEcf44(ecf));
+    }
+
+    /** Sends a Gubernamental Electrónico (e-CF 45). */
+    public EcfResponse sendEcf(String rnc, Ecf45ECF ecf) throws EcfClientException, ApiException {
+        return sendAndPoll(rnc, ecfApi.recepcionEcf45(ecf));
+    }
+
+    /** Sends a Comprobante de Exportaciones Electrónico (e-CF 46). */
+    public EcfResponse sendEcf(String rnc, Ecf46ECF ecf) throws EcfClientException, ApiException {
+        return sendAndPoll(rnc, ecfApi.recepcionEcf46(ecf));
+    }
+
+    /** Sends a Comprobante para Pagos al Exterior Electrónico (e-CF 47). */
+    public EcfResponse sendEcf(String rnc, Ecf47ECF ecf) throws EcfClientException, ApiException {
+        return sendAndPoll(rnc, ecfApi.recepcionEcf47(ecf));
+    }
+
+    private EcfResponse sendAndPoll(String rnc, EcfResponse initialResponse) throws EcfClientException, ApiException {
         UUID messageId = initialResponse.getMessageId();
         if (messageId == null) {
             throw new EcfClientException("API returned null messageId");
         }
-
-        // Step 2: Poll for completion
         return pollForCompletion(rnc, messageId);
-    }
-
-    private EcfResponse routeAndSend(TipoeCFType tipo, ECF ecf) throws EcfClientException, ApiException {
-        switch (tipo) {
-            case FACTURA_DE_CREDITO_FISCAL_ELECTRONICA:
-                return ecfApi.recepcionEcf31(ecf);
-            case FACTURA_DE_CONSUMO_ELECTRONICA:
-                return ecfApi.recepcionEcf32(ecf);
-            case NOTA_DE_DEBITO_ELECTRONICA:
-                return ecfApi.recepcionEcf33(ecf);
-            case NOTA_DE_CREDITO_ELECTRONICA:
-                return ecfApi.recepcionEcf34(ecf);
-            case COMPRAS_ELECTRONICO:
-                return ecfApi.recepcionEcf41(ecf);
-            case GASTOS_MENORES_ELECTRONICO:
-                return ecfApi.recepcionEcf43(ecf);
-            case REGIMENES_ESPECIALES_ELECTRONICO:
-                return ecfApi.recepcionEcf44(ecf);
-            case GUBERNAMENTAL_ELECTRONICO:
-                return ecfApi.recepcionEcf45(ecf);
-            case COMPROBANTE_DE_EXPORTACIONES_ELECTRONICO:
-                return ecfApi.recepcionEcf46(ecf);
-            case COMPROBANTE_PARA_PAGOS_AL_EXTERIOR_ELECTRONICO:
-                return ecfApi.recepcionEcf47(ecf);
-            default:
-                throw new EcfClientException("Unsupported ECF type: " + tipo);
-        }
     }
 
     private EcfResponse pollForCompletion(String rnc, UUID messageId) throws EcfClientException, ApiException {

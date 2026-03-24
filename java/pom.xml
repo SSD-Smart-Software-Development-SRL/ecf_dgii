@@ -267,6 +267,7 @@
                         <configuration>
                             <publishingServerId>central</publishingServerId>
                             <autoPublish>true</autoPublish>
+                            <deploymentName>do.com.ssd.ecfx-ecf-dgii-sdk-java-${project.version}</deploymentName>
                         </configuration>
                     </plugin>
                 </plugins>

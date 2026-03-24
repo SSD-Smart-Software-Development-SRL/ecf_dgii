@@ -21,8 +21,8 @@ All URIs are relative to *https://api.test.ecfx.ssd.com.do*
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = CompanyApi()
 val rnc : kotlin.String = rnc_example // kotlin.String | 
@@ -66,8 +66,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = CompanyApi()
 val rncs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
@@ -118,8 +118,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = CompanyApi()
 val rnc : kotlin.String = rnc_example // kotlin.String | 
@@ -164,8 +164,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = CompanyApi()
 val rnc : kotlin.String = rnc_example // kotlin.String | 
@@ -210,8 +210,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = CompanyApi()
 val rnc : kotlin.String = rnc_example // kotlin.String | 
@@ -259,8 +259,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = CompanyApi()
 val upsertCompanyRequest : UpsertCompanyRequest =  // UpsertCompanyRequest | 

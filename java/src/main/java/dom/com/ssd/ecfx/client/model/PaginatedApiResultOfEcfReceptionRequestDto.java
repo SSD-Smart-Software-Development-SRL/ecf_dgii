@@ -20,8 +20,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress;
+import dom.com.ssd.ecfx.client.model.Ecf31IdDocTotalPaginas;
 import dom.com.ssd.ecfx.client.model.EcfReceptionRequestDto;
-import dom.com.ssd.ecfx.client.model.IdDocTotalPaginas;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -84,12 +84,12 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
   public static final String SERIALIZED_NAME_NEXT_PAGE = "nextPage";
   @SerializedName(SERIALIZED_NAME_NEXT_PAGE)
   @javax.annotation.Nullable
-  private IdDocTotalPaginas nextPage;
+  private Ecf31IdDocTotalPaginas nextPage;
 
   public static final String SERIALIZED_NAME_PREVIOUS_PAGE = "previousPage";
   @SerializedName(SERIALIZED_NAME_PREVIOUS_PAGE)
   @javax.annotation.Nullable
-  private IdDocTotalPaginas previousPage;
+  private Ecf31IdDocTotalPaginas previousPage;
 
   public PaginatedApiResultOfEcfReceptionRequestDto() {
   }
@@ -197,7 +197,7 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
   }
 
 
-  public PaginatedApiResultOfEcfReceptionRequestDto nextPage(@javax.annotation.Nullable IdDocTotalPaginas nextPage) {
+  public PaginatedApiResultOfEcfReceptionRequestDto nextPage(@javax.annotation.Nullable Ecf31IdDocTotalPaginas nextPage) {
     this.nextPage = nextPage;
     return this;
   }
@@ -207,16 +207,16 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
    * @return nextPage
    */
   @javax.annotation.Nullable
-  public IdDocTotalPaginas getNextPage() {
+  public Ecf31IdDocTotalPaginas getNextPage() {
     return nextPage;
   }
 
-  public void setNextPage(@javax.annotation.Nullable IdDocTotalPaginas nextPage) {
+  public void setNextPage(@javax.annotation.Nullable Ecf31IdDocTotalPaginas nextPage) {
     this.nextPage = nextPage;
   }
 
 
-  public PaginatedApiResultOfEcfReceptionRequestDto previousPage(@javax.annotation.Nullable IdDocTotalPaginas previousPage) {
+  public PaginatedApiResultOfEcfReceptionRequestDto previousPage(@javax.annotation.Nullable Ecf31IdDocTotalPaginas previousPage) {
     this.previousPage = previousPage;
     return this;
   }
@@ -226,11 +226,11 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
    * @return previousPage
    */
   @javax.annotation.Nullable
-  public IdDocTotalPaginas getPreviousPage() {
+  public Ecf31IdDocTotalPaginas getPreviousPage() {
     return previousPage;
   }
 
-  public void setPreviousPage(@javax.annotation.Nullable IdDocTotalPaginas previousPage) {
+  public void setPreviousPage(@javax.annotation.Nullable Ecf31IdDocTotalPaginas previousPage) {
     this.previousPage = previousPage;
   }
 
@@ -356,11 +356,11 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
       }
       // validate the optional field `nextPage`
       if (jsonObj.get("nextPage") != null && !jsonObj.get("nextPage").isJsonNull()) {
-        IdDocTotalPaginas.validateJsonElement(jsonObj.get("nextPage"));
+        Ecf31IdDocTotalPaginas.validateJsonElement(jsonObj.get("nextPage"));
       }
       // validate the optional field `previousPage`
       if (jsonObj.get("previousPage") != null && !jsonObj.get("previousPage").isJsonNull()) {
-        IdDocTotalPaginas.validateJsonElement(jsonObj.get("previousPage"));
+        Ecf31IdDocTotalPaginas.validateJsonElement(jsonObj.get("previousPage"));
       }
   }
 

@@ -6,6 +6,6 @@
 -keepclasseswithmembers class kotlinx.serialization.json.** { kotlinx.serialization.KSerializer serializer(...); }
 
 # project specific.
--keep,includedescriptorclasses class com.ecfx.sdk.models.**$$serializer { *; }
--keepclassmembers class com.ecfx.sdk.models.** { *** Companion; }
--keepclasseswithmembers class com.ecfx.sdk.models.** { kotlinx.serialization.KSerializer serializer(...); }
+-keep,includedescriptorclasses class dom.com.ssd.ecfx.sdk.models.**$$serializer { *; }
+-keepclassmembers class dom.com.ssd.ecfx.sdk.models.** { *** Companion; }
+-keepclasseswithmembers class dom.com.ssd.ecfx.sdk.models.** { kotlinx.serialization.KSerializer serializer(...); }

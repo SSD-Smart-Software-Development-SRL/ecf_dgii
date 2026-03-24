@@ -21,3 +21,10 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+
+# Custom hand-written files - do not overwrite
+src/main/kotlin/dom/com/ssd/ecfx/sdk/EcfClient.kt
+src/main/kotlin/dom/com/ssd/ecfx/sdk/EcfFrontendClient.kt
+build.gradle
+settings.gradle
+README.md

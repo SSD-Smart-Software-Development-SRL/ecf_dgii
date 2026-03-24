@@ -1,0 +1,18 @@
+
+
+# Ecf45ECF
+
+
+## Properties
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**encabezado** | [**Ecf45Encabezado**](Ecf45Encabezado.md) |  |  |
+|**detallesItems** | [**List&lt;Ecf45Item&gt;**](Ecf45Item.md) |  |  |
+|**subtotales** | [**List&lt;Ecf45Subtotal&gt;**](Ecf45Subtotal.md) |  |  [optional] |
+|**descuentosORecargos** | [**List&lt;Ecf45DescuentoORecargo&gt;**](Ecf45DescuentoORecargo.md) |  |  [optional] |
+|**paginacion** | [**List&lt;Ecf45Pagina&gt;**](Ecf45Pagina.md) |  |  [optional] |
+|**informacionReferencia** | [**Ecf45InformacionReferencia**](Ecf45InformacionReferencia.md) |  |  [optional] |
+
+
+

@@ -459,7 +459,7 @@ public class Example {
 
 <a id="recepcionEcf31"></a>
 # **recepcionEcf31**
-> EcfResponse recepcionEcf31(ECF)
+> EcfResponse recepcionEcf31(ecf31ECF)
 
 
 
@@ -483,9 +483,9 @@ public class Example {
     Bearer.setBearerToken("BEARER TOKEN");
 
     EcfApi apiInstance = new EcfApi(defaultClient);
-    ECF ECF = new ECF(); // ECF | 
+    Ecf31ECF ecf31ECF = new Ecf31ECF(); // Ecf31ECF | 
     try {
-      EcfResponse result = apiInstance.recepcionEcf31(ECF);
+      EcfResponse result = apiInstance.recepcionEcf31(ecf31ECF);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#recepcionEcf31");
@@ -502,7 +502,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf31ECF** | [**Ecf31ECF**](Ecf31ECF.md)|  | |
 
 ### Return type
 
@@ -528,7 +528,7 @@ public class Example {
 
 <a id="recepcionEcf32"></a>
 # **recepcionEcf32**
-> EcfResponse recepcionEcf32(ECF)
+> EcfResponse recepcionEcf32(ecf32ECF)
 
 
 
@@ -552,9 +552,9 @@ public class Example {
     Bearer.setBearerToken("BEARER TOKEN");
 
     EcfApi apiInstance = new EcfApi(defaultClient);
-    ECF ECF = new ECF(); // ECF | 
+    Ecf32ECF ecf32ECF = new Ecf32ECF(); // Ecf32ECF | 
     try {
-      EcfResponse result = apiInstance.recepcionEcf32(ECF);
+      EcfResponse result = apiInstance.recepcionEcf32(ecf32ECF);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#recepcionEcf32");
@@ -571,7 +571,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf32ECF** | [**Ecf32ECF**](Ecf32ECF.md)|  | |
 
 ### Return type
 
@@ -597,7 +597,7 @@ public class Example {
 
 <a id="recepcionEcf33"></a>
 # **recepcionEcf33**
-> EcfResponse recepcionEcf33(ECF)
+> EcfResponse recepcionEcf33(ecf33ECF)
 
 
 
@@ -621,9 +621,9 @@ public class Example {
     Bearer.setBearerToken("BEARER TOKEN");
 
     EcfApi apiInstance = new EcfApi(defaultClient);
-    ECF ECF = new ECF(); // ECF | 
+    Ecf33ECF ecf33ECF = new Ecf33ECF(); // Ecf33ECF | 
     try {
-      EcfResponse result = apiInstance.recepcionEcf33(ECF);
+      EcfResponse result = apiInstance.recepcionEcf33(ecf33ECF);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#recepcionEcf33");
@@ -640,7 +640,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf33ECF** | [**Ecf33ECF**](Ecf33ECF.md)|  | |
 
 ### Return type
 
@@ -666,7 +666,7 @@ public class Example {
 
 <a id="recepcionEcf34"></a>
 # **recepcionEcf34**
-> EcfResponse recepcionEcf34(ECF)
+> EcfResponse recepcionEcf34(ecf34ECF)
 
 
 
@@ -690,9 +690,9 @@ public class Example {
     Bearer.setBearerToken("BEARER TOKEN");
 
     EcfApi apiInstance = new EcfApi(defaultClient);
-    ECF ECF = new ECF(); // ECF | 
+    Ecf34ECF ecf34ECF = new Ecf34ECF(); // Ecf34ECF | 
     try {
-      EcfResponse result = apiInstance.recepcionEcf34(ECF);
+      EcfResponse result = apiInstance.recepcionEcf34(ecf34ECF);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#recepcionEcf34");
@@ -709,7 +709,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf34ECF** | [**Ecf34ECF**](Ecf34ECF.md)|  | |
 
 ### Return type
 
@@ -735,7 +735,7 @@ public class Example {
 
 <a id="recepcionEcf41"></a>
 # **recepcionEcf41**
-> EcfResponse recepcionEcf41(ECF)
+> EcfResponse recepcionEcf41(ecf41ECF)
 
 
 
@@ -759,9 +759,9 @@ public class Example {
     Bearer.setBearerToken("BEARER TOKEN");
 
     EcfApi apiInstance = new EcfApi(defaultClient);
-    ECF ECF = new ECF(); // ECF | 
+    Ecf41ECF ecf41ECF = new Ecf41ECF(); // Ecf41ECF | 
     try {
-      EcfResponse result = apiInstance.recepcionEcf41(ECF);
+      EcfResponse result = apiInstance.recepcionEcf41(ecf41ECF);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#recepcionEcf41");
@@ -778,7 +778,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf41ECF** | [**Ecf41ECF**](Ecf41ECF.md)|  | |
 
 ### Return type
 
@@ -804,7 +804,7 @@ public class Example {
 
 <a id="recepcionEcf43"></a>
 # **recepcionEcf43**
-> EcfResponse recepcionEcf43(ECF)
+> EcfResponse recepcionEcf43(ecf43ECF)
 
 
 
@@ -828,9 +828,9 @@ public class Example {
     Bearer.setBearerToken("BEARER TOKEN");
 
     EcfApi apiInstance = new EcfApi(defaultClient);
-    ECF ECF = new ECF(); // ECF | 
+    Ecf43ECF ecf43ECF = new Ecf43ECF(); // Ecf43ECF | 
     try {
-      EcfResponse result = apiInstance.recepcionEcf43(ECF);
+      EcfResponse result = apiInstance.recepcionEcf43(ecf43ECF);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#recepcionEcf43");
@@ -847,7 +847,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf43ECF** | [**Ecf43ECF**](Ecf43ECF.md)|  | |
 
 ### Return type
 
@@ -873,7 +873,7 @@ public class Example {
 
 <a id="recepcionEcf44"></a>
 # **recepcionEcf44**
-> EcfResponse recepcionEcf44(ECF)
+> EcfResponse recepcionEcf44(ecf44ECF)
 
 
 
@@ -897,9 +897,9 @@ public class Example {
     Bearer.setBearerToken("BEARER TOKEN");
 
     EcfApi apiInstance = new EcfApi(defaultClient);
-    ECF ECF = new ECF(); // ECF | 
+    Ecf44ECF ecf44ECF = new Ecf44ECF(); // Ecf44ECF | 
     try {
-      EcfResponse result = apiInstance.recepcionEcf44(ECF);
+      EcfResponse result = apiInstance.recepcionEcf44(ecf44ECF);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#recepcionEcf44");
@@ -916,7 +916,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf44ECF** | [**Ecf44ECF**](Ecf44ECF.md)|  | |
 
 ### Return type
 
@@ -942,7 +942,7 @@ public class Example {
 
 <a id="recepcionEcf45"></a>
 # **recepcionEcf45**
-> EcfResponse recepcionEcf45(ECF)
+> EcfResponse recepcionEcf45(ecf45ECF)
 
 
 
@@ -966,9 +966,9 @@ public class Example {
     Bearer.setBearerToken("BEARER TOKEN");
 
     EcfApi apiInstance = new EcfApi(defaultClient);
-    ECF ECF = new ECF(); // ECF | 
+    Ecf45ECF ecf45ECF = new Ecf45ECF(); // Ecf45ECF | 
     try {
-      EcfResponse result = apiInstance.recepcionEcf45(ECF);
+      EcfResponse result = apiInstance.recepcionEcf45(ecf45ECF);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#recepcionEcf45");
@@ -985,7 +985,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf45ECF** | [**Ecf45ECF**](Ecf45ECF.md)|  | |
 
 ### Return type
 
@@ -1011,7 +1011,7 @@ public class Example {
 
 <a id="recepcionEcf46"></a>
 # **recepcionEcf46**
-> EcfResponse recepcionEcf46(ECF)
+> EcfResponse recepcionEcf46(ecf46ECF)
 
 
 
@@ -1035,9 +1035,9 @@ public class Example {
     Bearer.setBearerToken("BEARER TOKEN");
 
     EcfApi apiInstance = new EcfApi(defaultClient);
-    ECF ECF = new ECF(); // ECF | 
+    Ecf46ECF ecf46ECF = new Ecf46ECF(); // Ecf46ECF | 
     try {
-      EcfResponse result = apiInstance.recepcionEcf46(ECF);
+      EcfResponse result = apiInstance.recepcionEcf46(ecf46ECF);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#recepcionEcf46");
@@ -1054,7 +1054,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf46ECF** | [**Ecf46ECF**](Ecf46ECF.md)|  | |
 
 ### Return type
 
@@ -1080,7 +1080,7 @@ public class Example {
 
 <a id="recepcionEcf47"></a>
 # **recepcionEcf47**
-> EcfResponse recepcionEcf47(ECF)
+> EcfResponse recepcionEcf47(ecf47ECF)
 
 
 
@@ -1104,9 +1104,9 @@ public class Example {
     Bearer.setBearerToken("BEARER TOKEN");
 
     EcfApi apiInstance = new EcfApi(defaultClient);
-    ECF ECF = new ECF(); // ECF | 
+    Ecf47ECF ecf47ECF = new Ecf47ECF(); // Ecf47ECF | 
     try {
-      EcfResponse result = apiInstance.recepcionEcf47(ECF);
+      EcfResponse result = apiInstance.recepcionEcf47(ecf47ECF);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#recepcionEcf47");
@@ -1123,7 +1123,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf47ECF** | [**Ecf47ECF**](Ecf47ECF.md)|  | |
 
 ### Return type
 

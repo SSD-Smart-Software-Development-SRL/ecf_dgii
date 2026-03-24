@@ -30,8 +30,17 @@ import java.io.IOException;
 import dom.com.ssd.ecfx.client.model.AllTipoECFTypes;
 import dom.com.ssd.ecfx.client.model.AnulacionRequest;
 import java.util.Date;
-import dom.com.ssd.ecfx.client.model.ECF;
 import dom.com.ssd.ecfx.client.model.ECFType;
+import dom.com.ssd.ecfx.client.model.Ecf31ECF;
+import dom.com.ssd.ecfx.client.model.Ecf32ECF;
+import dom.com.ssd.ecfx.client.model.Ecf33ECF;
+import dom.com.ssd.ecfx.client.model.Ecf34ECF;
+import dom.com.ssd.ecfx.client.model.Ecf41ECF;
+import dom.com.ssd.ecfx.client.model.Ecf43ECF;
+import dom.com.ssd.ecfx.client.model.Ecf44ECF;
+import dom.com.ssd.ecfx.client.model.Ecf45ECF;
+import dom.com.ssd.ecfx.client.model.Ecf46ECF;
+import dom.com.ssd.ecfx.client.model.Ecf47ECF;
 import dom.com.ssd.ecfx.client.model.EcfResponse;
 import java.io.File;
 import dom.com.ssd.ecfx.client.model.GetCompaniesLimitParameter;
@@ -1041,7 +1050,7 @@ public class EcfApi {
     }
     /**
      * Build call for recepcionEcf31
-     * @param ECF  (required)
+     * @param ecf31ECF  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1056,7 +1065,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf31Call(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf31Call(@javax.annotation.Nonnull Ecf31ECF ecf31ECF, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1070,7 +1079,7 @@ public class EcfApi {
             basePath = null;
         }
 
-        Object localVarPostBody = ECF;
+        Object localVarPostBody = ecf31ECF;
 
         // create path and map variables
         String localVarPath = "/ecf/31";
@@ -1103,20 +1112,20 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call recepcionEcf31ValidateBeforeCall(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'ECF' is set
-        if (ECF == null) {
-            throw new ApiException("Missing the required parameter 'ECF' when calling recepcionEcf31(Async)");
+    private okhttp3.Call recepcionEcf31ValidateBeforeCall(@javax.annotation.Nonnull Ecf31ECF ecf31ECF, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'ecf31ECF' is set
+        if (ecf31ECF == null) {
+            throw new ApiException("Missing the required parameter 'ecf31ECF' when calling recepcionEcf31(Async)");
         }
 
-        return recepcionEcf31Call(ECF, _callback);
+        return recepcionEcf31Call(ecf31ECF, _callback);
 
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf31ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1130,15 +1139,15 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public EcfResponse recepcionEcf31(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        ApiResponse<EcfResponse> localVarResp = recepcionEcf31WithHttpInfo(ECF);
+    public EcfResponse recepcionEcf31(@javax.annotation.Nonnull Ecf31ECF ecf31ECF) throws ApiException {
+        ApiResponse<EcfResponse> localVarResp = recepcionEcf31WithHttpInfo(ecf31ECF);
         return localVarResp.getData();
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf31ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1152,8 +1161,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EcfResponse> recepcionEcf31WithHttpInfo(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        okhttp3.Call localVarCall = recepcionEcf31ValidateBeforeCall(ECF, null);
+    public ApiResponse<EcfResponse> recepcionEcf31WithHttpInfo(@javax.annotation.Nonnull Ecf31ECF ecf31ECF) throws ApiException {
+        okhttp3.Call localVarCall = recepcionEcf31ValidateBeforeCall(ecf31ECF, null);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1161,7 +1170,7 @@ public class EcfApi {
     /**
      *  (asynchronously)
      * 
-     * @param ECF  (required)
+     * @param ecf31ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1176,16 +1185,16 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf31Async(@javax.annotation.Nonnull ECF ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf31Async(@javax.annotation.Nonnull Ecf31ECF ecf31ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = recepcionEcf31ValidateBeforeCall(ECF, _callback);
+        okhttp3.Call localVarCall = recepcionEcf31ValidateBeforeCall(ecf31ECF, _callback);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for recepcionEcf32
-     * @param ECF  (required)
+     * @param ecf32ECF  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1200,7 +1209,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf32Call(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf32Call(@javax.annotation.Nonnull Ecf32ECF ecf32ECF, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1214,7 +1223,7 @@ public class EcfApi {
             basePath = null;
         }
 
-        Object localVarPostBody = ECF;
+        Object localVarPostBody = ecf32ECF;
 
         // create path and map variables
         String localVarPath = "/ecf/32";
@@ -1247,20 +1256,20 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call recepcionEcf32ValidateBeforeCall(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'ECF' is set
-        if (ECF == null) {
-            throw new ApiException("Missing the required parameter 'ECF' when calling recepcionEcf32(Async)");
+    private okhttp3.Call recepcionEcf32ValidateBeforeCall(@javax.annotation.Nonnull Ecf32ECF ecf32ECF, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'ecf32ECF' is set
+        if (ecf32ECF == null) {
+            throw new ApiException("Missing the required parameter 'ecf32ECF' when calling recepcionEcf32(Async)");
         }
 
-        return recepcionEcf32Call(ECF, _callback);
+        return recepcionEcf32Call(ecf32ECF, _callback);
 
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf32ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1274,15 +1283,15 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public EcfResponse recepcionEcf32(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        ApiResponse<EcfResponse> localVarResp = recepcionEcf32WithHttpInfo(ECF);
+    public EcfResponse recepcionEcf32(@javax.annotation.Nonnull Ecf32ECF ecf32ECF) throws ApiException {
+        ApiResponse<EcfResponse> localVarResp = recepcionEcf32WithHttpInfo(ecf32ECF);
         return localVarResp.getData();
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf32ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1296,8 +1305,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EcfResponse> recepcionEcf32WithHttpInfo(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        okhttp3.Call localVarCall = recepcionEcf32ValidateBeforeCall(ECF, null);
+    public ApiResponse<EcfResponse> recepcionEcf32WithHttpInfo(@javax.annotation.Nonnull Ecf32ECF ecf32ECF) throws ApiException {
+        okhttp3.Call localVarCall = recepcionEcf32ValidateBeforeCall(ecf32ECF, null);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1305,7 +1314,7 @@ public class EcfApi {
     /**
      *  (asynchronously)
      * 
-     * @param ECF  (required)
+     * @param ecf32ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1320,16 +1329,16 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf32Async(@javax.annotation.Nonnull ECF ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf32Async(@javax.annotation.Nonnull Ecf32ECF ecf32ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = recepcionEcf32ValidateBeforeCall(ECF, _callback);
+        okhttp3.Call localVarCall = recepcionEcf32ValidateBeforeCall(ecf32ECF, _callback);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for recepcionEcf33
-     * @param ECF  (required)
+     * @param ecf33ECF  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1344,7 +1353,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf33Call(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf33Call(@javax.annotation.Nonnull Ecf33ECF ecf33ECF, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1358,7 +1367,7 @@ public class EcfApi {
             basePath = null;
         }
 
-        Object localVarPostBody = ECF;
+        Object localVarPostBody = ecf33ECF;
 
         // create path and map variables
         String localVarPath = "/ecf/33";
@@ -1391,20 +1400,20 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call recepcionEcf33ValidateBeforeCall(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'ECF' is set
-        if (ECF == null) {
-            throw new ApiException("Missing the required parameter 'ECF' when calling recepcionEcf33(Async)");
+    private okhttp3.Call recepcionEcf33ValidateBeforeCall(@javax.annotation.Nonnull Ecf33ECF ecf33ECF, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'ecf33ECF' is set
+        if (ecf33ECF == null) {
+            throw new ApiException("Missing the required parameter 'ecf33ECF' when calling recepcionEcf33(Async)");
         }
 
-        return recepcionEcf33Call(ECF, _callback);
+        return recepcionEcf33Call(ecf33ECF, _callback);
 
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf33ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1418,15 +1427,15 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public EcfResponse recepcionEcf33(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        ApiResponse<EcfResponse> localVarResp = recepcionEcf33WithHttpInfo(ECF);
+    public EcfResponse recepcionEcf33(@javax.annotation.Nonnull Ecf33ECF ecf33ECF) throws ApiException {
+        ApiResponse<EcfResponse> localVarResp = recepcionEcf33WithHttpInfo(ecf33ECF);
         return localVarResp.getData();
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf33ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1440,8 +1449,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EcfResponse> recepcionEcf33WithHttpInfo(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        okhttp3.Call localVarCall = recepcionEcf33ValidateBeforeCall(ECF, null);
+    public ApiResponse<EcfResponse> recepcionEcf33WithHttpInfo(@javax.annotation.Nonnull Ecf33ECF ecf33ECF) throws ApiException {
+        okhttp3.Call localVarCall = recepcionEcf33ValidateBeforeCall(ecf33ECF, null);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1449,7 +1458,7 @@ public class EcfApi {
     /**
      *  (asynchronously)
      * 
-     * @param ECF  (required)
+     * @param ecf33ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1464,16 +1473,16 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf33Async(@javax.annotation.Nonnull ECF ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf33Async(@javax.annotation.Nonnull Ecf33ECF ecf33ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = recepcionEcf33ValidateBeforeCall(ECF, _callback);
+        okhttp3.Call localVarCall = recepcionEcf33ValidateBeforeCall(ecf33ECF, _callback);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for recepcionEcf34
-     * @param ECF  (required)
+     * @param ecf34ECF  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1488,7 +1497,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf34Call(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf34Call(@javax.annotation.Nonnull Ecf34ECF ecf34ECF, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1502,7 +1511,7 @@ public class EcfApi {
             basePath = null;
         }
 
-        Object localVarPostBody = ECF;
+        Object localVarPostBody = ecf34ECF;
 
         // create path and map variables
         String localVarPath = "/ecf/34";
@@ -1535,20 +1544,20 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call recepcionEcf34ValidateBeforeCall(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'ECF' is set
-        if (ECF == null) {
-            throw new ApiException("Missing the required parameter 'ECF' when calling recepcionEcf34(Async)");
+    private okhttp3.Call recepcionEcf34ValidateBeforeCall(@javax.annotation.Nonnull Ecf34ECF ecf34ECF, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'ecf34ECF' is set
+        if (ecf34ECF == null) {
+            throw new ApiException("Missing the required parameter 'ecf34ECF' when calling recepcionEcf34(Async)");
         }
 
-        return recepcionEcf34Call(ECF, _callback);
+        return recepcionEcf34Call(ecf34ECF, _callback);
 
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf34ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1562,15 +1571,15 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public EcfResponse recepcionEcf34(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        ApiResponse<EcfResponse> localVarResp = recepcionEcf34WithHttpInfo(ECF);
+    public EcfResponse recepcionEcf34(@javax.annotation.Nonnull Ecf34ECF ecf34ECF) throws ApiException {
+        ApiResponse<EcfResponse> localVarResp = recepcionEcf34WithHttpInfo(ecf34ECF);
         return localVarResp.getData();
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf34ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1584,8 +1593,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EcfResponse> recepcionEcf34WithHttpInfo(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        okhttp3.Call localVarCall = recepcionEcf34ValidateBeforeCall(ECF, null);
+    public ApiResponse<EcfResponse> recepcionEcf34WithHttpInfo(@javax.annotation.Nonnull Ecf34ECF ecf34ECF) throws ApiException {
+        okhttp3.Call localVarCall = recepcionEcf34ValidateBeforeCall(ecf34ECF, null);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1593,7 +1602,7 @@ public class EcfApi {
     /**
      *  (asynchronously)
      * 
-     * @param ECF  (required)
+     * @param ecf34ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1608,16 +1617,16 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf34Async(@javax.annotation.Nonnull ECF ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf34Async(@javax.annotation.Nonnull Ecf34ECF ecf34ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = recepcionEcf34ValidateBeforeCall(ECF, _callback);
+        okhttp3.Call localVarCall = recepcionEcf34ValidateBeforeCall(ecf34ECF, _callback);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for recepcionEcf41
-     * @param ECF  (required)
+     * @param ecf41ECF  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1632,7 +1641,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf41Call(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf41Call(@javax.annotation.Nonnull Ecf41ECF ecf41ECF, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1646,7 +1655,7 @@ public class EcfApi {
             basePath = null;
         }
 
-        Object localVarPostBody = ECF;
+        Object localVarPostBody = ecf41ECF;
 
         // create path and map variables
         String localVarPath = "/ecf/41";
@@ -1679,20 +1688,20 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call recepcionEcf41ValidateBeforeCall(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'ECF' is set
-        if (ECF == null) {
-            throw new ApiException("Missing the required parameter 'ECF' when calling recepcionEcf41(Async)");
+    private okhttp3.Call recepcionEcf41ValidateBeforeCall(@javax.annotation.Nonnull Ecf41ECF ecf41ECF, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'ecf41ECF' is set
+        if (ecf41ECF == null) {
+            throw new ApiException("Missing the required parameter 'ecf41ECF' when calling recepcionEcf41(Async)");
         }
 
-        return recepcionEcf41Call(ECF, _callback);
+        return recepcionEcf41Call(ecf41ECF, _callback);
 
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf41ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1706,15 +1715,15 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public EcfResponse recepcionEcf41(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        ApiResponse<EcfResponse> localVarResp = recepcionEcf41WithHttpInfo(ECF);
+    public EcfResponse recepcionEcf41(@javax.annotation.Nonnull Ecf41ECF ecf41ECF) throws ApiException {
+        ApiResponse<EcfResponse> localVarResp = recepcionEcf41WithHttpInfo(ecf41ECF);
         return localVarResp.getData();
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf41ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1728,8 +1737,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EcfResponse> recepcionEcf41WithHttpInfo(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        okhttp3.Call localVarCall = recepcionEcf41ValidateBeforeCall(ECF, null);
+    public ApiResponse<EcfResponse> recepcionEcf41WithHttpInfo(@javax.annotation.Nonnull Ecf41ECF ecf41ECF) throws ApiException {
+        okhttp3.Call localVarCall = recepcionEcf41ValidateBeforeCall(ecf41ECF, null);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1737,7 +1746,7 @@ public class EcfApi {
     /**
      *  (asynchronously)
      * 
-     * @param ECF  (required)
+     * @param ecf41ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1752,16 +1761,16 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf41Async(@javax.annotation.Nonnull ECF ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf41Async(@javax.annotation.Nonnull Ecf41ECF ecf41ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = recepcionEcf41ValidateBeforeCall(ECF, _callback);
+        okhttp3.Call localVarCall = recepcionEcf41ValidateBeforeCall(ecf41ECF, _callback);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for recepcionEcf43
-     * @param ECF  (required)
+     * @param ecf43ECF  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1776,7 +1785,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf43Call(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf43Call(@javax.annotation.Nonnull Ecf43ECF ecf43ECF, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1790,7 +1799,7 @@ public class EcfApi {
             basePath = null;
         }
 
-        Object localVarPostBody = ECF;
+        Object localVarPostBody = ecf43ECF;
 
         // create path and map variables
         String localVarPath = "/ecf/43";
@@ -1823,20 +1832,20 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call recepcionEcf43ValidateBeforeCall(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'ECF' is set
-        if (ECF == null) {
-            throw new ApiException("Missing the required parameter 'ECF' when calling recepcionEcf43(Async)");
+    private okhttp3.Call recepcionEcf43ValidateBeforeCall(@javax.annotation.Nonnull Ecf43ECF ecf43ECF, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'ecf43ECF' is set
+        if (ecf43ECF == null) {
+            throw new ApiException("Missing the required parameter 'ecf43ECF' when calling recepcionEcf43(Async)");
         }
 
-        return recepcionEcf43Call(ECF, _callback);
+        return recepcionEcf43Call(ecf43ECF, _callback);
 
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf43ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1850,15 +1859,15 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public EcfResponse recepcionEcf43(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        ApiResponse<EcfResponse> localVarResp = recepcionEcf43WithHttpInfo(ECF);
+    public EcfResponse recepcionEcf43(@javax.annotation.Nonnull Ecf43ECF ecf43ECF) throws ApiException {
+        ApiResponse<EcfResponse> localVarResp = recepcionEcf43WithHttpInfo(ecf43ECF);
         return localVarResp.getData();
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf43ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1872,8 +1881,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EcfResponse> recepcionEcf43WithHttpInfo(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        okhttp3.Call localVarCall = recepcionEcf43ValidateBeforeCall(ECF, null);
+    public ApiResponse<EcfResponse> recepcionEcf43WithHttpInfo(@javax.annotation.Nonnull Ecf43ECF ecf43ECF) throws ApiException {
+        okhttp3.Call localVarCall = recepcionEcf43ValidateBeforeCall(ecf43ECF, null);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1881,7 +1890,7 @@ public class EcfApi {
     /**
      *  (asynchronously)
      * 
-     * @param ECF  (required)
+     * @param ecf43ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1896,16 +1905,16 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf43Async(@javax.annotation.Nonnull ECF ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf43Async(@javax.annotation.Nonnull Ecf43ECF ecf43ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = recepcionEcf43ValidateBeforeCall(ECF, _callback);
+        okhttp3.Call localVarCall = recepcionEcf43ValidateBeforeCall(ecf43ECF, _callback);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for recepcionEcf44
-     * @param ECF  (required)
+     * @param ecf44ECF  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1920,7 +1929,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf44Call(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf44Call(@javax.annotation.Nonnull Ecf44ECF ecf44ECF, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1934,7 +1943,7 @@ public class EcfApi {
             basePath = null;
         }
 
-        Object localVarPostBody = ECF;
+        Object localVarPostBody = ecf44ECF;
 
         // create path and map variables
         String localVarPath = "/ecf/44";
@@ -1967,20 +1976,20 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call recepcionEcf44ValidateBeforeCall(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'ECF' is set
-        if (ECF == null) {
-            throw new ApiException("Missing the required parameter 'ECF' when calling recepcionEcf44(Async)");
+    private okhttp3.Call recepcionEcf44ValidateBeforeCall(@javax.annotation.Nonnull Ecf44ECF ecf44ECF, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'ecf44ECF' is set
+        if (ecf44ECF == null) {
+            throw new ApiException("Missing the required parameter 'ecf44ECF' when calling recepcionEcf44(Async)");
         }
 
-        return recepcionEcf44Call(ECF, _callback);
+        return recepcionEcf44Call(ecf44ECF, _callback);
 
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf44ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1994,15 +2003,15 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public EcfResponse recepcionEcf44(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        ApiResponse<EcfResponse> localVarResp = recepcionEcf44WithHttpInfo(ECF);
+    public EcfResponse recepcionEcf44(@javax.annotation.Nonnull Ecf44ECF ecf44ECF) throws ApiException {
+        ApiResponse<EcfResponse> localVarResp = recepcionEcf44WithHttpInfo(ecf44ECF);
         return localVarResp.getData();
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf44ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2016,8 +2025,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EcfResponse> recepcionEcf44WithHttpInfo(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        okhttp3.Call localVarCall = recepcionEcf44ValidateBeforeCall(ECF, null);
+    public ApiResponse<EcfResponse> recepcionEcf44WithHttpInfo(@javax.annotation.Nonnull Ecf44ECF ecf44ECF) throws ApiException {
+        okhttp3.Call localVarCall = recepcionEcf44ValidateBeforeCall(ecf44ECF, null);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2025,7 +2034,7 @@ public class EcfApi {
     /**
      *  (asynchronously)
      * 
-     * @param ECF  (required)
+     * @param ecf44ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -2040,16 +2049,16 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf44Async(@javax.annotation.Nonnull ECF ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf44Async(@javax.annotation.Nonnull Ecf44ECF ecf44ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = recepcionEcf44ValidateBeforeCall(ECF, _callback);
+        okhttp3.Call localVarCall = recepcionEcf44ValidateBeforeCall(ecf44ECF, _callback);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for recepcionEcf45
-     * @param ECF  (required)
+     * @param ecf45ECF  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2064,7 +2073,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf45Call(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf45Call(@javax.annotation.Nonnull Ecf45ECF ecf45ECF, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2078,7 +2087,7 @@ public class EcfApi {
             basePath = null;
         }
 
-        Object localVarPostBody = ECF;
+        Object localVarPostBody = ecf45ECF;
 
         // create path and map variables
         String localVarPath = "/ecf/45";
@@ -2111,20 +2120,20 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call recepcionEcf45ValidateBeforeCall(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'ECF' is set
-        if (ECF == null) {
-            throw new ApiException("Missing the required parameter 'ECF' when calling recepcionEcf45(Async)");
+    private okhttp3.Call recepcionEcf45ValidateBeforeCall(@javax.annotation.Nonnull Ecf45ECF ecf45ECF, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'ecf45ECF' is set
+        if (ecf45ECF == null) {
+            throw new ApiException("Missing the required parameter 'ecf45ECF' when calling recepcionEcf45(Async)");
         }
 
-        return recepcionEcf45Call(ECF, _callback);
+        return recepcionEcf45Call(ecf45ECF, _callback);
 
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf45ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2138,15 +2147,15 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public EcfResponse recepcionEcf45(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        ApiResponse<EcfResponse> localVarResp = recepcionEcf45WithHttpInfo(ECF);
+    public EcfResponse recepcionEcf45(@javax.annotation.Nonnull Ecf45ECF ecf45ECF) throws ApiException {
+        ApiResponse<EcfResponse> localVarResp = recepcionEcf45WithHttpInfo(ecf45ECF);
         return localVarResp.getData();
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf45ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2160,8 +2169,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EcfResponse> recepcionEcf45WithHttpInfo(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        okhttp3.Call localVarCall = recepcionEcf45ValidateBeforeCall(ECF, null);
+    public ApiResponse<EcfResponse> recepcionEcf45WithHttpInfo(@javax.annotation.Nonnull Ecf45ECF ecf45ECF) throws ApiException {
+        okhttp3.Call localVarCall = recepcionEcf45ValidateBeforeCall(ecf45ECF, null);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2169,7 +2178,7 @@ public class EcfApi {
     /**
      *  (asynchronously)
      * 
-     * @param ECF  (required)
+     * @param ecf45ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -2184,16 +2193,16 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf45Async(@javax.annotation.Nonnull ECF ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf45Async(@javax.annotation.Nonnull Ecf45ECF ecf45ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = recepcionEcf45ValidateBeforeCall(ECF, _callback);
+        okhttp3.Call localVarCall = recepcionEcf45ValidateBeforeCall(ecf45ECF, _callback);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for recepcionEcf46
-     * @param ECF  (required)
+     * @param ecf46ECF  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2208,7 +2217,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf46Call(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf46Call(@javax.annotation.Nonnull Ecf46ECF ecf46ECF, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2222,7 +2231,7 @@ public class EcfApi {
             basePath = null;
         }
 
-        Object localVarPostBody = ECF;
+        Object localVarPostBody = ecf46ECF;
 
         // create path and map variables
         String localVarPath = "/ecf/46";
@@ -2255,20 +2264,20 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call recepcionEcf46ValidateBeforeCall(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'ECF' is set
-        if (ECF == null) {
-            throw new ApiException("Missing the required parameter 'ECF' when calling recepcionEcf46(Async)");
+    private okhttp3.Call recepcionEcf46ValidateBeforeCall(@javax.annotation.Nonnull Ecf46ECF ecf46ECF, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'ecf46ECF' is set
+        if (ecf46ECF == null) {
+            throw new ApiException("Missing the required parameter 'ecf46ECF' when calling recepcionEcf46(Async)");
         }
 
-        return recepcionEcf46Call(ECF, _callback);
+        return recepcionEcf46Call(ecf46ECF, _callback);
 
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf46ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2282,15 +2291,15 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public EcfResponse recepcionEcf46(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        ApiResponse<EcfResponse> localVarResp = recepcionEcf46WithHttpInfo(ECF);
+    public EcfResponse recepcionEcf46(@javax.annotation.Nonnull Ecf46ECF ecf46ECF) throws ApiException {
+        ApiResponse<EcfResponse> localVarResp = recepcionEcf46WithHttpInfo(ecf46ECF);
         return localVarResp.getData();
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf46ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2304,8 +2313,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EcfResponse> recepcionEcf46WithHttpInfo(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        okhttp3.Call localVarCall = recepcionEcf46ValidateBeforeCall(ECF, null);
+    public ApiResponse<EcfResponse> recepcionEcf46WithHttpInfo(@javax.annotation.Nonnull Ecf46ECF ecf46ECF) throws ApiException {
+        okhttp3.Call localVarCall = recepcionEcf46ValidateBeforeCall(ecf46ECF, null);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2313,7 +2322,7 @@ public class EcfApi {
     /**
      *  (asynchronously)
      * 
-     * @param ECF  (required)
+     * @param ecf46ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -2328,16 +2337,16 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf46Async(@javax.annotation.Nonnull ECF ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf46Async(@javax.annotation.Nonnull Ecf46ECF ecf46ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = recepcionEcf46ValidateBeforeCall(ECF, _callback);
+        okhttp3.Call localVarCall = recepcionEcf46ValidateBeforeCall(ecf46ECF, _callback);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for recepcionEcf47
-     * @param ECF  (required)
+     * @param ecf47ECF  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -2352,7 +2361,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf47Call(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf47Call(@javax.annotation.Nonnull Ecf47ECF ecf47ECF, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2366,7 +2375,7 @@ public class EcfApi {
             basePath = null;
         }
 
-        Object localVarPostBody = ECF;
+        Object localVarPostBody = ecf47ECF;
 
         // create path and map variables
         String localVarPath = "/ecf/47";
@@ -2399,20 +2408,20 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call recepcionEcf47ValidateBeforeCall(@javax.annotation.Nonnull ECF ECF, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'ECF' is set
-        if (ECF == null) {
-            throw new ApiException("Missing the required parameter 'ECF' when calling recepcionEcf47(Async)");
+    private okhttp3.Call recepcionEcf47ValidateBeforeCall(@javax.annotation.Nonnull Ecf47ECF ecf47ECF, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'ecf47ECF' is set
+        if (ecf47ECF == null) {
+            throw new ApiException("Missing the required parameter 'ecf47ECF' when calling recepcionEcf47(Async)");
         }
 
-        return recepcionEcf47Call(ECF, _callback);
+        return recepcionEcf47Call(ecf47ECF, _callback);
 
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf47ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2426,15 +2435,15 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public EcfResponse recepcionEcf47(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        ApiResponse<EcfResponse> localVarResp = recepcionEcf47WithHttpInfo(ECF);
+    public EcfResponse recepcionEcf47(@javax.annotation.Nonnull Ecf47ECF ecf47ECF) throws ApiException {
+        ApiResponse<EcfResponse> localVarResp = recepcionEcf47WithHttpInfo(ecf47ECF);
         return localVarResp.getData();
     }
 
     /**
      * 
      * 
-     * @param ECF  (required)
+     * @param ecf47ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2448,8 +2457,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EcfResponse> recepcionEcf47WithHttpInfo(@javax.annotation.Nonnull ECF ECF) throws ApiException {
-        okhttp3.Call localVarCall = recepcionEcf47ValidateBeforeCall(ECF, null);
+    public ApiResponse<EcfResponse> recepcionEcf47WithHttpInfo(@javax.annotation.Nonnull Ecf47ECF ecf47ECF) throws ApiException {
+        okhttp3.Call localVarCall = recepcionEcf47ValidateBeforeCall(ecf47ECF, null);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2457,7 +2466,7 @@ public class EcfApi {
     /**
      *  (asynchronously)
      * 
-     * @param ECF  (required)
+     * @param ecf47ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -2472,9 +2481,9 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call recepcionEcf47Async(@javax.annotation.Nonnull ECF ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
+    public okhttp3.Call recepcionEcf47Async(@javax.annotation.Nonnull Ecf47ECF ecf47ECF, final ApiCallback<EcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = recepcionEcf47ValidateBeforeCall(ECF, _callback);
+        okhttp3.Call localVarCall = recepcionEcf47ValidateBeforeCall(ecf47ECF, _callback);
         Type localVarReturnType = new TypeToken<EcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

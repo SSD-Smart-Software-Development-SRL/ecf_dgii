@@ -28,9 +28,6 @@ import java.time.OffsetDateTime
 import java.time.OffsetTime
 import java.util.Locale
 import java.util.regex.Pattern
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 
@@ -53,7 +50,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
         var username: String? = null
         var password: String? = null
         var accessToken: String? = null
-        const val baseUrlKey: String = "com.ecfx.sdk.baseUrl"
+        const val baseUrlKey: String = "dom.com.ssd.ecfx.sdk.baseUrl"
 
         @JvmStatic
         val defaultClient: OkHttpClient by lazy {
@@ -303,7 +300,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
         }
     }
 
-    protected suspend inline fun <reified I, reified T: Any?> request(requestConfig: RequestConfig<I>): ApiResponse<T?> {
+    protected inline fun <reified I, reified T: Any?> request(requestConfig: RequestConfig<I>): ApiResponse<T?> {
         val httpUrl = baseUrl.toHttpUrlOrNull() ?: throw IllegalStateException("baseUrl is invalid.")
 
         // take authMethod from operation
@@ -355,18 +352,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
             this.headers(headersBuilder.build())
         }.build()
 
-        val response: Response = suspendCancellableCoroutine { continuation ->
-            val call = client.newCall(request)
-            continuation.invokeOnCancellation { call.cancel() }
-            call.enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    continuation.resumeWithException(e)
-                }
-                override fun onResponse(call: Call, response: Response) {
-                    continuation.resume(response)
-                }
-            })
-        }
+        val response = client.newCall(request).execute()
 
         val accept = response.header(ContentType)?.substringBefore(";")?.lowercase(Locale.US)
 

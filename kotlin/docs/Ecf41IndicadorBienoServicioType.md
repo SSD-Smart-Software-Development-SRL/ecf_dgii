@@ -1,0 +1,12 @@
+
+# Ecf41IndicadorBienoServicioType
+
+## Enum
+
+
+    * `Bien` (value: `"Bien"`)
+
+    * `Servicio` (value: `"Servicio"`)
+
+
+

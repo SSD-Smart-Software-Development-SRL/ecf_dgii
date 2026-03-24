@@ -9,8 +9,8 @@
 | **total** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  [optional] |
 | **page** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  [optional] |
 | **limit** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  [optional] |
-| **nextPage** | [**IdDocTotalPaginas**](IdDocTotalPaginas.md) |  |  [optional] |
-| **previousPage** | [**IdDocTotalPaginas**](IdDocTotalPaginas.md) |  |  [optional] |
+| **nextPage** | [**Ecf31IdDocTotalPaginas**](Ecf31IdDocTotalPaginas.md) |  |  [optional] |
+| **previousPage** | [**Ecf31IdDocTotalPaginas**](Ecf31IdDocTotalPaginas.md) |  |  [optional] |
 
 
 

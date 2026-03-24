@@ -15,7 +15,7 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
-import dom.com.ssd.ecfx.sdk.models.IdDocTotalPaginas
+import dom.com.ssd.ecfx.sdk.models.Ecf31IdDocTotalPaginas
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
@@ -41,7 +41,7 @@ data class ProblemDetails (
     val title: kotlin.String? = null,
 
     @SerialName(value = "status")
-    val status: IdDocTotalPaginas? = null,
+    val status: Ecf31IdDocTotalPaginas? = null,
 
     @SerialName(value = "detail")
     val detail: kotlin.String? = null,

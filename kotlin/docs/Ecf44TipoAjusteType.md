@@ -1,0 +1,12 @@
+
+# Ecf44TipoAjusteType
+
+## Enum
+
+
+    * `D` (value: `"D"`)
+
+    * `R` (value: `"R"`)
+
+
+

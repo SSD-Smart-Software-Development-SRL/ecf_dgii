@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import dom.com.ssd.ecfx.client.model.IdDocTotalPaginas;
+import dom.com.ssd.ecfx.client.model.Ecf31IdDocTotalPaginas;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -64,7 +64,7 @@ public class ProblemDetails {
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private IdDocTotalPaginas status;
+  private Ecf31IdDocTotalPaginas status;
 
   public static final String SERIALIZED_NAME_DETAIL = "detail";
   @SerializedName(SERIALIZED_NAME_DETAIL)
@@ -117,7 +117,7 @@ public class ProblemDetails {
   }
 
 
-  public ProblemDetails status(@javax.annotation.Nullable IdDocTotalPaginas status) {
+  public ProblemDetails status(@javax.annotation.Nullable Ecf31IdDocTotalPaginas status) {
     this.status = status;
     return this;
   }
@@ -127,11 +127,11 @@ public class ProblemDetails {
    * @return status
    */
   @javax.annotation.Nullable
-  public IdDocTotalPaginas getStatus() {
+  public Ecf31IdDocTotalPaginas getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable IdDocTotalPaginas status) {
+  public void setStatus(@javax.annotation.Nullable Ecf31IdDocTotalPaginas status) {
     this.status = status;
   }
 
@@ -261,7 +261,7 @@ public class ProblemDetails {
       }
       // validate the optional field `status`
       if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        IdDocTotalPaginas.validateJsonElement(jsonObj.get("status"));
+        Ecf31IdDocTotalPaginas.validateJsonElement(jsonObj.get("status"));
       }
       if ((jsonObj.get("detail") != null && !jsonObj.get("detail").isJsonNull()) && !jsonObj.get("detail").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `detail` to be a primitive type in the JSON string but got `%s`", jsonObj.get("detail").toString()));

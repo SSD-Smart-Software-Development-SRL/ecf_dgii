@@ -33,8 +33,8 @@ All URIs are relative to *https://api.test.ecfx.ssd.com.do*
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
 val rnc : kotlin.String = rnc_example // kotlin.String | 
@@ -81,8 +81,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
 val rnc : kotlin.String = rnc_example // kotlin.String | 
@@ -130,8 +130,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
 val rnc : kotlin.String = rnc_example // kotlin.String | 
@@ -177,8 +177,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
 val rnc : kotlin.String = rnc_example // kotlin.String | 
@@ -227,8 +227,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
 val tipoEcf : kotlin.collections.List<ECFType> =  // kotlin.collections.List<ECFType> | 
@@ -283,8 +283,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
 val rnc : kotlin.String = rnc_example // kotlin.String | 
@@ -326,20 +326,20 @@ Configure Bearer:
 
 <a id="recepcionEcf31"></a>
 # **recepcionEcf31**
-> EcfResponse recepcionEcf31(ECF)
+> EcfResponse recepcionEcf31(ecf31ECF)
 
 
 
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
-val ECF : ECF =  // ECF | 
+val ecf31ECF : Ecf31ECF =  // Ecf31ECF | 
 try {
-    val result : EcfResponse = apiInstance.recepcionEcf31(ECF)
+    val result : EcfResponse = apiInstance.recepcionEcf31(ecf31ECF)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#recepcionEcf31")
@@ -353,7 +353,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf31ECF** | [**Ecf31ECF**](Ecf31ECF.md)|  | |
 
 ### Return type
 
@@ -372,20 +372,20 @@ Configure Bearer:
 
 <a id="recepcionEcf32"></a>
 # **recepcionEcf32**
-> EcfResponse recepcionEcf32(ECF)
+> EcfResponse recepcionEcf32(ecf32ECF)
 
 
 
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
-val ECF : ECF =  // ECF | 
+val ecf32ECF : Ecf32ECF =  // Ecf32ECF | 
 try {
-    val result : EcfResponse = apiInstance.recepcionEcf32(ECF)
+    val result : EcfResponse = apiInstance.recepcionEcf32(ecf32ECF)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#recepcionEcf32")
@@ -399,7 +399,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf32ECF** | [**Ecf32ECF**](Ecf32ECF.md)|  | |
 
 ### Return type
 
@@ -418,20 +418,20 @@ Configure Bearer:
 
 <a id="recepcionEcf33"></a>
 # **recepcionEcf33**
-> EcfResponse recepcionEcf33(ECF)
+> EcfResponse recepcionEcf33(ecf33ECF)
 
 
 
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
-val ECF : ECF =  // ECF | 
+val ecf33ECF : Ecf33ECF =  // Ecf33ECF | 
 try {
-    val result : EcfResponse = apiInstance.recepcionEcf33(ECF)
+    val result : EcfResponse = apiInstance.recepcionEcf33(ecf33ECF)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#recepcionEcf33")
@@ -445,7 +445,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf33ECF** | [**Ecf33ECF**](Ecf33ECF.md)|  | |
 
 ### Return type
 
@@ -464,20 +464,20 @@ Configure Bearer:
 
 <a id="recepcionEcf34"></a>
 # **recepcionEcf34**
-> EcfResponse recepcionEcf34(ECF)
+> EcfResponse recepcionEcf34(ecf34ECF)
 
 
 
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
-val ECF : ECF =  // ECF | 
+val ecf34ECF : Ecf34ECF =  // Ecf34ECF | 
 try {
-    val result : EcfResponse = apiInstance.recepcionEcf34(ECF)
+    val result : EcfResponse = apiInstance.recepcionEcf34(ecf34ECF)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#recepcionEcf34")
@@ -491,7 +491,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf34ECF** | [**Ecf34ECF**](Ecf34ECF.md)|  | |
 
 ### Return type
 
@@ -510,20 +510,20 @@ Configure Bearer:
 
 <a id="recepcionEcf41"></a>
 # **recepcionEcf41**
-> EcfResponse recepcionEcf41(ECF)
+> EcfResponse recepcionEcf41(ecf41ECF)
 
 
 
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
-val ECF : ECF =  // ECF | 
+val ecf41ECF : Ecf41ECF =  // Ecf41ECF | 
 try {
-    val result : EcfResponse = apiInstance.recepcionEcf41(ECF)
+    val result : EcfResponse = apiInstance.recepcionEcf41(ecf41ECF)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#recepcionEcf41")
@@ -537,7 +537,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf41ECF** | [**Ecf41ECF**](Ecf41ECF.md)|  | |
 
 ### Return type
 
@@ -556,20 +556,20 @@ Configure Bearer:
 
 <a id="recepcionEcf43"></a>
 # **recepcionEcf43**
-> EcfResponse recepcionEcf43(ECF)
+> EcfResponse recepcionEcf43(ecf43ECF)
 
 
 
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
-val ECF : ECF =  // ECF | 
+val ecf43ECF : Ecf43ECF =  // Ecf43ECF | 
 try {
-    val result : EcfResponse = apiInstance.recepcionEcf43(ECF)
+    val result : EcfResponse = apiInstance.recepcionEcf43(ecf43ECF)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#recepcionEcf43")
@@ -583,7 +583,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf43ECF** | [**Ecf43ECF**](Ecf43ECF.md)|  | |
 
 ### Return type
 
@@ -602,20 +602,20 @@ Configure Bearer:
 
 <a id="recepcionEcf44"></a>
 # **recepcionEcf44**
-> EcfResponse recepcionEcf44(ECF)
+> EcfResponse recepcionEcf44(ecf44ECF)
 
 
 
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
-val ECF : ECF =  // ECF | 
+val ecf44ECF : Ecf44ECF =  // Ecf44ECF | 
 try {
-    val result : EcfResponse = apiInstance.recepcionEcf44(ECF)
+    val result : EcfResponse = apiInstance.recepcionEcf44(ecf44ECF)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#recepcionEcf44")
@@ -629,7 +629,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf44ECF** | [**Ecf44ECF**](Ecf44ECF.md)|  | |
 
 ### Return type
 
@@ -648,20 +648,20 @@ Configure Bearer:
 
 <a id="recepcionEcf45"></a>
 # **recepcionEcf45**
-> EcfResponse recepcionEcf45(ECF)
+> EcfResponse recepcionEcf45(ecf45ECF)
 
 
 
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
-val ECF : ECF =  // ECF | 
+val ecf45ECF : Ecf45ECF =  // Ecf45ECF | 
 try {
-    val result : EcfResponse = apiInstance.recepcionEcf45(ECF)
+    val result : EcfResponse = apiInstance.recepcionEcf45(ecf45ECF)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#recepcionEcf45")
@@ -675,7 +675,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf45ECF** | [**Ecf45ECF**](Ecf45ECF.md)|  | |
 
 ### Return type
 
@@ -694,20 +694,20 @@ Configure Bearer:
 
 <a id="recepcionEcf46"></a>
 # **recepcionEcf46**
-> EcfResponse recepcionEcf46(ECF)
+> EcfResponse recepcionEcf46(ecf46ECF)
 
 
 
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
-val ECF : ECF =  // ECF | 
+val ecf46ECF : Ecf46ECF =  // Ecf46ECF | 
 try {
-    val result : EcfResponse = apiInstance.recepcionEcf46(ECF)
+    val result : EcfResponse = apiInstance.recepcionEcf46(ecf46ECF)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#recepcionEcf46")
@@ -721,7 +721,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf46ECF** | [**Ecf46ECF**](Ecf46ECF.md)|  | |
 
 ### Return type
 
@@ -740,20 +740,20 @@ Configure Bearer:
 
 <a id="recepcionEcf47"></a>
 # **recepcionEcf47**
-> EcfResponse recepcionEcf47(ECF)
+> EcfResponse recepcionEcf47(ecf47ECF)
 
 
 
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
-val ECF : ECF =  // ECF | 
+val ecf47ECF : Ecf47ECF =  // Ecf47ECF | 
 try {
-    val result : EcfResponse = apiInstance.recepcionEcf47(ECF)
+    val result : EcfResponse = apiInstance.recepcionEcf47(ecf47ECF)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#recepcionEcf47")
@@ -767,7 +767,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **ECF** | [**ECF**](ECF.md)|  | |
+| **ecf47ECF** | [**Ecf47ECF**](Ecf47ECF.md)|  | |
 
 ### Return type
 
@@ -793,8 +793,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
 val encfs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
@@ -857,8 +857,8 @@ Configure Bearer:
 ### Example
 ```kotlin
 // Import classes:
-//import com.ecfx.sdk.infrastructure.*
-//import com.ecfx.sdk.models.*
+//import dom.com.ssd.ecfx.sdk.infrastructure.*
+//import dom.com.ssd.ecfx.sdk.models.*
 
 val apiInstance = EcfApi()
 val rnc : kotlin.String = rnc_example // kotlin.String | 

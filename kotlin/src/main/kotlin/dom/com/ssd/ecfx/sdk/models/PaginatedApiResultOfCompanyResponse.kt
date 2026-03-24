@@ -17,7 +17,7 @@ package dom.com.ssd.ecfx.sdk.models
 
 import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.CompanyResponse
-import dom.com.ssd.ecfx.sdk.models.IdDocTotalPaginas
+import dom.com.ssd.ecfx.sdk.models.Ecf31IdDocTotalPaginas
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
@@ -54,10 +54,10 @@ data class PaginatedApiResultOfCompanyResponse (
     val limit: AcecfReceptionRequestDtoProgress? = null,
 
     @SerialName(value = "nextPage")
-    val nextPage: IdDocTotalPaginas? = null,
+    val nextPage: Ecf31IdDocTotalPaginas? = null,
 
     @SerialName(value = "previousPage")
-    val previousPage: IdDocTotalPaginas? = null
+    val previousPage: Ecf31IdDocTotalPaginas? = null
 
 ) {
 

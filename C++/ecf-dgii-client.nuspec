@@ -4,15 +4,15 @@
     <id>ecf-dgii-client.cpp</id>
     <version>0.1.0</version>
     <title>ECF DGII C++ Client</title>
-    <authors>Puntoos</authors>
-    <owners>Puntoos</owners>
+    <authors>SSD Smart Software Development SRL</authors>
+    <owners>SSD Smart Software Development SRL</owners>
     <license type="expression">MIT</license>
-    <projectUrl>https://github.com/puntoos/ecf_dgii_clients</projectUrl>
+    <projectUrl>https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii</projectUrl>
     <description>C++ SDK client for the ECF DGII API (Electronic Fiscal Receipt - Dominican Republic). Provides auto-generated models and HTTP client plus a high-level sendEcf() method with automatic routing, polling, and error handling.</description>
     <releaseNotes>Initial release.</releaseNotes>
-    <copyright>Copyright (c) 2024 Puntoos</copyright>
+    <copyright>Copyright (c) 2024 SSD Smart Software Development SRL</copyright>
     <tags>ecf dgii dominican-republic electronic-invoice fiscal api-client cpp native</tags>
-    <repository type="git" url="https://github.com/puntoos/ecf_dgii_clients.git" />
+    <repository type="git" url="https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git" />
     <dependencies>
       <group targetFramework="native">
       </group>

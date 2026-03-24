@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 project(ecf-dgii-client
     VERSION 0.1.0
     DESCRIPTION "C++ SDK client for the ECF DGII API (Electronic Fiscal Receipt - Dominican Republic)"
-    HOMEPAGE_URL "https://github.com/puntoos/ecf_dgii_clients"
+    HOMEPAGE_URL "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii"
     LANGUAGES CXX
 )
 

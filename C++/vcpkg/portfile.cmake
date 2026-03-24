@@ -1,6 +1,6 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO puntoos/ecf_dgii_clients
+    REPO SSD-Smart-Software-Development-SRL/ecf_dgii
     REF "v${VERSION}"
     SHA512 0  # Update with actual SHA512 after release tag is created
     HEAD_REF main

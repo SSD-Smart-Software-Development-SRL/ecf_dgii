@@ -12,7 +12,7 @@ Agrega a tu `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/puntoos/ecf-dgii-swift.git", from: "0.1.0")
+    .package(url: "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git", from: "0.1.0")
 ]
 ```
 

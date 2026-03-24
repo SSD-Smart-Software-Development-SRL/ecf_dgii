@@ -8,8 +8,8 @@ class EcfDgiiClientConan(ConanFile):
     name = "ecf-dgii-client"
     version = "0.1.0"
     license = "MIT"
-    author = "Puntoos"
-    url = "https://github.com/puntoos/ecf_dgii_clients"
+    author = "SSD Smart Software Development SRL"
+    url = "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii"
     description = "C++ SDK client for the ECF DGII API (Electronic Fiscal Receipt - Dominican Republic)"
     topics = ("ecf", "dgii", "dominican-republic", "electronic-invoice", "fiscal", "api-client")
     settings = "os", "compiler", "build_type", "arch"

@@ -7,10 +7,10 @@ Pod::Spec.new do |s|
     and a high-level EcfClient with automatic ECF routing, polling, and error handling.
     Certified by DGII for electronic fiscal receipt processing in the Dominican Republic.
   DESC
-  s.homepage = 'https://github.com/puntoos/ecf-dgii-swift'
+  s.homepage = 'https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
-  s.authors = { 'Puntoos' => 'info@ssd.com.do' }
-  s.source = { :git => 'https://github.com/puntoos/ecf-dgii-swift.git', :tag => s.version.to_s }
+  s.authors = { 'SSD Smart Software Development SRL' => 'contacto@ssd.com.do' }
+  s.source = { :git => 'https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '13.0'
   s.osx.deployment_target = '10.15'

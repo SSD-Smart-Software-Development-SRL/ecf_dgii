@@ -21,7 +21,7 @@
     "dist"
   ],
   "scripts": {
-    "generate": "openapi-typescript /Users/dawlin/Developer/puntoos/ecf_dgii/src/Apis/ECF_DGII.EcfApi/wwwroot/openapi/v1.json -o src/generated/v1.d.ts",
+    "generate": "openapi-typescript ../openapi/v1.json -o src/generated/v1.d.ts",
     "build": "tsup",
     "prepublishOnly": "npm run build"
   },

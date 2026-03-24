@@ -2,32 +2,33 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>dom.com.ssd.ecfx</groupId>
-    <artifactId>ecf-dgii-client</artifactId>
+    <artifactId>ecf-dgii-sdk-java</artifactId>
     <packaging>jar</packaging>
-    <name>ecf-dgii-client</name>
+    <name>ecf-dgii-sdk-java</name>
     <version>1.0.0</version>
-    <url>https://github.com/openapitools/openapi-generator</url>
-    <description>OpenAPI Java</description>
+    <url>https://github.com/puntoos/ecf_dgii_clients</url>
+    <description>SDK de Java para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana)</description>
     <scm>
-        <connection>scm:git:git@github.com:openapitools/openapi-generator.git</connection>
-        <developerConnection>scm:git:git@github.com:openapitools/openapi-generator.git</developerConnection>
-        <url>https://github.com/openapitools/openapi-generator</url>
+        <connection>scm:git:git://github.com/puntoos/ecf_dgii_clients.git</connection>
+        <developerConnection>scm:git:ssh://github.com/puntoos/ecf_dgii_clients.git</developerConnection>
+        <url>https://github.com/puntoos/ecf_dgii_clients</url>
     </scm>
 
     <licenses>
         <license>
-            <name>Unlicense</name>
-            <url>http://unlicense.org</url>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
     <developers>
         <developer>
-            <name>OpenAPI-Generator Contributors</name>
-            <email>team@openapitools.org</email>
-            <organization>OpenAPITools.org</organization>
-            <organizationUrl>http://openapitools.org</organizationUrl>
+            <id>puntoos</id>
+            <name>Puntoos</name>
+            <email>dev@puntoos.com</email>
+            <organization>Puntoos</organization>
+            <organizationUrl>https://github.com/puntoos</organizationUrl>
         </developer>
     </developers>
 
@@ -235,7 +236,7 @@
 
     <profiles>
         <profile>
-            <id>sign-artifacts</id>
+            <id>release</id>
             <build>
                 <plugins>
                     <plugin>
@@ -249,8 +250,24 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.10.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <autoPublish>true</autoPublish>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

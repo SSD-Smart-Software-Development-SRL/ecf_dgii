@@ -1,4 +1,4 @@
-[![Maven Central](https://img.shields.io/maven-central/v/dom.com.ssd.ecfx/ecf-dgii-sdk-kotlin)](https://central.sonatype.com/artifact/dom.com.ssd.ecfx/ecf-dgii-sdk-kotlin)
+[![Maven Central](https://img.shields.io/maven-central/v/do.com.ssd.ecfx/ecf-dgii-sdk-kotlin)](https://central.sonatype.com/artifact/do.com.ssd.ecfx/ecf-dgii-sdk-kotlin)
 
 # dom.com.ssd.ecfx.sdk - Biblioteca cliente Kotlin para la API de ECF
 
@@ -39,20 +39,20 @@ Esto ejecuta todas las pruebas y empaqueta la biblioteca.
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-implementation("dom.com.ssd.ecfx:ecf-dgii-sdk-kotlin:1.0.0")
+implementation("do.com.ssd.ecfx:ecf-dgii-sdk-kotlin:1.0.0")
 ```
 
 ### Gradle (Groovy)
 
 ```groovy
-implementation 'dom.com.ssd.ecfx:ecf-dgii-sdk-kotlin:1.0.0'
+implementation 'do.com.ssd.ecfx:ecf-dgii-sdk-kotlin:1.0.0'
 ```
 
 ### Maven
 
 ```xml
 <dependency>
-    <groupId>dom.com.ssd.ecfx</groupId>
+    <groupId>do.com.ssd.ecfx</groupId>
     <artifactId>ecf-dgii-sdk-kotlin</artifactId>
     <version>1.0.0</version>
 </dependency>

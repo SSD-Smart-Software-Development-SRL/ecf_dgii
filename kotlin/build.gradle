@@ -5,7 +5,7 @@ plugins {
     id 'com.vanniktech.maven.publish' version '0.36.0'
 }
 
-group 'dom.com.ssd.ecfx'
+group 'do.com.ssd.ecfx'
 version '1.0.0'
 
 repositories {
@@ -54,7 +54,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
 mavenPublishing {
     publishToMavenCentral()
     signAllPublications()
-    coordinates('dom.com.ssd.ecfx', 'ecf-dgii-sdk-kotlin', version)
+    coordinates('do.com.ssd.ecfx', 'ecf-dgii-sdk-kotlin', version)
 
     pom {
         name = 'ECF DGII SDK Kotlin'

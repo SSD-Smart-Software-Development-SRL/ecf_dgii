@@ -1,4 +1,4 @@
-[![Maven Central](https://img.shields.io/maven-central/v/dom.com.ssd.ecfx/ecf-dgii-sdk-java)](https://central.sonatype.com/artifact/dom.com.ssd.ecfx/ecf-dgii-sdk-java)
+[![Maven Central](https://img.shields.io/maven-central/v/do.com.ssd.ecfx/ecf-dgii-sdk-java)](https://central.sonatype.com/artifact/do.com.ssd.ecfx/ecf-dgii-sdk-java)
 
 # ECF DGII Java SDK
 
@@ -10,7 +10,7 @@ SDK de Java para la API de ECF DGII (comprobantes fiscales electr√≥nicos de Rep√
 
 ```xml
 <dependency>
-    <groupId>dom.com.ssd.ecfx</groupId>
+    <groupId>do.com.ssd.ecfx</groupId>
     <artifactId>ecf-dgii-sdk-java</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -19,7 +19,7 @@ SDK de Java para la API de ECF DGII (comprobantes fiscales electr√≥nicos de Rep√
 ### Gradle
 
 ```groovy
-implementation 'dom.com.ssd.ecfx:ecf-dgii-sdk-java:1.0.0'
+implementation 'do.com.ssd.ecfx:ecf-dgii-sdk-java:1.0.0'
 ```
 
 ## Inicio r√°pido

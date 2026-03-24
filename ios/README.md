@@ -86,117 +86,74 @@ let options = PollingOptions(
 let result = try await client.sendEcf(ecf: ecf, pollingOptions: options)
 ```
 
-### Arquitectura Backend / Frontend
+## Arquitectura Backend / Frontend
 
 ```mermaid
 sequenceDiagram
-    participant FE as Frontend
+    participant C as Cliente (Browser/App)
     participant BE as Backend
     participant ECF as ECF API
 
-    Note over BE,ECF: Backend (lectura/escritura)
-    BE->>ECF: POST /ecf/31 (enviar factura)
+    C->>BE: POST /invoice (datos de factura)
+    Note over BE: Valida, guarda y convierte a formato ECF
+
+    BE->>ECF: POST /ecf/{tipo} (enviar ECF)
     ECF-->>BE: { messageId }
-    BE->>ECF: POST /apikey (token solo lectura, scoped a RNC)
-    ECF-->>BE: { apiKey }
-    BE-->>FE: GET /ecf-token → { apiKey }
+    BE-->>C: { messageId }
 
-    Note over FE,ECF: Frontend (solo lectura)
-    FE->>BE: POST /invoice, /order, /sale
-    BE-->>FE: { messageId }
+    Note over C: No espera — puede continuar
 
-    alt Token en caché
-        FE->>FE: Usar token existente
-    else Sin token
-        FE->>BE: GET /ecf-token
-        BE->>ECF: POST /apikey (scoped a RNC)
+    alt Token en cache
+        C->>C: Usar token existente
+    else Sin token o expirado
+        C->>BE: GET /ecf-token
+        BE->>ECF: POST /apikey (solo lectura, scoped a RNC)
         ECF-->>BE: { apiKey }
-        BE-->>FE: { apiKey }
-        FE->>FE: Almacenar token en caché
+        BE-->>C: { apiKey }
+        C->>C: Almacenar token en cache
     end
 
-    FE->>ECF: GET /ecf/{rnc}/{encf} (con token solo lectura)
-    ECF-->>FE: { progress, codSec, ... }
+    loop Polling hasta completar
+        C->>ECF: GET /ecf/{rnc}/{encf} (token solo lectura)
+        ECF-->>C: { progress, codSec, ... }
+    end
 ```
 
 ### Flujo detallado
 
-**Backend** (usa `EcfClient` con permisos de lectura/escritura):
+1. El **cliente** (browser/app) envía los datos de la factura al **backend** (`POST /invoice`, `/order`, `/sale`)
+2. El **backend** valida, guarda y convierte la factura interna al formato ECF
+3. El **backend** envía el ECF a la API de ECF SSD (`POST /ecf/{tipo}`) y recibe un `messageId`
+4. El **backend** retorna el `messageId` al cliente — **el cliente no espera**, puede continuar
+5. Cuando el cliente necesita consultar el estado del ECF, usa `EcfFrontendClient` que internamente:
+   - Verifica si hay un **token de solo lectura** en cache (Keychain por defecto)
+   - Si **no existe o expiró**: llama a `getToken()` (que el consumidor provee — típicamente un request a su backend), luego llama a `cacheToken(token)` para almacenarlo
+   - Si la API retorna **401**: automáticamente llama a `getToken()` de nuevo, actualiza el cache, y reintenta
+6. El cliente hace **polling** directamente contra la API de ECF SSD (`GET /ecf/{rnc}/{encf}`) hasta que `progress` sea `Finished`
 
-1. Tu backend recibe la factura del usuario (ej. `POST /invoice`)
-2. Valida, guarda y convierte la factura interna al formato ECF
-3. Envía el ECF a la API usando el token principal → recibe `messageId`
-4. Expone un endpoint `GET /ecf-token` que llama a `POST /apikey` de ECF SSD y retorna un **token de solo lectura** con alcance al RNC del tenant
-
-**Frontend** (usa `EcfFrontendClient`):
-
-1. El usuario invoca un endpoint del backend (`/invoice`, `/order`, `/sale`) → recibe el `messageId`
-2. Verifica si hay un token en caché (memoria, localStorage, etc.)
-   - **Si existe**: lo usa directamente
-   - **Si no existe**: llama a `GET /ecf-token` del backend, almacena el token retornado en caché
-3. Crea el cliente de solo lectura con el token
-4. Consulta el estado del ECF directamente contra la API de ECF SSD
-
-#### `EcfFrontendClient`
-
-Para el frontend, usa `EcfFrontendClient` que expone únicamente los métodos de consulta (solo lectura):
+### Ejemplo: Frontend (con `EcfFrontendClient`)
 
 ```swift
-import EcfDgiiClient
+// 1. Enviar la factura al backend
+let (invoiceData, _) = try await URLSession.shared.data(for: invoiceRequest)
+let result = try JSONDecoder().decode(InvoiceResult.self, from: invoiceData)
+// El cliente no espera — puede continuar con otras operaciones
 
-// Inicializar el cliente frontend con el token de solo lectura
-let frontendClient = EcfFrontendClient(
-    apiKey: "token-solo-lectura",
-    environment: .prod  // .test, .cert o .prod
+// 2. Crear cliente de solo lectura (getToken se llama automáticamente)
+let frontend = EcfFrontendClient(
+    getToken: {
+        let (data, _) = try await URLSession.shared.data(from: URL(string: "https://my-backend/api/v1/ecf-token")!)
+        let json = try JSONDecoder().decode(TokenResponse.self, from: data)
+        return json.apiKey
+    },
+    environment: .prod
+    // cacheToken usa Keychain por defecto
 )
 
-// Consultar el estado de un ECF
-let ecfStatus = try await frontendClient.queryEcf(
-    rnc: "123456789",
-    encf: "E310000000001"
-)
-
-// Buscar ECFs con filtros
-let results = try await frontendClient.searchEcfs(
-    rnc: "123456789",
-    tiposEcfs: [.facturaDeCreditoFiscalElectronica],
-    fromFechaEmision: "2026-01-01",
-    toFechaEmision: "2026-03-31",
-    page: 1,
-    limit: 20
-)
-
-// Buscar todos los ECFs (sin filtro por RNC)
-let allEcfs = try await frontendClient.searchAllEcfs(
-    tiposEcfs: [.facturaDeConsumoElectronica],
-    page: 1,
-    limit: 50
-)
-
-// Obtener un ECF por su ID de mensaje
-let ecfById = try await frontendClient.getEcfById(
-    rnc: "123456789",
-    id: "message-uuid",
-    includeEcfContent: true
-)
-
-// Consultar empresas
-let companies = try await frontendClient.getCompanies(page: 1, limit: 10)
-let company = try await frontendClient.getCompanyByRnc(rnc: "123456789")
+// 3. Consultar el estado del ECF
+let ecf = try await frontend.queryEcf(rnc: result.rnc, encf: result.encf)
+let ecfs = try await frontend.searchEcfs(rnc: result.rnc)
 ```
-
-**Métodos disponibles en `EcfFrontendClient`:**
-
-| Método | Descripción |
-|---|---|
-| `queryEcf(rnc:encf:includeEcfContent:)` | Consultar el estado de un ECF específico |
-| `searchEcfs(rnc:encfs:ids:tiposEcfs:includeEcfContent:fromFechaEmision:toFechaEmision:amountFrom:amountTo:page:limit:)` | Buscar ECFs con filtros |
-| `searchAllEcfs(...)` | Buscar todos los ECFs sin filtro por RNC |
-| `getEcfById(rnc:id:includeEcfContent:)` | Obtener un ECF por su ID de mensaje |
-| `getCompanies(rncs:names:page:limit:)` | Listar empresas |
-| `getCompanyByRnc(rnc:)` | Obtener una empresa por su RNC |
-
-> **`sendEcf`** es una conveniencia que envuelve envío + polling. Para aplicaciones donde el frontend maneja la visualización del estado, usa `EcfFrontendClient` con los endpoints individuales de consulta.
 
 ### Acceso directo a la API
 

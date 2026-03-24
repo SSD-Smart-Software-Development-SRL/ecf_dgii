@@ -71,10 +71,11 @@ namespace EcfDgii.Client
         /// <summary>
         /// Creates a restricted, read-only <see cref="EcfFrontendClient"/> for frontend use.
         /// The returned client only exposes GET endpoints — no mutations.
+        /// Uses callback-based token management with automatic 401 retry.
         /// </summary>
-        /// <param name="options">Client configuration options.</param>
+        /// <param name="options">Frontend client configuration with token callbacks.</param>
         /// <returns>A new <see cref="EcfFrontendClient"/> instance.</returns>
-        public static EcfFrontendClient CreateFrontendClient(EcfClientOptions options)
+        public static EcfFrontendClient CreateFrontendClient(EcfFrontendClientOptions options)
         {
             return new EcfFrontendClient(options);
         }

@@ -287,52 +287,72 @@ El SDK genera modelos específicos por tipo de comprobante (`Ecf31ECF`, `Ecf31En
 
 ```mermaid
 sequenceDiagram
-    participant FE as Frontend
+    participant C as Cliente (Browser/App)
     participant BE as Backend
     participant ECF as ECF API
 
-    Note over BE,ECF: Backend (lectura/escritura)
-    BE->>ECF: POST /ecf/31 (enviar factura)
+    C->>BE: POST /invoice (datos de factura)
+    Note over BE: Valida, guarda y convierte a formato ECF
+
+    BE->>ECF: POST /ecf/{tipo} (enviar ECF)
     ECF-->>BE: { messageId }
-    BE->>ECF: POST /apikey (token solo lectura, scoped a RNC)
-    ECF-->>BE: { apiKey }
-    BE-->>FE: GET /ecf-token → { apiKey }
+    BE-->>C: { messageId }
 
-    Note over FE,ECF: Frontend (solo lectura)
-    FE->>BE: POST /invoice, /order, /sale
-    BE-->>FE: { messageId }
+    Note over C: No espera — puede continuar
 
-    alt Token en caché
-        FE->>FE: Usar token existente
-    else Sin token
-        FE->>BE: GET /ecf-token
-        BE->>ECF: POST /apikey (scoped a RNC)
+    alt Token en cache
+        C->>C: Usar token existente
+    else Sin token o expirado
+        C->>BE: GET /ecf-token
+        BE->>ECF: POST /apikey (solo lectura, scoped a RNC)
         ECF-->>BE: { apiKey }
-        BE-->>FE: { apiKey }
-        FE->>FE: Almacenar token en caché
+        BE-->>C: { apiKey }
+        C->>C: Almacenar token en cache
     end
 
-    FE->>ECF: GET /ecf/{rnc}/{encf} (con token solo lectura)
-    ECF-->>FE: { progress, codSec, ... }
+    loop Polling hasta completar
+        C->>ECF: GET /ecf/{rnc}/{encf} (token solo lectura)
+        ECF-->>C: { progress, codSec, ... }
+    end
 ```
 
 ### Flujo detallado
 
-**Backend** (usa `EcfClient` con permisos de lectura/escritura):
+1. El **cliente** (browser/app) envía los datos de la factura al **backend** (`POST /invoice`, `/order`, `/sale`)
+2. El **backend** valida, guarda y convierte la factura interna al formato ECF
+3. El **backend** envía el ECF a la API de ECF SSD (`POST /ecf/{tipo}`) y recibe un `messageId`
+4. El **backend** retorna el `messageId` al cliente — **el cliente no espera**, puede continuar
+5. Cuando el cliente necesita consultar el estado del ECF, usa `EcfFrontendClient` que internamente:
+   - Verifica si hay un **token de solo lectura** en cache
+   - Si **no existe o expiró**: llama a `getToken()` (que el consumidor provee — típicamente un `fetch('/ecf-token')` a su backend), luego llama a `cacheToken(token)` para almacenarlo
+   - Si la API retorna **401**: automáticamente llama a `getToken()` de nuevo, actualiza el cache, y reintenta
+6. El cliente hace **polling** directamente contra la API de ECF SSD (`GET /ecf/{rnc}/{encf}`) hasta que `progress` sea `Finished`
 
-1. Tu backend recibe la factura del usuario (ej. `POST /invoice`)
-2. Valida, guarda y convierte la factura interna al formato ECF
-3. Envía el ECF a la API usando el token principal → recibe `messageId`
-4. Expone un endpoint `GET /ecf-token` que llama a `POST /apikey` de ECF SSD y retorna un **token de solo lectura** con alcance al RNC del tenant
+### Ejemplo: Frontend con callbacks
 
-**Frontend** (usa `EcfFrontendClient`):
+```csharp
+// 1. Enviar la factura al backend
+var invoiceResponse = await httpClient.PostAsJsonAsync("/api/v1/invoices", invoiceData);
+var result = await invoiceResponse.Content.ReadFromJsonAsync<InvoiceResult>();
+// El cliente no espera — puede continuar con otras operaciones
 
-1. El usuario invoca un endpoint del backend (`/invoice`, `/order`, `/sale`) → recibe el `messageId`
-2. Verifica si hay un token en caché (memoria, localStorage, etc.)
-   - **Si existe**: lo usa directamente
-   - **Si no existe**: llama a `GET /ecf-token` del backend, almacena el token retornado en caché
-3. Crea el cliente de solo lectura con el token
-4. Consulta el estado del ECF directamente contra la API de ECF SSD
+// 2. Crear cliente de solo lectura (GetToken se llama automáticamente)
+var frontend = new EcfFrontendClient(new EcfFrontendClientOptions
+{
+    GetToken = async () =>
+    {
+        var response = await httpClient.GetAsync("/api/v1/ecf-token");
+        var json = await response.Content.ReadFromJsonAsync<TokenResponse>();
+        return json.ApiKey;
+    },
+    Environment = EcfEnvironment.Prod
+    // CacheToken usa archivo encriptado en disco por defecto
+});
+
+// 3. Consultar el estado del ECF
+var ecf = await frontend.QueryEcfAsync(result.Rnc, result.Encf);
+var ecfs = await frontend.SearchEcfsAsync(result.Rnc);
+```
 
 ### Ejemplo: Backend
 
@@ -362,7 +382,7 @@ public async Task<IActionResult> CreateInvoice(CreateInvoiceRequest request)
     return Ok(new { invoice.Id, response.MessageId });
 }
 
-// Endpoint separado: generar token de lectura para el frontend
+// Endpoint separado: generar token de lectura para el cliente
 [HttpGet("/api/v1/ecf-token")]
 public async Task<IActionResult> GetEcfToken()
 {
@@ -373,10 +393,6 @@ public async Task<IActionResult> GetEcfToken()
     return Ok(new { apiKey.Token });
 }
 ```
-
-El frontend almacena el token de forma segura, lo renueva al recibir `401` o al expirar, y consulta ECF SSD directamente sin pasar por el backend. Ver [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo y ejemplo de frontend.
-
-> **`SendEcfAsync`** es una conveniencia que encapsula envío + polling en una sola llamada. Ideal para scripts o backends simples sin frontend.
 
 ## Acceso Directo al API
 

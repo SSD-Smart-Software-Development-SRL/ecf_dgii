@@ -1,7 +1,7 @@
 """ECF DGII Python SDK - Client for the Dominican Republic Electronic Fiscal Receipts API."""
 
 from .client import EcfClient, Environment, ENVIRONMENT_URLS
-from .frontend_client import EcfFrontendClient
+from .frontend_client import EcfFrontendClient, create_frontend_client
 from .enums import (
     AllTipoECFTypes,
     CodificacionTipoImpuestosType,
@@ -105,6 +105,7 @@ __all__ = [
     # Client
     "EcfClient",
     "EcfFrontendClient",
+    "create_frontend_client",
     "Environment",
     "ENVIRONMENT_URLS",
     "PollingOptions",

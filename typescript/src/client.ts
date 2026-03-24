@@ -1,5 +1,5 @@
 import createClient, { type Client, type Middleware } from 'openapi-fetch';
-import type { paths, components, EcfClientConfig, PollingOptions } from './types';
+import type { paths, components, EcfClientConfig, EcfFrontendClientConfig, PollingOptions } from './types';
 import { pollUntilComplete } from './polling';
 
 const ENVIRONMENT_URLS = {
@@ -473,20 +473,47 @@ export class EcfClient {
  * A restricted, read-only client that only exposes GET endpoints.
  * Suitable for use in frontend / browser code where write operations
  * should not be available.
+ *
+ * Token lifecycle is handled automatically:
+ * - On each request, checks `getCachedToken()`. If null, calls `getToken()` then `cacheToken(token)`.
+ * - On 401 responses, calls `getToken()` again, updates the cache, and retries the request.
  */
 export class EcfFrontendClient {
   /** The underlying openapi-fetch client for direct endpoint access. */
   private readonly raw: Client<paths>;
 
-  constructor(config: EcfClientConfig) {
+  constructor(config: EcfFrontendClientConfig) {
     const baseUrl =
       config.baseUrl ??
       ENVIRONMENT_URLS[config.environment ?? 'test'];
 
+    const getToken = config.getToken;
+    const cacheToken = config.cacheToken ?? (async (token: string) => {
+      localStorage.setItem('ecf-token', token);
+    });
+    const getCachedToken = config.getCachedToken ?? (async () => {
+      return localStorage.getItem('ecf-token');
+    });
+
     const authMiddleware: Middleware = {
       async onRequest({ request }) {
-        request.headers.set('Authorization', `Bearer ${config.apiKey}`);
+        let token = await getCachedToken();
+        if (!token) {
+          token = await getToken();
+          await cacheToken(token);
+        }
+        request.headers.set('Authorization', `Bearer ${token}`);
         return request;
+      },
+      async onResponse({ request, response }) {
+        if (response.status === 401) {
+          const token = await getToken();
+          await cacheToken(token);
+          const newRequest = request.clone();
+          newRequest.headers.set('Authorization', `Bearer ${token}`);
+          return fetch(newRequest);
+        }
+        return response;
       },
     };
 
@@ -558,6 +585,6 @@ export class EcfFrontendClient {
  * Factory that creates a restricted read-only client suitable for frontend use.
  * Only GET endpoints are exposed.
  */
-export function createFrontendClient(config: EcfClientConfig): EcfFrontendClient {
+export function createFrontendClient(config: EcfFrontendClientConfig): EcfFrontendClient {
   return new EcfFrontendClient(config);
 }

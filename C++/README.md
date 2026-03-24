@@ -170,80 +170,81 @@ options.timeout = std::chrono::milliseconds(300000);  // 5 minutos
 auto result = client.sendEcf(ecf, options).get();
 ```
 
-### Arquitectura Backend / Frontend
+## Arquitectura Backend / Frontend
 
 ```mermaid
 sequenceDiagram
-    participant FE as Frontend
+    participant C as Cliente (Browser/App)
     participant BE as Backend
     participant ECF as ECF API
 
-    Note over BE,ECF: Backend (lectura/escritura)
-    BE->>ECF: POST /ecf/31 (enviar factura)
+    C->>BE: POST /invoice (datos de factura)
+    Note over BE: Valida, guarda y convierte a formato ECF
+
+    BE->>ECF: POST /ecf/{tipo} (enviar ECF)
     ECF-->>BE: { messageId }
-    BE->>ECF: POST /apikey (token solo lectura, scoped a RNC)
-    ECF-->>BE: { apiKey }
-    BE-->>FE: GET /ecf-token → { apiKey }
+    BE-->>C: { messageId }
 
-    Note over FE,ECF: Frontend (solo lectura)
-    FE->>BE: POST /invoice, /order, /sale
-    BE-->>FE: { messageId }
+    Note over C: No espera — puede continuar
 
-    alt Token en caché
-        FE->>FE: Usar token existente
-    else Sin token
-        FE->>BE: GET /ecf-token
-        BE->>ECF: POST /apikey (scoped a RNC)
+    alt Token en cache
+        C->>C: Usar token existente
+    else Sin token o expirado
+        C->>BE: GET /ecf-token
+        BE->>ECF: POST /apikey (solo lectura, scoped a RNC)
         ECF-->>BE: { apiKey }
-        BE-->>FE: { apiKey }
-        FE->>FE: Almacenar token en caché
+        BE-->>C: { apiKey }
+        C->>C: Almacenar token en cache
     end
 
-    FE->>ECF: GET /ecf/{rnc}/{encf} (con token solo lectura)
-    ECF-->>FE: { progress, codSec, ... }
+    loop Polling hasta completar
+        C->>ECF: GET /ecf/{rnc}/{encf} (token solo lectura)
+        ECF-->>C: { progress, codSec, ... }
+    end
 ```
 
 ### Flujo detallado
 
 **Backend** (usa `EcfClient` con permisos de lectura/escritura):
 
-1. Tu backend recibe la factura del usuario (ej. `POST /invoice`)
-2. Valida, guarda y convierte la factura interna al formato ECF
+1. El cliente envía los datos de factura al backend (ej. `POST /invoice`)
+2. El backend valida, guarda y convierte al formato ECF
 3. Envía el ECF a la API usando el token principal → recibe `messageId`
-4. Expone un endpoint `GET /ecf-token` que llama a `POST /apikey` de ECF SSD y retorna un **token de solo lectura** con alcance al RNC del tenant
+4. Retorna el `messageId` al cliente
+5. Expone un endpoint `GET /ecf-token` que llama a `POST /apikey` de ECF SSD y retorna un **token de solo lectura** con alcance al RNC del tenant
 
-**Frontend** (usa `EcfFrontendClient`):
+**Cliente** (usa `EcfFrontendClient`):
 
-1. El usuario invoca un endpoint del backend (`/invoice`, `/order`, `/sale`) → recibe el `messageId`
-2. Verifica si hay un token en caché (memoria, localStorage, etc.)
+1. El cliente recibe el `messageId` del backend
+2. Verifica si hay un token en cache
    - **Si existe**: lo usa directamente
-   - **Si no existe**: llama a `GET /ecf-token` del backend, almacena el token retornado en caché
-3. Crea el cliente de solo lectura con el token
-4. Consulta el estado del ECF directamente contra la API de ECF SSD
-
-Para el frontend, usa `EcfFrontendClient` que expone solo los endpoints de consulta (solo lectura):
+   - **Si no existe o expiró**: llama a `GET /ecf-token` del backend, almacena el token retornado en cache
+3. Hace polling directamente contra la API de ECF SSD con el token de solo lectura hasta que el ECF esté completado
 
 ```cpp
 #include <ecf-dgii-client/EcfClient.h>
 
-using namespace ecf_dgii;
+// 1. Enviar la factura al backend
+auto invoiceRes = httpClient.post("https://my-backend/api/v1/invoices", invoiceJson);
+auto result = invoiceRes.json();
+auto rnc = result["rnc"].get<std::string>();
+auto encf = result["encf"].get<std::string>();
+// El cliente no espera — puede continuar con otras operaciones
 
-// Frontend: cliente de solo lectura
-EcfClientConfig frontendConfig;
-frontendConfig.apiKey = "token-solo-lectura-del-frontend";
-frontendConfig.environment = "prod";
+// 2. Crear cliente de solo lectura (getToken se llama automáticamente)
+EcfFrontendClientConfig config;
+config.getToken = []() -> std::string {
+    auto response = httpClient.get("https://my-backend/api/v1/ecf-token");
+    return response.json()["apiKey"];
+};
+config.environment = "prod";
+// cacheToken usa archivo encriptado en disco por defecto
 
-EcfFrontendClient frontendClient(frontendConfig);
+EcfFrontendClient frontend(config);
 
-// Solo operaciones de lectura disponibles
-auto ecfResults = frontendClient.ecfApi()->queryEcf(
-    _XPLATSTR("123456789"), _XPLATSTR("E310000000001"), boost::optional<bool>(false)
-).get();
+// 3. Consultar el estado del ECF
+auto ecf = frontend.ecfApi()->queryEcf(rnc, encf).get();
 ```
-
-Consulta el [README principal](../README.md#arquitectura-backend--frontend) para el diagrama completo y ejemplos de código.
-
-> **`sendEcf`** envuelve envío + polling en una sola llamada. Para aplicaciones con frontend, usa los endpoints individuales.
 
 ### Acceso directo a la API
 

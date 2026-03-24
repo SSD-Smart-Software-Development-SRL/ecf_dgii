@@ -11,6 +11,19 @@ export interface EcfClientConfig {
   environment?: Environment;
 }
 
+export interface EcfFrontendClientConfig {
+  /** Function that fetches a fresh token (e.g. calls your backend's GET /ecf-token). */
+  getToken: () => Promise<string>;
+  /** Function to cache the token. Defaults to localStorage.setItem('ecf-token', token). */
+  cacheToken?: (token: string) => Promise<void>;
+  /** Function to retrieve a cached token. Defaults to localStorage.getItem('ecf-token'). */
+  getCachedToken?: () => Promise<string | null>;
+  /** Base URL override. Takes precedence over `environment`. */
+  baseUrl?: string;
+  /** Target environment. Defaults to 'test'. */
+  environment?: Environment;
+}
+
 export interface PollingOptions {
   /** Initial delay between polls in ms. Default: 1000 */
   initialDelay?: number;

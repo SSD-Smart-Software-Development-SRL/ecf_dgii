@@ -43,79 +43,71 @@ Esto ejecuta todas las pruebas y empaqueta la biblioteca.
 
 ```mermaid
 sequenceDiagram
-    participant FE as Frontend
+    participant C as Cliente (Browser/App)
     participant BE as Backend
     participant ECF as ECF API
 
-    Note over BE,ECF: Backend (lectura/escritura)
-    BE->>ECF: POST /ecf/31 (enviar factura)
+    C->>BE: POST /invoice (datos de factura)
+    Note over BE: Valida, guarda y convierte a formato ECF
+
+    BE->>ECF: POST /ecf/{tipo} (enviar ECF)
     ECF-->>BE: { messageId }
-    BE->>ECF: POST /apikey (token solo lectura, scoped a RNC)
-    ECF-->>BE: { apiKey }
-    BE-->>FE: GET /ecf-token → { apiKey }
+    BE-->>C: { messageId }
 
-    Note over FE,ECF: Frontend (solo lectura)
-    FE->>BE: POST /invoice, /order, /sale
-    BE-->>FE: { messageId }
+    Note over C: No espera — puede continuar
 
-    alt Token en caché
-        FE->>FE: Usar token existente
-    else Sin token
-        FE->>BE: GET /ecf-token
-        BE->>ECF: POST /apikey (scoped a RNC)
+    alt Token en cache
+        C->>C: Usar token existente
+    else Sin token o expirado
+        C->>BE: GET /ecf-token
+        BE->>ECF: POST /apikey (solo lectura, scoped a RNC)
         ECF-->>BE: { apiKey }
-        BE-->>FE: { apiKey }
-        FE->>FE: Almacenar token en caché
+        BE-->>C: { apiKey }
+        C->>C: Almacenar token en cache
     end
 
-    FE->>ECF: GET /ecf/{rnc}/{encf} (con token solo lectura)
-    ECF-->>FE: { progress, codSec, ... }
+    loop Polling hasta completar
+        C->>ECF: GET /ecf/{rnc}/{encf} (token solo lectura)
+        ECF-->>C: { progress, codSec, ... }
+    end
 ```
 
 ### Flujo detallado
 
-**Backend** (usa `EcfClient` con permisos de lectura/escritura):
-
-1. Tu backend recibe la factura del usuario (ej. `POST /invoice`)
-2. Valida, guarda y convierte la factura interna al formato ECF
-3. Envía el ECF a la API usando el token principal → recibe `messageId`
-4. Expone un endpoint `GET /ecf-token` que llama a `POST /apikey` de ECF SSD y retorna un **token de solo lectura** con alcance al RNC del tenant
-
-**Frontend** (usa `EcfFrontendClient`):
-
-1. El usuario invoca un endpoint del backend (`/invoice`, `/order`, `/sale`) → recibe el `messageId`
-2. Verifica si hay un token en caché (memoria, localStorage, etc.)
-   - **Si existe**: lo usa directamente
-   - **Si no existe**: llama a `GET /ecf-token` del backend, almacena el token retornado en caché
-3. Crea el cliente de solo lectura con el token
-4. Consulta el estado del ECF directamente contra la API de ECF SSD
-
-### Ejemplo: Backend
-
-```kotlin
-val backendClient = ApiClient()
-backendClient.setBearerToken("tu-token-jwt-backend")
-backendClient.basePath = "https://api.prod.ecfx.ssd.com.do"
-
-val ecfApi = EcfApi(backendClient)
-val response = ecfApi.recepcionEcf31(ecf)
-```
+1. El **cliente** (browser/app) envía los datos de la factura al **backend** (`POST /invoice`, `/order`, `/sale`)
+2. El **backend** valida, guarda y convierte la factura interna al formato ECF
+3. El **backend** envía el ECF a la API de ECF SSD (`POST /ecf/{tipo}`) y recibe un `messageId`
+4. El **backend** retorna el `messageId` al cliente — **el cliente no espera**, puede continuar
+5. Cuando el cliente necesita consultar el estado del ECF, usa `EcfFrontendClient` que internamente:
+   - Verifica si hay un **token de solo lectura** en cache
+   - Si **no existe o expiró**: llama a `getToken()` (que el consumidor provee — típicamente un `fetch('/ecf-token')` a su backend), luego llama a `cacheToken(token)` para almacenarlo
+   - Si la API retorna **401**: automáticamente llama a `getToken()` de nuevo, actualiza el cache, y reintenta
+6. El cliente hace **polling** directamente contra la API de ECF SSD (`GET /ecf/{rnc}/{encf}`) hasta que `progress` sea `Finished`
 
 ### Ejemplo: Frontend (con `EcfFrontendClient`)
 
 ```kotlin
-val frontendClient = EcfFrontendClient(EcfClientConfig(
-    apiKey = readOnlyToken,  // token de solo lectura, scoped al RNC
+// 1. Enviar la factura al backend
+val invoiceRes = httpClient.post("https://my-backend/api/v1/invoices") {
+    setBody(invoiceData)
+}
+val result = invoiceRes.body<InvoiceResult>()
+// El cliente no espera — puede continuar con otras operaciones
+
+// 2. Crear cliente de solo lectura (getToken se llama automáticamente)
+val frontend = EcfFrontendClient(EcfFrontendClientConfig(
+    getToken = {
+        val res = httpClient.get("https://my-backend/api/v1/ecf-token")
+        res.body<TokenResponse>().apiKey
+    },
     environment = "prod"
+    // cacheToken usa archivo encriptado en disco por defecto
 ))
 
-// Solo endpoints GET disponibles
-val ecfStatus = frontendClient.queryEcf("131880681", "E310000051630")
-val ecfList = frontendClient.searchEcfs("131880681")
-val company = frontendClient.getCompanyByRnc("131880681")
+// 3. Consultar el estado del ECF
+val ecf = frontend.queryEcf(result.rnc, result.encf)
+val ecfs = frontend.searchEcfs(result.rnc)
 ```
-
-Consulta el [README principal](../README.md#arquitectura-backend--frontend) para más detalles.
 
 ## Entornos
 

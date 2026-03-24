@@ -146,76 +146,70 @@ const result = await client.sendEcf(ecf, {
 
 ```mermaid
 sequenceDiagram
-    participant FE as Frontend
+    participant C as Cliente (Browser/App)
     participant BE as Backend
     participant ECF as ECF API
 
-    Note over BE,ECF: Backend (lectura/escritura)
-    BE->>ECF: POST /ecf/31 (enviar factura)
+    C->>BE: POST /invoice (datos de factura)
+    Note over BE: Valida, guarda y convierte a formato ECF
+
+    BE->>ECF: POST /ecf/{tipo} (enviar ECF)
     ECF-->>BE: { messageId }
-    BE->>ECF: POST /apikey (token solo lectura, scoped a RNC)
-    ECF-->>BE: { apiKey }
-    BE-->>FE: GET /ecf-token → { apiKey }
+    BE-->>C: { messageId }
 
-    Note over FE,ECF: Frontend (solo lectura)
-    FE->>BE: POST /invoice, /order, /sale
-    BE-->>FE: { messageId }
+    Note over C: No espera — puede continuar
 
-    alt Token en caché
-        FE->>FE: Usar token existente
-    else Sin token
-        FE->>BE: GET /ecf-token
-        BE->>ECF: POST /apikey (scoped a RNC)
+    alt Token en cache
+        C->>C: Usar token existente
+    else Sin token o expirado
+        C->>BE: GET /ecf-token
+        BE->>ECF: POST /apikey (solo lectura, scoped a RNC)
         ECF-->>BE: { apiKey }
-        BE-->>FE: { apiKey }
-        FE->>FE: Almacenar token en caché
+        BE-->>C: { apiKey }
+        C->>C: Almacenar token en cache
     end
 
-    FE->>ECF: GET /ecf/{rnc}/{encf} (con token solo lectura)
-    ECF-->>FE: { progress, codSec, ... }
+    loop Polling hasta completar
+        C->>ECF: GET /ecf/{rnc}/{encf} (token solo lectura)
+        ECF-->>C: { progress, codSec, ... }
+    end
 ```
 
 ### Flujo detallado
 
-**Backend** (usa `EcfClient` con permisos de lectura/escritura):
-
-1. Tu backend recibe la factura del usuario (ej. `POST /invoice`)
-2. Valida, guarda y convierte la factura interna al formato ECF
-3. Envía el ECF a la API usando el token principal → recibe `messageId`
-4. Expone un endpoint `GET /ecf-token` que llama a `POST /apikey` de ECF SSD y retorna un **token de solo lectura** con alcance al RNC del tenant
-
-**Frontend** (usa `EcfFrontendClient` o `createFrontendClient`):
-
-1. El usuario invoca un endpoint del backend (`/invoice`, `/order`, `/sale`) → recibe el `messageId`
-2. Verifica si hay un token en caché (memoria, localStorage, etc.)
-   - **Si existe**: lo usa directamente
-   - **Si no existe**: llama a `GET /ecf-token` del backend, almacena el token retornado en caché
-3. Crea el cliente de solo lectura con el token
-4. Consulta el estado del ECF directamente contra la API de ECF SSD
+1. El **cliente** (browser/app) envía los datos de la factura al **backend** (`POST /invoice`, `/order`, `/sale`)
+2. El **backend** valida, guarda y convierte la factura interna al formato ECF
+3. El **backend** envía el ECF a la API de ECF SSD (`POST /ecf/{tipo}`) y recibe un `messageId`
+4. El **backend** retorna el `messageId` al cliente — **el cliente no espera**, puede continuar
+5. Cuando el cliente necesita consultar el estado del ECF, usa `EcfFrontendClient` que internamente:
+   - Verifica si hay un **token de solo lectura** en cache
+   - Si **no existe o expiró**: llama a `getToken()` (que el consumidor provee — típicamente un `fetch('/ecf-token')` a su backend), luego llama a `cacheToken(token)` para almacenarlo
+   - Si la API retorna **401**: automáticamente llama a `getToken()` de nuevo, actualiza el cache, y reintenta
+6. El cliente hace **polling** directamente contra la API de ECF SSD (`GET /ecf/{rnc}/{encf}`) hasta que `progress` sea `Finished`
 
 ### Ejemplo: Backend
 
 ```typescript
+import { EcfClient } from '@ssddo/ecf-sdk';
+
 const ecfClient = new EcfClient({
   apiKey: process.env.ECF_BACKEND_TOKEN,
   environment: 'prod',
 });
 
+// Endpoint de facturación
 app.post('/api/v1/invoices', async (req, res) => {
-  // 1. Validar y guardar tu factura interna
   const invoice = await validateAndSave(req.body);
-  // 2. Convertir a formato ECF
   const ecf = convertToEcf(invoice);
-  // 3. Enviar a ECF SSD
   const { data } = await ecfClient.raw.POST('/ecf/31', { body: ecf });
   await updateInvoice(invoice.id, { messageId: data.messageId });
   res.json({ id: invoice.id, messageId: data.messageId });
 });
 
-// Endpoint separado: generar token de solo lectura para el frontend
+// Generar token de solo lectura para el cliente
 app.get('/api/v1/ecf-token', async (req, res) => {
   const { data } = await ecfClient.createApiKey({ rnc: tenant.rnc });
-  res.json({ token: data.token });
+  res.json({ apiKey: data.token });
 });
 ```
 
@@ -224,31 +218,29 @@ app.get('/api/v1/ecf-token', async (req, res) => {
 ```typescript
 import { createFrontendClient } from '@ssddo/ecf-sdk';
 
-// 1. Obtener token (con caché)
-let cachedToken: string | null = null;
+// 1. Enviar la factura al backend
+const invoiceRes = await fetch('/api/v1/invoices', {
+  method: 'POST',
+  body: JSON.stringify(invoiceData),
+});
+const { messageId, rnc, encf } = await invoiceRes.json();
+// El cliente no espera — puede continuar con otras operaciones
 
-async function getEcfToken(): Promise<string> {
-  if (cachedToken) return cachedToken;
-  const res = await fetch('/api/v1/ecf-token');
-  const { token } = await res.json();
-  cachedToken = token;
-  return token;
-}
-
-// 2. Crear cliente de solo lectura
-const token = await getEcfToken();
+// 2. Crear cliente de solo lectura (getToken se llama automáticamente)
 const frontend = createFrontendClient({
-  apiKey: token,
+  getToken: async () => {
+    const res = await fetch('/api/v1/ecf-token');
+    const { apiKey } = await res.json();
+    return apiKey;
+  },
   environment: 'prod',
+  // cacheToken y getCachedToken usan localStorage por defecto
 });
 
-// 3. Consultar ECFs — solo endpoints GET disponibles
-const { data } = await frontend.queryEcf('131880681', 'E310000051630');
-const { data: ecfs } = await frontend.searchEcfs('131880681');
-const { data: company } = await frontend.getCompanyByRnc('131880681');
+// 3. Consultar el estado del ECF
+const { data } = await frontend.queryEcf(rnc, encf);
+const { data: ecfs } = await frontend.searchEcfs(rnc);
 ```
-
-> **`sendEcf`** envuelve envío + polling en una sola llamada. Ideal para scripts o backends simples sin frontend.
 
 ## Acceso directo al cliente
 

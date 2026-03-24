@@ -207,123 +207,108 @@ Crea un cliente tipado de React Query para la API de ECF DGII.
 
 ### `createEcfFrontendReactClient(config)`
 
-Crea un cliente de solo lectura restringido a endpoints GET. No expone `useMutation`. Diseñado para el frontend donde solo se consultan ECFs con un token de solo lectura.
+Crea un cliente de solo lectura restringido a endpoints GET. No expone `useMutation`. Diseñado para el cliente donde solo se consultan ECFs con un token de solo lectura. Maneja automáticamente el caching de tokens y refresh en caso de 401.
 
-**Opciones de configuración:** mismas que `createEcfReactClient`.
+**Opciones de configuración:**
+
+| Opción | Tipo | Requerido | Descripción |
+|--------|------|-----------|-------------|
+| `getToken` | `() => Promise<string>` | Sí | Callback para obtener un token fresco (ej. fetch a tu backend) |
+| `cacheToken` | `(token: string) => Promise<void>` | No | Callback para almacenar el token (por defecto: `localStorage`) |
+| `getCachedToken` | `() => Promise<string \| null>` | No | Callback para leer el token del cache (por defecto: `localStorage`) |
+| `environment` | `'test' \| 'cert' \| 'prod'` | No | Entorno destino (por defecto: `'test'`) |
+| `baseUrl` | `string` | No | URL base personalizada (sobreescribe `environment`) |
 
 **Retorna:** `{ $api, fetchClient }`
 
 - `$api` - Cliente con solo `useQuery`, `useSuspenseQuery`, y `queryOptions` (sin `useMutation`)
 - `fetchClient` - El cliente openapi-fetch subyacente (restringido a paths GET)
 
-```tsx
-import { createEcfFrontendReactClient } from '@ssddo/ecf-react';
-
-const { $api } = createEcfFrontendReactClient({
-  apiKey: token,
-  environment: 'prod',
-});
-
-// ✅ Funciona — endpoint GET
-$api.useQuery('get', '/ecf/{rnc}/{encf}', { params: { path: { rnc, encf } } });
-
-// ❌ Error de tipo — useMutation no está disponible
-// $api.useMutation('post', '/ecf/31');
-```
-
 ## Arquitectura Backend / Frontend
 
 ```mermaid
 sequenceDiagram
-    participant FE as Frontend
+    participant C as Cliente (Browser/App)
     participant BE as Backend
     participant ECF as ECF API
 
-    Note over BE,ECF: Backend (lectura/escritura)
-    BE->>ECF: POST /ecf/31 (enviar factura)
+    C->>BE: POST /invoice (datos de factura)
+    Note over BE: Valida, guarda y convierte a formato ECF
+
+    BE->>ECF: POST /ecf/{tipo} (enviar ECF)
     ECF-->>BE: { messageId }
-    BE->>ECF: POST /apikey (token solo lectura, scoped a RNC)
-    ECF-->>BE: { apiKey }
-    BE-->>FE: GET /ecf-token → { apiKey }
+    BE-->>C: { messageId }
 
-    Note over FE,ECF: Frontend (solo lectura)
-    FE->>BE: POST /invoice, /order, /sale
-    BE-->>FE: { messageId }
+    Note over C: No espera — puede continuar
 
-    alt Token en caché
-        FE->>FE: Usar token existente
-    else Sin token
-        FE->>BE: GET /ecf-token
-        BE->>ECF: POST /apikey (scoped a RNC)
+    alt Token en cache
+        C->>C: Usar token existente
+    else Sin token o expirado
+        C->>BE: GET /ecf-token
+        BE->>ECF: POST /apikey (solo lectura, scoped a RNC)
         ECF-->>BE: { apiKey }
-        BE-->>FE: { apiKey }
-        FE->>FE: Almacenar token en caché
+        BE-->>C: { apiKey }
+        C->>C: Almacenar token en cache
     end
 
-    FE->>ECF: GET /ecf/{rnc}/{encf} (con token solo lectura)
-    ECF-->>FE: { progress, codSec, ... }
+    loop Polling hasta completar
+        C->>ECF: GET /ecf/{rnc}/{encf} (token solo lectura)
+        ECF-->>C: { progress, codSec, ... }
+    end
 ```
 
 ### Flujo detallado
 
-**Backend** (usa `@ssddo/ecf-sdk` o la librería del lenguaje correspondiente con permisos de lectura/escritura):
-
-1. Tu backend recibe la factura del usuario (ej. `POST /invoice`)
-2. Valida, guarda y convierte la factura interna al formato ECF
-3. Envía el ECF a la API usando el token principal → recibe `messageId`
-4. Expone un endpoint `GET /ecf-token` que llama a `POST /apikey` de ECF SSD y retorna un **token de solo lectura** con alcance al RNC del tenant
-
-**Frontend** (usa `@ssddo/ecf-react` con `createEcfFrontendReactClient`):
-
-1. El usuario invoca un endpoint del backend (`/invoice`, `/order`, `/sale`) → recibe el `messageId`
-2. Verifica si hay un token en caché (memoria, localStorage, etc.)
-   - **Si existe**: lo usa directamente
-   - **Si no existe**: llama a `GET /ecf-token` del backend, almacena el token retornado en caché
-3. Crea el cliente de solo lectura con el token
-4. Consulta el estado del ECF directamente contra la API de ECF SSD
-
-### Ejemplo completo
+1. El **cliente** (browser/app) envía los datos de la factura al **backend** (`POST /invoice`, `/order`, `/sale`)
+2. El **backend** valida, guarda y convierte la factura interna al formato ECF
+3. El **backend** envía el ECF a la API de ECF SSD (`POST /ecf/{tipo}`) y recibe un `messageId`
+4. El **backend** retorna el `messageId` al cliente — **el cliente no espera**, puede continuar
+5. Cuando el cliente necesita consultar el estado del ECF, usa `EcfFrontendClient` que internamente:
+   - Verifica si hay un **token de solo lectura** en cache
+   - Si **no existe o expiró**: llama a `getToken()` (que el consumidor provee — típicamente un `fetch('/ecf-token')` a su backend), luego llama a `cacheToken(token)` para almacenarlo
+   - Si la API retorna **401**: automáticamente llama a `getToken()` de nuevo, actualiza el cache, y reintenta
+6. El cliente hace **polling** directamente contra la API de ECF SSD (`GET /ecf/{rnc}/{encf}`) hasta que `progress` sea `Finished`
 
 ```tsx
 import { createEcfFrontendReactClient } from '@ssddo/ecf-react';
 
-// Hook personalizado para gestión de token
-function useEcfToken() {
-  // 1. Verificar caché local
-  // 2. Si no hay token o expiró → llamar a GET /ecf-token del backend
-  // 3. Almacenar en caché y retornar
-  // 4. Renovar ante 401 o expiración
-}
-
-const ecfToken = useEcfToken();
-
+// 1. Crear cliente de solo lectura (getToken se llama automáticamente)
 const { $api } = createEcfFrontendReactClient({
-  apiKey: ecfToken,  // solo lectura, scoped al RNC del tenant
+  getToken: async () => {
+    const res = await fetch('/api/v1/ecf-token');
+    const { apiKey } = await res.json();
+    return apiKey;
+  },
   environment: 'prod',
 });
 
+// 2. El componente que envía la factura al backend
+function EnviarFactura() {
+  const handleSubmit = async (invoiceData) => {
+    // Enviar factura al backend — el cliente no espera por el procesamiento ECF
+    const res = await fetch('/api/v1/invoices', {
+      method: 'POST',
+      body: JSON.stringify(invoiceData),
+    });
+    const { messageId, rnc, encf } = await res.json();
+    // Navegar a la página de estado o mostrar el componente de polling
+    navigate(`/ecf-status/${rnc}/${encf}`);
+  };
+}
+
+// 3. El componente que consulta el estado del ECF (polling automático)
 function EstadoEcf({ rnc, encf }: { rnc: string; encf: string }) {
-  // Consulta ECF SSD directamente — no se necesita proxy en el backend
   const { data } = $api.useQuery('get', '/ecf/{rnc}/{encf}', {
     params: { path: { rnc, encf } },
     refetchInterval: 3000,
   });
 
   if (data?.progress === 'Finished') {
-    return (
-      <div>
-        <p>Comprobante aceptado</p>
-        <p>Código seguridad: {data.codSec}</p>
-        <QRCode value={data.impresionUrl} />
-      </div>
-    );
+    return <p>Comprobante aceptado — código: {data.codSec}</p>;
   }
-
   return <p>Procesando... ({data?.progress})</p>;
 }
 ```
-
-Este patrón descarga el polling de tu backend y permite que el frontend se comunique directamente con ECF SSD usando un token restringido. Consulta el [README principal](../README.md#arquitectura-backend--frontend) para más detalles.
 
 ## Uso fuera de React
 

@@ -182,15 +182,45 @@ private:
 };
 
 /**
+ * Configuration for the read-only frontend client.
+ */
+struct EcfFrontendClientConfig {
+    /// Callback that returns a read-only API token (REQUIRED).
+    /// Typically calls your backend's GET /ecf-token endpoint.
+    std::function<std::string()> getToken;
+
+    /// Callback to cache a token (OPTIONAL).
+    /// Default: encrypts and writes the token to a file on disk.
+    std::function<void(const std::string&)> cacheToken;
+
+    /// Callback to retrieve a cached token (OPTIONAL).
+    /// Default: reads from the encrypted file on disk.
+    /// Must return an empty string if no cached token is found.
+    std::function<std::string()> getCachedToken;
+
+    /// Target environment: "test", "cert", or "prod". Defaults to "test".
+    std::string environment = "test";
+
+    /// Base URL override. Takes precedence over environment.
+    /// Falls back to ECF_API_URL environment variable if empty.
+    std::string baseUrl;
+};
+
+/**
  * Read-only frontend client for the ECF DGII API.
  *
  * Provides access only to EcfApi and CompanyApi for querying and searching
  * ECFs and companies. Does not support sending ECFs, managing API keys,
  * or any write/delete operations.
+ *
+ * Token management is handled via callbacks:
+ * - getToken (REQUIRED): fetches a fresh read-only token from your backend
+ * - cacheToken (OPTIONAL): persists the token; defaults to encrypted file on disk
+ * - getCachedToken (OPTIONAL): retrieves a cached token; defaults to encrypted file on disk
  */
 class EcfFrontendClient {
 public:
-    explicit EcfFrontendClient(const EcfClientConfig& config);
+    explicit EcfFrontendClient(const EcfFrontendClientConfig& config);
 
     /** Access the underlying EcfApi for direct endpoint calls. */
     std::shared_ptr<EcfApi> ecfApi() const { return m_ecfApi; }
@@ -199,9 +229,18 @@ public:
     std::shared_ptr<CompanyApi> companyApi() const { return m_companyApi; }
 
 private:
-    static utility::string_t resolveBaseUrl(const EcfClientConfig& config);
-    static std::string resolveApiKey(const EcfClientConfig& config);
+    static utility::string_t resolveBaseUrl(const EcfFrontendClientConfig& config);
 
+    /// Resolve the token: try cache first, then fetch via getToken and cache it.
+    std::string resolveToken();
+
+    /// Default file-based cache: write encrypted token to disk.
+    static void defaultCacheToken(const std::string& token);
+
+    /// Default file-based cache: read encrypted token from disk (empty if not found).
+    static std::string defaultGetCachedToken();
+
+    EcfFrontendClientConfig m_config;
     std::shared_ptr<ApiClient> m_apiClient;
     std::shared_ptr<EcfApi> m_ecfApi;
     std::shared_ptr<CompanyApi> m_companyApi;

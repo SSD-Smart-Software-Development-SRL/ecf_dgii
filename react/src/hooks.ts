@@ -51,8 +51,26 @@ type ReadOnlyPaths = {
   };
 };
 
-export function createEcfFrontendReactClient(config: EcfReactClientConfig) {
+export interface EcfFrontendReactClientConfig {
+  getToken: () => Promise<string>;
+  cacheToken?: (token: string) => Promise<void>;
+  getCachedToken?: () => Promise<string | null>;
+  baseUrl?: string;
+  environment?: Environment;
+}
+
+const defaultCacheToken = async (token: string): Promise<void> => {
+  localStorage.setItem('ecf-token', token);
+};
+
+const defaultGetCachedToken = async (): Promise<string | null> => {
+  return localStorage.getItem('ecf-token');
+};
+
+export function createEcfFrontendReactClient(config: EcfFrontendReactClientConfig) {
   const baseUrl = config.baseUrl ?? ENVIRONMENT_URLS[config.environment ?? 'test'];
+  const cacheToken = config.cacheToken ?? defaultCacheToken;
+  const getCachedToken = config.getCachedToken ?? defaultGetCachedToken;
 
   const fetchClient = createFetchClient<ReadOnlyPaths>({
     baseUrl,
@@ -60,8 +78,23 @@ export function createEcfFrontendReactClient(config: EcfReactClientConfig) {
 
   fetchClient.use({
     async onRequest({ request }) {
-      request.headers.set("Authorization", `Bearer ${config.apiKey}`);
+      let token = await getCachedToken();
+      if (!token) {
+        token = await config.getToken();
+        await cacheToken(token);
+      }
+      request.headers.set("Authorization", `Bearer ${token}`);
       return request;
+    },
+    async onResponse({ request, response }) {
+      if (response.status === 401) {
+        const token = await config.getToken();
+        await cacheToken(token);
+        const retryRequest = request.clone();
+        retryRequest.headers.set("Authorization", `Bearer ${token}`);
+        return fetch(retryRequest);
+      }
+      return response;
     },
   });
 

@@ -1,5 +1,9 @@
 # @ssddo/ecf-sdk
 
+[![npm Version](https://img.shields.io/npm/v/@ssddo/ecf-sdk)](https://www.npmjs.com/package/@ssddo/ecf-sdk)
+[![npm Downloads](https://img.shields.io/npm/dm/@ssddo/ecf-sdk)](https://www.npmjs.com/package/@ssddo/ecf-sdk)
+[![License](https://img.shields.io/npm/l/@ssddo/ecf-sdk)](LICENSE)
+
 SDK de TypeScript para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana).
 
 Construido con [openapi-typescript](https://github.com/openapi-ts/openapi-typescript) y [openapi-fetch](https://github.com/openapi-ts/openapi-typescript/tree/main/packages/openapi-fetch) para acceso a la API completamente tipado.

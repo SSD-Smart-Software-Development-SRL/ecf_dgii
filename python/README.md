@@ -1,5 +1,9 @@
 # ecf-dgii
 
+[![PyPI Version](https://img.shields.io/pypi/v/ecf-dgii)](https://pypi.org/project/ecf-dgii/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/ecf-dgii)](https://pypi.org/project/ecf-dgii/)
+[![License](https://img.shields.io/pypi/l/ecf-dgii)](LICENSE)
+
 SDK de Python para la **API ECF DGII** — Comprobantes Fiscales Electrónicos de la República Dominicana.
 
 ## Instalación

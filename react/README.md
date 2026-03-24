@@ -1,5 +1,9 @@
 # @ssddo/ecf-react
 
+[![npm Version](https://img.shields.io/npm/v/@ssddo/ecf-react)](https://www.npmjs.com/package/@ssddo/ecf-react)
+[![npm Downloads](https://img.shields.io/npm/dm/@ssddo/ecf-react)](https://www.npmjs.com/package/@ssddo/ecf-react)
+[![License](https://img.shields.io/npm/l/@ssddo/ecf-react)](LICENSE)
+
 Hooks de React Query para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana). Construido sobre `openapi-react-query` y `openapi-fetch` para interacciones con la API completamente tipadas.
 
 ## Instalación

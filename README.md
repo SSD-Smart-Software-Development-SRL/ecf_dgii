@@ -12,15 +12,15 @@
 
 | Plataforma | Paquete | Instalación | Docs |
 |-----------|---------|-------------|------|
-| .NET | [![NuGet](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.SDK)](https://www.nuget.org/packages/SSDDO.ECF_DGII.SDK) | `dotnet add package SSDDO.ECF_DGII.SDK` | [README](.net/README.md) |
-| TypeScript | [![npm](https://img.shields.io/npm/v/@ssddo/ecf-sdk)](https://www.npmjs.com/package/@ssddo/ecf-sdk) | `npm install @ssddo/ecf-sdk` | [README](typescript/README.md) |
-| Python | [![PyPI](https://img.shields.io/pypi/v/ecf-dgii)](https://pypi.org/project/ecf-dgii/) | `pip install ecf-dgii` | [README](python/README.md) |
-| PHP | [Packagist](https://packagist.org/) | `composer require ecfx/ecf-dgii-php` | [ecf-dgii-php](https://github.com/SSD-Smart-Software-Development-SRL/ecf-dgii-php) |
+| .NET | [![NuGet Version](https://img.shields.io/nuget/v/SSDDO.ECF_DGII.SDK)](https://www.nuget.org/packages/SSDDO.ECF_DGII.SDK) [![NuGet Downloads](https://img.shields.io/nuget/dt/SSDDO.ECF_DGII.SDK)](https://www.nuget.org/packages/SSDDO.ECF_DGII.SDK) | `dotnet add package SSDDO.ECF_DGII.SDK` | [README](.net/README.md) |
+| TypeScript | [![npm Version](https://img.shields.io/npm/v/@ssddo/ecf-sdk)](https://www.npmjs.com/package/@ssddo/ecf-sdk) [![npm Downloads](https://img.shields.io/npm/dm/@ssddo/ecf-sdk)](https://www.npmjs.com/package/@ssddo/ecf-sdk) | `npm install @ssddo/ecf-sdk` | [README](typescript/README.md) |
+| React | [![npm Version](https://img.shields.io/npm/v/@ssddo/ecf-react)](https://www.npmjs.com/package/@ssddo/ecf-react) [![npm Downloads](https://img.shields.io/npm/dm/@ssddo/ecf-react)](https://www.npmjs.com/package/@ssddo/ecf-react) | `npm install @ssddo/ecf-react` | [README](react/README.md) |
+| Python | [![PyPI Version](https://img.shields.io/pypi/v/ecf-dgii)](https://pypi.org/project/ecf-dgii/) [![PyPI Downloads](https://img.shields.io/pypi/dm/ecf-dgii)](https://pypi.org/project/ecf-dgii/) | `pip install ecf-dgii` | [README](python/README.md) |
+| PHP | [![Packagist Version](https://img.shields.io/packagist/v/ecfx/ecf-dgii-php)](https://packagist.org/packages/ecfx/ecf-dgii-php) [![Packagist Downloads](https://img.shields.io/packagist/dt/ecfx/ecf-dgii-php)](https://packagist.org/packages/ecfx/ecf-dgii-php) | `composer require ecfx/ecf-dgii-php` | [README](https://github.com/SSD-Smart-Software-Development-SRL/ecf-dgii-php) |
 | Java | [Maven Central](https://central.sonatype.com/) | Ver [java/README.md](java/README.md) | [README](java/README.md) |
 | Kotlin | [Maven Central](https://central.sonatype.com/) | Ver [kotlin/README.md](kotlin/README.md) | [README](kotlin/README.md) |
 | iOS/Swift | [Swift Package Manager](https://swift.org/package-manager/) | Ver [ios/README.md](ios/README.md) | [README](ios/README.md) |
 | C++ | [vcpkg](https://vcpkg.io/) / [Conan](https://conan.io/) | Ver [C++/README.md](C++/README.md) | [README](C++/README.md) |
-| React | [![npm](https://img.shields.io/npm/v/@ssddo/ecf-react)](https://www.npmjs.com/package/@ssddo/ecf-react) | `npm install @ssddo/ecf-react` | [README](react/README.md) |
 
 ---
 

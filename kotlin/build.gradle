@@ -59,7 +59,7 @@ mavenPublishing {
     pom {
         name = 'ECF DGII SDK Kotlin'
         description = 'SDK de Kotlin para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana)'
-        url = 'https://github.com/puntoos/ecf_dgii_clients'
+        url = 'https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii'
 
         licenses {
             license {
@@ -70,16 +70,16 @@ mavenPublishing {
 
         developers {
             developer {
-                id = 'puntoos'
-                name = 'Puntoos'
-                email = 'dev@puntoos.com'
+                id = 'ssd-srl'
+                name = 'SSD Smart Software Development SRL'
+                email = 'contacto@ssd.com.do'
             }
         }
 
         scm {
-            connection = 'scm:git:git://github.com/puntoos/ecf_dgii_clients.git'
-            developerConnection = 'scm:git:ssh://github.com/puntoos/ecf_dgii_clients.git'
-            url = 'https://github.com/puntoos/ecf_dgii_clients'
+            connection = 'scm:git:git://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git'
+            developerConnection = 'scm:git:ssh://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git'
+            url = 'https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii'
         }
     }
 }

@@ -6,12 +6,12 @@
     <packaging>jar</packaging>
     <name>ecf-dgii-sdk-java</name>
     <version>1.0.0</version>
-    <url>https://github.com/puntoos/ecf_dgii_clients</url>
+    <url>https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii</url>
     <description>SDK de Java para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana)</description>
     <scm>
-        <connection>scm:git:git://github.com/puntoos/ecf_dgii_clients.git</connection>
-        <developerConnection>scm:git:ssh://github.com/puntoos/ecf_dgii_clients.git</developerConnection>
-        <url>https://github.com/puntoos/ecf_dgii_clients</url>
+        <connection>scm:git:git://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git</connection>
+        <developerConnection>scm:git:ssh://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git</developerConnection>
+        <url>https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii</url>
     </scm>
 
     <licenses>
@@ -24,11 +24,11 @@
 
     <developers>
         <developer>
-            <id>puntoos</id>
-            <name>Puntoos</name>
-            <email>dev@puntoos.com</email>
-            <organization>Puntoos</organization>
-            <organizationUrl>https://github.com/puntoos</organizationUrl>
+            <id>ssd-srl</id>
+            <name>SSD Smart Software Development SRL</name>
+            <email>contacto@ssd.com.do</email>
+            <organization>SSD Smart Software Development SRL</organization>
+            <organizationUrl>https://github.com/SSD-Smart-Software-Development-SRL</organizationUrl>
         </developer>
     </developers>
 

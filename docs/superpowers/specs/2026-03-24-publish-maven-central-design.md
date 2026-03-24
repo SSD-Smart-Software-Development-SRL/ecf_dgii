@@ -60,13 +60,26 @@ Publicar los SDKs de Java y Kotlin del proyecto ECF DGII en Maven Central a trav
 
 Reemplazar el perfil `sign-artifacts` con un perfil `release` que incluya:
 
-1. **`maven-gpg-plugin`** — firma de artefactos con GPG
-   - Usar `--pinentry-mode loopback` para CI no-interactivo
-2. **`central-publishing-maven-plugin`** (Sonatype) — publicación al Central Portal
-   - `publishingServerId`: `central`
+1. **`maven-gpg-plugin`** (`org.apache.maven.plugins:maven-gpg-plugin:3.2.1`) — firma de artefactos con GPG
+   - Configurar `--pinentry-mode loopback` para CI no-interactivo:
+   ```xml
+   <configuration>
+       <gpgArguments>
+           <arg>--pinentry-mode</arg>
+           <arg>loopback</arg>
+       </gpgArguments>
+   </configuration>
+   ```
+   - El passphrase se pasa via env var `GPG_PASSPHRASE` (configurado por `actions/setup-java`)
+
+2. **`central-publishing-maven-plugin`** (`org.sonatype.central:central-publishing-maven-plugin:0.10.0`) — publicación al Central Portal
+   - `<extensions>true</extensions>` — **requerido** para que reemplace el mecanismo de deploy default de Maven
+   - `publishingServerId`: `central` — **debe coincidir** con el `server-id` en el step `actions/setup-java` del workflow
    - `autoPublish`: `true` (publica automáticamente después de validación)
-3. **`maven-source-plugin`** — JAR de fuentes (ya existe, mover al perfil)
-4. **`maven-javadoc-plugin`** — JAR de javadoc (ya existe, mover al perfil)
+
+**Nota:** Los plugins `maven-source-plugin` y `maven-javadoc-plugin` se mantienen en el build section principal (no mover al perfil) para que `mvn install` local también genere los JARs de fuentes y javadoc.
+
+**Nota sobre paquetes Java:** El group ID es `dom.com.ssd.ecfx` y los paquetes Java están bajo `dom.com.ssd.ecfx.client`. No es necesario renombrar los paquetes Java — el group ID de Maven no requiere coincidir exactamente con la estructura de paquetes.
 
 ### 2.3 Eliminar `java/build.gradle`
 
@@ -80,7 +93,7 @@ Reemplazar la configuración manual de `maven-publish` + `signing` + OSSRH con e
 
 ```groovy
 plugins {
-    id 'com.vanniktech.maven.publish' version '0.30.0'
+    id 'com.vanniktech.maven.publish' version '0.36.0'
 }
 
 mavenPublishing {
@@ -106,10 +119,12 @@ mavenPublishing {
 
 ### 3.2 Cambio de Group ID y Package
 
-- Group ID: `com.ecfx` → `dom.com.ssd.ecfx`
+- Group ID en `build.gradle`: `com.ecfx` → `dom.com.ssd.ecfx`
 - Source package: `com.ecfx.sdk` → `dom.com.ssd.ecfx.sdk`
 - Mover archivos fuente de `src/main/kotlin/com/ecfx/sdk/` a `src/main/kotlin/dom/com/ssd/ecfx/sdk/`
-- Actualizar todos los `import` y `package` declarations
+- Mover archivos de test de `src/test/kotlin/com/ecfx/sdk/` a `src/test/kotlin/dom/com/ssd/ecfx/sdk/`
+- Actualizar todos los `import` y `package` declarations en fuentes y tests
+- Verificar y actualizar `settings.gradle` si `rootProject.name` necesita cambio
 
 ### 3.3 Eliminar configuración vieja
 
@@ -144,10 +159,12 @@ Eliminar del `build.gradle`:
     GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 ```
 
-**deploy-kotlin:**
+**Nota:** El `server-id: central` en `setup-java` debe coincidir con el `publishingServerId` del `central-publishing-maven-plugin` en el `pom.xml`. El comando `mvn deploy` funciona porque el plugin usa `<extensions>true</extensions>`.
+
+**deploy-kotlin** (actualizar env vars y comando — los actuales usan nombres incorrectos):
 ```yaml
 - name: Publish to Maven Central
-  run: ./gradlew publishAllPublicationsToMavenCentralRepository
+  run: ./gradlew publishAndReleaseToMavenCentral
   env:
     ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_USERNAME }}
     ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_PASSWORD }}
@@ -200,3 +217,15 @@ Después de la publicación, los usuarios podrán agregar las dependencias:
 ```kotlin
 implementation("dom.com.ssd.ecfx:ecf-dgii-sdk-kotlin:1.0.0")
 ```
+
+## 7. Troubleshooting
+
+Problemas comunes en la primera publicación:
+
+| Problema | Solución |
+|----------|----------|
+| Validación falla por javadoc faltante | Verificar que `maven-javadoc-plugin` (Java) y `withJavadocJar()` (Kotlin) estén configurados |
+| Validación falla por artefactos sin firma | Verificar que la clave GPG esté publicada en keyserver y que los secrets estén correctos |
+| Namespace rechazado | Verificar que el registro DNS TXT sea exactamente el valor provisto por el portal |
+| Clave GPG no encontrada en keyserver | Esperar ~10 min después de publicar, o intentar otro keyserver (`keys.openpgp.org`) |
+| `mvn deploy` falla con 401 | Verificar que `server-id: central` coincida en workflow y `pom.xml`, y que el token del portal sea válido |

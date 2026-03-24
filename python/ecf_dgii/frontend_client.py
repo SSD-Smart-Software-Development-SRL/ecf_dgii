@@ -12,14 +12,20 @@ from uuid import UUID
 
 import httpx
 
-from .client import ENVIRONMENT_URLS, Environment, _raise_for_status
-from .enums import AllTipoECFTypes
-from .models import (
+from .client import ENVIRONMENT_URLS, Environment
+from .exceptions import raise_for_status
+from .generated.client import AuthenticatedClient
+from .generated.types import UNSET
+from .generated.models import (
+    AllTipoECFTypesType1,
     CompanyResponse,
     EcfResponse,
-    PaginatedCompanyResponse,
-    PaginatedEcfResponse,
+    PaginatedApiResultOfCompanyResponse,
+    PaginatedApiResultOfEcfResponse,
+    ProblemDetails,
 )
+from .generated.api.ecf import query_ecf, search_ecfs, search_all_ecfs, get_ecf_by_id
+from .generated.api.company import get_companies, get_company_by_rnc
 
 logger = logging.getLogger(__name__)
 
@@ -99,11 +105,17 @@ except ImportError:
     _USING_FERNET = False
 
 
+def _parse_or_raise(response: Any) -> Any:
+    """Extract parsed value, raising on error."""
+    if isinstance(response.parsed, ProblemDetails):
+        raise_for_status(response.status_code.value, response.parsed.to_dict())
+    if response.parsed is None and response.status_code.value >= 400:
+        raise_for_status(response.status_code.value, response.content.decode(errors="ignore"))
+    return response.parsed
+
+
 class EcfFrontendClient:
     """Read-only async client exposing only GET endpoints of the ECF DGII API.
-
-    This client is intended for frontend / dashboard usage where write
-    operations are not needed.
 
     Token lifecycle is handled automatically:
     - On each request, checks ``get_cached_token()``. If None, calls
@@ -115,17 +127,13 @@ class EcfFrontendClient:
     ----------
     get_token:
         **Required.** Callback that fetches a fresh read-only token.
-        Typically calls your backend's ``GET /ecf-token`` endpoint.
     cache_token:
         Optional callback to store a token. Default: encrypted file on
-        disk at ``~/.ecf-dgii/token.enc`` using Fernet (falls back to
-        base64 if ``cryptography`` is not installed).
+        disk at ``~/.ecf-dgii/token.enc``.
     get_cached_token:
-        Optional callback to retrieve a previously cached token. Default:
-        read from ``~/.ecf-dgii/token.enc``.
+        Optional callback to retrieve a previously cached token.
     base_url:
-        Full base URL override. Takes precedence over *environment*.
-        Falls back to ``ECF_API_URL`` env var.
+        Full base URL override.
     environment:
         Target environment (``test``, ``cert``, ``prod``). Defaults to ``test``.
     timeout:
@@ -145,16 +153,33 @@ class EcfFrontendClient:
         self._get_token = get_token
         self._cache_token = cache_token or _default_cache_token
         self._get_cached_token = get_cached_token or _default_get_cached_token
+        self._base_url = base_url or os.environ.get("ECF_API_URL") or ENVIRONMENT_URLS[environment]
+        self._timeout = timeout
+        self._current_client: AuthenticatedClient | None = None
 
-        resolved_url = base_url or os.environ.get("ECF_API_URL") or ENVIRONMENT_URLS[environment]
-
-        self._client = httpx.AsyncClient(
-            base_url=resolved_url,
-            headers={
-                "Accept": "application/json",
-            },
-            timeout=timeout,
+    def _make_client(self, token: str) -> AuthenticatedClient:
+        return AuthenticatedClient(
+            base_url=self._base_url,
+            token=token,
+            raise_on_unexpected_status=False,
+            timeout=httpx.Timeout(self._timeout),
         )
+
+    def _resolve_client(self) -> AuthenticatedClient:
+        """Return a client with a valid token, fetching and caching if necessary."""
+        token = self._get_cached_token()
+        if not token:
+            token = self._get_token()
+            self._cache_token(token)
+        self._current_client = self._make_client(token)
+        return self._current_client
+
+    def _refresh_client(self) -> AuthenticatedClient:
+        """Force-fetch a new token and create a new client."""
+        token = self._get_token()
+        self._cache_token(token)
+        self._current_client = self._make_client(token)
+        return self._current_client
 
     async def __aenter__(self) -> EcfFrontendClient:
         return self
@@ -164,54 +189,17 @@ class EcfFrontendClient:
 
     async def close(self) -> None:
         """Close the underlying HTTP client."""
-        await self._client.aclose()
+        if self._current_client:
+            await self._current_client.__aexit__(None, None, None)
 
-    # ------------------------------------------------------------------
-    # Token management
-    # ------------------------------------------------------------------
-
-    def _resolve_token(self) -> str:
-        """Return a valid token, fetching and caching if necessary."""
-        token = self._get_cached_token()
-        if token:
-            return token
-        token = self._get_token()
-        self._cache_token(token)
-        return token
-
-    def _refresh_token(self) -> str:
-        """Force-fetch a new token and update the cache."""
-        token = self._get_token()
-        self._cache_token(token)
-        return token
-
-    # ------------------------------------------------------------------
-    # Internal helpers
-    # ------------------------------------------------------------------
-
-    async def _get(
-        self,
-        path: str,
-        *,
-        params: dict[str, Any] | None = None,
-    ) -> httpx.Response:
-        token = self._resolve_token()
-        headers = {"Authorization": f"Bearer {token}"}
-        response = await self._client.request("GET", path, params=params, headers=headers)
-
-        # On 401, refresh token and retry once
-        if response.status_code == 401:
-            token = self._refresh_token()
-            headers = {"Authorization": f"Bearer {token}"}
-            response = await self._client.request("GET", path, params=params, headers=headers)
-
-        _raise_for_status(response)
-        return response
-
-    @staticmethod
-    def _clean_params(params: dict[str, Any]) -> dict[str, Any]:
-        """Remove None values from query params."""
-        return {k: v for k, v in params.items() if v is not None}
+    async def _get_with_retry(self, api_call: Any, **kwargs: Any) -> Any:
+        """Execute an API call with 401 retry."""
+        client = self._resolve_client()
+        response = await api_call(client=client, **kwargs)
+        if response.status_code.value == 401:
+            client = self._refresh_client()
+            response = await api_call(client=client, **kwargs)
+        return _parse_or_raise(response)
 
     # ======================================================================
     # ECF query operations
@@ -221,78 +209,80 @@ class EcfFrontendClient:
         self, rnc: str, encf: str, *, include_ecf_content: bool = False
     ) -> list[EcfResponse]:
         """Query ECFs by RNC and eNCF."""
-        params = self._clean_params({"includeEcfContent": include_ecf_content})
-        resp = await self._get(f"/ecf/{rnc}/{encf}", params=params)
-        return [EcfResponse.model_validate(r) for r in resp.json()]
+        return await self._get_with_retry(
+            query_ecf.asyncio_detailed,
+            rnc=rnc,
+            encf=encf,
+            include_ecf_content=include_ecf_content,
+        )
 
     async def search_ecfs(
         self,
         rnc: str,
         *,
-        encfs: Sequence[str] | None = None,
-        ids: Sequence[str] | None = None,
-        tipos_ecfs: Sequence[AllTipoECFTypes] | None = None,
+        encfs: list[str] | None = None,
+        tipos_ecfs: list[AllTipoECFTypesType1 | None] | None = None,
         include_ecf_content: bool = False,
-        from_fecha_emision: str | None = None,
-        to_fecha_emision: str | None = None,
+        from_fecha_emision: Any = UNSET,
+        to_fecha_emision: Any = UNSET,
         amount_from: float | None = None,
         amount_to: float | None = None,
         page: int = 1,
         limit: int = 25,
-    ) -> PaginatedEcfResponse:
+    ) -> PaginatedApiResultOfEcfResponse:
         """Search ECFs for a specific RNC."""
-        params = self._clean_params({
-            "Encfs": encfs,
-            "Ids": ids,
-            "TiposEcfs": [t.value for t in tipos_ecfs] if tipos_ecfs else None,
-            "IncludeEcfContent": include_ecf_content,
-            "FromFechaEmision": from_fecha_emision,
-            "ToFechaEmision": to_fecha_emision,
-            "AmountFrom": amount_from,
-            "AmountTo": amount_to,
-            "Page": page,
-            "Limit": limit,
-        })
-        resp = await self._get(f"/ecf/{rnc}", params=params)
-        return PaginatedEcfResponse.model_validate(resp.json())
+        return await self._get_with_retry(
+            search_ecfs.asyncio_detailed,
+            rnc=rnc,
+            encfs=encfs if encfs is not None else UNSET,
+            tipos_ecfs=tipos_ecfs if tipos_ecfs is not None else UNSET,
+            include_ecf_content=include_ecf_content,
+            from_fecha_emision=from_fecha_emision if from_fecha_emision is not UNSET else UNSET,
+            to_fecha_emision=to_fecha_emision if to_fecha_emision is not UNSET else UNSET,
+            amount_from=amount_from if amount_from is not None else UNSET,
+            amount_to=amount_to if amount_to is not None else UNSET,
+            page=page,
+            limit=limit,
+        )
 
     async def search_all_ecfs(
         self,
         *,
-        encfs: Sequence[str] | None = None,
-        ids: Sequence[str] | None = None,
-        tipos_ecfs: Sequence[AllTipoECFTypes] | None = None,
+        encfs: list[str] | None = None,
+        tipos_ecfs: list[AllTipoECFTypesType1 | None] | None = None,
         include_ecf_content: bool = False,
-        from_fecha_emision: str | None = None,
-        to_fecha_emision: str | None = None,
+        from_fecha_emision: Any = UNSET,
+        to_fecha_emision: Any = UNSET,
         amount_from: float | None = None,
         amount_to: float | None = None,
         page: int = 1,
         limit: int = 25,
-    ) -> PaginatedEcfResponse:
+    ) -> PaginatedApiResultOfEcfResponse:
         """Search all ECFs across all companies."""
-        params = self._clean_params({
-            "Encfs": encfs,
-            "Ids": ids,
-            "TiposEcfs": [t.value for t in tipos_ecfs] if tipos_ecfs else None,
-            "IncludeEcfContent": include_ecf_content,
-            "FromFechaEmision": from_fecha_emision,
-            "ToFechaEmision": to_fecha_emision,
-            "AmountFrom": amount_from,
-            "AmountTo": amount_to,
-            "Page": page,
-            "Limit": limit,
-        })
-        resp = await self._get("/ecf", params=params)
-        return PaginatedEcfResponse.model_validate(resp.json())
+        return await self._get_with_retry(
+            search_all_ecfs.asyncio_detailed,
+            encfs=encfs if encfs is not None else UNSET,
+            tipos_ecfs=tipos_ecfs if tipos_ecfs is not None else UNSET,
+            include_ecf_content=include_ecf_content,
+            from_fecha_emision=from_fecha_emision if from_fecha_emision is not UNSET else UNSET,
+            to_fecha_emision=to_fecha_emision if to_fecha_emision is not UNSET else UNSET,
+            amount_from=amount_from if amount_from is not None else UNSET,
+            amount_to=amount_to if amount_to is not None else UNSET,
+            page=page,
+            limit=limit,
+        )
 
     async def get_ecf_by_id(
         self, rnc: str, message_id: str | UUID, *, include_ecf_content: bool = False
     ) -> list[EcfResponse]:
         """Get a specific ECF by message ID."""
-        params = self._clean_params({"includeEcfContent": include_ecf_content})
-        resp = await self._get(f"/ecf/{rnc}/message/{message_id}", params=params)
-        return [EcfResponse.model_validate(r) for r in resp.json()]
+        mid = message_id if isinstance(message_id, UUID) else UUID(str(message_id))
+        return await self._get_with_retry(
+            get_ecf_by_id.asyncio_detailed,
+            rnc=rnc,
+            id=mid,
+            include_ecf_content=include_ecf_content,
+        )
 
     # ======================================================================
     # Company operations
@@ -301,20 +291,26 @@ class EcfFrontendClient:
     async def get_companies(
         self,
         *,
-        rncs: Sequence[str] | None = None,
-        names: Sequence[str] | None = None,
+        rncs: list[str] | None = None,
+        names: list[str] | None = None,
         page: int = 1,
         limit: int = 25,
-    ) -> PaginatedCompanyResponse:
+    ) -> PaginatedApiResultOfCompanyResponse:
         """List companies with optional filters."""
-        params = self._clean_params({"Rncs": rncs, "Names": names, "Page": page, "Limit": limit})
-        resp = await self._get("/company", params=params)
-        return PaginatedCompanyResponse.model_validate(resp.json())
+        return await self._get_with_retry(
+            get_companies.asyncio_detailed,
+            rncs=rncs if rncs is not None else UNSET,
+            names=names if names is not None else UNSET,
+            page=page,
+            limit=limit,
+        )
 
     async def get_company_by_rnc(self, rnc: str) -> CompanyResponse:
         """Get a company by RNC."""
-        resp = await self._get(f"/company/{rnc}")
-        return CompanyResponse.model_validate(resp.json())
+        return await self._get_with_retry(
+            get_company_by_rnc.asyncio_detailed,
+            rnc=rnc,
+        )
 
 
 def create_frontend_client(
@@ -326,11 +322,7 @@ def create_frontend_client(
     environment: Environment = "test",
     timeout: float = 30.0,
 ) -> EcfFrontendClient:
-    """Factory that creates a restricted read-only client suitable for frontend use.
-
-    Only GET endpoints are exposed. See :class:`EcfFrontendClient` for full
-    parameter documentation.
-    """
+    """Factory that creates a restricted read-only client suitable for frontend use."""
     return EcfFrontendClient(
         get_token=get_token,
         cache_token=cache_token,

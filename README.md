@@ -17,8 +17,8 @@
 | React | [![npm Version](https://img.shields.io/npm/v/@ssddo/ecf-react)](https://www.npmjs.com/package/@ssddo/ecf-react) [![npm Downloads](https://img.shields.io/npm/dm/@ssddo/ecf-react)](https://www.npmjs.com/package/@ssddo/ecf-react) | `npm install @ssddo/ecf-react` | [README](react/README.md) |
 | Python | [![PyPI Version](https://img.shields.io/pypi/v/ecf-dgii)](https://pypi.org/project/ecf-dgii/) [![PyPI Downloads](https://img.shields.io/pypi/dm/ecf-dgii)](https://pypi.org/project/ecf-dgii/) | `pip install ecf-dgii` | [README](python/README.md) |
 | PHP | [![Packagist Version](https://img.shields.io/packagist/v/ecfx/ecf-dgii-php)](https://packagist.org/packages/ecfx/ecf-dgii-php) [![Packagist Downloads](https://img.shields.io/packagist/dt/ecfx/ecf-dgii-php)](https://packagist.org/packages/ecfx/ecf-dgii-php) | `composer require ecfx/ecf-dgii-php` | [README](https://github.com/SSD-Smart-Software-Development-SRL/ecf-dgii-php) |
-| Java | [Maven Central](https://central.sonatype.com/) | Ver [java/README.md](java/README.md) | [README](java/README.md) |
-| Kotlin | [Maven Central](https://central.sonatype.com/) | Ver [kotlin/README.md](kotlin/README.md) | [README](kotlin/README.md) |
+| Java | [![Maven Central](https://img.shields.io/maven-central/v/dom.com.ssd.ecfx/ecf-dgii-sdk-java)](https://central.sonatype.com/artifact/dom.com.ssd.ecfx/ecf-dgii-sdk-java) | Ver [java/README.md](java/README.md) | [README](java/README.md) |
+| Kotlin | [![Maven Central](https://img.shields.io/maven-central/v/dom.com.ssd.ecfx/ecf-dgii-sdk-kotlin)](https://central.sonatype.com/artifact/dom.com.ssd.ecfx/ecf-dgii-sdk-kotlin) | Ver [kotlin/README.md](kotlin/README.md) | [README](kotlin/README.md) |
 | iOS/Swift | [Swift Package Manager](https://swift.org/package-manager/) | Ver [ios/README.md](ios/README.md) | [README](ios/README.md) |
 | C++ | [vcpkg](https://vcpkg.io/) / [Conan](https://conan.io/) | Ver [C++/README.md](C++/README.md) | [README](C++/README.md) |
 

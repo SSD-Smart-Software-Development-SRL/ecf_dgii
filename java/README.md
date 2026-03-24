@@ -1,3 +1,5 @@
+[![Maven Central](https://img.shields.io/maven-central/v/dom.com.ssd.ecfx/ecf-dgii-sdk-java)](https://central.sonatype.com/artifact/dom.com.ssd.ecfx/ecf-dgii-sdk-java)
+
 # ECF DGII Java SDK
 
 SDK de Java para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana).
@@ -9,7 +11,7 @@ SDK de Java para la API de ECF DGII (comprobantes fiscales electrónicos de Rep�
 ```xml
 <dependency>
     <groupId>dom.com.ssd.ecfx</groupId>
-    <artifactId>ecf-dgii-client</artifactId>
+    <artifactId>ecf-dgii-sdk-java</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
@@ -17,7 +19,7 @@ SDK de Java para la API de ECF DGII (comprobantes fiscales electrónicos de Rep�
 ### Gradle
 
 ```groovy
-implementation 'dom.com.ssd.ecfx:ecf-dgii-client:1.0.0'
+implementation 'dom.com.ssd.ecfx:ecf-dgii-sdk-java:1.0.0'
 ```
 
 ## Inicio rápido

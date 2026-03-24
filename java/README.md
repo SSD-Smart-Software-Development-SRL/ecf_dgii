@@ -1,5 +1,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/do.com.ssd.ecfx/ecf-dgii-sdk-java)](https://central.sonatype.com/artifact/do.com.ssd.ecfx/ecf-dgii-sdk-java)
 
+**Paquete:** [do.com.ssd.ecfx:ecf-dgii-sdk-java en Maven Central](https://central.sonatype.com/artifact/do.com.ssd.ecfx/ecf-dgii-sdk-java)
+
 # ECF DGII Java SDK
 
 SDK de Java para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana).

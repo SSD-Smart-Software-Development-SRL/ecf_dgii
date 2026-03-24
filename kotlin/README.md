@@ -1,6 +1,8 @@
 [![Maven Central](https://img.shields.io/maven-central/v/do.com.ssd.ecfx/ecf-dgii-sdk-kotlin)](https://central.sonatype.com/artifact/do.com.ssd.ecfx/ecf-dgii-sdk-kotlin)
 
-# dom.com.ssd.ecfx.sdk - Biblioteca cliente Kotlin para la API de ECF
+**Paquete:** [do.com.ssd.ecfx:ecf-dgii-sdk-kotlin en Maven Central](https://central.sonatype.com/artifact/do.com.ssd.ecfx/ecf-dgii-sdk-kotlin)
+
+# ECF DGII Kotlin SDK
 
 SDK de Kotlin para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana).
 

@@ -268,7 +268,7 @@ namespace EcfDgii.Client
         {
             var cached = await _getCachedToken().ConfigureAwait(false);
             if (!string.IsNullOrEmpty(cached))
-                return cached;
+                return cached!;
 
             return await RefreshTokenAsync().ConfigureAwait(false);
         }

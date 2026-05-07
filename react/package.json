@@ -1,6 +1,6 @@
 {
   "name": "@ssddo/ecf-react",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Hooks de React Query para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana)",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -21,7 +21,7 @@
     "dist"
   ],
   "scripts": {
-    "generate": "openapi-typescript ../openapi/v1.json -o src/generated/v1.d.ts",
+    "generate": "openapi-typescript ../../ecf_dgii/src/Apis/ECF_DGII.EcfApi/wwwroot/openapi/v1.json -o src/generated/v1.d.ts",
     "build": "tsup",
     "prepublishOnly": "npm run build"
   },

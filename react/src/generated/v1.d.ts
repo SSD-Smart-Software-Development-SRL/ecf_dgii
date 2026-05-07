@@ -228,22 +228,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/ecf/aprobacioncomercial/{rnc}/{encf}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: operations["AprobacionComercial"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/ecf/{rnc}/{encf}": {
         parameters: {
             query?: never;
@@ -340,7 +324,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/recepcion/ecf": {
+    "/recepcion": {
         parameters: {
             query?: never;
             header?: never;
@@ -348,6 +332,70 @@ export interface paths {
             cookie?: never;
         };
         get: operations["SearchEcfReceptionRequests"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/recepcion/{messageId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["GetEcfReceptionRequest"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/recepcion/{messageId}/acecf": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["SendAprobacionComercial"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/recepcion/{rnc}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["SearchEcfReceptionRequestsByRnc"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/recepcion/{rnc}/{messageId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["GetEcfReceptorByMessageId"];
         put?: never;
         post?: never;
         delete?: never;
@@ -372,55 +420,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/recepcion/{rnc}/ecf": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["SearchEcfReceptionRequestsByRnc"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/recepcion/{rnc}/ecf/{messageId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["GetEcfReceptionRequest"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/recepcion/{rnc}/acecf": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["SearchAcecfReceptionRequestsByRnc"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/recepcion/{rnc}/acecf/{messageId}": {
+    "/recepcion/acecf/{messageId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -633,8 +633,35 @@ export interface components {
             encf?: null | string;
             rncEmisor?: null | string;
         };
+        AcecfSummaryDto: {
+            /** Format: uuid */
+            acecfId?: string;
+            /** Format: int32 */
+            estado?: number | string;
+            detalleMotivoRechazo?: null | string;
+            /** Format: date-time */
+            fechaHoraAprobacionComercial?: string;
+            fileName?: null | string;
+            /** Format: date-time */
+            createdOn?: string;
+            /**
+             * Format: int32
+             * @description Lifecycle progress (Pending / Building / DirectorioResolved / SendingToEmisor / SentToEmisor / Completed / Failed).
+             */
+            progress?: number | string;
+            /** @description Last failure reason when Progress = Failed. */
+            errorMessage?: null | string;
+            /**
+             * Format: int32
+             * @description HTTP status code from the receptor (set after SendingToEmisor).
+             */
+            receptorHttpStatus?: null | number | string;
+            dgiiCodigoResponse?: null | string;
+            dgiiEstadoResponse?: null | string;
+            dgiiMensajesResponse?: null | string;
+        };
         /** @enum {unknown} */
-        AllTipoECFTypes: "FacturaDeCreditoFiscalElectronica" | "FacturaDeConsumoElectronica" | "NotaDeDebitoElectronica" | "NotaDeCreditoElectronica" | "ComprasElectronico" | "GastosMenoresElectronico" | "RegimenesEspecialesElectronico" | "GubernamentalElectronico" | "ComprobanteDeExportacionesElectronico" | "ComprobanteParaPagosAlExteriorElectronico" | "RFCE" | "ACECF" | "ARECF" | "ANECF" | null;
+        AllTipoECFTypes: "FacturaDeCreditoFiscalElectronica" | "FacturaDeConsumoElectronica" | "NotaDeDebitoElectronica" | "NotaDeCreditoElectronica" | "ComprasElectronico" | "GastosMenoresElectronico" | "RegimenesEspecialesElectronico" | "GubernamentalElectronico" | "ComprobanteDeExportacionesElectronico" | "ComprobanteParaPagosAlExteriorElectronico" | "RFCE" | "ACECF" | "ARECF" | "ANECF";
         AnulacionListResponse: {
             /** Format: uuid */
             anulacionId?: string;
@@ -693,6 +720,9 @@ export interface components {
             /** Format: uuid */
             tenantId?: string;
             receptorId?: string;
+            urlRecepcion?: null | string;
+            urlAprobacionComercial?: null | string;
+            urlAutenticacion?: null | string;
         };
         DetalleAnulacionRequest: {
             tipoEcf: components["schemas"]["ECFType"];
@@ -1650,7 +1680,7 @@ export interface components {
             indicadorEnvioDiferido?: null | components["schemas"]["IndicadorEnvioDiferidoType"];
             indicadorMontoGravado?: null | components["schemas"]["IndicadorMontoGravadoType"];
             indicadorServicioTodoIncluido?: null | components["schemas"]["IndicadorServicioTodoIncluidoType"];
-            tipoIngresos: components["schemas"]["Ecf33TipoIngresosValidationType"];
+            tipoIngresos?: null | components["schemas"]["TipoIngresosValidationType"];
             tipoPago: components["schemas"]["Ecf33TipoPagoType"];
             /** Format: date-time */
             fechaLimitePago?: null | string;
@@ -1907,8 +1937,6 @@ export interface components {
         /** @enum {unknown} */
         Ecf33TipoDescuentoRecargoType: "$" | "%";
         /** @enum {unknown} */
-        Ecf33TipoIngresosValidationType: "01" | "02" | "03" | "04" | "05" | "06";
-        /** @enum {unknown} */
         Ecf33TipoPagoType: "Contado" | "Credito" | "Gratuito";
         Ecf33Totales: {
             /** Format: double */
@@ -2061,7 +2089,7 @@ export interface components {
             indicadorEnvioDiferido?: null | components["schemas"]["IndicadorEnvioDiferidoType"];
             indicadorMontoGravado?: null | components["schemas"]["IndicadorMontoGravadoType"];
             indicadorServicioTodoIncluido?: null | components["schemas"]["IndicadorServicioTodoIncluidoType"];
-            tipoIngresos: components["schemas"]["Ecf34TipoIngresosValidationType"];
+            tipoIngresos?: null | components["schemas"]["TipoIngresosValidationType"];
             tipoPago: components["schemas"]["Ecf34TipoPagoType"];
             /** Format: date-time */
             fechaLimitePago?: null | string;
@@ -2312,8 +2340,6 @@ export interface components {
         Ecf34TipoAjusteType: "D" | "R";
         /** @enum {unknown} */
         Ecf34TipoDescuentoRecargoType: "$" | "%";
-        /** @enum {unknown} */
-        Ecf34TipoIngresosValidationType: "01" | "02" | "03" | "04" | "05" | "06";
         /** @enum {unknown} */
         Ecf34TipoPagoType: "Contado" | "Credito" | "Gratuito";
         Ecf34Totales: {
@@ -3996,6 +4022,45 @@ export interface components {
             rncEmisor?: null | string;
             tipoEcf?: null | components["schemas"]["AllTipoECFTypes"];
             resultInternalFileName?: null | string;
+            /** Format: double */
+            montoTotal?: null | number | string;
+        };
+        EcfReceptorDto: {
+            /** Format: uuid */
+            ecfReceptorId?: string;
+            /** Format: uuid */
+            tenantId?: string;
+            companyRnc?: string;
+            encf?: string;
+            rncEmisor?: string;
+            rncReceptor?: string;
+            tipoEcf?: components["schemas"]["AllTipoECFTypes"];
+            /** Format: double */
+            montoTotal?: number | string;
+            /** Format: date */
+            fechaEmision?: string;
+            fileName?: string;
+            rawJsonData?: string;
+            /** Format: date-time */
+            createdOn?: string;
+            /** Format: date-time */
+            fechaFirma?: null | string;
+            codSec?: null | string;
+            /**
+             * Format: int32
+             * @description Estado from the generated ARECF (ECFRecibido / ECFNoRecibido).
+             */
+            estado?: null | number | string;
+            /**
+             * Format: int32
+             * @description EcfReceptionRequest.Progress — Pending / Processing / Completed / Error.
+             */
+            progress?: number | string;
+            /** @description DGII environment serving this tenant ("Test"/"Certification"/"Production"). */
+            ambiente?: string;
+            /** @description DGII consulta-timbre URL with QR query string. */
+            urlImpresion?: null | string;
+            acecfs?: components["schemas"]["AcecfSummaryDto"][];
         };
         EcfResponse: {
             /** Format: uuid */
@@ -4026,6 +4091,8 @@ export interface components {
             emisorReceptorErrors: null | string;
             secuenciaUtilizada: null | boolean;
             dgiiEnvironment: components["schemas"]["DGIIEnvironment"];
+            /** @description ACECFs received from the receptor for this outbound ECF. */
+            acecfs?: components["schemas"]["AcecfSummaryDto"][];
             impresionUrl?: null | string;
         };
         /** @enum {unknown} */
@@ -4497,7 +4564,9 @@ export interface components {
         /** @enum {unknown} */
         TipoeCFType: "FacturaDeCreditoFiscalElectronica" | "FacturaDeConsumoElectronica" | "NotaDeDebitoElectronica" | "NotaDeCreditoElectronica" | "ComprasElectronico" | "GastosMenoresElectronico" | "RegimenesEspecialesElectronico" | "GubernamentalElectronico" | "ComprobanteDeExportacionesElectronico" | "ComprobanteParaPagosAlExteriorElectronico";
         /** @enum {unknown} */
-        TipoMonedaType: "BRL" | "CAD" | "CHF" | "CHY" | "XDR" | "DKK" | "EUR" | "GBP" | "JPY" | "NOK" | "SCP" | "SEK" | "USD" | "VEF" | "HTG" | "MXN" | null;
+        TipoIngresosValidationType: "01" | "02" | "03" | "04" | "05" | "06" | null;
+        /** @enum {unknown} */
+        TipoMonedaType: "BRL" | "CAD" | "CHF" | "CHY" | "XDR" | "DKK" | "EUR" | "GBP" | "JPY" | "NOK" | "SCP" | "SEK" | "USD" | "VEF" | "HTG" | "MXN" | "COP" | null;
         /** @enum {unknown} */
         TipoPagoType: "Contado" | "Credito" | "Gratuito" | null;
         Token: {
@@ -4511,8 +4580,14 @@ export interface components {
         UnidadMedidaType: "Barril" | "Bolsa" | "Bote" | "Bultos" | "Botella" | "CajaSlashCajon" | "Cajetilla" | "Centimetro" | "Cilindro" | "Conjunto" | "Contenedor" | "Dia" | "Docena" | "Fardo" | "Galones" | "Grado" | "Gramo" | "Granel" | "Hora" | "Huacal" | "Kilogramo" | "KilovatioHora" | "Libra" | "Litro" | "Lote" | "Metro" | "MetroCuadrado" | "MetroCubico" | "MillonesDeUnidadesTermicas" | "Minuto" | "Paquete" | "Par" | "Pie" | "Pieza" | "Rollo" | "Sobre" | "Segundo" | "Tanque" | "Tonelada" | "Tubo" | "Yarda" | "YardaCuadrada" | "Unidad" | "Elemento" | "Millar" | "Saco" | "Lata" | "Display" | "Bidon" | "Racion" | "Quintal" | "ToneladasDeRegistroBruto" | "PieCuadrado" | "Pasajero" | "PULGPulgadas" | "STAYParqueoBarcosEnMuelle" | "BDJBandeja" | "HAHectarea" | "MLMililitro" | "MGMiligramo" | "OZOnzas" | "OZTOnzasTroy" | null;
         UpsertCompanyRequest: {
             rnc: string;
-            legalName: string;
             name: string;
+            employeeCount?: null | string;
+            estimatedInvoices?: null | string;
+            legalRepFirstName?: null | string;
+            legalRepLastName?: null | string;
+            address?: null | string;
+            certificationDeclared?: null | boolean;
+            certificationStatus?: null | string;
         };
         /**
          * @description Representa información de ventana de mantenimiento para un ambiente específico.
@@ -5472,76 +5547,6 @@ export interface operations {
             };
         };
     };
-    AprobacionComercial: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                rnc: string;
-                encf: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SendAcecfRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-        };
-    };
     QueryEcf: {
         parameters: {
             query?: {
@@ -5675,6 +5680,8 @@ export interface operations {
                 ToFechaEmision?: string;
                 AmountFrom?: number | string;
                 AmountTo?: number | string;
+                Progresses?: components["schemas"]["EcfProgress"][];
+                DgiiEstados?: components["schemas"]["EcfEstado"][];
                 Page?: number | string;
                 Limit?: number | string;
             };
@@ -5744,6 +5751,8 @@ export interface operations {
                 ToFechaEmision?: string;
                 AmountFrom?: number | string;
                 AmountTo?: number | string;
+                Progresses?: components["schemas"]["EcfProgress"][];
+                DgiiEstados?: components["schemas"]["EcfEstado"][];
                 Page?: number | string;
                 Limit?: number | string;
             };
@@ -5914,100 +5923,18 @@ export interface operations {
                 MessageIds?: string[];
                 Encfs?: string[];
                 Rncs?: string[];
+                RncEmisors?: string[];
+                TiposEcfs?: (number | string)[];
+                Progresses?: (number | string)[];
+                FromDate?: string;
+                ToDate?: string;
+                AmountFrom?: number | string;
+                AmountTo?: number | string;
                 Page?: number | string;
                 Limit?: number | string;
             };
             header?: never;
             path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PaginatedApiResultOfEcfReceptionRequestDto"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-        };
-    };
-    SearchAcecfReceptionRequests: {
-        parameters: {
-            query?: {
-                MessageIds?: string[];
-                Encfs?: string[];
-                Rncs?: string[];
-                Page?: number | string;
-                Limit?: number | string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PaginatedApiResultOfAcecfReceptionRequestDto"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/problem+json": components["schemas"]["ProblemDetails"];
-                };
-            };
-        };
-    };
-    SearchEcfReceptionRequestsByRnc: {
-        parameters: {
-            query?: {
-                MessageIds?: string[];
-                Encfs?: string[];
-                Page?: number | string;
-                Limit?: number | string;
-            };
-            header?: never;
-            path: {
-                rnc: string;
-            };
             cookie?: never;
         };
         requestBody?: never;
@@ -6046,7 +5973,6 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                rnc: string;
                 messageId: string;
             };
             cookie?: never;
@@ -6089,11 +6015,87 @@ export interface operations {
             };
         };
     };
-    SearchAcecfReceptionRequestsByRnc: {
+    SendAprobacionComercial: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                messageId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SendAcecfRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+        };
+    };
+    SearchEcfReceptionRequestsByRnc: {
         parameters: {
             query?: {
                 MessageIds?: string[];
                 Encfs?: string[];
+                RncEmisors?: string[];
+                TiposEcfs?: (number | string)[];
+                Progresses?: (number | string)[];
+                FromDate?: string;
+                ToDate?: string;
+                AmountFrom?: number | string;
+                AmountTo?: number | string;
                 Page?: number | string;
                 Limit?: number | string;
             };
@@ -6101,6 +6103,99 @@ export interface operations {
             path: {
                 rnc: string;
             };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedApiResultOfEcfReceptionRequestDto"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+        };
+    };
+    GetEcfReceptorByMessageId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                rnc: string;
+                messageId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EcfReceptorDto"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    SearchAcecfReceptionRequests: {
+        parameters: {
+            query?: {
+                MessageIds?: string[];
+                Encfs?: string[];
+                Rncs?: string[];
+                Progresses?: (number | string)[];
+                Page?: number | string;
+                Limit?: number | string;
+            };
+            header?: never;
+            path?: never;
             cookie?: never;
         };
         requestBody?: never;
@@ -6139,7 +6234,6 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                rnc: string;
                 messageId: string;
             };
             cookie?: never;

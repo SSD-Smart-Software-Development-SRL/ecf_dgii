@@ -72,5 +72,9 @@ namespace EcfDgii.Client.Generated.Models
         #pragma warning disable CS1591
         MXN,
         #pragma warning restore CS1591
+        [EnumMember(Value = "COP")]
+        #pragma warning disable CS1591
+        COP,
+        #pragma warning restore CS1591
     }
 }

@@ -9,43 +9,42 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
-namespace EcfDgii.Client.Generated.Recepcion.Item.Acecf.Item
+namespace EcfDgii.Client.Generated.Recepcion.Item.Item
 {
     /// <summary>
-    /// Builds and executes requests for operations under \recepcion\{rnc}\acecf\{messageId}
+    /// Builds and executes requests for operations under \recepcion\{message-id}\{messageId}
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithMessageItemRequestBuilder : BaseRequestBuilder
     {
         /// <summary>
-        /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Recepcion.Item.Acecf.Item.WithMessageItemRequestBuilder"/> and sets the default values.
+        /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Recepcion.Item.Item.WithMessageItemRequestBuilder"/> and sets the default values.
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithMessageItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/recepcion/{rnc}/acecf/{messageId}", pathParameters)
+        public WithMessageItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/recepcion/{message%2Did}/{messageId}", pathParameters)
         {
         }
         /// <summary>
-        /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Recepcion.Item.Acecf.Item.WithMessageItemRequestBuilder"/> and sets the default values.
+        /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Recepcion.Item.Item.WithMessageItemRequestBuilder"/> and sets the default values.
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithMessageItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/recepcion/{rnc}/acecf/{messageId}", rawUrl)
+        public WithMessageItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/recepcion/{message%2Did}/{messageId}", rawUrl)
         {
         }
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.EcfReceptorDto"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 401 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 403 status code</exception>
-        /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::EcfDgii.Client.Generated.Models.EcfReceptorDto?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::EcfDgii.Client.Generated.Models.EcfReceptorDto> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -53,9 +52,8 @@ namespace EcfDgii.Client.Generated.Recepcion.Item.Acecf.Item
             {
                 { "401", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "403", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
-                { "404", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::EcfDgii.Client.Generated.Models.EcfReceptorDto>(requestInfo, global::EcfDgii.Client.Generated.Models.EcfReceptorDto.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -70,17 +68,17 @@ namespace EcfDgii.Client.Generated.Recepcion.Item.Acecf.Item
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
-            requestInfo.Headers.TryAdd("Accept", "application/problem+json");
+            requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;
         }
         /// <summary>
         /// Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         /// </summary>
-        /// <returns>A <see cref="global::EcfDgii.Client.Generated.Recepcion.Item.Acecf.Item.WithMessageItemRequestBuilder"/></returns>
+        /// <returns>A <see cref="global::EcfDgii.Client.Generated.Recepcion.Item.Item.WithMessageItemRequestBuilder"/></returns>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
-        public global::EcfDgii.Client.Generated.Recepcion.Item.Acecf.Item.WithMessageItemRequestBuilder WithUrl(string rawUrl)
+        public global::EcfDgii.Client.Generated.Recepcion.Item.Item.WithMessageItemRequestBuilder WithUrl(string rawUrl)
         {
-            return new global::EcfDgii.Client.Generated.Recepcion.Item.Acecf.Item.WithMessageItemRequestBuilder(rawUrl, RequestAdapter);
+            return new global::EcfDgii.Client.Generated.Recepcion.Item.Item.WithMessageItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.

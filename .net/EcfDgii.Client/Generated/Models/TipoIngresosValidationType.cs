@@ -5,28 +5,32 @@ namespace EcfDgii.Client.Generated.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public enum IndicadorFacturacionType
+    public enum TipoIngresosValidationType
     #pragma warning restore CS1591
     {
-        [EnumMember(Value = "NoFacturable_18Percent")]
+        [EnumMember(Value = "01")]
         #pragma warning disable CS1591
-        NoFacturable_18Percent,
+        ZeroOne,
         #pragma warning restore CS1591
-        [EnumMember(Value = "ITBIS1_18Percent")]
+        [EnumMember(Value = "02")]
         #pragma warning disable CS1591
-        ITBIS1_18Percent,
+        ZeroTwo,
         #pragma warning restore CS1591
-        [EnumMember(Value = "ITBIS2_16Percent")]
+        [EnumMember(Value = "03")]
         #pragma warning disable CS1591
-        ITBIS2_16Percent,
+        ZeroThree,
         #pragma warning restore CS1591
-        [EnumMember(Value = "ITBIS3_0Percent")]
+        [EnumMember(Value = "04")]
         #pragma warning disable CS1591
-        ITBIS3_0Percent,
+        ZeroFour,
         #pragma warning restore CS1591
-        [EnumMember(Value = "Exento_E")]
+        [EnumMember(Value = "05")]
         #pragma warning disable CS1591
-        Exento_E,
+        ZeroFive,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "06")]
+        #pragma warning disable CS1591
+        ZeroSix,
         #pragma warning restore CS1591
     }
 }

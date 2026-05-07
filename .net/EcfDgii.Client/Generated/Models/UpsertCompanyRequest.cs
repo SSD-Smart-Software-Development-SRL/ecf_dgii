@@ -14,13 +14,55 @@ namespace EcfDgii.Client.Generated.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The legalName property</summary>
+        /// <summary>The address property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LegalName { get; set; }
+        public string? Address { get; set; }
 #nullable restore
 #else
-        public string LegalName { get; set; }
+        public string Address { get; set; }
+#endif
+        /// <summary>The certificationDeclared property</summary>
+        public bool? CertificationDeclared { get; set; }
+        /// <summary>The certificationStatus property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CertificationStatus { get; set; }
+#nullable restore
+#else
+        public string CertificationStatus { get; set; }
+#endif
+        /// <summary>The employeeCount property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? EmployeeCount { get; set; }
+#nullable restore
+#else
+        public string EmployeeCount { get; set; }
+#endif
+        /// <summary>The estimatedInvoices property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? EstimatedInvoices { get; set; }
+#nullable restore
+#else
+        public string EstimatedInvoices { get; set; }
+#endif
+        /// <summary>The legalRepFirstName property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LegalRepFirstName { get; set; }
+#nullable restore
+#else
+        public string LegalRepFirstName { get; set; }
+#endif
+        /// <summary>The legalRepLastName property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LegalRepLastName { get; set; }
+#nullable restore
+#else
+        public string LegalRepLastName { get; set; }
 #endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -63,7 +105,13 @@ namespace EcfDgii.Client.Generated.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "legalName", n => { LegalName = n.GetStringValue(); } },
+                { "address", n => { Address = n.GetStringValue(); } },
+                { "certificationDeclared", n => { CertificationDeclared = n.GetBoolValue(); } },
+                { "certificationStatus", n => { CertificationStatus = n.GetStringValue(); } },
+                { "employeeCount", n => { EmployeeCount = n.GetStringValue(); } },
+                { "estimatedInvoices", n => { EstimatedInvoices = n.GetStringValue(); } },
+                { "legalRepFirstName", n => { LegalRepFirstName = n.GetStringValue(); } },
+                { "legalRepLastName", n => { LegalRepLastName = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "rnc", n => { Rnc = n.GetStringValue(); } },
             };
@@ -75,7 +123,13 @@ namespace EcfDgii.Client.Generated.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("legalName", LegalName);
+            writer.WriteStringValue("address", Address);
+            writer.WriteBoolValue("certificationDeclared", CertificationDeclared);
+            writer.WriteStringValue("certificationStatus", CertificationStatus);
+            writer.WriteStringValue("employeeCount", EmployeeCount);
+            writer.WriteStringValue("estimatedInvoices", EstimatedInvoices);
+            writer.WriteStringValue("legalRepFirstName", LegalRepFirstName);
+            writer.WriteStringValue("legalRepLastName", LegalRepLastName);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("rnc", Rnc);
             writer.WriteAdditionalData(AdditionalData);

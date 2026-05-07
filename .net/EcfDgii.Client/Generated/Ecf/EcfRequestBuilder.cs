@@ -2,7 +2,6 @@
 #pragma warning disable CS0618
 using EcfDgii.Client.Generated.Ecf.Anulaciones;
 using EcfDgii.Client.Generated.Ecf.Anularrango;
-using EcfDgii.Client.Generated.Ecf.Aprobacioncomercial;
 using EcfDgii.Client.Generated.Ecf.FirmarSemilla;
 using EcfDgii.Client.Generated.Ecf.FourFive;
 using EcfDgii.Client.Generated.Ecf.FourFour;
@@ -41,11 +40,6 @@ namespace EcfDgii.Client.Generated.Ecf
         public global::EcfDgii.Client.Generated.Ecf.Anularrango.AnularrangoRequestBuilder Anularrango
         {
             get => new global::EcfDgii.Client.Generated.Ecf.Anularrango.AnularrangoRequestBuilder(PathParameters, RequestAdapter);
-        }
-        /// <summary>The aprobacioncomercial property</summary>
-        public global::EcfDgii.Client.Generated.Ecf.Aprobacioncomercial.AprobacioncomercialRequestBuilder Aprobacioncomercial
-        {
-            get => new global::EcfDgii.Client.Generated.Ecf.Aprobacioncomercial.AprobacioncomercialRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The FirmarSemilla property</summary>
         public global::EcfDgii.Client.Generated.Ecf.FirmarSemilla.FirmarSemillaRequestBuilder FirmarSemilla
@@ -119,7 +113,7 @@ namespace EcfDgii.Client.Generated.Ecf
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public EcfRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecf{?AmountFrom*,AmountTo*,Encfs*,FromFechaEmision*,Ids*,IncludeEcfContent*,Limit*,Page*,TiposEcfs*,ToFechaEmision*}", pathParameters)
+        public EcfRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecf{?AmountFrom*,AmountTo*,DgiiEstados*,Encfs*,FromFechaEmision*,Ids*,IncludeEcfContent*,Limit*,Page*,Progresses*,TiposEcfs*,ToFechaEmision*}", pathParameters)
         {
         }
         /// <summary>
@@ -127,7 +121,7 @@ namespace EcfDgii.Client.Generated.Ecf
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public EcfRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecf{?AmountFrom*,AmountTo*,Encfs*,FromFechaEmision*,Ids*,IncludeEcfContent*,Limit*,Page*,TiposEcfs*,ToFechaEmision*}", rawUrl)
+        public EcfRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecf{?AmountFrom*,AmountTo*,DgiiEstados*,Encfs*,FromFechaEmision*,Ids*,IncludeEcfContent*,Limit*,Page*,Progresses*,TiposEcfs*,ToFechaEmision*}", rawUrl)
         {
         }
         /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.PaginatedApiResultOfEcfResponse"/></returns>
@@ -200,6 +194,23 @@ namespace EcfDgii.Client.Generated.Ecf
 #else
             public string AmountTo { get; set; }
 #endif
+            [Obsolete("This property is deprecated, use DgiiEstadosAsEcfEstado instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public string[]? DgiiEstados { get; set; }
+#nullable restore
+#else
+            public string[] DgiiEstados { get; set; }
+#endif
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("DgiiEstados")]
+            public global::EcfDgii.Client.Generated.Models.EcfEstado[]? DgiiEstadosAsEcfEstado { get; set; }
+#nullable restore
+#else
+            [QueryParameter("DgiiEstados")]
+            public global::EcfDgii.Client.Generated.Models.EcfEstado[] DgiiEstadosAsEcfEstado { get; set; }
+#endif
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             public string[]? Encfs { get; set; }
@@ -229,6 +240,23 @@ namespace EcfDgii.Client.Generated.Ecf
 #nullable restore
 #else
             public string Page { get; set; }
+#endif
+            [Obsolete("This property is deprecated, use ProgressesAsEcfProgress instead")]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public string[]? Progresses { get; set; }
+#nullable restore
+#else
+            public string[] Progresses { get; set; }
+#endif
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("Progresses")]
+            public global::EcfDgii.Client.Generated.Models.EcfProgress[]? ProgressesAsEcfProgress { get; set; }
+#nullable restore
+#else
+            [QueryParameter("Progresses")]
+            public global::EcfDgii.Client.Generated.Models.EcfProgress[] ProgressesAsEcfProgress { get; set; }
 #endif
             [Obsolete("This property is deprecated, use TiposEcfsAsAllTipoECFTypes instead")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

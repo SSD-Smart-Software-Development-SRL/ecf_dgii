@@ -13,6 +13,14 @@ namespace EcfDgii.Client.Generated.Models
     public partial class EcfResponse : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>ACECFs received from the receptor for this outbound ECF.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::EcfDgii.Client.Generated.Models.AcecfSummaryDto>? Acecfs { get; set; }
+#nullable restore
+#else
+        public List<global::EcfDgii.Client.Generated.Models.AcecfSummaryDto> Acecfs { get; set; }
+#endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The codSec property</summary>
@@ -164,6 +172,7 @@ namespace EcfDgii.Client.Generated.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "acecfs", n => { Acecfs = n.GetCollectionOfObjectValues<global::EcfDgii.Client.Generated.Models.AcecfSummaryDto>(global::EcfDgii.Client.Generated.Models.AcecfSummaryDto.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "codSec", n => { CodSec = n.GetStringValue(); } },
                 { "dgiiEnvironment", n => { DgiiEnvironment = n.GetEnumValue<global::EcfDgii.Client.Generated.Models.DGIIEnvironment>(); } },
                 { "ecfContent", n => { EcfContent = n.GetStringValue(); } },
@@ -196,6 +205,7 @@ namespace EcfDgii.Client.Generated.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfObjectValues<global::EcfDgii.Client.Generated.Models.AcecfSummaryDto>("acecfs", Acecfs);
             writer.WriteStringValue("codSec", CodSec);
             writer.WriteEnumValue<global::EcfDgii.Client.Generated.Models.DGIIEnvironment>("dgiiEnvironment", DgiiEnvironment);
             writer.WriteStringValue("ecfContent", EcfContent);

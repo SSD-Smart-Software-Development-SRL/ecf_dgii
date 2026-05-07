@@ -50,6 +50,14 @@ namespace EcfDgii.Client.Generated.Models
 #endif
         /// <summary>The messageId property</summary>
         public Guid? MessageId { get; set; }
+        /// <summary>The montoTotal property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public UntypedNode? MontoTotal { get; set; }
+#nullable restore
+#else
+        public UntypedNode MontoTotal { get; set; }
+#endif
         /// <summary>The progress property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -117,6 +125,7 @@ namespace EcfDgii.Client.Generated.Models
                 { "errorMessage", n => { ErrorMessage = n.GetStringValue(); } },
                 { "fileName", n => { FileName = n.GetStringValue(); } },
                 { "messageId", n => { MessageId = n.GetGuidValue(); } },
+                { "montoTotal", n => { MontoTotal = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
                 { "progress", n => { Progress = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
                 { "resultInternalFileName", n => { ResultInternalFileName = n.GetStringValue(); } },
                 { "rncEmisor", n => { RncEmisor = n.GetStringValue(); } },
@@ -138,6 +147,7 @@ namespace EcfDgii.Client.Generated.Models
             writer.WriteStringValue("errorMessage", ErrorMessage);
             writer.WriteStringValue("fileName", FileName);
             writer.WriteGuidValue("messageId", MessageId);
+            writer.WriteObjectValue<UntypedNode>("montoTotal", MontoTotal);
             writer.WriteObjectValue<UntypedNode>("progress", Progress);
             writer.WriteStringValue("resultInternalFileName", ResultInternalFileName);
             writer.WriteStringValue("rncEmisor", RncEmisor);

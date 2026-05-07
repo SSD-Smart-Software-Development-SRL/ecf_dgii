@@ -9,94 +9,85 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
-namespace EcfDgii.Client.Generated.Ecf.Aprobacioncomercial.Item.Item
+namespace EcfDgii.Client.Generated.Recepcion.Acecf.Item
 {
     /// <summary>
-    /// Builds and executes requests for operations under \ecf\aprobacioncomercial\{rnc}\{encf}
+    /// Builds and executes requests for operations under \recepcion\acecf\{messageId}
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class WithEncfItemRequestBuilder : BaseRequestBuilder
+    public partial class WithMessageItemRequestBuilder : BaseRequestBuilder
     {
         /// <summary>
-        /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Ecf.Aprobacioncomercial.Item.Item.WithEncfItemRequestBuilder"/> and sets the default values.
+        /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Recepcion.Acecf.Item.WithMessageItemRequestBuilder"/> and sets the default values.
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithEncfItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecf/aprobacioncomercial/{rnc}/{encf}", pathParameters)
+        public WithMessageItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/recepcion/acecf/{messageId}", pathParameters)
         {
         }
         /// <summary>
-        /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Ecf.Aprobacioncomercial.Item.Item.WithEncfItemRequestBuilder"/> and sets the default values.
+        /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Recepcion.Acecf.Item.WithMessageItemRequestBuilder"/> and sets the default values.
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithEncfItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecf/aprobacioncomercial/{rnc}/{encf}", rawUrl)
+        public WithMessageItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/recepcion/acecf/{messageId}", rawUrl)
         {
         }
         /// <returns>A <see cref="Stream"/></returns>
-        /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 400 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 401 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 403 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 404 status code</exception>
-        /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> PostAsync(global::EcfDgii.Client.Generated.Models.SendAcecfRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> PostAsync(global::EcfDgii.Client.Generated.Models.SendAcecfRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
-            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "401", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "403", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "404", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
-                { "500", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::EcfDgii.Client.Generated.Models.SendAcecfRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::EcfDgii.Client.Generated.Models.SendAcecfRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
-            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/problem+json");
-            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>
         /// Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         /// </summary>
-        /// <returns>A <see cref="global::EcfDgii.Client.Generated.Ecf.Aprobacioncomercial.Item.Item.WithEncfItemRequestBuilder"/></returns>
+        /// <returns>A <see cref="global::EcfDgii.Client.Generated.Recepcion.Acecf.Item.WithMessageItemRequestBuilder"/></returns>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
-        public global::EcfDgii.Client.Generated.Ecf.Aprobacioncomercial.Item.Item.WithEncfItemRequestBuilder WithUrl(string rawUrl)
+        public global::EcfDgii.Client.Generated.Recepcion.Acecf.Item.WithMessageItemRequestBuilder WithUrl(string rawUrl)
         {
-            return new global::EcfDgii.Client.Generated.Ecf.Aprobacioncomercial.Item.Item.WithEncfItemRequestBuilder(rawUrl, RequestAdapter);
+            return new global::EcfDgii.Client.Generated.Recepcion.Acecf.Item.WithMessageItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class WithEncfItemRequestBuilderPostRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class WithMessageItemRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
         }
     }

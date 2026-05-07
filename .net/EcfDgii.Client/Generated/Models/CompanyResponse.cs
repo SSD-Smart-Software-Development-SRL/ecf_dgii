@@ -68,6 +68,30 @@ namespace EcfDgii.Client.Generated.Models
 #endif
         /// <summary>The updatedOn property</summary>
         public DateTimeOffset? UpdatedOn { get; set; }
+        /// <summary>The urlAprobacionComercial property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UrlAprobacionComercial { get; set; }
+#nullable restore
+#else
+        public string UrlAprobacionComercial { get; set; }
+#endif
+        /// <summary>The urlAutenticacion property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UrlAutenticacion { get; set; }
+#nullable restore
+#else
+        public string UrlAutenticacion { get; set; }
+#endif
+        /// <summary>The urlRecepcion property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UrlRecepcion { get; set; }
+#nullable restore
+#else
+        public string UrlRecepcion { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Models.CompanyResponse"/> and sets the default values.
         /// </summary>
@@ -102,6 +126,9 @@ namespace EcfDgii.Client.Generated.Models
                 { "tenantId", n => { TenantId = n.GetGuidValue(); } },
                 { "updatedBy", n => { UpdatedBy = n.GetStringValue(); } },
                 { "updatedOn", n => { UpdatedOn = n.GetDateTimeOffsetValue(); } },
+                { "urlAprobacionComercial", n => { UrlAprobacionComercial = n.GetStringValue(); } },
+                { "urlAutenticacion", n => { UrlAutenticacion = n.GetStringValue(); } },
+                { "urlRecepcion", n => { UrlRecepcion = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -120,6 +147,9 @@ namespace EcfDgii.Client.Generated.Models
             writer.WriteGuidValue("tenantId", TenantId);
             writer.WriteStringValue("updatedBy", UpdatedBy);
             writer.WriteDateTimeOffsetValue("updatedOn", UpdatedOn);
+            writer.WriteStringValue("urlAprobacionComercial", UrlAprobacionComercial);
+            writer.WriteStringValue("urlAutenticacion", UrlAutenticacion);
+            writer.WriteStringValue("urlRecepcion", UrlRecepcion);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

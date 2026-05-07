@@ -12,7 +12,8 @@ namespace EcfDgii.Client
     /// <summary>
     /// High-level client for the ECF DGII API.
     /// Provides both raw Kiota-generated endpoint access via <see cref="Api"/>
-    /// and a simplified send-and-poll workflow via <see cref="SendEcfAsync"/>.
+    /// and a simplified send-and-poll workflow via the typed <c>SendEcfAsync</c> overloads
+    /// (one per e-CF type: 31, 32, 33, 34, 41, 43, 44, 45, 46, 47).
     /// </summary>
     public class EcfClient
     {
@@ -21,20 +22,6 @@ namespace EcfDgii.Client
             ["Test"] = "https://api.test.ecfx.ssd.com.do",
             ["Cert"] = "https://api.cert.ecfx.ssd.com.do",
             ["Prod"] = "https://api.prod.ecfx.ssd.com.do",
-        };
-
-        private static readonly Dictionary<TipoeCFType, string> EcfTypeRouteMap = new Dictionary<TipoeCFType, string>
-        {
-            [TipoeCFType.FacturaDeCreditoFiscalElectronica] = "31",
-            [TipoeCFType.FacturaDeConsumoElectronica] = "32",
-            [TipoeCFType.NotaDeDebitoElectronica] = "33",
-            [TipoeCFType.NotaDeCreditoElectronica] = "34",
-            [TipoeCFType.ComprasElectronico] = "41",
-            [TipoeCFType.GastosMenoresElectronico] = "43",
-            [TipoeCFType.RegimenesEspecialesElectronico] = "44",
-            [TipoeCFType.GubernamentalElectronico] = "45",
-            [TipoeCFType.ComprobanteDeExportacionesElectronico] = "46",
-            [TipoeCFType.ComprobanteParaPagosAlExteriorElectronico] = "47",
         };
 
         /// <summary>
@@ -81,48 +68,120 @@ namespace EcfDgii.Client
         }
 
         // ---------------------------------------------------------------------------
-        // ECF send + poll
+        // ECF send + poll — typed overloads, one per ECF type
         // ---------------------------------------------------------------------------
 
-        /// <summary>
-        /// Send an ECF and poll until processing completes.
-        /// Automatically routes to the correct endpoint based on <c>ecf.Encabezado.IdDoc.TipoeCF</c>,
-        /// then polls the status endpoint until progress is <c>Finished</c> or <c>Error</c>.
-        /// </summary>
-        /// <param name="ecf">The ECF document to send.</param>
-        /// <param name="pollingOptions">Optional polling configuration.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>The final <see cref="EcfResponse"/> with a Finished status.</returns>
-        /// <exception cref="EcfException">When the ECF processing finishes with an Error status.</exception>
-        public async Task<EcfResponse> SendEcfAsync(
-            ECF ecf,
-            PollingOptions? pollingOptions = null,
-            CancellationToken cancellationToken = default)
+        /// <summary>Send a Factura de Crédito Fiscal Electrónica (e-CF 31) and poll until completion.</summary>
+        public Task<EcfResponse> SendEcfAsync(Ecf31ECF ecf, PollingOptions? pollingOptions = null, CancellationToken cancellationToken = default)
+            => SendInternalAsync(
+                ecf.Encabezado?.Emisor?.RncEmisor,
+                ecf.Encabezado?.IdDoc?.Encf,
+                ct => Api.Ecf.ThreeOne.PostAsync(ecf, cancellationToken: ct),
+                pollingOptions,
+                cancellationToken);
+
+        /// <summary>Send a Factura de Consumo Electrónica (e-CF 32) and poll until completion.</summary>
+        public Task<EcfResponse> SendEcfAsync(Ecf32ECF ecf, PollingOptions? pollingOptions = null, CancellationToken cancellationToken = default)
+            => SendInternalAsync(
+                ecf.Encabezado?.Emisor?.RncEmisor,
+                ecf.Encabezado?.IdDoc?.Encf,
+                ct => Api.Ecf.ThreeTwo.PostAsync(ecf, cancellationToken: ct),
+                pollingOptions,
+                cancellationToken);
+
+        /// <summary>Send a Nota de Débito Electrónica (e-CF 33) and poll until completion.</summary>
+        public Task<EcfResponse> SendEcfAsync(Ecf33ECF ecf, PollingOptions? pollingOptions = null, CancellationToken cancellationToken = default)
+            => SendInternalAsync(
+                ecf.Encabezado?.Emisor?.RncEmisor,
+                ecf.Encabezado?.IdDoc?.Encf,
+                ct => Api.Ecf.ThreeThree.PostAsync(ecf, cancellationToken: ct),
+                pollingOptions,
+                cancellationToken);
+
+        /// <summary>Send a Nota de Crédito Electrónica (e-CF 34) and poll until completion.</summary>
+        public Task<EcfResponse> SendEcfAsync(Ecf34ECF ecf, PollingOptions? pollingOptions = null, CancellationToken cancellationToken = default)
+            => SendInternalAsync(
+                ecf.Encabezado?.Emisor?.RncEmisor,
+                ecf.Encabezado?.IdDoc?.Encf,
+                ct => Api.Ecf.ThreeFour.PostAsync(ecf, cancellationToken: ct),
+                pollingOptions,
+                cancellationToken);
+
+        /// <summary>Send a Compras Electrónico (e-CF 41) and poll until completion.</summary>
+        public Task<EcfResponse> SendEcfAsync(Ecf41ECF ecf, PollingOptions? pollingOptions = null, CancellationToken cancellationToken = default)
+            => SendInternalAsync(
+                ecf.Encabezado?.Emisor?.RncEmisor,
+                ecf.Encabezado?.IdDoc?.Encf,
+                ct => Api.Ecf.FourOne.PostAsync(ecf, cancellationToken: ct),
+                pollingOptions,
+                cancellationToken);
+
+        /// <summary>Send a Gastos Menores Electrónico (e-CF 43) and poll until completion.</summary>
+        public Task<EcfResponse> SendEcfAsync(Ecf43ECF ecf, PollingOptions? pollingOptions = null, CancellationToken cancellationToken = default)
+            => SendInternalAsync(
+                ecf.Encabezado?.Emisor?.RncEmisor,
+                ecf.Encabezado?.IdDoc?.Encf,
+                ct => Api.Ecf.FourThree.PostAsync(ecf, cancellationToken: ct),
+                pollingOptions,
+                cancellationToken);
+
+        /// <summary>Send a Regímenes Especiales Electrónico (e-CF 44) and poll until completion.</summary>
+        public Task<EcfResponse> SendEcfAsync(Ecf44ECF ecf, PollingOptions? pollingOptions = null, CancellationToken cancellationToken = default)
+            => SendInternalAsync(
+                ecf.Encabezado?.Emisor?.RncEmisor,
+                ecf.Encabezado?.IdDoc?.Encf,
+                ct => Api.Ecf.FourFour.PostAsync(ecf, cancellationToken: ct),
+                pollingOptions,
+                cancellationToken);
+
+        /// <summary>Send a Gubernamental Electrónico (e-CF 45) and poll until completion.</summary>
+        public Task<EcfResponse> SendEcfAsync(Ecf45ECF ecf, PollingOptions? pollingOptions = null, CancellationToken cancellationToken = default)
+            => SendInternalAsync(
+                ecf.Encabezado?.Emisor?.RncEmisor,
+                ecf.Encabezado?.IdDoc?.Encf,
+                ct => Api.Ecf.FourFive.PostAsync(ecf, cancellationToken: ct),
+                pollingOptions,
+                cancellationToken);
+
+        /// <summary>Send a Comprobante de Exportaciones Electrónico (e-CF 46) and poll until completion.</summary>
+        public Task<EcfResponse> SendEcfAsync(Ecf46ECF ecf, PollingOptions? pollingOptions = null, CancellationToken cancellationToken = default)
+            => SendInternalAsync(
+                ecf.Encabezado?.Emisor?.RncEmisor,
+                ecf.Encabezado?.IdDoc?.Encf,
+                ct => Api.Ecf.FourSix.PostAsync(ecf, cancellationToken: ct),
+                pollingOptions,
+                cancellationToken);
+
+        /// <summary>Send a Comprobante para Pagos al Exterior Electrónico (e-CF 47) and poll until completion.</summary>
+        public Task<EcfResponse> SendEcfAsync(Ecf47ECF ecf, PollingOptions? pollingOptions = null, CancellationToken cancellationToken = default)
+            => SendInternalAsync(
+                ecf.Encabezado?.Emisor?.RncEmisor,
+                ecf.Encabezado?.IdDoc?.Encf,
+                ct => Api.Ecf.FourSeven.PostAsync(ecf, cancellationToken: ct),
+                pollingOptions,
+                cancellationToken);
+
+        private async Task<EcfResponse> SendInternalAsync(
+            string? rnc,
+            string? encf,
+            Func<CancellationToken, Task<EcfResponse?>> postCall,
+            PollingOptions? pollingOptions,
+            CancellationToken cancellationToken)
         {
-            var tipoeCF = ecf.Encabezado?.IdDoc?.TipoeCF
-                ?? throw new ArgumentException("ECF must have Encabezado.IdDoc.TipoeCF");
+            if (string.IsNullOrWhiteSpace(rnc))
+                throw new ArgumentException("ECF must have Encabezado.Emisor.RncEmisor");
+            if (string.IsNullOrWhiteSpace(encf))
+                throw new ArgumentException("ECF must have Encabezado.IdDoc.Encf");
 
-            string? route;
-            if (!EcfTypeRouteMap.TryGetValue(tipoeCF, out route))
-                throw new ArgumentException($"Unknown TipoeCF: {tipoeCF}");
-
-            var rnc = ecf.Encabezado?.Emisor?.RncEmisor
-                ?? throw new ArgumentException("ECF must have Encabezado.Emisor.RncEmisor");
-
-            var encf = ecf.Encabezado?.IdDoc?.Encf
-                ?? throw new ArgumentException("ECF must have Encabezado.IdDoc.Encf");
-
-            // POST to the typed endpoint
-            var postResponse = await PostEcfByRouteAsync(route, ecf, cancellationToken).ConfigureAwait(false);
+            var postResponse = await postCall(cancellationToken).ConfigureAwait(false);
 
             if (postResponse?.MessageId == null)
                 throw new InvalidOperationException("ECF submission did not return a message ID.");
 
-            // Poll until complete
             var result = await PollingHelper.PollUntilCompleteAsync(
                 async () =>
                 {
-                    var responses = await Api.Ecf[rnc][encf].GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var responses = await Api.Ecf[rnc!][encf!].GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                     if (responses == null || responses.Count == 0)
                         throw new InvalidOperationException("No ECF response found for the given rnc/encf.");
 
@@ -140,24 +199,6 @@ namespace EcfDgii.Client
             }
 
             return result;
-        }
-
-        private async Task<EcfResponse?> PostEcfByRouteAsync(string route, ECF ecf, CancellationToken cancellationToken)
-        {
-            switch (route)
-            {
-                case "31": return await Api.Ecf.ThreeOne.PostAsync(ecf, cancellationToken: cancellationToken).ConfigureAwait(false);
-                case "32": return await Api.Ecf.ThreeTwo.PostAsync(ecf, cancellationToken: cancellationToken).ConfigureAwait(false);
-                case "33": return await Api.Ecf.ThreeThree.PostAsync(ecf, cancellationToken: cancellationToken).ConfigureAwait(false);
-                case "34": return await Api.Ecf.ThreeFour.PostAsync(ecf, cancellationToken: cancellationToken).ConfigureAwait(false);
-                case "41": return await Api.Ecf.FourOne.PostAsync(ecf, cancellationToken: cancellationToken).ConfigureAwait(false);
-                case "43": return await Api.Ecf.FourThree.PostAsync(ecf, cancellationToken: cancellationToken).ConfigureAwait(false);
-                case "44": return await Api.Ecf.FourFour.PostAsync(ecf, cancellationToken: cancellationToken).ConfigureAwait(false);
-                case "45": return await Api.Ecf.FourFive.PostAsync(ecf, cancellationToken: cancellationToken).ConfigureAwait(false);
-                case "46": return await Api.Ecf.FourSix.PostAsync(ecf, cancellationToken: cancellationToken).ConfigureAwait(false);
-                case "47": return await Api.Ecf.FourSeven.PostAsync(ecf, cancellationToken: cancellationToken).ConfigureAwait(false);
-                default: throw new ArgumentException($"Unsupported ECF route: {route}");
-            }
         }
     }
 }

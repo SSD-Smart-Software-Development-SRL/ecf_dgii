@@ -9,27 +9,27 @@ namespace EcfDgii.Client.Generated.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class Emisor_provinciaMember1 : IAdditionalDataHolder, IParsable
+    public partial class Ecf33IdDoc_tipoIngresosMember1 : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Models.Emisor_provinciaMember1"/> and sets the default values.
+        /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Models.Ecf33IdDoc_tipoIngresosMember1"/> and sets the default values.
         /// </summary>
-        public Emisor_provinciaMember1()
+        public Ecf33IdDoc_tipoIngresosMember1()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.Emisor_provinciaMember1"/></returns>
+        /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.Ecf33IdDoc_tipoIngresosMember1"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::EcfDgii.Client.Generated.Models.Emisor_provinciaMember1 CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::EcfDgii.Client.Generated.Models.Ecf33IdDoc_tipoIngresosMember1 CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::EcfDgii.Client.Generated.Models.Emisor_provinciaMember1();
+            return new global::EcfDgii.Client.Generated.Models.Ecf33IdDoc_tipoIngresosMember1();
         }
         /// <summary>
         /// The deserialization information for the current model

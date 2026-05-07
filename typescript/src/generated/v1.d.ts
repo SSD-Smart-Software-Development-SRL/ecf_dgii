@@ -707,6 +707,11 @@ export interface components {
         CodificacionTipoImpuestosType: "001" | "002" | "003" | "004" | "005" | "006" | "007" | "008" | "009" | "010" | "011" | "012" | "013" | "014" | "015" | "016" | "017" | "018" | "019" | "020" | "021" | "022" | "023" | "024" | "025" | "026" | "027" | "028" | "029" | "030" | "031" | "032" | "033" | "034" | "035" | "036" | "037" | "038" | "039" | null;
         /** @enum {unknown} */
         CodigoModificacionType: "AnulaElNCFModificado" | "CorrigeTextoDelComprobanteFiscalModificado" | "CorrigeMontosDelNCFModificado" | "ReemplazoNCFEmitidoEnContingencia" | "ReferenciaFacturaConsumoElectronica" | null;
+        CompanyEnvironmentUrls: {
+            urlRecepcion?: string;
+            urlAprobacionComercial?: string;
+            urlAutenticacion?: string;
+        };
         CompanyResponse: {
             rnc?: string;
             legalName?: string;
@@ -720,9 +725,12 @@ export interface components {
             /** Format: uuid */
             tenantId?: string;
             receptorId?: string;
-            urlRecepcion?: null | string;
-            urlAprobacionComercial?: null | string;
-            urlAutenticacion?: null | string;
+            urls?: null | components["schemas"]["CompanyUrlsResponse"];
+        };
+        CompanyUrlsResponse: {
+            test?: null | components["schemas"]["CompanyEnvironmentUrls"];
+            cert?: null | components["schemas"]["CompanyEnvironmentUrls"];
+            prod?: null | components["schemas"]["CompanyEnvironmentUrls"];
         };
         DetalleAnulacionRequest: {
             tipoEcf: components["schemas"]["ECFType"];

@@ -68,29 +68,13 @@ namespace EcfDgii.Client.Generated.Models
 #endif
         /// <summary>The updatedOn property</summary>
         public DateTimeOffset? UpdatedOn { get; set; }
-        /// <summary>The urlAprobacionComercial property</summary>
+        /// <summary>The urls property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UrlAprobacionComercial { get; set; }
+        public global::EcfDgii.Client.Generated.Models.CompanyResponse.CompanyResponse_urls? Urls { get; set; }
 #nullable restore
 #else
-        public string UrlAprobacionComercial { get; set; }
-#endif
-        /// <summary>The urlAutenticacion property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? UrlAutenticacion { get; set; }
-#nullable restore
-#else
-        public string UrlAutenticacion { get; set; }
-#endif
-        /// <summary>The urlRecepcion property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? UrlRecepcion { get; set; }
-#nullable restore
-#else
-        public string UrlRecepcion { get; set; }
+        public global::EcfDgii.Client.Generated.Models.CompanyResponse.CompanyResponse_urls Urls { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::EcfDgii.Client.Generated.Models.CompanyResponse"/> and sets the default values.
@@ -126,9 +110,7 @@ namespace EcfDgii.Client.Generated.Models
                 { "tenantId", n => { TenantId = n.GetGuidValue(); } },
                 { "updatedBy", n => { UpdatedBy = n.GetStringValue(); } },
                 { "updatedOn", n => { UpdatedOn = n.GetDateTimeOffsetValue(); } },
-                { "urlAprobacionComercial", n => { UrlAprobacionComercial = n.GetStringValue(); } },
-                { "urlAutenticacion", n => { UrlAutenticacion = n.GetStringValue(); } },
-                { "urlRecepcion", n => { UrlRecepcion = n.GetStringValue(); } },
+                { "urls", n => { Urls = n.GetObjectValue<global::EcfDgii.Client.Generated.Models.CompanyResponse.CompanyResponse_urls>(global::EcfDgii.Client.Generated.Models.CompanyResponse.CompanyResponse_urls.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -147,10 +129,83 @@ namespace EcfDgii.Client.Generated.Models
             writer.WriteGuidValue("tenantId", TenantId);
             writer.WriteStringValue("updatedBy", UpdatedBy);
             writer.WriteDateTimeOffsetValue("updatedOn", UpdatedOn);
-            writer.WriteStringValue("urlAprobacionComercial", UrlAprobacionComercial);
-            writer.WriteStringValue("urlAutenticacion", UrlAutenticacion);
-            writer.WriteStringValue("urlRecepcion", UrlRecepcion);
+            writer.WriteObjectValue<global::EcfDgii.Client.Generated.Models.CompanyResponse.CompanyResponse_urls>("urls", Urls);
             writer.WriteAdditionalData(AdditionalData);
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="global::EcfDgii.Client.Generated.Models.CompanyResponse_urlsMember1"/>, <see cref="global::EcfDgii.Client.Generated.Models.CompanyUrlsResponse"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class CompanyResponse_urls : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="global::EcfDgii.Client.Generated.Models.CompanyResponse_urlsMember1"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::EcfDgii.Client.Generated.Models.CompanyResponse_urlsMember1? CompanyResponseUrlsMember1 { get; set; }
+#nullable restore
+#else
+            public global::EcfDgii.Client.Generated.Models.CompanyResponse_urlsMember1 CompanyResponseUrlsMember1 { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::EcfDgii.Client.Generated.Models.CompanyUrlsResponse"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::EcfDgii.Client.Generated.Models.CompanyUrlsResponse? CompanyUrlsResponse { get; set; }
+#nullable restore
+#else
+            public global::EcfDgii.Client.Generated.Models.CompanyUrlsResponse CompanyUrlsResponse { get; set; }
+#endif
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.CompanyResponse.CompanyResponse_urls"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::EcfDgii.Client.Generated.Models.CompanyResponse.CompanyResponse_urls CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::EcfDgii.Client.Generated.Models.CompanyResponse.CompanyResponse_urls();
+                if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.CompanyResponseUrlsMember1 = new global::EcfDgii.Client.Generated.Models.CompanyResponse_urlsMember1();
+                }
+                else if("CompanyUrlsResponse".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.CompanyUrlsResponse = new global::EcfDgii.Client.Generated.Models.CompanyUrlsResponse();
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                if(CompanyResponseUrlsMember1 != null)
+                {
+                    return CompanyResponseUrlsMember1.GetFieldDeserializers();
+                }
+                else if(CompanyUrlsResponse != null)
+                {
+                    return CompanyUrlsResponse.GetFieldDeserializers();
+                }
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(CompanyResponseUrlsMember1 != null)
+                {
+                    writer.WriteObjectValue<global::EcfDgii.Client.Generated.Models.CompanyResponse_urlsMember1>(null, CompanyResponseUrlsMember1);
+                }
+                else if(CompanyUrlsResponse != null)
+                {
+                    writer.WriteObjectValue<global::EcfDgii.Client.Generated.Models.CompanyUrlsResponse>(null, CompanyUrlsResponse);
+                }
+            }
         }
     }
 }

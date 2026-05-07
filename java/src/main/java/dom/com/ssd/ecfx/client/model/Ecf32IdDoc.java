@@ -60,7 +60,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Ecf32IdDoc
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Ecf32IdDoc {
   public static final String SERIALIZED_NAME_TIPOE_C_F = "tipoeCF";
   @SerializedName(SERIALIZED_NAME_TIPOE_C_F)
@@ -546,7 +546,7 @@ public class Ecf32IdDoc {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Ecf32IdDoc.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Ecf32IdDoc is not found in the empty JSON string", Ecf32IdDoc.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf32IdDoc is not found in the empty JSON string", Ecf32IdDoc.openapiRequiredFields.toString()));
         }
       }
 
@@ -554,21 +554,21 @@ public class Ecf32IdDoc {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Ecf32IdDoc.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Ecf32IdDoc` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf32IdDoc` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : Ecf32IdDoc.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `tipoeCF`
       TipoeCFType.validateJsonElement(jsonObj.get("tipoeCF"));
       if (!jsonObj.get("encf").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
       }
       // validate the optional field `indicadorEnvioDiferido`
       if (jsonObj.get("indicadorEnvioDiferido") != null && !jsonObj.get("indicadorEnvioDiferido").isJsonNull()) {
@@ -587,14 +587,14 @@ public class Ecf32IdDoc {
       // validate the required field `tipoPago`
       Ecf32TipoPagoType.validateJsonElement(jsonObj.get("tipoPago"));
       if ((jsonObj.get("terminoPago") != null && !jsonObj.get("terminoPago").isJsonNull()) && !jsonObj.get("terminoPago").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `terminoPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("terminoPago").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `terminoPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("terminoPago").toString()));
       }
       if (jsonObj.get("tablaFormasPago") != null && !jsonObj.get("tablaFormasPago").isJsonNull()) {
         JsonArray jsonArraytablaFormasPago = jsonObj.getAsJsonArray("tablaFormasPago");
         if (jsonArraytablaFormasPago != null) {
           // ensure the json data is an array
           if (!jsonObj.get("tablaFormasPago").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tablaFormasPago` to be an array in the JSON string but got `%s`", jsonObj.get("tablaFormasPago").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `tablaFormasPago` to be an array in the JSON string but got `%s`", jsonObj.get("tablaFormasPago").toString()));
           }
 
           // validate the optional field `tablaFormasPago` (array)
@@ -608,10 +608,10 @@ public class Ecf32IdDoc {
         TipoCuentaPagoType.validateJsonElement(jsonObj.get("tipoCuentaPago"));
       }
       if ((jsonObj.get("numeroCuentaPago") != null && !jsonObj.get("numeroCuentaPago").isJsonNull()) && !jsonObj.get("numeroCuentaPago").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `numeroCuentaPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("numeroCuentaPago").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `numeroCuentaPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("numeroCuentaPago").toString()));
       }
       if ((jsonObj.get("bancoPago") != null && !jsonObj.get("bancoPago").isJsonNull()) && !jsonObj.get("bancoPago").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `bancoPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("bancoPago").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `bancoPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("bancoPago").toString()));
       }
       // validate the optional field `totalPaginas`
       if (jsonObj.get("totalPaginas") != null && !jsonObj.get("totalPaginas").isJsonNull()) {

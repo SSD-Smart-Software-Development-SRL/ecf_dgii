@@ -13,7 +13,7 @@
 |**indicadorEnvioDiferido** | **IndicadorEnvioDiferidoType** |  |  [optional] |
 |**indicadorMontoGravado** | **IndicadorMontoGravadoType** |  |  [optional] |
 |**indicadorServicioTodoIncluido** | **IndicadorServicioTodoIncluidoType** |  |  [optional] |
-|**tipoIngresos** | **Ecf33TipoIngresosValidationType** |  |  |
+|**tipoIngresos** | **TipoIngresosValidationType** |  |  [optional] |
 |**tipoPago** | **Ecf33TipoPagoType** |  |  |
 |**fechaLimitePago** | **Date** |  |  [optional] |
 |**terminoPago** | **String** |  |  [optional] |

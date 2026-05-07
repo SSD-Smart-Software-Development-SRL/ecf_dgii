@@ -90,7 +90,9 @@ public class JSON {
         gsonBuilder.registerTypeAdapter(java.sql.Date.class, sqlDateTypeAdapter);
         gsonBuilder.registerTypeAdapter(byte[].class, byteArrayAdapter);
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDto.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.AcecfSummaryDto.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.AcecfSummaryDtoProgress.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.AcecfSummaryDtoReceptorHttpStatus.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.AnulacionListResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.AnulacionRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.CertificateResponse.CustomTypeAdapterFactory());
@@ -324,6 +326,10 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.Ecf47Totales.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.Ecf47Transporte.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.EcfReceptionRequestDto.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.EcfReceptionRequestDtoMontoTotal.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.EcfReceptorDto.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.EcfReceptorDtoEstado.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.EcfReceptorDtoProgress.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.EcfResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.GetCompaniesLimitParameter.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.GetCompaniesPageParameter.CustomTypeAdapterFactory());
@@ -346,6 +352,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.RespuestaConsultaTrackId.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.RespuestaEstatusServicio.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.RespuestaVentanaDeMantenimiento.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.SearchEcfsAmountFromParameter.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.SecuenciaRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.SecuenciaRequestDto.CustomTypeAdapterFactory());

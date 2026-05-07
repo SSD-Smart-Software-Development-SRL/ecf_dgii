@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**cantidaDeNcfAnulados** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  |
+|**cantidaDeNcfAnulados** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
 |**detalleAnulacion** | [**List&lt;DetalleAnulacionRequest&gt;**](DetalleAnulacionRequest.md) |  |  |
 
 

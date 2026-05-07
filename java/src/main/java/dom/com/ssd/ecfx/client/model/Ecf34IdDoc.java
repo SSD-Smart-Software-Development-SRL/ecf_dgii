@@ -19,13 +19,13 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress;
 import dom.com.ssd.ecfx.client.model.Ecf31IdDocTotalPaginas;
-import dom.com.ssd.ecfx.client.model.Ecf34TipoIngresosValidationType;
 import dom.com.ssd.ecfx.client.model.Ecf34TipoPagoType;
 import dom.com.ssd.ecfx.client.model.IndicadorEnvioDiferidoType;
 import dom.com.ssd.ecfx.client.model.IndicadorMontoGravadoType;
 import dom.com.ssd.ecfx.client.model.IndicadorServicioTodoIncluidoType;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
+import dom.com.ssd.ecfx.client.model.TipoIngresosValidationType;
 import dom.com.ssd.ecfx.client.model.TipoeCFType;
 import java.io.IOException;
 import java.util.Arrays;
@@ -57,7 +57,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Ecf34IdDoc
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Ecf34IdDoc {
   public static final String SERIALIZED_NAME_TIPOE_C_F = "tipoeCF";
   @SerializedName(SERIALIZED_NAME_TIPOE_C_F)
@@ -72,7 +72,7 @@ public class Ecf34IdDoc {
   public static final String SERIALIZED_NAME_INDICADOR_NOTA_CREDITO = "indicadorNotaCredito";
   @SerializedName(SERIALIZED_NAME_INDICADOR_NOTA_CREDITO)
   @javax.annotation.Nonnull
-  private AcecfReceptionRequestDtoProgress indicadorNotaCredito;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner indicadorNotaCredito;
 
   public static final String SERIALIZED_NAME_INDICADOR_ENVIO_DIFERIDO = "indicadorEnvioDiferido";
   @SerializedName(SERIALIZED_NAME_INDICADOR_ENVIO_DIFERIDO)
@@ -91,8 +91,8 @@ public class Ecf34IdDoc {
 
   public static final String SERIALIZED_NAME_TIPO_INGRESOS = "tipoIngresos";
   @SerializedName(SERIALIZED_NAME_TIPO_INGRESOS)
-  @javax.annotation.Nonnull
-  private Ecf34TipoIngresosValidationType tipoIngresos;
+  @javax.annotation.Nullable
+  private TipoIngresosValidationType tipoIngresos;
 
   public static final String SERIALIZED_NAME_TIPO_PAGO = "tipoPago";
   @SerializedName(SERIALIZED_NAME_TIPO_PAGO)
@@ -160,7 +160,7 @@ public class Ecf34IdDoc {
   }
 
 
-  public Ecf34IdDoc indicadorNotaCredito(@javax.annotation.Nonnull AcecfReceptionRequestDtoProgress indicadorNotaCredito) {
+  public Ecf34IdDoc indicadorNotaCredito(@javax.annotation.Nonnull SearchEcfReceptionRequestsTiposEcfsParameterInner indicadorNotaCredito) {
     this.indicadorNotaCredito = indicadorNotaCredito;
     return this;
   }
@@ -170,11 +170,11 @@ public class Ecf34IdDoc {
    * @return indicadorNotaCredito
    */
   @javax.annotation.Nonnull
-  public AcecfReceptionRequestDtoProgress getIndicadorNotaCredito() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getIndicadorNotaCredito() {
     return indicadorNotaCredito;
   }
 
-  public void setIndicadorNotaCredito(@javax.annotation.Nonnull AcecfReceptionRequestDtoProgress indicadorNotaCredito) {
+  public void setIndicadorNotaCredito(@javax.annotation.Nonnull SearchEcfReceptionRequestsTiposEcfsParameterInner indicadorNotaCredito) {
     this.indicadorNotaCredito = indicadorNotaCredito;
   }
 
@@ -236,7 +236,7 @@ public class Ecf34IdDoc {
   }
 
 
-  public Ecf34IdDoc tipoIngresos(@javax.annotation.Nonnull Ecf34TipoIngresosValidationType tipoIngresos) {
+  public Ecf34IdDoc tipoIngresos(@javax.annotation.Nullable TipoIngresosValidationType tipoIngresos) {
     this.tipoIngresos = tipoIngresos;
     return this;
   }
@@ -245,12 +245,12 @@ public class Ecf34IdDoc {
    * Get tipoIngresos
    * @return tipoIngresos
    */
-  @javax.annotation.Nonnull
-  public Ecf34TipoIngresosValidationType getTipoIngresos() {
+  @javax.annotation.Nullable
+  public TipoIngresosValidationType getTipoIngresos() {
     return tipoIngresos;
   }
 
-  public void setTipoIngresos(@javax.annotation.Nonnull Ecf34TipoIngresosValidationType tipoIngresos) {
+  public void setTipoIngresos(@javax.annotation.Nullable TipoIngresosValidationType tipoIngresos) {
     this.tipoIngresos = tipoIngresos;
   }
 
@@ -419,7 +419,7 @@ public class Ecf34IdDoc {
     openapiFields = new HashSet<String>(Arrays.asList("tipoeCF", "encf", "indicadorNotaCredito", "indicadorEnvioDiferido", "indicadorMontoGravado", "indicadorServicioTodoIncluido", "tipoIngresos", "tipoPago", "fechaLimitePago", "fechaDesde", "fechaHasta", "totalPaginas"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("tipoeCF", "encf", "indicadorNotaCredito", "tipoIngresos", "tipoPago"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("tipoeCF", "encf", "indicadorNotaCredito", "tipoPago"));
   }
 
   /**
@@ -431,7 +431,7 @@ public class Ecf34IdDoc {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Ecf34IdDoc.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Ecf34IdDoc is not found in the empty JSON string", Ecf34IdDoc.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf34IdDoc is not found in the empty JSON string", Ecf34IdDoc.openapiRequiredFields.toString()));
         }
       }
 
@@ -439,24 +439,24 @@ public class Ecf34IdDoc {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Ecf34IdDoc.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Ecf34IdDoc` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf34IdDoc` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : Ecf34IdDoc.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `tipoeCF`
       TipoeCFType.validateJsonElement(jsonObj.get("tipoeCF"));
       if (!jsonObj.get("encf").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
       }
       // validate the required field `indicadorNotaCredito`
-      AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("indicadorNotaCredito"));
+      SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("indicadorNotaCredito"));
       // validate the optional field `indicadorEnvioDiferido`
       if (jsonObj.get("indicadorEnvioDiferido") != null && !jsonObj.get("indicadorEnvioDiferido").isJsonNull()) {
         IndicadorEnvioDiferidoType.validateJsonElement(jsonObj.get("indicadorEnvioDiferido"));
@@ -469,8 +469,10 @@ public class Ecf34IdDoc {
       if (jsonObj.get("indicadorServicioTodoIncluido") != null && !jsonObj.get("indicadorServicioTodoIncluido").isJsonNull()) {
         IndicadorServicioTodoIncluidoType.validateJsonElement(jsonObj.get("indicadorServicioTodoIncluido"));
       }
-      // validate the required field `tipoIngresos`
-      Ecf34TipoIngresosValidationType.validateJsonElement(jsonObj.get("tipoIngresos"));
+      // validate the optional field `tipoIngresos`
+      if (jsonObj.get("tipoIngresos") != null && !jsonObj.get("tipoIngresos").isJsonNull()) {
+        TipoIngresosValidationType.validateJsonElement(jsonObj.get("tipoIngresos"));
+      }
       // validate the required field `tipoPago`
       Ecf34TipoPagoType.validateJsonElement(jsonObj.get("tipoPago"));
       // validate the optional field `totalPaginas`

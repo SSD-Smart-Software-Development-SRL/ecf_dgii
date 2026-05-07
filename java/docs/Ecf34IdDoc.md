@@ -9,11 +9,11 @@
 |------------ | ------------- | ------------- | -------------|
 |**tipoeCF** | **TipoeCFType** |  |  |
 |**encf** | **String** |  |  |
-|**indicadorNotaCredito** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  |
+|**indicadorNotaCredito** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
 |**indicadorEnvioDiferido** | **IndicadorEnvioDiferidoType** |  |  [optional] |
 |**indicadorMontoGravado** | **IndicadorMontoGravadoType** |  |  [optional] |
 |**indicadorServicioTodoIncluido** | **IndicadorServicioTodoIncluidoType** |  |  [optional] |
-|**tipoIngresos** | **Ecf34TipoIngresosValidationType** |  |  |
+|**tipoIngresos** | **TipoIngresosValidationType** |  |  [optional] |
 |**tipoPago** | **Ecf34TipoPagoType** |  |  |
 |**fechaLimitePago** | **Date** |  |  [optional] |
 |**fechaDesde** | **Date** |  |  [optional] |

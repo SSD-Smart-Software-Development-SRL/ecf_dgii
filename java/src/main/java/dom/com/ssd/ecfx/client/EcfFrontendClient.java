@@ -159,7 +159,7 @@ public class EcfFrontendClient {
      * @throws ApiException if the HTTP request fails
      */
     public PaginatedApiResultOfEcfResponse searchEcfs(String rnc) throws ApiException {
-        return searchEcfs(rnc, null, null, null, false, null, null, null, null, null, null);
+        return searchEcfs(rnc, null, null, null, false, null, null, null, null, null, null, null, null);
     }
 
     /**
@@ -174,6 +174,8 @@ public class EcfFrontendClient {
      * @param toFechaEmision    Filter to emission date (optional)
      * @param amountFrom        Filter by minimum amount (optional)
      * @param amountTo          Filter by maximum amount (optional)
+     * @param progresses        Filter by ECF processing progress (optional)
+     * @param dgiiEstados       Filter by DGII estado (optional)
      * @param page              Page number (optional, default 1)
      * @param limit             Page size (optional, default 25)
      * @return Paginated ECF responses
@@ -189,17 +191,19 @@ public class EcfFrontendClient {
             Date toFechaEmision,
             SearchEcfsAmountFromParameter amountFrom,
             SearchEcfsAmountFromParameter amountTo,
+            List<EcfProgress> progresses,
+            List<EcfEstado> dgiiEstados,
             GetCompaniesPageParameter page,
             GetCompaniesLimitParameter limit) throws ApiException {
         ensureToken();
         try {
             return ecfApi.searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent,
-                    fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit);
+                    fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit);
         } catch (ApiException e) {
             if (e.getCode() == 401) {
                 refreshToken();
                 return ecfApi.searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent,
-                        fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit);
+                        fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit);
             }
             throw e;
         }
@@ -216,6 +220,8 @@ public class EcfFrontendClient {
      * @param toFechaEmision    Filter to emission date (optional)
      * @param amountFrom        Filter by minimum amount (optional)
      * @param amountTo          Filter by maximum amount (optional)
+     * @param progresses        Filter by ECF processing progress (optional)
+     * @param dgiiEstados       Filter by DGII estado (optional)
      * @param page              Page number (optional, default 1)
      * @param limit             Page size (optional, default 25)
      * @return Paginated ECF responses
@@ -230,17 +236,19 @@ public class EcfFrontendClient {
             Date toFechaEmision,
             SearchEcfsAmountFromParameter amountFrom,
             SearchEcfsAmountFromParameter amountTo,
+            List<EcfProgress> progresses,
+            List<EcfEstado> dgiiEstados,
             GetCompaniesPageParameter page,
             GetCompaniesLimitParameter limit) throws ApiException {
         ensureToken();
         try {
             return ecfApi.searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent,
-                    fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit);
+                    fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit);
         } catch (ApiException e) {
             if (e.getCode() == 401) {
                 refreshToken();
                 return ecfApi.searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent,
-                        fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit);
+                        fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit);
             }
             throw e;
         }

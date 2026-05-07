@@ -27,11 +27,14 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import dom.com.ssd.ecfx.client.model.EcfReceptorDto;
 import dom.com.ssd.ecfx.client.model.GetCompaniesLimitParameter;
 import dom.com.ssd.ecfx.client.model.GetCompaniesPageParameter;
-import dom.com.ssd.ecfx.client.model.PaginatedApiResultOfAcecfReceptionRequestDto;
 import dom.com.ssd.ecfx.client.model.PaginatedApiResultOfEcfReceptionRequestDto;
 import dom.com.ssd.ecfx.client.model.ProblemDetails;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
+import dom.com.ssd.ecfx.client.model.SearchEcfsAmountFromParameter;
+import dom.com.ssd.ecfx.client.model.SendAcecfRequest;
 import java.util.UUID;
 
 import java.lang.reflect.Type;
@@ -78,153 +81,7 @@ public class RecepcionApi {
     }
 
     /**
-     * Build call for getAcecfReceptionRequest
-     * @param rnc  (required)
-     * @param messageId  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getAcecfReceptionRequestCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/recepcion/{rnc}/acecf/{messageId}"
-            .replace("{" + "rnc" + "}", localVarApiClient.escapeString(rnc.toString()))
-            .replace("{" + "messageId" + "}", localVarApiClient.escapeString(messageId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/problem+json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "Bearer" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call getAcecfReceptionRequestValidateBeforeCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'rnc' is set
-        if (rnc == null) {
-            throw new ApiException("Missing the required parameter 'rnc' when calling getAcecfReceptionRequest(Async)");
-        }
-
-        // verify the required parameter 'messageId' is set
-        if (messageId == null) {
-            throw new ApiException("Missing the required parameter 'messageId' when calling getAcecfReceptionRequest(Async)");
-        }
-
-        return getAcecfReceptionRequestCall(rnc, messageId, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param rnc  (required)
-     * @param messageId  (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public void getAcecfReceptionRequest(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId) throws ApiException {
-        getAcecfReceptionRequestWithHttpInfo(rnc, messageId);
-    }
-
-    /**
-     * 
-     * 
-     * @param rnc  (required)
-     * @param messageId  (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> getAcecfReceptionRequestWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId) throws ApiException {
-        okhttp3.Call localVarCall = getAcecfReceptionRequestValidateBeforeCall(rnc, messageId, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param rnc  (required)
-     * @param messageId  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call getAcecfReceptionRequestAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = getAcecfReceptionRequestValidateBeforeCall(rnc, messageId, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for getEcfReceptionRequest
-     * @param rnc  (required)
      * @param messageId  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -239,7 +96,7 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getEcfReceptionRequestCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getEcfReceptionRequestCall(@javax.annotation.Nonnull UUID messageId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -256,8 +113,7 @@ public class RecepcionApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/recepcion/{rnc}/ecf/{messageId}"
-            .replace("{" + "rnc" + "}", localVarApiClient.escapeString(rnc.toString()))
+        String localVarPath = "/recepcion/{messageId}"
             .replace("{" + "messageId" + "}", localVarApiClient.escapeString(messageId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -286,25 +142,19 @@ public class RecepcionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getEcfReceptionRequestValidateBeforeCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'rnc' is set
-        if (rnc == null) {
-            throw new ApiException("Missing the required parameter 'rnc' when calling getEcfReceptionRequest(Async)");
-        }
-
+    private okhttp3.Call getEcfReceptionRequestValidateBeforeCall(@javax.annotation.Nonnull UUID messageId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'messageId' is set
         if (messageId == null) {
             throw new ApiException("Missing the required parameter 'messageId' when calling getEcfReceptionRequest(Async)");
         }
 
-        return getEcfReceptionRequestCall(rnc, messageId, _callback);
+        return getEcfReceptionRequestCall(messageId, _callback);
 
     }
 
     /**
      * 
      * 
-     * @param rnc  (required)
      * @param messageId  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -317,14 +167,13 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public void getEcfReceptionRequest(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId) throws ApiException {
-        getEcfReceptionRequestWithHttpInfo(rnc, messageId);
+    public void getEcfReceptionRequest(@javax.annotation.Nonnull UUID messageId) throws ApiException {
+        getEcfReceptionRequestWithHttpInfo(messageId);
     }
 
     /**
      * 
      * 
-     * @param rnc  (required)
      * @param messageId  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -338,9 +187,157 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> getEcfReceptionRequestWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId) throws ApiException {
-        okhttp3.Call localVarCall = getEcfReceptionRequestValidateBeforeCall(rnc, messageId, null);
+    public ApiResponse<Void> getEcfReceptionRequestWithHttpInfo(@javax.annotation.Nonnull UUID messageId) throws ApiException {
+        okhttp3.Call localVarCall = getEcfReceptionRequestValidateBeforeCall(messageId, null);
         return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param messageId  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getEcfReceptionRequestAsync(@javax.annotation.Nonnull UUID messageId, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getEcfReceptionRequestValidateBeforeCall(messageId, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getEcfReceptorByMessageId
+     * @param rnc  (required)
+     * @param messageId  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getEcfReceptorByMessageIdCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/recepcion/{rnc}/{messageId}"
+            .replace("{" + "rnc" + "}", localVarApiClient.escapeString(rnc.toString()))
+            .replace("{" + "messageId" + "}", localVarApiClient.escapeString(messageId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json",
+            "application/problem+json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Bearer" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getEcfReceptorByMessageIdValidateBeforeCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'rnc' is set
+        if (rnc == null) {
+            throw new ApiException("Missing the required parameter 'rnc' when calling getEcfReceptorByMessageId(Async)");
+        }
+
+        // verify the required parameter 'messageId' is set
+        if (messageId == null) {
+            throw new ApiException("Missing the required parameter 'messageId' when calling getEcfReceptorByMessageId(Async)");
+        }
+
+        return getEcfReceptorByMessageIdCall(rnc, messageId, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param rnc  (required)
+     * @param messageId  (required)
+     * @return EcfReceptorDto
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+     </table>
+     */
+    public EcfReceptorDto getEcfReceptorByMessageId(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId) throws ApiException {
+        ApiResponse<EcfReceptorDto> localVarResp = getEcfReceptorByMessageIdWithHttpInfo(rnc, messageId);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param rnc  (required)
+     * @param messageId  (required)
+     * @return ApiResponse&lt;EcfReceptorDto&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EcfReceptorDto> getEcfReceptorByMessageIdWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId) throws ApiException {
+        okhttp3.Call localVarCall = getEcfReceptorByMessageIdValidateBeforeCall(rnc, messageId, null);
+        Type localVarReturnType = new TypeToken<EcfReceptorDto>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -361,343 +358,10 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getEcfReceptionRequestAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call getEcfReceptorByMessageIdAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull UUID messageId, final ApiCallback<EcfReceptorDto> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getEcfReceptionRequestValidateBeforeCall(rnc, messageId, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for searchAcecfReceptionRequests
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param rncs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call searchAcecfReceptionRequestsCall(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/recepcion/acecf";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (messageIds != null) {
-            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "MessageIds", messageIds));
-        }
-
-        if (encfs != null) {
-            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "Encfs", encfs));
-        }
-
-        if (rncs != null) {
-            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "Rncs", rncs));
-        }
-
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Page", page));
-        }
-
-        if (limit != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Limit", limit));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json",
-            "application/problem+json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "Bearer" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchAcecfReceptionRequestsValidateBeforeCall(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
-        return searchAcecfReceptionRequestsCall(messageIds, encfs, rncs, page, limit, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param rncs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @return PaginatedApiResultOfAcecfReceptionRequestDto
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public PaginatedApiResultOfAcecfReceptionRequestDto searchAcecfReceptionRequests(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto> localVarResp = searchAcecfReceptionRequestsWithHttpInfo(messageIds, encfs, rncs, page, limit);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param rncs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @return ApiResponse&lt;PaginatedApiResultOfAcecfReceptionRequestDto&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto> searchAcecfReceptionRequestsWithHttpInfo(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        okhttp3.Call localVarCall = searchAcecfReceptionRequestsValidateBeforeCall(messageIds, encfs, rncs, page, limit, null);
-        Type localVarReturnType = new TypeToken<PaginatedApiResultOfAcecfReceptionRequestDto>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param rncs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call searchAcecfReceptionRequestsAsync(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfAcecfReceptionRequestDto> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = searchAcecfReceptionRequestsValidateBeforeCall(messageIds, encfs, rncs, page, limit, _callback);
-        Type localVarReturnType = new TypeToken<PaginatedApiResultOfAcecfReceptionRequestDto>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for searchAcecfReceptionRequestsByRnc
-     * @param rnc  (required)
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call searchAcecfReceptionRequestsByRncCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/recepcion/{rnc}/acecf"
-            .replace("{" + "rnc" + "}", localVarApiClient.escapeString(rnc.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (messageIds != null) {
-            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "MessageIds", messageIds));
-        }
-
-        if (encfs != null) {
-            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "Encfs", encfs));
-        }
-
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Page", page));
-        }
-
-        if (limit != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Limit", limit));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json",
-            "application/problem+json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "Bearer" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchAcecfReceptionRequestsByRncValidateBeforeCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'rnc' is set
-        if (rnc == null) {
-            throw new ApiException("Missing the required parameter 'rnc' when calling searchAcecfReceptionRequestsByRnc(Async)");
-        }
-
-        return searchAcecfReceptionRequestsByRncCall(rnc, messageIds, encfs, page, limit, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param rnc  (required)
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @return PaginatedApiResultOfAcecfReceptionRequestDto
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public PaginatedApiResultOfAcecfReceptionRequestDto searchAcecfReceptionRequestsByRnc(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto> localVarResp = searchAcecfReceptionRequestsByRncWithHttpInfo(rnc, messageIds, encfs, page, limit);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param rnc  (required)
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @return ApiResponse&lt;PaginatedApiResultOfAcecfReceptionRequestDto&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto> searchAcecfReceptionRequestsByRncWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        okhttp3.Call localVarCall = searchAcecfReceptionRequestsByRncValidateBeforeCall(rnc, messageIds, encfs, page, limit, null);
-        Type localVarReturnType = new TypeToken<PaginatedApiResultOfAcecfReceptionRequestDto>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param rnc  (required)
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call searchAcecfReceptionRequestsByRncAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfAcecfReceptionRequestDto> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = searchAcecfReceptionRequestsByRncValidateBeforeCall(rnc, messageIds, encfs, page, limit, _callback);
-        Type localVarReturnType = new TypeToken<PaginatedApiResultOfAcecfReceptionRequestDto>(){}.getType();
+        okhttp3.Call localVarCall = getEcfReceptorByMessageIdValidateBeforeCall(rnc, messageId, _callback);
+        Type localVarReturnType = new TypeToken<EcfReceptorDto>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -706,6 +370,13 @@ public class RecepcionApi {
      * @param messageIds  (optional)
      * @param encfs  (optional)
      * @param rncs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback Callback for upload/download progress
@@ -720,7 +391,7 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchEcfReceptionRequestsCall(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchEcfReceptionRequestsCall(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -737,7 +408,7 @@ public class RecepcionApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/recepcion/ecf";
+        String localVarPath = "/recepcion";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -755,6 +426,34 @@ public class RecepcionApi {
 
         if (rncs != null) {
             localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "Rncs", rncs));
+        }
+
+        if (rncEmisors != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "RncEmisors", rncEmisors));
+        }
+
+        if (tiposEcfs != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "TiposEcfs", tiposEcfs));
+        }
+
+        if (progresses != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "Progresses", progresses));
+        }
+
+        if (fromDate != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("FromDate", fromDate));
+        }
+
+        if (toDate != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("ToDate", toDate));
+        }
+
+        if (amountFrom != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("AmountFrom", amountFrom));
+        }
+
+        if (amountTo != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("AmountTo", amountTo));
         }
 
         if (page != null) {
@@ -786,8 +485,8 @@ public class RecepcionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchEcfReceptionRequestsValidateBeforeCall(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
-        return searchEcfReceptionRequestsCall(messageIds, encfs, rncs, page, limit, _callback);
+    private okhttp3.Call searchEcfReceptionRequestsValidateBeforeCall(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+        return searchEcfReceptionRequestsCall(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, _callback);
 
     }
 
@@ -797,6 +496,13 @@ public class RecepcionApi {
      * @param messageIds  (optional)
      * @param encfs  (optional)
      * @param rncs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfReceptionRequestDto
@@ -810,8 +516,8 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequests(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> localVarResp = searchEcfReceptionRequestsWithHttpInfo(messageIds, encfs, rncs, page, limit);
+    public PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequests(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> localVarResp = searchEcfReceptionRequestsWithHttpInfo(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit);
         return localVarResp.getData();
     }
 
@@ -821,6 +527,13 @@ public class RecepcionApi {
      * @param messageIds  (optional)
      * @param encfs  (optional)
      * @param rncs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse&lt;PaginatedApiResultOfEcfReceptionRequestDto&gt;
@@ -834,8 +547,8 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> searchEcfReceptionRequestsWithHttpInfo(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        okhttp3.Call localVarCall = searchEcfReceptionRequestsValidateBeforeCall(messageIds, encfs, rncs, page, limit, null);
+    public ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> searchEcfReceptionRequestsWithHttpInfo(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        okhttp3.Call localVarCall = searchEcfReceptionRequestsValidateBeforeCall(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, null);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfReceptionRequestDto>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -846,6 +559,13 @@ public class RecepcionApi {
      * @param messageIds  (optional)
      * @param encfs  (optional)
      * @param rncs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback The callback to be executed when the API call finishes
@@ -860,9 +580,9 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchEcfReceptionRequestsAsync(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfReceptionRequestDto> _callback) throws ApiException {
+    public okhttp3.Call searchEcfReceptionRequestsAsync(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfReceptionRequestDto> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = searchEcfReceptionRequestsValidateBeforeCall(messageIds, encfs, rncs, page, limit, _callback);
+        okhttp3.Call localVarCall = searchEcfReceptionRequestsValidateBeforeCall(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, _callback);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfReceptionRequestDto>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -872,6 +592,13 @@ public class RecepcionApi {
      * @param rnc  (required)
      * @param messageIds  (optional)
      * @param encfs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback Callback for upload/download progress
@@ -886,7 +613,7 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchEcfReceptionRequestsByRncCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchEcfReceptionRequestsByRncCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -903,7 +630,7 @@ public class RecepcionApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/recepcion/{rnc}/ecf"
+        String localVarPath = "/recepcion/{rnc}"
             .replace("{" + "rnc" + "}", localVarApiClient.escapeString(rnc.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -918,6 +645,34 @@ public class RecepcionApi {
 
         if (encfs != null) {
             localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "Encfs", encfs));
+        }
+
+        if (rncEmisors != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "RncEmisors", rncEmisors));
+        }
+
+        if (tiposEcfs != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "TiposEcfs", tiposEcfs));
+        }
+
+        if (progresses != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "Progresses", progresses));
+        }
+
+        if (fromDate != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("FromDate", fromDate));
+        }
+
+        if (toDate != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("ToDate", toDate));
+        }
+
+        if (amountFrom != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("AmountFrom", amountFrom));
+        }
+
+        if (amountTo != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("AmountTo", amountTo));
         }
 
         if (page != null) {
@@ -949,13 +704,13 @@ public class RecepcionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchEcfReceptionRequestsByRncValidateBeforeCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchEcfReceptionRequestsByRncValidateBeforeCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'rnc' is set
         if (rnc == null) {
             throw new ApiException("Missing the required parameter 'rnc' when calling searchEcfReceptionRequestsByRnc(Async)");
         }
 
-        return searchEcfReceptionRequestsByRncCall(rnc, messageIds, encfs, page, limit, _callback);
+        return searchEcfReceptionRequestsByRncCall(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, _callback);
 
     }
 
@@ -965,6 +720,13 @@ public class RecepcionApi {
      * @param rnc  (required)
      * @param messageIds  (optional)
      * @param encfs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfReceptionRequestDto
@@ -978,8 +740,8 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequestsByRnc(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> localVarResp = searchEcfReceptionRequestsByRncWithHttpInfo(rnc, messageIds, encfs, page, limit);
+    public PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequestsByRnc(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> localVarResp = searchEcfReceptionRequestsByRncWithHttpInfo(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit);
         return localVarResp.getData();
     }
 
@@ -989,6 +751,13 @@ public class RecepcionApi {
      * @param rnc  (required)
      * @param messageIds  (optional)
      * @param encfs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse&lt;PaginatedApiResultOfEcfReceptionRequestDto&gt;
@@ -1002,8 +771,8 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> searchEcfReceptionRequestsByRncWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        okhttp3.Call localVarCall = searchEcfReceptionRequestsByRncValidateBeforeCall(rnc, messageIds, encfs, page, limit, null);
+    public ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> searchEcfReceptionRequestsByRncWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        okhttp3.Call localVarCall = searchEcfReceptionRequestsByRncValidateBeforeCall(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, null);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfReceptionRequestDto>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1014,6 +783,13 @@ public class RecepcionApi {
      * @param rnc  (required)
      * @param messageIds  (optional)
      * @param encfs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback The callback to be executed when the API call finishes
@@ -1028,11 +804,164 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchEcfReceptionRequestsByRncAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfReceptionRequestDto> _callback) throws ApiException {
+    public okhttp3.Call searchEcfReceptionRequestsByRncAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfReceptionRequestDto> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = searchEcfReceptionRequestsByRncValidateBeforeCall(rnc, messageIds, encfs, page, limit, _callback);
+        okhttp3.Call localVarCall = searchEcfReceptionRequestsByRncValidateBeforeCall(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, _callback);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfReceptionRequestDto>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for sendAprobacionComercial
+     * @param messageId  (required)
+     * @param sendAcecfRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call sendAprobacionComercialCall(@javax.annotation.Nonnull UUID messageId, @javax.annotation.Nonnull SendAcecfRequest sendAcecfRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = sendAcecfRequest;
+
+        // create path and map variables
+        String localVarPath = "/recepcion/{messageId}/acecf"
+            .replace("{" + "messageId" + "}", localVarApiClient.escapeString(messageId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/problem+json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Bearer" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call sendAprobacionComercialValidateBeforeCall(@javax.annotation.Nonnull UUID messageId, @javax.annotation.Nonnull SendAcecfRequest sendAcecfRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'messageId' is set
+        if (messageId == null) {
+            throw new ApiException("Missing the required parameter 'messageId' when calling sendAprobacionComercial(Async)");
+        }
+
+        // verify the required parameter 'sendAcecfRequest' is set
+        if (sendAcecfRequest == null) {
+            throw new ApiException("Missing the required parameter 'sendAcecfRequest' when calling sendAprobacionComercial(Async)");
+        }
+
+        return sendAprobacionComercialCall(messageId, sendAcecfRequest, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param messageId  (required)
+     * @param sendAcecfRequest  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public void sendAprobacionComercial(@javax.annotation.Nonnull UUID messageId, @javax.annotation.Nonnull SendAcecfRequest sendAcecfRequest) throws ApiException {
+        sendAprobacionComercialWithHttpInfo(messageId, sendAcecfRequest);
+    }
+
+    /**
+     * 
+     * 
+     * @param messageId  (required)
+     * @param sendAcecfRequest  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> sendAprobacionComercialWithHttpInfo(@javax.annotation.Nonnull UUID messageId, @javax.annotation.Nonnull SendAcecfRequest sendAcecfRequest) throws ApiException {
+        okhttp3.Call localVarCall = sendAprobacionComercialValidateBeforeCall(messageId, sendAcecfRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param messageId  (required)
+     * @param sendAcecfRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call sendAprobacionComercialAsync(@javax.annotation.Nonnull UUID messageId, @javax.annotation.Nonnull SendAcecfRequest sendAcecfRequest, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = sendAprobacionComercialValidateBeforeCall(messageId, sendAcecfRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
 }

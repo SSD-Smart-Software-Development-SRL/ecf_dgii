@@ -50,7 +50,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Ecf41Subtotal
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Ecf41Subtotal {
   public static final String SERIALIZED_NAME_NUMERO_SUB_TOTAL = "numeroSubTotal";
   @SerializedName(SERIALIZED_NAME_NUMERO_SUB_TOTAL)
@@ -502,7 +502,7 @@ public class Ecf41Subtotal {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Ecf41Subtotal.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Ecf41Subtotal is not found in the empty JSON string", Ecf41Subtotal.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf41Subtotal is not found in the empty JSON string", Ecf41Subtotal.openapiRequiredFields.toString()));
         }
       }
 
@@ -510,7 +510,7 @@ public class Ecf41Subtotal {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Ecf41Subtotal.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Ecf41Subtotal` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf41Subtotal` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -519,7 +519,7 @@ public class Ecf41Subtotal {
         Ecf31IdDocTotalPaginas.validateJsonElement(jsonObj.get("numeroSubTotal"));
       }
       if ((jsonObj.get("descripcionSubtotal") != null && !jsonObj.get("descripcionSubtotal").isJsonNull()) && !jsonObj.get("descripcionSubtotal").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `descripcionSubtotal` to be a primitive type in the JSON string but got `%s`", jsonObj.get("descripcionSubtotal").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `descripcionSubtotal` to be a primitive type in the JSON string but got `%s`", jsonObj.get("descripcionSubtotal").toString()));
       }
       // validate the optional field `orden`
       if (jsonObj.get("orden") != null && !jsonObj.get("orden").isJsonNull()) {

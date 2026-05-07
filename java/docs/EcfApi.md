@@ -5,7 +5,6 @@ All URIs are relative to *https://api.test.ecfx.ssd.com.do*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**anulacionRangos**](EcfApi.md#anulacionRangos) | **POST** /ecf/anularrango/{rnc} |  |
-| [**aprobacionComercial**](EcfApi.md#aprobacionComercial) | **POST** /ecf/aprobacioncomercial/{rnc}/{encf} |  |
 | [**firmarSemilla**](EcfApi.md#firmarSemilla) | **POST** /ecf/FirmarSemilla/{rnc} |  |
 | [**getEcfById**](EcfApi.md#getEcfById) | **GET** /ecf/{rnc}/message/{id} |  |
 | [**listAnulaciones**](EcfApi.md#listAnulaciones) | **GET** /ecf/anulaciones |  |
@@ -93,79 +92,6 @@ public class Example {
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
-| **500** | Internal Server Error |  -  |
-
-<a id="aprobacionComercial"></a>
-# **aprobacionComercial**
-> aprobacionComercial(rnc, encf, sendAcecfRequest)
-
-
-
-### Example
-```java
-// Import classes:
-import dom.com.ssd.ecfx.client.ApiClient;
-import dom.com.ssd.ecfx.client.ApiException;
-import dom.com.ssd.ecfx.client.Configuration;
-import dom.com.ssd.ecfx.client.auth.*;
-import dom.com.ssd.ecfx.client.models.*;
-import dom.com.ssd.ecfx.client.api.EcfApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.test.ecfx.ssd.com.do");
-    
-    // Configure HTTP bearer authorization: Bearer
-    HttpBearerAuth Bearer = (HttpBearerAuth) defaultClient.getAuthentication("Bearer");
-    Bearer.setBearerToken("BEARER TOKEN");
-
-    EcfApi apiInstance = new EcfApi(defaultClient);
-    String rnc = "rnc_example"; // String | 
-    String encf = "encf_example"; // String | 
-    SendAcecfRequest sendAcecfRequest = new SendAcecfRequest(); // SendAcecfRequest | 
-    try {
-      apiInstance.aprobacionComercial(rnc, encf, sendAcecfRequest);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling EcfApi#aprobacionComercial");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **rnc** | **String**|  | |
-| **encf** | **String**|  | |
-| **sendAcecfRequest** | [**SendAcecfRequest**](SendAcecfRequest.md)|  | |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/problem+json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **400** | Bad Request |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **404** | Not Found |  -  |
 | **500** | Internal Server Error |  -  |
 
 <a id="firmarSemilla"></a>
@@ -1149,7 +1075,7 @@ public class Example {
 
 <a id="searchAllEcfs"></a>
 # **searchAllEcfs**
-> PaginatedApiResultOfEcfResponse searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit)
+> PaginatedApiResultOfEcfResponse searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit)
 
 
 
@@ -1181,10 +1107,12 @@ public class Example {
     Date toFechaEmision = new Date(); // Date | 
     SearchEcfsAmountFromParameter amountFrom = new SearchEcfsAmountFromParameter(); // SearchEcfsAmountFromParameter | 
     SearchEcfsAmountFromParameter amountTo = new SearchEcfsAmountFromParameter(); // SearchEcfsAmountFromParameter | 
+    List<EcfProgress> progresses = Arrays.asList(); // List<EcfProgress> | 
+    List<EcfEstado> dgiiEstados = Arrays.asList(); // List<EcfEstado> | 
     GetCompaniesPageParameter page = new GetCompaniesPageParameter(); // GetCompaniesPageParameter | 
     GetCompaniesLimitParameter limit = new GetCompaniesLimitParameter(); // GetCompaniesLimitParameter | 
     try {
-      PaginatedApiResultOfEcfResponse result = apiInstance.searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit);
+      PaginatedApiResultOfEcfResponse result = apiInstance.searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#searchAllEcfs");
@@ -1209,6 +1137,8 @@ public class Example {
 | **toFechaEmision** | **Date**|  | [optional] |
 | **amountFrom** | **SearchEcfsAmountFromParameter**|  | [optional] |
 | **amountTo** | **SearchEcfsAmountFromParameter**|  | [optional] |
+| **progresses** | [**List&lt;EcfProgress&gt;**](EcfProgress.md)|  | [optional] |
+| **dgiiEstados** | [**List&lt;EcfEstado&gt;**](EcfEstado.md)|  | [optional] |
 | **page** | **GetCompaniesPageParameter**|  | [optional] [default to 1] |
 | **limit** | **GetCompaniesLimitParameter**|  | [optional] [default to 25] |
 
@@ -1236,7 +1166,7 @@ public class Example {
 
 <a id="searchEcfs"></a>
 # **searchEcfs**
-> PaginatedApiResultOfEcfResponse searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit)
+> PaginatedApiResultOfEcfResponse searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit)
 
 
 
@@ -1269,10 +1199,12 @@ public class Example {
     Date toFechaEmision = new Date(); // Date | 
     SearchEcfsAmountFromParameter amountFrom = new SearchEcfsAmountFromParameter(); // SearchEcfsAmountFromParameter | 
     SearchEcfsAmountFromParameter amountTo = new SearchEcfsAmountFromParameter(); // SearchEcfsAmountFromParameter | 
+    List<EcfProgress> progresses = Arrays.asList(); // List<EcfProgress> | 
+    List<EcfEstado> dgiiEstados = Arrays.asList(); // List<EcfEstado> | 
     GetCompaniesPageParameter page = new GetCompaniesPageParameter(); // GetCompaniesPageParameter | 
     GetCompaniesLimitParameter limit = new GetCompaniesLimitParameter(); // GetCompaniesLimitParameter | 
     try {
-      PaginatedApiResultOfEcfResponse result = apiInstance.searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit);
+      PaginatedApiResultOfEcfResponse result = apiInstance.searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcfApi#searchEcfs");
@@ -1298,6 +1230,8 @@ public class Example {
 | **toFechaEmision** | **Date**|  | [optional] |
 | **amountFrom** | **SearchEcfsAmountFromParameter**|  | [optional] |
 | **amountTo** | **SearchEcfsAmountFromParameter**|  | [optional] |
+| **progresses** | [**List&lt;EcfProgress&gt;**](EcfProgress.md)|  | [optional] |
+| **dgiiEstados** | [**List&lt;EcfEstado&gt;**](EcfEstado.md)|  | [optional] |
 | **page** | **GetCompaniesPageParameter**|  | [optional] [default to 1] |
 | **limit** | **GetCompaniesLimitParameter**|  | [optional] [default to 25] |
 

@@ -50,7 +50,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * CompanyResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class CompanyResponse {
   public static final String SERIALIZED_NAME_RNC = "rnc";
   @SerializedName(SERIALIZED_NAME_RNC)
@@ -96,6 +96,21 @@ public class CompanyResponse {
   @SerializedName(SERIALIZED_NAME_RECEPTOR_ID)
   @javax.annotation.Nullable
   private String receptorId;
+
+  public static final String SERIALIZED_NAME_URL_RECEPCION = "urlRecepcion";
+  @SerializedName(SERIALIZED_NAME_URL_RECEPCION)
+  @javax.annotation.Nullable
+  private String urlRecepcion;
+
+  public static final String SERIALIZED_NAME_URL_APROBACION_COMERCIAL = "urlAprobacionComercial";
+  @SerializedName(SERIALIZED_NAME_URL_APROBACION_COMERCIAL)
+  @javax.annotation.Nullable
+  private String urlAprobacionComercial;
+
+  public static final String SERIALIZED_NAME_URL_AUTENTICACION = "urlAutenticacion";
+  @SerializedName(SERIALIZED_NAME_URL_AUTENTICACION)
+  @javax.annotation.Nullable
+  private String urlAutenticacion;
 
   public CompanyResponse() {
   }
@@ -271,6 +286,63 @@ public class CompanyResponse {
   }
 
 
+  public CompanyResponse urlRecepcion(@javax.annotation.Nullable String urlRecepcion) {
+    this.urlRecepcion = urlRecepcion;
+    return this;
+  }
+
+  /**
+   * Get urlRecepcion
+   * @return urlRecepcion
+   */
+  @javax.annotation.Nullable
+  public String getUrlRecepcion() {
+    return urlRecepcion;
+  }
+
+  public void setUrlRecepcion(@javax.annotation.Nullable String urlRecepcion) {
+    this.urlRecepcion = urlRecepcion;
+  }
+
+
+  public CompanyResponse urlAprobacionComercial(@javax.annotation.Nullable String urlAprobacionComercial) {
+    this.urlAprobacionComercial = urlAprobacionComercial;
+    return this;
+  }
+
+  /**
+   * Get urlAprobacionComercial
+   * @return urlAprobacionComercial
+   */
+  @javax.annotation.Nullable
+  public String getUrlAprobacionComercial() {
+    return urlAprobacionComercial;
+  }
+
+  public void setUrlAprobacionComercial(@javax.annotation.Nullable String urlAprobacionComercial) {
+    this.urlAprobacionComercial = urlAprobacionComercial;
+  }
+
+
+  public CompanyResponse urlAutenticacion(@javax.annotation.Nullable String urlAutenticacion) {
+    this.urlAutenticacion = urlAutenticacion;
+    return this;
+  }
+
+  /**
+   * Get urlAutenticacion
+   * @return urlAutenticacion
+   */
+  @javax.annotation.Nullable
+  public String getUrlAutenticacion() {
+    return urlAutenticacion;
+  }
+
+  public void setUrlAutenticacion(@javax.annotation.Nullable String urlAutenticacion) {
+    this.urlAutenticacion = urlAutenticacion;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -289,12 +361,15 @@ public class CompanyResponse {
         Objects.equals(this.createdBy, companyResponse.createdBy) &&
         Objects.equals(this.updatedBy, companyResponse.updatedBy) &&
         Objects.equals(this.tenantId, companyResponse.tenantId) &&
-        Objects.equals(this.receptorId, companyResponse.receptorId);
+        Objects.equals(this.receptorId, companyResponse.receptorId) &&
+        Objects.equals(this.urlRecepcion, companyResponse.urlRecepcion) &&
+        Objects.equals(this.urlAprobacionComercial, companyResponse.urlAprobacionComercial) &&
+        Objects.equals(this.urlAutenticacion, companyResponse.urlAutenticacion);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(rnc, legalName, name, createdOn, updatedOn, createdBy, updatedBy, tenantId, receptorId);
+    return Objects.hash(rnc, legalName, name, createdOn, updatedOn, createdBy, updatedBy, tenantId, receptorId, urlRecepcion, urlAprobacionComercial, urlAutenticacion);
   }
 
   @Override
@@ -310,6 +385,9 @@ public class CompanyResponse {
     sb.append("    updatedBy: ").append(toIndentedString(updatedBy)).append("\n");
     sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    receptorId: ").append(toIndentedString(receptorId)).append("\n");
+    sb.append("    urlRecepcion: ").append(toIndentedString(urlRecepcion)).append("\n");
+    sb.append("    urlAprobacionComercial: ").append(toIndentedString(urlAprobacionComercial)).append("\n");
+    sb.append("    urlAutenticacion: ").append(toIndentedString(urlAutenticacion)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -331,7 +409,7 @@ public class CompanyResponse {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("rnc", "legalName", "name", "createdOn", "updatedOn", "createdBy", "updatedBy", "tenantId", "receptorId"));
+    openapiFields = new HashSet<String>(Arrays.asList("rnc", "legalName", "name", "createdOn", "updatedOn", "createdBy", "updatedBy", "tenantId", "receptorId", "urlRecepcion", "urlAprobacionComercial", "urlAutenticacion"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(0);
@@ -346,7 +424,7 @@ public class CompanyResponse {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!CompanyResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in CompanyResponse is not found in the empty JSON string", CompanyResponse.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in CompanyResponse is not found in the empty JSON string", CompanyResponse.openapiRequiredFields.toString()));
         }
       }
 
@@ -354,30 +432,39 @@ public class CompanyResponse {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!CompanyResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `CompanyResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CompanyResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("rnc") != null && !jsonObj.get("rnc").isJsonNull()) && !jsonObj.get("rnc").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
       }
       if ((jsonObj.get("legalName") != null && !jsonObj.get("legalName").isJsonNull()) && !jsonObj.get("legalName").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `legalName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("legalName").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `legalName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("legalName").toString()));
       }
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
       if ((jsonObj.get("createdBy") != null && !jsonObj.get("createdBy").isJsonNull()) && !jsonObj.get("createdBy").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `createdBy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("createdBy").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `createdBy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("createdBy").toString()));
       }
       if ((jsonObj.get("updatedBy") != null && !jsonObj.get("updatedBy").isJsonNull()) && !jsonObj.get("updatedBy").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `updatedBy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("updatedBy").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `updatedBy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("updatedBy").toString()));
       }
       if ((jsonObj.get("tenantId") != null && !jsonObj.get("tenantId").isJsonNull()) && !jsonObj.get("tenantId").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tenantId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenantId").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `tenantId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenantId").toString()));
       }
       if ((jsonObj.get("receptorId") != null && !jsonObj.get("receptorId").isJsonNull()) && !jsonObj.get("receptorId").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `receptorId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("receptorId").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `receptorId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("receptorId").toString()));
+      }
+      if ((jsonObj.get("urlRecepcion") != null && !jsonObj.get("urlRecepcion").isJsonNull()) && !jsonObj.get("urlRecepcion").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `urlRecepcion` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlRecepcion").toString()));
+      }
+      if ((jsonObj.get("urlAprobacionComercial") != null && !jsonObj.get("urlAprobacionComercial").isJsonNull()) && !jsonObj.get("urlAprobacionComercial").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `urlAprobacionComercial` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlAprobacionComercial").toString()));
+      }
+      if ((jsonObj.get("urlAutenticacion") != null && !jsonObj.get("urlAutenticacion").isJsonNull()) && !jsonObj.get("urlAutenticacion").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `urlAutenticacion` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlAutenticacion").toString()));
       }
   }
 

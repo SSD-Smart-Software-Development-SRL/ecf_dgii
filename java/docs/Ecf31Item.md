@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**numeroLinea** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  |
+|**numeroLinea** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
 |**tablaCodigosItem** | [**List&lt;Ecf31CodigosItem&gt;**](Ecf31CodigosItem.md) |  |  [optional] |
 |**indicadorFacturacion** | **Ecf31IndicadorFacturacionType** |  |  |
 |**retencion** | [**Ecf31Retencion**](Ecf31Retencion.md) |  |  [optional] |

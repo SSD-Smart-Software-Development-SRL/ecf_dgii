@@ -19,7 +19,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress;
 import dom.com.ssd.ecfx.client.model.Ecf31DescuentoORecargoMontoDescuentooRecargo;
 import dom.com.ssd.ecfx.client.model.Ecf31FormaDePagoMontoPago;
 import dom.com.ssd.ecfx.client.model.Ecf31ItemCantidadItem;
@@ -31,6 +30,7 @@ import dom.com.ssd.ecfx.client.model.Ecf44IndicadorFacturacionType;
 import dom.com.ssd.ecfx.client.model.Ecf44OtraMonedaDetalle;
 import dom.com.ssd.ecfx.client.model.Ecf44SubDescuento;
 import dom.com.ssd.ecfx.client.model.Ecf44SubRecargo;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
 import dom.com.ssd.ecfx.client.model.UnidadMedidaType;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,12 +64,12 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Ecf44Item
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Ecf44Item {
   public static final String SERIALIZED_NAME_NUMERO_LINEA = "numeroLinea";
   @SerializedName(SERIALIZED_NAME_NUMERO_LINEA)
   @javax.annotation.Nonnull
-  private AcecfReceptionRequestDtoProgress numeroLinea;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner numeroLinea;
 
   public static final String SERIALIZED_NAME_TABLA_CODIGOS_ITEM = "tablaCodigosItem";
   @SerializedName(SERIALIZED_NAME_TABLA_CODIGOS_ITEM)
@@ -159,7 +159,7 @@ public class Ecf44Item {
   public Ecf44Item() {
   }
 
-  public Ecf44Item numeroLinea(@javax.annotation.Nonnull AcecfReceptionRequestDtoProgress numeroLinea) {
+  public Ecf44Item numeroLinea(@javax.annotation.Nonnull SearchEcfReceptionRequestsTiposEcfsParameterInner numeroLinea) {
     this.numeroLinea = numeroLinea;
     return this;
   }
@@ -169,11 +169,11 @@ public class Ecf44Item {
    * @return numeroLinea
    */
   @javax.annotation.Nonnull
-  public AcecfReceptionRequestDtoProgress getNumeroLinea() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getNumeroLinea() {
     return numeroLinea;
   }
 
-  public void setNumeroLinea(@javax.annotation.Nonnull AcecfReceptionRequestDtoProgress numeroLinea) {
+  public void setNumeroLinea(@javax.annotation.Nonnull SearchEcfReceptionRequestsTiposEcfsParameterInner numeroLinea) {
     this.numeroLinea = numeroLinea;
   }
 
@@ -626,7 +626,7 @@ public class Ecf44Item {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Ecf44Item.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Ecf44Item is not found in the empty JSON string", Ecf44Item.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf44Item is not found in the empty JSON string", Ecf44Item.openapiRequiredFields.toString()));
         }
       }
 
@@ -634,25 +634,25 @@ public class Ecf44Item {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Ecf44Item.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Ecf44Item` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf44Item` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : Ecf44Item.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `numeroLinea`
-      AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("numeroLinea"));
+      SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("numeroLinea"));
       if (jsonObj.get("tablaCodigosItem") != null && !jsonObj.get("tablaCodigosItem").isJsonNull()) {
         JsonArray jsonArraytablaCodigosItem = jsonObj.getAsJsonArray("tablaCodigosItem");
         if (jsonArraytablaCodigosItem != null) {
           // ensure the json data is an array
           if (!jsonObj.get("tablaCodigosItem").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tablaCodigosItem` to be an array in the JSON string but got `%s`", jsonObj.get("tablaCodigosItem").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `tablaCodigosItem` to be an array in the JSON string but got `%s`", jsonObj.get("tablaCodigosItem").toString()));
           }
 
           // validate the optional field `tablaCodigosItem` (array)
@@ -664,12 +664,12 @@ public class Ecf44Item {
       // validate the required field `indicadorFacturacion`
       Ecf44IndicadorFacturacionType.validateJsonElement(jsonObj.get("indicadorFacturacion"));
       if (!jsonObj.get("nombreItem").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `nombreItem` to be a primitive type in the JSON string but got `%s`", jsonObj.get("nombreItem").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `nombreItem` to be a primitive type in the JSON string but got `%s`", jsonObj.get("nombreItem").toString()));
       }
       // validate the required field `indicadorBienoServicio`
       Ecf44IndicadorBienoServicioType.validateJsonElement(jsonObj.get("indicadorBienoServicio"));
       if ((jsonObj.get("descripcionItem") != null && !jsonObj.get("descripcionItem").isJsonNull()) && !jsonObj.get("descripcionItem").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `descripcionItem` to be a primitive type in the JSON string but got `%s`", jsonObj.get("descripcionItem").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `descripcionItem` to be a primitive type in the JSON string but got `%s`", jsonObj.get("descripcionItem").toString()));
       }
       // validate the required field `cantidadItem`
       Ecf31ItemCantidadItem.validateJsonElement(jsonObj.get("cantidadItem"));
@@ -688,7 +688,7 @@ public class Ecf44Item {
         if (jsonArraytablaSubDescuento != null) {
           // ensure the json data is an array
           if (!jsonObj.get("tablaSubDescuento").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tablaSubDescuento` to be an array in the JSON string but got `%s`", jsonObj.get("tablaSubDescuento").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `tablaSubDescuento` to be an array in the JSON string but got `%s`", jsonObj.get("tablaSubDescuento").toString()));
           }
 
           // validate the optional field `tablaSubDescuento` (array)
@@ -706,7 +706,7 @@ public class Ecf44Item {
         if (jsonArraytablaSubRecargo != null) {
           // ensure the json data is an array
           if (!jsonObj.get("tablaSubRecargo").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tablaSubRecargo` to be an array in the JSON string but got `%s`", jsonObj.get("tablaSubRecargo").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `tablaSubRecargo` to be an array in the JSON string but got `%s`", jsonObj.get("tablaSubRecargo").toString()));
           }
 
           // validate the optional field `tablaSubRecargo` (array)
@@ -720,7 +720,7 @@ public class Ecf44Item {
         if (jsonArraytablaImpuestoAdicional != null) {
           // ensure the json data is an array
           if (!jsonObj.get("tablaImpuestoAdicional").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tablaImpuestoAdicional` to be an array in the JSON string but got `%s`", jsonObj.get("tablaImpuestoAdicional").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `tablaImpuestoAdicional` to be an array in the JSON string but got `%s`", jsonObj.get("tablaImpuestoAdicional").toString()));
           }
 
           // validate the optional field `tablaImpuestoAdicional` (array)

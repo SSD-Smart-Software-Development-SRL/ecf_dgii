@@ -46,19 +46,67 @@ public class UpsertCompanyRequestTest {
     }
 
     /**
-     * Test the property 'legalName'
-     */
-    @Test
-    public void legalNameTest() {
-        // TODO: test legalName
-    }
-
-    /**
      * Test the property 'name'
      */
     @Test
     public void nameTest() {
         // TODO: test name
+    }
+
+    /**
+     * Test the property 'employeeCount'
+     */
+    @Test
+    public void employeeCountTest() {
+        // TODO: test employeeCount
+    }
+
+    /**
+     * Test the property 'estimatedInvoices'
+     */
+    @Test
+    public void estimatedInvoicesTest() {
+        // TODO: test estimatedInvoices
+    }
+
+    /**
+     * Test the property 'legalRepFirstName'
+     */
+    @Test
+    public void legalRepFirstNameTest() {
+        // TODO: test legalRepFirstName
+    }
+
+    /**
+     * Test the property 'legalRepLastName'
+     */
+    @Test
+    public void legalRepLastNameTest() {
+        // TODO: test legalRepLastName
+    }
+
+    /**
+     * Test the property 'address'
+     */
+    @Test
+    public void addressTest() {
+        // TODO: test address
+    }
+
+    /**
+     * Test the property 'certificationDeclared'
+     */
+    @Test
+    public void certificationDeclaredTest() {
+        // TODO: test certificationDeclared
+    }
+
+    /**
+     * Test the property 'certificationStatus'
+     */
+    @Test
+    public void certificationStatusTest() {
+        // TODO: test certificationStatus
     }
 
 }

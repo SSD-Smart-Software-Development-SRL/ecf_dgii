@@ -50,7 +50,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Respuesta de anulación de rango de secuencias de e-NCF.  Representa la respuesta del servicio de anulación de rangos de secuencias de comprobantes fiscales electrónicos. Este modelo se utiliza para procesar la respuesta del servicio web de anulación de e-NCF de la DGII.  Servicio Web:• Endpoint: /api/operaciones/anularrango• Método: POST• Formato de entrada: XML (formato ANECF)• Formato de respuesta: JSON o XMLValidaciones del Servicio:• Tipo de archivo válido (XML)• Firma del documento válida• Tipo de comprobante válido• Secuencias no utilizadas previamente• RNC autorizado para realizar transaccionesReferencia Oficial:• Descripción Técnica de Facturación Electrónica v1.6, Sección \&quot;Anulación de e-NCF\&quot;• Formato Anulación de e-NCF v1.0 - DGII
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class RespuestaAnulacionRango {
   public static final String SERIALIZED_NAME_RNC = "rnc";
   @SerializedName(SERIALIZED_NAME_RNC)
@@ -224,7 +224,7 @@ public class RespuestaAnulacionRango {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!RespuestaAnulacionRango.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in RespuestaAnulacionRango is not found in the empty JSON string", RespuestaAnulacionRango.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in RespuestaAnulacionRango is not found in the empty JSON string", RespuestaAnulacionRango.openapiRequiredFields.toString()));
         }
       }
 
@@ -232,22 +232,22 @@ public class RespuestaAnulacionRango {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!RespuestaAnulacionRango.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `RespuestaAnulacionRango` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RespuestaAnulacionRango` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("rnc") != null && !jsonObj.get("rnc").isJsonNull()) && !jsonObj.get("rnc").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
       }
       if ((jsonObj.get("codigo") != null && !jsonObj.get("codigo").isJsonNull()) && !jsonObj.get("codigo").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `codigo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("codigo").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `codigo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("codigo").toString()));
       }
       if ((jsonObj.get("nombre") != null && !jsonObj.get("nombre").isJsonNull()) && !jsonObj.get("nombre").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `nombre` to be a primitive type in the JSON string but got `%s`", jsonObj.get("nombre").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `nombre` to be a primitive type in the JSON string but got `%s`", jsonObj.get("nombre").toString()));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("mensajes") != null && !jsonObj.get("mensajes").isJsonNull() && !jsonObj.get("mensajes").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `mensajes` to be an array in the JSON string but got `%s`", jsonObj.get("mensajes").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `mensajes` to be an array in the JSON string but got `%s`", jsonObj.get("mensajes").toString()));
       }
   }
 

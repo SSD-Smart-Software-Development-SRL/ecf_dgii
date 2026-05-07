@@ -48,7 +48,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Representa una entrada del directorio para contribuyentes electrónicos en el sistema de facturación electrónica  de la República Dominicana. Este modelo contiene las URLs de servicios que los contribuyentes electrónicos  deben proporcionar para la comunicación entre contribuyentes.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Directorio {
   public static final String SERIALIZED_NAME_NOMBRE = "nombre";
   @SerializedName(SERIALIZED_NAME_NOMBRE)
@@ -240,7 +240,7 @@ public class Directorio {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Directorio.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Directorio is not found in the empty JSON string", Directorio.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Directorio is not found in the empty JSON string", Directorio.openapiRequiredFields.toString()));
         }
       }
 
@@ -248,24 +248,24 @@ public class Directorio {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Directorio.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Directorio` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Directorio` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("nombre") != null && !jsonObj.get("nombre").isJsonNull()) && !jsonObj.get("nombre").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `nombre` to be a primitive type in the JSON string but got `%s`", jsonObj.get("nombre").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `nombre` to be a primitive type in the JSON string but got `%s`", jsonObj.get("nombre").toString()));
       }
       if ((jsonObj.get("rnc") != null && !jsonObj.get("rnc").isJsonNull()) && !jsonObj.get("rnc").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
       }
       if ((jsonObj.get("urlRecepcion") != null && !jsonObj.get("urlRecepcion").isJsonNull()) && !jsonObj.get("urlRecepcion").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `urlRecepcion` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlRecepcion").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `urlRecepcion` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlRecepcion").toString()));
       }
       if ((jsonObj.get("urlAceptacion") != null && !jsonObj.get("urlAceptacion").isJsonNull()) && !jsonObj.get("urlAceptacion").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `urlAceptacion` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlAceptacion").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `urlAceptacion` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlAceptacion").toString()));
       }
       if ((jsonObj.get("urlOpcional") != null && !jsonObj.get("urlOpcional").isJsonNull()) && !jsonObj.get("urlOpcional").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `urlOpcional` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlOpcional").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `urlOpcional` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlOpcional").toString()));
       }
   }
 

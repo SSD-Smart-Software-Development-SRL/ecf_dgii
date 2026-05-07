@@ -51,7 +51,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Representa la respuesta del servicio de consulta de resultado de comprobantes fiscales electrónicos (e-CF). Este modelo contiene la información completa sobre el estado de procesamiento y validación de un e-CF que fue enviado previamente mediante el servicio de recepción.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class RespuestaConsultaTrackId {
   public static final String SERIALIZED_NAME_TRACK_ID = "trackId";
   @SerializedName(SERIALIZED_NAME_TRACK_ID)
@@ -329,7 +329,7 @@ public class RespuestaConsultaTrackId {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!RespuestaConsultaTrackId.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in RespuestaConsultaTrackId is not found in the empty JSON string", RespuestaConsultaTrackId.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in RespuestaConsultaTrackId is not found in the empty JSON string", RespuestaConsultaTrackId.openapiRequiredFields.toString()));
         }
       }
 
@@ -337,34 +337,34 @@ public class RespuestaConsultaTrackId {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!RespuestaConsultaTrackId.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `RespuestaConsultaTrackId` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RespuestaConsultaTrackId` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("trackId") != null && !jsonObj.get("trackId").isJsonNull()) && !jsonObj.get("trackId").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `trackId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("trackId").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `trackId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("trackId").toString()));
       }
       if ((jsonObj.get("codigo") != null && !jsonObj.get("codigo").isJsonNull()) && !jsonObj.get("codigo").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `codigo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("codigo").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `codigo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("codigo").toString()));
       }
       if ((jsonObj.get("estado") != null && !jsonObj.get("estado").isJsonNull()) && !jsonObj.get("estado").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `estado` to be a primitive type in the JSON string but got `%s`", jsonObj.get("estado").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `estado` to be a primitive type in the JSON string but got `%s`", jsonObj.get("estado").toString()));
       }
       if ((jsonObj.get("rnc") != null && !jsonObj.get("rnc").isJsonNull()) && !jsonObj.get("rnc").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
       }
       if ((jsonObj.get("encf") != null && !jsonObj.get("encf").isJsonNull()) && !jsonObj.get("encf").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
       }
       if ((jsonObj.get("fechaRecepcion") != null && !jsonObj.get("fechaRecepcion").isJsonNull()) && !jsonObj.get("fechaRecepcion").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fechaRecepcion` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fechaRecepcion").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `fechaRecepcion` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fechaRecepcion").toString()));
       }
       if (jsonObj.get("mensajes") != null && !jsonObj.get("mensajes").isJsonNull()) {
         JsonArray jsonArraymensajes = jsonObj.getAsJsonArray("mensajes");
         if (jsonArraymensajes != null) {
           // ensure the json data is an array
           if (!jsonObj.get("mensajes").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `mensajes` to be an array in the JSON string but got `%s`", jsonObj.get("mensajes").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `mensajes` to be an array in the JSON string but got `%s`", jsonObj.get("mensajes").toString()));
           }
 
           // validate the optional field `mensajes` (array)

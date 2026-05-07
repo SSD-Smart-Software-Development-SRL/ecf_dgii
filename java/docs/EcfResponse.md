@@ -29,6 +29,7 @@
 |**emisorReceptorErrors** | **String** |  |  |
 |**secuenciaUtilizada** | **Boolean** |  |  |
 |**dgiiEnvironment** | **DGIIEnvironment** |  |  |
+|**acecfs** | [**List&lt;AcecfSummaryDto&gt;**](AcecfSummaryDto.md) | ACECFs received from the receptor for this outbound ECF. |  [optional] |
 |**impresionUrl** | **String** |  |  [optional] |
 
 

@@ -51,7 +51,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Representa la respuesta del servicio de Consulta de Resumen de Factura (RFCE) de la DGII. Este servicio permite validar la validez fiscal de un comprobante fiscal electrónico a través del RNC emisor, e-NCF y código de seguridad.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class RespuestaConsultaRFCE {
   public static final String SERIALIZED_NAME_RNC = "rnc";
   @SerializedName(SERIALIZED_NAME_RNC)
@@ -277,7 +277,7 @@ public class RespuestaConsultaRFCE {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!RespuestaConsultaRFCE.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in RespuestaConsultaRFCE is not found in the empty JSON string", RespuestaConsultaRFCE.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in RespuestaConsultaRFCE is not found in the empty JSON string", RespuestaConsultaRFCE.openapiRequiredFields.toString()));
         }
       }
 
@@ -285,28 +285,28 @@ public class RespuestaConsultaRFCE {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!RespuestaConsultaRFCE.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `RespuestaConsultaRFCE` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RespuestaConsultaRFCE` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("rnc") != null && !jsonObj.get("rnc").isJsonNull()) && !jsonObj.get("rnc").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
       }
       if ((jsonObj.get("encf") != null && !jsonObj.get("encf").isJsonNull()) && !jsonObj.get("encf").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
       }
       if ((jsonObj.get("codigo") != null && !jsonObj.get("codigo").isJsonNull()) && !jsonObj.get("codigo").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `codigo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("codigo").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `codigo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("codigo").toString()));
       }
       if ((jsonObj.get("estado") != null && !jsonObj.get("estado").isJsonNull()) && !jsonObj.get("estado").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `estado` to be a primitive type in the JSON string but got `%s`", jsonObj.get("estado").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `estado` to be a primitive type in the JSON string but got `%s`", jsonObj.get("estado").toString()));
       }
       if (jsonObj.get("mensajes") != null && !jsonObj.get("mensajes").isJsonNull()) {
         JsonArray jsonArraymensajes = jsonObj.getAsJsonArray("mensajes");
         if (jsonArraymensajes != null) {
           // ensure the json data is an array
           if (!jsonObj.get("mensajes").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `mensajes` to be an array in the JSON string but got `%s`", jsonObj.get("mensajes").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `mensajes` to be an array in the JSON string but got `%s`", jsonObj.get("mensajes").toString()));
           }
 
           // validate the optional field `mensajes` (array)

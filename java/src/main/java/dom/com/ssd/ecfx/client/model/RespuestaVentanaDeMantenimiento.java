@@ -51,7 +51,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Modelo de respuesta que contiene información de ventanas de mantenimiento para todos los ambientes. Utilizado por el endpoint /api/estatusservicios/obtenerventanasmantenimiento.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class RespuestaVentanaDeMantenimiento {
   public static final String SERIALIZED_NAME_VENTANA_MANTENIMIENTOS = "ventanaMantenimientos";
   @SerializedName(SERIALIZED_NAME_VENTANA_MANTENIMIENTOS)
@@ -147,7 +147,7 @@ public class RespuestaVentanaDeMantenimiento {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!RespuestaVentanaDeMantenimiento.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in RespuestaVentanaDeMantenimiento is not found in the empty JSON string", RespuestaVentanaDeMantenimiento.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in RespuestaVentanaDeMantenimiento is not found in the empty JSON string", RespuestaVentanaDeMantenimiento.openapiRequiredFields.toString()));
         }
       }
 
@@ -155,7 +155,7 @@ public class RespuestaVentanaDeMantenimiento {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!RespuestaVentanaDeMantenimiento.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `RespuestaVentanaDeMantenimiento` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RespuestaVentanaDeMantenimiento` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -164,7 +164,7 @@ public class RespuestaVentanaDeMantenimiento {
         if (jsonArrayventanaMantenimientos != null) {
           // ensure the json data is an array
           if (!jsonObj.get("ventanaMantenimientos").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `ventanaMantenimientos` to be an array in the JSON string but got `%s`", jsonObj.get("ventanaMantenimientos").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `ventanaMantenimientos` to be an array in the JSON string but got `%s`", jsonObj.get("ventanaMantenimientos").toString()));
           }
 
           // validate the optional field `ventanaMantenimientos` (array)

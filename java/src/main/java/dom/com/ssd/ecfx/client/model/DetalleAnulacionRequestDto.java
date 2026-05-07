@@ -19,8 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress;
 import dom.com.ssd.ecfx.client.model.ECFType;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
 import dom.com.ssd.ecfx.client.model.SecuenciaRequestDto;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * DetalleAnulacionRequestDto
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class DetalleAnulacionRequestDto {
   public static final String SERIALIZED_NAME_TIPO_ECF = "tipoEcf";
   @SerializedName(SERIALIZED_NAME_TIPO_ECF)
@@ -63,12 +63,12 @@ public class DetalleAnulacionRequestDto {
   public static final String SERIALIZED_NAME_CANTIDADE_NCF_ANULADOS = "cantidadeNcfAnulados";
   @SerializedName(SERIALIZED_NAME_CANTIDADE_NCF_ANULADOS)
   @javax.annotation.Nullable
-  private AcecfReceptionRequestDtoProgress cantidadeNcfAnulados;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner cantidadeNcfAnulados;
 
   public static final String SERIALIZED_NAME_NO_LINEA = "noLinea";
   @SerializedName(SERIALIZED_NAME_NO_LINEA)
   @javax.annotation.Nullable
-  private List<AcecfReceptionRequestDtoProgress> noLinea = new ArrayList<>();
+  private List<SearchEcfReceptionRequestsTiposEcfsParameterInner> noLinea = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_SECUENCIAS = "secuencias";
   @SerializedName(SERIALIZED_NAME_SECUENCIAS)
@@ -97,7 +97,7 @@ public class DetalleAnulacionRequestDto {
   }
 
 
-  public DetalleAnulacionRequestDto cantidadeNcfAnulados(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress cantidadeNcfAnulados) {
+  public DetalleAnulacionRequestDto cantidadeNcfAnulados(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner cantidadeNcfAnulados) {
     this.cantidadeNcfAnulados = cantidadeNcfAnulados;
     return this;
   }
@@ -107,21 +107,21 @@ public class DetalleAnulacionRequestDto {
    * @return cantidadeNcfAnulados
    */
   @javax.annotation.Nullable
-  public AcecfReceptionRequestDtoProgress getCantidadeNcfAnulados() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getCantidadeNcfAnulados() {
     return cantidadeNcfAnulados;
   }
 
-  public void setCantidadeNcfAnulados(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress cantidadeNcfAnulados) {
+  public void setCantidadeNcfAnulados(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner cantidadeNcfAnulados) {
     this.cantidadeNcfAnulados = cantidadeNcfAnulados;
   }
 
 
-  public DetalleAnulacionRequestDto noLinea(@javax.annotation.Nullable List<AcecfReceptionRequestDtoProgress> noLinea) {
+  public DetalleAnulacionRequestDto noLinea(@javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> noLinea) {
     this.noLinea = noLinea;
     return this;
   }
 
-  public DetalleAnulacionRequestDto addNoLineaItem(AcecfReceptionRequestDtoProgress noLineaItem) {
+  public DetalleAnulacionRequestDto addNoLineaItem(SearchEcfReceptionRequestsTiposEcfsParameterInner noLineaItem) {
     if (this.noLinea == null) {
       this.noLinea = new ArrayList<>();
     }
@@ -134,11 +134,11 @@ public class DetalleAnulacionRequestDto {
    * @return noLinea
    */
   @javax.annotation.Nullable
-  public List<AcecfReceptionRequestDtoProgress> getNoLinea() {
+  public List<SearchEcfReceptionRequestsTiposEcfsParameterInner> getNoLinea() {
     return noLinea;
   }
 
-  public void setNoLinea(@javax.annotation.Nullable List<AcecfReceptionRequestDtoProgress> noLinea) {
+  public void setNoLinea(@javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> noLinea) {
     this.noLinea = noLinea;
   }
 
@@ -235,7 +235,7 @@ public class DetalleAnulacionRequestDto {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!DetalleAnulacionRequestDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in DetalleAnulacionRequestDto is not found in the empty JSON string", DetalleAnulacionRequestDto.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in DetalleAnulacionRequestDto is not found in the empty JSON string", DetalleAnulacionRequestDto.openapiRequiredFields.toString()));
         }
       }
 
@@ -243,7 +243,7 @@ public class DetalleAnulacionRequestDto {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!DetalleAnulacionRequestDto.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `DetalleAnulacionRequestDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DetalleAnulacionRequestDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -253,19 +253,19 @@ public class DetalleAnulacionRequestDto {
       }
       // validate the optional field `cantidadeNcfAnulados`
       if (jsonObj.get("cantidadeNcfAnulados") != null && !jsonObj.get("cantidadeNcfAnulados").isJsonNull()) {
-        AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("cantidadeNcfAnulados"));
+        SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("cantidadeNcfAnulados"));
       }
       if (jsonObj.get("noLinea") != null && !jsonObj.get("noLinea").isJsonNull()) {
         JsonArray jsonArraynoLinea = jsonObj.getAsJsonArray("noLinea");
         if (jsonArraynoLinea != null) {
           // ensure the json data is an array
           if (!jsonObj.get("noLinea").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `noLinea` to be an array in the JSON string but got `%s`", jsonObj.get("noLinea").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `noLinea` to be an array in the JSON string but got `%s`", jsonObj.get("noLinea").toString()));
           }
 
           // validate the optional field `noLinea` (array)
           for (int i = 0; i < jsonArraynoLinea.size(); i++) {
-            AcecfReceptionRequestDtoProgress.validateJsonElement(jsonArraynoLinea.get(i));
+            SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonArraynoLinea.get(i));
           };
         }
       }
@@ -274,7 +274,7 @@ public class DetalleAnulacionRequestDto {
         if (jsonArraysecuencias != null) {
           // ensure the json data is an array
           if (!jsonObj.get("secuencias").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `secuencias` to be an array in the JSON string but got `%s`", jsonObj.get("secuencias").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `secuencias` to be an array in the JSON string but got `%s`", jsonObj.get("secuencias").toString()));
           }
 
           // validate the optional field `secuencias` (array)

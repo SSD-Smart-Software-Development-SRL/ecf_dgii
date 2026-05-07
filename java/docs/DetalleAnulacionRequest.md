@@ -8,8 +8,8 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**tipoEcf** | **ECFType** |  |  |
-|**cantidadeNcfAnulados** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  |
-|**noLinea** | [**List&lt;AcecfReceptionRequestDtoProgress&gt;**](AcecfReceptionRequestDtoProgress.md) |  |  |
+|**cantidadeNcfAnulados** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
+|**noLinea** | [**List&lt;SearchEcfReceptionRequestsTiposEcfsParameterInner&gt;**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
 |**secuencias** | [**List&lt;SecuenciaRequest&gt;**](SecuenciaRequest.md) |  |  |
 
 

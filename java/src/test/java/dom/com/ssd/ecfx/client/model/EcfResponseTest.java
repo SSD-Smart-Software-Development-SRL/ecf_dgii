@@ -18,14 +18,17 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import dom.com.ssd.ecfx.client.model.AcecfSummaryDto;
 import dom.com.ssd.ecfx.client.model.AllTipoECFTypes;
 import dom.com.ssd.ecfx.client.model.DGIIEnvironment;
 import dom.com.ssd.ecfx.client.model.EcfEstado;
 import dom.com.ssd.ecfx.client.model.EcfProgress;
 import dom.com.ssd.ecfx.client.model.SearchEcfsAmountFromParameter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -218,6 +221,14 @@ public class EcfResponseTest {
     @Test
     public void dgiiEnvironmentTest() {
         // TODO: test dgiiEnvironment
+    }
+
+    /**
+     * Test the property 'acecfs'
+     */
+    @Test
+    public void acecfsTest() {
+        // TODO: test acecfs
     }
 
     /**

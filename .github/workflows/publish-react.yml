@@ -68,8 +68,8 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: react/pnpm-lock.yaml
 
-      - name: Update npm
-        run: npm install -g npm@latest
+      - name: Install npm 11 (needed for OIDC trusted publishing)
+        run: npm install -g npm@11.6.2
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

@@ -32,13 +32,14 @@ import dom.com.ssd.ecfx.sdk.models.Ecf44ECF
 import dom.com.ssd.ecfx.sdk.models.Ecf45ECF
 import dom.com.ssd.ecfx.sdk.models.Ecf46ECF
 import dom.com.ssd.ecfx.sdk.models.Ecf47ECF
+import dom.com.ssd.ecfx.sdk.models.EcfEstado
+import dom.com.ssd.ecfx.sdk.models.EcfProgress
 import dom.com.ssd.ecfx.sdk.models.EcfResponse
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfAnulacionListResponse
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfResponse
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
 import dom.com.ssd.ecfx.sdk.models.RespuestaAnulacionRango
 import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
-import dom.com.ssd.ecfx.sdk.models.SendAcecfRequest
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -136,84 +137,6 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/ecf/anularrango/{rnc}".replace("{"+"rnc"+"}", encodeURIComponent(rnc.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /ecf/aprobacioncomercial/{rnc}/{encf}
-     * 
-     * 
-     * @param rnc 
-     * @param encf 
-     * @param sendAcecfRequest 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aprobacionComercial(rnc: kotlin.String, encf: kotlin.String, sendAcecfRequest: SendAcecfRequest) : Unit {
-        val localVarResponse = aprobacionComercialWithHttpInfo(rnc = rnc, encf = encf, sendAcecfRequest = sendAcecfRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /ecf/aprobacioncomercial/{rnc}/{encf}
-     * 
-     * 
-     * @param rnc 
-     * @param encf 
-     * @param sendAcecfRequest 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aprobacionComercialWithHttpInfo(rnc: kotlin.String, encf: kotlin.String, sendAcecfRequest: SendAcecfRequest) : ApiResponse<Unit?> {
-        val localVariableConfig = aprobacionComercialRequestConfig(rnc = rnc, encf = encf, sendAcecfRequest = sendAcecfRequest)
-
-        return request<SendAcecfRequest, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aprobacionComercial
-     *
-     * @param rnc 
-     * @param encf 
-     * @param sendAcecfRequest 
-     * @return RequestConfig
-     */
-    fun aprobacionComercialRequestConfig(rnc: kotlin.String, encf: kotlin.String, sendAcecfRequest: SendAcecfRequest) : RequestConfig<SendAcecfRequest> {
-        val localVariableBody = sendAcecfRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/problem+json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/ecf/aprobacioncomercial/{rnc}/{encf}".replace("{"+"rnc"+"}", encodeURIComponent(rnc.toString())).replace("{"+"encf"+"}", encodeURIComponent(encf.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -1321,6 +1244,8 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfResponse
@@ -1332,8 +1257,8 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchAllEcfs(encfs: kotlin.collections.List<kotlin.String>? = null, ids: kotlin.collections.List<java.util.UUID>? = null, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>? = null, includeEcfContent: kotlin.Boolean? = false, fromFechaEmision: java.time.OffsetDateTime? = null, toFechaEmision: java.time.OffsetDateTime? = null, amountFrom: SearchEcfsAmountFromParameter? = null, amountTo: SearchEcfsAmountFromParameter? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfResponse {
-        val localVarResponse = searchAllEcfsWithHttpInfo(encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
+    fun searchAllEcfs(encfs: kotlin.collections.List<kotlin.String>? = null, ids: kotlin.collections.List<java.util.UUID>? = null, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>? = null, includeEcfContent: kotlin.Boolean? = false, fromFechaEmision: java.time.OffsetDateTime? = null, toFechaEmision: java.time.OffsetDateTime? = null, amountFrom: SearchEcfsAmountFromParameter? = null, amountTo: SearchEcfsAmountFromParameter? = null, progresses: kotlin.collections.List<EcfProgress>? = null, dgiiEstados: kotlin.collections.List<EcfEstado>? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfResponse {
+        val localVarResponse = searchAllEcfsWithHttpInfo(encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, progresses = progresses, dgiiEstados = dgiiEstados, page = page, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PaginatedApiResultOfEcfResponse
@@ -1362,6 +1287,8 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse<PaginatedApiResultOfEcfResponse?>
@@ -1370,8 +1297,8 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchAllEcfsWithHttpInfo(encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfResponse?> {
-        val localVariableConfig = searchAllEcfsRequestConfig(encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
+    fun searchAllEcfsWithHttpInfo(encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfResponse?> {
+        val localVariableConfig = searchAllEcfsRequestConfig(encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, progresses = progresses, dgiiEstados = dgiiEstados, page = page, limit = limit)
 
         return request<Unit, PaginatedApiResultOfEcfResponse>(
             localVariableConfig
@@ -1389,11 +1316,13 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchAllEcfsRequestConfig(encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : RequestConfig<Unit> {
+    fun searchAllEcfsRequestConfig(encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1418,6 +1347,12 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
                 if (amountFrom != null) {
                 }
                 if (amountTo != null) {
+                }
+                if (progresses != null) {
+                    put("Progresses", toMultiValue(progresses.toList(), "multi"))
+                }
+                if (dgiiEstados != null) {
+                    put("DgiiEstados", toMultiValue(dgiiEstados.toList(), "multi"))
                 }
                 if (page != null) {
                 }
@@ -1450,6 +1385,8 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfResponse
@@ -1461,8 +1398,8 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchEcfs(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>? = null, ids: kotlin.collections.List<java.util.UUID>? = null, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>? = null, includeEcfContent: kotlin.Boolean? = false, fromFechaEmision: java.time.OffsetDateTime? = null, toFechaEmision: java.time.OffsetDateTime? = null, amountFrom: SearchEcfsAmountFromParameter? = null, amountTo: SearchEcfsAmountFromParameter? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfResponse {
-        val localVarResponse = searchEcfsWithHttpInfo(rnc = rnc, encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
+    fun searchEcfs(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>? = null, ids: kotlin.collections.List<java.util.UUID>? = null, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>? = null, includeEcfContent: kotlin.Boolean? = false, fromFechaEmision: java.time.OffsetDateTime? = null, toFechaEmision: java.time.OffsetDateTime? = null, amountFrom: SearchEcfsAmountFromParameter? = null, amountTo: SearchEcfsAmountFromParameter? = null, progresses: kotlin.collections.List<EcfProgress>? = null, dgiiEstados: kotlin.collections.List<EcfEstado>? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfResponse {
+        val localVarResponse = searchEcfsWithHttpInfo(rnc = rnc, encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, progresses = progresses, dgiiEstados = dgiiEstados, page = page, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PaginatedApiResultOfEcfResponse
@@ -1492,6 +1429,8 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse<PaginatedApiResultOfEcfResponse?>
@@ -1500,8 +1439,8 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchEcfsWithHttpInfo(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfResponse?> {
-        val localVariableConfig = searchEcfsRequestConfig(rnc = rnc, encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
+    fun searchEcfsWithHttpInfo(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfResponse?> {
+        val localVariableConfig = searchEcfsRequestConfig(rnc = rnc, encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, progresses = progresses, dgiiEstados = dgiiEstados, page = page, limit = limit)
 
         return request<Unit, PaginatedApiResultOfEcfResponse>(
             localVariableConfig
@@ -1520,11 +1459,13 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchEcfsRequestConfig(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : RequestConfig<Unit> {
+    fun searchEcfsRequestConfig(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1549,6 +1490,12 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
                 if (amountFrom != null) {
                 }
                 if (amountTo != null) {
+                }
+                if (progresses != null) {
+                    put("Progresses", toMultiValue(progresses.toList(), "multi"))
+                }
+                if (dgiiEstados != null) {
+                    put("DgiiEstados", toMultiValue(dgiiEstados.toList(), "multi"))
                 }
                 if (page != null) {
                 }

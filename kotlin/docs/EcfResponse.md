@@ -26,6 +26,7 @@
 | **emisorReceptorErrors** | **kotlin.String** |  |  |
 | **secuenciaUtilizada** | **kotlin.Boolean** |  |  |
 | **dgiiEnvironment** | [**DGIIEnvironment**](DGIIEnvironment.md) |  |  |
+| **acecfs** | [**kotlin.collections.List&lt;AcecfSummaryDto&gt;**](AcecfSummaryDto.md) | ACECFs received from the receptor for this outbound ECF. |  [optional] |
 | **impresionUrl** | **kotlin.String** |  |  [optional] |
 
 

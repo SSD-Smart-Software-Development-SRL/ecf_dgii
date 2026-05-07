@@ -15,7 +15,6 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.ECFType
 import dom.com.ssd.ecfx.sdk.models.SecuenciaRequest
 
@@ -39,10 +38,10 @@ data class DetalleAnulacionRequest (
     val tipoEcf: ECFType,
 
     @SerialName(value = "cantidadeNcfAnulados")
-    val cantidadeNcfAnulados: AcecfReceptionRequestDtoProgress,
+    val cantidadeNcfAnulados: Int,
 
     @SerialName(value = "noLinea")
-    val noLinea: kotlin.collections.List<AcecfReceptionRequestDtoProgress>,
+    val noLinea: kotlin.collections.List<Int>,
 
     @SerialName(value = "secuencias")
     val secuencias: kotlin.collections.List<SecuenciaRequest>

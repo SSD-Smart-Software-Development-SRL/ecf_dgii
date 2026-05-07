@@ -13,6 +13,9 @@
 | **updatedBy** | **kotlin.String** |  |  [optional] |
 | **tenantId** | [**java.util.UUID**](java.util.UUID.md) |  |  [optional] |
 | **receptorId** | **kotlin.String** |  |  [optional] |
+| **urlRecepcion** | **kotlin.String** |  |  [optional] |
+| **urlAprobacionComercial** | **kotlin.String** |  |  [optional] |
+| **urlAutenticacion** | **kotlin.String** |  |  [optional] |
 
 
 

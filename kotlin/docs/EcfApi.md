@@ -5,7 +5,6 @@ All URIs are relative to *https://api.test.ecfx.ssd.com.do*
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**anulacionRangos**](EcfApi.md#anulacionRangos) | **POST** /ecf/anularrango/{rnc} |  |
-| [**aprobacionComercial**](EcfApi.md#aprobacionComercial) | **POST** /ecf/aprobacioncomercial/{rnc}/{encf} |  |
 | [**firmarSemilla**](EcfApi.md#firmarSemilla) | **POST** /ecf/FirmarSemilla/{rnc} |  |
 | [**getEcfById**](EcfApi.md#getEcfById) | **GET** /ecf/{rnc}/message/{id} |  |
 | [**listAnulaciones**](EcfApi.md#listAnulaciones) | **GET** /ecf/anulaciones |  |
@@ -71,55 +70,6 @@ Configure Bearer:
 
  - **Content-Type**: application/json
  - **Accept**: application/json, application/problem+json
-
-<a id="aprobacionComercial"></a>
-# **aprobacionComercial**
-> aprobacionComercial(rnc, encf, sendAcecfRequest)
-
-
-
-### Example
-```kotlin
-// Import classes:
-//import dom.com.ssd.ecfx.sdk.infrastructure.*
-//import dom.com.ssd.ecfx.sdk.models.*
-
-val apiInstance = EcfApi()
-val rnc : kotlin.String = rnc_example // kotlin.String | 
-val encf : kotlin.String = encf_example // kotlin.String | 
-val sendAcecfRequest : SendAcecfRequest =  // SendAcecfRequest | 
-try {
-    apiInstance.aprobacionComercial(rnc, encf, sendAcecfRequest)
-} catch (e: ClientException) {
-    println("4xx response calling EcfApi#aprobacionComercial")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling EcfApi#aprobacionComercial")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-| **rnc** | **kotlin.String**|  | |
-| **encf** | **kotlin.String**|  | |
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **sendAcecfRequest** | [**SendAcecfRequest**](SendAcecfRequest.md)|  | |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-
-Configure Bearer:
-    ApiClient.accessToken = ""
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/problem+json
 
 <a id="firmarSemilla"></a>
 # **firmarSemilla**
@@ -786,7 +736,7 @@ Configure Bearer:
 
 <a id="searchAllEcfs"></a>
 # **searchAllEcfs**
-> PaginatedApiResultOfEcfResponse searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit)
+> PaginatedApiResultOfEcfResponse searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit)
 
 
 
@@ -805,10 +755,12 @@ val fromFechaEmision : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // j
 val toFechaEmision : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // java.time.OffsetDateTime | 
 val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
 val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
+val progresses : kotlin.collections.List<EcfProgress> =  // kotlin.collections.List<EcfProgress> | 
+val dgiiEstados : kotlin.collections.List<EcfEstado> =  // kotlin.collections.List<EcfEstado> | 
 val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
 val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
 try {
-    val result : PaginatedApiResultOfEcfResponse = apiInstance.searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit)
+    val result : PaginatedApiResultOfEcfResponse = apiInstance.searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#searchAllEcfs")
@@ -828,6 +780,8 @@ try {
 | **toFechaEmision** | **java.time.OffsetDateTime**|  | [optional] |
 | **amountFrom** | **SearchEcfsAmountFromParameter**|  | [optional] |
 | **amountTo** | **SearchEcfsAmountFromParameter**|  | [optional] |
+| **progresses** | [**kotlin.collections.List&lt;EcfProgress&gt;**](EcfProgress.md)|  | [optional] |
+| **dgiiEstados** | [**kotlin.collections.List&lt;EcfEstado&gt;**](EcfEstado.md)|  | [optional] |
 | **page** | **GetCompaniesPageParameter**|  | [optional] [default to 1] |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
@@ -850,7 +804,7 @@ Configure Bearer:
 
 <a id="searchEcfs"></a>
 # **searchEcfs**
-> PaginatedApiResultOfEcfResponse searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit)
+> PaginatedApiResultOfEcfResponse searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit)
 
 
 
@@ -870,10 +824,12 @@ val fromFechaEmision : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // j
 val toFechaEmision : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // java.time.OffsetDateTime | 
 val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
 val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
+val progresses : kotlin.collections.List<EcfProgress> =  // kotlin.collections.List<EcfProgress> | 
+val dgiiEstados : kotlin.collections.List<EcfEstado> =  // kotlin.collections.List<EcfEstado> | 
 val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
 val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
 try {
-    val result : PaginatedApiResultOfEcfResponse = apiInstance.searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit)
+    val result : PaginatedApiResultOfEcfResponse = apiInstance.searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling EcfApi#searchEcfs")
@@ -894,6 +850,8 @@ try {
 | **toFechaEmision** | **java.time.OffsetDateTime**|  | [optional] |
 | **amountFrom** | **SearchEcfsAmountFromParameter**|  | [optional] |
 | **amountTo** | **SearchEcfsAmountFromParameter**|  | [optional] |
+| **progresses** | [**kotlin.collections.List&lt;EcfProgress&gt;**](EcfProgress.md)|  | [optional] |
+| **dgiiEstados** | [**kotlin.collections.List&lt;EcfEstado&gt;**](EcfEstado.md)|  | [optional] |
 | **page** | **GetCompaniesPageParameter**|  | [optional] [default to 1] |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |

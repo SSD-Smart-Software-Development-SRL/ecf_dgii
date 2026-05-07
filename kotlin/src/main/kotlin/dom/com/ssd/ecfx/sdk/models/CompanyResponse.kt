@@ -32,6 +32,9 @@ import kotlinx.serialization.Contextual
  * @param updatedBy 
  * @param tenantId 
  * @param receptorId 
+ * @param urlRecepcion 
+ * @param urlAprobacionComercial 
+ * @param urlAutenticacion 
  */
 @Serializable
 
@@ -62,7 +65,16 @@ data class CompanyResponse (
     val tenantId: java.util.UUID? = null,
 
     @SerialName(value = "receptorId")
-    val receptorId: kotlin.String? = null
+    val receptorId: kotlin.String? = null,
+
+    @SerialName(value = "urlRecepcion")
+    val urlRecepcion: kotlin.String? = null,
+
+    @SerialName(value = "urlAprobacionComercial")
+    val urlAprobacionComercial: kotlin.String? = null,
+
+    @SerialName(value = "urlAutenticacion")
+    val urlAutenticacion: kotlin.String? = null
 
 ) {
 

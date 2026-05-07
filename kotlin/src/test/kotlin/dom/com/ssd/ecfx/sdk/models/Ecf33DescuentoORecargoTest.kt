@@ -19,7 +19,6 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import dom.com.ssd.ecfx.sdk.models.Ecf33DescuentoORecargo
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.Ecf31DescuentoORecargoMontoDescuentooRecargo
 import dom.com.ssd.ecfx.sdk.models.Ecf31DescuentoORecargoValorDescuentooRecargo
 import dom.com.ssd.ecfx.sdk.models.Ecf33TipoAjusteType

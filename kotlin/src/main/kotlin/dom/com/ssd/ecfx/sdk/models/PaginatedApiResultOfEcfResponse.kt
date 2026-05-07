@@ -15,7 +15,6 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.Ecf31IdDocTotalPaginas
 import dom.com.ssd.ecfx.sdk.models.EcfResponse
 
@@ -45,13 +44,13 @@ data class PaginatedApiResultOfEcfResponse (
     val propertyValues: kotlin.collections.List<EcfResponse>? = null,
 
     @SerialName(value = "total")
-    val total: AcecfReceptionRequestDtoProgress? = null,
+    val total: Int? = null,
 
     @SerialName(value = "page")
-    val page: AcecfReceptionRequestDtoProgress? = null,
+    val page: Int? = null,
 
     @SerialName(value = "limit")
-    val limit: AcecfReceptionRequestDtoProgress? = null,
+    val limit: Int? = null,
 
     @SerialName(value = "nextPage")
     val nextPage: Ecf31IdDocTotalPaginas? = null,

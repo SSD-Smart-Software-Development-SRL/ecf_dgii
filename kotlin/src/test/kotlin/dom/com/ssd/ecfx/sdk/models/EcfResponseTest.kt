@@ -19,6 +19,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import dom.com.ssd.ecfx.sdk.models.EcfResponse
+import dom.com.ssd.ecfx.sdk.models.AcecfSummaryDto
 import dom.com.ssd.ecfx.sdk.models.AllTipoECFTypes
 import dom.com.ssd.ecfx.sdk.models.DGIIEnvironment
 import dom.com.ssd.ecfx.sdk.models.EcfEstado
@@ -160,6 +161,12 @@ class EcfResponseTest : ShouldSpec() {
         should("test dgiiEnvironment") {
             // uncomment below to test the property
             //modelInstance.dgiiEnvironment shouldBe ("TODO")
+        }
+
+        // to test the property `acecfs` - ACECFs received from the receptor for this outbound ECF.
+        should("test acecfs") {
+            // uncomment below to test the property
+            //modelInstance.acecfs shouldBe ("TODO")
         }
 
         // to test the property `impresionUrl`

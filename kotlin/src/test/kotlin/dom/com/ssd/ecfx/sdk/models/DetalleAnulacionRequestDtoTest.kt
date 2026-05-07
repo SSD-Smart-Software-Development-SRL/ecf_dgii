@@ -19,7 +19,6 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import dom.com.ssd.ecfx.sdk.models.DetalleAnulacionRequestDto
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.ECFType
 import dom.com.ssd.ecfx.sdk.models.SecuenciaRequestDto
 

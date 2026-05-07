@@ -23,7 +23,7 @@ import kotlinx.serialization.Serializable
 /**
  * 
  *
- * Values: BRL,CAD,CHF,CHY,XDR,DKK,EUR,GBP,JPY,NOK,SCP,SEK,USD,VEF,HTG,MXN
+ * Values: BRL,CAD,CHF,CHY,XDR,DKK,EUR,GBP,JPY,NOK,SCP,SEK,USD,VEF,HTG,MXN,COP
  */
 @Serializable
 enum class TipoMonedaType(val value: kotlin.String) {
@@ -74,7 +74,10 @@ enum class TipoMonedaType(val value: kotlin.String) {
     HTG("HTG"),
 
     @SerialName(value = "MXN")
-    MXN("MXN");
+    MXN("MXN"),
+
+    @SerialName(value = "COP")
+    COP("COP");
 
     /**
      * Override [toString()] to avoid using the enum variable name as the value, and instead use

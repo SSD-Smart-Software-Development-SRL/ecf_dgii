@@ -21,8 +21,6 @@ import io.kotlintest.specs.ShouldSpec
 import dom.com.ssd.ecfx.sdk.apis.CompanyApi
 import dom.com.ssd.ecfx.sdk.models.CertificateResponse
 import dom.com.ssd.ecfx.sdk.models.CompanyResponse
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesLimitParameter
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesPageParameter
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfCompanyResponse
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
 import dom.com.ssd.ecfx.sdk.models.UpsertCompanyRequest
@@ -44,8 +42,8 @@ class CompanyApiTest : ShouldSpec() {
             // uncomment below to test getCompanies
             //val rncs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
             //val names : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
-            //val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-            //val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
+            //val page : Int = 56 // Int | 
+            //val limit : Int = 56 // Int | 
             //val result : PaginatedApiResultOfCompanyResponse = apiInstance.getCompanies(rncs, names, page, limit)
             //result shouldBe ("TODO")
         }

@@ -15,8 +15,8 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.AllTipoECFTypes
+import dom.com.ssd.ecfx.sdk.models.EcfReceptionRequestDtoMontoTotal
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
@@ -37,6 +37,7 @@ import kotlinx.serialization.Contextual
  * @param rncEmisor 
  * @param tipoEcf 
  * @param resultInternalFileName 
+ * @param montoTotal 
  */
 @Serializable
 
@@ -55,7 +56,7 @@ data class EcfReceptionRequestDto (
     val fileName: kotlin.String? = null,
 
     @SerialName(value = "progress")
-    val progress: AcecfReceptionRequestDtoProgress? = null,
+    val progress: Int? = null,
 
     @Contextual @SerialName(value = "createdOn")
     val createdOn: java.time.OffsetDateTime? = null,
@@ -76,7 +77,10 @@ data class EcfReceptionRequestDto (
     val tipoEcf: AllTipoECFTypes? = null,
 
     @SerialName(value = "resultInternalFileName")
-    val resultInternalFileName: kotlin.String? = null
+    val resultInternalFileName: kotlin.String? = null,
+
+    @SerialName(value = "montoTotal")
+    val montoTotal: EcfReceptionRequestDtoMontoTotal? = null
 
 ) {
 

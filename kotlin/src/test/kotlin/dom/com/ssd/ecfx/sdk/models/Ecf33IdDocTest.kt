@@ -21,12 +21,12 @@ import io.kotlintest.specs.ShouldSpec
 import dom.com.ssd.ecfx.sdk.models.Ecf33IdDoc
 import dom.com.ssd.ecfx.sdk.models.Ecf31IdDocTotalPaginas
 import dom.com.ssd.ecfx.sdk.models.Ecf33FormaDePago
-import dom.com.ssd.ecfx.sdk.models.Ecf33TipoIngresosValidationType
 import dom.com.ssd.ecfx.sdk.models.Ecf33TipoPagoType
 import dom.com.ssd.ecfx.sdk.models.IndicadorEnvioDiferidoType
 import dom.com.ssd.ecfx.sdk.models.IndicadorMontoGravadoType
 import dom.com.ssd.ecfx.sdk.models.IndicadorServicioTodoIncluidoType
 import dom.com.ssd.ecfx.sdk.models.TipoCuentaPagoType
+import dom.com.ssd.ecfx.sdk.models.TipoIngresosValidationType
 import dom.com.ssd.ecfx.sdk.models.TipoeCFType
 
 class Ecf33IdDocTest : ShouldSpec() {
@@ -44,12 +44,6 @@ class Ecf33IdDocTest : ShouldSpec() {
         should("test encf") {
             // uncomment below to test the property
             //modelInstance.encf shouldBe ("TODO")
-        }
-
-        // to test the property `tipoIngresos`
-        should("test tipoIngresos") {
-            // uncomment below to test the property
-            //modelInstance.tipoIngresos shouldBe ("TODO")
         }
 
         // to test the property `tipoPago`
@@ -80,6 +74,12 @@ class Ecf33IdDocTest : ShouldSpec() {
         should("test indicadorServicioTodoIncluido") {
             // uncomment below to test the property
             //modelInstance.indicadorServicioTodoIncluido shouldBe ("TODO")
+        }
+
+        // to test the property `tipoIngresos`
+        should("test tipoIngresos") {
+            // uncomment below to test the property
+            //modelInstance.tipoIngresos shouldBe ("TODO")
         }
 
         // to test the property `fechaLimitePago`

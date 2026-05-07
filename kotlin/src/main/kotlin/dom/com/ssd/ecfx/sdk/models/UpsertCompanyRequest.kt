@@ -24,8 +24,14 @@ import kotlinx.serialization.Contextual
  * 
  *
  * @param rnc 
- * @param legalName 
  * @param name 
+ * @param employeeCount 
+ * @param estimatedInvoices 
+ * @param legalRepFirstName 
+ * @param legalRepLastName 
+ * @param address 
+ * @param certificationDeclared 
+ * @param certificationStatus 
  */
 @Serializable
 
@@ -34,11 +40,29 @@ data class UpsertCompanyRequest (
     @SerialName(value = "rnc")
     val rnc: kotlin.String,
 
-    @SerialName(value = "legalName")
-    val legalName: kotlin.String,
-
     @SerialName(value = "name")
-    val name: kotlin.String
+    val name: kotlin.String,
+
+    @SerialName(value = "employeeCount")
+    val employeeCount: kotlin.String? = null,
+
+    @SerialName(value = "estimatedInvoices")
+    val estimatedInvoices: kotlin.String? = null,
+
+    @SerialName(value = "legalRepFirstName")
+    val legalRepFirstName: kotlin.String? = null,
+
+    @SerialName(value = "legalRepLastName")
+    val legalRepLastName: kotlin.String? = null,
+
+    @SerialName(value = "address")
+    val address: kotlin.String? = null,
+
+    @SerialName(value = "certificationDeclared")
+    val certificationDeclared: kotlin.Boolean? = null,
+
+    @SerialName(value = "certificationStatus")
+    val certificationStatus: kotlin.String? = null
 
 ) {
 

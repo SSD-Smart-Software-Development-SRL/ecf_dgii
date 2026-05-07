@@ -79,5 +79,23 @@ class CompanyResponseTest : ShouldSpec() {
             //modelInstance.receptorId shouldBe ("TODO")
         }
 
+        // to test the property `urlRecepcion`
+        should("test urlRecepcion") {
+            // uncomment below to test the property
+            //modelInstance.urlRecepcion shouldBe ("TODO")
+        }
+
+        // to test the property `urlAprobacionComercial`
+        should("test urlAprobacionComercial") {
+            // uncomment below to test the property
+            //modelInstance.urlAprobacionComercial shouldBe ("TODO")
+        }
+
+        // to test the property `urlAutenticacion`
+        should("test urlAutenticacion") {
+            // uncomment below to test the property
+            //modelInstance.urlAutenticacion shouldBe ("TODO")
+        }
+
     }
 }

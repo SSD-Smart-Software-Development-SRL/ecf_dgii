@@ -15,13 +15,12 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.Ecf31IdDocTotalPaginas
-import dom.com.ssd.ecfx.sdk.models.Ecf34TipoIngresosValidationType
 import dom.com.ssd.ecfx.sdk.models.Ecf34TipoPagoType
 import dom.com.ssd.ecfx.sdk.models.IndicadorEnvioDiferidoType
 import dom.com.ssd.ecfx.sdk.models.IndicadorMontoGravadoType
 import dom.com.ssd.ecfx.sdk.models.IndicadorServicioTodoIncluidoType
+import dom.com.ssd.ecfx.sdk.models.TipoIngresosValidationType
 import dom.com.ssd.ecfx.sdk.models.TipoeCFType
 
 import kotlinx.serialization.Serializable
@@ -34,11 +33,11 @@ import kotlinx.serialization.Contextual
  * @param tipoeCF 
  * @param encf 
  * @param indicadorNotaCredito 
- * @param tipoIngresos 
  * @param tipoPago 
  * @param indicadorEnvioDiferido 
  * @param indicadorMontoGravado 
  * @param indicadorServicioTodoIncluido 
+ * @param tipoIngresos 
  * @param fechaLimitePago 
  * @param fechaDesde 
  * @param fechaHasta 
@@ -55,10 +54,7 @@ data class Ecf34IdDoc (
     val encf: kotlin.String,
 
     @SerialName(value = "indicadorNotaCredito")
-    val indicadorNotaCredito: AcecfReceptionRequestDtoProgress,
-
-    @Contextual @SerialName(value = "tipoIngresos")
-    val tipoIngresos: Ecf34TipoIngresosValidationType,
+    val indicadorNotaCredito: Int,
 
     @Contextual @SerialName(value = "tipoPago")
     val tipoPago: Ecf34TipoPagoType,
@@ -71,6 +67,9 @@ data class Ecf34IdDoc (
 
     @Contextual @SerialName(value = "indicadorServicioTodoIncluido")
     val indicadorServicioTodoIncluido: IndicadorServicioTodoIncluidoType? = null,
+
+    @Contextual @SerialName(value = "tipoIngresos")
+    val tipoIngresos: TipoIngresosValidationType? = null,
 
     @Contextual @SerialName(value = "fechaLimitePago")
     val fechaLimitePago: java.time.OffsetDateTime? = null,

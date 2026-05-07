@@ -15,7 +15,6 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.Ecf31CodigosItem
 import dom.com.ssd.ecfx.sdk.models.Ecf31DescuentoORecargoMontoDescuentooRecargo
 import dom.com.ssd.ecfx.sdk.models.Ecf31DescuentoORecargoValorDescuentooRecargo
@@ -70,7 +69,7 @@ import kotlinx.serialization.Contextual
 data class Ecf31Item (
 
     @SerialName(value = "numeroLinea")
-    val numeroLinea: AcecfReceptionRequestDtoProgress,
+    val numeroLinea: Int,
 
     @Contextual @SerialName(value = "indicadorFacturacion")
     val indicadorFacturacion: Ecf31IndicadorFacturacionType,

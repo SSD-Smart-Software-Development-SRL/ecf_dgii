@@ -1,12 +1,21 @@
 package dom.com.ssd.ecfx.sdk
 
-import dom.com.ssd.ecfx.sdk.api.CompanyApi
-import dom.com.ssd.ecfx.sdk.api.EcfApi
-import dom.com.ssd.ecfx.sdk.api.RecepcionApi
-import dom.com.ssd.ecfx.sdk.models.ECF
+import dom.com.ssd.ecfx.sdk.apis.AprobacionComercialApi
+import dom.com.ssd.ecfx.sdk.apis.CompanyApi
+import dom.com.ssd.ecfx.sdk.apis.EcfApi
+import dom.com.ssd.ecfx.sdk.apis.RecepcionApi
+import dom.com.ssd.ecfx.sdk.models.Ecf31ECF
+import dom.com.ssd.ecfx.sdk.models.Ecf32ECF
+import dom.com.ssd.ecfx.sdk.models.Ecf33ECF
+import dom.com.ssd.ecfx.sdk.models.Ecf34ECF
+import dom.com.ssd.ecfx.sdk.models.Ecf41ECF
+import dom.com.ssd.ecfx.sdk.models.Ecf43ECF
+import dom.com.ssd.ecfx.sdk.models.Ecf44ECF
+import dom.com.ssd.ecfx.sdk.models.Ecf45ECF
+import dom.com.ssd.ecfx.sdk.models.Ecf46ECF
+import dom.com.ssd.ecfx.sdk.models.Ecf47ECF
 import dom.com.ssd.ecfx.sdk.models.EcfProgress
 import dom.com.ssd.ecfx.sdk.models.EcfResponse
-import dom.com.ssd.ecfx.sdk.models.TipoeCFType
 import kotlinx.coroutines.delay
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -62,9 +71,9 @@ class EcfProcessingException(
 /**
  * High-level client for the ECF DGII API (Dominican Republic Electronic Fiscal Receipts).
  *
- * Provides all raw API endpoints via [company], [ecf], and [recepcion] properties,
- * plus a convenient [sendEcf] method that handles ECF type routing, submission,
- * polling, and error handling automatically.
+ * Provides all raw API endpoints via [company], [ecf], [recepcion], and [aprobacionComercial] properties,
+ * plus typed [sendEcf] overloads (one per e-CF type: 31, 32, 33, 34, 41, 43, 44, 45, 46, 47)
+ * that handle submission, polling, and error handling automatically.
  *
  * Usage:
  * ```kotlin
@@ -73,8 +82,8 @@ class EcfProcessingException(
  *     apiKey = "your-jwt-token"
  * ))
  *
- * // High-level: send ECF with automatic routing and polling
- * val result = client.sendEcf(ecfDocument)
+ * // High-level: send a typed ECF and poll until done
+ * val result = client.sendEcf(ecf31Document)
  *
  * // Low-level: use raw API endpoints directly
  * val companies = client.company.getCompanies()
@@ -87,58 +96,147 @@ class EcfClient(private val config: EcfClientConfig) {
     /** Raw Company API endpoints. */
     val company: CompanyApi = CompanyApi(config.baseUrl, authenticatedClient)
 
-    /** Raw ECF API endpoints. */
+    /** Raw ECF API endpoints (issuer side). */
     val ecf: EcfApi = EcfApi(config.baseUrl, authenticatedClient)
 
-    /** Raw Recepcion API endpoints. */
+    /** Raw Recepcion API endpoints (receptor side). */
     val recepcion: RecepcionApi = RecepcionApi(config.baseUrl, authenticatedClient)
 
-    /**
-     * Sends an ECF to the DGII, automatically routing it to the correct endpoint
-     * based on the ECF type (tipoeCF) in the document header, then polls until
-     * processing is complete and returns the final result.
-     *
-     * This method encapsulates:
-     * - **Routing**: Determines the correct `/ecf/{type}` endpoint from `encabezado.idDoc.tipoeCF`
-     * - **Submission**: Sends the ECF to the API
-     * - **Polling**: Repeatedly checks the processing status using the returned message ID
-     * - **Error handling**: Throws [EcfProcessingException] on processing errors,
-     *   [EcfPollingTimeoutException] on timeout
-     *
-     * @param ecfDocument The ECF document to send.
-     * @param pollingIntervalMs Override the default polling interval for this call.
-     * @param maxPollingAttempts Override the default max polling attempts for this call.
-     * @return The final [EcfResponse] with the DGII processing result.
-     * @throws EcfProcessingException if the ECF processing fails.
-     * @throws EcfPollingTimeoutException if polling exceeds the maximum attempts.
-     */
+    /** Raw Aprobacion Comercial (ACECF) API endpoints. */
+    val aprobacionComercial: AprobacionComercialApi = AprobacionComercialApi(config.baseUrl, authenticatedClient)
+
+    // -------------------------------------------------------------------------
+    // ECF send + poll — typed overloads, one per ECF type
+    // -------------------------------------------------------------------------
+
+    /** Send a Factura de Crédito Fiscal Electrónica (e-CF 31) and poll until completion. */
     suspend fun sendEcf(
-        ecfDocument: ECF,
+        ecf: Ecf31ECF,
         pollingIntervalMs: Long = config.pollingIntervalMs,
         maxPollingAttempts: Int = config.maxPollingAttempts,
+    ): EcfResponse = sendInternal(
+        ecf.encabezado.emisor.rncEmisor,
+        { this.ecf.recepcionEcf31(ecf) },
+        pollingIntervalMs,
+        maxPollingAttempts,
+    )
+
+    /** Send a Factura de Consumo Electrónica (e-CF 32) and poll until completion. */
+    suspend fun sendEcf(
+        ecf: Ecf32ECF,
+        pollingIntervalMs: Long = config.pollingIntervalMs,
+        maxPollingAttempts: Int = config.maxPollingAttempts,
+    ): EcfResponse = sendInternal(
+        ecf.encabezado.emisor.rncEmisor,
+        { this.ecf.recepcionEcf32(ecf) },
+        pollingIntervalMs,
+        maxPollingAttempts,
+    )
+
+    /** Send a Nota de Débito Electrónica (e-CF 33) and poll until completion. */
+    suspend fun sendEcf(
+        ecf: Ecf33ECF,
+        pollingIntervalMs: Long = config.pollingIntervalMs,
+        maxPollingAttempts: Int = config.maxPollingAttempts,
+    ): EcfResponse = sendInternal(
+        ecf.encabezado.emisor.rncEmisor,
+        { this.ecf.recepcionEcf33(ecf) },
+        pollingIntervalMs,
+        maxPollingAttempts,
+    )
+
+    /** Send a Nota de Crédito Electrónica (e-CF 34) and poll until completion. */
+    suspend fun sendEcf(
+        ecf: Ecf34ECF,
+        pollingIntervalMs: Long = config.pollingIntervalMs,
+        maxPollingAttempts: Int = config.maxPollingAttempts,
+    ): EcfResponse = sendInternal(
+        ecf.encabezado.emisor.rncEmisor,
+        { this.ecf.recepcionEcf34(ecf) },
+        pollingIntervalMs,
+        maxPollingAttempts,
+    )
+
+    /** Send a Compras Electrónico (e-CF 41) and poll until completion. */
+    suspend fun sendEcf(
+        ecf: Ecf41ECF,
+        pollingIntervalMs: Long = config.pollingIntervalMs,
+        maxPollingAttempts: Int = config.maxPollingAttempts,
+    ): EcfResponse = sendInternal(
+        ecf.encabezado.emisor.rncEmisor,
+        { this.ecf.recepcionEcf41(ecf) },
+        pollingIntervalMs,
+        maxPollingAttempts,
+    )
+
+    /** Send a Gastos Menores Electrónico (e-CF 43) and poll until completion. */
+    suspend fun sendEcf(
+        ecf: Ecf43ECF,
+        pollingIntervalMs: Long = config.pollingIntervalMs,
+        maxPollingAttempts: Int = config.maxPollingAttempts,
+    ): EcfResponse = sendInternal(
+        ecf.encabezado.emisor.rncEmisor,
+        { this.ecf.recepcionEcf43(ecf) },
+        pollingIntervalMs,
+        maxPollingAttempts,
+    )
+
+    /** Send a Regímenes Especiales Electrónico (e-CF 44) and poll until completion. */
+    suspend fun sendEcf(
+        ecf: Ecf44ECF,
+        pollingIntervalMs: Long = config.pollingIntervalMs,
+        maxPollingAttempts: Int = config.maxPollingAttempts,
+    ): EcfResponse = sendInternal(
+        ecf.encabezado.emisor.rncEmisor,
+        { this.ecf.recepcionEcf44(ecf) },
+        pollingIntervalMs,
+        maxPollingAttempts,
+    )
+
+    /** Send a Gubernamental Electrónico (e-CF 45) and poll until completion. */
+    suspend fun sendEcf(
+        ecf: Ecf45ECF,
+        pollingIntervalMs: Long = config.pollingIntervalMs,
+        maxPollingAttempts: Int = config.maxPollingAttempts,
+    ): EcfResponse = sendInternal(
+        ecf.encabezado.emisor.rncEmisor,
+        { this.ecf.recepcionEcf45(ecf) },
+        pollingIntervalMs,
+        maxPollingAttempts,
+    )
+
+    /** Send a Comprobante de Exportaciones Electrónico (e-CF 46) and poll until completion. */
+    suspend fun sendEcf(
+        ecf: Ecf46ECF,
+        pollingIntervalMs: Long = config.pollingIntervalMs,
+        maxPollingAttempts: Int = config.maxPollingAttempts,
+    ): EcfResponse = sendInternal(
+        ecf.encabezado.emisor.rncEmisor,
+        { this.ecf.recepcionEcf46(ecf) },
+        pollingIntervalMs,
+        maxPollingAttempts,
+    )
+
+    /** Send a Comprobante para Pagos al Exterior Electrónico (e-CF 47) and poll until completion. */
+    suspend fun sendEcf(
+        ecf: Ecf47ECF,
+        pollingIntervalMs: Long = config.pollingIntervalMs,
+        maxPollingAttempts: Int = config.maxPollingAttempts,
+    ): EcfResponse = sendInternal(
+        ecf.encabezado.emisor.rncEmisor,
+        { this.ecf.recepcionEcf47(ecf) },
+        pollingIntervalMs,
+        maxPollingAttempts,
+    )
+
+    private suspend fun sendInternal(
+        rnc: String,
+        submit: suspend () -> EcfResponse,
+        pollingIntervalMs: Long,
+        maxPollingAttempts: Int,
     ): EcfResponse {
-        val tipoEcf = ecfDocument.encabezado.idDoc.tipoeCF
-        val rnc = ecfDocument.encabezado.emisor.rncEmisor
-
-        val submitResponse = routeAndSubmit(tipoEcf, ecfDocument)
-        val messageId = submitResponse.messageId
-
-        return pollForResult(rnc, messageId, pollingIntervalMs, maxPollingAttempts)
-    }
-
-    private suspend fun routeAndSubmit(tipoEcf: TipoeCFType, ecfDocument: ECF): EcfResponse {
-        return when (tipoEcf) {
-            TipoeCFType.FacturaDeCreditoFiscalElectronica -> ecf.recepcionEcf31(ecfDocument)
-            TipoeCFType.FacturaDeConsumoElectronica -> ecf.recepcionEcf32(ecfDocument)
-            TipoeCFType.NotaDeDebitoElectronica -> ecf.recepcionEcf33(ecfDocument)
-            TipoeCFType.NotaDeCreditoElectronica -> ecf.recepcionEcf34(ecfDocument)
-            TipoeCFType.ComprasElectronico -> ecf.recepcionEcf41(ecfDocument)
-            TipoeCFType.GastosMenoresElectronico -> ecf.recepcionEcf43(ecfDocument)
-            TipoeCFType.RegimenesEspecialesElectronico -> ecf.recepcionEcf44(ecfDocument)
-            TipoeCFType.GubernamentalElectronico -> ecf.recepcionEcf45(ecfDocument)
-            TipoeCFType.ComprobanteDeExportacionesElectronico -> ecf.recepcionEcf46(ecfDocument)
-            TipoeCFType.ComprobanteParaPagosAlExteriorElectronico -> ecf.recepcionEcf47(ecfDocument)
-        }
+        val submitResponse = submit()
+        return pollForResult(rnc, submitResponse.messageId, pollingIntervalMs, maxPollingAttempts)
     }
 
     private suspend fun pollForResult(
@@ -155,7 +253,7 @@ class EcfClient(private val config: EcfClientConfig) {
             val responses = ecf.getEcfById(rnc, messageId, includeEcfContent = true)
             if (responses.isEmpty()) continue
 
-            val response = responses.first()
+            val response = responses.firstOrNull { it.messageId == messageId } ?: responses.first()
             lastProgress = response.progress
 
             when (response.progress) {

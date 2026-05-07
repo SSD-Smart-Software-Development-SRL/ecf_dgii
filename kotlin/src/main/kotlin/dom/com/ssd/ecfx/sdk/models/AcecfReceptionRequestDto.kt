@@ -15,7 +15,6 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
@@ -52,7 +51,7 @@ data class AcecfReceptionRequestDto (
     val fileName: kotlin.String? = null,
 
     @SerialName(value = "progress")
-    val progress: AcecfReceptionRequestDtoProgress? = null,
+    val progress: Int? = null,
 
     @Contextual @SerialName(value = "createdOn")
     val createdOn: java.time.OffsetDateTime? = null,

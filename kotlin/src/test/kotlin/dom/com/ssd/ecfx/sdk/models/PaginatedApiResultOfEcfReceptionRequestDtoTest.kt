@@ -19,9 +19,8 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfReceptionRequestDto
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
+import dom.com.ssd.ecfx.sdk.models.Ecf31IdDocTotalPaginas
 import dom.com.ssd.ecfx.sdk.models.EcfReceptionRequestDto
-import dom.com.ssd.ecfx.sdk.models.IdDocTotalPaginas
 
 class PaginatedApiResultOfEcfReceptionRequestDtoTest : ShouldSpec() {
     init {

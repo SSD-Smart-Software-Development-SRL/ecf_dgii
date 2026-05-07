@@ -19,8 +19,8 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import dom.com.ssd.ecfx.sdk.models.EcfReceptionRequestDto
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.AllTipoECFTypes
+import dom.com.ssd.ecfx.sdk.models.EcfReceptionRequestDtoMontoTotal
 
 class EcfReceptionRequestDtoTest : ShouldSpec() {
     init {
@@ -97,6 +97,12 @@ class EcfReceptionRequestDtoTest : ShouldSpec() {
         should("test resultInternalFileName") {
             // uncomment below to test the property
             //modelInstance.resultInternalFileName shouldBe ("TODO")
+        }
+
+        // to test the property `montoTotal`
+        should("test montoTotal") {
+            // uncomment below to test the property
+            //modelInstance.montoTotal shouldBe ("TODO")
         }
 
     }

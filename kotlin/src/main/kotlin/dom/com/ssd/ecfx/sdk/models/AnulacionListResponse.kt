@@ -15,7 +15,6 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.DetalleAnulacionRequestDto
 import dom.com.ssd.ecfx.sdk.models.RespuestaAnulacionRango
 
@@ -54,7 +53,7 @@ data class AnulacionListResponse (
     val companyRnc: kotlin.String? = null,
 
     @SerialName(value = "cantidadeNCFAnulados")
-    val cantidadeNCFAnulados: AcecfReceptionRequestDtoProgress? = null,
+    val cantidadeNCFAnulados: Int? = null,
 
     @SerialName(value = "detalleAnulacion")
     val detalleAnulacion: kotlin.collections.List<DetalleAnulacionRequestDto>? = null,
@@ -63,7 +62,7 @@ data class AnulacionListResponse (
     val response: RespuestaAnulacionRango? = null,
 
     @SerialName(value = "statusCode")
-    val statusCode: AcecfReceptionRequestDtoProgress? = null,
+    val statusCode: Int? = null,
 
     @SerialName(value = "fileName")
     val fileName: kotlin.String? = null,

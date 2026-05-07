@@ -8,7 +8,7 @@
 | **tenantId** | [**java.util.UUID**](java.util.UUID.md) |  |  [optional] |
 | **companyRnc** | **kotlin.String** |  |  [optional] |
 | **fileName** | **kotlin.String** |  |  [optional] |
-| **progress** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  [optional] |
+| **progress** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  [optional] |
 | **createdOn** | [**java.time.OffsetDateTime**](java.time.OffsetDateTime.md) |  |  [optional] |
 | **updatedOn** | [**java.time.OffsetDateTime**](java.time.OffsetDateTime.md) |  |  [optional] |
 | **errorMessage** | **kotlin.String** |  |  [optional] |

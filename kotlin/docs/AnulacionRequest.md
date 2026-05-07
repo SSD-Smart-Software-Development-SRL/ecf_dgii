@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **cantidaDeNcfAnulados** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  |
+| **cantidaDeNcfAnulados** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
 | **detalleAnulacion** | [**kotlin.collections.List&lt;DetalleAnulacionRequest&gt;**](DetalleAnulacionRequest.md) |  |  |
 
 

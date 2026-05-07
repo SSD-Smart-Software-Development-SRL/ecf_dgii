@@ -1,9 +1,11 @@
 package dom.com.ssd.ecfx.sdk
 
-import dom.com.ssd.ecfx.sdk.api.CompanyApi
-import dom.com.ssd.ecfx.sdk.api.EcfApi
+import dom.com.ssd.ecfx.sdk.apis.CompanyApi
+import dom.com.ssd.ecfx.sdk.apis.EcfApi
 import dom.com.ssd.ecfx.sdk.models.AllTipoECFTypes
 import dom.com.ssd.ecfx.sdk.models.CompanyResponse
+import dom.com.ssd.ecfx.sdk.models.EcfEstado
+import dom.com.ssd.ecfx.sdk.models.EcfProgress
 import dom.com.ssd.ecfx.sdk.models.EcfResponse
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfCompanyResponse
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfResponse
@@ -163,12 +165,15 @@ class EcfFrontendClient(private val config: EcfFrontendClientConfig) {
         toFechaEmision: OffsetDateTime? = null,
         amountFrom: SearchEcfsAmountFromParameter? = null,
         amountTo: SearchEcfsAmountFromParameter? = null,
+        progresses: List<EcfProgress>? = null,
+        dgiiEstados: List<EcfEstado>? = null,
         page: Int? = null,
         limit: Int? = null,
     ): PaginatedApiResultOfEcfResponse = runBlocking {
         ecfApi.searchEcfs(
             rnc, encfs, ids, tiposEcfs, includeEcfContent,
-            fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit
+            fromFechaEmision, toFechaEmision, amountFrom, amountTo,
+            progresses, dgiiEstados, page, limit
         )
     }
 
@@ -196,12 +201,15 @@ class EcfFrontendClient(private val config: EcfFrontendClientConfig) {
         toFechaEmision: OffsetDateTime? = null,
         amountFrom: SearchEcfsAmountFromParameter? = null,
         amountTo: SearchEcfsAmountFromParameter? = null,
+        progresses: List<EcfProgress>? = null,
+        dgiiEstados: List<EcfEstado>? = null,
         page: Int? = null,
         limit: Int? = null,
     ): PaginatedApiResultOfEcfResponse = runBlocking {
         ecfApi.searchAllEcfs(
             encfs, ids, tiposEcfs, includeEcfContent,
-            fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit
+            fromFechaEmision, toFechaEmision, amountFrom, amountTo,
+            progresses, dgiiEstados, page, limit
         )
     }
 

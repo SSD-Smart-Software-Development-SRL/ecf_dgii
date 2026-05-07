@@ -6,12 +6,12 @@
 | ------------ | ------------- | ------------- | ------------- |
 | **tipoeCF** | [**TipoeCFType**](TipoeCFType.md) |  |  |
 | **encf** | **kotlin.String** |  |  |
-| **indicadorNotaCredito** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  |
-| **tipoIngresos** | [**Ecf34TipoIngresosValidationType**](Ecf34TipoIngresosValidationType.md) |  |  |
+| **indicadorNotaCredito** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
 | **tipoPago** | [**Ecf34TipoPagoType**](Ecf34TipoPagoType.md) |  |  |
 | **indicadorEnvioDiferido** | [**IndicadorEnvioDiferidoType**](IndicadorEnvioDiferidoType.md) |  |  [optional] |
 | **indicadorMontoGravado** | [**IndicadorMontoGravadoType**](IndicadorMontoGravadoType.md) |  |  [optional] |
 | **indicadorServicioTodoIncluido** | [**IndicadorServicioTodoIncluidoType**](IndicadorServicioTodoIncluidoType.md) |  |  [optional] |
+| **tipoIngresos** | [**TipoIngresosValidationType**](TipoIngresosValidationType.md) |  |  [optional] |
 | **fechaLimitePago** | [**java.time.OffsetDateTime**](java.time.OffsetDateTime.md) |  |  [optional] |
 | **fechaDesde** | [**java.time.OffsetDateTime**](java.time.OffsetDateTime.md) |  |  [optional] |
 | **fechaHasta** | [**java.time.OffsetDateTime**](java.time.OffsetDateTime.md) |  |  [optional] |

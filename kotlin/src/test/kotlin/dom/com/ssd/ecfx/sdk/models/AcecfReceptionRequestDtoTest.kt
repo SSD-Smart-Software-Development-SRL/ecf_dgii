@@ -19,7 +19,6 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDto
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 
 class AcecfReceptionRequestDtoTest : ShouldSpec() {
     init {

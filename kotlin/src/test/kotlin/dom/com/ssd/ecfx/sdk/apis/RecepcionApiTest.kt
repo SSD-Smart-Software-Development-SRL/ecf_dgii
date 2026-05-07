@@ -19,54 +19,30 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import dom.com.ssd.ecfx.sdk.apis.RecepcionApi
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesLimitParameter
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesPageParameter
-import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfAcecfReceptionRequestDto
+import dom.com.ssd.ecfx.sdk.models.EcfReceptorDto
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfReceptionRequestDto
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
+import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
+import dom.com.ssd.ecfx.sdk.models.SendAcecfRequest
 
 class RecepcionApiTest : ShouldSpec() {
     init {
         // uncomment below to create an instance of RecepcionApi
         //val apiInstance = RecepcionApi()
 
-        // to test getAcecfReceptionRequest
-        should("test getAcecfReceptionRequest") {
-            // uncomment below to test getAcecfReceptionRequest
-            //val rnc : kotlin.String = rnc_example // kotlin.String | 
-            //val messageId : java.util.UUID = 38400000-8cf0-11bd-b23e-10b96e4ef00d // java.util.UUID | 
-            //apiInstance.getAcecfReceptionRequest(rnc, messageId)
-        }
-
         // to test getEcfReceptionRequest
         should("test getEcfReceptionRequest") {
             // uncomment below to test getEcfReceptionRequest
+            //val messageId : java.util.UUID = 38400000-8cf0-11bd-b23e-10b96e4ef00d // java.util.UUID | 
+            //apiInstance.getEcfReceptionRequest(messageId)
+        }
+
+        // to test getEcfReceptorByMessageId
+        should("test getEcfReceptorByMessageId") {
+            // uncomment below to test getEcfReceptorByMessageId
             //val rnc : kotlin.String = rnc_example // kotlin.String | 
             //val messageId : java.util.UUID = 38400000-8cf0-11bd-b23e-10b96e4ef00d // java.util.UUID | 
-            //apiInstance.getEcfReceptionRequest(rnc, messageId)
-        }
-
-        // to test searchAcecfReceptionRequests
-        should("test searchAcecfReceptionRequests") {
-            // uncomment below to test searchAcecfReceptionRequests
-            //val messageIds : kotlin.collections.List<java.util.UUID> =  // kotlin.collections.List<java.util.UUID> | 
-            //val encfs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
-            //val rncs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
-            //val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-            //val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
-            //val result : PaginatedApiResultOfAcecfReceptionRequestDto = apiInstance.searchAcecfReceptionRequests(messageIds, encfs, rncs, page, limit)
-            //result shouldBe ("TODO")
-        }
-
-        // to test searchAcecfReceptionRequestsByRnc
-        should("test searchAcecfReceptionRequestsByRnc") {
-            // uncomment below to test searchAcecfReceptionRequestsByRnc
-            //val rnc : kotlin.String = rnc_example // kotlin.String | 
-            //val messageIds : kotlin.collections.List<java.util.UUID> =  // kotlin.collections.List<java.util.UUID> | 
-            //val encfs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
-            //val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-            //val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
-            //val result : PaginatedApiResultOfAcecfReceptionRequestDto = apiInstance.searchAcecfReceptionRequestsByRnc(rnc, messageIds, encfs, page, limit)
+            //val result : EcfReceptorDto = apiInstance.getEcfReceptorByMessageId(rnc, messageId)
             //result shouldBe ("TODO")
         }
 
@@ -76,9 +52,16 @@ class RecepcionApiTest : ShouldSpec() {
             //val messageIds : kotlin.collections.List<java.util.UUID> =  // kotlin.collections.List<java.util.UUID> | 
             //val encfs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
             //val rncs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
-            //val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-            //val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
-            //val result : PaginatedApiResultOfEcfReceptionRequestDto = apiInstance.searchEcfReceptionRequests(messageIds, encfs, rncs, page, limit)
+            //val rncEmisors : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
+            //val tiposEcfs : kotlin.collections.List<Int> =  // kotlin.collections.List<Int> | 
+            //val progresses : kotlin.collections.List<Int> =  // kotlin.collections.List<Int> | 
+            //val fromDate : kotlin.String = fromDate_example // kotlin.String | 
+            //val toDate : kotlin.String = toDate_example // kotlin.String | 
+            //val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
+            //val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
+            //val page : Int = 56 // Int | 
+            //val limit : Int = 56 // Int | 
+            //val result : PaginatedApiResultOfEcfReceptionRequestDto = apiInstance.searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit)
             //result shouldBe ("TODO")
         }
 
@@ -88,10 +71,25 @@ class RecepcionApiTest : ShouldSpec() {
             //val rnc : kotlin.String = rnc_example // kotlin.String | 
             //val messageIds : kotlin.collections.List<java.util.UUID> =  // kotlin.collections.List<java.util.UUID> | 
             //val encfs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
-            //val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-            //val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
-            //val result : PaginatedApiResultOfEcfReceptionRequestDto = apiInstance.searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, page, limit)
+            //val rncEmisors : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
+            //val tiposEcfs : kotlin.collections.List<Int> =  // kotlin.collections.List<Int> | 
+            //val progresses : kotlin.collections.List<Int> =  // kotlin.collections.List<Int> | 
+            //val fromDate : kotlin.String = fromDate_example // kotlin.String | 
+            //val toDate : kotlin.String = toDate_example // kotlin.String | 
+            //val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
+            //val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
+            //val page : Int = 56 // Int | 
+            //val limit : Int = 56 // Int | 
+            //val result : PaginatedApiResultOfEcfReceptionRequestDto = apiInstance.searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit)
             //result shouldBe ("TODO")
+        }
+
+        // to test sendAprobacionComercial
+        should("test sendAprobacionComercial") {
+            // uncomment below to test sendAprobacionComercial
+            //val messageId : java.util.UUID = 38400000-8cf0-11bd-b23e-10b96e4ef00d // java.util.UUID | 
+            //val sendAcecfRequest : SendAcecfRequest =  // SendAcecfRequest | 
+            //apiInstance.sendAprobacionComercial(messageId, sendAcecfRequest)
         }
 
     }

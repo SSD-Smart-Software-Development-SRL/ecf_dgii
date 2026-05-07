@@ -15,7 +15,6 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.Ecf31DescuentoORecargoMontoDescuentooRecargo
 import dom.com.ssd.ecfx.sdk.models.Ecf31DescuentoORecargoValorDescuentooRecargo
 import dom.com.ssd.ecfx.sdk.models.Ecf32TipoAjusteType
@@ -45,7 +44,7 @@ import kotlinx.serialization.Contextual
 data class Ecf32DescuentoORecargo (
 
     @SerialName(value = "numeroLinea")
-    val numeroLinea: AcecfReceptionRequestDtoProgress,
+    val numeroLinea: Int,
 
     @Contextual @SerialName(value = "tipoAjuste")
     val tipoAjuste: Ecf32TipoAjusteType,

@@ -31,16 +31,52 @@ class UpsertCompanyRequestTest : ShouldSpec() {
             //modelInstance.rnc shouldBe ("TODO")
         }
 
-        // to test the property `legalName`
-        should("test legalName") {
-            // uncomment below to test the property
-            //modelInstance.legalName shouldBe ("TODO")
-        }
-
         // to test the property `name`
         should("test name") {
             // uncomment below to test the property
             //modelInstance.name shouldBe ("TODO")
+        }
+
+        // to test the property `employeeCount`
+        should("test employeeCount") {
+            // uncomment below to test the property
+            //modelInstance.employeeCount shouldBe ("TODO")
+        }
+
+        // to test the property `estimatedInvoices`
+        should("test estimatedInvoices") {
+            // uncomment below to test the property
+            //modelInstance.estimatedInvoices shouldBe ("TODO")
+        }
+
+        // to test the property `legalRepFirstName`
+        should("test legalRepFirstName") {
+            // uncomment below to test the property
+            //modelInstance.legalRepFirstName shouldBe ("TODO")
+        }
+
+        // to test the property `legalRepLastName`
+        should("test legalRepLastName") {
+            // uncomment below to test the property
+            //modelInstance.legalRepLastName shouldBe ("TODO")
+        }
+
+        // to test the property `address`
+        should("test address") {
+            // uncomment below to test the property
+            //modelInstance.address shouldBe ("TODO")
+        }
+
+        // to test the property `certificationDeclared`
+        should("test certificationDeclared") {
+            // uncomment below to test the property
+            //modelInstance.certificationDeclared shouldBe ("TODO")
+        }
+
+        // to test the property `certificationStatus`
+        should("test certificationStatus") {
+            // uncomment below to test the property
+            //modelInstance.certificationStatus shouldBe ("TODO")
         }
 
     }

@@ -19,7 +19,6 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import dom.com.ssd.ecfx.sdk.models.Ecf46Item
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.Ecf31DescuentoORecargoMontoDescuentooRecargo
 import dom.com.ssd.ecfx.sdk.models.Ecf31FormaDePagoMontoPago
 import dom.com.ssd.ecfx.sdk.models.Ecf31ItemCantidadItem

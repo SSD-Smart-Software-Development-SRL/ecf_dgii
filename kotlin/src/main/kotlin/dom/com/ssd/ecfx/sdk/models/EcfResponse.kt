@@ -15,6 +15,7 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
+import dom.com.ssd.ecfx.sdk.models.AcecfSummaryDto
 import dom.com.ssd.ecfx.sdk.models.AllTipoECFTypes
 import dom.com.ssd.ecfx.sdk.models.DGIIEnvironment
 import dom.com.ssd.ecfx.sdk.models.EcfEstado
@@ -50,6 +51,7 @@ import kotlinx.serialization.Contextual
  * @param emisorReceptorErrors 
  * @param secuenciaUtilizada 
  * @param dgiiEnvironment 
+ * @param acecfs ACECFs received from the receptor for this outbound ECF.
  * @param impresionUrl 
  */
 @Serializable
@@ -121,6 +123,10 @@ data class EcfResponse (
 
     @Contextual @SerialName(value = "dgiiEnvironment")
     val dgiiEnvironment: DGIIEnvironment,
+
+    /* ACECFs received from the receptor for this outbound ECF. */
+    @SerialName(value = "acecfs")
+    val acecfs: kotlin.collections.List<AcecfSummaryDto>? = null,
 
     @SerialName(value = "impresionUrl")
     val impresionUrl: kotlin.String? = null

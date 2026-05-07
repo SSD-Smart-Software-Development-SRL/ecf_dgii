@@ -19,9 +19,11 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfAcecfReceptionRequestDto
+import dom.com.ssd.ecfx.sdk.models.EcfReceptorDto
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfReceptionRequestDto
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
+import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
+import dom.com.ssd.ecfx.sdk.models.SendAcecfRequest
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -50,10 +52,9 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
-     * GET /recepcion/{rnc}/acecf/{messageId}
+     * GET /recepcion/{messageId}
      * 
      * 
-     * @param rnc 
      * @param messageId 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -63,8 +64,8 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getAcecfReceptionRequest(rnc: kotlin.String, messageId: java.util.UUID) : Unit {
-        val localVarResponse = getAcecfReceptionRequestWithHttpInfo(rnc = rnc, messageId = messageId)
+    fun getEcfReceptionRequest(messageId: java.util.UUID) : Unit {
+        val localVarResponse = getEcfReceptionRequestWithHttpInfo(messageId = messageId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -82,92 +83,17 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
-     * GET /recepcion/{rnc}/acecf/{messageId}
+     * GET /recepcion/{messageId}
      * 
      * 
-     * @param rnc 
      * @param messageId 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun getAcecfReceptionRequestWithHttpInfo(rnc: kotlin.String, messageId: java.util.UUID) : ApiResponse<Unit?> {
-        val localVariableConfig = getAcecfReceptionRequestRequestConfig(rnc = rnc, messageId = messageId)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation getAcecfReceptionRequest
-     *
-     * @param rnc 
-     * @param messageId 
-     * @return RequestConfig
-     */
-    fun getAcecfReceptionRequestRequestConfig(rnc: kotlin.String, messageId: java.util.UUID) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/problem+json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/recepcion/{rnc}/acecf/{messageId}".replace("{"+"rnc"+"}", encodeURIComponent(rnc.toString())).replace("{"+"messageId"+"}", encodeURIComponent(messageId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /recepcion/{rnc}/ecf/{messageId}
-     * 
-     * 
-     * @param rnc 
-     * @param messageId 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getEcfReceptionRequest(rnc: kotlin.String, messageId: java.util.UUID) : Unit {
-        val localVarResponse = getEcfReceptionRequestWithHttpInfo(rnc = rnc, messageId = messageId)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /recepcion/{rnc}/ecf/{messageId}
-     * 
-     * 
-     * @param rnc 
-     * @param messageId 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun getEcfReceptionRequestWithHttpInfo(rnc: kotlin.String, messageId: java.util.UUID) : ApiResponse<Unit?> {
-        val localVariableConfig = getEcfReceptionRequestRequestConfig(rnc = rnc, messageId = messageId)
+    fun getEcfReceptionRequestWithHttpInfo(messageId: java.util.UUID) : ApiResponse<Unit?> {
+        val localVariableConfig = getEcfReceptionRequestRequestConfig(messageId = messageId)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -177,11 +103,10 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
     /**
      * To obtain the request config of the operation getEcfReceptionRequest
      *
-     * @param rnc 
      * @param messageId 
      * @return RequestConfig
      */
-    fun getEcfReceptionRequestRequestConfig(rnc: kotlin.String, messageId: java.util.UUID) : RequestConfig<Unit> {
+    fun getEcfReceptionRequestRequestConfig(messageId: java.util.UUID) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -189,7 +114,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/recepcion/{rnc}/ecf/{messageId}".replace("{"+"rnc"+"}", encodeURIComponent(rnc.toString())).replace("{"+"messageId"+"}", encodeURIComponent(messageId.toString())),
+            path = "/recepcion/{messageId}".replace("{"+"messageId"+"}", encodeURIComponent(messageId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -198,15 +123,12 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
-     * GET /recepcion/acecf
+     * GET /recepcion/{rnc}/{messageId}
      * 
      * 
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param rncs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @return PaginatedApiResultOfAcecfReceptionRequestDto
+     * @param rnc 
+     * @param messageId 
+     * @return EcfReceptorDto
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -215,11 +137,11 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchAcecfReceptionRequests(messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncs: kotlin.collections.List<kotlin.String>? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfAcecfReceptionRequestDto {
-        val localVarResponse = searchAcecfReceptionRequestsWithHttpInfo(messageIds = messageIds, encfs = encfs, rncs = rncs, page = page, limit = limit)
+    fun getEcfReceptorByMessageId(rnc: kotlin.String, messageId: java.util.UUID) : EcfReceptorDto {
+        val localVarResponse = getEcfReceptorByMessageIdWithHttpInfo(rnc = rnc, messageId = messageId)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PaginatedApiResultOfAcecfReceptionRequestDto
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EcfReceptorDto
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -234,62 +156,41 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
-     * GET /recepcion/acecf
+     * GET /recepcion/{rnc}/{messageId}
      * 
      * 
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param rncs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @return ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto?>
+     * @param rnc 
+     * @param messageId 
+     * @return ApiResponse<EcfReceptorDto?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchAcecfReceptionRequestsWithHttpInfo(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto?> {
-        val localVariableConfig = searchAcecfReceptionRequestsRequestConfig(messageIds = messageIds, encfs = encfs, rncs = rncs, page = page, limit = limit)
+    fun getEcfReceptorByMessageIdWithHttpInfo(rnc: kotlin.String, messageId: java.util.UUID) : ApiResponse<EcfReceptorDto?> {
+        val localVariableConfig = getEcfReceptorByMessageIdRequestConfig(rnc = rnc, messageId = messageId)
 
-        return request<Unit, PaginatedApiResultOfAcecfReceptionRequestDto>(
+        return request<Unit, EcfReceptorDto>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation searchAcecfReceptionRequests
+     * To obtain the request config of the operation getEcfReceptorByMessageId
      *
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param rncs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
+     * @param rnc 
+     * @param messageId 
      * @return RequestConfig
      */
-    fun searchAcecfReceptionRequestsRequestConfig(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
+    fun getEcfReceptorByMessageIdRequestConfig(rnc: kotlin.String, messageId: java.util.UUID) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (messageIds != null) {
-                    put("MessageIds", toMultiValue(messageIds.toList(), "multi"))
-                }
-                if (encfs != null) {
-                    put("Encfs", toMultiValue(encfs.toList(), "multi"))
-                }
-                if (rncs != null) {
-                    put("Rncs", toMultiValue(rncs.toList(), "multi"))
-                }
-                if (page != null) {
-                }
-                if (limit != null) {
-                }
-            }
+        val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json, application/problem+json"
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/recepcion/acecf",
+            path = "/recepcion/{rnc}/{messageId}".replace("{"+"rnc"+"}", encodeURIComponent(rnc.toString())).replace("{"+"messageId"+"}", encodeURIComponent(messageId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -298,109 +199,19 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
-     * GET /recepcion/{rnc}/acecf
-     * 
-     * 
-     * @param rnc 
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @return PaginatedApiResultOfAcecfReceptionRequestDto
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchAcecfReceptionRequestsByRnc(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfAcecfReceptionRequestDto {
-        val localVarResponse = searchAcecfReceptionRequestsByRncWithHttpInfo(rnc = rnc, messageIds = messageIds, encfs = encfs, page = page, limit = limit)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PaginatedApiResultOfAcecfReceptionRequestDto
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /recepcion/{rnc}/acecf
-     * 
-     * 
-     * @param rnc 
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @return ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchAcecfReceptionRequestsByRncWithHttpInfo(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfAcecfReceptionRequestDto?> {
-        val localVariableConfig = searchAcecfReceptionRequestsByRncRequestConfig(rnc = rnc, messageIds = messageIds, encfs = encfs, page = page, limit = limit)
-
-        return request<Unit, PaginatedApiResultOfAcecfReceptionRequestDto>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchAcecfReceptionRequestsByRnc
-     *
-     * @param rnc 
-     * @param messageIds  (optional)
-     * @param encfs  (optional)
-     * @param page  (optional, default to 1)
-     * @param limit  (optional, default to 25)
-     * @return RequestConfig
-     */
-    fun searchAcecfReceptionRequestsByRncRequestConfig(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (messageIds != null) {
-                    put("MessageIds", toMultiValue(messageIds.toList(), "multi"))
-                }
-                if (encfs != null) {
-                    put("Encfs", toMultiValue(encfs.toList(), "multi"))
-                }
-                if (page != null) {
-                }
-                if (limit != null) {
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json, application/problem+json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/recepcion/{rnc}/acecf".replace("{"+"rnc"+"}", encodeURIComponent(rnc.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /recepcion/ecf
+     * GET /recepcion
      * 
      * 
      * @param messageIds  (optional)
      * @param encfs  (optional)
      * @param rncs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfReceptionRequestDto
@@ -412,8 +223,8 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchEcfReceptionRequests(messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncs: kotlin.collections.List<kotlin.String>? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfReceptionRequestDto {
-        val localVarResponse = searchEcfReceptionRequestsWithHttpInfo(messageIds = messageIds, encfs = encfs, rncs = rncs, page = page, limit = limit)
+    fun searchEcfReceptionRequests(messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncs: kotlin.collections.List<kotlin.String>? = null, rncEmisors: kotlin.collections.List<kotlin.String>? = null, tiposEcfs: kotlin.collections.List<Int>? = null, progresses: kotlin.collections.List<Int>? = null, fromDate: kotlin.String? = null, toDate: kotlin.String? = null, amountFrom: SearchEcfsAmountFromParameter? = null, amountTo: SearchEcfsAmountFromParameter? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfReceptionRequestDto {
+        val localVarResponse = searchEcfReceptionRequestsWithHttpInfo(messageIds = messageIds, encfs = encfs, rncs = rncs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PaginatedApiResultOfEcfReceptionRequestDto
@@ -431,12 +242,19 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
-     * GET /recepcion/ecf
+     * GET /recepcion
      * 
      * 
      * @param messageIds  (optional)
      * @param encfs  (optional)
      * @param rncs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?>
@@ -445,8 +263,8 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchEcfReceptionRequestsWithHttpInfo(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> {
-        val localVariableConfig = searchEcfReceptionRequestsRequestConfig(messageIds = messageIds, encfs = encfs, rncs = rncs, page = page, limit = limit)
+    fun searchEcfReceptionRequestsWithHttpInfo(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> {
+        val localVariableConfig = searchEcfReceptionRequestsRequestConfig(messageIds = messageIds, encfs = encfs, rncs = rncs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
 
         return request<Unit, PaginatedApiResultOfEcfReceptionRequestDto>(
             localVariableConfig
@@ -459,11 +277,18 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param messageIds  (optional)
      * @param encfs  (optional)
      * @param rncs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchEcfReceptionRequestsRequestConfig(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
+    fun searchEcfReceptionRequestsRequestConfig(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -476,6 +301,25 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
                 if (rncs != null) {
                     put("Rncs", toMultiValue(rncs.toList(), "multi"))
                 }
+                if (rncEmisors != null) {
+                    put("RncEmisors", toMultiValue(rncEmisors.toList(), "multi"))
+                }
+                if (tiposEcfs != null) {
+                    put("TiposEcfs", toMultiValue(tiposEcfs.toList(), "multi"))
+                }
+                if (progresses != null) {
+                    put("Progresses", toMultiValue(progresses.toList(), "multi"))
+                }
+                if (fromDate != null) {
+                    put("FromDate", listOf(fromDate.toString()))
+                }
+                if (toDate != null) {
+                    put("ToDate", listOf(toDate.toString()))
+                }
+                if (amountFrom != null) {
+                }
+                if (amountTo != null) {
+                }
                 if (page != null) {
                 }
                 if (limit != null) {
@@ -486,7 +330,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/recepcion/ecf",
+            path = "/recepcion",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -495,12 +339,19 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
-     * GET /recepcion/{rnc}/ecf
+     * GET /recepcion/{rnc}
      * 
      * 
      * @param rnc 
      * @param messageIds  (optional)
      * @param encfs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfReceptionRequestDto
@@ -512,8 +363,8 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchEcfReceptionRequestsByRnc(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfReceptionRequestDto {
-        val localVarResponse = searchEcfReceptionRequestsByRncWithHttpInfo(rnc = rnc, messageIds = messageIds, encfs = encfs, page = page, limit = limit)
+    fun searchEcfReceptionRequestsByRnc(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncEmisors: kotlin.collections.List<kotlin.String>? = null, tiposEcfs: kotlin.collections.List<Int>? = null, progresses: kotlin.collections.List<Int>? = null, fromDate: kotlin.String? = null, toDate: kotlin.String? = null, amountFrom: SearchEcfsAmountFromParameter? = null, amountTo: SearchEcfsAmountFromParameter? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfReceptionRequestDto {
+        val localVarResponse = searchEcfReceptionRequestsByRncWithHttpInfo(rnc = rnc, messageIds = messageIds, encfs = encfs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PaginatedApiResultOfEcfReceptionRequestDto
@@ -531,12 +382,19 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
-     * GET /recepcion/{rnc}/ecf
+     * GET /recepcion/{rnc}
      * 
      * 
      * @param rnc 
      * @param messageIds  (optional)
      * @param encfs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?>
@@ -545,8 +403,8 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchEcfReceptionRequestsByRncWithHttpInfo(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> {
-        val localVariableConfig = searchEcfReceptionRequestsByRncRequestConfig(rnc = rnc, messageIds = messageIds, encfs = encfs, page = page, limit = limit)
+    fun searchEcfReceptionRequestsByRncWithHttpInfo(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> {
+        val localVariableConfig = searchEcfReceptionRequestsByRncRequestConfig(rnc = rnc, messageIds = messageIds, encfs = encfs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
 
         return request<Unit, PaginatedApiResultOfEcfReceptionRequestDto>(
             localVariableConfig
@@ -559,11 +417,18 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param rnc 
      * @param messageIds  (optional)
      * @param encfs  (optional)
+     * @param rncEmisors  (optional)
+     * @param tiposEcfs  (optional)
+     * @param progresses  (optional)
+     * @param fromDate  (optional)
+     * @param toDate  (optional)
+     * @param amountFrom  (optional)
+     * @param amountTo  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchEcfReceptionRequestsByRncRequestConfig(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
+    fun searchEcfReceptionRequestsByRncRequestConfig(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -572,6 +437,25 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
                 }
                 if (encfs != null) {
                     put("Encfs", toMultiValue(encfs.toList(), "multi"))
+                }
+                if (rncEmisors != null) {
+                    put("RncEmisors", toMultiValue(rncEmisors.toList(), "multi"))
+                }
+                if (tiposEcfs != null) {
+                    put("TiposEcfs", toMultiValue(tiposEcfs.toList(), "multi"))
+                }
+                if (progresses != null) {
+                    put("Progresses", toMultiValue(progresses.toList(), "multi"))
+                }
+                if (fromDate != null) {
+                    put("FromDate", listOf(fromDate.toString()))
+                }
+                if (toDate != null) {
+                    put("ToDate", listOf(toDate.toString()))
+                }
+                if (amountFrom != null) {
+                }
+                if (amountTo != null) {
                 }
                 if (page != null) {
                 }
@@ -583,7 +467,82 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/recepcion/{rnc}/ecf".replace("{"+"rnc"+"}", encodeURIComponent(rnc.toString())),
+            path = "/recepcion/{rnc}".replace("{"+"rnc"+"}", encodeURIComponent(rnc.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /recepcion/{messageId}/acecf
+     * 
+     * 
+     * @param messageId 
+     * @param sendAcecfRequest 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun sendAprobacionComercial(messageId: java.util.UUID, sendAcecfRequest: SendAcecfRequest) : Unit {
+        val localVarResponse = sendAprobacionComercialWithHttpInfo(messageId = messageId, sendAcecfRequest = sendAcecfRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /recepcion/{messageId}/acecf
+     * 
+     * 
+     * @param messageId 
+     * @param sendAcecfRequest 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun sendAprobacionComercialWithHttpInfo(messageId: java.util.UUID, sendAcecfRequest: SendAcecfRequest) : ApiResponse<Unit?> {
+        val localVariableConfig = sendAprobacionComercialRequestConfig(messageId = messageId, sendAcecfRequest = sendAcecfRequest)
+
+        return request<SendAcecfRequest, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation sendAprobacionComercial
+     *
+     * @param messageId 
+     * @param sendAcecfRequest 
+     * @return RequestConfig
+     */
+    fun sendAprobacionComercialRequestConfig(messageId: java.util.UUID, sendAcecfRequest: SendAcecfRequest) : RequestConfig<SendAcecfRequest> {
+        val localVariableBody = sendAcecfRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/problem+json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/recepcion/{messageId}/acecf".replace("{"+"messageId"+"}", encodeURIComponent(messageId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

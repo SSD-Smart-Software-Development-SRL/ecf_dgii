@@ -36,5 +36,7 @@
 
     * `MXN` (value: `"MXN"`)
 
+    * `COP` (value: `"COP"`)
+
 
 

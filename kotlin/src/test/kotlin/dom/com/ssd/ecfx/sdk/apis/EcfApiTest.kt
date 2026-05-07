@@ -32,15 +32,14 @@ import dom.com.ssd.ecfx.sdk.models.Ecf44ECF
 import dom.com.ssd.ecfx.sdk.models.Ecf45ECF
 import dom.com.ssd.ecfx.sdk.models.Ecf46ECF
 import dom.com.ssd.ecfx.sdk.models.Ecf47ECF
+import dom.com.ssd.ecfx.sdk.models.EcfEstado
+import dom.com.ssd.ecfx.sdk.models.EcfProgress
 import dom.com.ssd.ecfx.sdk.models.EcfResponse
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesLimitParameter
-import dom.com.ssd.ecfx.sdk.models.GetCompaniesPageParameter
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfAnulacionListResponse
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfResponse
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
 import dom.com.ssd.ecfx.sdk.models.RespuestaAnulacionRango
 import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
-import dom.com.ssd.ecfx.sdk.models.SendAcecfRequest
 
 class EcfApiTest : ShouldSpec() {
     init {
@@ -54,15 +53,6 @@ class EcfApiTest : ShouldSpec() {
             //val anulacionRequest : AnulacionRequest =  // AnulacionRequest | 
             //val result : RespuestaAnulacionRango = apiInstance.anulacionRangos(rnc, anulacionRequest)
             //result shouldBe ("TODO")
-        }
-
-        // to test aprobacionComercial
-        should("test aprobacionComercial") {
-            // uncomment below to test aprobacionComercial
-            //val rnc : kotlin.String = rnc_example // kotlin.String | 
-            //val encf : kotlin.String = encf_example // kotlin.String | 
-            //val sendAcecfRequest : SendAcecfRequest =  // SendAcecfRequest | 
-            //apiInstance.aprobacionComercial(rnc, encf, sendAcecfRequest)
         }
 
         // to test firmarSemilla
@@ -90,8 +80,8 @@ class EcfApiTest : ShouldSpec() {
             //val rncs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
             //val fechaDesde : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // java.time.OffsetDateTime | 
             //val fechaHasta : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // java.time.OffsetDateTime | 
-            //val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-            //val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
+            //val page : Int = 56 // Int | 
+            //val limit : Int = 56 // Int | 
             //val result : PaginatedApiResultOfAnulacionListResponse = apiInstance.listAnulaciones(tipoEcf, rncs, fechaDesde, fechaHasta, page, limit)
             //result shouldBe ("TODO")
         }
@@ -197,9 +187,11 @@ class EcfApiTest : ShouldSpec() {
             //val toFechaEmision : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // java.time.OffsetDateTime | 
             //val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
             //val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
-            //val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-            //val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
-            //val result : PaginatedApiResultOfEcfResponse = apiInstance.searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit)
+            //val progresses : kotlin.collections.List<EcfProgress> =  // kotlin.collections.List<EcfProgress> | 
+            //val dgiiEstados : kotlin.collections.List<EcfEstado> =  // kotlin.collections.List<EcfEstado> | 
+            //val page : Int = 56 // Int | 
+            //val limit : Int = 56 // Int | 
+            //val result : PaginatedApiResultOfEcfResponse = apiInstance.searchAllEcfs(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit)
             //result shouldBe ("TODO")
         }
 
@@ -215,9 +207,11 @@ class EcfApiTest : ShouldSpec() {
             //val toFechaEmision : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // java.time.OffsetDateTime | 
             //val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
             //val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
-            //val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-            //val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
-            //val result : PaginatedApiResultOfEcfResponse = apiInstance.searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit)
+            //val progresses : kotlin.collections.List<EcfProgress> =  // kotlin.collections.List<EcfProgress> | 
+            //val dgiiEstados : kotlin.collections.List<EcfEstado> =  // kotlin.collections.List<EcfEstado> | 
+            //val page : Int = 56 // Int | 
+            //val limit : Int = 56 // Int | 
+            //val result : PaginatedApiResultOfEcfResponse = apiInstance.searchEcfs(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit)
             //result shouldBe ("TODO")
         }
 

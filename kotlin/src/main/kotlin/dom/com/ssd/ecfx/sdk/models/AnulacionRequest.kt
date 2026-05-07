@@ -15,7 +15,6 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
-import dom.com.ssd.ecfx.sdk.models.AcecfReceptionRequestDtoProgress
 import dom.com.ssd.ecfx.sdk.models.DetalleAnulacionRequest
 
 import kotlinx.serialization.Serializable
@@ -33,7 +32,7 @@ import kotlinx.serialization.Contextual
 data class AnulacionRequest (
 
     @SerialName(value = "cantidaDeNcfAnulados")
-    val cantidaDeNcfAnulados: AcecfReceptionRequestDtoProgress,
+    val cantidaDeNcfAnulados: Int,
 
     @SerialName(value = "detalleAnulacion")
     val detalleAnulacion: kotlin.collections.List<DetalleAnulacionRequest>

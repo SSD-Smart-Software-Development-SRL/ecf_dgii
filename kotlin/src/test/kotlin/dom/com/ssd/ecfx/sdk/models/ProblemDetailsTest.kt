@@ -19,7 +19,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
-import dom.com.ssd.ecfx.sdk.models.IdDocTotalPaginas
+import dom.com.ssd.ecfx.sdk.models.Ecf31IdDocTotalPaginas
 
 class ProblemDetailsTest : ShouldSpec() {
     init {

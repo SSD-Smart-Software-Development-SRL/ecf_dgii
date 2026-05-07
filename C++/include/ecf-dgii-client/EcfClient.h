@@ -16,7 +16,6 @@
 #include "ecf-dgii-client/api/RecepcionApi.h"
 #include "ecf-dgii-client/api/DgiiApi.h"
 #include "ecf-dgii-client/api/ApiKeyApi.h"
-#include "ecf-dgii-client/model/ECF.h"
 #include "ecf-dgii-client/model/EcfResponse.h"
 #include "ecf-dgii-client/model/EcfProgress.h"
 #include "ecf-dgii-client/model/TipoeCFType.h"
@@ -111,31 +110,19 @@ public:
     explicit EcfClient(const EcfClientConfig& config);
 
     // -------------------------------------------------------------------------
-    // High-level ECF send + poll
-    // -------------------------------------------------------------------------
-
-    /**
-     * Send an ECF and poll until processing completes.
-     *
-     * Determines the correct endpoint from ecf.encabezado.idDoc.tipoeCF,
-     * posts the ECF, then polls until progress is Finished or Error.
-     *
-     * @param ecf The ECF document to send.
-     * @param options Polling configuration (optional).
-     * @return The final EcfResponse when processing is complete.
-     * @throws EcfError if processing results in an error.
-     * @throws PollingMaxRetriesError if max retries exceeded.
-     * @throws PollingTimeoutError if timeout exceeded.
-     * @throws std::invalid_argument if required fields are missing.
-     */
-    pplx::task<std::shared_ptr<EcfResponse>> sendEcf(
-        std::shared_ptr<ECF> ecf,
-        const PollingOptions& options = PollingOptions{}
-    );
-
-    // -------------------------------------------------------------------------
     // Raw API access
     // -------------------------------------------------------------------------
+    //
+    // The previous high-level sendEcf(std::shared_ptr<ECF>, ...) helper has
+    // been removed: the OpenAPI spec no longer carries a unified ECF schema.
+    // It now exposes per-eCF-type schemas (Ecf31ECF ... Ecf47ECF), each with
+    // its own typed Encabezado/IdDoc/Emisor. To submit an ECF, call the
+    // matching typed endpoint directly via ecfApi(), e.g.:
+    //
+    //     auto resp = client.ecfApi()->ecf31Post(rnc, ecf31).get();
+    //
+    // A typed send-and-poll wrapper (one overload per eCF type) is on the
+    // roadmap but not yet ported.
 
     /** Access the underlying EcfApi for direct endpoint calls. */
     std::shared_ptr<EcfApi> ecfApi() const { return m_ecfApi; }

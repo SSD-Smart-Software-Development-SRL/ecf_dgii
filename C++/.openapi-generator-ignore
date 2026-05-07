@@ -27,6 +27,8 @@ include/ecf-dgii-client/EcfClient.h
 src/EcfClient.cpp
 README.md
 LICENSE
+CMakeLists.txt
+Config.cmake.in
 conanfile.py
 vcpkg.json
 vcpkg/*
@@ -34,3 +36,4 @@ ecf-dgii-client.nuspec
 nuget/*
 test_package/*
 .gitignore
+git_push.sh

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum UnidadMedidaType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum UnidadMedidaType: String, Sendable, Codable, CaseIterable {
     case barril = "Barril"
     case bolsa = "Bolsa"
     case bote = "Bote"
@@ -70,5 +70,4 @@ public enum UnidadMedidaType: String, Sendable, Codable, CaseIterable, CaseItera
     case mgmiligramo = "MGMiligramo"
     case ozonzas = "OZOnzas"
     case oztonzastroy = "OZTOnzasTroy"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

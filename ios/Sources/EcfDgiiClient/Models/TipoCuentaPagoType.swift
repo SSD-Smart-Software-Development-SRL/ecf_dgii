@@ -7,9 +7,8 @@
 
 import Foundation
 
-public enum TipoCuentaPagoType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum TipoCuentaPagoType: String, Sendable, Codable, CaseIterable {
     case ct = "CT"
     case ah = "AH"
     case ot = "OT"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

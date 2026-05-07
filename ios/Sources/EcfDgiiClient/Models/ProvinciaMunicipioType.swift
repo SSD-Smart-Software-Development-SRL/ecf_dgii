@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ProvinciaMunicipioType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum ProvinciaMunicipioType: String, Sendable, Codable, CaseIterable {
     case _010000 = "010000"
     case _010100 = "010100"
     case _010101 = "010101"
@@ -590,5 +590,4 @@ public enum ProvinciaMunicipioType: String, Sendable, Codable, CaseIterable, Cas
     case _320701 = "320701"
     case _320702 = "320702"
     case _320703 = "320703"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

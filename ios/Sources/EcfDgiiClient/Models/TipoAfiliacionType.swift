@@ -7,8 +7,7 @@
 
 import Foundation
 
-public enum TipoAfiliacionType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum TipoAfiliacionType: String, Sendable, Codable, CaseIterable {
     case afiliada = "Afiliada"
     case noAfiliada = "NoAfiliada"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

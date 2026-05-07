@@ -1154,97 +1154,6 @@
         }
       }
     },
-    "/ecf/aprobacioncomercial/{rnc}/{encf}": {
-      "post": {
-        "tags": [
-          "Ecf"
-        ],
-        "operationId": "AprobacionComercial",
-        "parameters": [
-          {
-            "name": "rnc",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "encf",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SendAcecfRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/ecf/{rnc}/{encf}": {
       "get": {
         "tags": [
@@ -1519,6 +1428,26 @@
             }
           },
           {
+            "name": "Progresses",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/EcfProgress"
+              }
+            }
+          },
+          {
+            "name": "DgiiEstados",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/EcfEstado"
+              }
+            }
+          },
+          {
             "name": "Page",
             "in": "query",
             "schema": {
@@ -1683,6 +1612,26 @@
                 "string"
               ],
               "format": "double"
+            }
+          },
+          {
+            "name": "Progresses",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/EcfProgress"
+              }
+            }
+          },
+          {
+            "name": "DgiiEstados",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/EcfEstado"
+              }
             }
           },
           {
@@ -1955,7 +1904,7 @@
         }
       }
     },
-    "/recepcion/ecf": {
+    "/recepcion": {
       "get": {
         "tags": [
           "Recepcion"
@@ -1994,86 +1943,7 @@
             }
           },
           {
-            "name": "Page",
-            "in": "query",
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32",
-              "default": 1
-            }
-          },
-          {
-            "name": "Limit",
-            "in": "query",
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32",
-              "default": 25
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaginatedApiResultOfEcfReceptionRequestDto"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/recepcion/acecf": {
-      "get": {
-        "tags": [
-          "Recepcion"
-        ],
-        "operationId": "SearchAcecfReceptionRequests",
-        "parameters": [
-          {
-            "name": "MessageIds",
-            "in": "query",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "format": "uuid"
-              }
-            }
-          },
-          {
-            "name": "Encfs",
+            "name": "RncEmisors",
             "in": "query",
             "schema": {
               "type": "array",
@@ -2083,110 +1953,71 @@
             }
           },
           {
-            "name": "Rncs",
+            "name": "TiposEcfs",
             "in": "query",
             "schema": {
               "type": "array",
               "items": {
-                "type": "string"
+                "pattern": "^-?(?:0|[1-9]\\d*)$",
+                "type": [
+                  "integer",
+                  "string"
+                ],
+                "format": "int32"
               }
             }
           },
           {
-            "name": "Page",
+            "name": "Progresses",
             "in": "query",
             "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32",
-              "default": 1
+              "type": "array",
+              "items": {
+                "pattern": "^-?(?:0|[1-9]\\d*)$",
+                "type": [
+                  "integer",
+                  "string"
+                ],
+                "format": "int32"
+              }
             }
           },
           {
-            "name": "Limit",
+            "name": "FromDate",
             "in": "query",
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32",
-              "default": 25
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaginatedApiResultOfAcecfReceptionRequestDto"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/recepcion/{rnc}/ecf": {
-      "get": {
-        "tags": [
-          "Recepcion"
-        ],
-        "operationId": "SearchEcfReceptionRequestsByRnc",
-        "parameters": [
-          {
-            "name": "rnc",
-            "in": "path",
-            "required": true,
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "MessageIds",
+            "name": "ToDate",
             "in": "query",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "format": "uuid"
-              }
+              "type": "string"
             }
           },
           {
-            "name": "Encfs",
+            "name": "AmountFrom",
             "in": "query",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+              "type": [
+                "number",
+                "string"
+              ],
+              "format": "double"
+            }
+          },
+          {
+            "name": "AmountTo",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+              "type": [
+                "number",
+                "string"
+              ],
+              "format": "double"
             }
           },
           {
@@ -2250,21 +2081,13 @@
         }
       }
     },
-    "/recepcion/{rnc}/ecf/{messageId}": {
+    "/recepcion/{messageId}": {
       "get": {
         "tags": [
           "Recepcion"
         ],
         "operationId": "GetEcfReceptionRequest",
         "parameters": [
-          {
-            "name": "rnc",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "messageId",
             "in": "path",
@@ -2312,12 +2135,96 @@
         }
       }
     },
-    "/recepcion/{rnc}/acecf": {
+    "/recepcion/{messageId}/acecf": {
+      "post": {
+        "tags": [
+          "Recepcion"
+        ],
+        "operationId": "SendAprobacionComercial",
+        "parameters": [
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAcecfRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recepcion/{rnc}": {
       "get": {
         "tags": [
           "Recepcion"
         ],
-        "operationId": "SearchAcecfReceptionRequestsByRnc",
+        "operationId": "SearchEcfReceptionRequestsByRnc",
         "parameters": [
           {
             "name": "rnc",
@@ -2345,6 +2252,260 @@
               "type": "array",
               "items": {
                 "type": "string"
+              }
+            }
+          },
+          {
+            "name": "RncEmisors",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "TiposEcfs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "pattern": "^-?(?:0|[1-9]\\d*)$",
+                "type": [
+                  "integer",
+                  "string"
+                ],
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Progresses",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "pattern": "^-?(?:0|[1-9]\\d*)$",
+                "type": [
+                  "integer",
+                  "string"
+                ],
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AmountFrom",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+              "type": [
+                "number",
+                "string"
+              ],
+              "format": "double"
+            }
+          },
+          {
+            "name": "AmountTo",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+              "type": [
+                "number",
+                "string"
+              ],
+              "format": "double"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedApiResultOfEcfReceptionRequestDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recepcion/{rnc}/{messageId}": {
+      "get": {
+        "tags": [
+          "Recepcion"
+        ],
+        "operationId": "GetEcfReceptorByMessageId",
+        "parameters": [
+          {
+            "name": "rnc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcfReceptorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recepcion/acecf": {
+      "get": {
+        "tags": [
+          "AprobacionComercial"
+        ],
+        "operationId": "SearchAcecfReceptionRequests",
+        "parameters": [
+          {
+            "name": "MessageIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "name": "Encfs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Rncs",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Progresses",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "pattern": "^-?(?:0|[1-9]\\d*)$",
+                "type": [
+                  "integer",
+                  "string"
+                ],
+                "format": "int32"
               }
             }
           },
@@ -2409,21 +2570,13 @@
         }
       }
     },
-    "/recepcion/{rnc}/acecf/{messageId}": {
+    "/recepcion/acecf/{messageId}": {
       "get": {
         "tags": [
-          "Recepcion"
+          "AprobacionComercial"
         ],
         "operationId": "GetAcecfReceptionRequest",
         "parameters": [
-          {
-            "name": "rnc",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "messageId",
             "in": "path",
@@ -3445,6 +3598,87 @@
           }
         }
       },
+      "AcecfSummaryDto": {
+        "type": "object",
+        "properties": {
+          "acecfId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "estado": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detalleMotivoRechazo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "fechaHoraAprobacionComercial": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fileName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "progress": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "description": "Lifecycle progress (Pending / Building / DirectorioResolved / SendingToEmisor / SentToEmisor / Completed / Failed).",
+            "format": "int32"
+          },
+          "errorMessage": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Last failure reason when Progress = Failed."
+          },
+          "receptorHttpStatus": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "description": "HTTP status code from the receptor (set after SendingToEmisor).",
+            "format": "int32"
+          },
+          "dgiiCodigoResponse": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dgiiEstadoResponse": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dgiiMensajesResponse": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "AllTipoECFTypes": {
         "enum": [
           "FacturaDeCreditoFiscalElectronica",
@@ -3460,8 +3694,7 @@
           "RFCE",
           "ACECF",
           "ARECF",
-          "ANECF",
-          null
+          "ANECF"
         ]
       },
       "AnulacionListResponse": {
@@ -3694,6 +3927,24 @@
           },
           "receptorId": {
             "type": "string"
+          },
+          "urlRecepcion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "urlAprobacionComercial": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "urlAutenticacion": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -8517,7 +8768,6 @@
         "required": [
           "tipoeCF",
           "encf",
-          "tipoIngresos",
           "tipoPago"
         ],
         "type": "object",
@@ -8563,7 +8813,14 @@
             ]
           },
           "tipoIngresos": {
-            "$ref": "#/components/schemas/Ecf33TipoIngresosValidationType"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoIngresosValidationType"
+              }
+            ]
           },
           "tipoPago": {
             "$ref": "#/components/schemas/Ecf33TipoPagoType"
@@ -9833,16 +10090,6 @@
           "%"
         ]
       },
-      "Ecf33TipoIngresosValidationType": {
-        "enum": [
-          "01",
-          "02",
-          "03",
-          "04",
-          "05",
-          "06"
-        ]
-      },
       "Ecf33TipoPagoType": {
         "enum": [
           "Contado",
@@ -10648,7 +10895,6 @@
           "tipoeCF",
           "encf",
           "indicadorNotaCredito",
-          "tipoIngresos",
           "tipoPago"
         ],
         "type": "object",
@@ -10698,7 +10944,14 @@
             ]
           },
           "tipoIngresos": {
-            "$ref": "#/components/schemas/Ecf34TipoIngresosValidationType"
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TipoIngresosValidationType"
+              }
+            ]
           },
           "tipoPago": {
             "$ref": "#/components/schemas/Ecf34TipoPagoType"
@@ -11933,16 +12186,6 @@
         "enum": [
           "$",
           "%"
-        ]
-      },
-      "Ecf34TipoIngresosValidationType": {
-        "enum": [
-          "01",
-          "02",
-          "03",
-          "04",
-          "05",
-          "06"
         ]
       },
       "Ecf34TipoPagoType": {
@@ -20418,6 +20661,114 @@
               "null",
               "string"
             ]
+          },
+          "montoTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "EcfReceptorDto": {
+        "type": "object",
+        "properties": {
+          "ecfReceptorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenantId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyRnc": {
+            "type": "string"
+          },
+          "encf": {
+            "type": "string"
+          },
+          "rncEmisor": {
+            "type": "string"
+          },
+          "rncReceptor": {
+            "type": "string"
+          },
+          "tipoEcf": {
+            "$ref": "#/components/schemas/AllTipoECFTypes"
+          },
+          "montoTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "fechaEmision": {
+            "type": "string",
+            "format": "date"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "rawJsonData": {
+            "type": "string"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaFirma": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "codSec": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "estado": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "description": "Estado from the generated ARECF (ECFRecibido / ECFNoRecibido).",
+            "format": "int32"
+          },
+          "progress": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "description": "EcfReceptionRequest.Progress — Pending / Processing / Completed / Error.",
+            "format": "int32"
+          },
+          "ambiente": {
+            "type": "string",
+            "description": "DGII environment serving this tenant (\"Test\"/\"Certification\"/\"Production\")."
+          },
+          "urlImpresion": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "DGII consulta-timbre URL with QR query string."
+          },
+          "acecfs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AcecfSummaryDto"
+            }
           }
         }
       },
@@ -20554,6 +20905,13 @@
           },
           "dgiiEnvironment": {
             "$ref": "#/components/schemas/DGIIEnvironment"
+          },
+          "acecfs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AcecfSummaryDto"
+            },
+            "description": "ACECFs received from the receptor for this outbound ECF."
           },
           "impresionUrl": {
             "type": [
@@ -22009,6 +22367,17 @@
           "ComprobanteParaPagosAlExteriorElectronico"
         ]
       },
+      "TipoIngresosValidationType": {
+        "enum": [
+          "01",
+          "02",
+          "03",
+          "04",
+          "05",
+          "06",
+          null
+        ]
+      },
       "TipoMonedaType": {
         "enum": [
           "BRL",
@@ -22027,6 +22396,7 @@
           "VEF",
           "HTG",
           "MXN",
+          "COP",
           null
         ]
       },
@@ -22129,7 +22499,6 @@
       "UpsertCompanyRequest": {
         "required": [
           "rnc",
-          "legalName",
           "name"
         ],
         "type": "object",
@@ -22138,13 +22507,57 @@
             "maxLength": 11,
             "type": "string"
           },
-          "legalName": {
-            "maxLength": 2000,
-            "type": "string"
-          },
           "name": {
             "maxLength": 2000,
             "type": "string"
+          },
+          "employeeCount": {
+            "maxLength": 20,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "estimatedInvoices": {
+            "maxLength": 20,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "legalRepFirstName": {
+            "maxLength": 200,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "legalRepLastName": {
+            "maxLength": 200,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "address": {
+            "maxLength": 500,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "certificationDeclared": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "certificationStatus": {
+            "maxLength": 50,
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },
@@ -22217,6 +22630,9 @@
     },
     {
       "name": "Recepcion"
+    },
+    {
+      "name": "AprobacionComercial"
     },
     {
       "name": "Dgii"

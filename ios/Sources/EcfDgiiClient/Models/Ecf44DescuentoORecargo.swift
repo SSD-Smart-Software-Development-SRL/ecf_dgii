@@ -9,7 +9,7 @@ import Foundation
 
 public struct Ecf44DescuentoORecargo: Sendable, Codable, Hashable {
 
-    public var numeroLinea: AcecfReceptionRequestDtoProgress
+    public var numeroLinea: SearchEcfReceptionRequestsTiposEcfsParameterInner
     public var tipoAjuste: Ecf44TipoAjusteType
     public var descripcionDescuentooRecargo: String?
     public var tipoValor: TipoDescuentoRecargoType?
@@ -18,7 +18,7 @@ public struct Ecf44DescuentoORecargo: Sendable, Codable, Hashable {
     public var montoDescuentooRecargoOtraMoneda: Ecf31DescuentoORecargoMontoDescuentooRecargo?
     public var indicadorFacturacionDescuentooRecargo: IndicadorFacturacionDRType?
 
-    public init(numeroLinea: AcecfReceptionRequestDtoProgress, tipoAjuste: Ecf44TipoAjusteType, descripcionDescuentooRecargo: String? = nil, tipoValor: TipoDescuentoRecargoType? = nil, valorDescuentooRecargo: Ecf31DescuentoORecargoValorDescuentooRecargo? = nil, montoDescuentooRecargo: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, montoDescuentooRecargoOtraMoneda: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, indicadorFacturacionDescuentooRecargo: IndicadorFacturacionDRType? = nil) {
+    public init(numeroLinea: SearchEcfReceptionRequestsTiposEcfsParameterInner, tipoAjuste: Ecf44TipoAjusteType, descripcionDescuentooRecargo: String? = nil, tipoValor: TipoDescuentoRecargoType? = nil, valorDescuentooRecargo: Ecf31DescuentoORecargoValorDescuentooRecargo? = nil, montoDescuentooRecargo: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, montoDescuentooRecargoOtraMoneda: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, indicadorFacturacionDescuentooRecargo: IndicadorFacturacionDRType? = nil) {
         self.numeroLinea = numeroLinea
         self.tipoAjuste = tipoAjuste
         self.descripcionDescuentooRecargo = descripcionDescuentooRecargo

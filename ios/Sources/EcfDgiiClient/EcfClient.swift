@@ -78,29 +78,16 @@ public struct PollingMaxRetriesError: Error, Sendable {
     }
 }
 
-/// Maps TipoeCFType to the API route number.
-private let ecfTypeRouteMap: [TipoeCFType: String] = [
-    .facturaDeCreditoFiscalElectronica: "31",
-    .facturaDeConsumoElectronica: "32",
-    .notaDeDebitoElectronica: "33",
-    .notaDeCreditoElectronica: "34",
-    .comprasElectronico: "41",
-    .gastosMenoresElectronico: "43",
-    .regimenesEspecialesElectronico: "44",
-    .gubernamentalElectronico: "45",
-    .comprobanteDeExportacionesElectronico: "46",
-    .comprobanteParaPagosAlExteriorElectronico: "47",
-]
-
 /// High-level client for the ECF DGII API.
 ///
-/// Wraps the auto-generated API classes and provides a convenient `sendEcf` method
-/// that automatically routes ECFs by type, polls for completion, and handles errors.
+/// Wraps the auto-generated API classes and provides convenient `sendEcf`
+/// overloads — one per electronic-receipt type — that POST the document,
+/// poll until processing completes, and surface errors.
 ///
 /// Usage:
 /// ```swift
 /// let client = EcfClient(apiKey: "your-jwt-token", environment: .test)
-/// let result = try await client.sendEcf(ecf: myEcf)
+/// let result = try await client.sendEcf(ecf: myEcf31)
 /// ```
 public final class EcfClient: Sendable {
 
@@ -121,33 +108,118 @@ public final class EcfClient: Sendable {
         )
     }
 
-    // MARK: - Send ECF with polling
+    // MARK: - Send ECF (per type)
 
-    /// Send an ECF and poll until processing completes.
-    ///
-    /// Determines the correct endpoint from `ecf.encabezado.idDoc.tipoeCF`,
-    /// posts the ECF, then polls until `progress` is `Finished` or `Error`.
-    ///
-    /// - Parameters:
-    ///   - ecf: The ECF document to send.
-    ///   - pollingOptions: Optional polling configuration.
-    /// - Returns: The final `EcfResponse` when processing is complete.
-    /// - Throws: `EcfProcessingError` if the ECF was rejected, or other errors for network/polling failures.
-    public func sendEcf(ecf: ECF, pollingOptions: PollingOptions = .default) async throws -> EcfResponse {
-        let tipoeCF = ecf.encabezado.idDoc.tipoeCF
-        guard let route = ecfTypeRouteMap[tipoeCF] else {
-            throw NSError(domain: "EcfClient", code: -1, userInfo: [
-                NSLocalizedDescriptionKey: "Unknown tipoeCF: \(tipoeCF)"
-            ])
-        }
+    /// Send a Factura de Crédito Fiscal Electrónica (e-CF 31) and poll until completion.
+    public func sendEcf(ecf: Ecf31ECF, pollingOptions: PollingOptions = .default) async throws -> EcfResponse {
+        try await sendInternal(
+            rnc: ecf.encabezado.emisor.rncEmisor,
+            encf: ecf.encabezado.idDoc.encf,
+            pollingOptions: pollingOptions,
+            post: { try await EcfAPI.recepcionEcf31(ecf31ECF: ecf, apiConfiguration: $0) }
+        )
+    }
 
-        let rnc = ecf.encabezado.emisor.rncEmisor
-        let encf = ecf.encabezado.idDoc.encf
+    /// Send a Factura de Consumo Electrónica (e-CF 32) and poll until completion.
+    public func sendEcf(ecf: Ecf32ECF, pollingOptions: PollingOptions = .default) async throws -> EcfResponse {
+        try await sendInternal(
+            rnc: ecf.encabezado.emisor.rncEmisor,
+            encf: ecf.encabezado.idDoc.encf,
+            pollingOptions: pollingOptions,
+            post: { try await EcfAPI.recepcionEcf32(ecf32ECF: ecf, apiConfiguration: $0) }
+        )
+    }
 
-        // POST to the typed endpoint
-        let postResponse = try await postEcf(route: route, ecf: ecf)
+    /// Send a Nota de Débito Electrónica (e-CF 33) and poll until completion.
+    public func sendEcf(ecf: Ecf33ECF, pollingOptions: PollingOptions = .default) async throws -> EcfResponse {
+        try await sendInternal(
+            rnc: ecf.encabezado.emisor.rncEmisor,
+            encf: ecf.encabezado.idDoc.encf,
+            pollingOptions: pollingOptions,
+            post: { try await EcfAPI.recepcionEcf33(ecf33ECF: ecf, apiConfiguration: $0) }
+        )
+    }
 
-        // Poll until complete
+    /// Send a Nota de Crédito Electrónica (e-CF 34) and poll until completion.
+    public func sendEcf(ecf: Ecf34ECF, pollingOptions: PollingOptions = .default) async throws -> EcfResponse {
+        try await sendInternal(
+            rnc: ecf.encabezado.emisor.rncEmisor,
+            encf: ecf.encabezado.idDoc.encf,
+            pollingOptions: pollingOptions,
+            post: { try await EcfAPI.recepcionEcf34(ecf34ECF: ecf, apiConfiguration: $0) }
+        )
+    }
+
+    /// Send a Compras Electrónico (e-CF 41) and poll until completion.
+    public func sendEcf(ecf: Ecf41ECF, pollingOptions: PollingOptions = .default) async throws -> EcfResponse {
+        try await sendInternal(
+            rnc: ecf.encabezado.emisor.rncEmisor,
+            encf: ecf.encabezado.idDoc.encf,
+            pollingOptions: pollingOptions,
+            post: { try await EcfAPI.recepcionEcf41(ecf41ECF: ecf, apiConfiguration: $0) }
+        )
+    }
+
+    /// Send a Gastos Menores Electrónico (e-CF 43) and poll until completion.
+    public func sendEcf(ecf: Ecf43ECF, pollingOptions: PollingOptions = .default) async throws -> EcfResponse {
+        try await sendInternal(
+            rnc: ecf.encabezado.emisor.rncEmisor,
+            encf: ecf.encabezado.idDoc.encf,
+            pollingOptions: pollingOptions,
+            post: { try await EcfAPI.recepcionEcf43(ecf43ECF: ecf, apiConfiguration: $0) }
+        )
+    }
+
+    /// Send a Regímenes Especiales Electrónico (e-CF 44) and poll until completion.
+    public func sendEcf(ecf: Ecf44ECF, pollingOptions: PollingOptions = .default) async throws -> EcfResponse {
+        try await sendInternal(
+            rnc: ecf.encabezado.emisor.rncEmisor,
+            encf: ecf.encabezado.idDoc.encf,
+            pollingOptions: pollingOptions,
+            post: { try await EcfAPI.recepcionEcf44(ecf44ECF: ecf, apiConfiguration: $0) }
+        )
+    }
+
+    /// Send a Gubernamental Electrónico (e-CF 45) and poll until completion.
+    public func sendEcf(ecf: Ecf45ECF, pollingOptions: PollingOptions = .default) async throws -> EcfResponse {
+        try await sendInternal(
+            rnc: ecf.encabezado.emisor.rncEmisor,
+            encf: ecf.encabezado.idDoc.encf,
+            pollingOptions: pollingOptions,
+            post: { try await EcfAPI.recepcionEcf45(ecf45ECF: ecf, apiConfiguration: $0) }
+        )
+    }
+
+    /// Send a Comprobante de Exportaciones Electrónico (e-CF 46) and poll until completion.
+    public func sendEcf(ecf: Ecf46ECF, pollingOptions: PollingOptions = .default) async throws -> EcfResponse {
+        try await sendInternal(
+            rnc: ecf.encabezado.emisor.rncEmisor,
+            encf: ecf.encabezado.idDoc.encf,
+            pollingOptions: pollingOptions,
+            post: { try await EcfAPI.recepcionEcf46(ecf46ECF: ecf, apiConfiguration: $0) }
+        )
+    }
+
+    /// Send a Comprobante para Pagos al Exterior Electrónico (e-CF 47) and poll until completion.
+    public func sendEcf(ecf: Ecf47ECF, pollingOptions: PollingOptions = .default) async throws -> EcfResponse {
+        try await sendInternal(
+            rnc: ecf.encabezado.emisor.rncEmisor,
+            encf: ecf.encabezado.idDoc.encf,
+            pollingOptions: pollingOptions,
+            post: { try await EcfAPI.recepcionEcf47(ecf47ECF: ecf, apiConfiguration: $0) }
+        )
+    }
+
+    // MARK: - Private helpers
+
+    private func sendInternal(
+        rnc: String,
+        encf: String,
+        pollingOptions: PollingOptions,
+        post: @Sendable (EcfDgiiClientAPIConfiguration) async throws -> EcfResponse
+    ) async throws -> EcfResponse {
+        let postResponse = try await post(apiConfiguration)
+
         let result = try await pollUntilComplete(
             pollingOptions: pollingOptions,
             fetch: {
@@ -177,27 +249,6 @@ public final class EcfClient: Sendable {
         }
 
         return result
-    }
-
-    // MARK: - Private helpers
-
-    private func postEcf(route: String, ecf: ECF) async throws -> EcfResponse {
-        switch route {
-        case "31": return try await EcfAPI.recepcionEcf31(ECF: ecf, apiConfiguration: apiConfiguration)
-        case "32": return try await EcfAPI.recepcionEcf32(ECF: ecf, apiConfiguration: apiConfiguration)
-        case "33": return try await EcfAPI.recepcionEcf33(ECF: ecf, apiConfiguration: apiConfiguration)
-        case "34": return try await EcfAPI.recepcionEcf34(ECF: ecf, apiConfiguration: apiConfiguration)
-        case "41": return try await EcfAPI.recepcionEcf41(ECF: ecf, apiConfiguration: apiConfiguration)
-        case "43": return try await EcfAPI.recepcionEcf43(ECF: ecf, apiConfiguration: apiConfiguration)
-        case "44": return try await EcfAPI.recepcionEcf44(ECF: ecf, apiConfiguration: apiConfiguration)
-        case "45": return try await EcfAPI.recepcionEcf45(ECF: ecf, apiConfiguration: apiConfiguration)
-        case "46": return try await EcfAPI.recepcionEcf46(ECF: ecf, apiConfiguration: apiConfiguration)
-        case "47": return try await EcfAPI.recepcionEcf47(ECF: ecf, apiConfiguration: apiConfiguration)
-        default:
-            throw NSError(domain: "EcfClient", code: -1, userInfo: [
-                NSLocalizedDescriptionKey: "Unknown ECF route: \(route)"
-            ])
-        }
     }
 
     private func pollUntilComplete(

@@ -7,9 +7,8 @@
 
 import Foundation
 
-public enum ViaTransporteType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum ViaTransporteType: String, Sendable, Codable, CaseIterable {
     case _01 = "01"
     case _02 = "02"
     case _03 = "03"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

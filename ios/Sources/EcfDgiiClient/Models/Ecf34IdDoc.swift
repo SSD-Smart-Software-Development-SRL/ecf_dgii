@@ -11,18 +11,18 @@ public struct Ecf34IdDoc: Sendable, Codable, Hashable {
 
     public var tipoeCF: TipoeCFType
     public var encf: String
-    public var indicadorNotaCredito: AcecfReceptionRequestDtoProgress
+    public var indicadorNotaCredito: SearchEcfReceptionRequestsTiposEcfsParameterInner
     public var indicadorEnvioDiferido: IndicadorEnvioDiferidoType?
     public var indicadorMontoGravado: IndicadorMontoGravadoType?
     public var indicadorServicioTodoIncluido: IndicadorServicioTodoIncluidoType?
-    public var tipoIngresos: Ecf34TipoIngresosValidationType
+    public var tipoIngresos: TipoIngresosValidationType?
     public var tipoPago: Ecf34TipoPagoType
     public var fechaLimitePago: Date?
     public var fechaDesde: Date?
     public var fechaHasta: Date?
     public var totalPaginas: Ecf31IdDocTotalPaginas?
 
-    public init(tipoeCF: TipoeCFType, encf: String, indicadorNotaCredito: AcecfReceptionRequestDtoProgress, indicadorEnvioDiferido: IndicadorEnvioDiferidoType? = nil, indicadorMontoGravado: IndicadorMontoGravadoType? = nil, indicadorServicioTodoIncluido: IndicadorServicioTodoIncluidoType? = nil, tipoIngresos: Ecf34TipoIngresosValidationType, tipoPago: Ecf34TipoPagoType, fechaLimitePago: Date? = nil, fechaDesde: Date? = nil, fechaHasta: Date? = nil, totalPaginas: Ecf31IdDocTotalPaginas? = nil) {
+    public init(tipoeCF: TipoeCFType, encf: String, indicadorNotaCredito: SearchEcfReceptionRequestsTiposEcfsParameterInner, indicadorEnvioDiferido: IndicadorEnvioDiferidoType? = nil, indicadorMontoGravado: IndicadorMontoGravadoType? = nil, indicadorServicioTodoIncluido: IndicadorServicioTodoIncluidoType? = nil, tipoIngresos: TipoIngresosValidationType? = nil, tipoPago: Ecf34TipoPagoType, fechaLimitePago: Date? = nil, fechaDesde: Date? = nil, fechaHasta: Date? = nil, totalPaginas: Ecf31IdDocTotalPaginas? = nil) {
         self.tipoeCF = tipoeCF
         self.encf = encf
         self.indicadorNotaCredito = indicadorNotaCredito
@@ -62,7 +62,7 @@ public struct Ecf34IdDoc: Sendable, Codable, Hashable {
         try container.encodeIfPresent(indicadorEnvioDiferido, forKey: .indicadorEnvioDiferido)
         try container.encodeIfPresent(indicadorMontoGravado, forKey: .indicadorMontoGravado)
         try container.encodeIfPresent(indicadorServicioTodoIncluido, forKey: .indicadorServicioTodoIncluido)
-        try container.encode(tipoIngresos, forKey: .tipoIngresos)
+        try container.encodeIfPresent(tipoIngresos, forKey: .tipoIngresos)
         try container.encode(tipoPago, forKey: .tipoPago)
         try container.encodeIfPresent(fechaLimitePago, forKey: .fechaLimitePago)
         try container.encodeIfPresent(fechaDesde, forKey: .fechaDesde)

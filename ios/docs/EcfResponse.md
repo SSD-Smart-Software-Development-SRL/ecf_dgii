@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **encf** | **String** |  | 
 **rncEmisor** | **String** |  | 
 **rncReceptor** | **String** |  | 
-**montoTotal** | **Double** |  | 
+**montoTotal** | [**SearchEcfsAmountFromParameter**](SearchEcfsAmountFromParameter.md) |  | 
 **fileName** | **String** |  | 
 **tenantId** | **UUID** |  | 
 **estatus** | [**EcfEstado**](EcfEstado.md) |  | 
@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **emisorReceptorErrors** | **String** |  | 
 **secuenciaUtilizada** | **Bool** |  | 
 **dgiiEnvironment** | [**DGIIEnvironment**](DGIIEnvironment.md) |  | 
+**acecfs** | [AcecfSummaryDto] | ACECFs received from the receptor for this outbound ECF. | [optional] 
 **impresionUrl** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

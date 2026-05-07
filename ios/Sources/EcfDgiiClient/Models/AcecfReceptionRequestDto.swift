@@ -9,19 +9,18 @@ import Foundation
 
 public struct AcecfReceptionRequestDto: Sendable, Codable, Hashable {
 
-    public static let progressRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     public var messageId: UUID?
     public var tenantId: UUID?
     public var companyRnc: String?
     public var fileName: String?
-    public var progress: Int?
+    public var progress: SearchEcfReceptionRequestsTiposEcfsParameterInner?
     public var createdOn: Date?
     public var updatedOn: Date?
     public var errorMessage: String?
     public var encf: String?
     public var rncEmisor: String?
 
-    public init(messageId: UUID? = nil, tenantId: UUID? = nil, companyRnc: String? = nil, fileName: String? = nil, progress: Int? = nil, createdOn: Date? = nil, updatedOn: Date? = nil, errorMessage: String? = nil, encf: String? = nil, rncEmisor: String? = nil) {
+    public init(messageId: UUID? = nil, tenantId: UUID? = nil, companyRnc: String? = nil, fileName: String? = nil, progress: SearchEcfReceptionRequestsTiposEcfsParameterInner? = nil, createdOn: Date? = nil, updatedOn: Date? = nil, errorMessage: String? = nil, encf: String? = nil, rncEmisor: String? = nil) {
         self.messageId = messageId
         self.tenantId = tenantId
         self.companyRnc = companyRnc

@@ -9,7 +9,7 @@ import Foundation
 
 public struct Ecf43Item: Sendable, Codable, Hashable {
 
-    public var numeroLinea: AcecfReceptionRequestDtoProgress
+    public var numeroLinea: SearchEcfReceptionRequestsTiposEcfsParameterInner
     public var tablaCodigosItem: [Ecf43CodigosItem]?
     public var indicadorFacturacion: Ecf43IndicadorFacturacionType
     public var nombreItem: String
@@ -21,7 +21,7 @@ public struct Ecf43Item: Sendable, Codable, Hashable {
     public var otraMonedaDetalle: Ecf43OtraMonedaDetalle?
     public var montoItem: Ecf31FormaDePagoMontoPago
 
-    public init(numeroLinea: AcecfReceptionRequestDtoProgress, tablaCodigosItem: [Ecf43CodigosItem]? = nil, indicadorFacturacion: Ecf43IndicadorFacturacionType, nombreItem: String, indicadorBienoServicio: Ecf43IndicadorBienoServicioType, descripcionItem: String? = nil, cantidadItem: Ecf31ItemCantidadItem, unidadMedida: UnidadMedidaType? = nil, precioUnitarioItem: Ecf31ItemPrecioUnitarioItem, otraMonedaDetalle: Ecf43OtraMonedaDetalle? = nil, montoItem: Ecf31FormaDePagoMontoPago) {
+    public init(numeroLinea: SearchEcfReceptionRequestsTiposEcfsParameterInner, tablaCodigosItem: [Ecf43CodigosItem]? = nil, indicadorFacturacion: Ecf43IndicadorFacturacionType, nombreItem: String, indicadorBienoServicio: Ecf43IndicadorBienoServicioType, descripcionItem: String? = nil, cantidadItem: Ecf31ItemCantidadItem, unidadMedida: UnidadMedidaType? = nil, precioUnitarioItem: Ecf31ItemPrecioUnitarioItem, otraMonedaDetalle: Ecf43OtraMonedaDetalle? = nil, montoItem: Ecf31FormaDePagoMontoPago) {
         self.numeroLinea = numeroLinea
         self.tablaCodigosItem = tablaCodigosItem
         self.indicadorFacturacion = indicadorFacturacion

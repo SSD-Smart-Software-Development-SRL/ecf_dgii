@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **updatedBy** | **String** |  | [optional] 
 **tenantId** | **UUID** |  | [optional] 
 **receptorId** | **String** |  | [optional] 
+**urlRecepcion** | **String** |  | [optional] 
+**urlAprobacionComercial** | **String** |  | [optional] 
+**urlAutenticacion** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

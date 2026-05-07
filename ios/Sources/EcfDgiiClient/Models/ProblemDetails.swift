@@ -9,14 +9,13 @@ import Foundation
 
 public struct ProblemDetails: Sendable, Codable, Hashable {
 
-    public static let statusRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     public var type: String?
     public var title: String?
-    public var status: Int?
+    public var status: Ecf31IdDocTotalPaginas?
     public var detail: String?
     public var instance: String?
 
-    public init(type: String? = nil, title: String? = nil, status: Int? = nil, detail: String? = nil, instance: String? = nil) {
+    public init(type: String? = nil, title: String? = nil, status: Ecf31IdDocTotalPaginas? = nil, detail: String? = nil, instance: String? = nil) {
         self.type = type
         self.title = title
         self.status = status

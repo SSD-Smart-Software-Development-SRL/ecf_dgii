@@ -9,7 +9,7 @@ import Foundation
 
 public struct Ecf33Item: Sendable, Codable, Hashable {
 
-    public var numeroLinea: AcecfReceptionRequestDtoProgress
+    public var numeroLinea: SearchEcfReceptionRequestsTiposEcfsParameterInner
     public var tablaCodigosItem: [Ecf33CodigosItem]?
     public var indicadorFacturacion: Ecf33IndicadorFacturacionType
     public var retencion: Ecf33Retencion?
@@ -35,7 +35,7 @@ public struct Ecf33Item: Sendable, Codable, Hashable {
     public var otraMonedaDetalle: Ecf33OtraMonedaDetalle?
     public var montoItem: Ecf31FormaDePagoMontoPago
 
-    public init(numeroLinea: AcecfReceptionRequestDtoProgress, tablaCodigosItem: [Ecf33CodigosItem]? = nil, indicadorFacturacion: Ecf33IndicadorFacturacionType, retencion: Ecf33Retencion? = nil, nombreItem: String, indicadorBienoServicio: Ecf33IndicadorBienoServicioType, descripcionItem: String? = nil, cantidadItem: Ecf31ItemCantidadItem, unidadMedida: UnidadMedidaType? = nil, cantidadReferencia: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, unidadReferencia: UnidadMedidaType? = nil, tablaSubcantidad: [Ecf33SubcantidadItem]? = nil, gradosAlcohol: Ecf31DescuentoORecargoValorDescuentooRecargo? = nil, precioUnitarioReferencia: Ecf31ImpuestoAdicional2MontoImpuestoSelectivoConsumoEspecifico? = nil, fechaElaboracion: Date? = nil, fechaVencimientoItem: Date? = nil, mineria: Ecf33Mineria? = nil, precioUnitarioItem: Ecf31ItemPrecioUnitarioItem, descuentoMonto: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, tablaSubDescuento: [Ecf33SubDescuento]? = nil, recargoMonto: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, tablaSubRecargo: [Ecf33SubRecargo]? = nil, tablaImpuestoAdicional: [Ecf33ImpuestoAdicional]? = nil, otraMonedaDetalle: Ecf33OtraMonedaDetalle? = nil, montoItem: Ecf31FormaDePagoMontoPago) {
+    public init(numeroLinea: SearchEcfReceptionRequestsTiposEcfsParameterInner, tablaCodigosItem: [Ecf33CodigosItem]? = nil, indicadorFacturacion: Ecf33IndicadorFacturacionType, retencion: Ecf33Retencion? = nil, nombreItem: String, indicadorBienoServicio: Ecf33IndicadorBienoServicioType, descripcionItem: String? = nil, cantidadItem: Ecf31ItemCantidadItem, unidadMedida: UnidadMedidaType? = nil, cantidadReferencia: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, unidadReferencia: UnidadMedidaType? = nil, tablaSubcantidad: [Ecf33SubcantidadItem]? = nil, gradosAlcohol: Ecf31DescuentoORecargoValorDescuentooRecargo? = nil, precioUnitarioReferencia: Ecf31ImpuestoAdicional2MontoImpuestoSelectivoConsumoEspecifico? = nil, fechaElaboracion: Date? = nil, fechaVencimientoItem: Date? = nil, mineria: Ecf33Mineria? = nil, precioUnitarioItem: Ecf31ItemPrecioUnitarioItem, descuentoMonto: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, tablaSubDescuento: [Ecf33SubDescuento]? = nil, recargoMonto: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, tablaSubRecargo: [Ecf33SubRecargo]? = nil, tablaImpuestoAdicional: [Ecf33ImpuestoAdicional]? = nil, otraMonedaDetalle: Ecf33OtraMonedaDetalle? = nil, montoItem: Ecf31FormaDePagoMontoPago) {
         self.numeroLinea = numeroLinea
         self.tablaCodigosItem = tablaCodigosItem
         self.indicadorFacturacion = indicadorFacturacion

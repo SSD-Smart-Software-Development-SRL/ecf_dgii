@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'EcfDgiiClient'
-  s.version = '0.1.0'
+  s.version = '1.0.0'
   s.summary = 'Swift SDK for the ECF DGII API (Dominican Republic electronic fiscal receipts)'
   s.description = <<-DESC
     Swift client for the ECF DGII API. Provides typed models, auto-generated API endpoints,

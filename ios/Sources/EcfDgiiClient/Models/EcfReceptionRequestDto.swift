@@ -9,12 +9,11 @@ import Foundation
 
 public struct EcfReceptionRequestDto: Sendable, Codable, Hashable {
 
-    public static let progressRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     public var messageId: UUID?
     public var tenantId: UUID?
     public var companyRnc: String?
     public var fileName: String?
-    public var progress: Int?
+    public var progress: SearchEcfReceptionRequestsTiposEcfsParameterInner?
     public var createdOn: Date?
     public var updatedOn: Date?
     public var errorMessage: String?
@@ -22,8 +21,9 @@ public struct EcfReceptionRequestDto: Sendable, Codable, Hashable {
     public var rncEmisor: String?
     public var tipoEcf: AllTipoECFTypes?
     public var resultInternalFileName: String?
+    public var montoTotal: EcfReceptionRequestDtoMontoTotal?
 
-    public init(messageId: UUID? = nil, tenantId: UUID? = nil, companyRnc: String? = nil, fileName: String? = nil, progress: Int? = nil, createdOn: Date? = nil, updatedOn: Date? = nil, errorMessage: String? = nil, encf: String? = nil, rncEmisor: String? = nil, tipoEcf: AllTipoECFTypes? = nil, resultInternalFileName: String? = nil) {
+    public init(messageId: UUID? = nil, tenantId: UUID? = nil, companyRnc: String? = nil, fileName: String? = nil, progress: SearchEcfReceptionRequestsTiposEcfsParameterInner? = nil, createdOn: Date? = nil, updatedOn: Date? = nil, errorMessage: String? = nil, encf: String? = nil, rncEmisor: String? = nil, tipoEcf: AllTipoECFTypes? = nil, resultInternalFileName: String? = nil, montoTotal: EcfReceptionRequestDtoMontoTotal? = nil) {
         self.messageId = messageId
         self.tenantId = tenantId
         self.companyRnc = companyRnc
@@ -36,6 +36,7 @@ public struct EcfReceptionRequestDto: Sendable, Codable, Hashable {
         self.rncEmisor = rncEmisor
         self.tipoEcf = tipoEcf
         self.resultInternalFileName = resultInternalFileName
+        self.montoTotal = montoTotal
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -51,6 +52,7 @@ public struct EcfReceptionRequestDto: Sendable, Codable, Hashable {
         case rncEmisor
         case tipoEcf
         case resultInternalFileName
+        case montoTotal
     }
 
     // Encodable protocol methods
@@ -69,6 +71,7 @@ public struct EcfReceptionRequestDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(rncEmisor, forKey: .rncEmisor)
         try container.encodeIfPresent(tipoEcf, forKey: .tipoEcf)
         try container.encodeIfPresent(resultInternalFileName, forKey: .resultInternalFileName)
+        try container.encodeIfPresent(montoTotal, forKey: .montoTotal)
     }
 }
 

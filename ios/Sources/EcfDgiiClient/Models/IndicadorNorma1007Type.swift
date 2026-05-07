@@ -7,8 +7,7 @@
 
 import Foundation
 
-public enum IndicadorNorma1007Type: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum IndicadorNorma1007Type: String, Sendable, Codable, CaseIterable {
     case noIncluir = "NoIncluir"
     case incluir = "Incluir"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

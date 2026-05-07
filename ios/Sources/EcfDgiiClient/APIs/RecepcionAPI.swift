@@ -11,30 +11,25 @@ open class RecepcionAPI {
 
     /**
 
-     - parameter rnc: (path)  
      - parameter messageId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func getAcecfReceptionRequest(rnc: String, messageId: UUID, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await getAcecfReceptionRequestWithRequestBuilder(rnc: rnc, messageId: messageId, apiConfiguration: apiConfiguration).execute().body
+    open class func getEcfReceptionRequest(messageId: UUID, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await getEcfReceptionRequestWithRequestBuilder(messageId: messageId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     - GET /recepcion/{rnc}/acecf/{messageId}
+     - GET /recepcion/{messageId}
      - Bearer Token:
        - type: http
        - name: Bearer
-     - parameter rnc: (path)  
      - parameter messageId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
-    open class func getAcecfReceptionRequestWithRequestBuilder(rnc: String, messageId: UUID, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<Void> {
-        var localVariablePath = "/recepcion/{rnc}/acecf/{messageId}"
-        let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
-        let rncPostEscape = rncPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{rnc}", with: rncPostEscape, options: .literal, range: nil)
+    open class func getEcfReceptionRequestWithRequestBuilder(messageId: UUID, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+        var localVariablePath = "/recepcion/{messageId}"
         let messageIdPreEscape = "\(APIHelper.mapValueToPathItem(messageId))"
         let messageIdPostEscape = messageIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{messageId}", with: messageIdPostEscape, options: .literal, range: nil)
@@ -59,24 +54,24 @@ open class RecepcionAPI {
      - parameter rnc: (path)  
      - parameter messageId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: Void
+     - returns: EcfReceptorDto
      */
-    open class func getEcfReceptionRequest(rnc: String, messageId: UUID, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await getEcfReceptionRequestWithRequestBuilder(rnc: rnc, messageId: messageId, apiConfiguration: apiConfiguration).execute().body
+    open class func getEcfReceptorByMessageId(rnc: String, messageId: UUID, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfReceptorDto {
+        return try await getEcfReceptorByMessageIdWithRequestBuilder(rnc: rnc, messageId: messageId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     - GET /recepcion/{rnc}/ecf/{messageId}
+     - GET /recepcion/{rnc}/{messageId}
      - Bearer Token:
        - type: http
        - name: Bearer
      - parameter rnc: (path)  
      - parameter messageId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<EcfReceptorDto> 
      */
-    open class func getEcfReceptionRequestWithRequestBuilder(rnc: String, messageId: UUID, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<Void> {
-        var localVariablePath = "/recepcion/{rnc}/ecf/{messageId}"
+    open class func getEcfReceptorByMessageIdWithRequestBuilder(rnc: String, messageId: UUID, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfReceptorDto> {
+        var localVariablePath = "/recepcion/{rnc}/{messageId}"
         let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
         let rncPostEscape = rncPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{rnc}", with: rncPostEscape, options: .literal, range: nil)
@@ -94,220 +89,198 @@ open class RecepcionAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
+        let localVariableRequestBuilder: RequestBuilder<EcfReceptorDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+
+     - parameter messageIds: (query)  (optional)
+     - parameter encfs: (query)  (optional)
+     - parameter rncs: (query)  (optional)
+     - parameter rncEmisors: (query)  (optional)
+     - parameter tiposEcfs: (query)  (optional)
+     - parameter progresses: (query)  (optional)
+     - parameter fromDate: (query)  (optional)
+     - parameter toDate: (query)  (optional)
+     - parameter amountFrom: (query)  (optional)
+     - parameter amountTo: (query)  (optional)
+     - parameter page: (query)  (optional, default to 1)
+     - parameter limit: (query)  (optional, default to 25)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: PaginatedApiResultOfEcfReceptionRequestDto
+     */
+    open class func searchEcfReceptionRequests(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfReceptionRequestDto {
+        return try await searchEcfReceptionRequestsWithRequestBuilder(messageIds: messageIds, encfs: encfs, rncs: rncs, rncEmisors: rncEmisors, tiposEcfs: tiposEcfs, progresses: progresses, fromDate: fromDate, toDate: toDate, amountFrom: amountFrom, amountTo: amountTo, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     - GET /recepcion
+     - Bearer Token:
+       - type: http
+       - name: Bearer
+     - parameter messageIds: (query)  (optional)
+     - parameter encfs: (query)  (optional)
+     - parameter rncs: (query)  (optional)
+     - parameter rncEmisors: (query)  (optional)
+     - parameter tiposEcfs: (query)  (optional)
+     - parameter progresses: (query)  (optional)
+     - parameter fromDate: (query)  (optional)
+     - parameter toDate: (query)  (optional)
+     - parameter amountFrom: (query)  (optional)
+     - parameter amountTo: (query)  (optional)
+     - parameter page: (query)  (optional, default to 1)
+     - parameter limit: (query)  (optional, default to 25)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> 
+     */
+    open class func searchEcfReceptionRequestsWithRequestBuilder(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> {
+        let localVariablePath = "/recepcion"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(([
+            "MessageIds": (wrappedValue: messageIds?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Encfs": (wrappedValue: encfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Rncs": (wrappedValue: rncs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "RncEmisors": (wrappedValue: rncEmisors?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "TiposEcfs": (wrappedValue: tiposEcfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Progresses": (wrappedValue: progresses?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "FromDate": (wrappedValue: fromDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "ToDate": (wrappedValue: toDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "AmountFrom": (wrappedValue: amountFrom?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "AmountTo": (wrappedValue: amountTo?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ] as [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]))
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+
+     - parameter rnc: (path)  
+     - parameter messageIds: (query)  (optional)
+     - parameter encfs: (query)  (optional)
+     - parameter rncEmisors: (query)  (optional)
+     - parameter tiposEcfs: (query)  (optional)
+     - parameter progresses: (query)  (optional)
+     - parameter fromDate: (query)  (optional)
+     - parameter toDate: (query)  (optional)
+     - parameter amountFrom: (query)  (optional)
+     - parameter amountTo: (query)  (optional)
+     - parameter page: (query)  (optional, default to 1)
+     - parameter limit: (query)  (optional, default to 25)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: PaginatedApiResultOfEcfReceptionRequestDto
+     */
+    open class func searchEcfReceptionRequestsByRnc(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfReceptionRequestDto {
+        return try await searchEcfReceptionRequestsByRncWithRequestBuilder(rnc: rnc, messageIds: messageIds, encfs: encfs, rncEmisors: rncEmisors, tiposEcfs: tiposEcfs, progresses: progresses, fromDate: fromDate, toDate: toDate, amountFrom: amountFrom, amountTo: amountTo, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     - GET /recepcion/{rnc}
+     - Bearer Token:
+       - type: http
+       - name: Bearer
+     - parameter rnc: (path)  
+     - parameter messageIds: (query)  (optional)
+     - parameter encfs: (query)  (optional)
+     - parameter rncEmisors: (query)  (optional)
+     - parameter tiposEcfs: (query)  (optional)
+     - parameter progresses: (query)  (optional)
+     - parameter fromDate: (query)  (optional)
+     - parameter toDate: (query)  (optional)
+     - parameter amountFrom: (query)  (optional)
+     - parameter amountTo: (query)  (optional)
+     - parameter page: (query)  (optional, default to 1)
+     - parameter limit: (query)  (optional, default to 25)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> 
+     */
+    open class func searchEcfReceptionRequestsByRncWithRequestBuilder(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> {
+        var localVariablePath = "/recepcion/{rnc}"
+        let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
+        let rncPostEscape = rncPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{rnc}", with: rncPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(([
+            "MessageIds": (wrappedValue: messageIds?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Encfs": (wrappedValue: encfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "RncEmisors": (wrappedValue: rncEmisors?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "TiposEcfs": (wrappedValue: tiposEcfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Progresses": (wrappedValue: progresses?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "FromDate": (wrappedValue: fromDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "ToDate": (wrappedValue: toDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "AmountFrom": (wrappedValue: amountFrom?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "AmountTo": (wrappedValue: amountTo?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ] as [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]))
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+
+     - parameter messageId: (path)  
+     - parameter sendAcecfRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func sendAprobacionComercial(messageId: UUID, sendAcecfRequest: SendAcecfRequest, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await sendAprobacionComercialWithRequestBuilder(messageId: messageId, sendAcecfRequest: sendAcecfRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     - POST /recepcion/{messageId}/acecf
+     - Bearer Token:
+       - type: http
+       - name: Bearer
+     - parameter messageId: (path)  
+     - parameter sendAcecfRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func sendAprobacionComercialWithRequestBuilder(messageId: UUID, sendAcecfRequest: SendAcecfRequest, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+        var localVariablePath = "/recepcion/{messageId}/acecf"
+        let messageIdPreEscape = "\(APIHelper.mapValueToPathItem(messageId))"
+        let messageIdPostEscape = messageIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{messageId}", with: messageIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: sendAcecfRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-
-     - parameter messageIds: (query)  (optional)
-     - parameter encfs: (query)  (optional)
-     - parameter rncs: (query)  (optional)
-     - parameter page: (query)  (optional, default to 1)
-     - parameter limit: (query)  (optional, default to 25)
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: PaginatedApiResultOfAcecfReceptionRequestDto
-     */
-    open class func searchAcecfReceptionRequests(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfAcecfReceptionRequestDto {
-        return try await searchAcecfReceptionRequestsWithRequestBuilder(messageIds: messageIds, encfs: encfs, rncs: rncs, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     - GET /recepcion/acecf
-     - Bearer Token:
-       - type: http
-       - name: Bearer
-     - parameter messageIds: (query)  (optional)
-     - parameter encfs: (query)  (optional)
-     - parameter rncs: (query)  (optional)
-     - parameter page: (query)  (optional, default to 1)
-     - parameter limit: (query)  (optional, default to 25)
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<PaginatedApiResultOfAcecfReceptionRequestDto> 
-     */
-    open class func searchAcecfReceptionRequestsWithRequestBuilder(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfAcecfReceptionRequestDto> {
-        let localVariablePath = "/recepcion/acecf"
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "MessageIds": (wrappedValue: messageIds?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Encfs": (wrappedValue: encfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Rncs": (wrappedValue: rncs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<PaginatedApiResultOfAcecfReceptionRequestDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-
-     - parameter rnc: (path)  
-     - parameter messageIds: (query)  (optional)
-     - parameter encfs: (query)  (optional)
-     - parameter page: (query)  (optional, default to 1)
-     - parameter limit: (query)  (optional, default to 25)
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: PaginatedApiResultOfAcecfReceptionRequestDto
-     */
-    open class func searchAcecfReceptionRequestsByRnc(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfAcecfReceptionRequestDto {
-        return try await searchAcecfReceptionRequestsByRncWithRequestBuilder(rnc: rnc, messageIds: messageIds, encfs: encfs, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     - GET /recepcion/{rnc}/acecf
-     - Bearer Token:
-       - type: http
-       - name: Bearer
-     - parameter rnc: (path)  
-     - parameter messageIds: (query)  (optional)
-     - parameter encfs: (query)  (optional)
-     - parameter page: (query)  (optional, default to 1)
-     - parameter limit: (query)  (optional, default to 25)
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<PaginatedApiResultOfAcecfReceptionRequestDto> 
-     */
-    open class func searchAcecfReceptionRequestsByRncWithRequestBuilder(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfAcecfReceptionRequestDto> {
-        var localVariablePath = "/recepcion/{rnc}/acecf"
-        let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
-        let rncPostEscape = rncPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{rnc}", with: rncPostEscape, options: .literal, range: nil)
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "MessageIds": (wrappedValue: messageIds?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Encfs": (wrappedValue: encfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<PaginatedApiResultOfAcecfReceptionRequestDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-
-     - parameter messageIds: (query)  (optional)
-     - parameter encfs: (query)  (optional)
-     - parameter rncs: (query)  (optional)
-     - parameter page: (query)  (optional, default to 1)
-     - parameter limit: (query)  (optional, default to 25)
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: PaginatedApiResultOfEcfReceptionRequestDto
-     */
-    open class func searchEcfReceptionRequests(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfReceptionRequestDto {
-        return try await searchEcfReceptionRequestsWithRequestBuilder(messageIds: messageIds, encfs: encfs, rncs: rncs, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     - GET /recepcion/ecf
-     - Bearer Token:
-       - type: http
-       - name: Bearer
-     - parameter messageIds: (query)  (optional)
-     - parameter encfs: (query)  (optional)
-     - parameter rncs: (query)  (optional)
-     - parameter page: (query)  (optional, default to 1)
-     - parameter limit: (query)  (optional, default to 25)
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> 
-     */
-    open class func searchEcfReceptionRequestsWithRequestBuilder(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> {
-        let localVariablePath = "/recepcion/ecf"
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "MessageIds": (wrappedValue: messageIds?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Encfs": (wrappedValue: encfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Rncs": (wrappedValue: rncs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-
-     - parameter rnc: (path)  
-     - parameter messageIds: (query)  (optional)
-     - parameter encfs: (query)  (optional)
-     - parameter page: (query)  (optional, default to 1)
-     - parameter limit: (query)  (optional, default to 25)
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: PaginatedApiResultOfEcfReceptionRequestDto
-     */
-    open class func searchEcfReceptionRequestsByRnc(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfReceptionRequestDto {
-        return try await searchEcfReceptionRequestsByRncWithRequestBuilder(rnc: rnc, messageIds: messageIds, encfs: encfs, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     - GET /recepcion/{rnc}/ecf
-     - Bearer Token:
-       - type: http
-       - name: Bearer
-     - parameter rnc: (path)  
-     - parameter messageIds: (query)  (optional)
-     - parameter encfs: (query)  (optional)
-     - parameter page: (query)  (optional, default to 1)
-     - parameter limit: (query)  (optional, default to 25)
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> 
-     */
-    open class func searchEcfReceptionRequestsByRncWithRequestBuilder(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> {
-        var localVariablePath = "/recepcion/{rnc}/ecf"
-        let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
-        let rncPostEscape = rncPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{rnc}", with: rncPostEscape, options: .literal, range: nil)
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "MessageIds": (wrappedValue: messageIds?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Encfs": (wrappedValue: encfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

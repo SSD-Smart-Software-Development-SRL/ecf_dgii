@@ -12,7 +12,7 @@ Agrega a tu `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git", from: "0.1.0")
+    .package(url: "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git", from: "1.0.0")
 ]
 ```
 
@@ -21,7 +21,7 @@ O en Xcode: **File > Add Package Dependencies** e ingresa la URL del repositorio
 ### CocoaPods
 
 ```ruby
-pod 'EcfDgiiClient', '~> 0.1.0'
+pod 'EcfDgiiClient', '~> 1.0.0'
 ```
 
 ## Inicio rápido
@@ -35,15 +35,19 @@ let client = EcfClient(
     environment: .prod  // .test, .cert o .prod
 )
 
-// Enviar un ECF con enrutamiento automático y polling
-let ecf = ECF(
-    encabezado: Encabezado(
+// Enviar un ECF con enrutamiento automático y polling.
+// Cada tipo de e-CF (31, 32, ..., 47) tiene su propio modelo y un overload
+// de `sendEcf` correspondiente.
+let ecf = Ecf31ECF(
+    encabezado: Ecf31Encabezado(
         version: .e10,
-        idDoc: IdDoc(
+        idDoc: Ecf31IdDoc(
             tipoeCF: .facturaDeCreditoFiscalElectronica,
-            encf: "E310000000001"
+            encf: "E310000000001",
+            tipoIngresos: .ingresosPorOperacionesGravadas,
+            tipoPago: .contado
         ),
-        emisor: Emisor(
+        emisor: Ecf31Emisor(
             rncEmisor: "123456789",
             razonSocialEmisor: "Mi Empresa SRL",
             direccionEmisor: "Santo Domingo"

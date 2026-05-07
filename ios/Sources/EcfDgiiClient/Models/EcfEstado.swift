@@ -7,11 +7,10 @@
 
 import Foundation
 
-public enum EcfEstado: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum EcfEstado: String, Sendable, Codable, CaseIterable {
     case noEncontrado = "NoEncontrado"
     case aceptado = "Aceptado"
     case rechazado = "Rechazado"
     case enProceso = "EnProceso"
     case aceptadoCondicional = "AceptadoCondicional"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

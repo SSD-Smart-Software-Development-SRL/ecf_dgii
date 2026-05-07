@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **tenantId** | **UUID** |  | [optional] 
 **companyRnc** | **String** |  | [optional] 
 **fileName** | **String** |  | [optional] 
-**progress** | **Int** |  | [optional] 
+**progress** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  | [optional] 
 **createdOn** | **Date** |  | [optional] 
 **updatedOn** | **Date** |  | [optional] 
 **errorMessage** | **String** |  | [optional] 
@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **rncEmisor** | **String** |  | [optional] 
 **tipoEcf** | [**AllTipoECFTypes**](AllTipoECFTypes.md) |  | [optional] 
 **resultInternalFileName** | **String** |  | [optional] 
+**montoTotal** | [**EcfReceptionRequestDtoMontoTotal**](EcfReceptionRequestDtoMontoTotal.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

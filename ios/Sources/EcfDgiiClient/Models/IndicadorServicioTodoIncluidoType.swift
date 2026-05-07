@@ -7,7 +7,6 @@
 
 import Foundation
 
-public enum IndicadorServicioTodoIncluidoType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum IndicadorServicioTodoIncluidoType: String, Sendable, Codable, CaseIterable {
     case indicadorServicioTodoIncluido = "IndicadorServicioTodoIncluido"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

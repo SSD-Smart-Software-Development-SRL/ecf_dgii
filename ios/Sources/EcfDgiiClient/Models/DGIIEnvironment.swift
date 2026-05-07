@@ -7,9 +7,8 @@
 
 import Foundation
 
-public enum DGIIEnvironment: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum DGIIEnvironment: String, Sendable, Codable, CaseIterable {
     case test = "Test"
     case certification = "Certification"
     case production = "Production"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

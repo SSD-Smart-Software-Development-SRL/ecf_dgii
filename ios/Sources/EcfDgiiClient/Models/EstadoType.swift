@@ -7,8 +7,7 @@
 
 import Foundation
 
-public enum EstadoType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum EstadoType: String, Sendable, Codable, CaseIterable {
     case ecfaceptado = "ECFAceptado"
     case ecfrechazado = "ECFRechazado"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

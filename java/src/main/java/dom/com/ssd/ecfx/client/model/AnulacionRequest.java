@@ -19,8 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress;
 import dom.com.ssd.ecfx.client.model.DetalleAnulacionRequest;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,12 +52,12 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * AnulacionRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class AnulacionRequest {
   public static final String SERIALIZED_NAME_CANTIDA_DE_NCF_ANULADOS = "cantidaDeNcfAnulados";
   @SerializedName(SERIALIZED_NAME_CANTIDA_DE_NCF_ANULADOS)
   @javax.annotation.Nonnull
-  private AcecfReceptionRequestDtoProgress cantidaDeNcfAnulados;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner cantidaDeNcfAnulados;
 
   public static final String SERIALIZED_NAME_DETALLE_ANULACION = "detalleAnulacion";
   @SerializedName(SERIALIZED_NAME_DETALLE_ANULACION)
@@ -67,7 +67,7 @@ public class AnulacionRequest {
   public AnulacionRequest() {
   }
 
-  public AnulacionRequest cantidaDeNcfAnulados(@javax.annotation.Nonnull AcecfReceptionRequestDtoProgress cantidaDeNcfAnulados) {
+  public AnulacionRequest cantidaDeNcfAnulados(@javax.annotation.Nonnull SearchEcfReceptionRequestsTiposEcfsParameterInner cantidaDeNcfAnulados) {
     this.cantidaDeNcfAnulados = cantidaDeNcfAnulados;
     return this;
   }
@@ -77,11 +77,11 @@ public class AnulacionRequest {
    * @return cantidaDeNcfAnulados
    */
   @javax.annotation.Nonnull
-  public AcecfReceptionRequestDtoProgress getCantidaDeNcfAnulados() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getCantidaDeNcfAnulados() {
     return cantidaDeNcfAnulados;
   }
 
-  public void setCantidaDeNcfAnulados(@javax.annotation.Nonnull AcecfReceptionRequestDtoProgress cantidaDeNcfAnulados) {
+  public void setCantidaDeNcfAnulados(@javax.annotation.Nonnull SearchEcfReceptionRequestsTiposEcfsParameterInner cantidaDeNcfAnulados) {
     this.cantidaDeNcfAnulados = cantidaDeNcfAnulados;
   }
 
@@ -174,7 +174,7 @@ public class AnulacionRequest {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!AnulacionRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in AnulacionRequest is not found in the empty JSON string", AnulacionRequest.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in AnulacionRequest is not found in the empty JSON string", AnulacionRequest.openapiRequiredFields.toString()));
         }
       }
 
@@ -182,29 +182,29 @@ public class AnulacionRequest {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!AnulacionRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `AnulacionRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AnulacionRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : AnulacionRequest.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `cantidaDeNcfAnulados`
-      AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("cantidaDeNcfAnulados"));
-      if (jsonObj.get("detalleAnulacion") != null) {
-        if (!jsonObj.get("detalleAnulacion").isJsonArray()) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `detalleAnulacion` to be an array in the JSON string but got `%s`", jsonObj.get("detalleAnulacion").toString()));
-        }
-        JsonArray jsonArraydetalleAnulacion = jsonObj.getAsJsonArray("detalleAnulacion");
-        // validate the required field `detalleAnulacion` (array)
-        for (int i = 0; i < jsonArraydetalleAnulacion.size(); i++) {
-          DetalleAnulacionRequest.validateJsonElement(jsonArraydetalleAnulacion.get(i));
-        }
+      SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("cantidaDeNcfAnulados"));
+      // ensure the json data is an array
+      if (!jsonObj.get("detalleAnulacion").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `detalleAnulacion` to be an array in the JSON string but got `%s`", jsonObj.get("detalleAnulacion").toString()));
       }
+
+      JsonArray jsonArraydetalleAnulacion = jsonObj.getAsJsonArray("detalleAnulacion");
+      // validate the required field `detalleAnulacion` (array)
+      for (int i = 0; i < jsonArraydetalleAnulacion.size(); i++) {
+        DetalleAnulacionRequest.validateJsonElement(jsonArraydetalleAnulacion.get(i));
+      };
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

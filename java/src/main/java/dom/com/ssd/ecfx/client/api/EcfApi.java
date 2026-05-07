@@ -41,6 +41,8 @@ import dom.com.ssd.ecfx.client.model.Ecf44ECF;
 import dom.com.ssd.ecfx.client.model.Ecf45ECF;
 import dom.com.ssd.ecfx.client.model.Ecf46ECF;
 import dom.com.ssd.ecfx.client.model.Ecf47ECF;
+import dom.com.ssd.ecfx.client.model.EcfEstado;
+import dom.com.ssd.ecfx.client.model.EcfProgress;
 import dom.com.ssd.ecfx.client.model.EcfResponse;
 import java.io.File;
 import dom.com.ssd.ecfx.client.model.GetCompaniesLimitParameter;
@@ -50,7 +52,6 @@ import dom.com.ssd.ecfx.client.model.PaginatedApiResultOfEcfResponse;
 import dom.com.ssd.ecfx.client.model.ProblemDetails;
 import dom.com.ssd.ecfx.client.model.RespuestaAnulacionRango;
 import dom.com.ssd.ecfx.client.model.SearchEcfsAmountFromParameter;
-import dom.com.ssd.ecfx.client.model.SendAcecfRequest;
 import java.util.UUID;
 
 import java.lang.reflect.Type;
@@ -249,169 +250,6 @@ public class EcfApi {
         okhttp3.Call localVarCall = anulacionRangosValidateBeforeCall(rnc, anulacionRequest, _callback);
         Type localVarReturnType = new TypeToken<RespuestaAnulacionRango>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for aprobacionComercial
-     * @param rnc  (required)
-     * @param encf  (required)
-     * @param sendAcecfRequest  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call aprobacionComercialCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull SendAcecfRequest sendAcecfRequest, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = sendAcecfRequest;
-
-        // create path and map variables
-        String localVarPath = "/ecf/aprobacioncomercial/{rnc}/{encf}"
-            .replace("{" + "rnc" + "}", localVarApiClient.escapeString(rnc.toString()))
-            .replace("{" + "encf" + "}", localVarApiClient.escapeString(encf.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/problem+json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "Bearer" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call aprobacionComercialValidateBeforeCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull SendAcecfRequest sendAcecfRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'rnc' is set
-        if (rnc == null) {
-            throw new ApiException("Missing the required parameter 'rnc' when calling aprobacionComercial(Async)");
-        }
-
-        // verify the required parameter 'encf' is set
-        if (encf == null) {
-            throw new ApiException("Missing the required parameter 'encf' when calling aprobacionComercial(Async)");
-        }
-
-        // verify the required parameter 'sendAcecfRequest' is set
-        if (sendAcecfRequest == null) {
-            throw new ApiException("Missing the required parameter 'sendAcecfRequest' when calling aprobacionComercial(Async)");
-        }
-
-        return aprobacionComercialCall(rnc, encf, sendAcecfRequest, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param rnc  (required)
-     * @param encf  (required)
-     * @param sendAcecfRequest  (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public void aprobacionComercial(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull SendAcecfRequest sendAcecfRequest) throws ApiException {
-        aprobacionComercialWithHttpInfo(rnc, encf, sendAcecfRequest);
-    }
-
-    /**
-     * 
-     * 
-     * @param rnc  (required)
-     * @param encf  (required)
-     * @param sendAcecfRequest  (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> aprobacionComercialWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull SendAcecfRequest sendAcecfRequest) throws ApiException {
-        okhttp3.Call localVarCall = aprobacionComercialValidateBeforeCall(rnc, encf, sendAcecfRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param rnc  (required)
-     * @param encf  (required)
-     * @param sendAcecfRequest  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call aprobacionComercialAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull SendAcecfRequest sendAcecfRequest, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = aprobacionComercialValidateBeforeCall(rnc, encf, sendAcecfRequest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
@@ -2498,6 +2336,8 @@ public class EcfApi {
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback Callback for upload/download progress
@@ -2514,7 +2354,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchAllEcfsCall(@javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchAllEcfsCall(@javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable List<EcfProgress> progresses, @javax.annotation.Nullable List<EcfEstado> dgiiEstados, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2571,6 +2411,14 @@ public class EcfApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("AmountTo", amountTo));
         }
 
+        if (progresses != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "Progresses", progresses));
+        }
+
+        if (dgiiEstados != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "DgiiEstados", dgiiEstados));
+        }
+
         if (page != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("Page", page));
         }
@@ -2600,8 +2448,8 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchAllEcfsValidateBeforeCall(@javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
-        return searchAllEcfsCall(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit, _callback);
+    private okhttp3.Call searchAllEcfsValidateBeforeCall(@javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable List<EcfProgress> progresses, @javax.annotation.Nullable List<EcfEstado> dgiiEstados, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+        return searchAllEcfsCall(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit, _callback);
 
     }
 
@@ -2616,6 +2464,8 @@ public class EcfApi {
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfResponse
@@ -2631,8 +2481,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public PaginatedApiResultOfEcfResponse searchAllEcfs(@javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        ApiResponse<PaginatedApiResultOfEcfResponse> localVarResp = searchAllEcfsWithHttpInfo(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit);
+    public PaginatedApiResultOfEcfResponse searchAllEcfs(@javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable List<EcfProgress> progresses, @javax.annotation.Nullable List<EcfEstado> dgiiEstados, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        ApiResponse<PaginatedApiResultOfEcfResponse> localVarResp = searchAllEcfsWithHttpInfo(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit);
         return localVarResp.getData();
     }
 
@@ -2647,6 +2497,8 @@ public class EcfApi {
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse&lt;PaginatedApiResultOfEcfResponse&gt;
@@ -2662,8 +2514,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PaginatedApiResultOfEcfResponse> searchAllEcfsWithHttpInfo(@javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        okhttp3.Call localVarCall = searchAllEcfsValidateBeforeCall(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit, null);
+    public ApiResponse<PaginatedApiResultOfEcfResponse> searchAllEcfsWithHttpInfo(@javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable List<EcfProgress> progresses, @javax.annotation.Nullable List<EcfEstado> dgiiEstados, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        okhttp3.Call localVarCall = searchAllEcfsValidateBeforeCall(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit, null);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2679,6 +2531,8 @@ public class EcfApi {
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback The callback to be executed when the API call finishes
@@ -2695,9 +2549,9 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchAllEcfsAsync(@javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfResponse> _callback) throws ApiException {
+    public okhttp3.Call searchAllEcfsAsync(@javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable List<EcfProgress> progresses, @javax.annotation.Nullable List<EcfEstado> dgiiEstados, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = searchAllEcfsValidateBeforeCall(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit, _callback);
+        okhttp3.Call localVarCall = searchAllEcfsValidateBeforeCall(encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit, _callback);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -2713,6 +2567,8 @@ public class EcfApi {
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback Callback for upload/download progress
@@ -2729,7 +2585,7 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchEcfsCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchEcfsCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable List<EcfProgress> progresses, @javax.annotation.Nullable List<EcfEstado> dgiiEstados, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2787,6 +2643,14 @@ public class EcfApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("AmountTo", amountTo));
         }
 
+        if (progresses != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "Progresses", progresses));
+        }
+
+        if (dgiiEstados != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "DgiiEstados", dgiiEstados));
+        }
+
         if (page != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("Page", page));
         }
@@ -2816,13 +2680,13 @@ public class EcfApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchEcfsValidateBeforeCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchEcfsValidateBeforeCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable List<EcfProgress> progresses, @javax.annotation.Nullable List<EcfEstado> dgiiEstados, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'rnc' is set
         if (rnc == null) {
             throw new ApiException("Missing the required parameter 'rnc' when calling searchEcfs(Async)");
         }
 
-        return searchEcfsCall(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit, _callback);
+        return searchEcfsCall(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit, _callback);
 
     }
 
@@ -2838,6 +2702,8 @@ public class EcfApi {
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfResponse
@@ -2853,8 +2719,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public PaginatedApiResultOfEcfResponse searchEcfs(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        ApiResponse<PaginatedApiResultOfEcfResponse> localVarResp = searchEcfsWithHttpInfo(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit);
+    public PaginatedApiResultOfEcfResponse searchEcfs(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable List<EcfProgress> progresses, @javax.annotation.Nullable List<EcfEstado> dgiiEstados, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        ApiResponse<PaginatedApiResultOfEcfResponse> localVarResp = searchEcfsWithHttpInfo(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit);
         return localVarResp.getData();
     }
 
@@ -2870,6 +2736,8 @@ public class EcfApi {
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse&lt;PaginatedApiResultOfEcfResponse&gt;
@@ -2885,8 +2753,8 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PaginatedApiResultOfEcfResponse> searchEcfsWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        okhttp3.Call localVarCall = searchEcfsValidateBeforeCall(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit, null);
+    public ApiResponse<PaginatedApiResultOfEcfResponse> searchEcfsWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable List<EcfProgress> progresses, @javax.annotation.Nullable List<EcfEstado> dgiiEstados, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        okhttp3.Call localVarCall = searchEcfsValidateBeforeCall(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit, null);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2903,6 +2771,8 @@ public class EcfApi {
      * @param toFechaEmision  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param progresses  (optional)
+     * @param dgiiEstados  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback The callback to be executed when the API call finishes
@@ -2919,9 +2789,9 @@ public class EcfApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchEcfsAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfResponse> _callback) throws ApiException {
+    public okhttp3.Call searchEcfsAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<UUID> ids, @javax.annotation.Nullable List<AllTipoECFTypes> tiposEcfs, @javax.annotation.Nullable Boolean includeEcfContent, @javax.annotation.Nullable Date fromFechaEmision, @javax.annotation.Nullable Date toFechaEmision, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable List<EcfProgress> progresses, @javax.annotation.Nullable List<EcfEstado> dgiiEstados, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = searchEcfsValidateBeforeCall(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, page, limit, _callback);
+        okhttp3.Call localVarCall = searchEcfsValidateBeforeCall(rnc, encfs, ids, tiposEcfs, includeEcfContent, fromFechaEmision, toFechaEmision, amountFrom, amountTo, progresses, dgiiEstados, page, limit, _callback);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

@@ -111,4 +111,28 @@ public class CompanyResponseTest {
         // TODO: test receptorId
     }
 
+    /**
+     * Test the property 'urlRecepcion'
+     */
+    @Test
+    public void urlRecepcionTest() {
+        // TODO: test urlRecepcion
+    }
+
+    /**
+     * Test the property 'urlAprobacionComercial'
+     */
+    @Test
+    public void urlAprobacionComercialTest() {
+        // TODO: test urlAprobacionComercial
+    }
+
+    /**
+     * Test the property 'urlAutenticacion'
+     */
+    @Test
+    public void urlAutenticacionTest() {
+        // TODO: test urlAutenticacion
+    }
+
 }

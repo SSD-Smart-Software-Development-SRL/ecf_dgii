@@ -49,7 +49,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * SendAcecfRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class SendAcecfRequest {
   public static final String SERIALIZED_NAME_DETALLE_MOTIVO_RECHAZO = "detalleMotivoRechazo";
   @SerializedName(SERIALIZED_NAME_DETALLE_MOTIVO_RECHAZO)
@@ -163,7 +163,7 @@ public class SendAcecfRequest {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!SendAcecfRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in SendAcecfRequest is not found in the empty JSON string", SendAcecfRequest.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in SendAcecfRequest is not found in the empty JSON string", SendAcecfRequest.openapiRequiredFields.toString()));
         }
       }
 
@@ -171,12 +171,12 @@ public class SendAcecfRequest {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SendAcecfRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `SendAcecfRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SendAcecfRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("detalleMotivoRechazo") != null && !jsonObj.get("detalleMotivoRechazo").isJsonNull()) && !jsonObj.get("detalleMotivoRechazo").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `detalleMotivoRechazo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("detalleMotivoRechazo").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `detalleMotivoRechazo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("detalleMotivoRechazo").toString()));
       }
       // validate the optional field `estadoType`
       if (jsonObj.get("estadoType") != null && !jsonObj.get("estadoType").isJsonNull()) {

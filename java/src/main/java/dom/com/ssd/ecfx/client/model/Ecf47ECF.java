@@ -55,7 +55,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Ecf47ECF
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Ecf47ECF {
   public static final String SERIALIZED_NAME_ENCABEZADO = "encabezado";
   @SerializedName(SERIALIZED_NAME_ENCABEZADO)
@@ -271,7 +271,7 @@ public class Ecf47ECF {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Ecf47ECF.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Ecf47ECF is not found in the empty JSON string", Ecf47ECF.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf47ECF is not found in the empty JSON string", Ecf47ECF.openapiRequiredFields.toString()));
         }
       }
 
@@ -279,35 +279,35 @@ public class Ecf47ECF {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Ecf47ECF.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Ecf47ECF` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf47ECF` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : Ecf47ECF.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `encabezado`
       Ecf47Encabezado.validateJsonElement(jsonObj.get("encabezado"));
-      if (jsonObj.get("detallesItems") != null) {
-        if (!jsonObj.get("detallesItems").isJsonArray()) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `detallesItems` to be an array in the JSON string but got `%s`", jsonObj.get("detallesItems").toString()));
-        }
-        JsonArray jsonArraydetallesItems = jsonObj.getAsJsonArray("detallesItems");
-        // validate the required field `detallesItems` (array)
-        for (int i = 0; i < jsonArraydetallesItems.size(); i++) {
-          Ecf47Item.validateJsonElement(jsonArraydetallesItems.get(i));
-        }
+      // ensure the json data is an array
+      if (!jsonObj.get("detallesItems").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `detallesItems` to be an array in the JSON string but got `%s`", jsonObj.get("detallesItems").toString()));
       }
+
+      JsonArray jsonArraydetallesItems = jsonObj.getAsJsonArray("detallesItems");
+      // validate the required field `detallesItems` (array)
+      for (int i = 0; i < jsonArraydetallesItems.size(); i++) {
+        Ecf47Item.validateJsonElement(jsonArraydetallesItems.get(i));
+      };
       if (jsonObj.get("subtotales") != null && !jsonObj.get("subtotales").isJsonNull()) {
         JsonArray jsonArraysubtotales = jsonObj.getAsJsonArray("subtotales");
         if (jsonArraysubtotales != null) {
           // ensure the json data is an array
           if (!jsonObj.get("subtotales").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `subtotales` to be an array in the JSON string but got `%s`", jsonObj.get("subtotales").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `subtotales` to be an array in the JSON string but got `%s`", jsonObj.get("subtotales").toString()));
           }
 
           // validate the optional field `subtotales` (array)
@@ -321,7 +321,7 @@ public class Ecf47ECF {
         if (jsonArraypaginacion != null) {
           // ensure the json data is an array
           if (!jsonObj.get("paginacion").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `paginacion` to be an array in the JSON string but got `%s`", jsonObj.get("paginacion").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `paginacion` to be an array in the JSON string but got `%s`", jsonObj.get("paginacion").toString()));
           }
 
           // validate the optional field `paginacion` (array)

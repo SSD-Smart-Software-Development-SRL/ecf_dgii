@@ -59,7 +59,9 @@ public enum TipoMonedaType {
   
   HTG("HTG"),
   
-  MXN("MXN");
+  MXN("MXN"),
+  
+  COP("COP");
 
   private String value;
 

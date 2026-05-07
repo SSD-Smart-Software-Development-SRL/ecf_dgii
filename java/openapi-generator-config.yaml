@@ -1,7 +1,7 @@
 generatorName: java
 library: okhttp-gson
-inputSpec: ../openapi/v1.json
-outputDir: ./java
+inputSpec: /Users/dawlin/Developer/puntoos/ecf_dgii/src/Apis/ECF_DGII.EcfApi/wwwroot/openapi/v1.json
+outputDir: ./
 additionalProperties:
   groupId: dom.com.ssd.ecfx
   artifactId: ecf-dgii-client

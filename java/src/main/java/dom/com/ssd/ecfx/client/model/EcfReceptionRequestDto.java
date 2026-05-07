@@ -19,8 +19,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress;
 import dom.com.ssd.ecfx.client.model.AllTipoECFTypes;
+import dom.com.ssd.ecfx.client.model.EcfReceptionRequestDtoMontoTotal;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
@@ -52,7 +53,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * EcfReceptionRequestDto
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class EcfReceptionRequestDto {
   public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
   @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
@@ -77,7 +78,7 @@ public class EcfReceptionRequestDto {
   public static final String SERIALIZED_NAME_PROGRESS = "progress";
   @SerializedName(SERIALIZED_NAME_PROGRESS)
   @javax.annotation.Nullable
-  private AcecfReceptionRequestDtoProgress progress;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner progress;
 
   public static final String SERIALIZED_NAME_CREATED_ON = "createdOn";
   @SerializedName(SERIALIZED_NAME_CREATED_ON)
@@ -113,6 +114,11 @@ public class EcfReceptionRequestDto {
   @SerializedName(SERIALIZED_NAME_RESULT_INTERNAL_FILE_NAME)
   @javax.annotation.Nullable
   private String resultInternalFileName;
+
+  public static final String SERIALIZED_NAME_MONTO_TOTAL = "montoTotal";
+  @SerializedName(SERIALIZED_NAME_MONTO_TOTAL)
+  @javax.annotation.Nullable
+  private EcfReceptionRequestDtoMontoTotal montoTotal;
 
   public EcfReceptionRequestDto() {
   }
@@ -193,7 +199,7 @@ public class EcfReceptionRequestDto {
   }
 
 
-  public EcfReceptionRequestDto progress(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress progress) {
+  public EcfReceptionRequestDto progress(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner progress) {
     this.progress = progress;
     return this;
   }
@@ -203,11 +209,11 @@ public class EcfReceptionRequestDto {
    * @return progress
    */
   @javax.annotation.Nullable
-  public AcecfReceptionRequestDtoProgress getProgress() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getProgress() {
     return progress;
   }
 
-  public void setProgress(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress progress) {
+  public void setProgress(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner progress) {
     this.progress = progress;
   }
 
@@ -345,6 +351,25 @@ public class EcfReceptionRequestDto {
   }
 
 
+  public EcfReceptionRequestDto montoTotal(@javax.annotation.Nullable EcfReceptionRequestDtoMontoTotal montoTotal) {
+    this.montoTotal = montoTotal;
+    return this;
+  }
+
+  /**
+   * Get montoTotal
+   * @return montoTotal
+   */
+  @javax.annotation.Nullable
+  public EcfReceptionRequestDtoMontoTotal getMontoTotal() {
+    return montoTotal;
+  }
+
+  public void setMontoTotal(@javax.annotation.Nullable EcfReceptionRequestDtoMontoTotal montoTotal) {
+    this.montoTotal = montoTotal;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -366,12 +391,13 @@ public class EcfReceptionRequestDto {
         Objects.equals(this.encf, ecfReceptionRequestDto.encf) &&
         Objects.equals(this.rncEmisor, ecfReceptionRequestDto.rncEmisor) &&
         Objects.equals(this.tipoEcf, ecfReceptionRequestDto.tipoEcf) &&
-        Objects.equals(this.resultInternalFileName, ecfReceptionRequestDto.resultInternalFileName);
+        Objects.equals(this.resultInternalFileName, ecfReceptionRequestDto.resultInternalFileName) &&
+        Objects.equals(this.montoTotal, ecfReceptionRequestDto.montoTotal);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(messageId, tenantId, companyRnc, fileName, progress, createdOn, updatedOn, errorMessage, encf, rncEmisor, tipoEcf, resultInternalFileName);
+    return Objects.hash(messageId, tenantId, companyRnc, fileName, progress, createdOn, updatedOn, errorMessage, encf, rncEmisor, tipoEcf, resultInternalFileName, montoTotal);
   }
 
   @Override
@@ -390,6 +416,7 @@ public class EcfReceptionRequestDto {
     sb.append("    rncEmisor: ").append(toIndentedString(rncEmisor)).append("\n");
     sb.append("    tipoEcf: ").append(toIndentedString(tipoEcf)).append("\n");
     sb.append("    resultInternalFileName: ").append(toIndentedString(resultInternalFileName)).append("\n");
+    sb.append("    montoTotal: ").append(toIndentedString(montoTotal)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -411,7 +438,7 @@ public class EcfReceptionRequestDto {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("messageId", "tenantId", "companyRnc", "fileName", "progress", "createdOn", "updatedOn", "errorMessage", "encf", "rncEmisor", "tipoEcf", "resultInternalFileName"));
+    openapiFields = new HashSet<String>(Arrays.asList("messageId", "tenantId", "companyRnc", "fileName", "progress", "createdOn", "updatedOn", "errorMessage", "encf", "rncEmisor", "tipoEcf", "resultInternalFileName", "montoTotal"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(0);
@@ -426,7 +453,7 @@ public class EcfReceptionRequestDto {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!EcfReceptionRequestDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in EcfReceptionRequestDto is not found in the empty JSON string", EcfReceptionRequestDto.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in EcfReceptionRequestDto is not found in the empty JSON string", EcfReceptionRequestDto.openapiRequiredFields.toString()));
         }
       }
 
@@ -434,41 +461,45 @@ public class EcfReceptionRequestDto {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!EcfReceptionRequestDto.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `EcfReceptionRequestDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `EcfReceptionRequestDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("messageId") != null && !jsonObj.get("messageId").isJsonNull()) && !jsonObj.get("messageId").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `messageId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("messageId").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `messageId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("messageId").toString()));
       }
       if ((jsonObj.get("tenantId") != null && !jsonObj.get("tenantId").isJsonNull()) && !jsonObj.get("tenantId").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tenantId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenantId").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `tenantId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenantId").toString()));
       }
       if ((jsonObj.get("companyRnc") != null && !jsonObj.get("companyRnc").isJsonNull()) && !jsonObj.get("companyRnc").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `companyRnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("companyRnc").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `companyRnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("companyRnc").toString()));
       }
       if ((jsonObj.get("fileName") != null && !jsonObj.get("fileName").isJsonNull()) && !jsonObj.get("fileName").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fileName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fileName").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `fileName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fileName").toString()));
       }
       // validate the optional field `progress`
       if (jsonObj.get("progress") != null && !jsonObj.get("progress").isJsonNull()) {
-        AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("progress"));
+        SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("progress"));
       }
       if ((jsonObj.get("errorMessage") != null && !jsonObj.get("errorMessage").isJsonNull()) && !jsonObj.get("errorMessage").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `errorMessage` to be a primitive type in the JSON string but got `%s`", jsonObj.get("errorMessage").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `errorMessage` to be a primitive type in the JSON string but got `%s`", jsonObj.get("errorMessage").toString()));
       }
       if ((jsonObj.get("encf") != null && !jsonObj.get("encf").isJsonNull()) && !jsonObj.get("encf").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
       }
       if ((jsonObj.get("rncEmisor") != null && !jsonObj.get("rncEmisor").isJsonNull()) && !jsonObj.get("rncEmisor").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `rncEmisor` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rncEmisor").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `rncEmisor` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rncEmisor").toString()));
       }
       // validate the optional field `tipoEcf`
       if (jsonObj.get("tipoEcf") != null && !jsonObj.get("tipoEcf").isJsonNull()) {
         AllTipoECFTypes.validateJsonElement(jsonObj.get("tipoEcf"));
       }
       if ((jsonObj.get("resultInternalFileName") != null && !jsonObj.get("resultInternalFileName").isJsonNull()) && !jsonObj.get("resultInternalFileName").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `resultInternalFileName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("resultInternalFileName").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `resultInternalFileName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("resultInternalFileName").toString()));
+      }
+      // validate the optional field `montoTotal`
+      if (jsonObj.get("montoTotal") != null && !jsonObj.get("montoTotal").isJsonNull()) {
+        EcfReceptionRequestDtoMontoTotal.validateJsonElement(jsonObj.get("montoTotal"));
       }
   }
 

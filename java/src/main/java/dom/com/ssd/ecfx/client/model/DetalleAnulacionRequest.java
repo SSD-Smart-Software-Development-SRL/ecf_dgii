@@ -19,8 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress;
 import dom.com.ssd.ecfx.client.model.ECFType;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
 import dom.com.ssd.ecfx.client.model.SecuenciaRequest;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * DetalleAnulacionRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class DetalleAnulacionRequest {
   public static final String SERIALIZED_NAME_TIPO_ECF = "tipoEcf";
   @SerializedName(SERIALIZED_NAME_TIPO_ECF)
@@ -63,12 +63,12 @@ public class DetalleAnulacionRequest {
   public static final String SERIALIZED_NAME_CANTIDADE_NCF_ANULADOS = "cantidadeNcfAnulados";
   @SerializedName(SERIALIZED_NAME_CANTIDADE_NCF_ANULADOS)
   @javax.annotation.Nonnull
-  private AcecfReceptionRequestDtoProgress cantidadeNcfAnulados;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner cantidadeNcfAnulados;
 
   public static final String SERIALIZED_NAME_NO_LINEA = "noLinea";
   @SerializedName(SERIALIZED_NAME_NO_LINEA)
   @javax.annotation.Nonnull
-  private List<AcecfReceptionRequestDtoProgress> noLinea = new ArrayList<>();
+  private List<SearchEcfReceptionRequestsTiposEcfsParameterInner> noLinea = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_SECUENCIAS = "secuencias";
   @SerializedName(SERIALIZED_NAME_SECUENCIAS)
@@ -97,7 +97,7 @@ public class DetalleAnulacionRequest {
   }
 
 
-  public DetalleAnulacionRequest cantidadeNcfAnulados(@javax.annotation.Nonnull AcecfReceptionRequestDtoProgress cantidadeNcfAnulados) {
+  public DetalleAnulacionRequest cantidadeNcfAnulados(@javax.annotation.Nonnull SearchEcfReceptionRequestsTiposEcfsParameterInner cantidadeNcfAnulados) {
     this.cantidadeNcfAnulados = cantidadeNcfAnulados;
     return this;
   }
@@ -107,21 +107,21 @@ public class DetalleAnulacionRequest {
    * @return cantidadeNcfAnulados
    */
   @javax.annotation.Nonnull
-  public AcecfReceptionRequestDtoProgress getCantidadeNcfAnulados() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getCantidadeNcfAnulados() {
     return cantidadeNcfAnulados;
   }
 
-  public void setCantidadeNcfAnulados(@javax.annotation.Nonnull AcecfReceptionRequestDtoProgress cantidadeNcfAnulados) {
+  public void setCantidadeNcfAnulados(@javax.annotation.Nonnull SearchEcfReceptionRequestsTiposEcfsParameterInner cantidadeNcfAnulados) {
     this.cantidadeNcfAnulados = cantidadeNcfAnulados;
   }
 
 
-  public DetalleAnulacionRequest noLinea(@javax.annotation.Nonnull List<AcecfReceptionRequestDtoProgress> noLinea) {
+  public DetalleAnulacionRequest noLinea(@javax.annotation.Nonnull List<SearchEcfReceptionRequestsTiposEcfsParameterInner> noLinea) {
     this.noLinea = noLinea;
     return this;
   }
 
-  public DetalleAnulacionRequest addNoLineaItem(AcecfReceptionRequestDtoProgress noLineaItem) {
+  public DetalleAnulacionRequest addNoLineaItem(SearchEcfReceptionRequestsTiposEcfsParameterInner noLineaItem) {
     if (this.noLinea == null) {
       this.noLinea = new ArrayList<>();
     }
@@ -134,11 +134,11 @@ public class DetalleAnulacionRequest {
    * @return noLinea
    */
   @javax.annotation.Nonnull
-  public List<AcecfReceptionRequestDtoProgress> getNoLinea() {
+  public List<SearchEcfReceptionRequestsTiposEcfsParameterInner> getNoLinea() {
     return noLinea;
   }
 
-  public void setNoLinea(@javax.annotation.Nonnull List<AcecfReceptionRequestDtoProgress> noLinea) {
+  public void setNoLinea(@javax.annotation.Nonnull List<SearchEcfReceptionRequestsTiposEcfsParameterInner> noLinea) {
     this.noLinea = noLinea;
   }
 
@@ -235,7 +235,7 @@ public class DetalleAnulacionRequest {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!DetalleAnulacionRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in DetalleAnulacionRequest is not found in the empty JSON string", DetalleAnulacionRequest.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in DetalleAnulacionRequest is not found in the empty JSON string", DetalleAnulacionRequest.openapiRequiredFields.toString()));
         }
       }
 
@@ -243,41 +243,41 @@ public class DetalleAnulacionRequest {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!DetalleAnulacionRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `DetalleAnulacionRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DetalleAnulacionRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : DetalleAnulacionRequest.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `tipoEcf`
       ECFType.validateJsonElement(jsonObj.get("tipoEcf"));
       // validate the required field `cantidadeNcfAnulados`
-      AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("cantidadeNcfAnulados"));
-      if (jsonObj.get("noLinea") != null) {
-        if (!jsonObj.get("noLinea").isJsonArray()) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `noLinea` to be an array in the JSON string but got `%s`", jsonObj.get("noLinea").toString()));
-        }
-        JsonArray jsonArraynoLinea = jsonObj.getAsJsonArray("noLinea");
-        // validate the required field `noLinea` (array)
-        for (int i = 0; i < jsonArraynoLinea.size(); i++) {
-          AcecfReceptionRequestDtoProgress.validateJsonElement(jsonArraynoLinea.get(i));
-        }
+      SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("cantidadeNcfAnulados"));
+      // ensure the json data is an array
+      if (!jsonObj.get("noLinea").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `noLinea` to be an array in the JSON string but got `%s`", jsonObj.get("noLinea").toString()));
       }
-      if (jsonObj.get("secuencias") != null) {
-        if (!jsonObj.get("secuencias").isJsonArray()) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `secuencias` to be an array in the JSON string but got `%s`", jsonObj.get("secuencias").toString()));
-        }
-        JsonArray jsonArraysecuencias = jsonObj.getAsJsonArray("secuencias");
-        // validate the required field `secuencias` (array)
-        for (int i = 0; i < jsonArraysecuencias.size(); i++) {
-          SecuenciaRequest.validateJsonElement(jsonArraysecuencias.get(i));
-        }
+
+      JsonArray jsonArraynoLinea = jsonObj.getAsJsonArray("noLinea");
+      // validate the required field `noLinea` (array)
+      for (int i = 0; i < jsonArraynoLinea.size(); i++) {
+        SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonArraynoLinea.get(i));
+      };
+      // ensure the json data is an array
+      if (!jsonObj.get("secuencias").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `secuencias` to be an array in the JSON string but got `%s`", jsonObj.get("secuencias").toString()));
       }
+
+      JsonArray jsonArraysecuencias = jsonObj.getAsJsonArray("secuencias");
+      // validate the required field `secuencias` (array)
+      for (int i = 0; i < jsonArraysecuencias.size(); i++) {
+        SecuenciaRequest.validateJsonElement(jsonArraysecuencias.get(i));
+      };
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

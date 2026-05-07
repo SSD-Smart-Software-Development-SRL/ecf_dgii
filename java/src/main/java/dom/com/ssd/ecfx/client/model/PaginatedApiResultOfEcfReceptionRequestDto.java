@@ -19,9 +19,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress;
 import dom.com.ssd.ecfx.client.model.Ecf31IdDocTotalPaginas;
 import dom.com.ssd.ecfx.client.model.EcfReceptionRequestDto;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * PaginatedApiResultOfEcfReceptionRequestDto
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class PaginatedApiResultOfEcfReceptionRequestDto {
   public static final String SERIALIZED_NAME_NEXT_PAGE_URI = "nextPageUri";
   @SerializedName(SERIALIZED_NAME_NEXT_PAGE_URI)
@@ -69,17 +69,17 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
   public static final String SERIALIZED_NAME_TOTAL = "total";
   @SerializedName(SERIALIZED_NAME_TOTAL)
   @javax.annotation.Nullable
-  private AcecfReceptionRequestDtoProgress total;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner total;
 
   public static final String SERIALIZED_NAME_PAGE = "page";
   @SerializedName(SERIALIZED_NAME_PAGE)
   @javax.annotation.Nullable
-  private AcecfReceptionRequestDtoProgress page;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner page;
 
   public static final String SERIALIZED_NAME_LIMIT = "limit";
   @SerializedName(SERIALIZED_NAME_LIMIT)
   @javax.annotation.Nullable
-  private AcecfReceptionRequestDtoProgress limit;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner limit;
 
   public static final String SERIALIZED_NAME_NEXT_PAGE = "nextPage";
   @SerializedName(SERIALIZED_NAME_NEXT_PAGE)
@@ -140,7 +140,7 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
   }
 
 
-  public PaginatedApiResultOfEcfReceptionRequestDto total(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress total) {
+  public PaginatedApiResultOfEcfReceptionRequestDto total(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner total) {
     this.total = total;
     return this;
   }
@@ -150,16 +150,16 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
    * @return total
    */
   @javax.annotation.Nullable
-  public AcecfReceptionRequestDtoProgress getTotal() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getTotal() {
     return total;
   }
 
-  public void setTotal(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress total) {
+  public void setTotal(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner total) {
     this.total = total;
   }
 
 
-  public PaginatedApiResultOfEcfReceptionRequestDto page(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress page) {
+  public PaginatedApiResultOfEcfReceptionRequestDto page(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner page) {
     this.page = page;
     return this;
   }
@@ -169,16 +169,16 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
    * @return page
    */
   @javax.annotation.Nullable
-  public AcecfReceptionRequestDtoProgress getPage() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getPage() {
     return page;
   }
 
-  public void setPage(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress page) {
+  public void setPage(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner page) {
     this.page = page;
   }
 
 
-  public PaginatedApiResultOfEcfReceptionRequestDto limit(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress limit) {
+  public PaginatedApiResultOfEcfReceptionRequestDto limit(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner limit) {
     this.limit = limit;
     return this;
   }
@@ -188,11 +188,11 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
    * @return limit
    */
   @javax.annotation.Nullable
-  public AcecfReceptionRequestDtoProgress getLimit() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getLimit() {
     return limit;
   }
 
-  public void setLimit(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress limit) {
+  public void setLimit(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner limit) {
     this.limit = limit;
   }
 
@@ -306,7 +306,7 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!PaginatedApiResultOfEcfReceptionRequestDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in PaginatedApiResultOfEcfReceptionRequestDto is not found in the empty JSON string", PaginatedApiResultOfEcfReceptionRequestDto.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in PaginatedApiResultOfEcfReceptionRequestDto is not found in the empty JSON string", PaginatedApiResultOfEcfReceptionRequestDto.openapiRequiredFields.toString()));
         }
       }
 
@@ -314,26 +314,26 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!PaginatedApiResultOfEcfReceptionRequestDto.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PaginatedApiResultOfEcfReceptionRequestDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `PaginatedApiResultOfEcfReceptionRequestDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : PaginatedApiResultOfEcfReceptionRequestDto.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("nextPageUri") != null && !jsonObj.get("nextPageUri").isJsonNull()) && !jsonObj.get("nextPageUri").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `nextPageUri` to be a primitive type in the JSON string but got `%s`", jsonObj.get("nextPageUri").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `nextPageUri` to be a primitive type in the JSON string but got `%s`", jsonObj.get("nextPageUri").toString()));
       }
       if (jsonObj.get("values") != null && !jsonObj.get("values").isJsonNull()) {
         JsonArray jsonArrayvalues = jsonObj.getAsJsonArray("values");
         if (jsonArrayvalues != null) {
           // ensure the json data is an array
           if (!jsonObj.get("values").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `values` to be an array in the JSON string but got `%s`", jsonObj.get("values").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `values` to be an array in the JSON string but got `%s`", jsonObj.get("values").toString()));
           }
 
           // validate the optional field `values` (array)
@@ -344,15 +344,15 @@ public class PaginatedApiResultOfEcfReceptionRequestDto {
       }
       // validate the optional field `total`
       if (jsonObj.get("total") != null && !jsonObj.get("total").isJsonNull()) {
-        AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("total"));
+        SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("total"));
       }
       // validate the optional field `page`
       if (jsonObj.get("page") != null && !jsonObj.get("page").isJsonNull()) {
-        AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("page"));
+        SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("page"));
       }
       // validate the optional field `limit`
       if (jsonObj.get("limit") != null && !jsonObj.get("limit").isJsonNull()) {
-        AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("limit"));
+        SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("limit"));
       }
       // validate the optional field `nextPage`
       if (jsonObj.get("nextPage") != null && !jsonObj.get("nextPage").isJsonNull()) {

@@ -14,11 +14,14 @@
 package dom.com.ssd.ecfx.client.api;
 
 import dom.com.ssd.ecfx.client.ApiException;
+import dom.com.ssd.ecfx.client.model.EcfReceptorDto;
 import dom.com.ssd.ecfx.client.model.GetCompaniesLimitParameter;
 import dom.com.ssd.ecfx.client.model.GetCompaniesPageParameter;
-import dom.com.ssd.ecfx.client.model.PaginatedApiResultOfAcecfReceptionRequestDto;
 import dom.com.ssd.ecfx.client.model.PaginatedApiResultOfEcfReceptionRequestDto;
 import dom.com.ssd.ecfx.client.model.ProblemDetails;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
+import dom.com.ssd.ecfx.client.model.SearchEcfsAmountFromParameter;
+import dom.com.ssd.ecfx.client.model.SendAcecfRequest;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -40,49 +43,20 @@ public class RecepcionApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void getAcecfReceptionRequestTest() throws ApiException {
-        String rnc = null;
-        UUID messageId = null;
-        api.getAcecfReceptionRequest(rnc, messageId);
-        // TODO: test validations
-    }
-
-    /**
-     * @throws ApiException if the Api call fails
-     */
-    @Test
     public void getEcfReceptionRequestTest() throws ApiException {
+        UUID messageId = null;
+        api.getEcfReceptionRequest(messageId);
+        // TODO: test validations
+    }
+
+    /**
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getEcfReceptorByMessageIdTest() throws ApiException {
         String rnc = null;
         UUID messageId = null;
-        api.getEcfReceptionRequest(rnc, messageId);
-        // TODO: test validations
-    }
-
-    /**
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void searchAcecfReceptionRequestsTest() throws ApiException {
-        List<UUID> messageIds = null;
-        List<String> encfs = null;
-        List<String> rncs = null;
-        GetCompaniesPageParameter page = null;
-        GetCompaniesLimitParameter limit = null;
-        PaginatedApiResultOfAcecfReceptionRequestDto response = api.searchAcecfReceptionRequests(messageIds, encfs, rncs, page, limit);
-        // TODO: test validations
-    }
-
-    /**
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void searchAcecfReceptionRequestsByRncTest() throws ApiException {
-        String rnc = null;
-        List<UUID> messageIds = null;
-        List<String> encfs = null;
-        GetCompaniesPageParameter page = null;
-        GetCompaniesLimitParameter limit = null;
-        PaginatedApiResultOfAcecfReceptionRequestDto response = api.searchAcecfReceptionRequestsByRnc(rnc, messageIds, encfs, page, limit);
+        EcfReceptorDto response = api.getEcfReceptorByMessageId(rnc, messageId);
         // TODO: test validations
     }
 
@@ -94,9 +68,16 @@ public class RecepcionApiTest {
         List<UUID> messageIds = null;
         List<String> encfs = null;
         List<String> rncs = null;
+        List<String> rncEmisors = null;
+        List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs = null;
+        List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses = null;
+        String fromDate = null;
+        String toDate = null;
+        SearchEcfsAmountFromParameter amountFrom = null;
+        SearchEcfsAmountFromParameter amountTo = null;
         GetCompaniesPageParameter page = null;
         GetCompaniesLimitParameter limit = null;
-        PaginatedApiResultOfEcfReceptionRequestDto response = api.searchEcfReceptionRequests(messageIds, encfs, rncs, page, limit);
+        PaginatedApiResultOfEcfReceptionRequestDto response = api.searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit);
         // TODO: test validations
     }
 
@@ -108,9 +89,27 @@ public class RecepcionApiTest {
         String rnc = null;
         List<UUID> messageIds = null;
         List<String> encfs = null;
+        List<String> rncEmisors = null;
+        List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs = null;
+        List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses = null;
+        String fromDate = null;
+        String toDate = null;
+        SearchEcfsAmountFromParameter amountFrom = null;
+        SearchEcfsAmountFromParameter amountTo = null;
         GetCompaniesPageParameter page = null;
         GetCompaniesLimitParameter limit = null;
-        PaginatedApiResultOfEcfReceptionRequestDto response = api.searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, page, limit);
+        PaginatedApiResultOfEcfReceptionRequestDto response = api.searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit);
+        // TODO: test validations
+    }
+
+    /**
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void sendAprobacionComercialTest() throws ApiException {
+        UUID messageId = null;
+        SendAcecfRequest sendAcecfRequest = null;
+        api.sendAprobacionComercial(messageId, sendAcecfRequest);
         // TODO: test validations
     }
 

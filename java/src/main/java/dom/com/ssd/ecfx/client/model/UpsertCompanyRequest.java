@@ -48,22 +48,52 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * UpsertCompanyRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class UpsertCompanyRequest {
   public static final String SERIALIZED_NAME_RNC = "rnc";
   @SerializedName(SERIALIZED_NAME_RNC)
   @javax.annotation.Nonnull
   private String rnc;
 
-  public static final String SERIALIZED_NAME_LEGAL_NAME = "legalName";
-  @SerializedName(SERIALIZED_NAME_LEGAL_NAME)
-  @javax.annotation.Nonnull
-  private String legalName;
-
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   @javax.annotation.Nonnull
   private String name;
+
+  public static final String SERIALIZED_NAME_EMPLOYEE_COUNT = "employeeCount";
+  @SerializedName(SERIALIZED_NAME_EMPLOYEE_COUNT)
+  @javax.annotation.Nullable
+  private String employeeCount;
+
+  public static final String SERIALIZED_NAME_ESTIMATED_INVOICES = "estimatedInvoices";
+  @SerializedName(SERIALIZED_NAME_ESTIMATED_INVOICES)
+  @javax.annotation.Nullable
+  private String estimatedInvoices;
+
+  public static final String SERIALIZED_NAME_LEGAL_REP_FIRST_NAME = "legalRepFirstName";
+  @SerializedName(SERIALIZED_NAME_LEGAL_REP_FIRST_NAME)
+  @javax.annotation.Nullable
+  private String legalRepFirstName;
+
+  public static final String SERIALIZED_NAME_LEGAL_REP_LAST_NAME = "legalRepLastName";
+  @SerializedName(SERIALIZED_NAME_LEGAL_REP_LAST_NAME)
+  @javax.annotation.Nullable
+  private String legalRepLastName;
+
+  public static final String SERIALIZED_NAME_ADDRESS = "address";
+  @SerializedName(SERIALIZED_NAME_ADDRESS)
+  @javax.annotation.Nullable
+  private String address;
+
+  public static final String SERIALIZED_NAME_CERTIFICATION_DECLARED = "certificationDeclared";
+  @SerializedName(SERIALIZED_NAME_CERTIFICATION_DECLARED)
+  @javax.annotation.Nullable
+  private Boolean certificationDeclared;
+
+  public static final String SERIALIZED_NAME_CERTIFICATION_STATUS = "certificationStatus";
+  @SerializedName(SERIALIZED_NAME_CERTIFICATION_STATUS)
+  @javax.annotation.Nullable
+  private String certificationStatus;
 
   public UpsertCompanyRequest() {
   }
@@ -87,25 +117,6 @@ public class UpsertCompanyRequest {
   }
 
 
-  public UpsertCompanyRequest legalName(@javax.annotation.Nonnull String legalName) {
-    this.legalName = legalName;
-    return this;
-  }
-
-  /**
-   * Get legalName
-   * @return legalName
-   */
-  @javax.annotation.Nonnull
-  public String getLegalName() {
-    return legalName;
-  }
-
-  public void setLegalName(@javax.annotation.Nonnull String legalName) {
-    this.legalName = legalName;
-  }
-
-
   public UpsertCompanyRequest name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
@@ -125,6 +136,139 @@ public class UpsertCompanyRequest {
   }
 
 
+  public UpsertCompanyRequest employeeCount(@javax.annotation.Nullable String employeeCount) {
+    this.employeeCount = employeeCount;
+    return this;
+  }
+
+  /**
+   * Get employeeCount
+   * @return employeeCount
+   */
+  @javax.annotation.Nullable
+  public String getEmployeeCount() {
+    return employeeCount;
+  }
+
+  public void setEmployeeCount(@javax.annotation.Nullable String employeeCount) {
+    this.employeeCount = employeeCount;
+  }
+
+
+  public UpsertCompanyRequest estimatedInvoices(@javax.annotation.Nullable String estimatedInvoices) {
+    this.estimatedInvoices = estimatedInvoices;
+    return this;
+  }
+
+  /**
+   * Get estimatedInvoices
+   * @return estimatedInvoices
+   */
+  @javax.annotation.Nullable
+  public String getEstimatedInvoices() {
+    return estimatedInvoices;
+  }
+
+  public void setEstimatedInvoices(@javax.annotation.Nullable String estimatedInvoices) {
+    this.estimatedInvoices = estimatedInvoices;
+  }
+
+
+  public UpsertCompanyRequest legalRepFirstName(@javax.annotation.Nullable String legalRepFirstName) {
+    this.legalRepFirstName = legalRepFirstName;
+    return this;
+  }
+
+  /**
+   * Get legalRepFirstName
+   * @return legalRepFirstName
+   */
+  @javax.annotation.Nullable
+  public String getLegalRepFirstName() {
+    return legalRepFirstName;
+  }
+
+  public void setLegalRepFirstName(@javax.annotation.Nullable String legalRepFirstName) {
+    this.legalRepFirstName = legalRepFirstName;
+  }
+
+
+  public UpsertCompanyRequest legalRepLastName(@javax.annotation.Nullable String legalRepLastName) {
+    this.legalRepLastName = legalRepLastName;
+    return this;
+  }
+
+  /**
+   * Get legalRepLastName
+   * @return legalRepLastName
+   */
+  @javax.annotation.Nullable
+  public String getLegalRepLastName() {
+    return legalRepLastName;
+  }
+
+  public void setLegalRepLastName(@javax.annotation.Nullable String legalRepLastName) {
+    this.legalRepLastName = legalRepLastName;
+  }
+
+
+  public UpsertCompanyRequest address(@javax.annotation.Nullable String address) {
+    this.address = address;
+    return this;
+  }
+
+  /**
+   * Get address
+   * @return address
+   */
+  @javax.annotation.Nullable
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(@javax.annotation.Nullable String address) {
+    this.address = address;
+  }
+
+
+  public UpsertCompanyRequest certificationDeclared(@javax.annotation.Nullable Boolean certificationDeclared) {
+    this.certificationDeclared = certificationDeclared;
+    return this;
+  }
+
+  /**
+   * Get certificationDeclared
+   * @return certificationDeclared
+   */
+  @javax.annotation.Nullable
+  public Boolean getCertificationDeclared() {
+    return certificationDeclared;
+  }
+
+  public void setCertificationDeclared(@javax.annotation.Nullable Boolean certificationDeclared) {
+    this.certificationDeclared = certificationDeclared;
+  }
+
+
+  public UpsertCompanyRequest certificationStatus(@javax.annotation.Nullable String certificationStatus) {
+    this.certificationStatus = certificationStatus;
+    return this;
+  }
+
+  /**
+   * Get certificationStatus
+   * @return certificationStatus
+   */
+  @javax.annotation.Nullable
+  public String getCertificationStatus() {
+    return certificationStatus;
+  }
+
+  public void setCertificationStatus(@javax.annotation.Nullable String certificationStatus) {
+    this.certificationStatus = certificationStatus;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -136,13 +280,19 @@ public class UpsertCompanyRequest {
     }
     UpsertCompanyRequest upsertCompanyRequest = (UpsertCompanyRequest) o;
     return Objects.equals(this.rnc, upsertCompanyRequest.rnc) &&
-        Objects.equals(this.legalName, upsertCompanyRequest.legalName) &&
-        Objects.equals(this.name, upsertCompanyRequest.name);
+        Objects.equals(this.name, upsertCompanyRequest.name) &&
+        Objects.equals(this.employeeCount, upsertCompanyRequest.employeeCount) &&
+        Objects.equals(this.estimatedInvoices, upsertCompanyRequest.estimatedInvoices) &&
+        Objects.equals(this.legalRepFirstName, upsertCompanyRequest.legalRepFirstName) &&
+        Objects.equals(this.legalRepLastName, upsertCompanyRequest.legalRepLastName) &&
+        Objects.equals(this.address, upsertCompanyRequest.address) &&
+        Objects.equals(this.certificationDeclared, upsertCompanyRequest.certificationDeclared) &&
+        Objects.equals(this.certificationStatus, upsertCompanyRequest.certificationStatus);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(rnc, legalName, name);
+    return Objects.hash(rnc, name, employeeCount, estimatedInvoices, legalRepFirstName, legalRepLastName, address, certificationDeclared, certificationStatus);
   }
 
   @Override
@@ -150,8 +300,14 @@ public class UpsertCompanyRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class UpsertCompanyRequest {\n");
     sb.append("    rnc: ").append(toIndentedString(rnc)).append("\n");
-    sb.append("    legalName: ").append(toIndentedString(legalName)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    employeeCount: ").append(toIndentedString(employeeCount)).append("\n");
+    sb.append("    estimatedInvoices: ").append(toIndentedString(estimatedInvoices)).append("\n");
+    sb.append("    legalRepFirstName: ").append(toIndentedString(legalRepFirstName)).append("\n");
+    sb.append("    legalRepLastName: ").append(toIndentedString(legalRepLastName)).append("\n");
+    sb.append("    address: ").append(toIndentedString(address)).append("\n");
+    sb.append("    certificationDeclared: ").append(toIndentedString(certificationDeclared)).append("\n");
+    sb.append("    certificationStatus: ").append(toIndentedString(certificationStatus)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -173,10 +329,10 @@ public class UpsertCompanyRequest {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("rnc", "legalName", "name"));
+    openapiFields = new HashSet<String>(Arrays.asList("rnc", "name", "employeeCount", "estimatedInvoices", "legalRepFirstName", "legalRepLastName", "address", "certificationDeclared", "certificationStatus"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("rnc", "legalName", "name"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("rnc", "name"));
   }
 
   /**
@@ -188,7 +344,7 @@ public class UpsertCompanyRequest {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!UpsertCompanyRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in UpsertCompanyRequest is not found in the empty JSON string", UpsertCompanyRequest.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in UpsertCompanyRequest is not found in the empty JSON string", UpsertCompanyRequest.openapiRequiredFields.toString()));
         }
       }
 
@@ -196,25 +352,40 @@ public class UpsertCompanyRequest {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!UpsertCompanyRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `UpsertCompanyRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UpsertCompanyRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : UpsertCompanyRequest.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("rnc").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
-      }
-      if (!jsonObj.get("legalName").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `legalName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("legalName").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `rnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rnc").toString()));
       }
       if (!jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      }
+      if ((jsonObj.get("employeeCount") != null && !jsonObj.get("employeeCount").isJsonNull()) && !jsonObj.get("employeeCount").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `employeeCount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("employeeCount").toString()));
+      }
+      if ((jsonObj.get("estimatedInvoices") != null && !jsonObj.get("estimatedInvoices").isJsonNull()) && !jsonObj.get("estimatedInvoices").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `estimatedInvoices` to be a primitive type in the JSON string but got `%s`", jsonObj.get("estimatedInvoices").toString()));
+      }
+      if ((jsonObj.get("legalRepFirstName") != null && !jsonObj.get("legalRepFirstName").isJsonNull()) && !jsonObj.get("legalRepFirstName").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `legalRepFirstName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("legalRepFirstName").toString()));
+      }
+      if ((jsonObj.get("legalRepLastName") != null && !jsonObj.get("legalRepLastName").isJsonNull()) && !jsonObj.get("legalRepLastName").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `legalRepLastName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("legalRepLastName").toString()));
+      }
+      if ((jsonObj.get("address") != null && !jsonObj.get("address").isJsonNull()) && !jsonObj.get("address").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `address` to be a primitive type in the JSON string but got `%s`", jsonObj.get("address").toString()));
+      }
+      if ((jsonObj.get("certificationStatus") != null && !jsonObj.get("certificationStatus").isJsonNull()) && !jsonObj.get("certificationStatus").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `certificationStatus` to be a primitive type in the JSON string but got `%s`", jsonObj.get("certificationStatus").toString()));
       }
   }
 

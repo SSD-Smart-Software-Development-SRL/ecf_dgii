@@ -50,7 +50,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Ecf43OtraMonedaDetalle
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Ecf43OtraMonedaDetalle {
   public static final String SERIALIZED_NAME_PRECIO_OTRA_MONEDA = "precioOtraMoneda";
   @SerializedName(SERIALIZED_NAME_PRECIO_OTRA_MONEDA)
@@ -216,7 +216,7 @@ public class Ecf43OtraMonedaDetalle {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Ecf43OtraMonedaDetalle.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Ecf43OtraMonedaDetalle is not found in the empty JSON string", Ecf43OtraMonedaDetalle.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf43OtraMonedaDetalle is not found in the empty JSON string", Ecf43OtraMonedaDetalle.openapiRequiredFields.toString()));
         }
       }
 
@@ -224,7 +224,7 @@ public class Ecf43OtraMonedaDetalle {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Ecf43OtraMonedaDetalle.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Ecf43OtraMonedaDetalle` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf43OtraMonedaDetalle` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();

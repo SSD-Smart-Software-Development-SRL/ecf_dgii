@@ -48,7 +48,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * SecuenciaRequestDto
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class SecuenciaRequestDto {
   public static final String SERIALIZED_NAME_DESDE_ENCF = "desdeEncf";
   @SerializedName(SERIALIZED_NAME_DESDE_ENCF)
@@ -162,7 +162,7 @@ public class SecuenciaRequestDto {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!SecuenciaRequestDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in SecuenciaRequestDto is not found in the empty JSON string", SecuenciaRequestDto.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in SecuenciaRequestDto is not found in the empty JSON string", SecuenciaRequestDto.openapiRequiredFields.toString()));
         }
       }
 
@@ -170,15 +170,15 @@ public class SecuenciaRequestDto {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SecuenciaRequestDto.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `SecuenciaRequestDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SecuenciaRequestDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("desdeEncf") != null && !jsonObj.get("desdeEncf").isJsonNull()) && !jsonObj.get("desdeEncf").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `desdeEncf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("desdeEncf").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `desdeEncf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("desdeEncf").toString()));
       }
       if ((jsonObj.get("hastaEncf") != null && !jsonObj.get("hastaEncf").isJsonNull()) && !jsonObj.get("hastaEncf").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `hastaEncf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("hastaEncf").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `hastaEncf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("hastaEncf").toString()));
       }
   }
 

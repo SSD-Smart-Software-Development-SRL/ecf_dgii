@@ -19,14 +19,17 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import dom.com.ssd.ecfx.client.model.AcecfSummaryDto;
 import dom.com.ssd.ecfx.client.model.AllTipoECFTypes;
 import dom.com.ssd.ecfx.client.model.DGIIEnvironment;
 import dom.com.ssd.ecfx.client.model.EcfEstado;
 import dom.com.ssd.ecfx.client.model.EcfProgress;
 import dom.com.ssd.ecfx.client.model.SearchEcfsAmountFromParameter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import com.google.gson.Gson;
@@ -55,7 +58,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * EcfResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class EcfResponse {
   public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
   @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
@@ -166,6 +169,11 @@ public class EcfResponse {
   @SerializedName(SERIALIZED_NAME_DGII_ENVIRONMENT)
   @javax.annotation.Nonnull
   private DGIIEnvironment dgiiEnvironment;
+
+  public static final String SERIALIZED_NAME_ACECFS = "acecfs";
+  @SerializedName(SERIALIZED_NAME_ACECFS)
+  @javax.annotation.Nullable
+  private List<AcecfSummaryDto> acecfs = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_IMPRESION_URL = "impresionUrl";
   @SerializedName(SERIALIZED_NAME_IMPRESION_URL)
@@ -593,6 +601,33 @@ public class EcfResponse {
   }
 
 
+  public EcfResponse acecfs(@javax.annotation.Nullable List<AcecfSummaryDto> acecfs) {
+    this.acecfs = acecfs;
+    return this;
+  }
+
+  public EcfResponse addAcecfsItem(AcecfSummaryDto acecfsItem) {
+    if (this.acecfs == null) {
+      this.acecfs = new ArrayList<>();
+    }
+    this.acecfs.add(acecfsItem);
+    return this;
+  }
+
+  /**
+   * ACECFs received from the receptor for this outbound ECF.
+   * @return acecfs
+   */
+  @javax.annotation.Nullable
+  public List<AcecfSummaryDto> getAcecfs() {
+    return acecfs;
+  }
+
+  public void setAcecfs(@javax.annotation.Nullable List<AcecfSummaryDto> acecfs) {
+    this.acecfs = acecfs;
+  }
+
+
   public EcfResponse impresionUrl(@javax.annotation.Nullable String impresionUrl) {
     this.impresionUrl = impresionUrl;
     return this;
@@ -644,12 +679,13 @@ public class EcfResponse {
         Objects.equals(this.emisorReceptorErrors, ecfResponse.emisorReceptorErrors) &&
         Objects.equals(this.secuenciaUtilizada, ecfResponse.secuenciaUtilizada) &&
         Objects.equals(this.dgiiEnvironment, ecfResponse.dgiiEnvironment) &&
+        Objects.equals(this.acecfs, ecfResponse.acecfs) &&
         Objects.equals(this.impresionUrl, ecfResponse.impresionUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(messageId, timestamp, fechaEmision, queueName, includeEcfContent, ecfContent, tipoEcf, encf, rncEmisor, rncReceptor, montoTotal, fileName, tenantId, estatus, codSec, fechaFirma, mensaje, errors, progress, emisorReceptorErrors, secuenciaUtilizada, dgiiEnvironment, impresionUrl);
+    return Objects.hash(messageId, timestamp, fechaEmision, queueName, includeEcfContent, ecfContent, tipoEcf, encf, rncEmisor, rncReceptor, montoTotal, fileName, tenantId, estatus, codSec, fechaFirma, mensaje, errors, progress, emisorReceptorErrors, secuenciaUtilizada, dgiiEnvironment, acecfs, impresionUrl);
   }
 
   @Override
@@ -678,6 +714,7 @@ public class EcfResponse {
     sb.append("    emisorReceptorErrors: ").append(toIndentedString(emisorReceptorErrors)).append("\n");
     sb.append("    secuenciaUtilizada: ").append(toIndentedString(secuenciaUtilizada)).append("\n");
     sb.append("    dgiiEnvironment: ").append(toIndentedString(dgiiEnvironment)).append("\n");
+    sb.append("    acecfs: ").append(toIndentedString(acecfs)).append("\n");
     sb.append("    impresionUrl: ").append(toIndentedString(impresionUrl)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -700,7 +737,7 @@ public class EcfResponse {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("messageId", "timestamp", "fechaEmision", "queueName", "includeEcfContent", "ecfContent", "tipoEcf", "encf", "rncEmisor", "rncReceptor", "montoTotal", "fileName", "tenantId", "estatus", "codSec", "fechaFirma", "mensaje", "errors", "progress", "emisorReceptorErrors", "secuenciaUtilizada", "dgiiEnvironment", "impresionUrl"));
+    openapiFields = new HashSet<String>(Arrays.asList("messageId", "timestamp", "fechaEmision", "queueName", "includeEcfContent", "ecfContent", "tipoEcf", "encf", "rncEmisor", "rncReceptor", "montoTotal", "fileName", "tenantId", "estatus", "codSec", "fechaFirma", "mensaje", "errors", "progress", "emisorReceptorErrors", "secuenciaUtilizada", "dgiiEnvironment", "acecfs", "impresionUrl"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("messageId", "timestamp", "fechaEmision", "queueName", "includeEcfContent", "ecfContent", "tipoEcf", "encf", "rncEmisor", "rncReceptor", "montoTotal", "fileName", "tenantId", "estatus", "codSec", "fechaFirma", "mensaje", "errors", "progress", "emisorReceptorErrors", "secuenciaUtilizada", "dgiiEnvironment"));
@@ -715,7 +752,7 @@ public class EcfResponse {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!EcfResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in EcfResponse is not found in the empty JSON string", EcfResponse.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in EcfResponse is not found in the empty JSON string", EcfResponse.openapiRequiredFields.toString()));
         }
       }
 
@@ -723,67 +760,79 @@ public class EcfResponse {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!EcfResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `EcfResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `EcfResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : EcfResponse.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("messageId").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `messageId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("messageId").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `messageId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("messageId").toString()));
       }
       if (!jsonObj.get("queueName").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `queueName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("queueName").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `queueName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("queueName").toString()));
       }
       if (!jsonObj.get("ecfContent").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `ecfContent` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ecfContent").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `ecfContent` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ecfContent").toString()));
       }
       // validate the required field `tipoEcf`
       AllTipoECFTypes.validateJsonElement(jsonObj.get("tipoEcf"));
       if (!jsonObj.get("encf").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
       }
       if (!jsonObj.get("rncEmisor").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `rncEmisor` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rncEmisor").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `rncEmisor` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rncEmisor").toString()));
       }
       if ((jsonObj.get("rncReceptor") != null && !jsonObj.get("rncReceptor").isJsonNull()) && !jsonObj.get("rncReceptor").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `rncReceptor` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rncReceptor").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `rncReceptor` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rncReceptor").toString()));
       }
       // validate the required field `montoTotal`
       SearchEcfsAmountFromParameter.validateJsonElement(jsonObj.get("montoTotal"));
       if ((jsonObj.get("fileName") != null && !jsonObj.get("fileName").isJsonNull()) && !jsonObj.get("fileName").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fileName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fileName").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `fileName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fileName").toString()));
       }
       if (!jsonObj.get("tenantId").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tenantId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenantId").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `tenantId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenantId").toString()));
       }
-      if (jsonObj.get("estatus") != null && !jsonObj.get("estatus").isJsonNull()) {
       // validate the required field `estatus`
       EcfEstado.validateJsonElement(jsonObj.get("estatus"));
-      }
       if ((jsonObj.get("codSec") != null && !jsonObj.get("codSec").isJsonNull()) && !jsonObj.get("codSec").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `codSec` to be a primitive type in the JSON string but got `%s`", jsonObj.get("codSec").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `codSec` to be a primitive type in the JSON string but got `%s`", jsonObj.get("codSec").toString()));
       }
       if ((jsonObj.get("mensaje") != null && !jsonObj.get("mensaje").isJsonNull()) && !jsonObj.get("mensaje").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `mensaje` to be a primitive type in the JSON string but got `%s`", jsonObj.get("mensaje").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `mensaje` to be a primitive type in the JSON string but got `%s`", jsonObj.get("mensaje").toString()));
       }
       if ((jsonObj.get("errors") != null && !jsonObj.get("errors").isJsonNull()) && !jsonObj.get("errors").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `errors` to be a primitive type in the JSON string but got `%s`", jsonObj.get("errors").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `errors` to be a primitive type in the JSON string but got `%s`", jsonObj.get("errors").toString()));
       }
       // validate the required field `progress`
       EcfProgress.validateJsonElement(jsonObj.get("progress"));
       if ((jsonObj.get("emisorReceptorErrors") != null && !jsonObj.get("emisorReceptorErrors").isJsonNull()) && !jsonObj.get("emisorReceptorErrors").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `emisorReceptorErrors` to be a primitive type in the JSON string but got `%s`", jsonObj.get("emisorReceptorErrors").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `emisorReceptorErrors` to be a primitive type in the JSON string but got `%s`", jsonObj.get("emisorReceptorErrors").toString()));
       }
       // validate the required field `dgiiEnvironment`
       DGIIEnvironment.validateJsonElement(jsonObj.get("dgiiEnvironment"));
+      if (jsonObj.get("acecfs") != null && !jsonObj.get("acecfs").isJsonNull()) {
+        JsonArray jsonArrayacecfs = jsonObj.getAsJsonArray("acecfs");
+        if (jsonArrayacecfs != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("acecfs").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `acecfs` to be an array in the JSON string but got `%s`", jsonObj.get("acecfs").toString()));
+          }
+
+          // validate the optional field `acecfs` (array)
+          for (int i = 0; i < jsonArrayacecfs.size(); i++) {
+            AcecfSummaryDto.validateJsonElement(jsonArrayacecfs.get(i));
+          };
+        }
+      }
       if ((jsonObj.get("impresionUrl") != null && !jsonObj.get("impresionUrl").isJsonNull()) && !jsonObj.get("impresionUrl").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `impresionUrl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("impresionUrl").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `impresionUrl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("impresionUrl").toString()));
       }
   }
 

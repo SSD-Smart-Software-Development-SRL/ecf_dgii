@@ -50,7 +50,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Representa información de ventana de mantenimiento para un ambiente específico. Contiene detalles sobre cuándo ocurrirá el mantenimiento programado.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class VentanaDeMantenimiento {
   public static final String SERIALIZED_NAME_AMBIENTE = "ambiente";
   @SerializedName(SERIALIZED_NAME_AMBIENTE)
@@ -224,7 +224,7 @@ public class VentanaDeMantenimiento {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!VentanaDeMantenimiento.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in VentanaDeMantenimiento is not found in the empty JSON string", VentanaDeMantenimiento.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in VentanaDeMantenimiento is not found in the empty JSON string", VentanaDeMantenimiento.openapiRequiredFields.toString()));
         }
       }
 
@@ -232,22 +232,22 @@ public class VentanaDeMantenimiento {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!VentanaDeMantenimiento.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `VentanaDeMantenimiento` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `VentanaDeMantenimiento` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("ambiente") != null && !jsonObj.get("ambiente").isJsonNull()) && !jsonObj.get("ambiente").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `ambiente` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ambiente").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `ambiente` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ambiente").toString()));
       }
       if ((jsonObj.get("horaInicio") != null && !jsonObj.get("horaInicio").isJsonNull()) && !jsonObj.get("horaInicio").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `horaInicio` to be a primitive type in the JSON string but got `%s`", jsonObj.get("horaInicio").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `horaInicio` to be a primitive type in the JSON string but got `%s`", jsonObj.get("horaInicio").toString()));
       }
       if ((jsonObj.get("horaFin") != null && !jsonObj.get("horaFin").isJsonNull()) && !jsonObj.get("horaFin").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `horaFin` to be a primitive type in the JSON string but got `%s`", jsonObj.get("horaFin").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `horaFin` to be a primitive type in the JSON string but got `%s`", jsonObj.get("horaFin").toString()));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("dias") != null && !jsonObj.get("dias").isJsonNull() && !jsonObj.get("dias").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `dias` to be an array in the JSON string but got `%s`", jsonObj.get("dias").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `dias` to be an array in the JSON string but got `%s`", jsonObj.get("dias").toString()));
       }
   }
 

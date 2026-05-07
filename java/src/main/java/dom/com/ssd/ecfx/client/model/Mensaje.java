@@ -49,7 +49,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Representa un mensaje asociado al estado de validación de un comprobante fiscal electrónico (e-CF). Este modelo se utiliza en las respuestas de consulta de resultado para proporcionar información detallada sobre el estado de procesamiento y cualquier mensaje relacionado.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Mensaje {
   public static final String SERIALIZED_NAME_VALOR = "valor";
   @SerializedName(SERIALIZED_NAME_VALOR)
@@ -163,7 +163,7 @@ public class Mensaje {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Mensaje.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Mensaje is not found in the empty JSON string", Mensaje.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Mensaje is not found in the empty JSON string", Mensaje.openapiRequiredFields.toString()));
         }
       }
 
@@ -171,12 +171,12 @@ public class Mensaje {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Mensaje.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Mensaje` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Mensaje` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("valor") != null && !jsonObj.get("valor").isJsonNull()) && !jsonObj.get("valor").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `valor` to be a primitive type in the JSON string but got `%s`", jsonObj.get("valor").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `valor` to be a primitive type in the JSON string but got `%s`", jsonObj.get("valor").toString()));
       }
       // validate the optional field `codigo`
       if (jsonObj.get("codigo") != null && !jsonObj.get("codigo").isJsonNull()) {

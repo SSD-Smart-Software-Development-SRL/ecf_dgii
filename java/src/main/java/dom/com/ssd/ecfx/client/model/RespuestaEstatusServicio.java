@@ -48,7 +48,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Modelo de respuesta que representa el estado de un servicio específico de facturación electrónica en un ambiente específico. Utilizado por el endpoint /api/estatusservicios/obtenerestatus.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class RespuestaEstatusServicio {
   public static final String SERIALIZED_NAME_SERVICIO = "servicio";
   @SerializedName(SERIALIZED_NAME_SERVICIO)
@@ -188,7 +188,7 @@ public class RespuestaEstatusServicio {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!RespuestaEstatusServicio.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in RespuestaEstatusServicio is not found in the empty JSON string", RespuestaEstatusServicio.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in RespuestaEstatusServicio is not found in the empty JSON string", RespuestaEstatusServicio.openapiRequiredFields.toString()));
         }
       }
 
@@ -196,18 +196,18 @@ public class RespuestaEstatusServicio {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!RespuestaEstatusServicio.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `RespuestaEstatusServicio` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `RespuestaEstatusServicio` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("servicio") != null && !jsonObj.get("servicio").isJsonNull()) && !jsonObj.get("servicio").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `servicio` to be a primitive type in the JSON string but got `%s`", jsonObj.get("servicio").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `servicio` to be a primitive type in the JSON string but got `%s`", jsonObj.get("servicio").toString()));
       }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
       if ((jsonObj.get("ambiente") != null && !jsonObj.get("ambiente").isJsonNull()) && !jsonObj.get("ambiente").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `ambiente` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ambiente").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `ambiente` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ambiente").toString()));
       }
   }
 

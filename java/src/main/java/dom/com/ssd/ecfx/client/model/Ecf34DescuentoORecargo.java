@@ -19,12 +19,12 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress;
 import dom.com.ssd.ecfx.client.model.Ecf31DescuentoORecargoMontoDescuentooRecargo;
 import dom.com.ssd.ecfx.client.model.Ecf31DescuentoORecargoValorDescuentooRecargo;
 import dom.com.ssd.ecfx.client.model.Ecf34TipoAjusteType;
 import dom.com.ssd.ecfx.client.model.IndicadorFacturacionDRType;
 import dom.com.ssd.ecfx.client.model.IndicadorNorma1007Type;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
 import dom.com.ssd.ecfx.client.model.TipoDescuentoRecargoType;
 import java.io.IOException;
 import java.util.Arrays;
@@ -55,12 +55,12 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Ecf34DescuentoORecargo
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Ecf34DescuentoORecargo {
   public static final String SERIALIZED_NAME_NUMERO_LINEA = "numeroLinea";
   @SerializedName(SERIALIZED_NAME_NUMERO_LINEA)
   @javax.annotation.Nonnull
-  private AcecfReceptionRequestDtoProgress numeroLinea;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner numeroLinea;
 
   public static final String SERIALIZED_NAME_TIPO_AJUSTE = "tipoAjuste";
   @SerializedName(SERIALIZED_NAME_TIPO_AJUSTE)
@@ -105,7 +105,7 @@ public class Ecf34DescuentoORecargo {
   public Ecf34DescuentoORecargo() {
   }
 
-  public Ecf34DescuentoORecargo numeroLinea(@javax.annotation.Nonnull AcecfReceptionRequestDtoProgress numeroLinea) {
+  public Ecf34DescuentoORecargo numeroLinea(@javax.annotation.Nonnull SearchEcfReceptionRequestsTiposEcfsParameterInner numeroLinea) {
     this.numeroLinea = numeroLinea;
     return this;
   }
@@ -115,11 +115,11 @@ public class Ecf34DescuentoORecargo {
    * @return numeroLinea
    */
   @javax.annotation.Nonnull
-  public AcecfReceptionRequestDtoProgress getNumeroLinea() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getNumeroLinea() {
     return numeroLinea;
   }
 
-  public void setNumeroLinea(@javax.annotation.Nonnull AcecfReceptionRequestDtoProgress numeroLinea) {
+  public void setNumeroLinea(@javax.annotation.Nonnull SearchEcfReceptionRequestsTiposEcfsParameterInner numeroLinea) {
     this.numeroLinea = numeroLinea;
   }
 
@@ -351,7 +351,7 @@ public class Ecf34DescuentoORecargo {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Ecf34DescuentoORecargo.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Ecf34DescuentoORecargo is not found in the empty JSON string", Ecf34DescuentoORecargo.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf34DescuentoORecargo is not found in the empty JSON string", Ecf34DescuentoORecargo.openapiRequiredFields.toString()));
         }
       }
 
@@ -359,19 +359,19 @@ public class Ecf34DescuentoORecargo {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Ecf34DescuentoORecargo.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Ecf34DescuentoORecargo` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf34DescuentoORecargo` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : Ecf34DescuentoORecargo.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `numeroLinea`
-      AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("numeroLinea"));
+      SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("numeroLinea"));
       // validate the required field `tipoAjuste`
       Ecf34TipoAjusteType.validateJsonElement(jsonObj.get("tipoAjuste"));
       // validate the optional field `indicadorNorma1007`
@@ -379,7 +379,7 @@ public class Ecf34DescuentoORecargo {
         IndicadorNorma1007Type.validateJsonElement(jsonObj.get("indicadorNorma1007"));
       }
       if ((jsonObj.get("descripcionDescuentooRecargo") != null && !jsonObj.get("descripcionDescuentooRecargo").isJsonNull()) && !jsonObj.get("descripcionDescuentooRecargo").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `descripcionDescuentooRecargo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("descripcionDescuentooRecargo").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `descripcionDescuentooRecargo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("descripcionDescuentooRecargo").toString()));
       }
       // validate the optional field `tipoValor`
       if (jsonObj.get("tipoValor") != null && !jsonObj.get("tipoValor").isJsonNull()) {

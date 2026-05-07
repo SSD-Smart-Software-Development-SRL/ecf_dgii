@@ -21,12 +21,12 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import dom.com.ssd.ecfx.client.model.Ecf31IdDocTotalPaginas;
 import dom.com.ssd.ecfx.client.model.Ecf33FormaDePago;
-import dom.com.ssd.ecfx.client.model.Ecf33TipoIngresosValidationType;
 import dom.com.ssd.ecfx.client.model.Ecf33TipoPagoType;
 import dom.com.ssd.ecfx.client.model.IndicadorEnvioDiferidoType;
 import dom.com.ssd.ecfx.client.model.IndicadorMontoGravadoType;
 import dom.com.ssd.ecfx.client.model.IndicadorServicioTodoIncluidoType;
 import dom.com.ssd.ecfx.client.model.TipoCuentaPagoType;
+import dom.com.ssd.ecfx.client.model.TipoIngresosValidationType;
 import dom.com.ssd.ecfx.client.model.TipoeCFType;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Ecf33IdDoc
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Ecf33IdDoc {
   public static final String SERIALIZED_NAME_TIPOE_C_F = "tipoeCF";
   @SerializedName(SERIALIZED_NAME_TIPOE_C_F)
@@ -94,8 +94,8 @@ public class Ecf33IdDoc {
 
   public static final String SERIALIZED_NAME_TIPO_INGRESOS = "tipoIngresos";
   @SerializedName(SERIALIZED_NAME_TIPO_INGRESOS)
-  @javax.annotation.Nonnull
-  private Ecf33TipoIngresosValidationType tipoIngresos;
+  @javax.annotation.Nullable
+  private TipoIngresosValidationType tipoIngresos;
 
   public static final String SERIALIZED_NAME_TIPO_PAGO = "tipoPago";
   @SerializedName(SERIALIZED_NAME_TIPO_PAGO)
@@ -264,7 +264,7 @@ public class Ecf33IdDoc {
   }
 
 
-  public Ecf33IdDoc tipoIngresos(@javax.annotation.Nonnull Ecf33TipoIngresosValidationType tipoIngresos) {
+  public Ecf33IdDoc tipoIngresos(@javax.annotation.Nullable TipoIngresosValidationType tipoIngresos) {
     this.tipoIngresos = tipoIngresos;
     return this;
   }
@@ -273,12 +273,12 @@ public class Ecf33IdDoc {
    * Get tipoIngresos
    * @return tipoIngresos
    */
-  @javax.annotation.Nonnull
-  public Ecf33TipoIngresosValidationType getTipoIngresos() {
+  @javax.annotation.Nullable
+  public TipoIngresosValidationType getTipoIngresos() {
     return tipoIngresos;
   }
 
-  public void setTipoIngresos(@javax.annotation.Nonnull Ecf33TipoIngresosValidationType tipoIngresos) {
+  public void setTipoIngresos(@javax.annotation.Nullable TipoIngresosValidationType tipoIngresos) {
     this.tipoIngresos = tipoIngresos;
   }
 
@@ -560,7 +560,7 @@ public class Ecf33IdDoc {
     openapiFields = new HashSet<String>(Arrays.asList("tipoeCF", "encf", "fechaVencimientoSecuencia", "indicadorEnvioDiferido", "indicadorMontoGravado", "indicadorServicioTodoIncluido", "tipoIngresos", "tipoPago", "fechaLimitePago", "terminoPago", "tablaFormasPago", "tipoCuentaPago", "numeroCuentaPago", "bancoPago", "fechaDesde", "fechaHasta", "totalPaginas"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("tipoeCF", "encf", "tipoIngresos", "tipoPago"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("tipoeCF", "encf", "tipoPago"));
   }
 
   /**
@@ -572,7 +572,7 @@ public class Ecf33IdDoc {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Ecf33IdDoc.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Ecf33IdDoc is not found in the empty JSON string", Ecf33IdDoc.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf33IdDoc is not found in the empty JSON string", Ecf33IdDoc.openapiRequiredFields.toString()));
         }
       }
 
@@ -580,21 +580,21 @@ public class Ecf33IdDoc {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Ecf33IdDoc.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Ecf33IdDoc` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf33IdDoc` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : Ecf33IdDoc.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `tipoeCF`
       TipoeCFType.validateJsonElement(jsonObj.get("tipoeCF"));
       if (!jsonObj.get("encf").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
       }
       // validate the optional field `indicadorEnvioDiferido`
       if (jsonObj.get("indicadorEnvioDiferido") != null && !jsonObj.get("indicadorEnvioDiferido").isJsonNull()) {
@@ -608,19 +608,21 @@ public class Ecf33IdDoc {
       if (jsonObj.get("indicadorServicioTodoIncluido") != null && !jsonObj.get("indicadorServicioTodoIncluido").isJsonNull()) {
         IndicadorServicioTodoIncluidoType.validateJsonElement(jsonObj.get("indicadorServicioTodoIncluido"));
       }
-      // validate the required field `tipoIngresos`
-      Ecf33TipoIngresosValidationType.validateJsonElement(jsonObj.get("tipoIngresos"));
+      // validate the optional field `tipoIngresos`
+      if (jsonObj.get("tipoIngresos") != null && !jsonObj.get("tipoIngresos").isJsonNull()) {
+        TipoIngresosValidationType.validateJsonElement(jsonObj.get("tipoIngresos"));
+      }
       // validate the required field `tipoPago`
       Ecf33TipoPagoType.validateJsonElement(jsonObj.get("tipoPago"));
       if ((jsonObj.get("terminoPago") != null && !jsonObj.get("terminoPago").isJsonNull()) && !jsonObj.get("terminoPago").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `terminoPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("terminoPago").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `terminoPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("terminoPago").toString()));
       }
       if (jsonObj.get("tablaFormasPago") != null && !jsonObj.get("tablaFormasPago").isJsonNull()) {
         JsonArray jsonArraytablaFormasPago = jsonObj.getAsJsonArray("tablaFormasPago");
         if (jsonArraytablaFormasPago != null) {
           // ensure the json data is an array
           if (!jsonObj.get("tablaFormasPago").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tablaFormasPago` to be an array in the JSON string but got `%s`", jsonObj.get("tablaFormasPago").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `tablaFormasPago` to be an array in the JSON string but got `%s`", jsonObj.get("tablaFormasPago").toString()));
           }
 
           // validate the optional field `tablaFormasPago` (array)
@@ -634,10 +636,10 @@ public class Ecf33IdDoc {
         TipoCuentaPagoType.validateJsonElement(jsonObj.get("tipoCuentaPago"));
       }
       if ((jsonObj.get("numeroCuentaPago") != null && !jsonObj.get("numeroCuentaPago").isJsonNull()) && !jsonObj.get("numeroCuentaPago").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `numeroCuentaPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("numeroCuentaPago").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `numeroCuentaPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("numeroCuentaPago").toString()));
       }
       if ((jsonObj.get("bancoPago") != null && !jsonObj.get("bancoPago").isJsonNull()) && !jsonObj.get("bancoPago").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `bancoPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("bancoPago").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `bancoPago` to be a primitive type in the JSON string but got `%s`", jsonObj.get("bancoPago").toString()));
       }
       // validate the optional field `totalPaginas`
       if (jsonObj.get("totalPaginas") != null && !jsonObj.get("totalPaginas").isJsonNull()) {

@@ -19,9 +19,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress;
 import dom.com.ssd.ecfx.client.model.DetalleAnulacionRequestDto;
 import dom.com.ssd.ecfx.client.model.RespuestaAnulacionRango;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,7 +55,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * AnulacionListResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class AnulacionListResponse {
   public static final String SERIALIZED_NAME_ANULACION_ID = "anulacionId";
   @SerializedName(SERIALIZED_NAME_ANULACION_ID)
@@ -75,7 +75,7 @@ public class AnulacionListResponse {
   public static final String SERIALIZED_NAME_CANTIDADE_N_C_F_ANULADOS = "cantidadeNCFAnulados";
   @SerializedName(SERIALIZED_NAME_CANTIDADE_N_C_F_ANULADOS)
   @javax.annotation.Nullable
-  private AcecfReceptionRequestDtoProgress cantidadeNCFAnulados;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner cantidadeNCFAnulados;
 
   public static final String SERIALIZED_NAME_DETALLE_ANULACION = "detalleAnulacion";
   @SerializedName(SERIALIZED_NAME_DETALLE_ANULACION)
@@ -90,7 +90,7 @@ public class AnulacionListResponse {
   public static final String SERIALIZED_NAME_STATUS_CODE = "statusCode";
   @SerializedName(SERIALIZED_NAME_STATUS_CODE)
   @javax.annotation.Nullable
-  private AcecfReceptionRequestDtoProgress statusCode;
+  private SearchEcfReceptionRequestsTiposEcfsParameterInner statusCode;
 
   public static final String SERIALIZED_NAME_FILE_NAME = "fileName";
   @SerializedName(SERIALIZED_NAME_FILE_NAME)
@@ -182,7 +182,7 @@ public class AnulacionListResponse {
   }
 
 
-  public AnulacionListResponse cantidadeNCFAnulados(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress cantidadeNCFAnulados) {
+  public AnulacionListResponse cantidadeNCFAnulados(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner cantidadeNCFAnulados) {
     this.cantidadeNCFAnulados = cantidadeNCFAnulados;
     return this;
   }
@@ -192,11 +192,11 @@ public class AnulacionListResponse {
    * @return cantidadeNCFAnulados
    */
   @javax.annotation.Nullable
-  public AcecfReceptionRequestDtoProgress getCantidadeNCFAnulados() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getCantidadeNCFAnulados() {
     return cantidadeNCFAnulados;
   }
 
-  public void setCantidadeNCFAnulados(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress cantidadeNCFAnulados) {
+  public void setCantidadeNCFAnulados(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner cantidadeNCFAnulados) {
     this.cantidadeNCFAnulados = cantidadeNCFAnulados;
   }
 
@@ -247,7 +247,7 @@ public class AnulacionListResponse {
   }
 
 
-  public AnulacionListResponse statusCode(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress statusCode) {
+  public AnulacionListResponse statusCode(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner statusCode) {
     this.statusCode = statusCode;
     return this;
   }
@@ -257,11 +257,11 @@ public class AnulacionListResponse {
    * @return statusCode
    */
   @javax.annotation.Nullable
-  public AcecfReceptionRequestDtoProgress getStatusCode() {
+  public SearchEcfReceptionRequestsTiposEcfsParameterInner getStatusCode() {
     return statusCode;
   }
 
-  public void setStatusCode(@javax.annotation.Nullable AcecfReceptionRequestDtoProgress statusCode) {
+  public void setStatusCode(@javax.annotation.Nullable SearchEcfReceptionRequestsTiposEcfsParameterInner statusCode) {
     this.statusCode = statusCode;
   }
 
@@ -463,7 +463,7 @@ public class AnulacionListResponse {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!AnulacionListResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in AnulacionListResponse is not found in the empty JSON string", AnulacionListResponse.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in AnulacionListResponse is not found in the empty JSON string", AnulacionListResponse.openapiRequiredFields.toString()));
         }
       }
 
@@ -471,29 +471,29 @@ public class AnulacionListResponse {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!AnulacionListResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `AnulacionListResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AnulacionListResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("anulacionId") != null && !jsonObj.get("anulacionId").isJsonNull()) && !jsonObj.get("anulacionId").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `anulacionId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("anulacionId").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `anulacionId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("anulacionId").toString()));
       }
       if ((jsonObj.get("tenantId") != null && !jsonObj.get("tenantId").isJsonNull()) && !jsonObj.get("tenantId").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tenantId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenantId").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `tenantId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tenantId").toString()));
       }
       if ((jsonObj.get("companyRnc") != null && !jsonObj.get("companyRnc").isJsonNull()) && !jsonObj.get("companyRnc").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `companyRnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("companyRnc").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `companyRnc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("companyRnc").toString()));
       }
       // validate the optional field `cantidadeNCFAnulados`
       if (jsonObj.get("cantidadeNCFAnulados") != null && !jsonObj.get("cantidadeNCFAnulados").isJsonNull()) {
-        AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("cantidadeNCFAnulados"));
+        SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("cantidadeNCFAnulados"));
       }
       if (jsonObj.get("detalleAnulacion") != null && !jsonObj.get("detalleAnulacion").isJsonNull()) {
         JsonArray jsonArraydetalleAnulacion = jsonObj.getAsJsonArray("detalleAnulacion");
         if (jsonArraydetalleAnulacion != null) {
           // ensure the json data is an array
           if (!jsonObj.get("detalleAnulacion").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `detalleAnulacion` to be an array in the JSON string but got `%s`", jsonObj.get("detalleAnulacion").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `detalleAnulacion` to be an array in the JSON string but got `%s`", jsonObj.get("detalleAnulacion").toString()));
           }
 
           // validate the optional field `detalleAnulacion` (array)
@@ -508,16 +508,16 @@ public class AnulacionListResponse {
       }
       // validate the optional field `statusCode`
       if (jsonObj.get("statusCode") != null && !jsonObj.get("statusCode").isJsonNull()) {
-        AcecfReceptionRequestDtoProgress.validateJsonElement(jsonObj.get("statusCode"));
+        SearchEcfReceptionRequestsTiposEcfsParameterInner.validateJsonElement(jsonObj.get("statusCode"));
       }
       if ((jsonObj.get("fileName") != null && !jsonObj.get("fileName").isJsonNull()) && !jsonObj.get("fileName").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fileName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fileName").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `fileName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fileName").toString()));
       }
       if ((jsonObj.get("createdBy") != null && !jsonObj.get("createdBy").isJsonNull()) && !jsonObj.get("createdBy").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `createdBy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("createdBy").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `createdBy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("createdBy").toString()));
       }
       if ((jsonObj.get("updatedBy") != null && !jsonObj.get("updatedBy").isJsonNull()) && !jsonObj.get("updatedBy").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `updatedBy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("updatedBy").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `updatedBy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("updatedBy").toString()));
       }
   }
 

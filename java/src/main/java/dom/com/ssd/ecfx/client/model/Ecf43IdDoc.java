@@ -52,7 +52,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Ecf43IdDoc
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Ecf43IdDoc {
   public static final String SERIALIZED_NAME_TIPOE_C_F = "tipoeCF";
   @SerializedName(SERIALIZED_NAME_TIPOE_C_F)
@@ -244,7 +244,7 @@ public class Ecf43IdDoc {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Ecf43IdDoc.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Ecf43IdDoc is not found in the empty JSON string", Ecf43IdDoc.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf43IdDoc is not found in the empty JSON string", Ecf43IdDoc.openapiRequiredFields.toString()));
         }
       }
 
@@ -252,21 +252,21 @@ public class Ecf43IdDoc {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Ecf43IdDoc.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Ecf43IdDoc` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf43IdDoc` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : Ecf43IdDoc.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `tipoeCF`
       TipoeCFType.validateJsonElement(jsonObj.get("tipoeCF"));
       if (!jsonObj.get("encf").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `encf` to be a primitive type in the JSON string but got `%s`", jsonObj.get("encf").toString()));
       }
       // validate the optional field `tipoPago`
       if (jsonObj.get("tipoPago") != null && !jsonObj.get("tipoPago").isJsonNull()) {

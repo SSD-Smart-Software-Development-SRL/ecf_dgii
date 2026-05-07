@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**numeroLinea** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  |
+|**numeroLinea** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
 |**tablaCodigosItem** | [**List&lt;Ecf46CodigosItem&gt;**](Ecf46CodigosItem.md) |  |  [optional] |
 |**indicadorFacturacion** | **Ecf46IndicadorFacturacionType** |  |  |
 |**nombreItem** | **String** |  |  |

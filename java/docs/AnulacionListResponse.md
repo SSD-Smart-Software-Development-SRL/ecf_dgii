@@ -10,10 +10,10 @@
 |**anulacionId** | **UUID** |  |  [optional] |
 |**tenantId** | **UUID** |  |  [optional] |
 |**companyRnc** | **String** |  |  [optional] |
-|**cantidadeNCFAnulados** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  [optional] |
+|**cantidadeNCFAnulados** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  [optional] |
 |**detalleAnulacion** | [**List&lt;DetalleAnulacionRequestDto&gt;**](DetalleAnulacionRequestDto.md) |  |  [optional] |
 |**response** | [**RespuestaAnulacionRango**](RespuestaAnulacionRango.md) |  |  [optional] |
-|**statusCode** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  [optional] |
+|**statusCode** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  [optional] |
 |**fileName** | **String** |  |  [optional] |
 |**fechaHoraAnulacioneNCF** | **Date** |  |  [optional] |
 |**createdOn** | **Date** |  |  [optional] |

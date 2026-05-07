@@ -16,6 +16,9 @@
 |**updatedBy** | **String** |  |  [optional] |
 |**tenantId** | **UUID** |  |  [optional] |
 |**receptorId** | **String** |  |  [optional] |
+|**urlRecepcion** | **String** |  |  [optional] |
+|**urlAprobacionComercial** | **String** |  |  [optional] |
+|**urlAutenticacion** | **String** |  |  [optional] |
 
 
 

@@ -51,7 +51,7 @@ import com.google.gson.JsonParseException;
 
 import dom.com.ssd.ecfx.client.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class SearchEcfsAmountFromParameter extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(SearchEcfsAmountFromParameter.class.getName());
 
@@ -101,7 +101,7 @@ public class SearchEcfsAmountFromParameter extends AbstractOpenApiSchema {
                     try {
                         // validate the JSON object to see if any exception is thrown
                         if (!jsonElement.getAsJsonPrimitive().isNumber()) {
-                            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected json element to be of type Number in the JSON string but got `%s`", jsonElement.toString()));
+                            throw new IllegalArgumentException(String.format("Expected json element to be of type Number in the JSON string but got `%s`", jsonElement.toString()));
                         }
                         actualAdapter = adapterBigDecimal;
                         SearchEcfsAmountFromParameter ret = new SearchEcfsAmountFromParameter();
@@ -109,14 +109,14 @@ public class SearchEcfsAmountFromParameter extends AbstractOpenApiSchema {
                         return ret;
                     } catch (Exception e) {
                         // deserialization failed, continue
-                        errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for BigDecimal failed with `%s`.", e.getMessage()));
+                        errorMessages.add(String.format("Deserialization for BigDecimal failed with `%s`.", e.getMessage()));
                         log.log(Level.FINER, "Input data does not match schema 'BigDecimal'", e);
                     }
                     // deserialize String
                     try {
                         // validate the JSON object to see if any exception is thrown
                         if (!jsonElement.getAsJsonPrimitive().isString()) {
-                            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected json element to be of type String in the JSON string but got `%s`", jsonElement.toString()));
+                            throw new IllegalArgumentException(String.format("Expected json element to be of type String in the JSON string but got `%s`", jsonElement.toString()));
                         }
                         actualAdapter = adapterString;
                         SearchEcfsAmountFromParameter ret = new SearchEcfsAmountFromParameter();
@@ -124,11 +124,11 @@ public class SearchEcfsAmountFromParameter extends AbstractOpenApiSchema {
                         return ret;
                     } catch (Exception e) {
                         // deserialization failed, continue
-                        errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for String failed with `%s`.", e.getMessage()));
+                        errorMessages.add(String.format("Deserialization for String failed with `%s`.", e.getMessage()));
                         log.log(Level.FINER, "Input data does not match schema 'String'", e);
                     }
 
-                    throw new IOException(String.format(java.util.Locale.ROOT, "Failed deserialization for SearchEcfsAmountFromParameter: no class matches result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s", errorMessages, jsonElement.toString()));
+                    throw new IOException(String.format("Failed deserialization for SearchEcfsAmountFromParameter: no class matches result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s", errorMessages, jsonElement.toString()));
                 }
             }.nullSafe();
         }
@@ -224,24 +224,24 @@ public class SearchEcfsAmountFromParameter extends AbstractOpenApiSchema {
         // validate the json string with BigDecimal
         try {
             if (!jsonElement.getAsJsonPrimitive().isNumber()) {
-                throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected json element to be of type Number in the JSON string but got `%s`", jsonElement.toString()));
+                throw new IllegalArgumentException(String.format("Expected json element to be of type Number in the JSON string but got `%s`", jsonElement.toString()));
             }
             return;
         } catch (Exception e) {
-            errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for BigDecimal failed with `%s`.", e.getMessage()));
+            errorMessages.add(String.format("Deserialization for BigDecimal failed with `%s`.", e.getMessage()));
             // continue to the next one
         }
         // validate the json string with String
         try {
             if (!jsonElement.getAsJsonPrimitive().isString()) {
-                throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected json element to be of type String in the JSON string but got `%s`", jsonElement.toString()));
+                throw new IllegalArgumentException(String.format("Expected json element to be of type String in the JSON string but got `%s`", jsonElement.toString()));
             }
             return;
         } catch (Exception e) {
-            errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for String failed with `%s`.", e.getMessage()));
+            errorMessages.add(String.format("Deserialization for String failed with `%s`.", e.getMessage()));
             // continue to the next one
         }
-        throw new IOException(String.format(java.util.Locale.ROOT, "The JSON string is invalid for SearchEcfsAmountFromParameter with anyOf schemas: BigDecimal, String. no class match the result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s", errorMessages, jsonElement.toString()));
+        throw new IOException(String.format("The JSON string is invalid for SearchEcfsAmountFromParameter with anyOf schemas: BigDecimal, String. no class match the result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s", errorMessages, jsonElement.toString()));
     }
 
     /**

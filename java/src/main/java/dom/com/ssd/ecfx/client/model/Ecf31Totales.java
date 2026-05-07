@@ -56,7 +56,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Ecf31Totales
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Ecf31Totales {
   public static final String SERIALIZED_NAME_MONTO_GRAVADO_TOTAL = "montoGravadoTotal";
   @SerializedName(SERIALIZED_NAME_MONTO_GRAVADO_TOTAL)
@@ -750,7 +750,7 @@ public class Ecf31Totales {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Ecf31Totales.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Ecf31Totales is not found in the empty JSON string", Ecf31Totales.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf31Totales is not found in the empty JSON string", Ecf31Totales.openapiRequiredFields.toString()));
         }
       }
 
@@ -758,14 +758,14 @@ public class Ecf31Totales {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Ecf31Totales.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Ecf31Totales` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf31Totales` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : Ecf31Totales.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -826,7 +826,7 @@ public class Ecf31Totales {
         if (jsonArrayimpuestosAdicionales != null) {
           // ensure the json data is an array
           if (!jsonObj.get("impuestosAdicionales").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `impuestosAdicionales` to be an array in the JSON string but got `%s`", jsonObj.get("impuestosAdicionales").toString()));
+            throw new IllegalArgumentException(String.format("Expected the field `impuestosAdicionales` to be an array in the JSON string but got `%s`", jsonObj.get("impuestosAdicionales").toString()));
           }
 
           // validate the optional field `impuestosAdicionales` (array)

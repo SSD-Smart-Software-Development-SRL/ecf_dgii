@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**numeroLinea** | [**AcecfReceptionRequestDtoProgress**](AcecfReceptionRequestDtoProgress.md) |  |  |
+|**numeroLinea** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
 |**tipoAjuste** | **Ecf41TipoAjusteType** |  |  |
 |**descripcionDescuentooRecargo** | **String** |  |  [optional] |
 |**tipoValor** | **TipoDescuentoRecargoType** |  |  [optional] |

@@ -48,7 +48,7 @@ import dom.com.ssd.ecfx.client.JSON;
 /**
  * Ecf45CodigosItem
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Ecf45CodigosItem {
   public static final String SERIALIZED_NAME_TIPO_CODIGO = "tipoCodigo";
   @SerializedName(SERIALIZED_NAME_TIPO_CODIGO)
@@ -162,7 +162,7 @@ public class Ecf45CodigosItem {
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!Ecf45CodigosItem.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in Ecf45CodigosItem is not found in the empty JSON string", Ecf45CodigosItem.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf45CodigosItem is not found in the empty JSON string", Ecf45CodigosItem.openapiRequiredFields.toString()));
         }
       }
 
@@ -170,22 +170,22 @@ public class Ecf45CodigosItem {
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
         if (!Ecf45CodigosItem.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Ecf45CodigosItem` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf45CodigosItem` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : Ecf45CodigosItem.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("tipoCodigo").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tipoCodigo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tipoCodigo").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `tipoCodigo` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tipoCodigo").toString()));
       }
       if (!jsonObj.get("codigoItem").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `codigoItem` to be a primitive type in the JSON string but got `%s`", jsonObj.get("codigoItem").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `codigoItem` to be a primitive type in the JSON string but got `%s`", jsonObj.get("codigoItem").toString()));
       }
   }
 

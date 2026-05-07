@@ -18,8 +18,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import dom.com.ssd.ecfx.client.model.AcecfReceptionRequestDtoProgress;
 import dom.com.ssd.ecfx.client.model.AllTipoECFTypes;
+import dom.com.ssd.ecfx.client.model.EcfReceptionRequestDtoMontoTotal;
+import dom.com.ssd.ecfx.client.model.SearchEcfReceptionRequestsTiposEcfsParameterInner;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
@@ -135,6 +136,14 @@ public class EcfReceptionRequestDtoTest {
     @Test
     public void resultInternalFileNameTest() {
         // TODO: test resultInternalFileName
+    }
+
+    /**
+     * Test the property 'montoTotal'
+     */
+    @Test
+    public void montoTotalTest() {
+        // TODO: test montoTotal
     }
 
 }

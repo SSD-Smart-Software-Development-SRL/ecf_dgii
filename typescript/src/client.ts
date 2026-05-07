@@ -241,22 +241,6 @@ export class EcfClient {
   }
 
   // ---------------------------------------------------------------------------
-  // Aprobacion comercial
-  // ---------------------------------------------------------------------------
-
-  /** Send aprobacion comercial for an ECF. */
-  async aprobacionComercial(
-    rnc: string,
-    encf: string,
-    body: components['schemas']['SendAcecfRequest'],
-  ) {
-    return this.raw.POST('/ecf/aprobacioncomercial/{rnc}/{encf}', {
-      params: { path: { rnc, encf } },
-      body,
-    });
-  }
-
-  // ---------------------------------------------------------------------------
   // Anulacion rangos
   // ---------------------------------------------------------------------------
 
@@ -307,7 +291,7 @@ export class EcfClient {
     Page?: number | string;
     Limit?: number | string;
   }) {
-    return this.raw.GET('/recepcion/ecf', { params: { query: params } });
+    return this.raw.GET('/recepcion', { params: { query: params } });
   }
 
   /** Search ACECF reception requests. */
@@ -328,34 +312,37 @@ export class EcfClient {
     Page?: number | string;
     Limit?: number | string;
   }) {
-    return this.raw.GET('/recepcion/{rnc}/ecf', {
+    return this.raw.GET('/recepcion/{rnc}', {
       params: { path: { rnc }, query: params },
     });
   }
 
-  /** Get a specific ECF reception request. */
+  /** Get a specific ECF reception request by RNC and messageId. */
   async getEcfReceptionRequest(rnc: string, messageId: string) {
-    return this.raw.GET('/recepcion/{rnc}/ecf/{messageId}', {
+    return this.raw.GET('/recepcion/{rnc}/{messageId}', {
       params: { path: { rnc, messageId } },
     });
   }
 
-  /** Search ACECF reception requests by RNC. */
-  async searchAcecfReceptionRequestsByRnc(rnc: string, params?: {
-    MessageIds?: string[];
-    Encfs?: string[];
-    Page?: number | string;
-    Limit?: number | string;
-  }) {
-    return this.raw.GET('/recepcion/{rnc}/acecf', {
-      params: { path: { rnc }, query: params },
+  /** Get a specific ACECF reception request by messageId. */
+  async getAcecfReceptionRequest(messageId: string) {
+    return this.raw.GET('/recepcion/acecf/{messageId}', {
+      params: { path: { messageId } },
     });
   }
 
-  /** Get a specific ACECF reception request. */
-  async getAcecfReceptionRequest(rnc: string, messageId: string) {
-    return this.raw.GET('/recepcion/{rnc}/acecf/{messageId}', {
-      params: { path: { rnc, messageId } },
+  // ---------------------------------------------------------------------------
+  // Aprobacion comercial
+  // ---------------------------------------------------------------------------
+
+  /** Send aprobacion comercial (ACECF) for a given ECF reception messageId. */
+  async aprobacionComercial(
+    messageId: string,
+    body: components['schemas']['SendAcecfRequest'],
+  ) {
+    return this.raw.POST('/recepcion/{messageId}/acecf', {
+      params: { path: { messageId } },
+      body,
     });
   }
 

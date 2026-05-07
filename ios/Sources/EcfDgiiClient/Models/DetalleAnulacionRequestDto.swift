@@ -9,13 +9,12 @@ import Foundation
 
 public struct DetalleAnulacionRequestDto: Sendable, Codable, Hashable {
 
-    public static let cantidadeNcfAnuladosRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     public var tipoEcf: ECFType?
-    public var cantidadeNcfAnulados: Int?
-    public var noLinea: [Int]?
+    public var cantidadeNcfAnulados: SearchEcfReceptionRequestsTiposEcfsParameterInner?
+    public var noLinea: [SearchEcfReceptionRequestsTiposEcfsParameterInner]?
     public var secuencias: [SecuenciaRequestDto]?
 
-    public init(tipoEcf: ECFType? = nil, cantidadeNcfAnulados: Int? = nil, noLinea: [Int]? = nil, secuencias: [SecuenciaRequestDto]? = nil) {
+    public init(tipoEcf: ECFType? = nil, cantidadeNcfAnulados: SearchEcfReceptionRequestsTiposEcfsParameterInner? = nil, noLinea: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, secuencias: [SecuenciaRequestDto]? = nil) {
         self.tipoEcf = tipoEcf
         self.cantidadeNcfAnulados = cantidadeNcfAnulados
         self.noLinea = noLinea

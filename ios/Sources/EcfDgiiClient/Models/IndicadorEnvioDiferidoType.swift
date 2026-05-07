@@ -7,7 +7,6 @@
 
 import Foundation
 
-public enum IndicadorEnvioDiferidoType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum IndicadorEnvioDiferidoType: String, Sendable, Codable, CaseIterable {
     case envioDiferidoAutorizado = "EnvioDiferidoAutorizado"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

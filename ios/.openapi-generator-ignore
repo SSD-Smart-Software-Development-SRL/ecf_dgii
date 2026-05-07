@@ -21,3 +21,15 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+
+# Hand-written wrappers and project metadata that should not be overwritten.
+README.md
+EcfDgiiClient.podspec
+Package.swift
+Cartfile
+project.yml
+.swiftformat
+git_push.sh
+openapitools.json
+Sources/EcfDgiiClient/EcfClient.swift
+Sources/EcfDgiiClient/EcfFrontendClient.swift

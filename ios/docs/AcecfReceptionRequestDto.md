@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **tenantId** | **UUID** |  | [optional] 
 **companyRnc** | **String** |  | [optional] 
 **fileName** | **String** |  | [optional] 
-**progress** | **Int** |  | [optional] 
+**progress** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  | [optional] 
 **createdOn** | **Date** |  | [optional] 
 **updatedOn** | **Date** |  | [optional] 
 **errorMessage** | **String** |  | [optional] 

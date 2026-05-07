@@ -10,21 +10,15 @@ import Foundation
 /** Representa la respuesta del servicio de consulta de estado de e-CF. Este modelo contiene la información de validez y estado de un comprobante fiscal electrónico consultado a través del servicio web de consulta estado de la DGII. */
 public struct RespuestaConsultaEstado: Sendable, Codable, Hashable {
 
-    public static let codigoRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    public static let montoTotalRule = NumericRule<Double>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    public static let totalITBISRule = NumericRule<Double>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    /** Código asociado al estado de validación del e-CF recibido.             Posibles valores:             * 0No encontrado - No se encontró el comprobante en los registros * 1Aceptado - El e-CF generado por el emisor fue aceptado y tiene validez fiscal * 2Rechazado - Corresponde a la nulidad del comprobante generado por el emisor */
-    public var codigo: Int?
+    public var codigo: RespuestaConsultaEstadoCodigo?
     /** Estado de validación otorgado por Impuestos Internos al e-CF recibido. Descripción textual del estado del comprobante fiscal electrónico. */
     public var estado: String?
     /** Número de registro nacional del contribuyente que envió el e-CF. RNC del emisor del comprobante fiscal electrónico. */
     public var rncEmisor: String?
     /** Número de secuencia utilizada por el contribuyente en el e-CF. Número de comprobante fiscal electrónico (e-NCF) utilizado en la transacción. */
     public var ncfElectronico: String?
-    /** Monto total extraído del e-CF recibido. Valor total de la transacción en pesos dominicanos. */
-    public var montoTotal: Double?
-    /** Total de ITBIS extraído del e-CF recibido. Monto total del Impuesto sobre Transferencias de Bienes Industrializados y Servicios. */
-    public var totalITBIS: Double?
+    public var montoTotal: RespuestaConsultaEstadoMontoTotal?
+    public var totalITBIS: RespuestaConsultaEstadoTotalITBIS?
     /** Fecha de emisión extraída del e-CF recibido. Fecha en que fue emitido el comprobante fiscal electrónico. */
     public var fechaEmision: String?
     /** Fecha de firma extraída del e-CF recibido. Fecha en que fue firmado digitalmente el comprobante fiscal electrónico. */
@@ -36,7 +30,7 @@ public struct RespuestaConsultaEstado: Sendable, Codable, Hashable {
     /** Identificación de extranjero extraída del e-CF recibido (si aplica). Número de identificación del comprador extranjero cuando corresponde. */
     public var idExtranjero: String?
 
-    public init(codigo: Int? = nil, estado: String? = nil, rncEmisor: String? = nil, ncfElectronico: String? = nil, montoTotal: Double? = nil, totalITBIS: Double? = nil, fechaEmision: String? = nil, fechaFirma: String? = nil, rncComprador: String? = nil, codigoSeguridad: String? = nil, idExtranjero: String? = nil) {
+    public init(codigo: RespuestaConsultaEstadoCodigo? = nil, estado: String? = nil, rncEmisor: String? = nil, ncfElectronico: String? = nil, montoTotal: RespuestaConsultaEstadoMontoTotal? = nil, totalITBIS: RespuestaConsultaEstadoTotalITBIS? = nil, fechaEmision: String? = nil, fechaFirma: String? = nil, rncComprador: String? = nil, codigoSeguridad: String? = nil, idExtranjero: String? = nil) {
         self.codigo = codigo
         self.estado = estado
         self.rncEmisor = rncEmisor

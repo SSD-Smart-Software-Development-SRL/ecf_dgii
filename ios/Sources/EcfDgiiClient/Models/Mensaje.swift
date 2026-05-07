@@ -10,13 +10,11 @@ import Foundation
 /** Representa un mensaje asociado al estado de validación de un comprobante fiscal electrónico (e-CF). Este modelo se utiliza en las respuestas de consulta de resultado para proporcionar información detallada sobre el estado de procesamiento y cualquier mensaje relacionado. */
 public struct Mensaje: Sendable, Codable, Hashable {
 
-    public static let codigoRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     /** Obtiene el valor textual del mensaje que describe el estado o resultado de la validación. El texto descriptivo del mensaje. Puede ser null si no hay mensaje disponible. */
     public var valor: String?
-    /** Obtiene el código numérico que identifica el tipo de mensaje o estado. Un código entero que categoriza el mensaje. Los valores típicos incluyen: - 0: No encontrado - 1: Aceptado - 2: Rechazado - 3: En Proceso - 4: Aceptado Condicional */
-    public var codigo: Int?
+    public var codigo: MensajeCodigo?
 
-    public init(valor: String? = nil, codigo: Int? = nil) {
+    public init(valor: String? = nil, codigo: MensajeCodigo? = nil) {
         self.valor = valor
         self.codigo = codigo
     }

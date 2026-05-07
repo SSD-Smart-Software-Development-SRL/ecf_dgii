@@ -7,11 +7,10 @@
 
 import Foundation
 
-public enum EcfProgress: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum EcfProgress: String, Sendable, Codable, CaseIterable {
     case new = "New"
     case processing = "Processing"
     case uploadedToDgii = "UploadedToDgii"
     case finished = "Finished"
     case error = "Error"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

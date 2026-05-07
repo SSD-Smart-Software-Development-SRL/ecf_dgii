@@ -9,7 +9,6 @@ import Foundation
 
 public struct EcfResponse: Sendable, Codable, Hashable {
 
-    public static let montoTotalRule = NumericRule<Double>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     public var messageId: UUID
     public var timestamp: Date
     public var fechaEmision: Date
@@ -32,9 +31,11 @@ public struct EcfResponse: Sendable, Codable, Hashable {
     public var emisorReceptorErrors: String?
     public var secuenciaUtilizada: Bool?
     public var dgiiEnvironment: DGIIEnvironment
+    /** ACECFs received from the receptor for this outbound ECF. */
+    public var acecfs: [AcecfSummaryDto]?
     public var impresionUrl: String?
 
-    public init(messageId: UUID, timestamp: Date, fechaEmision: Date, queueName: String, includeEcfContent: Bool, ecfContent: String, tipoEcf: AllTipoECFTypes, encf: String, rncEmisor: String, rncReceptor: String?, montoTotal: Double, fileName: String?, tenantId: UUID, estatus: EcfEstado?, codSec: String?, fechaFirma: Date?, mensaje: String?, errors: String?, progress: EcfProgress, emisorReceptorErrors: String?, secuenciaUtilizada: Bool?, dgiiEnvironment: DGIIEnvironment, impresionUrl: String? = nil) {
+    public init(messageId: UUID, timestamp: Date, fechaEmision: Date, queueName: String, includeEcfContent: Bool, ecfContent: String, tipoEcf: AllTipoECFTypes, encf: String, rncEmisor: String, rncReceptor: String?, montoTotal: Double, fileName: String?, tenantId: UUID, estatus: EcfEstado?, codSec: String?, fechaFirma: Date?, mensaje: String?, errors: String?, progress: EcfProgress, emisorReceptorErrors: String?, secuenciaUtilizada: Bool?, dgiiEnvironment: DGIIEnvironment, acecfs: [AcecfSummaryDto]? = nil, impresionUrl: String? = nil) {
         self.messageId = messageId
         self.timestamp = timestamp
         self.fechaEmision = fechaEmision
@@ -57,6 +58,7 @@ public struct EcfResponse: Sendable, Codable, Hashable {
         self.emisorReceptorErrors = emisorReceptorErrors
         self.secuenciaUtilizada = secuenciaUtilizada
         self.dgiiEnvironment = dgiiEnvironment
+        self.acecfs = acecfs
         self.impresionUrl = impresionUrl
     }
 
@@ -83,6 +85,7 @@ public struct EcfResponse: Sendable, Codable, Hashable {
         case emisorReceptorErrors
         case secuenciaUtilizada
         case dgiiEnvironment
+        case acecfs
         case impresionUrl
     }
 
@@ -112,6 +115,7 @@ public struct EcfResponse: Sendable, Codable, Hashable {
         try container.encode(emisorReceptorErrors, forKey: .emisorReceptorErrors)
         try container.encode(secuenciaUtilizada, forKey: .secuenciaUtilizada)
         try container.encode(dgiiEnvironment, forKey: .dgiiEnvironment)
+        try container.encodeIfPresent(acecfs, forKey: .acecfs)
         try container.encodeIfPresent(impresionUrl, forKey: .impresionUrl)
     }
 }

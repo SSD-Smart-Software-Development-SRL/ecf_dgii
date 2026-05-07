@@ -9,11 +9,10 @@ import Foundation
 
 public struct AnulacionRequest: Sendable, Codable, Hashable {
 
-    public static let cantidaDeNcfAnuladosRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    public var cantidaDeNcfAnulados: Int
+    public var cantidaDeNcfAnulados: SearchEcfReceptionRequestsTiposEcfsParameterInner
     public var detalleAnulacion: [DetalleAnulacionRequest]
 
-    public init(cantidaDeNcfAnulados: Int, detalleAnulacion: [DetalleAnulacionRequest]) {
+    public init(cantidaDeNcfAnulados: SearchEcfReceptionRequestsTiposEcfsParameterInner, detalleAnulacion: [DetalleAnulacionRequest]) {
         self.cantidaDeNcfAnulados = cantidaDeNcfAnulados
         self.detalleAnulacion = detalleAnulacion
     }

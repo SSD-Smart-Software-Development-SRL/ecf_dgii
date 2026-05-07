@@ -54,58 +54,11 @@ open class EcfAPI {
     /**
 
      - parameter rnc: (path)  
-     - parameter encf: (path)  
-     - parameter sendAcecfRequest: (body)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: Void
-     */
-    open class func aprobacionComercial(rnc: String, encf: String, sendAcecfRequest: SendAcecfRequest, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await aprobacionComercialWithRequestBuilder(rnc: rnc, encf: encf, sendAcecfRequest: sendAcecfRequest, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     - POST /ecf/aprobacioncomercial/{rnc}/{encf}
-     - Bearer Token:
-       - type: http
-       - name: Bearer
-     - parameter rnc: (path)  
-     - parameter encf: (path)  
-     - parameter sendAcecfRequest: (body)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
-     */
-    open class func aprobacionComercialWithRequestBuilder(rnc: String, encf: String, sendAcecfRequest: SendAcecfRequest, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<Void> {
-        var localVariablePath = "/ecf/aprobacioncomercial/{rnc}/{encf}"
-        let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
-        let rncPostEscape = rncPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{rnc}", with: rncPostEscape, options: .literal, range: nil)
-        let encfPreEscape = "\(APIHelper.mapValueToPathItem(encf))"
-        let encfPostEscape = encfPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{encf}", with: encfPostEscape, options: .literal, range: nil)
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: sendAcecfRequest, codableHelper: apiConfiguration.codableHelper)
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/json",
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
-
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-
-     - parameter rnc: (path)  
      - parameter xml: (form)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func firmarSemilla(rnc: String, xml: Data, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) {
+    open class func firmarSemilla(rnc: String, xml: URL, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await firmarSemillaWithRequestBuilder(rnc: rnc, xml: xml, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -119,7 +72,7 @@ open class EcfAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
-    open class func firmarSemillaWithRequestBuilder(rnc: String, xml: Data, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func firmarSemillaWithRequestBuilder(rnc: String, xml: URL, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/ecf/FirmarSemilla/{rnc}"
         let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
         let rncPostEscape = rncPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -180,9 +133,9 @@ open class EcfAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(([
             "includeEcfContent": (wrappedValue: includeEcfContent?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ] as [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]))
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -230,14 +183,14 @@ open class EcfAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(([
             "TipoEcf": (wrappedValue: tipoEcf?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Rncs": (wrappedValue: rncs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "FechaDesde": (wrappedValue: fechaDesde?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "FechaHasta": (wrappedValue: fechaHasta?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ] as [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]))
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -285,9 +238,9 @@ open class EcfAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(([
             "includeEcfContent": (wrappedValue: includeEcfContent?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ] as [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]))
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -302,12 +255,12 @@ open class EcfAPI {
 
     /**
 
-     - parameter ECF: (body)  
+     - parameter ecf31ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: EcfResponse
      */
-    open class func recepcionEcf31(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
-        return try await recepcionEcf31WithRequestBuilder(ECF: ECF, apiConfiguration: apiConfiguration).execute().body
+    open class func recepcionEcf31(ecf31ECF: Ecf31ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
+        return try await recepcionEcf31WithRequestBuilder(ecf31ECF: ecf31ECF, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -315,14 +268,14 @@ open class EcfAPI {
      - Bearer Token:
        - type: http
        - name: Bearer
-     - parameter ECF: (body)  
+     - parameter ecf31ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<EcfResponse> 
      */
-    open class func recepcionEcf31WithRequestBuilder(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
+    open class func recepcionEcf31WithRequestBuilder(ecf31ECF: Ecf31ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
         let localVariablePath = "/ecf/31"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ECF, codableHelper: apiConfiguration.codableHelper)
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ecf31ECF, codableHelper: apiConfiguration.codableHelper)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
@@ -339,12 +292,12 @@ open class EcfAPI {
 
     /**
 
-     - parameter ECF: (body)  
+     - parameter ecf32ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: EcfResponse
      */
-    open class func recepcionEcf32(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
-        return try await recepcionEcf32WithRequestBuilder(ECF: ECF, apiConfiguration: apiConfiguration).execute().body
+    open class func recepcionEcf32(ecf32ECF: Ecf32ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
+        return try await recepcionEcf32WithRequestBuilder(ecf32ECF: ecf32ECF, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -352,14 +305,14 @@ open class EcfAPI {
      - Bearer Token:
        - type: http
        - name: Bearer
-     - parameter ECF: (body)  
+     - parameter ecf32ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<EcfResponse> 
      */
-    open class func recepcionEcf32WithRequestBuilder(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
+    open class func recepcionEcf32WithRequestBuilder(ecf32ECF: Ecf32ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
         let localVariablePath = "/ecf/32"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ECF, codableHelper: apiConfiguration.codableHelper)
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ecf32ECF, codableHelper: apiConfiguration.codableHelper)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
@@ -376,12 +329,12 @@ open class EcfAPI {
 
     /**
 
-     - parameter ECF: (body)  
+     - parameter ecf33ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: EcfResponse
      */
-    open class func recepcionEcf33(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
-        return try await recepcionEcf33WithRequestBuilder(ECF: ECF, apiConfiguration: apiConfiguration).execute().body
+    open class func recepcionEcf33(ecf33ECF: Ecf33ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
+        return try await recepcionEcf33WithRequestBuilder(ecf33ECF: ecf33ECF, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -389,14 +342,14 @@ open class EcfAPI {
      - Bearer Token:
        - type: http
        - name: Bearer
-     - parameter ECF: (body)  
+     - parameter ecf33ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<EcfResponse> 
      */
-    open class func recepcionEcf33WithRequestBuilder(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
+    open class func recepcionEcf33WithRequestBuilder(ecf33ECF: Ecf33ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
         let localVariablePath = "/ecf/33"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ECF, codableHelper: apiConfiguration.codableHelper)
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ecf33ECF, codableHelper: apiConfiguration.codableHelper)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
@@ -413,12 +366,12 @@ open class EcfAPI {
 
     /**
 
-     - parameter ECF: (body)  
+     - parameter ecf34ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: EcfResponse
      */
-    open class func recepcionEcf34(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
-        return try await recepcionEcf34WithRequestBuilder(ECF: ECF, apiConfiguration: apiConfiguration).execute().body
+    open class func recepcionEcf34(ecf34ECF: Ecf34ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
+        return try await recepcionEcf34WithRequestBuilder(ecf34ECF: ecf34ECF, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -426,14 +379,14 @@ open class EcfAPI {
      - Bearer Token:
        - type: http
        - name: Bearer
-     - parameter ECF: (body)  
+     - parameter ecf34ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<EcfResponse> 
      */
-    open class func recepcionEcf34WithRequestBuilder(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
+    open class func recepcionEcf34WithRequestBuilder(ecf34ECF: Ecf34ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
         let localVariablePath = "/ecf/34"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ECF, codableHelper: apiConfiguration.codableHelper)
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ecf34ECF, codableHelper: apiConfiguration.codableHelper)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
@@ -450,12 +403,12 @@ open class EcfAPI {
 
     /**
 
-     - parameter ECF: (body)  
+     - parameter ecf41ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: EcfResponse
      */
-    open class func recepcionEcf41(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
-        return try await recepcionEcf41WithRequestBuilder(ECF: ECF, apiConfiguration: apiConfiguration).execute().body
+    open class func recepcionEcf41(ecf41ECF: Ecf41ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
+        return try await recepcionEcf41WithRequestBuilder(ecf41ECF: ecf41ECF, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -463,14 +416,14 @@ open class EcfAPI {
      - Bearer Token:
        - type: http
        - name: Bearer
-     - parameter ECF: (body)  
+     - parameter ecf41ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<EcfResponse> 
      */
-    open class func recepcionEcf41WithRequestBuilder(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
+    open class func recepcionEcf41WithRequestBuilder(ecf41ECF: Ecf41ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
         let localVariablePath = "/ecf/41"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ECF, codableHelper: apiConfiguration.codableHelper)
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ecf41ECF, codableHelper: apiConfiguration.codableHelper)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
@@ -487,12 +440,12 @@ open class EcfAPI {
 
     /**
 
-     - parameter ECF: (body)  
+     - parameter ecf43ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: EcfResponse
      */
-    open class func recepcionEcf43(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
-        return try await recepcionEcf43WithRequestBuilder(ECF: ECF, apiConfiguration: apiConfiguration).execute().body
+    open class func recepcionEcf43(ecf43ECF: Ecf43ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
+        return try await recepcionEcf43WithRequestBuilder(ecf43ECF: ecf43ECF, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -500,14 +453,14 @@ open class EcfAPI {
      - Bearer Token:
        - type: http
        - name: Bearer
-     - parameter ECF: (body)  
+     - parameter ecf43ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<EcfResponse> 
      */
-    open class func recepcionEcf43WithRequestBuilder(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
+    open class func recepcionEcf43WithRequestBuilder(ecf43ECF: Ecf43ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
         let localVariablePath = "/ecf/43"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ECF, codableHelper: apiConfiguration.codableHelper)
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ecf43ECF, codableHelper: apiConfiguration.codableHelper)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
@@ -524,12 +477,12 @@ open class EcfAPI {
 
     /**
 
-     - parameter ECF: (body)  
+     - parameter ecf44ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: EcfResponse
      */
-    open class func recepcionEcf44(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
-        return try await recepcionEcf44WithRequestBuilder(ECF: ECF, apiConfiguration: apiConfiguration).execute().body
+    open class func recepcionEcf44(ecf44ECF: Ecf44ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
+        return try await recepcionEcf44WithRequestBuilder(ecf44ECF: ecf44ECF, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -537,14 +490,14 @@ open class EcfAPI {
      - Bearer Token:
        - type: http
        - name: Bearer
-     - parameter ECF: (body)  
+     - parameter ecf44ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<EcfResponse> 
      */
-    open class func recepcionEcf44WithRequestBuilder(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
+    open class func recepcionEcf44WithRequestBuilder(ecf44ECF: Ecf44ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
         let localVariablePath = "/ecf/44"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ECF, codableHelper: apiConfiguration.codableHelper)
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ecf44ECF, codableHelper: apiConfiguration.codableHelper)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
@@ -561,12 +514,12 @@ open class EcfAPI {
 
     /**
 
-     - parameter ECF: (body)  
+     - parameter ecf45ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: EcfResponse
      */
-    open class func recepcionEcf45(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
-        return try await recepcionEcf45WithRequestBuilder(ECF: ECF, apiConfiguration: apiConfiguration).execute().body
+    open class func recepcionEcf45(ecf45ECF: Ecf45ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
+        return try await recepcionEcf45WithRequestBuilder(ecf45ECF: ecf45ECF, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -574,14 +527,14 @@ open class EcfAPI {
      - Bearer Token:
        - type: http
        - name: Bearer
-     - parameter ECF: (body)  
+     - parameter ecf45ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<EcfResponse> 
      */
-    open class func recepcionEcf45WithRequestBuilder(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
+    open class func recepcionEcf45WithRequestBuilder(ecf45ECF: Ecf45ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
         let localVariablePath = "/ecf/45"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ECF, codableHelper: apiConfiguration.codableHelper)
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ecf45ECF, codableHelper: apiConfiguration.codableHelper)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
@@ -598,12 +551,12 @@ open class EcfAPI {
 
     /**
 
-     - parameter ECF: (body)  
+     - parameter ecf46ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: EcfResponse
      */
-    open class func recepcionEcf46(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
-        return try await recepcionEcf46WithRequestBuilder(ECF: ECF, apiConfiguration: apiConfiguration).execute().body
+    open class func recepcionEcf46(ecf46ECF: Ecf46ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
+        return try await recepcionEcf46WithRequestBuilder(ecf46ECF: ecf46ECF, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -611,14 +564,14 @@ open class EcfAPI {
      - Bearer Token:
        - type: http
        - name: Bearer
-     - parameter ECF: (body)  
+     - parameter ecf46ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<EcfResponse> 
      */
-    open class func recepcionEcf46WithRequestBuilder(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
+    open class func recepcionEcf46WithRequestBuilder(ecf46ECF: Ecf46ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
         let localVariablePath = "/ecf/46"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ECF, codableHelper: apiConfiguration.codableHelper)
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ecf46ECF, codableHelper: apiConfiguration.codableHelper)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
@@ -635,12 +588,12 @@ open class EcfAPI {
 
     /**
 
-     - parameter ECF: (body)  
+     - parameter ecf47ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: EcfResponse
      */
-    open class func recepcionEcf47(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
-        return try await recepcionEcf47WithRequestBuilder(ECF: ECF, apiConfiguration: apiConfiguration).execute().body
+    open class func recepcionEcf47(ecf47ECF: Ecf47ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> EcfResponse {
+        return try await recepcionEcf47WithRequestBuilder(ecf47ECF: ecf47ECF, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -648,14 +601,14 @@ open class EcfAPI {
      - Bearer Token:
        - type: http
        - name: Bearer
-     - parameter ECF: (body)  
+     - parameter ecf47ECF: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<EcfResponse> 
      */
-    open class func recepcionEcf47WithRequestBuilder(ECF: ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
+    open class func recepcionEcf47WithRequestBuilder(ecf47ECF: Ecf47ECF, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<EcfResponse> {
         let localVariablePath = "/ecf/47"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ECF, codableHelper: apiConfiguration.codableHelper)
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: ecf47ECF, codableHelper: apiConfiguration.codableHelper)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
@@ -680,13 +633,15 @@ open class EcfAPI {
      - parameter toFechaEmision: (query)  (optional)
      - parameter amountFrom: (query)  (optional)
      - parameter amountTo: (query)  (optional)
+     - parameter progresses: (query)  (optional)
+     - parameter dgiiEstados: (query)  (optional)
      - parameter page: (query)  (optional, default to 1)
      - parameter limit: (query)  (optional, default to 25)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedApiResultOfEcfResponse
      */
-    open class func searchAllEcfs(encfs: [String]? = nil, ids: [UUID]? = nil, tiposEcfs: [AllTipoECFTypes]? = nil, includeEcfContent: Bool? = nil, fromFechaEmision: Date? = nil, toFechaEmision: Date? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfResponse {
-        return try await searchAllEcfsWithRequestBuilder(encfs: encfs, ids: ids, tiposEcfs: tiposEcfs, includeEcfContent: includeEcfContent, fromFechaEmision: fromFechaEmision, toFechaEmision: toFechaEmision, amountFrom: amountFrom, amountTo: amountTo, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
+    open class func searchAllEcfs(encfs: [String]? = nil, ids: [UUID]? = nil, tiposEcfs: [AllTipoECFTypes]? = nil, includeEcfContent: Bool? = nil, fromFechaEmision: Date? = nil, toFechaEmision: Date? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, progresses: [EcfProgress]? = nil, dgiiEstados: [EcfEstado]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfResponse {
+        return try await searchAllEcfsWithRequestBuilder(encfs: encfs, ids: ids, tiposEcfs: tiposEcfs, includeEcfContent: includeEcfContent, fromFechaEmision: fromFechaEmision, toFechaEmision: toFechaEmision, amountFrom: amountFrom, amountTo: amountTo, progresses: progresses, dgiiEstados: dgiiEstados, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -702,18 +657,20 @@ open class EcfAPI {
      - parameter toFechaEmision: (query)  (optional)
      - parameter amountFrom: (query)  (optional)
      - parameter amountTo: (query)  (optional)
+     - parameter progresses: (query)  (optional)
+     - parameter dgiiEstados: (query)  (optional)
      - parameter page: (query)  (optional, default to 1)
      - parameter limit: (query)  (optional, default to 25)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedApiResultOfEcfResponse> 
      */
-    open class func searchAllEcfsWithRequestBuilder(encfs: [String]? = nil, ids: [UUID]? = nil, tiposEcfs: [AllTipoECFTypes]? = nil, includeEcfContent: Bool? = nil, fromFechaEmision: Date? = nil, toFechaEmision: Date? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfResponse> {
+    open class func searchAllEcfsWithRequestBuilder(encfs: [String]? = nil, ids: [UUID]? = nil, tiposEcfs: [AllTipoECFTypes]? = nil, includeEcfContent: Bool? = nil, fromFechaEmision: Date? = nil, toFechaEmision: Date? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, progresses: [EcfProgress]? = nil, dgiiEstados: [EcfEstado]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfResponse> {
         let localVariablePath = "/ecf"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(([
             "Encfs": (wrappedValue: encfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Ids": (wrappedValue: ids?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "TiposEcfs": (wrappedValue: tiposEcfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
@@ -722,9 +679,11 @@ open class EcfAPI {
             "ToFechaEmision": (wrappedValue: toFechaEmision?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "AmountFrom": (wrappedValue: amountFrom?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "AmountTo": (wrappedValue: amountTo?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Progresses": (wrappedValue: progresses?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "DgiiEstados": (wrappedValue: dgiiEstados?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ] as [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]))
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -748,13 +707,15 @@ open class EcfAPI {
      - parameter toFechaEmision: (query)  (optional)
      - parameter amountFrom: (query)  (optional)
      - parameter amountTo: (query)  (optional)
+     - parameter progresses: (query)  (optional)
+     - parameter dgiiEstados: (query)  (optional)
      - parameter page: (query)  (optional, default to 1)
      - parameter limit: (query)  (optional, default to 25)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedApiResultOfEcfResponse
      */
-    open class func searchEcfs(rnc: String, encfs: [String]? = nil, ids: [UUID]? = nil, tiposEcfs: [AllTipoECFTypes]? = nil, includeEcfContent: Bool? = nil, fromFechaEmision: Date? = nil, toFechaEmision: Date? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfResponse {
-        return try await searchEcfsWithRequestBuilder(rnc: rnc, encfs: encfs, ids: ids, tiposEcfs: tiposEcfs, includeEcfContent: includeEcfContent, fromFechaEmision: fromFechaEmision, toFechaEmision: toFechaEmision, amountFrom: amountFrom, amountTo: amountTo, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
+    open class func searchEcfs(rnc: String, encfs: [String]? = nil, ids: [UUID]? = nil, tiposEcfs: [AllTipoECFTypes]? = nil, includeEcfContent: Bool? = nil, fromFechaEmision: Date? = nil, toFechaEmision: Date? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, progresses: [EcfProgress]? = nil, dgiiEstados: [EcfEstado]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfResponse {
+        return try await searchEcfsWithRequestBuilder(rnc: rnc, encfs: encfs, ids: ids, tiposEcfs: tiposEcfs, includeEcfContent: includeEcfContent, fromFechaEmision: fromFechaEmision, toFechaEmision: toFechaEmision, amountFrom: amountFrom, amountTo: amountTo, progresses: progresses, dgiiEstados: dgiiEstados, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -771,12 +732,14 @@ open class EcfAPI {
      - parameter toFechaEmision: (query)  (optional)
      - parameter amountFrom: (query)  (optional)
      - parameter amountTo: (query)  (optional)
+     - parameter progresses: (query)  (optional)
+     - parameter dgiiEstados: (query)  (optional)
      - parameter page: (query)  (optional, default to 1)
      - parameter limit: (query)  (optional, default to 25)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedApiResultOfEcfResponse> 
      */
-    open class func searchEcfsWithRequestBuilder(rnc: String, encfs: [String]? = nil, ids: [UUID]? = nil, tiposEcfs: [AllTipoECFTypes]? = nil, includeEcfContent: Bool? = nil, fromFechaEmision: Date? = nil, toFechaEmision: Date? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfResponse> {
+    open class func searchEcfsWithRequestBuilder(rnc: String, encfs: [String]? = nil, ids: [UUID]? = nil, tiposEcfs: [AllTipoECFTypes]? = nil, includeEcfContent: Bool? = nil, fromFechaEmision: Date? = nil, toFechaEmision: Date? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, progresses: [EcfProgress]? = nil, dgiiEstados: [EcfEstado]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfResponse> {
         var localVariablePath = "/ecf/{rnc}"
         let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
         let rncPostEscape = rncPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -785,7 +748,7 @@ open class EcfAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(([
             "Encfs": (wrappedValue: encfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Ids": (wrappedValue: ids?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "TiposEcfs": (wrappedValue: tiposEcfs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
@@ -794,9 +757,11 @@ open class EcfAPI {
             "ToFechaEmision": (wrappedValue: toFechaEmision?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "AmountFrom": (wrappedValue: amountFrom?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "AmountTo": (wrappedValue: amountTo?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Progresses": (wrappedValue: progresses?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "DgiiEstados": (wrappedValue: dgiiEstados?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ] as [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]))
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :

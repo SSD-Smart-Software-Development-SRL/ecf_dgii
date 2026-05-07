@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum TipoeCFType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum TipoeCFType: String, Sendable, Codable, CaseIterable {
     case facturaDeCreditoFiscalElectronica = "FacturaDeCreditoFiscalElectronica"
     case facturaDeConsumoElectronica = "FacturaDeConsumoElectronica"
     case notaDeDebitoElectronica = "NotaDeDebitoElectronica"
@@ -18,5 +18,4 @@ public enum TipoeCFType: String, Sendable, Codable, CaseIterable, CaseIterableDe
     case gubernamentalElectronico = "GubernamentalElectronico"
     case comprobanteDeExportacionesElectronico = "ComprobanteDeExportacionesElectronico"
     case comprobanteParaPagosAlExteriorElectronico = "ComprobanteParaPagosAlExteriorElectronico"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

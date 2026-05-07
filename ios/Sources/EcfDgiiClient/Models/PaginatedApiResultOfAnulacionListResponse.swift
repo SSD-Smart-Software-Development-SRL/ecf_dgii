@@ -9,20 +9,15 @@ import Foundation
 
 public struct PaginatedApiResultOfAnulacionListResponse: Sendable, Codable, Hashable {
 
-    public static let totalRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    public static let pageRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    public static let limitRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    public static let nextPageRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    public static let previousPageRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     public var nextPageUri: String?
     public var values: [AnulacionListResponse]?
-    public var total: Int?
-    public var page: Int?
-    public var limit: Int?
-    public var nextPage: Int?
-    public var previousPage: Int?
+    public var total: SearchEcfReceptionRequestsTiposEcfsParameterInner?
+    public var page: SearchEcfReceptionRequestsTiposEcfsParameterInner?
+    public var limit: SearchEcfReceptionRequestsTiposEcfsParameterInner?
+    public var nextPage: Ecf31IdDocTotalPaginas?
+    public var previousPage: Ecf31IdDocTotalPaginas?
 
-    public init(nextPageUri: String?, values: [AnulacionListResponse]? = nil, total: Int? = nil, page: Int? = nil, limit: Int? = nil, nextPage: Int? = nil, previousPage: Int? = nil) {
+    public init(nextPageUri: String?, values: [AnulacionListResponse]? = nil, total: SearchEcfReceptionRequestsTiposEcfsParameterInner? = nil, page: SearchEcfReceptionRequestsTiposEcfsParameterInner? = nil, limit: SearchEcfReceptionRequestsTiposEcfsParameterInner? = nil, nextPage: Ecf31IdDocTotalPaginas? = nil, previousPage: Ecf31IdDocTotalPaginas? = nil) {
         self.nextPageUri = nextPageUri
         self.values = values
         self.total = total

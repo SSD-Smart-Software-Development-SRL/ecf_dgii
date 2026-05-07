@@ -10,22 +10,45 @@ import Foundation
 public struct UpsertCompanyRequest: Sendable, Codable, Hashable {
 
     public static let rncRule = StringRule(minLength: nil, maxLength: 11, pattern: nil)
-    public static let legalNameRule = StringRule(minLength: nil, maxLength: 2000, pattern: nil)
     public static let nameRule = StringRule(minLength: nil, maxLength: 2000, pattern: nil)
+    public static let employeeCountRule = StringRule(minLength: nil, maxLength: 20, pattern: nil)
+    public static let estimatedInvoicesRule = StringRule(minLength: nil, maxLength: 20, pattern: nil)
+    public static let legalRepFirstNameRule = StringRule(minLength: nil, maxLength: 200, pattern: nil)
+    public static let legalRepLastNameRule = StringRule(minLength: nil, maxLength: 200, pattern: nil)
+    public static let addressRule = StringRule(minLength: nil, maxLength: 500, pattern: nil)
+    public static let certificationStatusRule = StringRule(minLength: nil, maxLength: 50, pattern: nil)
     public var rnc: String
-    public var legalName: String
     public var name: String
+    public var employeeCount: String?
+    public var estimatedInvoices: String?
+    public var legalRepFirstName: String?
+    public var legalRepLastName: String?
+    public var address: String?
+    public var certificationDeclared: Bool?
+    public var certificationStatus: String?
 
-    public init(rnc: String, legalName: String, name: String) {
+    public init(rnc: String, name: String, employeeCount: String? = nil, estimatedInvoices: String? = nil, legalRepFirstName: String? = nil, legalRepLastName: String? = nil, address: String? = nil, certificationDeclared: Bool? = nil, certificationStatus: String? = nil) {
         self.rnc = rnc
-        self.legalName = legalName
         self.name = name
+        self.employeeCount = employeeCount
+        self.estimatedInvoices = estimatedInvoices
+        self.legalRepFirstName = legalRepFirstName
+        self.legalRepLastName = legalRepLastName
+        self.address = address
+        self.certificationDeclared = certificationDeclared
+        self.certificationStatus = certificationStatus
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case rnc
-        case legalName
         case name
+        case employeeCount
+        case estimatedInvoices
+        case legalRepFirstName
+        case legalRepLastName
+        case address
+        case certificationDeclared
+        case certificationStatus
     }
 
     // Encodable protocol methods
@@ -33,8 +56,14 @@ public struct UpsertCompanyRequest: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(rnc, forKey: .rnc)
-        try container.encode(legalName, forKey: .legalName)
         try container.encode(name, forKey: .name)
+        try container.encodeIfPresent(employeeCount, forKey: .employeeCount)
+        try container.encodeIfPresent(estimatedInvoices, forKey: .estimatedInvoices)
+        try container.encodeIfPresent(legalRepFirstName, forKey: .legalRepFirstName)
+        try container.encodeIfPresent(legalRepLastName, forKey: .legalRepLastName)
+        try container.encodeIfPresent(address, forKey: .address)
+        try container.encodeIfPresent(certificationDeclared, forKey: .certificationDeclared)
+        try container.encodeIfPresent(certificationStatus, forKey: .certificationStatus)
     }
 }
 

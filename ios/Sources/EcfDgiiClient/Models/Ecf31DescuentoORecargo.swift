@@ -9,7 +9,7 @@ import Foundation
 
 public struct Ecf31DescuentoORecargo: Sendable, Codable, Hashable {
 
-    public var numeroLinea: AcecfReceptionRequestDtoProgress
+    public var numeroLinea: SearchEcfReceptionRequestsTiposEcfsParameterInner
     public var tipoAjuste: Ecf31TipoAjusteType
     public var indicadorNorma1007: IndicadorNorma1007Type?
     public var descripcionDescuentooRecargo: String?
@@ -19,7 +19,7 @@ public struct Ecf31DescuentoORecargo: Sendable, Codable, Hashable {
     public var montoDescuentooRecargoOtraMoneda: Ecf31DescuentoORecargoMontoDescuentooRecargo?
     public var indicadorFacturacionDescuentooRecargo: IndicadorFacturacionDRType?
 
-    public init(numeroLinea: AcecfReceptionRequestDtoProgress, tipoAjuste: Ecf31TipoAjusteType, indicadorNorma1007: IndicadorNorma1007Type? = nil, descripcionDescuentooRecargo: String? = nil, tipoValor: TipoDescuentoRecargoType? = nil, valorDescuentooRecargo: Ecf31DescuentoORecargoValorDescuentooRecargo? = nil, montoDescuentooRecargo: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, montoDescuentooRecargoOtraMoneda: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, indicadorFacturacionDescuentooRecargo: IndicadorFacturacionDRType? = nil) {
+    public init(numeroLinea: SearchEcfReceptionRequestsTiposEcfsParameterInner, tipoAjuste: Ecf31TipoAjusteType, indicadorNorma1007: IndicadorNorma1007Type? = nil, descripcionDescuentooRecargo: String? = nil, tipoValor: TipoDescuentoRecargoType? = nil, valorDescuentooRecargo: Ecf31DescuentoORecargoValorDescuentooRecargo? = nil, montoDescuentooRecargo: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, montoDescuentooRecargoOtraMoneda: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, indicadorFacturacionDescuentooRecargo: IndicadorFacturacionDRType? = nil) {
         self.numeroLinea = numeroLinea
         self.tipoAjuste = tipoAjuste
         self.indicadorNorma1007 = indicadorNorma1007

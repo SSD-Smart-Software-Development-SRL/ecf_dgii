@@ -9,15 +9,13 @@ import Foundation
 
 public struct AnulacionListResponse: Sendable, Codable, Hashable {
 
-    public static let cantidadeNCFAnuladosRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    public static let statusCodeRule = NumericRule<Int>(minimum: nil, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     public var anulacionId: UUID?
     public var tenantId: UUID?
     public var companyRnc: String?
-    public var cantidadeNCFAnulados: Int?
+    public var cantidadeNCFAnulados: SearchEcfReceptionRequestsTiposEcfsParameterInner?
     public var detalleAnulacion: [DetalleAnulacionRequestDto]?
     public var response: RespuestaAnulacionRango?
-    public var statusCode: Int?
+    public var statusCode: SearchEcfReceptionRequestsTiposEcfsParameterInner?
     public var fileName: String?
     public var fechaHoraAnulacioneNCF: Date?
     public var createdOn: Date?
@@ -25,7 +23,7 @@ public struct AnulacionListResponse: Sendable, Codable, Hashable {
     public var createdBy: String?
     public var updatedBy: String?
 
-    public init(anulacionId: UUID? = nil, tenantId: UUID? = nil, companyRnc: String? = nil, cantidadeNCFAnulados: Int? = nil, detalleAnulacion: [DetalleAnulacionRequestDto]? = nil, response: RespuestaAnulacionRango? = nil, statusCode: Int? = nil, fileName: String? = nil, fechaHoraAnulacioneNCF: Date? = nil, createdOn: Date? = nil, updatedOn: Date? = nil, createdBy: String? = nil, updatedBy: String? = nil) {
+    public init(anulacionId: UUID? = nil, tenantId: UUID? = nil, companyRnc: String? = nil, cantidadeNCFAnulados: SearchEcfReceptionRequestsTiposEcfsParameterInner? = nil, detalleAnulacion: [DetalleAnulacionRequestDto]? = nil, response: RespuestaAnulacionRango? = nil, statusCode: SearchEcfReceptionRequestsTiposEcfsParameterInner? = nil, fileName: String? = nil, fechaHoraAnulacioneNCF: Date? = nil, createdOn: Date? = nil, updatedOn: Date? = nil, createdBy: String? = nil, updatedBy: String? = nil) {
         self.anulacionId = anulacionId
         self.tenantId = tenantId
         self.companyRnc = companyRnc

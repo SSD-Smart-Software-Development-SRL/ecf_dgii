@@ -7,8 +7,7 @@
 
 import Foundation
 
-public enum IndicadorMontoGravadoType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum IndicadorMontoGravadoType: String, Sendable, Codable, CaseIterable {
     case sinITBISIncluido = "SinITBISIncluido"
     case conITBISIncluido = "ConITBISIncluido"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

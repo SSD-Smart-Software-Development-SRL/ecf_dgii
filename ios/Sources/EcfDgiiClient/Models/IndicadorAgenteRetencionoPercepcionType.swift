@@ -7,8 +7,7 @@
 
 import Foundation
 
-public enum IndicadorAgenteRetencionoPercepcionType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum IndicadorAgenteRetencionoPercepcionType: String, Sendable, Codable, CaseIterable {
     case retencion = "Retencion"
     case percepcion = "Percepcion"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

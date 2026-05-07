@@ -15,7 +15,7 @@ public struct Ecf33IdDoc: Sendable, Codable, Hashable {
     public var indicadorEnvioDiferido: IndicadorEnvioDiferidoType?
     public var indicadorMontoGravado: IndicadorMontoGravadoType?
     public var indicadorServicioTodoIncluido: IndicadorServicioTodoIncluidoType?
-    public var tipoIngresos: Ecf33TipoIngresosValidationType
+    public var tipoIngresos: TipoIngresosValidationType?
     public var tipoPago: Ecf33TipoPagoType
     public var fechaLimitePago: Date?
     public var terminoPago: String?
@@ -27,7 +27,7 @@ public struct Ecf33IdDoc: Sendable, Codable, Hashable {
     public var fechaHasta: Date?
     public var totalPaginas: Ecf31IdDocTotalPaginas?
 
-    public init(tipoeCF: TipoeCFType, encf: String, fechaVencimientoSecuencia: Date? = nil, indicadorEnvioDiferido: IndicadorEnvioDiferidoType? = nil, indicadorMontoGravado: IndicadorMontoGravadoType? = nil, indicadorServicioTodoIncluido: IndicadorServicioTodoIncluidoType? = nil, tipoIngresos: Ecf33TipoIngresosValidationType, tipoPago: Ecf33TipoPagoType, fechaLimitePago: Date? = nil, terminoPago: String? = nil, tablaFormasPago: [Ecf33FormaDePago]? = nil, tipoCuentaPago: TipoCuentaPagoType? = nil, numeroCuentaPago: String? = nil, bancoPago: String? = nil, fechaDesde: Date? = nil, fechaHasta: Date? = nil, totalPaginas: Ecf31IdDocTotalPaginas? = nil) {
+    public init(tipoeCF: TipoeCFType, encf: String, fechaVencimientoSecuencia: Date? = nil, indicadorEnvioDiferido: IndicadorEnvioDiferidoType? = nil, indicadorMontoGravado: IndicadorMontoGravadoType? = nil, indicadorServicioTodoIncluido: IndicadorServicioTodoIncluidoType? = nil, tipoIngresos: TipoIngresosValidationType? = nil, tipoPago: Ecf33TipoPagoType, fechaLimitePago: Date? = nil, terminoPago: String? = nil, tablaFormasPago: [Ecf33FormaDePago]? = nil, tipoCuentaPago: TipoCuentaPagoType? = nil, numeroCuentaPago: String? = nil, bancoPago: String? = nil, fechaDesde: Date? = nil, fechaHasta: Date? = nil, totalPaginas: Ecf31IdDocTotalPaginas? = nil) {
         self.tipoeCF = tipoeCF
         self.encf = encf
         self.fechaVencimientoSecuencia = fechaVencimientoSecuencia
@@ -77,7 +77,7 @@ public struct Ecf33IdDoc: Sendable, Codable, Hashable {
         try container.encodeIfPresent(indicadorEnvioDiferido, forKey: .indicadorEnvioDiferido)
         try container.encodeIfPresent(indicadorMontoGravado, forKey: .indicadorMontoGravado)
         try container.encodeIfPresent(indicadorServicioTodoIncluido, forKey: .indicadorServicioTodoIncluido)
-        try container.encode(tipoIngresos, forKey: .tipoIngresos)
+        try container.encodeIfPresent(tipoIngresos, forKey: .tipoIngresos)
         try container.encode(tipoPago, forKey: .tipoPago)
         try container.encodeIfPresent(fechaLimitePago, forKey: .fechaLimitePago)
         try container.encodeIfPresent(terminoPago, forKey: .terminoPago)

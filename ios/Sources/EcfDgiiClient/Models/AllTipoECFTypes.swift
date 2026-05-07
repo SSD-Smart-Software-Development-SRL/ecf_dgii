@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum AllTipoECFTypes: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum AllTipoECFTypes: String, Sendable, Codable, CaseIterable {
     case facturaDeCreditoFiscalElectronica = "FacturaDeCreditoFiscalElectronica"
     case facturaDeConsumoElectronica = "FacturaDeConsumoElectronica"
     case notaDeDebitoElectronica = "NotaDeDebitoElectronica"
@@ -22,5 +22,4 @@ public enum AllTipoECFTypes: String, Sendable, Codable, CaseIterable, CaseIterab
     case acecf = "ACECF"
     case arecf = "ARECF"
     case anecf = "ANECF"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

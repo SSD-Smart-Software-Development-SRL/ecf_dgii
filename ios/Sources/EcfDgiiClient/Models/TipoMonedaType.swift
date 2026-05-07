@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum TipoMonedaType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum TipoMonedaType: String, Sendable, Codable, CaseIterable {
     case brl = "BRL"
     case cad = "CAD"
     case chf = "CHF"
@@ -24,5 +24,5 @@ public enum TipoMonedaType: String, Sendable, Codable, CaseIterable, CaseIterabl
     case vef = "VEF"
     case htg = "HTG"
     case mxn = "MXN"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
+    case cop = "COP"
 }

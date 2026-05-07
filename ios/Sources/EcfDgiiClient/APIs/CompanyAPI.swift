@@ -80,12 +80,12 @@ open class CompanyAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(([
             "Rncs": (wrappedValue: rncs?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Names": (wrappedValue: names?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ] as [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]))
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -186,7 +186,7 @@ open class CompanyAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func updateCertificateCompany(rnc: String, certificate: Data, password: String, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) {
+    open class func updateCertificateCompany(rnc: String, certificate: URL, password: String, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await updateCertificateCompanyWithRequestBuilder(rnc: rnc, certificate: certificate, password: password, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -201,7 +201,7 @@ open class CompanyAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
-    open class func updateCertificateCompanyWithRequestBuilder(rnc: String, certificate: Data, password: String, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func updateCertificateCompanyWithRequestBuilder(rnc: String, certificate: URL, password: String, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/company/{rnc}/certificate"
         let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
         let rncPostEscape = rncPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""

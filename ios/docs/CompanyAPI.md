@@ -61,7 +61,7 @@ Void (empty response body)
 
 # **getCompanies**
 ```swift
-    open class func getCompanies(rncs: [String]? = nil, names: [String]? = nil, page: Int? = nil, limit: Int? = nil, completion: @escaping (_ data: PaginatedApiResultOfCompanyResponse?, _ error: Error?) -> Void)
+    open class func getCompanies(rncs: [String]? = nil, names: [String]? = nil, page: GetCompaniesPageParameter? = nil, limit: GetCompaniesLimitParameter? = nil, completion: @escaping (_ data: PaginatedApiResultOfCompanyResponse?, _ error: Error?) -> Void)
 ```
 
 
@@ -73,8 +73,8 @@ import EcfDgiiClient
 
 let rncs = ["inner_example"] // [String] |  (optional)
 let names = ["inner_example"] // [String] |  (optional)
-let page = 987 // Int |  (optional) (default to 1)
-let limit = 987 // Int |  (optional) (default to 25)
+let page = GetCompanies_Page_parameter() // GetCompaniesPageParameter |  (optional) (default to 1)
+let limit = GetCompanies_Limit_parameter() // GetCompaniesLimitParameter |  (optional) (default to 25)
 
 CompanyAPI.getCompanies(rncs: rncs, names: names, page: page, limit: limit) { (response, error) in
     guard error == nil else {
@@ -94,8 +94,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **rncs** | [**[String]**](String.md) |  | [optional] 
  **names** | [**[String]**](String.md) |  | [optional] 
- **page** | **Int** |  | [optional] [default to 1]
- **limit** | **Int** |  | [optional] [default to 25]
+ **page** | **GetCompaniesPageParameter** |  | [optional] [default to 1]
+ **limit** | **GetCompaniesLimitParameter** |  | [optional] [default to 25]
 
 ### Return type
 
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 
 # **updateCertificateCompany**
 ```swift
-    open class func updateCertificateCompany(rnc: String, certificate: Data, password: String, completion: @escaping (_ data: Void?, _ error: Error?) -> Void)
+    open class func updateCertificateCompany(rnc: String, certificate: URL, password: String, completion: @escaping (_ data: Void?, _ error: Error?) -> Void)
 ```
 
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 import EcfDgiiClient
 
 let rnc = "rnc_example" // String | 
-let certificate = Data([9, 8, 7]) // Data | 
+let certificate = URL(string: "https://example.com")! // URL | 
 let password = "password_example" // String | 
 
 CompanyAPI.updateCertificateCompany(rnc: rnc, certificate: certificate, password: password) { (response, error) in
@@ -239,7 +239,7 @@ CompanyAPI.updateCertificateCompany(rnc: rnc, certificate: certificate, password
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **rnc** | **String** |  | 
- **certificate** | **Data** |  | 
+ **certificate** | **URL** |  | 
  **password** | **String** |  | 
 
 ### Return type
@@ -269,7 +269,7 @@ Void (empty response body)
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import EcfDgiiClient
 
-let upsertCompanyRequest = UpsertCompanyRequest(rnc: "rnc_example", legalName: "legalName_example", name: "name_example") // UpsertCompanyRequest | 
+let upsertCompanyRequest = UpsertCompanyRequest(rnc: "rnc_example", name: "name_example", employeeCount: "employeeCount_example", estimatedInvoices: "estimatedInvoices_example", legalRepFirstName: "legalRepFirstName_example", legalRepLastName: "legalRepLastName_example", address: "address_example", certificationDeclared: false, certificationStatus: "certificationStatus_example") // UpsertCompanyRequest | 
 
 CompanyAPI.upsertCompany(upsertCompanyRequest: upsertCompanyRequest) { (response, error) in
     guard error == nil else {

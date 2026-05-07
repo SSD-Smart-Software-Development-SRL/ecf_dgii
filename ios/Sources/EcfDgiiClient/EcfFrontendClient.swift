@@ -174,13 +174,8 @@ public final class EcfFrontendClient: Sendable {
     /// 1. Resolve token (cache → fetch → cache)
     /// 2. Execute the request
     /// 3. On 401, refresh token and retry once
-    private func withAuth<T>(_ operation: @Sendable (EcfDgiiClientAPIConfiguration) async throws(ErrorResponse) -> T) async throws(ErrorResponse) -> T {
-        let token: String
-        do {
-            token = try await resolveToken()
-        } catch {
-            throw ErrorResponse.error(0, nil, nil, error)
-        }
+    private func withAuth<T>(_ operation: @Sendable (EcfDgiiClientAPIConfiguration) async throws -> T) async throws -> T {
+        let token = try await resolveToken()
         let config = makeConfiguration(token: token)
 
         do {
@@ -188,13 +183,8 @@ public final class EcfFrontendClient: Sendable {
         } catch let errorResponse as ErrorResponse {
             // Check if 401 — refresh token and retry
             if case .error(let statusCode, _, _, _) = errorResponse, statusCode == 401 {
-                let freshToken: String
-                do {
-                    freshToken = try await getToken()
-                    try await cacheToken(freshToken)
-                } catch {
-                    throw ErrorResponse.error(0, nil, nil, error)
-                }
+                let freshToken = try await getToken()
+                try await cacheToken(freshToken)
                 let freshConfig = makeConfiguration(token: freshToken)
                 return try await operation(freshConfig)
             }
@@ -205,7 +195,7 @@ public final class EcfFrontendClient: Sendable {
     // MARK: - ECF Query Operations
 
     /// Query ECFs by RNC and eNCF.
-    public func queryEcf(rnc: String, encf: String, includeEcfContent: Bool? = nil) async throws(ErrorResponse) -> [EcfResponse] {
+    public func queryEcf(rnc: String, encf: String, includeEcfContent: Bool? = nil) async throws -> [EcfResponse] {
         try await withAuth { config in
             try await EcfAPI.queryEcf(rnc: rnc, encf: encf, includeEcfContent: includeEcfContent, apiConfiguration: config)
         }
@@ -224,7 +214,7 @@ public final class EcfFrontendClient: Sendable {
         amountTo: Double? = nil,
         page: Int? = nil,
         limit: Int? = nil
-    ) async throws(ErrorResponse) -> PaginatedApiResultOfEcfResponse {
+    ) async throws -> PaginatedApiResultOfEcfResponse {
         try await withAuth { config in
             try await EcfAPI.searchEcfs(
                 rnc: rnc,
@@ -255,7 +245,7 @@ public final class EcfFrontendClient: Sendable {
         amountTo: Double? = nil,
         page: Int? = nil,
         limit: Int? = nil
-    ) async throws(ErrorResponse) -> PaginatedApiResultOfEcfResponse {
+    ) async throws -> PaginatedApiResultOfEcfResponse {
         try await withAuth { config in
             try await EcfAPI.searchAllEcfs(
                 encfs: encfs,
@@ -274,7 +264,7 @@ public final class EcfFrontendClient: Sendable {
     }
 
     /// Get a specific ECF by message ID.
-    public func getEcfById(rnc: String, id: UUID, includeEcfContent: Bool? = nil) async throws(ErrorResponse) -> [EcfResponse] {
+    public func getEcfById(rnc: String, id: UUID, includeEcfContent: Bool? = nil) async throws -> [EcfResponse] {
         try await withAuth { config in
             try await EcfAPI.getEcfById(rnc: rnc, id: id, includeEcfContent: includeEcfContent, apiConfiguration: config)
         }
@@ -288,14 +278,14 @@ public final class EcfFrontendClient: Sendable {
         names: [String]? = nil,
         page: Int? = nil,
         limit: Int? = nil
-    ) async throws(ErrorResponse) -> PaginatedApiResultOfCompanyResponse {
+    ) async throws -> PaginatedApiResultOfCompanyResponse {
         try await withAuth { config in
             try await CompanyAPI.getCompanies(rncs: rncs, names: names, page: page, limit: limit, apiConfiguration: config)
         }
     }
 
     /// Get a company by RNC.
-    public func getCompanyByRnc(rnc: String) async throws(ErrorResponse) -> CompanyResponse {
+    public func getCompanyByRnc(rnc: String) async throws -> CompanyResponse {
         try await withAuth { config in
             try await CompanyAPI.getCompanyByRnc(rnc: rnc, apiConfiguration: config)
         }

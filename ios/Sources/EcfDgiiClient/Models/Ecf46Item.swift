@@ -9,7 +9,7 @@ import Foundation
 
 public struct Ecf46Item: Sendable, Codable, Hashable {
 
-    public var numeroLinea: AcecfReceptionRequestDtoProgress
+    public var numeroLinea: SearchEcfReceptionRequestsTiposEcfsParameterInner
     public var tablaCodigosItem: [Ecf46CodigosItem]?
     public var indicadorFacturacion: Ecf46IndicadorFacturacionType
     public var nombreItem: String
@@ -28,7 +28,7 @@ public struct Ecf46Item: Sendable, Codable, Hashable {
     public var otraMonedaDetalle: Ecf46OtraMonedaDetalle?
     public var montoItem: Ecf31FormaDePagoMontoPago
 
-    public init(numeroLinea: AcecfReceptionRequestDtoProgress, tablaCodigosItem: [Ecf46CodigosItem]? = nil, indicadorFacturacion: Ecf46IndicadorFacturacionType, nombreItem: String, indicadorBienoServicio: Ecf46IndicadorBienoServicioType, descripcionItem: String? = nil, cantidadItem: Ecf31ItemCantidadItem, unidadMedida: UnidadMedidaType? = nil, fechaElaboracion: Date? = nil, fechaVencimientoItem: Date? = nil, mineria: Ecf46Mineria? = nil, precioUnitarioItem: Ecf31ItemPrecioUnitarioItem, descuentoMonto: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, tablaSubDescuento: [Ecf46SubDescuento]? = nil, recargoMonto: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, tablaSubRecargo: [Ecf46SubRecargo]? = nil, otraMonedaDetalle: Ecf46OtraMonedaDetalle? = nil, montoItem: Ecf31FormaDePagoMontoPago) {
+    public init(numeroLinea: SearchEcfReceptionRequestsTiposEcfsParameterInner, tablaCodigosItem: [Ecf46CodigosItem]? = nil, indicadorFacturacion: Ecf46IndicadorFacturacionType, nombreItem: String, indicadorBienoServicio: Ecf46IndicadorBienoServicioType, descripcionItem: String? = nil, cantidadItem: Ecf31ItemCantidadItem, unidadMedida: UnidadMedidaType? = nil, fechaElaboracion: Date? = nil, fechaVencimientoItem: Date? = nil, mineria: Ecf46Mineria? = nil, precioUnitarioItem: Ecf31ItemPrecioUnitarioItem, descuentoMonto: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, tablaSubDescuento: [Ecf46SubDescuento]? = nil, recargoMonto: Ecf31DescuentoORecargoMontoDescuentooRecargo? = nil, tablaSubRecargo: [Ecf46SubRecargo]? = nil, otraMonedaDetalle: Ecf46OtraMonedaDetalle? = nil, montoItem: Ecf31FormaDePagoMontoPago) {
         self.numeroLinea = numeroLinea
         self.tablaCodigosItem = tablaCodigosItem
         self.indicadorFacturacion = indicadorFacturacion

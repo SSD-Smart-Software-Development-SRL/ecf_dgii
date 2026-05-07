@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ECFType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
+public enum ECFType: String, Sendable, Codable, CaseIterable {
     case ecf31 = "ECF31"
     case ecf32 = "ECF32"
     case ecf33 = "ECF33"
@@ -18,5 +18,4 @@ public enum ECFType: String, Sendable, Codable, CaseIterable, CaseIterableDefaul
     case ecf45 = "ECF45"
     case ecf46 = "ECF46"
     case ecf47 = "ECF47"
-    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

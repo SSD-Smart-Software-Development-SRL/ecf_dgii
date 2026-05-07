@@ -24,9 +24,6 @@ T = TypeVar("T", bound="Ecf41Retencion")
 @_attrs_define
 class Ecf41Retencion:
     """ 
-        Example:
-            {'montoITBISRetenido': None, 'montoISRRetenido': None, 'indicadorAgenteRetencionoPercepcion': 'Retencion'}
-
         Attributes:
             indicador_agente_retenciono_percepcion (Ecf41IndicadorAgenteRetencionoPercepcionType):
             monto_itbis_retenido (float | None | str | Unset):

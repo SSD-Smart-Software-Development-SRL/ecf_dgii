@@ -6,7 +6,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
-SPEC_PATH="../java/api/openapi.yaml"
+SPEC_PATH="${SPEC_PATH:-../../ecf_dgii/src/Apis/ECF_DGII.EcfApi/wwwroot/openapi/v1.json}"
 CONFIG_PATH="openapi-config.yaml"
 GENERATED_DIR="ecf_dgii/generated"
 

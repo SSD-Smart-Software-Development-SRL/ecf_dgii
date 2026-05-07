@@ -26,10 +26,6 @@ T = TypeVar("T", bound="DetalleAnulacionRequestDto")
 @_attrs_define
 class DetalleAnulacionRequestDto:
     """ 
-        Example:
-            {'secuencias': [{'hastaEncf': 'hastaEncf', 'desdeEncf': 'desdeEncf'}, {'hastaEncf': 'hastaEncf', 'desdeEncf':
-                'desdeEncf'}], 'cantidadeNcfAnulados': None, 'tipoEcf': 'ECF31', 'noLinea': [None, None]}
-
         Attributes:
             tipo_ecf (ECFType | Unset):
             cantidade_ncf_anulados (int | str | Unset):

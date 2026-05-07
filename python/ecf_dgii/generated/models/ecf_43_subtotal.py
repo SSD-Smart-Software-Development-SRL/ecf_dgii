@@ -23,10 +23,6 @@ T = TypeVar("T", bound="Ecf43Subtotal")
 @_attrs_define
 class Ecf43Subtotal:
     """ 
-        Example:
-            {'lineas': None, 'descripcionSubtotal': 'descripcionSubtotal', 'numeroSubTotal': None, 'montoSubTotal': None,
-                'orden': None, 'subTotalExento': None}
-
         Attributes:
             numero_sub_total (int | None | str | Unset):
             descripcion_subtotal (None | str | Unset):

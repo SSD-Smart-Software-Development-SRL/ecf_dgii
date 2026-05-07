@@ -1,7 +1,8 @@
 """ Contains all the data models used in inputs/outputs """
 
 from .acecf_reception_request_dto import AcecfReceptionRequestDto
-from .all_tipo_ecf_types_type_1 import AllTipoECFTypesType1
+from .acecf_summary_dto import AcecfSummaryDto
+from .all_tipo_ecf_types import AllTipoECFTypes
 from .anulacion_list_response import AnulacionListResponse
 from .anulacion_request import AnulacionRequest
 from .certificate_response import CertificateResponse
@@ -110,7 +111,6 @@ from .ecf_33_subtotal import Ecf33Subtotal
 from .ecf_33_subtotal_impuesto_adicional import Ecf33SubtotalImpuestoAdicional
 from .ecf_33_tipo_ajuste_type import Ecf33TipoAjusteType
 from .ecf_33_tipo_descuento_recargo_type import Ecf33TipoDescuentoRecargoType
-from .ecf_33_tipo_ingresos_validation_type import Ecf33TipoIngresosValidationType
 from .ecf_33_tipo_pago_type import Ecf33TipoPagoType
 from .ecf_33_totales import Ecf33Totales
 from .ecf_33_transporte import Ecf33Transporte
@@ -144,7 +144,6 @@ from .ecf_34_subtotal import Ecf34Subtotal
 from .ecf_34_subtotal_impuesto_adicional import Ecf34SubtotalImpuestoAdicional
 from .ecf_34_tipo_ajuste_type import Ecf34TipoAjusteType
 from .ecf_34_tipo_descuento_recargo_type import Ecf34TipoDescuentoRecargoType
-from .ecf_34_tipo_ingresos_validation_type import Ecf34TipoIngresosValidationType
 from .ecf_34_tipo_pago_type import Ecf34TipoPagoType
 from .ecf_34_totales import Ecf34Totales
 from .ecf_34_transporte import Ecf34Transporte
@@ -307,10 +306,11 @@ from .ecf_47ecf import Ecf47ECF
 from .ecf_estado_type_1 import EcfEstadoType1
 from .ecf_progress import EcfProgress
 from .ecf_reception_request_dto import EcfReceptionRequestDto
+from .ecf_receptor_dto import EcfReceptorDto
 from .ecf_response import EcfResponse
 from .ecf_type import ECFType
 from .estado_type import EstadoType
-from .firmar_semilla_request import FirmarSemillaRequest
+from .firmar_semilla_body import FirmarSemillaBody
 from .indicador_agente_retenciono_percepcion_type_type_1 import IndicadorAgenteRetencionoPercepcionTypeType1
 from .indicador_envio_diferido_type_type_1 import IndicadorEnvioDiferidoTypeType1
 from .indicador_facturacion_dr_type_type_1 import IndicadorFacturacionDRTypeType1
@@ -340,19 +340,21 @@ from .send_acecf_request import SendAcecfRequest
 from .tipo_afiliacion_type_type_1 import TipoAfiliacionTypeType1
 from .tipo_cuenta_pago_type_type_1 import TipoCuentaPagoTypeType1
 from .tipo_descuento_recargo_type_type_1 import TipoDescuentoRecargoTypeType1
+from .tipo_ingresos_validation_type_type_1 import TipoIngresosValidationTypeType1
 from .tipo_moneda_type_type_1 import TipoMonedaTypeType1
 from .tipo_pago_type_type_1 import TipoPagoTypeType1
 from .tipoe_cf_type import TipoeCFType
 from .token import Token
 from .unidad_medida_type_type_1 import UnidadMedidaTypeType1
-from .update_certificate_company_request import UpdateCertificateCompanyRequest
+from .update_certificate_company_body import UpdateCertificateCompanyBody
 from .upsert_company_request import UpsertCompanyRequest
 from .ventana_de_mantenimiento import VentanaDeMantenimiento
 from .via_transporte_type_type_1 import ViaTransporteTypeType1
 
 __all__ = (
     "AcecfReceptionRequestDto",
-    "AllTipoECFTypesType1",
+    "AcecfSummaryDto",
+    "AllTipoECFTypes",
     "AnulacionListResponse",
     "AnulacionRequest",
     "CertificateResponse",
@@ -462,7 +464,6 @@ __all__ = (
     "Ecf33SubtotalImpuestoAdicional",
     "Ecf33TipoAjusteType",
     "Ecf33TipoDescuentoRecargoType",
-    "Ecf33TipoIngresosValidationType",
     "Ecf33TipoPagoType",
     "Ecf33Totales",
     "Ecf33Transporte",
@@ -496,7 +497,6 @@ __all__ = (
     "Ecf34SubtotalImpuestoAdicional",
     "Ecf34TipoAjusteType",
     "Ecf34TipoDescuentoRecargoType",
-    "Ecf34TipoIngresosValidationType",
     "Ecf34TipoPagoType",
     "Ecf34Totales",
     "Ecf34Transporte",
@@ -658,10 +658,11 @@ __all__ = (
     "EcfEstadoType1",
     "EcfProgress",
     "EcfReceptionRequestDto",
+    "EcfReceptorDto",
     "EcfResponse",
     "ECFType",
     "EstadoType",
-    "FirmarSemillaRequest",
+    "FirmarSemillaBody",
     "IndicadorAgenteRetencionoPercepcionTypeType1",
     "IndicadorEnvioDiferidoTypeType1",
     "IndicadorFacturacionDRTypeType1",
@@ -692,11 +693,12 @@ __all__ = (
     "TipoCuentaPagoTypeType1",
     "TipoDescuentoRecargoTypeType1",
     "TipoeCFType",
+    "TipoIngresosValidationTypeType1",
     "TipoMonedaTypeType1",
     "TipoPagoTypeType1",
     "Token",
     "UnidadMedidaTypeType1",
-    "UpdateCertificateCompanyRequest",
+    "UpdateCertificateCompanyBody",
     "UpsertCompanyRequest",
     "VentanaDeMantenimiento",
     "ViaTransporteTypeType1",

@@ -25,13 +25,6 @@ T = TypeVar("T", bound="Ecf44Totales")
 @_attrs_define
 class Ecf44Totales:
     """ 
-        Example:
-            {'montoNoFacturable': 7.061401241503109, 'montoPeriodo': None, 'impuestosAdicionales': [{'tipoImpuesto': '001',
-                'tasaImpuestoAdicional': 5.637376656633329, 'otrosImpuestosAdicionales': 2.3021358869347655}, {'tipoImpuesto':
-                '001', 'tasaImpuestoAdicional': 5.637376656633329, 'otrosImpuestosAdicionales': 2.3021358869347655}],
-                'saldoAnterior': None, 'montoAvancePago': None, 'montoExento': 1.4658129805029452, 'valorPagar': None,
-                'montoImpuestoAdicional': 5.962133916683182, 'montoTotal': None}
-
         Attributes:
             monto_total (float | str):
             monto_exento (float | None | str | Unset):
@@ -81,9 +74,9 @@ class Ecf44Totales:
             impuestos_adicionales = UNSET
         elif isinstance(self.impuestos_adicionales, list):
             impuestos_adicionales = []
-            for impuestos_adicionales_type_0_item_data in self.impuestos_adicionales:
-                impuestos_adicionales_type_0_item = impuestos_adicionales_type_0_item_data.to_dict()
-                impuestos_adicionales.append(impuestos_adicionales_type_0_item)
+            for impuestos_adicionales_type_1_item_data in self.impuestos_adicionales:
+                impuestos_adicionales_type_1_item = impuestos_adicionales_type_1_item_data.to_dict()
+                impuestos_adicionales.append(impuestos_adicionales_type_1_item)
 
 
         else:
@@ -184,16 +177,16 @@ class Ecf44Totales:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                impuestos_adicionales_type_0 = []
-                _impuestos_adicionales_type_0 = data
-                for impuestos_adicionales_type_0_item_data in (_impuestos_adicionales_type_0):
-                    impuestos_adicionales_type_0_item = Ecf44ImpuestoAdicional2.from_dict(impuestos_adicionales_type_0_item_data)
+                impuestos_adicionales_type_1 = []
+                _impuestos_adicionales_type_1 = data
+                for impuestos_adicionales_type_1_item_data in (_impuestos_adicionales_type_1):
+                    impuestos_adicionales_type_1_item = Ecf44ImpuestoAdicional2.from_dict(impuestos_adicionales_type_1_item_data)
 
 
 
-                    impuestos_adicionales_type_0.append(impuestos_adicionales_type_0_item)
+                    impuestos_adicionales_type_1.append(impuestos_adicionales_type_1_item)
 
-                return impuestos_adicionales_type_0
+                return impuestos_adicionales_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf44ImpuestoAdicional2] | None | Unset, data)

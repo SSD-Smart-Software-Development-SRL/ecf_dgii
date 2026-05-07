@@ -18,12 +18,12 @@ from io import BytesIO
 
 
 
-T = TypeVar("T", bound="FirmarSemillaRequest")
+T = TypeVar("T", bound="FirmarSemillaBody")
 
 
 
 @_attrs_define
-class FirmarSemillaRequest:
+class FirmarSemillaBody:
     """ 
         Attributes:
             xml (File):
@@ -76,13 +76,13 @@ class FirmarSemillaRequest:
 
 
 
-        firmar_semilla_request = cls(
+        firmar_semilla_body = cls(
             xml=xml,
         )
 
 
-        firmar_semilla_request.additional_properties = d
-        return firmar_semilla_request
+        firmar_semilla_body.additional_properties = d
+        return firmar_semilla_body
 
     @property
     def additional_keys(self) -> list[str]:

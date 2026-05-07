@@ -32,78 +32,12 @@ T = TypeVar("T", bound="Ecf32Encabezado")
 @_attrs_define
 class Ecf32Encabezado:
     """ 
-        Example:
-            {'transporte': '', 'informacionesAdicionales': '', 'comprador': {'direccionComprador': 'direccionComprador',
-                'correoComprador': 'correoComprador', 'fechaOrdenCompra': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'responsablePago': 'responsablePago',
-                'provinciaComprador': '', 'razonSocialComprador': 'razonSocialComprador', 'identificadorExtranjero':
-                'identificadorExtranjero', 'municipioComprador': '', 'rncComprador': 'rncComprador', 'codigoInternoComprador':
-                'codigoInternoComprador', 'direccionEntrega': 'direccionEntrega', 'numeroOrdenCompra': 'numeroOrdenCompra',
-                'informacionAdicionalComprador': 'informacionAdicionalComprador', 'contactoComprador': 'contactoComprador',
-                'contactoEntrega': 'contactoEntrega', 'fechaEntrega': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'telefonoAdicional': 'telefonoAdicional'}, 'idDoc':
-                {'tipoIngresos': '01', 'fechaLimitePago': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'encf': 'encf', 'fechaHasta':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'tipoCuentaPago': '', 'fechaDesde': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoeCF': 'FacturaDeCreditoFiscalElectronica',
-                'terminoPago': 'terminoPago', 'numeroCuentaPago': 'numeroCuentaPago', 'indicadorMontoGravado': '', 'bancoPago':
-                'bancoPago', 'indicadorEnvioDiferido': '', 'tipoPago': 'Contado', 'totalPaginas': 6,
-                'indicadorServicioTodoIncluido': '', 'tablaFormasPago': [{'montoPago': 0.8008281904610115, 'formaPago':
-                'Efectivo'}, {'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}]}, 'otraMoneda': '', 'version':
-                'Version1_0', 'emisor': {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor': 'razonSocialEmisor',
-                'informacionAdicionalEmisor': 'informacionAdicionalEmisor', 'municipio': '', 'fechaEmision': datetime.date(2000,
-                1, 23), 'provincia': '', 'actividadEconomica': 'actividadEconomica', 'rncEmisor': 'rncEmisor', 'correoEmisor':
-                'correoEmisor', 'webSite': 'webSite', 'tablaTelefonoEmisor': ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'],
-                'sucursal': 'sucursal', 'numeroPedidoInterno': 'numeroPedidoInterno', 'numeroFacturaInterna':
-                'numeroFacturaInterna', 'nombreComercial': 'nombreComercial', 'zonaVenta': 'zonaVenta', 'rutaVenta':
-                'rutaVenta', 'codigoVendedor': 'codigoVendedor'}, 'totales': {'montoPeriodo': None, 'montoGravadoI3': None,
-                'montoGravadoI2': None, 'montoAvancePago': None, 'montoGravadoI1': None, 'totalITBIS3': None, 'totalITBIS1':
-                None, 'totalITBIS2': None, 'itbiS2': None, 'montoImpuestoAdicional': 5.962133916683182, 'itbiS1': None,
-                'itbiS3': None, 'totalITBIS': None, 'montoNoFacturable': 2.3021358869347655, 'impuestosAdicionales':
-                [{'tipoImpuesto': '001', 'montoImpuestoSelectivoConsumoAdvalorem': None, 'tasaImpuestoAdicional':
-                5.637376656633329, 'montoImpuestoSelectivoConsumoEspecifico': None, 'otrosImpuestosAdicionales': None},
-                {'tipoImpuesto': '001', 'montoImpuestoSelectivoConsumoAdvalorem': None, 'tasaImpuestoAdicional':
-                5.637376656633329, 'montoImpuestoSelectivoConsumoEspecifico': None, 'otrosImpuestosAdicionales': None}],
-                'saldoAnterior': None, 'montoExento': None, 'montoGravadoTotal': 1.4658129805029452, 'valorPagar': None,
-                'montoTotal': None}}
-
         Attributes:
             version (Ecf32VersionType):
-            id_doc (Ecf32IdDoc):  Example: {'tipoIngresos': '01', 'fechaLimitePago': datetime.datetime(2000, 1, 23, 4, 56,
-                7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'encf': 'encf', 'fechaHasta':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'tipoCuentaPago': '', 'fechaDesde': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoeCF': 'FacturaDeCreditoFiscalElectronica',
-                'terminoPago': 'terminoPago', 'numeroCuentaPago': 'numeroCuentaPago', 'indicadorMontoGravado': '', 'bancoPago':
-                'bancoPago', 'indicadorEnvioDiferido': '', 'tipoPago': 'Contado', 'totalPaginas': 6,
-                'indicadorServicioTodoIncluido': '', 'tablaFormasPago': [{'montoPago': 0.8008281904610115, 'formaPago':
-                'Efectivo'}, {'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}]}.
-            emisor (Ecf32Emisor):  Example: {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor': 'razonSocialEmisor',
-                'informacionAdicionalEmisor': 'informacionAdicionalEmisor', 'municipio': '', 'fechaEmision': datetime.date(2000,
-                1, 23), 'provincia': '', 'actividadEconomica': 'actividadEconomica', 'rncEmisor': 'rncEmisor', 'correoEmisor':
-                'correoEmisor', 'webSite': 'webSite', 'tablaTelefonoEmisor': ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'],
-                'sucursal': 'sucursal', 'numeroPedidoInterno': 'numeroPedidoInterno', 'numeroFacturaInterna':
-                'numeroFacturaInterna', 'nombreComercial': 'nombreComercial', 'zonaVenta': 'zonaVenta', 'rutaVenta':
-                'rutaVenta', 'codigoVendedor': 'codigoVendedor'}.
-            comprador (Ecf32Comprador):  Example: {'direccionComprador': 'direccionComprador', 'correoComprador':
-                'correoComprador', 'fechaOrdenCompra': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'responsablePago': 'responsablePago',
-                'provinciaComprador': '', 'razonSocialComprador': 'razonSocialComprador', 'identificadorExtranjero':
-                'identificadorExtranjero', 'municipioComprador': '', 'rncComprador': 'rncComprador', 'codigoInternoComprador':
-                'codigoInternoComprador', 'direccionEntrega': 'direccionEntrega', 'numeroOrdenCompra': 'numeroOrdenCompra',
-                'informacionAdicionalComprador': 'informacionAdicionalComprador', 'contactoComprador': 'contactoComprador',
-                'contactoEntrega': 'contactoEntrega', 'fechaEntrega': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'telefonoAdicional': 'telefonoAdicional'}.
-            totales (Ecf32Totales):  Example: {'montoPeriodo': None, 'montoGravadoI3': None, 'montoGravadoI2': None,
-                'montoAvancePago': None, 'montoGravadoI1': None, 'totalITBIS3': None, 'totalITBIS1': None, 'totalITBIS2': None,
-                'itbiS2': None, 'montoImpuestoAdicional': 5.962133916683182, 'itbiS1': None, 'itbiS3': None, 'totalITBIS': None,
-                'montoNoFacturable': 2.3021358869347655, 'impuestosAdicionales': [{'tipoImpuesto': '001',
-                'montoImpuestoSelectivoConsumoAdvalorem': None, 'tasaImpuestoAdicional': 5.637376656633329,
-                'montoImpuestoSelectivoConsumoEspecifico': None, 'otrosImpuestosAdicionales': None}, {'tipoImpuesto': '001',
-                'montoImpuestoSelectivoConsumoAdvalorem': None, 'tasaImpuestoAdicional': 5.637376656633329,
-                'montoImpuestoSelectivoConsumoEspecifico': None, 'otrosImpuestosAdicionales': None}], 'saldoAnterior': None,
-                'montoExento': None, 'montoGravadoTotal': 1.4658129805029452, 'valorPagar': None, 'montoTotal': None}.
+            id_doc (Ecf32IdDoc):
+            emisor (Ecf32Emisor):
+            comprador (Ecf32Comprador):
+            totales (Ecf32Totales):
             informaciones_adicionales (Ecf32InformacionesAdicionales | None | Unset):
             transporte (Ecf32Transporte | None | Unset):
             otra_moneda (Ecf32OtraMoneda | None | Unset):

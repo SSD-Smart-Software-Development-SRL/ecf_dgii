@@ -25,18 +25,6 @@ T = TypeVar("T", bound="PaginatedApiResultOfCompanyResponse")
 @_attrs_define
 class PaginatedApiResultOfCompanyResponse:
     """ 
-        Example:
-            {'total': 0, 'previousPage': None, 'nextPageUri': 'https://openapi-generator.tech', 'nextPage': 6, 'values':
-                [{'legalName': 'legalName', 'updatedBy': 'updatedBy', 'receptorId': 'receptorId', 'createdBy': 'createdBy',
-                'rnc': 'rnc', 'name': 'name', 'tenantId': '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'updatedOn':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'createdOn': datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0),
-                '+00:00'))}, {'legalName': 'legalName', 'updatedBy': 'updatedBy', 'receptorId': 'receptorId', 'createdBy':
-                'createdBy', 'rnc': 'rnc', 'name': 'name', 'tenantId': '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'updatedOn':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'createdOn': datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0),
-                '+00:00'))}], 'limit': None, 'page': None}
-
         Attributes:
             next_page_uri (None | str):
             values (list[CompanyResponse] | Unset):

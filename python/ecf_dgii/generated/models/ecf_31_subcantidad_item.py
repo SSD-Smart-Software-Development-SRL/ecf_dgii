@@ -24,9 +24,6 @@ T = TypeVar("T", bound="Ecf31SubcantidadItem")
 @_attrs_define
 class Ecf31SubcantidadItem:
     """ 
-        Example:
-            {'codigoSubcantidad': '', 'subcantidad': 3.616076749251911}
-
         Attributes:
             subcantidad (float | None | str | Unset):
             codigo_subcantidad (None | UnidadMedidaTypeType1 | Unset):

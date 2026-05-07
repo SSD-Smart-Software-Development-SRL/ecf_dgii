@@ -21,8 +21,15 @@ def _get_kwargs(
     message_ids: list[UUID] | Unset = UNSET,
     encfs: list[str] | Unset = UNSET,
     rncs: list[str] | Unset = UNSET,
-    page: int | str | Unset = UNSET,
-    limit: int | str | Unset = UNSET,
+    rnc_emisors: list[str] | Unset = UNSET,
+    tipos_ecfs: list[int | str] | Unset = UNSET,
+    progresses: list[int | str] | Unset = UNSET,
+    from_date: str | Unset = UNSET,
+    to_date: str | Unset = UNSET,
+    amount_from: float | str | Unset = UNSET,
+    amount_to: float | str | Unset = UNSET,
+    page: int | str | Unset = 1,
+    limit: int | str | Unset = 25,
 
 ) -> dict[str, Any]:
     
@@ -55,6 +62,53 @@ def _get_kwargs(
 
     params["Rncs"] = json_rncs
 
+    json_rnc_emisors: list[str] | Unset = UNSET
+    if not isinstance(rnc_emisors, Unset):
+        json_rnc_emisors = rnc_emisors
+
+
+    params["RncEmisors"] = json_rnc_emisors
+
+    json_tipos_ecfs: list[int | str] | Unset = UNSET
+    if not isinstance(tipos_ecfs, Unset):
+        json_tipos_ecfs = []
+        for tipos_ecfs_item_data in tipos_ecfs:
+            tipos_ecfs_item: int | str
+            tipos_ecfs_item = tipos_ecfs_item_data
+            json_tipos_ecfs.append(tipos_ecfs_item)
+
+
+    params["TiposEcfs"] = json_tipos_ecfs
+
+    json_progresses: list[int | str] | Unset = UNSET
+    if not isinstance(progresses, Unset):
+        json_progresses = []
+        for progresses_item_data in progresses:
+            progresses_item: int | str
+            progresses_item = progresses_item_data
+            json_progresses.append(progresses_item)
+
+
+    params["Progresses"] = json_progresses
+
+    params["FromDate"] = from_date
+
+    params["ToDate"] = to_date
+
+    json_amount_from: float | str | Unset
+    if isinstance(amount_from, Unset):
+        json_amount_from = UNSET
+    else:
+        json_amount_from = amount_from
+    params["AmountFrom"] = json_amount_from
+
+    json_amount_to: float | str | Unset
+    if isinstance(amount_to, Unset):
+        json_amount_to = UNSET
+    else:
+        json_amount_to = amount_to
+    params["AmountTo"] = json_amount_to
+
     json_page: int | str | Unset
     if isinstance(page, Unset):
         json_page = UNSET
@@ -75,7 +129,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/recepcion/ecf",
+        "url": "/recepcion",
         "params": params,
     }
 
@@ -127,8 +181,15 @@ def sync_detailed(
     message_ids: list[UUID] | Unset = UNSET,
     encfs: list[str] | Unset = UNSET,
     rncs: list[str] | Unset = UNSET,
-    page: int | str | Unset = UNSET,
-    limit: int | str | Unset = UNSET,
+    rnc_emisors: list[str] | Unset = UNSET,
+    tipos_ecfs: list[int | str] | Unset = UNSET,
+    progresses: list[int | str] | Unset = UNSET,
+    from_date: str | Unset = UNSET,
+    to_date: str | Unset = UNSET,
+    amount_from: float | str | Unset = UNSET,
+    amount_to: float | str | Unset = UNSET,
+    page: int | str | Unset = 1,
+    limit: int | str | Unset = 25,
 
 ) -> Response[PaginatedApiResultOfEcfReceptionRequestDto | ProblemDetails]:
     """ 
@@ -136,8 +197,15 @@ def sync_detailed(
         message_ids (list[UUID] | Unset):
         encfs (list[str] | Unset):
         rncs (list[str] | Unset):
-        page (int | str | Unset):
-        limit (int | str | Unset):
+        rnc_emisors (list[str] | Unset):
+        tipos_ecfs (list[int | str] | Unset):
+        progresses (list[int | str] | Unset):
+        from_date (str | Unset):
+        to_date (str | Unset):
+        amount_from (float | str | Unset):
+        amount_to (float | str | Unset):
+        page (int | str | Unset):  Default: 1.
+        limit (int | str | Unset):  Default: 25.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -152,6 +220,13 @@ def sync_detailed(
         message_ids=message_ids,
 encfs=encfs,
 rncs=rncs,
+rnc_emisors=rnc_emisors,
+tipos_ecfs=tipos_ecfs,
+progresses=progresses,
+from_date=from_date,
+to_date=to_date,
+amount_from=amount_from,
+amount_to=amount_to,
 page=page,
 limit=limit,
 
@@ -169,8 +244,15 @@ def sync(
     message_ids: list[UUID] | Unset = UNSET,
     encfs: list[str] | Unset = UNSET,
     rncs: list[str] | Unset = UNSET,
-    page: int | str | Unset = UNSET,
-    limit: int | str | Unset = UNSET,
+    rnc_emisors: list[str] | Unset = UNSET,
+    tipos_ecfs: list[int | str] | Unset = UNSET,
+    progresses: list[int | str] | Unset = UNSET,
+    from_date: str | Unset = UNSET,
+    to_date: str | Unset = UNSET,
+    amount_from: float | str | Unset = UNSET,
+    amount_to: float | str | Unset = UNSET,
+    page: int | str | Unset = 1,
+    limit: int | str | Unset = 25,
 
 ) -> PaginatedApiResultOfEcfReceptionRequestDto | ProblemDetails | None:
     """ 
@@ -178,8 +260,15 @@ def sync(
         message_ids (list[UUID] | Unset):
         encfs (list[str] | Unset):
         rncs (list[str] | Unset):
-        page (int | str | Unset):
-        limit (int | str | Unset):
+        rnc_emisors (list[str] | Unset):
+        tipos_ecfs (list[int | str] | Unset):
+        progresses (list[int | str] | Unset):
+        from_date (str | Unset):
+        to_date (str | Unset):
+        amount_from (float | str | Unset):
+        amount_to (float | str | Unset):
+        page (int | str | Unset):  Default: 1.
+        limit (int | str | Unset):  Default: 25.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -195,6 +284,13 @@ def sync(
 message_ids=message_ids,
 encfs=encfs,
 rncs=rncs,
+rnc_emisors=rnc_emisors,
+tipos_ecfs=tipos_ecfs,
+progresses=progresses,
+from_date=from_date,
+to_date=to_date,
+amount_from=amount_from,
+amount_to=amount_to,
 page=page,
 limit=limit,
 
@@ -206,8 +302,15 @@ async def asyncio_detailed(
     message_ids: list[UUID] | Unset = UNSET,
     encfs: list[str] | Unset = UNSET,
     rncs: list[str] | Unset = UNSET,
-    page: int | str | Unset = UNSET,
-    limit: int | str | Unset = UNSET,
+    rnc_emisors: list[str] | Unset = UNSET,
+    tipos_ecfs: list[int | str] | Unset = UNSET,
+    progresses: list[int | str] | Unset = UNSET,
+    from_date: str | Unset = UNSET,
+    to_date: str | Unset = UNSET,
+    amount_from: float | str | Unset = UNSET,
+    amount_to: float | str | Unset = UNSET,
+    page: int | str | Unset = 1,
+    limit: int | str | Unset = 25,
 
 ) -> Response[PaginatedApiResultOfEcfReceptionRequestDto | ProblemDetails]:
     """ 
@@ -215,8 +318,15 @@ async def asyncio_detailed(
         message_ids (list[UUID] | Unset):
         encfs (list[str] | Unset):
         rncs (list[str] | Unset):
-        page (int | str | Unset):
-        limit (int | str | Unset):
+        rnc_emisors (list[str] | Unset):
+        tipos_ecfs (list[int | str] | Unset):
+        progresses (list[int | str] | Unset):
+        from_date (str | Unset):
+        to_date (str | Unset):
+        amount_from (float | str | Unset):
+        amount_to (float | str | Unset):
+        page (int | str | Unset):  Default: 1.
+        limit (int | str | Unset):  Default: 25.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -231,6 +341,13 @@ async def asyncio_detailed(
         message_ids=message_ids,
 encfs=encfs,
 rncs=rncs,
+rnc_emisors=rnc_emisors,
+tipos_ecfs=tipos_ecfs,
+progresses=progresses,
+from_date=from_date,
+to_date=to_date,
+amount_from=amount_from,
+amount_to=amount_to,
 page=page,
 limit=limit,
 
@@ -248,8 +365,15 @@ async def asyncio(
     message_ids: list[UUID] | Unset = UNSET,
     encfs: list[str] | Unset = UNSET,
     rncs: list[str] | Unset = UNSET,
-    page: int | str | Unset = UNSET,
-    limit: int | str | Unset = UNSET,
+    rnc_emisors: list[str] | Unset = UNSET,
+    tipos_ecfs: list[int | str] | Unset = UNSET,
+    progresses: list[int | str] | Unset = UNSET,
+    from_date: str | Unset = UNSET,
+    to_date: str | Unset = UNSET,
+    amount_from: float | str | Unset = UNSET,
+    amount_to: float | str | Unset = UNSET,
+    page: int | str | Unset = 1,
+    limit: int | str | Unset = 25,
 
 ) -> PaginatedApiResultOfEcfReceptionRequestDto | ProblemDetails | None:
     """ 
@@ -257,8 +381,15 @@ async def asyncio(
         message_ids (list[UUID] | Unset):
         encfs (list[str] | Unset):
         rncs (list[str] | Unset):
-        page (int | str | Unset):
-        limit (int | str | Unset):
+        rnc_emisors (list[str] | Unset):
+        tipos_ecfs (list[int | str] | Unset):
+        progresses (list[int | str] | Unset):
+        from_date (str | Unset):
+        to_date (str | Unset):
+        amount_from (float | str | Unset):
+        amount_to (float | str | Unset):
+        page (int | str | Unset):  Default: 1.
+        limit (int | str | Unset):  Default: 25.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -274,6 +405,13 @@ async def asyncio(
 message_ids=message_ids,
 encfs=encfs,
 rncs=rncs,
+rnc_emisors=rnc_emisors,
+tipos_ecfs=tipos_ecfs,
+progresses=progresses,
+from_date=from_date,
+to_date=to_date,
+amount_from=amount_from,
+amount_to=amount_to,
 page=page,
 limit=limit,
 

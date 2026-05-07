@@ -26,11 +26,6 @@ T = TypeVar("T", bound="Ecf33InformacionReferencia")
 @_attrs_define
 class Ecf33InformacionReferencia:
     """ 
-        Example:
-            {'razonModificacion': 'razonModificacion', 'rncOtroContribuyente': 'rncOtroContribuyente', 'codigoModificacion':
-                'AnulaElNCFModificado', 'ncfModificado': 'ncfModificado', 'fechaNCFModificado': datetime.datetime(2000, 1, 23,
-                4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00'))}
-
         Attributes:
             ncf_modificado (str):
             codigo_modificacion (Ecf33CodigoModificacionType):

@@ -8,7 +8,7 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..models.all_tipo_ecf_types_type_1 import AllTipoECFTypesType1
+from ..models.all_tipo_ecf_types import AllTipoECFTypes
 from ..types import UNSET, Unset
 from dateutil.parser import isoparse
 from typing import cast
@@ -27,13 +27,6 @@ T = TypeVar("T", bound="EcfReceptionRequestDto")
 @_attrs_define
 class EcfReceptionRequestDto:
     """ 
-        Example:
-            {'resultInternalFileName': 'resultInternalFileName', 'fileName': 'fileName', 'companyRnc': 'companyRnc', 'encf':
-                'encf', 'tenantId': '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'errorMessage': 'errorMessage', 'messageId':
-                '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'progress': 0, 'tipoEcf': '', 'updatedOn': datetime.datetime(2000, 1,
-                23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'createdOn': datetime.datetime(2000,
-                1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'rncEmisor': 'rncEmisor'}
-
         Attributes:
             message_id (UUID | Unset):
             tenant_id (UUID | Unset):
@@ -45,8 +38,9 @@ class EcfReceptionRequestDto:
             error_message (None | str | Unset):
             encf (None | str | Unset):
             rnc_emisor (None | str | Unset):
-            tipo_ecf (AllTipoECFTypesType1 | None | Unset):
+            tipo_ecf (AllTipoECFTypes | None | Unset):
             result_internal_file_name (None | str | Unset):
+            monto_total (float | None | str | Unset):
      """
 
     message_id: UUID | Unset = UNSET
@@ -59,8 +53,9 @@ class EcfReceptionRequestDto:
     error_message: None | str | Unset = UNSET
     encf: None | str | Unset = UNSET
     rnc_emisor: None | str | Unset = UNSET
-    tipo_ecf: AllTipoECFTypesType1 | None | Unset = UNSET
+    tipo_ecf: AllTipoECFTypes | None | Unset = UNSET
     result_internal_file_name: None | str | Unset = UNSET
+    monto_total: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -115,7 +110,7 @@ class EcfReceptionRequestDto:
         tipo_ecf: None | str | Unset
         if isinstance(self.tipo_ecf, Unset):
             tipo_ecf = UNSET
-        elif isinstance(self.tipo_ecf, AllTipoECFTypesType1):
+        elif isinstance(self.tipo_ecf, AllTipoECFTypes):
             tipo_ecf = self.tipo_ecf.value
         else:
             tipo_ecf = self.tipo_ecf
@@ -125,6 +120,12 @@ class EcfReceptionRequestDto:
             result_internal_file_name = UNSET
         else:
             result_internal_file_name = self.result_internal_file_name
+
+        monto_total: float | None | str | Unset
+        if isinstance(self.monto_total, Unset):
+            monto_total = UNSET
+        else:
+            monto_total = self.monto_total
 
 
         field_dict: dict[str, Any] = {}
@@ -155,6 +156,8 @@ class EcfReceptionRequestDto:
             field_dict["tipoEcf"] = tipo_ecf
         if result_internal_file_name is not UNSET:
             field_dict["resultInternalFileName"] = result_internal_file_name
+        if monto_total is not UNSET:
+            field_dict["montoTotal"] = monto_total
 
         return field_dict
 
@@ -245,7 +248,7 @@ class EcfReceptionRequestDto:
         rnc_emisor = _parse_rnc_emisor(d.pop("rncEmisor", UNSET))
 
 
-        def _parse_tipo_ecf(data: object) -> AllTipoECFTypesType1 | None | Unset:
+        def _parse_tipo_ecf(data: object) -> AllTipoECFTypes | None | Unset:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -253,14 +256,14 @@ class EcfReceptionRequestDto:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                componentsschemas_all_tipo_ecf_types_type_1 = AllTipoECFTypesType1(data)
+                tipo_ecf_type_1 = AllTipoECFTypes(data)
 
 
 
-                return componentsschemas_all_tipo_ecf_types_type_1
+                return tipo_ecf_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
-            return cast(AllTipoECFTypesType1 | None | Unset, data)
+            return cast(AllTipoECFTypes | None | Unset, data)
 
         tipo_ecf = _parse_tipo_ecf(d.pop("tipoEcf", UNSET))
 
@@ -273,6 +276,16 @@ class EcfReceptionRequestDto:
             return cast(None | str | Unset, data)
 
         result_internal_file_name = _parse_result_internal_file_name(d.pop("resultInternalFileName", UNSET))
+
+
+        def _parse_monto_total(data: object) -> float | None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | str | Unset, data)
+
+        monto_total = _parse_monto_total(d.pop("montoTotal", UNSET))
 
 
         ecf_reception_request_dto = cls(
@@ -288,6 +301,7 @@ class EcfReceptionRequestDto:
             rnc_emisor=rnc_emisor,
             tipo_ecf=tipo_ecf,
             result_internal_file_name=result_internal_file_name,
+            monto_total=monto_total,
         )
 
 

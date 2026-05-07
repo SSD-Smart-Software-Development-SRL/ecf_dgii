@@ -121,11 +121,11 @@ class Ecf46InformacionReferencia:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_ncf_modificado_type_0 = isoparse(data)
+                fecha_ncf_modificado_type_1 = isoparse(data)
 
 
 
-                return fecha_ncf_modificado_type_0
+                return fecha_ncf_modificado_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)

@@ -25,27 +25,6 @@ T = TypeVar("T", bound="PaginatedApiResultOfEcfResponse")
 @_attrs_define
 class PaginatedApiResultOfEcfResponse:
     """ 
-        Example:
-            {'total': 0, 'previousPage': None, 'nextPageUri': 'https://openapi-generator.tech', 'nextPage': 6, 'values':
-                [{'fileName': 'fileName', 'encf': 'encf', 'codSec': 'codSec', 'rncReceptor': 'rncReceptor', 'dgiiEnvironment':
-                'Test', 'secuenciaUtilizada': True, 'messageId': '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'ecfContent':
-                'ecfContent', 'tipoEcf': 'FacturaDeCreditoFiscalElectronica', 'fechaEmision': datetime.date(2000, 1, 23),
-                'impresionUrl': 'impresionUrl', 'rncEmisor': 'rncEmisor', 'emisorReceptorErrors': 'emisorReceptorErrors',
-                'queueName': 'queueName', 'estatus': '', 'includeEcfContent': True, 'fechaFirma': datetime.datetime(2000, 1, 23,
-                4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tenantId':
-                '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'progress': 'New', 'mensaje': 'mensaje', 'montoTotal':
-                0.8008281904610115, 'errors': 'errors', 'timestamp': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00'))}, {'fileName': 'fileName', 'encf': 'encf', 'codSec':
-                'codSec', 'rncReceptor': 'rncReceptor', 'dgiiEnvironment': 'Test', 'secuenciaUtilizada': True, 'messageId':
-                '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'ecfContent': 'ecfContent', 'tipoEcf':
-                'FacturaDeCreditoFiscalElectronica', 'fechaEmision': datetime.date(2000, 1, 23), 'impresionUrl': 'impresionUrl',
-                'rncEmisor': 'rncEmisor', 'emisorReceptorErrors': 'emisorReceptorErrors', 'queueName': 'queueName', 'estatus':
-                '', 'includeEcfContent': True, 'fechaFirma': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tenantId': '046b6c7f-0b8a-43b9-b35d-6489e6daee91',
-                'progress': 'New', 'mensaje': 'mensaje', 'montoTotal': 0.8008281904610115, 'errors': 'errors', 'timestamp':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00'))}], 'limit':
-                None, 'page': None}
-
         Attributes:
             next_page_uri (None | str):
             values (list[EcfResponse] | Unset):

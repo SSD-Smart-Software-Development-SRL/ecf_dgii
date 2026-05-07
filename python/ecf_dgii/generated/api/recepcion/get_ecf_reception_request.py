@@ -15,7 +15,6 @@ from uuid import UUID
 
 
 def _get_kwargs(
-    rnc: str,
     message_id: UUID,
 
 ) -> dict[str, Any]:
@@ -27,7 +26,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/recepcion/{rnc}/ecf/{message_id}".format(rnc=quote(str(rnc), safe=""),message_id=quote(str(message_id), safe=""),),
+        "url": "/recepcion/{message_id}".format(message_id=quote(str(message_id), safe=""),),
     }
 
 
@@ -77,7 +76,6 @@ def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Res
 
 
 def sync_detailed(
-    rnc: str,
     message_id: UUID,
     *,
     client: AuthenticatedClient | Client,
@@ -85,7 +83,6 @@ def sync_detailed(
 ) -> Response[Any | ProblemDetails]:
     """ 
     Args:
-        rnc (str):
         message_id (UUID):
 
     Raises:
@@ -98,8 +95,7 @@ def sync_detailed(
 
 
     kwargs = _get_kwargs(
-        rnc=rnc,
-message_id=message_id,
+        message_id=message_id,
 
     )
 
@@ -110,7 +106,6 @@ message_id=message_id,
     return _build_response(client=client, response=response)
 
 def sync(
-    rnc: str,
     message_id: UUID,
     *,
     client: AuthenticatedClient | Client,
@@ -118,7 +113,6 @@ def sync(
 ) -> Any | ProblemDetails | None:
     """ 
     Args:
-        rnc (str):
         message_id (UUID):
 
     Raises:
@@ -131,14 +125,12 @@ def sync(
 
 
     return sync_detailed(
-        rnc=rnc,
-message_id=message_id,
+        message_id=message_id,
 client=client,
 
     ).parsed
 
 async def asyncio_detailed(
-    rnc: str,
     message_id: UUID,
     *,
     client: AuthenticatedClient | Client,
@@ -146,7 +138,6 @@ async def asyncio_detailed(
 ) -> Response[Any | ProblemDetails]:
     """ 
     Args:
-        rnc (str):
         message_id (UUID):
 
     Raises:
@@ -159,8 +150,7 @@ async def asyncio_detailed(
 
 
     kwargs = _get_kwargs(
-        rnc=rnc,
-message_id=message_id,
+        message_id=message_id,
 
     )
 
@@ -171,7 +161,6 @@ message_id=message_id,
     return _build_response(client=client, response=response)
 
 async def asyncio(
-    rnc: str,
     message_id: UUID,
     *,
     client: AuthenticatedClient | Client,
@@ -179,7 +168,6 @@ async def asyncio(
 ) -> Any | ProblemDetails | None:
     """ 
     Args:
-        rnc (str):
         message_id (UUID):
 
     Raises:
@@ -192,8 +180,7 @@ async def asyncio(
 
 
     return (await asyncio_detailed(
-        rnc=rnc,
-message_id=message_id,
+        message_id=message_id,
 client=client,
 
     )).parsed

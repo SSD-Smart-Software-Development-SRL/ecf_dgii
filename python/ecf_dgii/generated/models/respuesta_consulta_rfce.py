@@ -28,11 +28,6 @@ class RespuestaConsultaRFCE:
     Este servicio permite validar la validez fiscal de un comprobante fiscal electrónico
     a través del RNC emisor, e-NCF y código de seguridad.
 
-        Example:
-            {'codigo': 'codigo', 'estado': 'estado', 'encf': 'encf', 'rnc': 'rnc', 'secuenciaUtilizada': True, 'mensajes':
-                [{'codigo': 1, 'valor': 'El comprobante fue aceptado correctamente'}, {'codigo': 1, 'valor': 'El comprobante fue
-                aceptado correctamente'}]}
-
         Attributes:
             rnc (None | str | Unset): Número de registro nacional del contribuyente que envió el e-CF.
                 RNC del emisor del comprobante fiscal electrónico consultado.
@@ -94,9 +89,9 @@ class RespuestaConsultaRFCE:
             mensajes = UNSET
         elif isinstance(self.mensajes, list):
             mensajes = []
-            for mensajes_type_0_item_data in self.mensajes:
-                mensajes_type_0_item = mensajes_type_0_item_data.to_dict()
-                mensajes.append(mensajes_type_0_item)
+            for mensajes_type_1_item_data in self.mensajes:
+                mensajes_type_1_item = mensajes_type_1_item_data.to_dict()
+                mensajes.append(mensajes_type_1_item)
 
 
         else:
@@ -170,16 +165,16 @@ class RespuestaConsultaRFCE:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                mensajes_type_0 = []
-                _mensajes_type_0 = data
-                for mensajes_type_0_item_data in (_mensajes_type_0):
-                    mensajes_type_0_item = Mensaje.from_dict(mensajes_type_0_item_data)
+                mensajes_type_1 = []
+                _mensajes_type_1 = data
+                for mensajes_type_1_item_data in (_mensajes_type_1):
+                    mensajes_type_1_item = Mensaje.from_dict(mensajes_type_1_item_data)
 
 
 
-                    mensajes_type_0.append(mensajes_type_0_item)
+                    mensajes_type_1.append(mensajes_type_1_item)
 
-                return mensajes_type_0
+                return mensajes_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Mensaje] | None | Unset, data)

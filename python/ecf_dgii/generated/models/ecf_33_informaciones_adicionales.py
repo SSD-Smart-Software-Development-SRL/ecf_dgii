@@ -187,11 +187,11 @@ class Ecf33InformacionesAdicionales:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_embarque_type_0 = isoparse(data)
+                fecha_embarque_type_1 = isoparse(data)
 
 
 
-                return fecha_embarque_type_0
+                return fecha_embarque_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)

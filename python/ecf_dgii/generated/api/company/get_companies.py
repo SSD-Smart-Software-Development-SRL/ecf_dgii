@@ -19,8 +19,8 @@ def _get_kwargs(
     *,
     rncs: list[str] | Unset = UNSET,
     names: list[str] | Unset = UNSET,
-    page: int | str | Unset = UNSET,
-    limit: int | str | Unset = UNSET,
+    page: int | str | Unset = 1,
+    limit: int | str | Unset = 25,
 
 ) -> dict[str, Any]:
     
@@ -121,16 +121,16 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     rncs: list[str] | Unset = UNSET,
     names: list[str] | Unset = UNSET,
-    page: int | str | Unset = UNSET,
-    limit: int | str | Unset = UNSET,
+    page: int | str | Unset = 1,
+    limit: int | str | Unset = 25,
 
 ) -> Response[PaginatedApiResultOfCompanyResponse | ProblemDetails]:
     """ 
     Args:
         rncs (list[str] | Unset):
         names (list[str] | Unset):
-        page (int | str | Unset):
-        limit (int | str | Unset):
+        page (int | str | Unset):  Default: 1.
+        limit (int | str | Unset):  Default: 25.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -160,16 +160,16 @@ def sync(
     client: AuthenticatedClient | Client,
     rncs: list[str] | Unset = UNSET,
     names: list[str] | Unset = UNSET,
-    page: int | str | Unset = UNSET,
-    limit: int | str | Unset = UNSET,
+    page: int | str | Unset = 1,
+    limit: int | str | Unset = 25,
 
 ) -> PaginatedApiResultOfCompanyResponse | ProblemDetails | None:
     """ 
     Args:
         rncs (list[str] | Unset):
         names (list[str] | Unset):
-        page (int | str | Unset):
-        limit (int | str | Unset):
+        page (int | str | Unset):  Default: 1.
+        limit (int | str | Unset):  Default: 25.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -194,16 +194,16 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     rncs: list[str] | Unset = UNSET,
     names: list[str] | Unset = UNSET,
-    page: int | str | Unset = UNSET,
-    limit: int | str | Unset = UNSET,
+    page: int | str | Unset = 1,
+    limit: int | str | Unset = 25,
 
 ) -> Response[PaginatedApiResultOfCompanyResponse | ProblemDetails]:
     """ 
     Args:
         rncs (list[str] | Unset):
         names (list[str] | Unset):
-        page (int | str | Unset):
-        limit (int | str | Unset):
+        page (int | str | Unset):  Default: 1.
+        limit (int | str | Unset):  Default: 25.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -233,16 +233,16 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     rncs: list[str] | Unset = UNSET,
     names: list[str] | Unset = UNSET,
-    page: int | str | Unset = UNSET,
-    limit: int | str | Unset = UNSET,
+    page: int | str | Unset = 1,
+    limit: int | str | Unset = 25,
 
 ) -> PaginatedApiResultOfCompanyResponse | ProblemDetails | None:
     """ 
     Args:
         rncs (list[str] | Unset):
         names (list[str] | Unset):
-        page (int | str | Unset):
-        limit (int | str | Unset):
+        page (int | str | Unset):  Default: 1.
+        limit (int | str | Unset):  Default: 25.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

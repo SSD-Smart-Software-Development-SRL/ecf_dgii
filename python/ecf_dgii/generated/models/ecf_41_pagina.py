@@ -23,12 +23,6 @@ T = TypeVar("T", bound="Ecf41Pagina")
 @_attrs_define
 class Ecf41Pagina:
     """ 
-        Example:
-            {'subtotalItbis1Pagina': None, 'noLineaHasta': None, 'subtotalMontoGravado2Pagina': None,
-                'subtotalMontoGravadoPagina': None, 'subtotalMontoGravado1Pagina': None, 'noLineaDesde': None,
-                'subtotalItbisPagina': None, 'paginaNo': None, 'subtotalItbis3Pagina': None, 'subtotalItbis2Pagina': None,
-                'montoSubtotalPagina': None, 'subtotalExentoPagina': None, 'subtotalMontoGravado3Pagina': None}
-
         Attributes:
             pagina_no (int | None | str | Unset):
             no_linea_desde (int | None | str | Unset):

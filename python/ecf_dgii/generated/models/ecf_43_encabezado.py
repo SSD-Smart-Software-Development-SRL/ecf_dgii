@@ -29,32 +29,11 @@ T = TypeVar("T", bound="Ecf43Encabezado")
 @_attrs_define
 class Ecf43Encabezado:
     """ 
-        Example:
-            {'idDoc': {'encf': 'encf', 'tipoeCF': 'FacturaDeCreditoFiscalElectronica', 'tipoPago': '', 'totalPaginas': 0,
-                'fechaVencimientoSecuencia': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00'))}, 'otraMoneda': '', 'version': 'Version1_0',
-                'emisor': {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor': 'razonSocialEmisor',
-                'informacionAdicionalEmisor': 'informacionAdicionalEmisor', 'municipio': '', 'fechaEmision': datetime.date(2000,
-                1, 23), 'provincia': '', 'actividadEconomica': 'actividadEconomica', 'rncEmisor': 'rncEmisor', 'correoEmisor':
-                'correoEmisor', 'webSite': 'webSite', 'tablaTelefonoEmisor': ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'],
-                'sucursal': 'sucursal', 'numeroPedidoInterno': 'numeroPedidoInterno', 'numeroFacturaInterna':
-                'numeroFacturaInterna', 'nombreComercial': 'nombreComercial'}, 'totales': {'montoPeriodo': 5.962133916683182,
-                'saldoAnterior': None, 'montoAvancePago': None, 'montoExento': 6.027456183070403, 'valorPagar': None,
-                'montoTotal': 1.4658129805029452}}
-
         Attributes:
             version (Ecf43VersionType):
-            id_doc (Ecf43IdDoc):  Example: {'encf': 'encf', 'tipoeCF': 'FacturaDeCreditoFiscalElectronica', 'tipoPago': '',
-                'totalPaginas': 0, 'fechaVencimientoSecuencia': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00'))}.
-            emisor (Ecf43Emisor):  Example: {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor': 'razonSocialEmisor',
-                'informacionAdicionalEmisor': 'informacionAdicionalEmisor', 'municipio': '', 'fechaEmision': datetime.date(2000,
-                1, 23), 'provincia': '', 'actividadEconomica': 'actividadEconomica', 'rncEmisor': 'rncEmisor', 'correoEmisor':
-                'correoEmisor', 'webSite': 'webSite', 'tablaTelefonoEmisor': ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'],
-                'sucursal': 'sucursal', 'numeroPedidoInterno': 'numeroPedidoInterno', 'numeroFacturaInterna':
-                'numeroFacturaInterna', 'nombreComercial': 'nombreComercial'}.
-            totales (Ecf43Totales):  Example: {'montoPeriodo': 5.962133916683182, 'saldoAnterior': None, 'montoAvancePago':
-                None, 'montoExento': 6.027456183070403, 'valorPagar': None, 'montoTotal': 1.4658129805029452}.
+            id_doc (Ecf43IdDoc):
+            emisor (Ecf43Emisor):
+            totales (Ecf43Totales):
             otra_moneda (Ecf43OtraMoneda | None | Unset):
      """
 

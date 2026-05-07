@@ -23,9 +23,6 @@ T = TypeVar("T", bound="Ecf31FormaDePago")
 @_attrs_define
 class Ecf31FormaDePago:
     """ 
-        Example:
-            {'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}
-
         Attributes:
             forma_pago (Ecf31FormaPagoType):
             monto_pago (float | str):

@@ -3,16 +3,16 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Literal, Sequence
+from typing import Any, Literal
 from uuid import UUID
 
 import httpx
 
 from .exceptions import raise_for_status
 from .generated.client import AuthenticatedClient
-from .generated.types import UNSET, Unset
+from .generated.types import UNSET
 from .generated.models import (
-    AllTipoECFTypesType1,
+    AllTipoECFTypes,
     AnulacionRequest,
     CompanyResponse,
     Ecf31ECF,
@@ -25,14 +25,16 @@ from .generated.models import (
     Ecf45ECF,
     Ecf46ECF,
     Ecf47ECF,
+    EcfProgress,
+    EcfReceptorDto,
     EcfResponse,
     ECFType,
-    FirmarSemillaRequest,
+    FirmarSemillaBody,
     NewCompanyApiKey,
+    PaginatedApiResultOfAcecfReceptionRequestDto,
     PaginatedApiResultOfAnulacionListResponse,
     PaginatedApiResultOfCompanyResponse,
     PaginatedApiResultOfEcfResponse,
-    PaginatedApiResultOfAcecfReceptionRequestDto,
     PaginatedApiResultOfEcfReceptionRequestDto,
     ProblemDetails,
     RespuestaAnulacionRango,
@@ -42,13 +44,11 @@ from .generated.models import (
     RespuestaConsultaTrackId,
     RespuestaEstatusServicio,
     RespuestaVentanaDeMantenimiento,
-    SecuenciaRequest,
     SendAcecfRequest,
     UpsertCompanyRequest,
 )
 from .generated.api.ecf import (
     anulacion_rangos,
-    aprobacion_comercial,
     firmar_semilla,
     get_ecf_by_id,
     list_anulaciones,
@@ -87,12 +87,15 @@ from .generated.api.dgii import (
     estatus_servicios_obtener_ventanas_mantenimiento,
 )
 from .generated.api.recepcion import (
-    get_acecf_reception_request,
     get_ecf_reception_request,
-    search_acecf_reception_requests,
-    search_acecf_reception_requests_by_rnc,
+    get_ecf_receptor_by_message_id,
     search_ecf_reception_requests,
     search_ecf_reception_requests_by_rnc,
+    send_aprobacion_comercial,
+)
+from .generated.api.aprobacion_comercial import (
+    get_acecf_reception_request,
+    search_acecf_reception_requests,
 )
 from .generated.api.api_key import new_company_api_key
 from .polling import PollingOptions, poll_until_complete
@@ -103,32 +106,6 @@ ENVIRONMENT_URLS: dict[str, str] = {
     "test": "https://api.test.ecfx.ssd.com.do",
     "cert": "https://api.cert.ecfx.ssd.com.do",
     "prod": "https://api.prod.ecfx.ssd.com.do",
-}
-
-ECF_TYPE_MAP: dict[str, str] = {
-    "31": "31",
-    "32": "32",
-    "33": "33",
-    "34": "34",
-    "41": "41",
-    "43": "43",
-    "44": "44",
-    "45": "45",
-    "46": "46",
-    "47": "47",
-}
-
-_ECF_SEND_MODULES: dict[str, Any] = {
-    "31": recepcion_ecf_31,
-    "32": recepcion_ecf_32,
-    "33": recepcion_ecf_33,
-    "34": recepcion_ecf_34,
-    "41": recepcion_ecf_41,
-    "43": recepcion_ecf_43,
-    "44": recepcion_ecf_44,
-    "45": recepcion_ecf_45,
-    "46": recepcion_ecf_46,
-    "47": recepcion_ecf_47,
 }
 
 
@@ -181,24 +158,62 @@ class EcfClient:
         await self._client.__aexit__(None, None, None)
 
     # ------------------------------------------------------------------
-    # ECF operations
+    # ECF send operations (per-type)
     # ------------------------------------------------------------------
 
-    async def send_ecf(
-        self,
-        ecf: Ecf31ECF | Ecf32ECF | Ecf33ECF | Ecf34ECF | Ecf41ECF | Ecf43ECF | Ecf44ECF | Ecf45ECF | Ecf46ECF | Ecf47ECF,
-        ecf_type: str | None = None,
-    ) -> EcfResponse:
-        """Send an ECF document. Auto-routes to the correct endpoint based on type."""
-        if ecf_type is None:
-            ecf_type = _detect_ecf_type(ecf)
-
-        module = _ECF_SEND_MODULES.get(ecf_type)
-        if module is None:
-            raise ValueError(f"Unsupported ECF type: {ecf_type}")
-
-        response = await module.asyncio_detailed(client=self._client, body=ecf)
+    async def send_ecf31(self, ecf: Ecf31ECF) -> EcfResponse:
+        """Send a Factura de Crédito Fiscal Electrónica (31)."""
+        response = await recepcion_ecf_31.asyncio_detailed(client=self._client, body=ecf)
         return _parse_or_raise(response)
+
+    async def send_ecf32(self, ecf: Ecf32ECF) -> EcfResponse:
+        """Send a Factura de Consumo Electrónica (32)."""
+        response = await recepcion_ecf_32.asyncio_detailed(client=self._client, body=ecf)
+        return _parse_or_raise(response)
+
+    async def send_ecf33(self, ecf: Ecf33ECF) -> EcfResponse:
+        """Send a Nota de Débito Electrónica (33)."""
+        response = await recepcion_ecf_33.asyncio_detailed(client=self._client, body=ecf)
+        return _parse_or_raise(response)
+
+    async def send_ecf34(self, ecf: Ecf34ECF) -> EcfResponse:
+        """Send a Nota de Crédito Electrónica (34)."""
+        response = await recepcion_ecf_34.asyncio_detailed(client=self._client, body=ecf)
+        return _parse_or_raise(response)
+
+    async def send_ecf41(self, ecf: Ecf41ECF) -> EcfResponse:
+        """Send a Comprobante Electrónico de Compras (41)."""
+        response = await recepcion_ecf_41.asyncio_detailed(client=self._client, body=ecf)
+        return _parse_or_raise(response)
+
+    async def send_ecf43(self, ecf: Ecf43ECF) -> EcfResponse:
+        """Send a Comprobante Electrónico de Gastos Menores (43)."""
+        response = await recepcion_ecf_43.asyncio_detailed(client=self._client, body=ecf)
+        return _parse_or_raise(response)
+
+    async def send_ecf44(self, ecf: Ecf44ECF) -> EcfResponse:
+        """Send a Comprobante Electrónico de Regímenes Especiales (44)."""
+        response = await recepcion_ecf_44.asyncio_detailed(client=self._client, body=ecf)
+        return _parse_or_raise(response)
+
+    async def send_ecf45(self, ecf: Ecf45ECF) -> EcfResponse:
+        """Send a Comprobante Electrónico Gubernamental (45)."""
+        response = await recepcion_ecf_45.asyncio_detailed(client=self._client, body=ecf)
+        return _parse_or_raise(response)
+
+    async def send_ecf46(self, ecf: Ecf46ECF) -> EcfResponse:
+        """Send a Comprobante Electrónico de Exportaciones (46)."""
+        response = await recepcion_ecf_46.asyncio_detailed(client=self._client, body=ecf)
+        return _parse_or_raise(response)
+
+    async def send_ecf47(self, ecf: Ecf47ECF) -> EcfResponse:
+        """Send a Comprobante Electrónico de Pagos al Exterior (47)."""
+        response = await recepcion_ecf_47.asyncio_detailed(client=self._client, body=ecf)
+        return _parse_or_raise(response)
+
+    # ------------------------------------------------------------------
+    # ECF query operations
+    # ------------------------------------------------------------------
 
     async def query_ecf(
         self,
@@ -221,12 +236,14 @@ class EcfClient:
         rnc: str,
         *,
         encfs: list[str] | None = None,
-        tipos_ecfs: list[AllTipoECFTypesType1 | None] | None = None,
+        ids: list[UUID] | None = None,
+        tipos_ecfs: list[AllTipoECFTypes] | None = None,
         include_ecf_content: bool = False,
         from_fecha_emision: Any = UNSET,
         to_fecha_emision: Any = UNSET,
         amount_from: float | None = None,
         amount_to: float | None = None,
+        progresses: list[EcfProgress] | None = None,
         page: int = 1,
         limit: int = 25,
     ) -> PaginatedApiResultOfEcfResponse:
@@ -235,12 +252,14 @@ class EcfClient:
             rnc=rnc,
             client=self._client,
             encfs=encfs if encfs is not None else UNSET,
+            ids=ids if ids is not None else UNSET,
             tipos_ecfs=tipos_ecfs if tipos_ecfs is not None else UNSET,
             include_ecf_content=include_ecf_content,
             from_fecha_emision=from_fecha_emision if from_fecha_emision is not UNSET else UNSET,
             to_fecha_emision=to_fecha_emision if to_fecha_emision is not UNSET else UNSET,
             amount_from=amount_from if amount_from is not None else UNSET,
             amount_to=amount_to if amount_to is not None else UNSET,
+            progresses=progresses if progresses is not None else UNSET,
             page=page,
             limit=limit,
         )
@@ -250,12 +269,14 @@ class EcfClient:
         self,
         *,
         encfs: list[str] | None = None,
-        tipos_ecfs: list[AllTipoECFTypesType1 | None] | None = None,
+        ids: list[UUID] | None = None,
+        tipos_ecfs: list[AllTipoECFTypes] | None = None,
         include_ecf_content: bool = False,
         from_fecha_emision: Any = UNSET,
         to_fecha_emision: Any = UNSET,
         amount_from: float | None = None,
         amount_to: float | None = None,
+        progresses: list[EcfProgress] | None = None,
         page: int = 1,
         limit: int = 25,
     ) -> PaginatedApiResultOfEcfResponse:
@@ -263,12 +284,14 @@ class EcfClient:
         response = await search_all_ecfs.asyncio_detailed(
             client=self._client,
             encfs=encfs if encfs is not None else UNSET,
+            ids=ids if ids is not None else UNSET,
             tipos_ecfs=tipos_ecfs if tipos_ecfs is not None else UNSET,
             include_ecf_content=include_ecf_content,
             from_fecha_emision=from_fecha_emision if from_fecha_emision is not UNSET else UNSET,
             to_fecha_emision=to_fecha_emision if to_fecha_emision is not UNSET else UNSET,
             amount_from=amount_from if amount_from is not None else UNSET,
             amount_to=amount_to if amount_to is not None else UNSET,
+            progresses=progresses if progresses is not None else UNSET,
             page=page,
             limit=limit,
         )
@@ -291,6 +314,10 @@ class EcfClient:
         )
         return _parse_or_raise(response)
 
+    # ------------------------------------------------------------------
+    # Anulación operations
+    # ------------------------------------------------------------------
+
     async def anulacion_rangos(
         self,
         rnc: str,
@@ -307,34 +334,47 @@ class EcfClient:
         *,
         tipo_ecf: list[ECFType] | None = None,
         rncs: list[str] | None = None,
+        fecha_desde: Any = UNSET,
+        fecha_hasta: Any = UNSET,
         page: int = 1,
         limit: int = 25,
     ) -> PaginatedApiResultOfAnulacionListResponse:
         """List annulments."""
         response = await list_anulaciones.asyncio_detailed(
             client=self._client,
-            tipo_ecf=tipo_ecf if tipo_ecf is not None else UNSET,  # type: ignore[arg-type]
+            tipo_ecf=tipo_ecf if tipo_ecf is not None else UNSET,
             rncs=rncs if rncs is not None else UNSET,
+            fecha_desde=fecha_desde if fecha_desde is not UNSET else UNSET,
+            fecha_hasta=fecha_hasta if fecha_hasta is not UNSET else UNSET,
             page=page,
             limit=limit,
         )
         return _parse_or_raise(response)
 
-    async def aprobacion_comercial(
+    # ------------------------------------------------------------------
+    # Aprobación Comercial (ACECF)
+    # ------------------------------------------------------------------
+
+    async def send_aprobacion_comercial(
         self,
-        rnc: str,
+        message_id: str | UUID,
         body: SendAcecfRequest,
-    ) -> EcfResponse:
-        """Send commercial approval (ACECF)."""
-        response = await aprobacion_comercial.asyncio_detailed(
-            rnc=rnc, client=self._client, body=body,
+    ) -> Any:
+        """Send commercial approval (ACECF) for an existing ECF reception by messageId.
+
+        The ECF must have been previously received successfully (its
+        ``message_id`` from the recepción response is required here).
+        """
+        mid = message_id if isinstance(message_id, UUID) else UUID(str(message_id))
+        response = await send_aprobacion_comercial.asyncio_detailed(
+            message_id=mid, client=self._client, body=body,
         )
         return _parse_or_raise(response)
 
     async def firmar_semilla(
         self,
         rnc: str,
-        body: FirmarSemillaRequest,
+        body: FirmarSemillaBody,
     ) -> Any:
         """Sign a seed for DGII."""
         response = await firmar_semilla.asyncio_detailed(
@@ -538,14 +578,14 @@ class EcfClient:
         )
         return _parse_or_raise(response)
 
-    async def estatus_servicio(self, rnc: str) -> RespuestaEstatusServicio:
+    async def estatus_servicio(self, rnc: str) -> list[RespuestaEstatusServicio]:
         """Get DGII service status."""
         response = await estatus_servicios_obtener_estatus.asyncio_detailed(
             rnc=rnc, client=self._client,
         )
         return _parse_or_raise(response)
 
-    async def ventanas_mantenimiento(self, rnc: str) -> list[RespuestaVentanaDeMantenimiento]:
+    async def ventanas_mantenimiento(self, rnc: str) -> RespuestaVentanaDeMantenimiento:
         """Get DGII maintenance windows."""
         response = await estatus_servicios_obtener_ventanas_mantenimiento.asyncio_detailed(
             rnc=rnc, client=self._client,
@@ -553,13 +593,25 @@ class EcfClient:
         return _parse_or_raise(response)
 
     # ------------------------------------------------------------------
-    # Recepcion operations
+    # Recepción operations
     # ------------------------------------------------------------------
 
-    async def get_ecf_reception_request(self, rnc: str, message_id: str | UUID) -> Any:
-        """Get ECF reception request."""
+    async def get_ecf_reception_request(self, message_id: str | UUID) -> Any:
+        """Get ECF reception request by message id (``GET /recepcion/{messageId}``)."""
         mid = message_id if isinstance(message_id, UUID) else UUID(str(message_id))
         response = await get_ecf_reception_request.asyncio_detailed(
+            message_id=mid, client=self._client,
+        )
+        return _parse_or_raise(response)
+
+    async def get_ecf_receptor_by_message_id(
+        self,
+        rnc: str,
+        message_id: str | UUID,
+    ) -> EcfReceptorDto | Any:
+        """Get ECF receptor by RNC and messageId (``GET /recepcion/{rnc}/{messageId}``)."""
+        mid = message_id if isinstance(message_id, UUID) else UUID(str(message_id))
+        response = await get_ecf_receptor_by_message_id.asyncio_detailed(
             rnc=rnc, message_id=mid, client=self._client,
         )
         return _parse_or_raise(response)
@@ -570,15 +622,29 @@ class EcfClient:
         message_ids: list[UUID] | None = None,
         encfs: list[str] | None = None,
         rncs: list[str] | None = None,
+        rnc_emisors: list[str] | None = None,
+        tipos_ecfs: list[Any] | None = None,
+        progresses: list[Any] | None = None,
+        from_date: str | None = None,
+        to_date: str | None = None,
+        amount_from: float | None = None,
+        amount_to: float | None = None,
         page: int = 1,
         limit: int = 25,
     ) -> PaginatedApiResultOfEcfReceptionRequestDto:
-        """Search ECF reception requests."""
+        """Search ECF reception requests (``GET /recepcion``)."""
         response = await search_ecf_reception_requests.asyncio_detailed(
             client=self._client,
             message_ids=message_ids if message_ids is not None else UNSET,
             encfs=encfs if encfs is not None else UNSET,
             rncs=rncs if rncs is not None else UNSET,
+            rnc_emisors=rnc_emisors if rnc_emisors is not None else UNSET,
+            tipos_ecfs=tipos_ecfs if tipos_ecfs is not None else UNSET,
+            progresses=progresses if progresses is not None else UNSET,
+            from_date=from_date if from_date is not None else UNSET,
+            to_date=to_date if to_date is not None else UNSET,
+            amount_from=amount_from if amount_from is not None else UNSET,
+            amount_to=amount_to if amount_to is not None else UNSET,
             page=page,
             limit=limit,
         )
@@ -590,25 +656,39 @@ class EcfClient:
         *,
         message_ids: list[UUID] | None = None,
         encfs: list[str] | None = None,
+        rnc_emisors: list[str] | None = None,
+        tipos_ecfs: list[Any] | None = None,
+        progresses: list[Any] | None = None,
+        from_date: str | None = None,
+        to_date: str | None = None,
+        amount_from: float | None = None,
+        amount_to: float | None = None,
         page: int = 1,
         limit: int = 25,
     ) -> PaginatedApiResultOfEcfReceptionRequestDto:
-        """Search ECF reception requests by RNC."""
+        """Search ECF reception requests by RNC (``GET /recepcion/{rnc}``)."""
         response = await search_ecf_reception_requests_by_rnc.asyncio_detailed(
             rnc=rnc,
             client=self._client,
             message_ids=message_ids if message_ids is not None else UNSET,
             encfs=encfs if encfs is not None else UNSET,
+            rnc_emisors=rnc_emisors if rnc_emisors is not None else UNSET,
+            tipos_ecfs=tipos_ecfs if tipos_ecfs is not None else UNSET,
+            progresses=progresses if progresses is not None else UNSET,
+            from_date=from_date if from_date is not None else UNSET,
+            to_date=to_date if to_date is not None else UNSET,
+            amount_from=amount_from if amount_from is not None else UNSET,
+            amount_to=amount_to if amount_to is not None else UNSET,
             page=page,
             limit=limit,
         )
         return _parse_or_raise(response)
 
-    async def get_acecf_reception_request(self, rnc: str, message_id: str | UUID) -> Any:
-        """Get ACECF reception request."""
+    async def get_acecf_reception_request(self, message_id: str | UUID) -> Any:
+        """Get ACECF reception request (``GET /recepcion/acecf/{messageId}``)."""
         mid = message_id if isinstance(message_id, UUID) else UUID(str(message_id))
         response = await get_acecf_reception_request.asyncio_detailed(
-            rnc=rnc, message_id=mid, client=self._client,
+            message_id=mid, client=self._client,
         )
         return _parse_or_raise(response)
 
@@ -618,53 +698,33 @@ class EcfClient:
         message_ids: list[UUID] | None = None,
         encfs: list[str] | None = None,
         rncs: list[str] | None = None,
+        progresses: list[Any] | None = None,
         page: int = 1,
         limit: int = 25,
     ) -> PaginatedApiResultOfAcecfReceptionRequestDto:
-        """Search ACECF reception requests."""
+        """Search ACECF reception requests (``GET /recepcion/acecf``)."""
         response = await search_acecf_reception_requests.asyncio_detailed(
             client=self._client,
             message_ids=message_ids if message_ids is not None else UNSET,
             encfs=encfs if encfs is not None else UNSET,
             rncs=rncs if rncs is not None else UNSET,
-            page=page,
-            limit=limit,
-        )
-        return _parse_or_raise(response)
-
-    async def search_acecf_reception_requests_by_rnc(
-        self,
-        rnc: str,
-        *,
-        message_ids: list[UUID] | None = None,
-        encfs: list[str] | None = None,
-        page: int = 1,
-        limit: int = 25,
-    ) -> PaginatedApiResultOfAcecfReceptionRequestDto:
-        """Search ACECF reception requests by RNC."""
-        response = await search_acecf_reception_requests_by_rnc.asyncio_detailed(
-            rnc=rnc,
-            client=self._client,
-            message_ids=message_ids if message_ids is not None else UNSET,
-            encfs=encfs if encfs is not None else UNSET,
+            progresses=progresses if progresses is not None else UNSET,
             page=page,
             limit=limit,
         )
         return _parse_or_raise(response)
 
     # ------------------------------------------------------------------
-    # Polling helper
+    # Polling helpers
     # ------------------------------------------------------------------
 
-    async def send_ecf_and_poll(
+    async def _send_and_poll(
         self,
-        ecf: Ecf31ECF | Ecf32ECF | Ecf33ECF | Ecf34ECF | Ecf41ECF | Ecf43ECF | Ecf44ECF | Ecf45ECF | Ecf46ECF | Ecf47ECF,
-        ecf_type: str | None = None,
+        send_coro: Any,
         *,
         polling_options: PollingOptions | None = None,
     ) -> EcfResponse:
-        """Send an ECF and poll until processing completes."""
-        initial = await self.send_ecf(ecf, ecf_type=ecf_type)
+        initial: EcfResponse = await send_coro
 
         async def _poll() -> EcfResponse:
             results = await self.query_ecf(
@@ -676,11 +736,52 @@ class EcfClient:
 
         return await poll_until_complete(_poll, options=polling_options)
 
+    async def send_ecf31_and_poll(
+        self, ecf: Ecf31ECF, *, polling_options: PollingOptions | None = None,
+    ) -> EcfResponse:
+        return await self._send_and_poll(self.send_ecf31(ecf), polling_options=polling_options)
 
-def _detect_ecf_type(ecf: Any) -> str:
-    """Detect ECF type from the model class name."""
-    name = type(ecf).__name__
-    for code in ("31", "32", "33", "34", "41", "43", "44", "45", "46", "47"):
-        if f"Ecf{code}" in name:
-            return code
-    raise ValueError(f"Cannot detect ECF type from {name}")
+    async def send_ecf32_and_poll(
+        self, ecf: Ecf32ECF, *, polling_options: PollingOptions | None = None,
+    ) -> EcfResponse:
+        return await self._send_and_poll(self.send_ecf32(ecf), polling_options=polling_options)
+
+    async def send_ecf33_and_poll(
+        self, ecf: Ecf33ECF, *, polling_options: PollingOptions | None = None,
+    ) -> EcfResponse:
+        return await self._send_and_poll(self.send_ecf33(ecf), polling_options=polling_options)
+
+    async def send_ecf34_and_poll(
+        self, ecf: Ecf34ECF, *, polling_options: PollingOptions | None = None,
+    ) -> EcfResponse:
+        return await self._send_and_poll(self.send_ecf34(ecf), polling_options=polling_options)
+
+    async def send_ecf41_and_poll(
+        self, ecf: Ecf41ECF, *, polling_options: PollingOptions | None = None,
+    ) -> EcfResponse:
+        return await self._send_and_poll(self.send_ecf41(ecf), polling_options=polling_options)
+
+    async def send_ecf43_and_poll(
+        self, ecf: Ecf43ECF, *, polling_options: PollingOptions | None = None,
+    ) -> EcfResponse:
+        return await self._send_and_poll(self.send_ecf43(ecf), polling_options=polling_options)
+
+    async def send_ecf44_and_poll(
+        self, ecf: Ecf44ECF, *, polling_options: PollingOptions | None = None,
+    ) -> EcfResponse:
+        return await self._send_and_poll(self.send_ecf44(ecf), polling_options=polling_options)
+
+    async def send_ecf45_and_poll(
+        self, ecf: Ecf45ECF, *, polling_options: PollingOptions | None = None,
+    ) -> EcfResponse:
+        return await self._send_and_poll(self.send_ecf45(ecf), polling_options=polling_options)
+
+    async def send_ecf46_and_poll(
+        self, ecf: Ecf46ECF, *, polling_options: PollingOptions | None = None,
+    ) -> EcfResponse:
+        return await self._send_and_poll(self.send_ecf46(ecf), polling_options=polling_options)
+
+    async def send_ecf47_and_poll(
+        self, ecf: Ecf47ECF, *, polling_options: PollingOptions | None = None,
+    ) -> EcfResponse:
+        return await self._send_and_poll(self.send_ecf47(ecf), polling_options=polling_options)

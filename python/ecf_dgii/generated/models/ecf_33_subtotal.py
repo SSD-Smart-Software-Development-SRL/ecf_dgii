@@ -23,12 +23,6 @@ T = TypeVar("T", bound="Ecf33Subtotal")
 @_attrs_define
 class Ecf33Subtotal:
     """ 
-        Example:
-            {'lineas': None, 'subTotalMontoGravadoI1': None, 'subTotaITBIS3': None, 'subTotalMontoGravadoTotal': None,
-                'subTotalMontoGravadoI3': None, 'subTotaITBIS2': None, 'subTotalMontoGravadoI2': None, 'subTotaITBIS1': None,
-                'descripcionSubtotal': 'descripcionSubtotal', 'subTotaITBIS': None, 'numeroSubTotal': None,
-                'subTotalImpuestoAdicional': None, 'montoSubTotal': None, 'orden': None, 'subTotalExento': None}
-
         Attributes:
             numero_sub_total (int | None | str | Unset):
             descripcion_subtotal (None | str | Unset):

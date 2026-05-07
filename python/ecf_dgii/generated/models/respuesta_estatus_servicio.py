@@ -26,9 +26,6 @@ class RespuestaEstatusServicio:
     específico.
     Utilizado por el endpoint /api/estatusservicios/obtenerestatus.
 
-        Example:
-            {'servicio': 'servicio', 'ambiente': 'ambiente', 'status': 'status'}
-
         Attributes:
             servicio (None | str | Unset): Nombre del servicio de facturación electrónica.
                 Valores posibles incluyen:

@@ -17,8 +17,9 @@ from .exceptions import raise_for_status
 from .generated.client import AuthenticatedClient
 from .generated.types import UNSET
 from .generated.models import (
-    AllTipoECFTypesType1,
+    AllTipoECFTypes,
     CompanyResponse,
+    EcfProgress,
     EcfResponse,
     PaginatedApiResultOfCompanyResponse,
     PaginatedApiResultOfEcfResponse,
@@ -221,7 +222,7 @@ class EcfFrontendClient:
         rnc: str,
         *,
         encfs: list[str] | None = None,
-        tipos_ecfs: list[AllTipoECFTypesType1 | None] | None = None,
+        tipos_ecfs: list[AllTipoECFTypes] | None = None,
         include_ecf_content: bool = False,
         from_fecha_emision: Any = UNSET,
         to_fecha_emision: Any = UNSET,
@@ -249,7 +250,7 @@ class EcfFrontendClient:
         self,
         *,
         encfs: list[str] | None = None,
-        tipos_ecfs: list[AllTipoECFTypesType1 | None] | None = None,
+        tipos_ecfs: list[AllTipoECFTypes] | None = None,
         include_ecf_content: bool = False,
         from_fecha_emision: Any = UNSET,
         to_fecha_emision: Any = UNSET,

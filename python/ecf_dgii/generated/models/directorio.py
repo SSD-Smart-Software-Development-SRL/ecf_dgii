@@ -26,10 +26,6 @@ class Directorio:
     de la República Dominicana. Este modelo contiene las URLs de servicios que los contribuyentes electrónicos
     deben proporcionar para la comunicación entre contribuyentes.
 
-        Example:
-            {'urlRecepcion': 'urlRecepcion', 'urlAceptacion': 'urlAceptacion', 'rnc': 'rnc', 'urlOpcional': 'urlOpcional',
-                'nombre': 'nombre'}
-
         Attributes:
             nombre (None | str | Unset): Obtiene el nombre legal o razón social del contribuyente electrónico.
                 La razón social registrada tal como aparece en el registro oficial del contribuyente.

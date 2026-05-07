@@ -34,20 +34,6 @@ T = TypeVar("T", bound="Ecf46Item")
 @_attrs_define
 class Ecf46Item:
     """ 
-        Example:
-            {'indicadorFacturacion': 'NoFacturable_18Percent', 'nombreItem': 'nombreItem', 'tablaCodigosItem':
-                [{'codigoItem': 'codigoItem', 'tipoCodigo': 'tipoCodigo'}, {'codigoItem': 'codigoItem', 'tipoCodigo':
-                'tipoCodigo'}], 'unidadMedida': '', 'mineria': '', 'otraMonedaDetalle': '', 'indicadorBienoServicio': 'Bien',
-                'tablaSubRecargo': [{'subRecargoPorcentaje': None, 'tipoSubRecargo': None, 'montoSubRecargo': None},
-                {'subRecargoPorcentaje': None, 'tipoSubRecargo': None, 'montoSubRecargo': None}], 'descripcionItem':
-                'descripcionItem', 'descuentoMonto': None, 'fechaVencimientoItem': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'numeroLinea': 5, 'recargoMonto': None,
-                'cantidadItem': 2.3021358869347655, 'precioUnitarioItem': 7.061401241503109, 'tablaSubDescuento':
-                [{'tipoSubDescuento': '$', 'subDescuentoPorcentaje': 9.301444243932576, 'montoSubDescuento': None},
-                {'tipoSubDescuento': '$', 'subDescuentoPorcentaje': 9.301444243932576, 'montoSubDescuento': None}], 'montoItem':
-                None, 'fechaElaboracion': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00'))}
-
         Attributes:
             numero_linea (int | str):
             indicador_facturacion (Ecf46IndicadorFacturacionType):
@@ -122,9 +108,9 @@ class Ecf46Item:
             tabla_codigos_item = UNSET
         elif isinstance(self.tabla_codigos_item, list):
             tabla_codigos_item = []
-            for tabla_codigos_item_type_0_item_data in self.tabla_codigos_item:
-                tabla_codigos_item_type_0_item = tabla_codigos_item_type_0_item_data.to_dict()
-                tabla_codigos_item.append(tabla_codigos_item_type_0_item)
+            for tabla_codigos_item_type_1_item_data in self.tabla_codigos_item:
+                tabla_codigos_item_type_1_item = tabla_codigos_item_type_1_item_data.to_dict()
+                tabla_codigos_item.append(tabla_codigos_item_type_1_item)
 
 
         else:
@@ -179,9 +165,9 @@ class Ecf46Item:
             tabla_sub_descuento = UNSET
         elif isinstance(self.tabla_sub_descuento, list):
             tabla_sub_descuento = []
-            for tabla_sub_descuento_type_0_item_data in self.tabla_sub_descuento:
-                tabla_sub_descuento_type_0_item = tabla_sub_descuento_type_0_item_data.to_dict()
-                tabla_sub_descuento.append(tabla_sub_descuento_type_0_item)
+            for tabla_sub_descuento_type_1_item_data in self.tabla_sub_descuento:
+                tabla_sub_descuento_type_1_item = tabla_sub_descuento_type_1_item_data.to_dict()
+                tabla_sub_descuento.append(tabla_sub_descuento_type_1_item)
 
 
         else:
@@ -198,9 +184,9 @@ class Ecf46Item:
             tabla_sub_recargo = UNSET
         elif isinstance(self.tabla_sub_recargo, list):
             tabla_sub_recargo = []
-            for tabla_sub_recargo_type_0_item_data in self.tabla_sub_recargo:
-                tabla_sub_recargo_type_0_item = tabla_sub_recargo_type_0_item_data.to_dict()
-                tabla_sub_recargo.append(tabla_sub_recargo_type_0_item)
+            for tabla_sub_recargo_type_1_item_data in self.tabla_sub_recargo:
+                tabla_sub_recargo_type_1_item = tabla_sub_recargo_type_1_item_data.to_dict()
+                tabla_sub_recargo.append(tabla_sub_recargo_type_1_item)
 
 
         else:
@@ -305,16 +291,16 @@ class Ecf46Item:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_codigos_item_type_0 = []
-                _tabla_codigos_item_type_0 = data
-                for tabla_codigos_item_type_0_item_data in (_tabla_codigos_item_type_0):
-                    tabla_codigos_item_type_0_item = Ecf46CodigosItem.from_dict(tabla_codigos_item_type_0_item_data)
+                tabla_codigos_item_type_1 = []
+                _tabla_codigos_item_type_1 = data
+                for tabla_codigos_item_type_1_item_data in (_tabla_codigos_item_type_1):
+                    tabla_codigos_item_type_1_item = Ecf46CodigosItem.from_dict(tabla_codigos_item_type_1_item_data)
 
 
 
-                    tabla_codigos_item_type_0.append(tabla_codigos_item_type_0_item)
+                    tabla_codigos_item_type_1.append(tabla_codigos_item_type_1_item)
 
-                return tabla_codigos_item_type_0
+                return tabla_codigos_item_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf46CodigosItem] | None | Unset, data)
@@ -360,11 +346,11 @@ class Ecf46Item:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_elaboracion_type_0 = isoparse(data)
+                fecha_elaboracion_type_1 = isoparse(data)
 
 
 
-                return fecha_elaboracion_type_0
+                return fecha_elaboracion_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)
@@ -380,11 +366,11 @@ class Ecf46Item:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_vencimiento_item_type_0 = isoparse(data)
+                fecha_vencimiento_item_type_1 = isoparse(data)
 
 
 
-                return fecha_vencimiento_item_type_0
+                return fecha_vencimiento_item_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)
@@ -430,16 +416,16 @@ class Ecf46Item:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_sub_descuento_type_0 = []
-                _tabla_sub_descuento_type_0 = data
-                for tabla_sub_descuento_type_0_item_data in (_tabla_sub_descuento_type_0):
-                    tabla_sub_descuento_type_0_item = Ecf46SubDescuento.from_dict(tabla_sub_descuento_type_0_item_data)
+                tabla_sub_descuento_type_1 = []
+                _tabla_sub_descuento_type_1 = data
+                for tabla_sub_descuento_type_1_item_data in (_tabla_sub_descuento_type_1):
+                    tabla_sub_descuento_type_1_item = Ecf46SubDescuento.from_dict(tabla_sub_descuento_type_1_item_data)
 
 
 
-                    tabla_sub_descuento_type_0.append(tabla_sub_descuento_type_0_item)
+                    tabla_sub_descuento_type_1.append(tabla_sub_descuento_type_1_item)
 
-                return tabla_sub_descuento_type_0
+                return tabla_sub_descuento_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf46SubDescuento] | None | Unset, data)
@@ -465,16 +451,16 @@ class Ecf46Item:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_sub_recargo_type_0 = []
-                _tabla_sub_recargo_type_0 = data
-                for tabla_sub_recargo_type_0_item_data in (_tabla_sub_recargo_type_0):
-                    tabla_sub_recargo_type_0_item = Ecf46SubRecargo.from_dict(tabla_sub_recargo_type_0_item_data)
+                tabla_sub_recargo_type_1 = []
+                _tabla_sub_recargo_type_1 = data
+                for tabla_sub_recargo_type_1_item_data in (_tabla_sub_recargo_type_1):
+                    tabla_sub_recargo_type_1_item = Ecf46SubRecargo.from_dict(tabla_sub_recargo_type_1_item_data)
 
 
 
-                    tabla_sub_recargo_type_0.append(tabla_sub_recargo_type_0_item)
+                    tabla_sub_recargo_type_1.append(tabla_sub_recargo_type_1_item)
 
-                return tabla_sub_recargo_type_0
+                return tabla_sub_recargo_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf46SubRecargo] | None | Unset, data)

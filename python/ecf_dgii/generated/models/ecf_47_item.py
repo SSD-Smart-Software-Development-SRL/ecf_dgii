@@ -30,19 +30,10 @@ T = TypeVar("T", bound="Ecf47Item")
 @_attrs_define
 class Ecf47Item:
     """ 
-        Example:
-            {'numeroLinea': 5, 'indicadorFacturacion': 'NoFacturable_18Percent', 'nombreItem': 'nombreItem',
-                'tablaCodigosItem': [{'codigoItem': 'codigoItem', 'tipoCodigo': 'tipoCodigo'}, {'codigoItem': 'codigoItem',
-                'tipoCodigo': 'tipoCodigo'}], 'cantidadItem': 2.3021358869347655, 'unidadMedida': '', 'retencion':
-                {'montoISRRetenido': None, 'indicadorAgenteRetencionoPercepcion': 'Retencion'}, 'otraMonedaDetalle': '',
-                'precioUnitarioItem': 7.061401241503109, 'indicadorBienoServicio': 'Bien', 'descripcionItem': 'descripcionItem',
-                'montoItem': None}
-
         Attributes:
             numero_linea (int | str):
             indicador_facturacion (Ecf47IndicadorFacturacionType):
-            retencion (Ecf47Retencion):  Example: {'montoISRRetenido': None, 'indicadorAgenteRetencionoPercepcion':
-                'Retencion'}.
+            retencion (Ecf47Retencion):
             nombre_item (str):
             indicador_bieno_servicio (Ecf47IndicadorBienoServicioType):
             cantidad_item (float | str):
@@ -101,9 +92,9 @@ class Ecf47Item:
             tabla_codigos_item = UNSET
         elif isinstance(self.tabla_codigos_item, list):
             tabla_codigos_item = []
-            for tabla_codigos_item_type_0_item_data in self.tabla_codigos_item:
-                tabla_codigos_item_type_0_item = tabla_codigos_item_type_0_item_data.to_dict()
-                tabla_codigos_item.append(tabla_codigos_item_type_0_item)
+            for tabla_codigos_item_type_1_item_data in self.tabla_codigos_item:
+                tabla_codigos_item_type_1_item = tabla_codigos_item_type_1_item_data.to_dict()
+                tabla_codigos_item.append(tabla_codigos_item_type_1_item)
 
 
         else:
@@ -212,16 +203,16 @@ class Ecf47Item:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_codigos_item_type_0 = []
-                _tabla_codigos_item_type_0 = data
-                for tabla_codigos_item_type_0_item_data in (_tabla_codigos_item_type_0):
-                    tabla_codigos_item_type_0_item = Ecf47CodigosItem.from_dict(tabla_codigos_item_type_0_item_data)
+                tabla_codigos_item_type_1 = []
+                _tabla_codigos_item_type_1 = data
+                for tabla_codigos_item_type_1_item_data in (_tabla_codigos_item_type_1):
+                    tabla_codigos_item_type_1_item = Ecf47CodigosItem.from_dict(tabla_codigos_item_type_1_item_data)
 
 
 
-                    tabla_codigos_item_type_0.append(tabla_codigos_item_type_0_item)
+                    tabla_codigos_item_type_1.append(tabla_codigos_item_type_1_item)
 
-                return tabla_codigos_item_type_0
+                return tabla_codigos_item_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf47CodigosItem] | None | Unset, data)

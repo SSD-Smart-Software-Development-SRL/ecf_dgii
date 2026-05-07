@@ -26,9 +26,6 @@ class RespuestaConsultaTimbre:
     Este servicio permite validar la validez de un e-CF remitido exclusivamente por el servicio web
     de recepción de e-CF, a partir de los datos incluidos en el timbre de su representación impresa (RI).
 
-        Example:
-            {'razonSocial': 'razonSocial', 'estado': 'estado', 'encf': 'encf', 'rncEmisor': 'rncEmisor'}
-
         Attributes:
             rnc_emisor (None | str | Unset): Número de registro nacional del contribuyente que emitió el resumen de factura
                 de consumo.

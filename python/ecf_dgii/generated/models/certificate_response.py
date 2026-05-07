@@ -24,13 +24,6 @@ T = TypeVar("T", bound="CertificateResponse")
 @_attrs_define
 class CertificateResponse:
     """ 
-        Example:
-            {'serialNumber': 'serialNumber', 'createdBy': 'createdBy', 'subject': 'subject', 'notAfterUtc':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'rnc':
-                'rnc', 'thumbprint': 'thumbprint', 'createdOn': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'issuer': 'issuer', 'notBeforeUtc':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00'))}
-
         Attributes:
             thumbprint (str):
             subject (str):

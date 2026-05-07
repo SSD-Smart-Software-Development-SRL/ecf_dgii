@@ -18,12 +18,12 @@ from io import BytesIO
 
 
 
-T = TypeVar("T", bound="UpdateCertificateCompanyRequest")
+T = TypeVar("T", bound="UpdateCertificateCompanyBody")
 
 
 
 @_attrs_define
-class UpdateCertificateCompanyRequest:
+class UpdateCertificateCompanyBody:
     """ 
         Attributes:
             certificate (File):
@@ -87,14 +87,14 @@ class UpdateCertificateCompanyRequest:
 
         password = d.pop("password")
 
-        update_certificate_company_request = cls(
+        update_certificate_company_body = cls(
             certificate=certificate,
             password=password,
         )
 
 
-        update_certificate_company_request.additional_properties = d
-        return update_certificate_company_request
+        update_certificate_company_body.additional_properties = d
+        return update_certificate_company_body
 
     @property
     def additional_keys(self) -> list[str]:

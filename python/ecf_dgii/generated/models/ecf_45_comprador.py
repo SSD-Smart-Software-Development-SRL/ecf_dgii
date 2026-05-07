@@ -26,16 +26,6 @@ T = TypeVar("T", bound="Ecf45Comprador")
 @_attrs_define
 class Ecf45Comprador:
     """ 
-        Example:
-            {'direccionComprador': 'direccionComprador', 'correoComprador': 'correoComprador', 'fechaOrdenCompra':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'responsablePago': 'responsablePago', 'provinciaComprador': '', 'razonSocialComprador': 'razonSocialComprador',
-                'municipioComprador': '', 'rncComprador': 'rncComprador', 'codigoInternoComprador': 'codigoInternoComprador',
-                'direccionEntrega': 'direccionEntrega', 'numeroOrdenCompra': 'numeroOrdenCompra',
-                'informacionAdicionalComprador': 'informacionAdicionalComprador', 'contactoComprador': 'contactoComprador',
-                'contactoEntrega': 'contactoEntrega', 'fechaEntrega': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'telefonoAdicional': 'telefonoAdicional'}
-
         Attributes:
             rnc_comprador (str):
             razon_social_comprador (str):
@@ -299,11 +289,11 @@ class Ecf45Comprador:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_entrega_type_0 = isoparse(data)
+                fecha_entrega_type_1 = isoparse(data)
 
 
 
-                return fecha_entrega_type_0
+                return fecha_entrega_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)
@@ -349,11 +339,11 @@ class Ecf45Comprador:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_orden_compra_type_0 = isoparse(data)
+                fecha_orden_compra_type_1 = isoparse(data)
 
 
 
-                return fecha_orden_compra_type_0
+                return fecha_orden_compra_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)

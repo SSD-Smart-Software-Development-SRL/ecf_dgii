@@ -25,31 +25,6 @@ T = TypeVar("T", bound="PaginatedApiResultOfAnulacionListResponse")
 @_attrs_define
 class PaginatedApiResultOfAnulacionListResponse:
     """ 
-        Example:
-            {'total': None, 'previousPage': None, 'nextPageUri': 'https://openapi-generator.tech', 'nextPage': 6, 'values':
-                [{'fileName': 'fileName', 'updatedBy': 'updatedBy', 'detalleAnulacion': [{'secuencias': [{'hastaEncf':
-                'hastaEncf', 'desdeEncf': 'desdeEncf'}, {'hastaEncf': 'hastaEncf', 'desdeEncf': 'desdeEncf'}],
-                'cantidadeNcfAnulados': None, 'tipoEcf': 'ECF31', 'noLinea': [None, None]}, {'secuencias': [{'hastaEncf':
-                'hastaEncf', 'desdeEncf': 'desdeEncf'}, {'hastaEncf': 'hastaEncf', 'desdeEncf': 'desdeEncf'}],
-                'cantidadeNcfAnulados': None, 'tipoEcf': 'ECF31', 'noLinea': [None, None]}], 'updatedOn':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'createdOn': datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0),
-                '+00:00')), 'companyRnc': 'companyRnc', 'createdBy': 'createdBy', 'response': '', 'fechaHoraAnulacioneNCF':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tenantId':
-                '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'cantidadeNCFAnulados': 0, 'anulacionId':
-                '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'statusCode': None}, {'fileName': 'fileName', 'updatedBy': 'updatedBy',
-                'detalleAnulacion': [{'secuencias': [{'hastaEncf': 'hastaEncf', 'desdeEncf': 'desdeEncf'}, {'hastaEncf':
-                'hastaEncf', 'desdeEncf': 'desdeEncf'}], 'cantidadeNcfAnulados': None, 'tipoEcf': 'ECF31', 'noLinea': [None,
-                None]}, {'secuencias': [{'hastaEncf': 'hastaEncf', 'desdeEncf': 'desdeEncf'}, {'hastaEncf': 'hastaEncf',
-                'desdeEncf': 'desdeEncf'}], 'cantidadeNcfAnulados': None, 'tipoEcf': 'ECF31', 'noLinea': [None, None]}],
-                'updatedOn': datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0),
-                '+00:00')), 'createdOn': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'companyRnc': 'companyRnc', 'createdBy':
-                'createdBy', 'response': '', 'fechaHoraAnulacioneNCF': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tenantId': '046b6c7f-0b8a-43b9-b35d-6489e6daee91',
-                'cantidadeNCFAnulados': 0, 'anulacionId': '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'statusCode': None}], 'limit':
-                None, 'page': None}
-
         Attributes:
             next_page_uri (None | str):
             values (list[AnulacionListResponse] | Unset):

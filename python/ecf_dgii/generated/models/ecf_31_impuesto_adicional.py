@@ -22,9 +22,6 @@ T = TypeVar("T", bound="Ecf31ImpuestoAdicional")
 @_attrs_define
 class Ecf31ImpuestoAdicional:
     """ 
-        Example:
-            {'tipoImpuesto': None}
-
         Attributes:
             tipo_impuesto (Ecf31CodificacionTipoImpuestosType):
      """

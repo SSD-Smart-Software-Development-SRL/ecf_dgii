@@ -27,11 +27,6 @@ T = TypeVar("T", bound="Ecf43IdDoc")
 @_attrs_define
 class Ecf43IdDoc:
     """ 
-        Example:
-            {'encf': 'encf', 'tipoeCF': 'FacturaDeCreditoFiscalElectronica', 'tipoPago': '', 'totalPaginas': 0,
-                'fechaVencimientoSecuencia': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00'))}
-
         Attributes:
             tipoe_cf (TipoeCFType):
             encf (str):

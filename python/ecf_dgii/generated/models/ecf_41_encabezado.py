@@ -30,55 +30,12 @@ T = TypeVar("T", bound="Ecf41Encabezado")
 @_attrs_define
 class Ecf41Encabezado:
     """ 
-        Example:
-            {'comprador': {'direccionComprador': 'direccionComprador', 'correoComprador': 'correoComprador',
-                'responsablePago': 'responsablePago', 'informacionAdicionalComprador': 'informacionAdicionalComprador',
-                'contactoComprador': 'contactoComprador', 'provinciaComprador': '', 'razonSocialComprador':
-                'razonSocialComprador', 'municipioComprador': '', 'rncComprador': 'rncComprador', 'codigoInternoComprador':
-                'codigoInternoComprador'}, 'idDoc': {'fechaLimitePago': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'numeroCuentaPago': 'numeroCuentaPago',
-                'indicadorMontoGravado': '', 'encf': 'encf', 'tipoCuentaPago': '', 'bancoPago': 'bancoPago', 'tipoeCF':
-                'FacturaDeCreditoFiscalElectronica', 'tipoPago': '', 'totalPaginas': 6, 'fechaVencimientoSecuencia':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'terminoPago': 'terminoPago', 'tablaFormasPago': [{'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'},
-                {'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}]}, 'otraMoneda': '', 'version': 'Version1_0',
-                'emisor': {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor': 'razonSocialEmisor',
-                'informacionAdicionalEmisor': 'informacionAdicionalEmisor', 'municipio': '', 'fechaEmision': datetime.date(2000,
-                1, 23), 'provincia': '', 'actividadEconomica': 'actividadEconomica', 'rncEmisor': 'rncEmisor', 'correoEmisor':
-                'correoEmisor', 'webSite': 'webSite', 'tablaTelefonoEmisor': ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'],
-                'sucursal': 'sucursal', 'numeroPedidoInterno': 'numeroPedidoInterno', 'numeroFacturaInterna':
-                'numeroFacturaInterna', 'nombreComercial': 'nombreComercial'}, 'totales': {'montoPeriodo': 5.962133916683182,
-                'totalISRPercepcion': None, 'montoGravadoI3': None, 'montoGravadoI2': None, 'montoAvancePago': None,
-                'montoGravadoI1': None, 'totalITBIS3': None, 'totalITBIS1': None, 'totalITBIS2': None, 'totalITBISPercepcion':
-                None, 'itbiS2': None, 'itbiS1': None, 'itbiS3': None, 'totalITBISRetenido': None, 'totalITBIS': None,
-                'saldoAnterior': None, 'totalISRRetencion': None, 'montoExento': None, 'montoGravadoTotal': 1.4658129805029452,
-                'valorPagar': None, 'montoTotal': None}}
-
         Attributes:
             version (Ecf41VersionType):
-            id_doc (Ecf41IdDoc):  Example: {'fechaLimitePago': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'numeroCuentaPago': 'numeroCuentaPago',
-                'indicadorMontoGravado': '', 'encf': 'encf', 'tipoCuentaPago': '', 'bancoPago': 'bancoPago', 'tipoeCF':
-                'FacturaDeCreditoFiscalElectronica', 'tipoPago': '', 'totalPaginas': 6, 'fechaVencimientoSecuencia':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'terminoPago': 'terminoPago', 'tablaFormasPago': [{'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'},
-                {'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}]}.
-            emisor (Ecf41Emisor):  Example: {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor': 'razonSocialEmisor',
-                'informacionAdicionalEmisor': 'informacionAdicionalEmisor', 'municipio': '', 'fechaEmision': datetime.date(2000,
-                1, 23), 'provincia': '', 'actividadEconomica': 'actividadEconomica', 'rncEmisor': 'rncEmisor', 'correoEmisor':
-                'correoEmisor', 'webSite': 'webSite', 'tablaTelefonoEmisor': ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'],
-                'sucursal': 'sucursal', 'numeroPedidoInterno': 'numeroPedidoInterno', 'numeroFacturaInterna':
-                'numeroFacturaInterna', 'nombreComercial': 'nombreComercial'}.
-            comprador (Ecf41Comprador):  Example: {'direccionComprador': 'direccionComprador', 'correoComprador':
-                'correoComprador', 'responsablePago': 'responsablePago', 'informacionAdicionalComprador':
-                'informacionAdicionalComprador', 'contactoComprador': 'contactoComprador', 'provinciaComprador': '',
-                'razonSocialComprador': 'razonSocialComprador', 'municipioComprador': '', 'rncComprador': 'rncComprador',
-                'codigoInternoComprador': 'codigoInternoComprador'}.
-            totales (Ecf41Totales):  Example: {'montoPeriodo': 5.962133916683182, 'totalISRPercepcion': None,
-                'montoGravadoI3': None, 'montoGravadoI2': None, 'montoAvancePago': None, 'montoGravadoI1': None, 'totalITBIS3':
-                None, 'totalITBIS1': None, 'totalITBIS2': None, 'totalITBISPercepcion': None, 'itbiS2': None, 'itbiS1': None,
-                'itbiS3': None, 'totalITBISRetenido': None, 'totalITBIS': None, 'saldoAnterior': None, 'totalISRRetencion':
-                None, 'montoExento': None, 'montoGravadoTotal': 1.4658129805029452, 'valorPagar': None, 'montoTotal': None}.
+            id_doc (Ecf41IdDoc):
+            emisor (Ecf41Emisor):
+            comprador (Ecf41Comprador):
+            totales (Ecf41Totales):
             otra_moneda (Ecf41OtraMoneda | None | Unset):
      """
 

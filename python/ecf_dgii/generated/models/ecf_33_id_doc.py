@@ -8,12 +8,12 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..models.ecf_33_tipo_ingresos_validation_type import Ecf33TipoIngresosValidationType
 from ..models.ecf_33_tipo_pago_type import Ecf33TipoPagoType
 from ..models.indicador_envio_diferido_type_type_1 import IndicadorEnvioDiferidoTypeType1
 from ..models.indicador_monto_gravado_type_type_1 import IndicadorMontoGravadoTypeType1
 from ..models.indicador_servicio_todo_incluido_type_type_1 import IndicadorServicioTodoIncluidoTypeType1
 from ..models.tipo_cuenta_pago_type_type_1 import TipoCuentaPagoTypeType1
+from ..models.tipo_ingresos_validation_type_type_1 import TipoIngresosValidationTypeType1
 from ..models.tipoe_cf_type import TipoeCFType
 from ..types import UNSET, Unset
 from dateutil.parser import isoparse
@@ -34,28 +34,15 @@ T = TypeVar("T", bound="Ecf33IdDoc")
 @_attrs_define
 class Ecf33IdDoc:
     """ 
-        Example:
-            {'tipoIngresos': '01', 'fechaLimitePago': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'encf': 'encf', 'fechaHasta':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'tipoCuentaPago': '', 'fechaDesde': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoeCF': 'FacturaDeCreditoFiscalElectronica',
-                'terminoPago': 'terminoPago', 'numeroCuentaPago': 'numeroCuentaPago', 'indicadorMontoGravado': '', 'bancoPago':
-                'bancoPago', 'indicadorEnvioDiferido': '', 'tipoPago': 'Contado', 'totalPaginas': 6,
-                'fechaVencimientoSecuencia': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'indicadorServicioTodoIncluido': '',
-                'tablaFormasPago': [{'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}, {'montoPago':
-                0.8008281904610115, 'formaPago': 'Efectivo'}]}
-
         Attributes:
             tipoe_cf (TipoeCFType):
             encf (str):
-            tipo_ingresos (Ecf33TipoIngresosValidationType):
             tipo_pago (Ecf33TipoPagoType):
             fecha_vencimiento_secuencia (datetime.datetime | Unset):
             indicador_envio_diferido (IndicadorEnvioDiferidoTypeType1 | None | Unset):
             indicador_monto_gravado (IndicadorMontoGravadoTypeType1 | None | Unset):
             indicador_servicio_todo_incluido (IndicadorServicioTodoIncluidoTypeType1 | None | Unset):
+            tipo_ingresos (None | TipoIngresosValidationTypeType1 | Unset):
             fecha_limite_pago (datetime.datetime | None | Unset):
             termino_pago (None | str | Unset):
             tabla_formas_pago (list[Ecf33FormaDePago] | None | Unset):
@@ -69,12 +56,12 @@ class Ecf33IdDoc:
 
     tipoe_cf: TipoeCFType
     encf: str
-    tipo_ingresos: Ecf33TipoIngresosValidationType
     tipo_pago: Ecf33TipoPagoType
     fecha_vencimiento_secuencia: datetime.datetime | Unset = UNSET
     indicador_envio_diferido: IndicadorEnvioDiferidoTypeType1 | None | Unset = UNSET
     indicador_monto_gravado: IndicadorMontoGravadoTypeType1 | None | Unset = UNSET
     indicador_servicio_todo_incluido: IndicadorServicioTodoIncluidoTypeType1 | None | Unset = UNSET
+    tipo_ingresos: None | TipoIngresosValidationTypeType1 | Unset = UNSET
     fecha_limite_pago: datetime.datetime | None | Unset = UNSET
     termino_pago: None | str | Unset = UNSET
     tabla_formas_pago: list[Ecf33FormaDePago] | None | Unset = UNSET
@@ -95,8 +82,6 @@ class Ecf33IdDoc:
         tipoe_cf = self.tipoe_cf.value
 
         encf = self.encf
-
-        tipo_ingresos = self.tipo_ingresos.value
 
         tipo_pago = self.tipo_pago.value
 
@@ -128,6 +113,14 @@ class Ecf33IdDoc:
         else:
             indicador_servicio_todo_incluido = self.indicador_servicio_todo_incluido
 
+        tipo_ingresos: None | str | Unset
+        if isinstance(self.tipo_ingresos, Unset):
+            tipo_ingresos = UNSET
+        elif isinstance(self.tipo_ingresos, TipoIngresosValidationTypeType1):
+            tipo_ingresos = self.tipo_ingresos.value
+        else:
+            tipo_ingresos = self.tipo_ingresos
+
         fecha_limite_pago: None | str | Unset
         if isinstance(self.fecha_limite_pago, Unset):
             fecha_limite_pago = UNSET
@@ -147,9 +140,9 @@ class Ecf33IdDoc:
             tabla_formas_pago = UNSET
         elif isinstance(self.tabla_formas_pago, list):
             tabla_formas_pago = []
-            for tabla_formas_pago_type_0_item_data in self.tabla_formas_pago:
-                tabla_formas_pago_type_0_item = tabla_formas_pago_type_0_item_data.to_dict()
-                tabla_formas_pago.append(tabla_formas_pago_type_0_item)
+            for tabla_formas_pago_type_1_item_data in self.tabla_formas_pago:
+                tabla_formas_pago_type_1_item = tabla_formas_pago_type_1_item_data.to_dict()
+                tabla_formas_pago.append(tabla_formas_pago_type_1_item)
 
 
         else:
@@ -203,7 +196,6 @@ class Ecf33IdDoc:
         field_dict.update({
             "tipoeCF": tipoe_cf,
             "encf": encf,
-            "tipoIngresos": tipo_ingresos,
             "tipoPago": tipo_pago,
         })
         if fecha_vencimiento_secuencia is not UNSET:
@@ -214,6 +206,8 @@ class Ecf33IdDoc:
             field_dict["indicadorMontoGravado"] = indicador_monto_gravado
         if indicador_servicio_todo_incluido is not UNSET:
             field_dict["indicadorServicioTodoIncluido"] = indicador_servicio_todo_incluido
+        if tipo_ingresos is not UNSET:
+            field_dict["tipoIngresos"] = tipo_ingresos
         if fecha_limite_pago is not UNSET:
             field_dict["fechaLimitePago"] = fecha_limite_pago
         if termino_pago is not UNSET:
@@ -247,11 +241,6 @@ class Ecf33IdDoc:
 
 
         encf = d.pop("encf")
-
-        tipo_ingresos = Ecf33TipoIngresosValidationType(d.pop("tipoIngresos"))
-
-
-
 
         tipo_pago = Ecf33TipoPagoType(d.pop("tipoPago"))
 
@@ -328,6 +317,26 @@ class Ecf33IdDoc:
         indicador_servicio_todo_incluido = _parse_indicador_servicio_todo_incluido(d.pop("indicadorServicioTodoIncluido", UNSET))
 
 
+        def _parse_tipo_ingresos(data: object) -> None | TipoIngresosValidationTypeType1 | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                componentsschemas_tipo_ingresos_validation_type_type_1 = TipoIngresosValidationTypeType1(data)
+
+
+
+                return componentsschemas_tipo_ingresos_validation_type_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | TipoIngresosValidationTypeType1 | Unset, data)
+
+        tipo_ingresos = _parse_tipo_ingresos(d.pop("tipoIngresos", UNSET))
+
+
         def _parse_fecha_limite_pago(data: object) -> datetime.datetime | None | Unset:
             if data is None:
                 return data
@@ -336,11 +345,11 @@ class Ecf33IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_limite_pago_type_0 = isoparse(data)
+                fecha_limite_pago_type_1 = isoparse(data)
 
 
 
-                return fecha_limite_pago_type_0
+                return fecha_limite_pago_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)
@@ -366,16 +375,16 @@ class Ecf33IdDoc:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_formas_pago_type_0 = []
-                _tabla_formas_pago_type_0 = data
-                for tabla_formas_pago_type_0_item_data in (_tabla_formas_pago_type_0):
-                    tabla_formas_pago_type_0_item = Ecf33FormaDePago.from_dict(tabla_formas_pago_type_0_item_data)
+                tabla_formas_pago_type_1 = []
+                _tabla_formas_pago_type_1 = data
+                for tabla_formas_pago_type_1_item_data in (_tabla_formas_pago_type_1):
+                    tabla_formas_pago_type_1_item = Ecf33FormaDePago.from_dict(tabla_formas_pago_type_1_item_data)
 
 
 
-                    tabla_formas_pago_type_0.append(tabla_formas_pago_type_0_item)
+                    tabla_formas_pago_type_1.append(tabla_formas_pago_type_1_item)
 
-                return tabla_formas_pago_type_0
+                return tabla_formas_pago_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf33FormaDePago] | None | Unset, data)
@@ -431,11 +440,11 @@ class Ecf33IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_desde_type_0 = isoparse(data)
+                fecha_desde_type_1 = isoparse(data)
 
 
 
-                return fecha_desde_type_0
+                return fecha_desde_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)
@@ -451,11 +460,11 @@ class Ecf33IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_hasta_type_0 = isoparse(data)
+                fecha_hasta_type_1 = isoparse(data)
 
 
 
-                return fecha_hasta_type_0
+                return fecha_hasta_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)
@@ -476,12 +485,12 @@ class Ecf33IdDoc:
         ecf_33_id_doc = cls(
             tipoe_cf=tipoe_cf,
             encf=encf,
-            tipo_ingresos=tipo_ingresos,
             tipo_pago=tipo_pago,
             fecha_vencimiento_secuencia=fecha_vencimiento_secuencia,
             indicador_envio_diferido=indicador_envio_diferido,
             indicador_monto_gravado=indicador_monto_gravado,
             indicador_servicio_todo_incluido=indicador_servicio_todo_incluido,
+            tipo_ingresos=tipo_ingresos,
             fecha_limite_pago=fecha_limite_pago,
             termino_pago=termino_pago,
             tabla_formas_pago=tabla_formas_pago,

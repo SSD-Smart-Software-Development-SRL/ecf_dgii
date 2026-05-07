@@ -32,66 +32,11 @@ T = TypeVar("T", bound="Ecf33Encabezado")
 @_attrs_define
 class Ecf33Encabezado:
     """ 
-        Example:
-            {'transporte': '', 'informacionesAdicionales': '', 'comprador': '', 'idDoc': {'tipoIngresos': '01',
-                'fechaLimitePago': datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0),
-                '+00:00')), 'encf': 'encf', 'fechaHasta': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoCuentaPago': '', 'fechaDesde':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoeCF':
-                'FacturaDeCreditoFiscalElectronica', 'terminoPago': 'terminoPago', 'numeroCuentaPago': 'numeroCuentaPago',
-                'indicadorMontoGravado': '', 'bancoPago': 'bancoPago', 'indicadorEnvioDiferido': '', 'tipoPago': 'Contado',
-                'totalPaginas': 6, 'fechaVencimientoSecuencia': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'indicadorServicioTodoIncluido': '',
-                'tablaFormasPago': [{'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}, {'montoPago':
-                0.8008281904610115, 'formaPago': 'Efectivo'}]}, 'otraMoneda': '', 'version': 'Version1_0', 'emisor':
-                {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor': 'razonSocialEmisor', 'informacionAdicionalEmisor':
-                'informacionAdicionalEmisor', 'municipio': '', 'fechaEmision': datetime.date(2000, 1, 23), 'provincia': '',
-                'actividadEconomica': 'actividadEconomica', 'rncEmisor': 'rncEmisor', 'correoEmisor': 'correoEmisor', 'webSite':
-                'webSite', 'tablaTelefonoEmisor': ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'], 'sucursal': 'sucursal',
-                'numeroPedidoInterno': 'numeroPedidoInterno', 'numeroFacturaInterna': 'numeroFacturaInterna', 'nombreComercial':
-                'nombreComercial', 'zonaVenta': 'zonaVenta', 'rutaVenta': 'rutaVenta', 'codigoVendedor': 'codigoVendedor'},
-                'totales': {'montoPeriodo': None, 'totalISRPercepcion': None, 'montoGravadoI3': None, 'montoGravadoI2': None,
-                'montoAvancePago': None, 'montoGravadoI1': None, 'totalITBIS3': None, 'totalITBIS1': None, 'totalITBIS2': None,
-                'totalITBISPercepcion': None, 'itbiS2': None, 'montoImpuestoAdicional': 5.962133916683182, 'itbiS1': None,
-                'itbiS3': None, 'totalITBISRetenido': None, 'totalITBIS': None, 'montoNoFacturable': 2.3021358869347655,
-                'impuestosAdicionales': [{'tipoImpuesto': '001', 'montoImpuestoSelectivoConsumoAdvalorem': None,
-                'tasaImpuestoAdicional': 5.637376656633329, 'montoImpuestoSelectivoConsumoEspecifico': None,
-                'otrosImpuestosAdicionales': None}, {'tipoImpuesto': '001', 'montoImpuestoSelectivoConsumoAdvalorem': None,
-                'tasaImpuestoAdicional': 5.637376656633329, 'montoImpuestoSelectivoConsumoEspecifico': None,
-                'otrosImpuestosAdicionales': None}], 'saldoAnterior': None, 'totalISRRetencion': None, 'montoExento': None,
-                'montoGravadoTotal': 1.4658129805029452, 'valorPagar': None, 'montoTotal': None}}
-
         Attributes:
             version (Ecf33VersionType):
-            id_doc (Ecf33IdDoc):  Example: {'tipoIngresos': '01', 'fechaLimitePago': datetime.datetime(2000, 1, 23, 4, 56,
-                7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'encf': 'encf', 'fechaHasta':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'tipoCuentaPago': '', 'fechaDesde': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoeCF': 'FacturaDeCreditoFiscalElectronica',
-                'terminoPago': 'terminoPago', 'numeroCuentaPago': 'numeroCuentaPago', 'indicadorMontoGravado': '', 'bancoPago':
-                'bancoPago', 'indicadorEnvioDiferido': '', 'tipoPago': 'Contado', 'totalPaginas': 6,
-                'fechaVencimientoSecuencia': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'indicadorServicioTodoIncluido': '',
-                'tablaFormasPago': [{'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}, {'montoPago':
-                0.8008281904610115, 'formaPago': 'Efectivo'}]}.
-            emisor (Ecf33Emisor):  Example: {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor': 'razonSocialEmisor',
-                'informacionAdicionalEmisor': 'informacionAdicionalEmisor', 'municipio': '', 'fechaEmision': datetime.date(2000,
-                1, 23), 'provincia': '', 'actividadEconomica': 'actividadEconomica', 'rncEmisor': 'rncEmisor', 'correoEmisor':
-                'correoEmisor', 'webSite': 'webSite', 'tablaTelefonoEmisor': ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'],
-                'sucursal': 'sucursal', 'numeroPedidoInterno': 'numeroPedidoInterno', 'numeroFacturaInterna':
-                'numeroFacturaInterna', 'nombreComercial': 'nombreComercial', 'zonaVenta': 'zonaVenta', 'rutaVenta':
-                'rutaVenta', 'codigoVendedor': 'codigoVendedor'}.
-            totales (Ecf33Totales):  Example: {'montoPeriodo': None, 'totalISRPercepcion': None, 'montoGravadoI3': None,
-                'montoGravadoI2': None, 'montoAvancePago': None, 'montoGravadoI1': None, 'totalITBIS3': None, 'totalITBIS1':
-                None, 'totalITBIS2': None, 'totalITBISPercepcion': None, 'itbiS2': None, 'montoImpuestoAdicional':
-                5.962133916683182, 'itbiS1': None, 'itbiS3': None, 'totalITBISRetenido': None, 'totalITBIS': None,
-                'montoNoFacturable': 2.3021358869347655, 'impuestosAdicionales': [{'tipoImpuesto': '001',
-                'montoImpuestoSelectivoConsumoAdvalorem': None, 'tasaImpuestoAdicional': 5.637376656633329,
-                'montoImpuestoSelectivoConsumoEspecifico': None, 'otrosImpuestosAdicionales': None}, {'tipoImpuesto': '001',
-                'montoImpuestoSelectivoConsumoAdvalorem': None, 'tasaImpuestoAdicional': 5.637376656633329,
-                'montoImpuestoSelectivoConsumoEspecifico': None, 'otrosImpuestosAdicionales': None}], 'saldoAnterior': None,
-                'totalISRRetencion': None, 'montoExento': None, 'montoGravadoTotal': 1.4658129805029452, 'valorPagar': None,
-                'montoTotal': None}.
+            id_doc (Ecf33IdDoc):
+            emisor (Ecf33Emisor):
+            totales (Ecf33Totales):
             comprador (Ecf33Comprador | None | Unset):
             informaciones_adicionales (Ecf33InformacionesAdicionales | None | Unset):
             transporte (Ecf33Transporte | None | Unset):

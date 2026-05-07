@@ -27,11 +27,6 @@ class RespuestaVentanaDeMantenimiento:
     """ Modelo de respuesta que contiene información de ventanas de mantenimiento para todos los ambientes.
     Utilizado por el endpoint /api/estatusservicios/obtenerventanasmantenimiento.
 
-        Example:
-            {'ventanaMantenimientos': [{'horaFin': 'horaFin', 'ambiente': 'ambiente', 'dias': ['dias', 'dias'],
-                'horaInicio': 'horaInicio'}, {'horaFin': 'horaFin', 'ambiente': 'ambiente', 'dias': ['dias', 'dias'],
-                'horaInicio': 'horaInicio'}]}
-
         Attributes:
             ventana_mantenimientos (list[VentanaDeMantenimiento] | Unset): Arreglo de información de ventanas de
                 mantenimiento para cada ambiente.

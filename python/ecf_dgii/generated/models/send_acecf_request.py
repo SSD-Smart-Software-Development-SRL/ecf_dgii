@@ -24,9 +24,6 @@ T = TypeVar("T", bound="SendAcecfRequest")
 @_attrs_define
 class SendAcecfRequest:
     """ 
-        Example:
-            {'estadoType': 'ECFAceptado', 'detalleMotivoRechazo': 'detalleMotivoRechazo'}
-
         Attributes:
             detalle_motivo_rechazo (None | str | Unset):
             estado_type (EstadoType | Unset):

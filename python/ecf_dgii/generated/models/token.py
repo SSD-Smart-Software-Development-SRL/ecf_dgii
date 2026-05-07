@@ -24,11 +24,6 @@ T = TypeVar("T", bound="Token")
 @_attrs_define
 class Token:
     """ 
-        Example:
-            {'jwt': 'jwt', 'validFrom': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'validTo': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00'))}
-
         Attributes:
             jwt (str):
             valid_from (datetime.datetime):

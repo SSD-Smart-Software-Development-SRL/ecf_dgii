@@ -31,44 +31,11 @@ T = TypeVar("T", bound="Ecf47Encabezado")
 @_attrs_define
 class Ecf47Encabezado:
     """ 
-        Example:
-            {'transporte': '', 'comprador': '', 'idDoc': {'fechaLimitePago': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'encf': 'encf', 'fechaHasta':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'tipoCuentaPago': '', 'fechaDesde': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoeCF': 'FacturaDeCreditoFiscalElectronica',
-                'terminoPago': 'terminoPago', 'numeroCuentaPago': 'numeroCuentaPago', 'bancoPago': 'bancoPago', 'tipoPago': '',
-                'totalPaginas': 6, 'fechaVencimientoSecuencia': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tablaFormasPago': [{'montoPago':
-                0.8008281904610115, 'formaPago': 'Efectivo'}, {'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}]},
-                'otraMoneda': '', 'version': 'Version1_0', 'emisor': {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor':
-                'razonSocialEmisor', 'informacionAdicionalEmisor': 'informacionAdicionalEmisor', 'municipio': '',
-                'fechaEmision': datetime.date(2000, 1, 23), 'provincia': '', 'actividadEconomica': 'actividadEconomica',
-                'rncEmisor': 'rncEmisor', 'correoEmisor': 'correoEmisor', 'webSite': 'webSite', 'tablaTelefonoEmisor':
-                ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'], 'sucursal': 'sucursal', 'numeroPedidoInterno':
-                'numeroPedidoInterno', 'numeroFacturaInterna': 'numeroFacturaInterna', 'nombreComercial': 'nombreComercial'},
-                'totales': {'montoPeriodo': 5.962133916683182, 'saldoAnterior': None, 'montoAvancePago': None,
-                'totalISRRetencion': None, 'montoExento': 1.4658129805029452, 'valorPagar': None, 'montoTotal': None}}
-
         Attributes:
             version (Ecf47VersionType):
-            id_doc (Ecf47IdDoc):  Example: {'fechaLimitePago': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'encf': 'encf', 'fechaHasta':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'tipoCuentaPago': '', 'fechaDesde': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoeCF': 'FacturaDeCreditoFiscalElectronica',
-                'terminoPago': 'terminoPago', 'numeroCuentaPago': 'numeroCuentaPago', 'bancoPago': 'bancoPago', 'tipoPago': '',
-                'totalPaginas': 6, 'fechaVencimientoSecuencia': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tablaFormasPago': [{'montoPago':
-                0.8008281904610115, 'formaPago': 'Efectivo'}, {'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}]}.
-            emisor (Ecf47Emisor):  Example: {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor': 'razonSocialEmisor',
-                'informacionAdicionalEmisor': 'informacionAdicionalEmisor', 'municipio': '', 'fechaEmision': datetime.date(2000,
-                1, 23), 'provincia': '', 'actividadEconomica': 'actividadEconomica', 'rncEmisor': 'rncEmisor', 'correoEmisor':
-                'correoEmisor', 'webSite': 'webSite', 'tablaTelefonoEmisor': ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'],
-                'sucursal': 'sucursal', 'numeroPedidoInterno': 'numeroPedidoInterno', 'numeroFacturaInterna':
-                'numeroFacturaInterna', 'nombreComercial': 'nombreComercial'}.
-            totales (Ecf47Totales):  Example: {'montoPeriodo': 5.962133916683182, 'saldoAnterior': None, 'montoAvancePago':
-                None, 'totalISRRetencion': None, 'montoExento': 1.4658129805029452, 'valorPagar': None, 'montoTotal': None}.
+            id_doc (Ecf47IdDoc):
+            emisor (Ecf47Emisor):
+            totales (Ecf47Totales):
             comprador (Ecf47Comprador | None | Unset):
             transporte (Ecf47Transporte | None | Unset):
             otra_moneda (Ecf47OtraMoneda | None | Unset):

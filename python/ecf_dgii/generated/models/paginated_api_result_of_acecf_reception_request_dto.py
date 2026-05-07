@@ -25,19 +25,6 @@ T = TypeVar("T", bound="PaginatedApiResultOfAcecfReceptionRequestDto")
 @_attrs_define
 class PaginatedApiResultOfAcecfReceptionRequestDto:
     """ 
-        Example:
-            {'total': None, 'previousPage': None, 'nextPageUri': 'https://openapi-generator.tech', 'nextPage': 6, 'values':
-                [{'fileName': 'fileName', 'companyRnc': 'companyRnc', 'encf': 'encf', 'tenantId':
-                '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'errorMessage': 'errorMessage', 'messageId':
-                '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'progress': 0, 'updatedOn': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'createdOn': datetime.datetime(2000, 1, 23, 4, 56,
-                7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'rncEmisor': 'rncEmisor'}, {'fileName':
-                'fileName', 'companyRnc': 'companyRnc', 'encf': 'encf', 'tenantId': '046b6c7f-0b8a-43b9-b35d-6489e6daee91',
-                'errorMessage': 'errorMessage', 'messageId': '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'progress': 0, 'updatedOn':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'createdOn': datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0),
-                '+00:00')), 'rncEmisor': 'rncEmisor'}], 'limit': None, 'page': None}
-
         Attributes:
             next_page_uri (None | str):
             values (list[AcecfReceptionRequestDto] | Unset):

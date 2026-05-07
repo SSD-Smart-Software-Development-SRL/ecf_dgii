@@ -21,9 +21,6 @@ T = TypeVar("T", bound="Ecf34CodigosItem")
 @_attrs_define
 class Ecf34CodigosItem:
     """ 
-        Example:
-            {'codigoItem': 'codigoItem', 'tipoCodigo': 'tipoCodigo'}
-
         Attributes:
             tipo_codigo (str):
             codigo_item (str):

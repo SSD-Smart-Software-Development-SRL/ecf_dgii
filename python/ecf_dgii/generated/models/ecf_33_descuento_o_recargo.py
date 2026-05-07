@@ -27,11 +27,6 @@ T = TypeVar("T", bound="Ecf33DescuentoORecargo")
 @_attrs_define
 class Ecf33DescuentoORecargo:
     """ 
-        Example:
-            {'numeroLinea': None, 'montoDescuentooRecargo': None, 'descripcionDescuentooRecargo':
-                'descripcionDescuentooRecargo', 'indicadorNorma1007': '', 'indicadorFacturacionDescuentooRecargo': '',
-                'tipoAjuste': 'D', 'tipoValor': '', 'valorDescuentooRecargo': None, 'montoDescuentooRecargoOtraMoneda': None}
-
         Attributes:
             numero_linea (int | str):
             tipo_ajuste (Ecf33TipoAjusteType):

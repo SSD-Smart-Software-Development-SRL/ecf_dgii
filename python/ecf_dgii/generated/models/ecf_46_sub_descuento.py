@@ -24,9 +24,6 @@ T = TypeVar("T", bound="Ecf46SubDescuento")
 @_attrs_define
 class Ecf46SubDescuento:
     """ 
-        Example:
-            {'tipoSubDescuento': '$', 'subDescuentoPorcentaje': 9.301444243932576, 'montoSubDescuento': None}
-
         Attributes:
             tipo_sub_descuento (Ecf46TipoDescuentoRecargoType):
             sub_descuento_porcentaje (float | None | str | Unset):

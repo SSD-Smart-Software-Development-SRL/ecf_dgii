@@ -23,10 +23,6 @@ T = TypeVar("T", bound="Ecf44ImpuestoAdicional2")
 @_attrs_define
 class Ecf44ImpuestoAdicional2:
     """ 
-        Example:
-            {'tipoImpuesto': '001', 'tasaImpuestoAdicional': 5.637376656633329, 'otrosImpuestosAdicionales':
-                2.3021358869347655}
-
         Attributes:
             tipo_impuesto (Ecf44CodificacionTipoImpuestosType):
             tasa_impuesto_adicional (float | str):

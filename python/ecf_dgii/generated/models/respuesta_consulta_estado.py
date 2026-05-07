@@ -26,11 +26,6 @@ class RespuestaConsultaEstado:
     Este modelo contiene la información de validez y estado de un comprobante fiscal electrónico
     consultado a través del servicio web de consulta estado de la DGII.
 
-        Example:
-            {'codigo': 0, 'estado': 'estado', 'totalITBIS': 1.4658129805029452, 'codigoSeguridad': 'codigoSeguridad',
-                'fechaFirma': 'fechaFirma', 'idExtranjero': 'idExtranjero', 'fechaEmision': 'fechaEmision', 'ncfElectronico':
-                'ncfElectronico', 'montoTotal': 6.027456183070403, 'rncComprador': 'rncComprador', 'rncEmisor': 'rncEmisor'}
-
         Attributes:
             codigo (int | str | Unset): Código asociado al estado de validación del e-CF recibido.
                             Posibles valores:

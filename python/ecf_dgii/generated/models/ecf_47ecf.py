@@ -29,59 +29,8 @@ T = TypeVar("T", bound="Ecf47ECF")
 @_attrs_define
 class Ecf47ECF:
     """ 
-        Example:
-            {'detallesItems': [{'numeroLinea': 5, 'indicadorFacturacion': 'NoFacturable_18Percent', 'nombreItem':
-                'nombreItem', 'tablaCodigosItem': [{'codigoItem': 'codigoItem', 'tipoCodigo': 'tipoCodigo'}, {'codigoItem':
-                'codigoItem', 'tipoCodigo': 'tipoCodigo'}], 'cantidadItem': 2.3021358869347655, 'unidadMedida': '', 'retencion':
-                {'montoISRRetenido': None, 'indicadorAgenteRetencionoPercepcion': 'Retencion'}, 'otraMonedaDetalle': '',
-                'precioUnitarioItem': 7.061401241503109, 'indicadorBienoServicio': 'Bien', 'descripcionItem': 'descripcionItem',
-                'montoItem': None}, {'numeroLinea': 5, 'indicadorFacturacion': 'NoFacturable_18Percent', 'nombreItem':
-                'nombreItem', 'tablaCodigosItem': [{'codigoItem': 'codigoItem', 'tipoCodigo': 'tipoCodigo'}, {'codigoItem':
-                'codigoItem', 'tipoCodigo': 'tipoCodigo'}], 'cantidadItem': 2.3021358869347655, 'unidadMedida': '', 'retencion':
-                {'montoISRRetenido': None, 'indicadorAgenteRetencionoPercepcion': 'Retencion'}, 'otraMonedaDetalle': '',
-                'precioUnitarioItem': 7.061401241503109, 'indicadorBienoServicio': 'Bien', 'descripcionItem': 'descripcionItem',
-                'montoItem': None}], 'informacionReferencia': '', 'subtotales': [{'lineas': None, 'descripcionSubtotal':
-                'descripcionSubtotal', 'numeroSubTotal': None, 'montoSubTotal': None, 'orden': None, 'subTotalExento': None},
-                {'lineas': None, 'descripcionSubtotal': 'descripcionSubtotal', 'numeroSubTotal': None, 'montoSubTotal': None,
-                'orden': None, 'subTotalExento': None}], 'encabezado': {'transporte': '', 'comprador': '', 'idDoc':
-                {'fechaLimitePago': datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0),
-                '+00:00')), 'encf': 'encf', 'fechaHasta': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoCuentaPago': '', 'fechaDesde':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoeCF':
-                'FacturaDeCreditoFiscalElectronica', 'terminoPago': 'terminoPago', 'numeroCuentaPago': 'numeroCuentaPago',
-                'bancoPago': 'bancoPago', 'tipoPago': '', 'totalPaginas': 6, 'fechaVencimientoSecuencia':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'tablaFormasPago': [{'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}, {'montoPago':
-                0.8008281904610115, 'formaPago': 'Efectivo'}]}, 'otraMoneda': '', 'version': 'Version1_0', 'emisor':
-                {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor': 'razonSocialEmisor', 'informacionAdicionalEmisor':
-                'informacionAdicionalEmisor', 'municipio': '', 'fechaEmision': datetime.date(2000, 1, 23), 'provincia': '',
-                'actividadEconomica': 'actividadEconomica', 'rncEmisor': 'rncEmisor', 'correoEmisor': 'correoEmisor', 'webSite':
-                'webSite', 'tablaTelefonoEmisor': ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'], 'sucursal': 'sucursal',
-                'numeroPedidoInterno': 'numeroPedidoInterno', 'numeroFacturaInterna': 'numeroFacturaInterna', 'nombreComercial':
-                'nombreComercial'}, 'totales': {'montoPeriodo': 5.962133916683182, 'saldoAnterior': None, 'montoAvancePago':
-                None, 'totalISRRetencion': None, 'montoExento': 1.4658129805029452, 'valorPagar': None, 'montoTotal': None}},
-                'paginacion': [{'noLineaHasta': None, 'paginaNo': None, 'montoSubtotalPagina': None, 'subtotalExentoPagina':
-                None, 'noLineaDesde': None}, {'noLineaHasta': None, 'paginaNo': None, 'montoSubtotalPagina': None,
-                'subtotalExentoPagina': None, 'noLineaDesde': None}]}
-
         Attributes:
-            encabezado (Ecf47Encabezado):  Example: {'transporte': '', 'comprador': '', 'idDoc': {'fechaLimitePago':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'encf':
-                'encf', 'fechaHasta': datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0),
-                '+00:00')), 'tipoCuentaPago': '', 'fechaDesde': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoeCF': 'FacturaDeCreditoFiscalElectronica',
-                'terminoPago': 'terminoPago', 'numeroCuentaPago': 'numeroCuentaPago', 'bancoPago': 'bancoPago', 'tipoPago': '',
-                'totalPaginas': 6, 'fechaVencimientoSecuencia': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tablaFormasPago': [{'montoPago':
-                0.8008281904610115, 'formaPago': 'Efectivo'}, {'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}]},
-                'otraMoneda': '', 'version': 'Version1_0', 'emisor': {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor':
-                'razonSocialEmisor', 'informacionAdicionalEmisor': 'informacionAdicionalEmisor', 'municipio': '',
-                'fechaEmision': datetime.date(2000, 1, 23), 'provincia': '', 'actividadEconomica': 'actividadEconomica',
-                'rncEmisor': 'rncEmisor', 'correoEmisor': 'correoEmisor', 'webSite': 'webSite', 'tablaTelefonoEmisor':
-                ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'], 'sucursal': 'sucursal', 'numeroPedidoInterno':
-                'numeroPedidoInterno', 'numeroFacturaInterna': 'numeroFacturaInterna', 'nombreComercial': 'nombreComercial'},
-                'totales': {'montoPeriodo': 5.962133916683182, 'saldoAnterior': None, 'montoAvancePago': None,
-                'totalISRRetencion': None, 'montoExento': 1.4658129805029452, 'valorPagar': None, 'montoTotal': None}}.
+            encabezado (Ecf47Encabezado):
             detalles_items (list[Ecf47Item]):
             subtotales (list[Ecf47Subtotal] | None | Unset):
             paginacion (list[Ecf47Pagina] | None | Unset):
@@ -119,9 +68,9 @@ class Ecf47ECF:
             subtotales = UNSET
         elif isinstance(self.subtotales, list):
             subtotales = []
-            for subtotales_type_0_item_data in self.subtotales:
-                subtotales_type_0_item = subtotales_type_0_item_data.to_dict()
-                subtotales.append(subtotales_type_0_item)
+            for subtotales_type_1_item_data in self.subtotales:
+                subtotales_type_1_item = subtotales_type_1_item_data.to_dict()
+                subtotales.append(subtotales_type_1_item)
 
 
         else:
@@ -132,9 +81,9 @@ class Ecf47ECF:
             paginacion = UNSET
         elif isinstance(self.paginacion, list):
             paginacion = []
-            for paginacion_type_0_item_data in self.paginacion:
-                paginacion_type_0_item = paginacion_type_0_item_data.to_dict()
-                paginacion.append(paginacion_type_0_item)
+            for paginacion_type_1_item_data in self.paginacion:
+                paginacion_type_1_item = paginacion_type_1_item_data.to_dict()
+                paginacion.append(paginacion_type_1_item)
 
 
         else:
@@ -197,16 +146,16 @@ class Ecf47ECF:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                subtotales_type_0 = []
-                _subtotales_type_0 = data
-                for subtotales_type_0_item_data in (_subtotales_type_0):
-                    subtotales_type_0_item = Ecf47Subtotal.from_dict(subtotales_type_0_item_data)
+                subtotales_type_1 = []
+                _subtotales_type_1 = data
+                for subtotales_type_1_item_data in (_subtotales_type_1):
+                    subtotales_type_1_item = Ecf47Subtotal.from_dict(subtotales_type_1_item_data)
 
 
 
-                    subtotales_type_0.append(subtotales_type_0_item)
+                    subtotales_type_1.append(subtotales_type_1_item)
 
-                return subtotales_type_0
+                return subtotales_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf47Subtotal] | None | Unset, data)
@@ -222,16 +171,16 @@ class Ecf47ECF:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                paginacion_type_0 = []
-                _paginacion_type_0 = data
-                for paginacion_type_0_item_data in (_paginacion_type_0):
-                    paginacion_type_0_item = Ecf47Pagina.from_dict(paginacion_type_0_item_data)
+                paginacion_type_1 = []
+                _paginacion_type_1 = data
+                for paginacion_type_1_item_data in (_paginacion_type_1):
+                    paginacion_type_1_item = Ecf47Pagina.from_dict(paginacion_type_1_item_data)
 
 
 
-                    paginacion_type_0.append(paginacion_type_0_item)
+                    paginacion_type_1.append(paginacion_type_1_item)
 
-                return paginacion_type_0
+                return paginacion_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf47Pagina] | None | Unset, data)

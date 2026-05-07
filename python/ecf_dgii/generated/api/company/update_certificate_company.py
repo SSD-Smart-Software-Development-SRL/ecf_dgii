@@ -9,7 +9,7 @@ from ...types import Response, UNSET
 from ... import errors
 
 from ...models.problem_details import ProblemDetails
-from ...models.update_certificate_company_request import UpdateCertificateCompanyRequest
+from ...models.update_certificate_company_body import UpdateCertificateCompanyBody
 from typing import cast
 
 
@@ -17,7 +17,7 @@ from typing import cast
 def _get_kwargs(
     rnc: str,
     *,
-    body: UpdateCertificateCompanyRequest,
+    body: UpdateCertificateCompanyBody,
 
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -86,13 +86,13 @@ def sync_detailed(
     rnc: str,
     *,
     client: AuthenticatedClient | Client,
-    body: UpdateCertificateCompanyRequest,
+    body: UpdateCertificateCompanyBody,
 
 ) -> Response[Any | ProblemDetails]:
     """ 
     Args:
         rnc (str):
-        body (UpdateCertificateCompanyRequest):
+        body (UpdateCertificateCompanyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -119,13 +119,13 @@ def sync(
     rnc: str,
     *,
     client: AuthenticatedClient | Client,
-    body: UpdateCertificateCompanyRequest,
+    body: UpdateCertificateCompanyBody,
 
 ) -> Any | ProblemDetails | None:
     """ 
     Args:
         rnc (str):
-        body (UpdateCertificateCompanyRequest):
+        body (UpdateCertificateCompanyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -147,13 +147,13 @@ async def asyncio_detailed(
     rnc: str,
     *,
     client: AuthenticatedClient | Client,
-    body: UpdateCertificateCompanyRequest,
+    body: UpdateCertificateCompanyBody,
 
 ) -> Response[Any | ProblemDetails]:
     """ 
     Args:
         rnc (str):
-        body (UpdateCertificateCompanyRequest):
+        body (UpdateCertificateCompanyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -180,13 +180,13 @@ async def asyncio(
     rnc: str,
     *,
     client: AuthenticatedClient | Client,
-    body: UpdateCertificateCompanyRequest,
+    body: UpdateCertificateCompanyBody,
 
 ) -> Any | ProblemDetails | None:
     """ 
     Args:
         rnc (str):
-        body (UpdateCertificateCompanyRequest):
+        body (UpdateCertificateCompanyBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

@@ -5,6 +5,7 @@ class TipoMonedaTypeType1(str, Enum):
     CAD = "CAD"
     CHF = "CHF"
     CHY = "CHY"
+    COP = "COP"
     DKK = "DKK"
     EUR = "EUR"
     GBP = "GBP"

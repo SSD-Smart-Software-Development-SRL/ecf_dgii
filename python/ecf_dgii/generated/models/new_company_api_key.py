@@ -21,9 +21,6 @@ T = TypeVar("T", bound="NewCompanyApiKey")
 @_attrs_define
 class NewCompanyApiKey:
     """ 
-        Example:
-            {'rnc': 'rnc'}
-
         Attributes:
             rnc (str):
      """

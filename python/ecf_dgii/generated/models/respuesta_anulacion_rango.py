@@ -34,10 +34,6 @@ class RespuestaAnulacionRango:
     transaccionesReferencia Oficial:• Descripción Técnica de Facturación Electrónica v1.6, Sección "Anulación de e-NCF"•
     Formato Anulación de e-NCF v1.0 - DGII
 
-        Example:
-            {'codigo': 1, 'rnc': 123456789, 'mensajes': ['Las secuencias fueron anuladas correctamente'], 'nombre': 'EMPRESA
-                EJEMPLO SRL'}
-
         Attributes:
             rnc (None | str | Unset): Número de Registro Nacional del Contribuyente que envió la anulación.
 
@@ -160,9 +156,9 @@ class RespuestaAnulacionRango:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                mensajes_type_0 = cast(list[str], data)
+                mensajes_type_1 = cast(list[str], data)
 
-                return mensajes_type_0
+                return mensajes_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[str] | None | Unset, data)

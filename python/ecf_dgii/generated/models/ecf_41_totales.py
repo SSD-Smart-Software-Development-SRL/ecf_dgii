@@ -23,13 +23,6 @@ T = TypeVar("T", bound="Ecf41Totales")
 @_attrs_define
 class Ecf41Totales:
     """ 
-        Example:
-            {'montoPeriodo': 5.962133916683182, 'totalISRPercepcion': None, 'montoGravadoI3': None, 'montoGravadoI2': None,
-                'montoAvancePago': None, 'montoGravadoI1': None, 'totalITBIS3': None, 'totalITBIS1': None, 'totalITBIS2': None,
-                'totalITBISPercepcion': None, 'itbiS2': None, 'itbiS1': None, 'itbiS3': None, 'totalITBISRetenido': None,
-                'totalITBIS': None, 'saldoAnterior': None, 'totalISRRetencion': None, 'montoExento': None, 'montoGravadoTotal':
-                1.4658129805029452, 'valorPagar': None, 'montoTotal': None}
-
         Attributes:
             monto_total (float | str):
             monto_gravado_total (float | None | str | Unset):

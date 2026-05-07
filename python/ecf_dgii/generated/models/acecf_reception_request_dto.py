@@ -26,13 +26,6 @@ T = TypeVar("T", bound="AcecfReceptionRequestDto")
 @_attrs_define
 class AcecfReceptionRequestDto:
     """ 
-        Example:
-            {'fileName': 'fileName', 'companyRnc': 'companyRnc', 'encf': 'encf', 'tenantId':
-                '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'errorMessage': 'errorMessage', 'messageId':
-                '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'progress': 0, 'updatedOn': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'createdOn': datetime.datetime(2000, 1, 23, 4, 56,
-                7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'rncEmisor': 'rncEmisor'}
-
         Attributes:
             message_id (UUID | Unset):
             tenant_id (UUID | Unset):

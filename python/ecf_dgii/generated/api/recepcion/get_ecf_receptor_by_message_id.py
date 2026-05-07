@@ -8,6 +8,7 @@ from ...client import AuthenticatedClient, Client
 from ...types import Response, UNSET
 from ... import errors
 
+from ...models.ecf_receptor_dto import EcfReceptorDto
 from ...models.problem_details import ProblemDetails
 from typing import cast
 from uuid import UUID
@@ -27,7 +28,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/recepcion/{rnc}/acecf/{message_id}".format(rnc=quote(str(rnc), safe=""),message_id=quote(str(message_id), safe=""),),
+        "url": "/recepcion/{rnc}/{message_id}".format(rnc=quote(str(rnc), safe=""),message_id=quote(str(message_id), safe=""),),
     }
 
 
@@ -35,9 +36,12 @@ def _get_kwargs(
 
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | ProblemDetails | None:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | EcfReceptorDto | ProblemDetails | None:
     if response.status_code == 200:
-        response_200 = cast(Any, None)
+        response_200 = EcfReceptorDto.from_dict(response.json())
+
+
+
         return response_200
 
     if response.status_code == 401:
@@ -55,10 +59,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return response_403
 
     if response.status_code == 404:
-        response_404 = ProblemDetails.from_dict(response.json())
-
-
-
+        response_404 = cast(Any, None)
         return response_404
 
     if client.raise_on_unexpected_status:
@@ -67,7 +68,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | ProblemDetails]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | EcfReceptorDto | ProblemDetails]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -82,7 +83,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Any | ProblemDetails]:
+) -> Response[Any | EcfReceptorDto | ProblemDetails]:
     """ 
     Args:
         rnc (str):
@@ -93,7 +94,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | ProblemDetails]
+        Response[Any | EcfReceptorDto | ProblemDetails]
      """
 
 
@@ -115,7 +116,7 @@ def sync(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Any | ProblemDetails | None:
+) -> Any | EcfReceptorDto | ProblemDetails | None:
     """ 
     Args:
         rnc (str):
@@ -126,7 +127,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | ProblemDetails
+        Any | EcfReceptorDto | ProblemDetails
      """
 
 
@@ -143,7 +144,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Response[Any | ProblemDetails]:
+) -> Response[Any | EcfReceptorDto | ProblemDetails]:
     """ 
     Args:
         rnc (str):
@@ -154,7 +155,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | ProblemDetails]
+        Response[Any | EcfReceptorDto | ProblemDetails]
      """
 
 
@@ -176,7 +177,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient | Client,
 
-) -> Any | ProblemDetails | None:
+) -> Any | EcfReceptorDto | ProblemDetails | None:
     """ 
     Args:
         rnc (str):
@@ -187,7 +188,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | ProblemDetails
+        Any | EcfReceptorDto | ProblemDetails
      """
 
 

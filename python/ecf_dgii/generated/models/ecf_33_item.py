@@ -37,23 +37,6 @@ T = TypeVar("T", bound="Ecf33Item")
 @_attrs_define
 class Ecf33Item:
     """ 
-        Example:
-            {'indicadorFacturacion': 'NoFacturable_18Percent', 'tablaImpuestoAdicional': [{'tipoImpuesto': None},
-                {'tipoImpuesto': None}], 'nombreItem': 'nombreItem', 'tablaSubcantidad': [{'codigoSubcantidad': '',
-                'subcantidad': 3.616076749251911}, {'codigoSubcantidad': '', 'subcantidad': 3.616076749251911}],
-                'tablaCodigosItem': [{'codigoItem': 'codigoItem', 'tipoCodigo': 'tipoCodigo'}, {'codigoItem': 'codigoItem',
-                'tipoCodigo': 'tipoCodigo'}], 'otraMonedaDetalle': '', 'indicadorBienoServicio': 'Bien', 'tablaSubRecargo':
-                [{'subRecargoPorcentaje': None, 'tipoSubRecargo': None, 'montoSubRecargo': None}, {'subRecargoPorcentaje': None,
-                'tipoSubRecargo': None, 'montoSubRecargo': None}], 'fechaVencimientoItem': datetime.datetime(2000, 1, 23, 4, 56,
-                7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'numeroLinea': 7, 'gradosAlcohol':
-                3.616076749251911, 'tablaSubDescuento': [{'tipoSubDescuento': '$', 'subDescuentoPorcentaje': None,
-                'montoSubDescuento': None}, {'tipoSubDescuento': '$', 'subDescuentoPorcentaje': None, 'montoSubDescuento':
-                None}], 'montoItem': None, 'unidadMedida': '', 'mineria': '', 'descripcionItem': 'descripcionItem',
-                'descuentoMonto': None, 'recargoMonto': None, 'cantidadItem': 9.301444243932576, 'unidadReferencia': '',
-                'retencion': '', 'precioUnitarioReferencia': None, 'precioUnitarioItem': 2.027123023002322,
-                'cantidadReferencia': None, 'fechaElaboracion': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00'))}
-
         Attributes:
             numero_linea (int | str):
             indicador_facturacion (Ecf33IndicadorFacturacionType):
@@ -145,9 +128,9 @@ class Ecf33Item:
             tabla_codigos_item = UNSET
         elif isinstance(self.tabla_codigos_item, list):
             tabla_codigos_item = []
-            for tabla_codigos_item_type_0_item_data in self.tabla_codigos_item:
-                tabla_codigos_item_type_0_item = tabla_codigos_item_type_0_item_data.to_dict()
-                tabla_codigos_item.append(tabla_codigos_item_type_0_item)
+            for tabla_codigos_item_type_1_item_data in self.tabla_codigos_item:
+                tabla_codigos_item_type_1_item = tabla_codigos_item_type_1_item_data.to_dict()
+                tabla_codigos_item.append(tabla_codigos_item_type_1_item)
 
 
         else:
@@ -194,9 +177,9 @@ class Ecf33Item:
             tabla_subcantidad = UNSET
         elif isinstance(self.tabla_subcantidad, list):
             tabla_subcantidad = []
-            for tabla_subcantidad_type_0_item_data in self.tabla_subcantidad:
-                tabla_subcantidad_type_0_item = tabla_subcantidad_type_0_item_data.to_dict()
-                tabla_subcantidad.append(tabla_subcantidad_type_0_item)
+            for tabla_subcantidad_type_1_item_data in self.tabla_subcantidad:
+                tabla_subcantidad_type_1_item = tabla_subcantidad_type_1_item_data.to_dict()
+                tabla_subcantidad.append(tabla_subcantidad_type_1_item)
 
 
         else:
@@ -249,9 +232,9 @@ class Ecf33Item:
             tabla_sub_descuento = UNSET
         elif isinstance(self.tabla_sub_descuento, list):
             tabla_sub_descuento = []
-            for tabla_sub_descuento_type_0_item_data in self.tabla_sub_descuento:
-                tabla_sub_descuento_type_0_item = tabla_sub_descuento_type_0_item_data.to_dict()
-                tabla_sub_descuento.append(tabla_sub_descuento_type_0_item)
+            for tabla_sub_descuento_type_1_item_data in self.tabla_sub_descuento:
+                tabla_sub_descuento_type_1_item = tabla_sub_descuento_type_1_item_data.to_dict()
+                tabla_sub_descuento.append(tabla_sub_descuento_type_1_item)
 
 
         else:
@@ -268,9 +251,9 @@ class Ecf33Item:
             tabla_sub_recargo = UNSET
         elif isinstance(self.tabla_sub_recargo, list):
             tabla_sub_recargo = []
-            for tabla_sub_recargo_type_0_item_data in self.tabla_sub_recargo:
-                tabla_sub_recargo_type_0_item = tabla_sub_recargo_type_0_item_data.to_dict()
-                tabla_sub_recargo.append(tabla_sub_recargo_type_0_item)
+            for tabla_sub_recargo_type_1_item_data in self.tabla_sub_recargo:
+                tabla_sub_recargo_type_1_item = tabla_sub_recargo_type_1_item_data.to_dict()
+                tabla_sub_recargo.append(tabla_sub_recargo_type_1_item)
 
 
         else:
@@ -281,9 +264,9 @@ class Ecf33Item:
             tabla_impuesto_adicional = UNSET
         elif isinstance(self.tabla_impuesto_adicional, list):
             tabla_impuesto_adicional = []
-            for tabla_impuesto_adicional_type_0_item_data in self.tabla_impuesto_adicional:
-                tabla_impuesto_adicional_type_0_item = tabla_impuesto_adicional_type_0_item_data.to_dict()
-                tabla_impuesto_adicional.append(tabla_impuesto_adicional_type_0_item)
+            for tabla_impuesto_adicional_type_1_item_data in self.tabla_impuesto_adicional:
+                tabla_impuesto_adicional_type_1_item = tabla_impuesto_adicional_type_1_item_data.to_dict()
+                tabla_impuesto_adicional.append(tabla_impuesto_adicional_type_1_item)
 
 
         else:
@@ -405,16 +388,16 @@ class Ecf33Item:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_codigos_item_type_0 = []
-                _tabla_codigos_item_type_0 = data
-                for tabla_codigos_item_type_0_item_data in (_tabla_codigos_item_type_0):
-                    tabla_codigos_item_type_0_item = Ecf33CodigosItem.from_dict(tabla_codigos_item_type_0_item_data)
+                tabla_codigos_item_type_1 = []
+                _tabla_codigos_item_type_1 = data
+                for tabla_codigos_item_type_1_item_data in (_tabla_codigos_item_type_1):
+                    tabla_codigos_item_type_1_item = Ecf33CodigosItem.from_dict(tabla_codigos_item_type_1_item_data)
 
 
 
-                    tabla_codigos_item_type_0.append(tabla_codigos_item_type_0_item)
+                    tabla_codigos_item_type_1.append(tabla_codigos_item_type_1_item)
 
-                return tabla_codigos_item_type_0
+                return tabla_codigos_item_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf33CodigosItem] | None | Unset, data)
@@ -510,16 +493,16 @@ class Ecf33Item:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_subcantidad_type_0 = []
-                _tabla_subcantidad_type_0 = data
-                for tabla_subcantidad_type_0_item_data in (_tabla_subcantidad_type_0):
-                    tabla_subcantidad_type_0_item = Ecf33SubcantidadItem.from_dict(tabla_subcantidad_type_0_item_data)
+                tabla_subcantidad_type_1 = []
+                _tabla_subcantidad_type_1 = data
+                for tabla_subcantidad_type_1_item_data in (_tabla_subcantidad_type_1):
+                    tabla_subcantidad_type_1_item = Ecf33SubcantidadItem.from_dict(tabla_subcantidad_type_1_item_data)
 
 
 
-                    tabla_subcantidad_type_0.append(tabla_subcantidad_type_0_item)
+                    tabla_subcantidad_type_1.append(tabla_subcantidad_type_1_item)
 
-                return tabla_subcantidad_type_0
+                return tabla_subcantidad_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf33SubcantidadItem] | None | Unset, data)
@@ -555,11 +538,11 @@ class Ecf33Item:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_elaboracion_type_0 = isoparse(data)
+                fecha_elaboracion_type_1 = isoparse(data)
 
 
 
-                return fecha_elaboracion_type_0
+                return fecha_elaboracion_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)
@@ -575,11 +558,11 @@ class Ecf33Item:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_vencimiento_item_type_0 = isoparse(data)
+                fecha_vencimiento_item_type_1 = isoparse(data)
 
 
 
-                return fecha_vencimiento_item_type_0
+                return fecha_vencimiento_item_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)
@@ -625,16 +608,16 @@ class Ecf33Item:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_sub_descuento_type_0 = []
-                _tabla_sub_descuento_type_0 = data
-                for tabla_sub_descuento_type_0_item_data in (_tabla_sub_descuento_type_0):
-                    tabla_sub_descuento_type_0_item = Ecf33SubDescuento.from_dict(tabla_sub_descuento_type_0_item_data)
+                tabla_sub_descuento_type_1 = []
+                _tabla_sub_descuento_type_1 = data
+                for tabla_sub_descuento_type_1_item_data in (_tabla_sub_descuento_type_1):
+                    tabla_sub_descuento_type_1_item = Ecf33SubDescuento.from_dict(tabla_sub_descuento_type_1_item_data)
 
 
 
-                    tabla_sub_descuento_type_0.append(tabla_sub_descuento_type_0_item)
+                    tabla_sub_descuento_type_1.append(tabla_sub_descuento_type_1_item)
 
-                return tabla_sub_descuento_type_0
+                return tabla_sub_descuento_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf33SubDescuento] | None | Unset, data)
@@ -660,16 +643,16 @@ class Ecf33Item:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_sub_recargo_type_0 = []
-                _tabla_sub_recargo_type_0 = data
-                for tabla_sub_recargo_type_0_item_data in (_tabla_sub_recargo_type_0):
-                    tabla_sub_recargo_type_0_item = Ecf33SubRecargo.from_dict(tabla_sub_recargo_type_0_item_data)
+                tabla_sub_recargo_type_1 = []
+                _tabla_sub_recargo_type_1 = data
+                for tabla_sub_recargo_type_1_item_data in (_tabla_sub_recargo_type_1):
+                    tabla_sub_recargo_type_1_item = Ecf33SubRecargo.from_dict(tabla_sub_recargo_type_1_item_data)
 
 
 
-                    tabla_sub_recargo_type_0.append(tabla_sub_recargo_type_0_item)
+                    tabla_sub_recargo_type_1.append(tabla_sub_recargo_type_1_item)
 
-                return tabla_sub_recargo_type_0
+                return tabla_sub_recargo_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf33SubRecargo] | None | Unset, data)
@@ -685,16 +668,16 @@ class Ecf33Item:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_impuesto_adicional_type_0 = []
-                _tabla_impuesto_adicional_type_0 = data
-                for tabla_impuesto_adicional_type_0_item_data in (_tabla_impuesto_adicional_type_0):
-                    tabla_impuesto_adicional_type_0_item = Ecf33ImpuestoAdicional.from_dict(tabla_impuesto_adicional_type_0_item_data)
+                tabla_impuesto_adicional_type_1 = []
+                _tabla_impuesto_adicional_type_1 = data
+                for tabla_impuesto_adicional_type_1_item_data in (_tabla_impuesto_adicional_type_1):
+                    tabla_impuesto_adicional_type_1_item = Ecf33ImpuestoAdicional.from_dict(tabla_impuesto_adicional_type_1_item_data)
 
 
 
-                    tabla_impuesto_adicional_type_0.append(tabla_impuesto_adicional_type_0_item)
+                    tabla_impuesto_adicional_type_1.append(tabla_impuesto_adicional_type_1_item)
 
-                return tabla_impuesto_adicional_type_0
+                return tabla_impuesto_adicional_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf33ImpuestoAdicional] | None | Unset, data)

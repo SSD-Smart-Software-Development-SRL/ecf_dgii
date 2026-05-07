@@ -25,9 +25,6 @@ class VentanaDeMantenimiento:
     """ Representa información de ventana de mantenimiento para un ambiente específico.
     Contiene detalles sobre cuándo ocurrirá el mantenimiento programado.
 
-        Example:
-            {'horaFin': 'horaFin', 'ambiente': 'ambiente', 'dias': ['dias', 'dias'], 'horaInicio': 'horaInicio'}
-
         Attributes:
             ambiente (None | str | Unset): Nombre del ambiente donde aplica la ventana de mantenimiento.
                 Valores posibles:
@@ -141,9 +138,9 @@ class VentanaDeMantenimiento:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                dias_type_0 = cast(list[str], data)
+                dias_type_1 = cast(list[str], data)
 
-                return dias_type_0
+                return dias_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[str] | None | Unset, data)

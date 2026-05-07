@@ -80,9 +80,9 @@ class Ecf44OtraMoneda:
             impuestos_adicionales_otra_moneda = UNSET
         elif isinstance(self.impuestos_adicionales_otra_moneda, list):
             impuestos_adicionales_otra_moneda = []
-            for impuestos_adicionales_otra_moneda_type_0_item_data in self.impuestos_adicionales_otra_moneda:
-                impuestos_adicionales_otra_moneda_type_0_item = impuestos_adicionales_otra_moneda_type_0_item_data.to_dict()
-                impuestos_adicionales_otra_moneda.append(impuestos_adicionales_otra_moneda_type_0_item)
+            for impuestos_adicionales_otra_moneda_type_1_item_data in self.impuestos_adicionales_otra_moneda:
+                impuestos_adicionales_otra_moneda_type_1_item = impuestos_adicionales_otra_moneda_type_1_item_data.to_dict()
+                impuestos_adicionales_otra_moneda.append(impuestos_adicionales_otra_moneda_type_1_item)
 
 
         else:
@@ -178,16 +178,16 @@ class Ecf44OtraMoneda:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                impuestos_adicionales_otra_moneda_type_0 = []
-                _impuestos_adicionales_otra_moneda_type_0 = data
-                for impuestos_adicionales_otra_moneda_type_0_item_data in (_impuestos_adicionales_otra_moneda_type_0):
-                    impuestos_adicionales_otra_moneda_type_0_item = Ecf44ImpuestoAdicionalOtraMoneda.from_dict(impuestos_adicionales_otra_moneda_type_0_item_data)
+                impuestos_adicionales_otra_moneda_type_1 = []
+                _impuestos_adicionales_otra_moneda_type_1 = data
+                for impuestos_adicionales_otra_moneda_type_1_item_data in (_impuestos_adicionales_otra_moneda_type_1):
+                    impuestos_adicionales_otra_moneda_type_1_item = Ecf44ImpuestoAdicionalOtraMoneda.from_dict(impuestos_adicionales_otra_moneda_type_1_item_data)
 
 
 
-                    impuestos_adicionales_otra_moneda_type_0.append(impuestos_adicionales_otra_moneda_type_0_item)
+                    impuestos_adicionales_otra_moneda_type_1.append(impuestos_adicionales_otra_moneda_type_1_item)
 
-                return impuestos_adicionales_otra_moneda_type_0
+                return impuestos_adicionales_otra_moneda_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf44ImpuestoAdicionalOtraMoneda] | None | Unset, data)

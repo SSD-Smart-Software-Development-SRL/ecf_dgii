@@ -26,14 +26,6 @@ T = TypeVar("T", bound="Ecf34Emisor")
 @_attrs_define
 class Ecf34Emisor:
     """ 
-        Example:
-            {'direccionEmisor': 'direccionEmisor', 'razonSocialEmisor': 'razonSocialEmisor', 'informacionAdicionalEmisor':
-                'informacionAdicionalEmisor', 'municipio': '', 'fechaEmision': datetime.date(2000, 1, 23), 'provincia': '',
-                'actividadEconomica': 'actividadEconomica', 'rncEmisor': 'rncEmisor', 'correoEmisor': 'correoEmisor', 'webSite':
-                'webSite', 'tablaTelefonoEmisor': ['tablaTelefonoEmisor', 'tablaTelefonoEmisor'], 'sucursal': 'sucursal',
-                'numeroPedidoInterno': 'numeroPedidoInterno', 'numeroFacturaInterna': 'numeroFacturaInterna', 'nombreComercial':
-                'nombreComercial', 'zonaVenta': 'zonaVenta', 'rutaVenta': 'rutaVenta', 'codigoVendedor': 'codigoVendedor'}
-
         Attributes:
             rnc_emisor (str):
             razon_social_emisor (str):
@@ -302,9 +294,9 @@ class Ecf34Emisor:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_telefono_emisor_type_0 = cast(list[str], data)
+                tabla_telefono_emisor_type_1 = cast(list[str], data)
 
-                return tabla_telefono_emisor_type_0
+                return tabla_telefono_emisor_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[str] | None | Unset, data)

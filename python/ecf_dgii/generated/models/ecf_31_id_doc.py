@@ -34,19 +34,6 @@ T = TypeVar("T", bound="Ecf31IdDoc")
 @_attrs_define
 class Ecf31IdDoc:
     """ 
-        Example:
-            {'tipoIngresos': '01', 'fechaLimitePago': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'encf': 'encf', 'fechaHasta':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'tipoCuentaPago': '', 'fechaDesde': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tipoeCF': 'FacturaDeCreditoFiscalElectronica',
-                'terminoPago': 'terminoPago', 'numeroCuentaPago': 'numeroCuentaPago', 'indicadorMontoGravado': '', 'bancoPago':
-                'bancoPago', 'indicadorEnvioDiferido': '', 'tipoPago': 'Contado', 'totalPaginas': 6,
-                'fechaVencimientoSecuencia': datetime.datetime(2000, 1, 23, 4, 56, 7,
-                tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'indicadorServicioTodoIncluido': '',
-                'tablaFormasPago': [{'montoPago': 0.8008281904610115, 'formaPago': 'Efectivo'}, {'montoPago':
-                0.8008281904610115, 'formaPago': 'Efectivo'}]}
-
         Attributes:
             tipoe_cf (TipoeCFType):
             encf (str):
@@ -147,9 +134,9 @@ class Ecf31IdDoc:
             tabla_formas_pago = UNSET
         elif isinstance(self.tabla_formas_pago, list):
             tabla_formas_pago = []
-            for tabla_formas_pago_type_0_item_data in self.tabla_formas_pago:
-                tabla_formas_pago_type_0_item = tabla_formas_pago_type_0_item_data.to_dict()
-                tabla_formas_pago.append(tabla_formas_pago_type_0_item)
+            for tabla_formas_pago_type_1_item_data in self.tabla_formas_pago:
+                tabla_formas_pago_type_1_item = tabla_formas_pago_type_1_item_data.to_dict()
+                tabla_formas_pago.append(tabla_formas_pago_type_1_item)
 
 
         else:
@@ -336,11 +323,11 @@ class Ecf31IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_limite_pago_type_0 = isoparse(data)
+                fecha_limite_pago_type_1 = isoparse(data)
 
 
 
-                return fecha_limite_pago_type_0
+                return fecha_limite_pago_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)
@@ -366,16 +353,16 @@ class Ecf31IdDoc:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                tabla_formas_pago_type_0 = []
-                _tabla_formas_pago_type_0 = data
-                for tabla_formas_pago_type_0_item_data in (_tabla_formas_pago_type_0):
-                    tabla_formas_pago_type_0_item = Ecf31FormaDePago.from_dict(tabla_formas_pago_type_0_item_data)
+                tabla_formas_pago_type_1 = []
+                _tabla_formas_pago_type_1 = data
+                for tabla_formas_pago_type_1_item_data in (_tabla_formas_pago_type_1):
+                    tabla_formas_pago_type_1_item = Ecf31FormaDePago.from_dict(tabla_formas_pago_type_1_item_data)
 
 
 
-                    tabla_formas_pago_type_0.append(tabla_formas_pago_type_0_item)
+                    tabla_formas_pago_type_1.append(tabla_formas_pago_type_1_item)
 
-                return tabla_formas_pago_type_0
+                return tabla_formas_pago_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf31FormaDePago] | None | Unset, data)
@@ -431,11 +418,11 @@ class Ecf31IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_desde_type_0 = isoparse(data)
+                fecha_desde_type_1 = isoparse(data)
 
 
 
-                return fecha_desde_type_0
+                return fecha_desde_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)
@@ -451,11 +438,11 @@ class Ecf31IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_hasta_type_0 = isoparse(data)
+                fecha_hasta_type_1 = isoparse(data)
 
 
 
-                return fecha_hasta_type_0
+                return fecha_hasta_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(datetime.datetime | None | Unset, data)

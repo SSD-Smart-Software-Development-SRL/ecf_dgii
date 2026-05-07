@@ -25,17 +25,6 @@ T = TypeVar("T", bound="Ecf32Totales")
 @_attrs_define
 class Ecf32Totales:
     """ 
-        Example:
-            {'montoPeriodo': None, 'montoGravadoI3': None, 'montoGravadoI2': None, 'montoAvancePago': None,
-                'montoGravadoI1': None, 'totalITBIS3': None, 'totalITBIS1': None, 'totalITBIS2': None, 'itbiS2': None,
-                'montoImpuestoAdicional': 5.962133916683182, 'itbiS1': None, 'itbiS3': None, 'totalITBIS': None,
-                'montoNoFacturable': 2.3021358869347655, 'impuestosAdicionales': [{'tipoImpuesto': '001',
-                'montoImpuestoSelectivoConsumoAdvalorem': None, 'tasaImpuestoAdicional': 5.637376656633329,
-                'montoImpuestoSelectivoConsumoEspecifico': None, 'otrosImpuestosAdicionales': None}, {'tipoImpuesto': '001',
-                'montoImpuestoSelectivoConsumoAdvalorem': None, 'tasaImpuestoAdicional': 5.637376656633329,
-                'montoImpuestoSelectivoConsumoEspecifico': None, 'otrosImpuestosAdicionales': None}], 'saldoAnterior': None,
-                'montoExento': None, 'montoGravadoTotal': 1.4658129805029452, 'valorPagar': None, 'montoTotal': None}
-
         Attributes:
             monto_total (float | str):
             monto_gravado_total (float | None | str | Unset):
@@ -173,9 +162,9 @@ class Ecf32Totales:
             impuestos_adicionales = UNSET
         elif isinstance(self.impuestos_adicionales, list):
             impuestos_adicionales = []
-            for impuestos_adicionales_type_0_item_data in self.impuestos_adicionales:
-                impuestos_adicionales_type_0_item = impuestos_adicionales_type_0_item_data.to_dict()
-                impuestos_adicionales.append(impuestos_adicionales_type_0_item)
+            for impuestos_adicionales_type_1_item_data in self.impuestos_adicionales:
+                impuestos_adicionales_type_1_item = impuestos_adicionales_type_1_item_data.to_dict()
+                impuestos_adicionales.append(impuestos_adicionales_type_1_item)
 
 
         else:
@@ -408,16 +397,16 @@ class Ecf32Totales:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                impuestos_adicionales_type_0 = []
-                _impuestos_adicionales_type_0 = data
-                for impuestos_adicionales_type_0_item_data in (_impuestos_adicionales_type_0):
-                    impuestos_adicionales_type_0_item = Ecf32ImpuestoAdicional2.from_dict(impuestos_adicionales_type_0_item_data)
+                impuestos_adicionales_type_1 = []
+                _impuestos_adicionales_type_1 = data
+                for impuestos_adicionales_type_1_item_data in (_impuestos_adicionales_type_1):
+                    impuestos_adicionales_type_1_item = Ecf32ImpuestoAdicional2.from_dict(impuestos_adicionales_type_1_item_data)
 
 
 
-                    impuestos_adicionales_type_0.append(impuestos_adicionales_type_0_item)
+                    impuestos_adicionales_type_1.append(impuestos_adicionales_type_1_item)
 
-                return impuestos_adicionales_type_0
+                return impuestos_adicionales_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Ecf32ImpuestoAdicional2] | None | Unset, data)

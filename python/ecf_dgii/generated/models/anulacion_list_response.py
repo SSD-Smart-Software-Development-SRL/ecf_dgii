@@ -29,19 +29,6 @@ T = TypeVar("T", bound="AnulacionListResponse")
 @_attrs_define
 class AnulacionListResponse:
     """ 
-        Example:
-            {'fileName': 'fileName', 'updatedBy': 'updatedBy', 'detalleAnulacion': [{'secuencias': [{'hastaEncf':
-                'hastaEncf', 'desdeEncf': 'desdeEncf'}, {'hastaEncf': 'hastaEncf', 'desdeEncf': 'desdeEncf'}],
-                'cantidadeNcfAnulados': None, 'tipoEcf': 'ECF31', 'noLinea': [None, None]}, {'secuencias': [{'hastaEncf':
-                'hastaEncf', 'desdeEncf': 'desdeEncf'}, {'hastaEncf': 'hastaEncf', 'desdeEncf': 'desdeEncf'}],
-                'cantidadeNcfAnulados': None, 'tipoEcf': 'ECF31', 'noLinea': [None, None]}], 'updatedOn':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'createdOn': datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0),
-                '+00:00')), 'companyRnc': 'companyRnc', 'createdBy': 'createdBy', 'response': '', 'fechaHoraAnulacioneNCF':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')), 'tenantId':
-                '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'cantidadeNCFAnulados': 0, 'anulacionId':
-                '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'statusCode': None}
-
         Attributes:
             anulacion_id (UUID | Unset):
             tenant_id (UUID | Unset):
@@ -101,9 +88,9 @@ class AnulacionListResponse:
             detalle_anulacion = UNSET
         elif isinstance(self.detalle_anulacion, list):
             detalle_anulacion = []
-            for detalle_anulacion_type_0_item_data in self.detalle_anulacion:
-                detalle_anulacion_type_0_item = detalle_anulacion_type_0_item_data.to_dict()
-                detalle_anulacion.append(detalle_anulacion_type_0_item)
+            for detalle_anulacion_type_1_item_data in self.detalle_anulacion:
+                detalle_anulacion_type_1_item = detalle_anulacion_type_1_item_data.to_dict()
+                detalle_anulacion.append(detalle_anulacion_type_1_item)
 
 
         else:
@@ -220,16 +207,16 @@ class AnulacionListResponse:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                detalle_anulacion_type_0 = []
-                _detalle_anulacion_type_0 = data
-                for detalle_anulacion_type_0_item_data in (_detalle_anulacion_type_0):
-                    detalle_anulacion_type_0_item = DetalleAnulacionRequestDto.from_dict(detalle_anulacion_type_0_item_data)
+                detalle_anulacion_type_1 = []
+                _detalle_anulacion_type_1 = data
+                for detalle_anulacion_type_1_item_data in (_detalle_anulacion_type_1):
+                    detalle_anulacion_type_1_item = DetalleAnulacionRequestDto.from_dict(detalle_anulacion_type_1_item_data)
 
 
 
-                    detalle_anulacion_type_0.append(detalle_anulacion_type_0_item)
+                    detalle_anulacion_type_1.append(detalle_anulacion_type_1_item)
 
-                return detalle_anulacion_type_0
+                return detalle_anulacion_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[DetalleAnulacionRequestDto] | None | Unset, data)

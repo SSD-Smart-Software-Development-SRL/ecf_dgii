@@ -28,12 +28,6 @@ class RespuestaConsultaTrackId:
     Este modelo contiene la información completa sobre el estado de procesamiento y validación de un e-CF
     que fue enviado previamente mediante el servicio de recepción.
 
-        Example:
-            {'codigo': '1', 'estado': 'Aceptado', 'encf': 'E310000000001', 'trackId': 'ddddd', 'rnc': '131880738',
-                'secuenciaUtilizada': False, 'mensajes': [{'codigo': 1, 'valor': 'El comprobante fue aceptado correctamente'},
-                {'codigo': 1, 'valor': 'El comprobante fue aceptado correctamente'}], 'fechaRecepcion': datetime.datetime(2020,
-                12, 17, 11, 19, 6)}
-
         Attributes:
             track_id (None | str | Unset): Obtiene el número único generado por Impuestos Internos para identificar un e-CF
                 recibido.
@@ -73,7 +67,7 @@ class RespuestaConsultaTrackId:
                 - El RNC Emisor no existe o no se encuentra activo
             fecha_recepcion (None | str | Unset): Obtiene la fecha en la cual Impuestos Internos recibió el e-CF.
                 La fecha de recepción del comprobante. Puede ser null si no está disponible.
-                El formato típico es ISO 8601 o un formato de fecha legible. Example: 2020-12-17 11:19:06.
+                El formato típico es ISO 8601 o un formato de fecha legible. Example: 2020-12-17T11:19:06.
             mensajes (list[Mensaje] | None | Unset): Obtiene los mensajes asociados al estado de validación del e-CF
                 recibido.
                 Un array de mensajes que proporcionan información detallada sobre el estado
@@ -139,9 +133,9 @@ class RespuestaConsultaTrackId:
             mensajes = UNSET
         elif isinstance(self.mensajes, list):
             mensajes = []
-            for mensajes_type_0_item_data in self.mensajes:
-                mensajes_type_0_item = mensajes_type_0_item_data.to_dict()
-                mensajes.append(mensajes_type_0_item)
+            for mensajes_type_1_item_data in self.mensajes:
+                mensajes_type_1_item = mensajes_type_1_item_data.to_dict()
+                mensajes.append(mensajes_type_1_item)
 
 
         else:
@@ -247,16 +241,16 @@ class RespuestaConsultaTrackId:
             try:
                 if not isinstance(data, list):
                     raise TypeError()
-                mensajes_type_0 = []
-                _mensajes_type_0 = data
-                for mensajes_type_0_item_data in (_mensajes_type_0):
-                    mensajes_type_0_item = Mensaje.from_dict(mensajes_type_0_item_data)
+                mensajes_type_1 = []
+                _mensajes_type_1 = data
+                for mensajes_type_1_item_data in (_mensajes_type_1):
+                    mensajes_type_1_item = Mensaje.from_dict(mensajes_type_1_item_data)
 
 
 
-                    mensajes_type_0.append(mensajes_type_0_item)
+                    mensajes_type_1.append(mensajes_type_1_item)
 
-                return mensajes_type_0
+                return mensajes_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(list[Mensaje] | None | Unset, data)

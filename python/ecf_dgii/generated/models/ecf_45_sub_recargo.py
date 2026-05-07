@@ -24,9 +24,6 @@ T = TypeVar("T", bound="Ecf45SubRecargo")
 @_attrs_define
 class Ecf45SubRecargo:
     """ 
-        Example:
-            {'subRecargoPorcentaje': None, 'tipoSubRecargo': None, 'montoSubRecargo': None}
-
         Attributes:
             tipo_sub_recargo (Ecf45TipoDescuentoRecargoType):
             sub_recargo_porcentaje (float | None | str | Unset):

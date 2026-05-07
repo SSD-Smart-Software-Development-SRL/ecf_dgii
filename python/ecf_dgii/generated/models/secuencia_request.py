@@ -21,9 +21,6 @@ T = TypeVar("T", bound="SecuenciaRequest")
 @_attrs_define
 class SecuenciaRequest:
     """ 
-        Example:
-            {'hastaEncf': 'hastaEncf', 'desdeEncf': 'desdeEncf'}
-
         Attributes:
             desde_encf (str):
             hasta_encf (str):

@@ -26,13 +26,6 @@ T = TypeVar("T", bound="CompanyResponse")
 @_attrs_define
 class CompanyResponse:
     """ 
-        Example:
-            {'legalName': 'legalName', 'updatedBy': 'updatedBy', 'receptorId': 'receptorId', 'createdBy': 'createdBy',
-                'rnc': 'rnc', 'name': 'name', 'tenantId': '046b6c7f-0b8a-43b9-b35d-6489e6daee91', 'updatedOn':
-                datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0), '+00:00')),
-                'createdOn': datetime.datetime(2000, 1, 23, 4, 56, 7, tzinfo=datetime.timezone(datetime.timedelta(0),
-                '+00:00'))}
-
         Attributes:
             rnc (str | Unset):
             legal_name (str | Unset):
@@ -43,6 +36,9 @@ class CompanyResponse:
             updated_by (str | Unset):
             tenant_id (UUID | Unset):
             receptor_id (str | Unset):
+            url_recepcion (None | str | Unset):
+            url_aprobacion_comercial (None | str | Unset):
+            url_autenticacion (None | str | Unset):
      """
 
     rnc: str | Unset = UNSET
@@ -54,6 +50,9 @@ class CompanyResponse:
     updated_by: str | Unset = UNSET
     tenant_id: UUID | Unset = UNSET
     receptor_id: str | Unset = UNSET
+    url_recepcion: None | str | Unset = UNSET
+    url_aprobacion_comercial: None | str | Unset = UNSET
+    url_autenticacion: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -85,6 +84,24 @@ class CompanyResponse:
 
         receptor_id = self.receptor_id
 
+        url_recepcion: None | str | Unset
+        if isinstance(self.url_recepcion, Unset):
+            url_recepcion = UNSET
+        else:
+            url_recepcion = self.url_recepcion
+
+        url_aprobacion_comercial: None | str | Unset
+        if isinstance(self.url_aprobacion_comercial, Unset):
+            url_aprobacion_comercial = UNSET
+        else:
+            url_aprobacion_comercial = self.url_aprobacion_comercial
+
+        url_autenticacion: None | str | Unset
+        if isinstance(self.url_autenticacion, Unset):
+            url_autenticacion = UNSET
+        else:
+            url_autenticacion = self.url_autenticacion
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -108,6 +125,12 @@ class CompanyResponse:
             field_dict["tenantId"] = tenant_id
         if receptor_id is not UNSET:
             field_dict["receptorId"] = receptor_id
+        if url_recepcion is not UNSET:
+            field_dict["urlRecepcion"] = url_recepcion
+        if url_aprobacion_comercial is not UNSET:
+            field_dict["urlAprobacionComercial"] = url_aprobacion_comercial
+        if url_autenticacion is not UNSET:
+            field_dict["urlAutenticacion"] = url_autenticacion
 
         return field_dict
 
@@ -158,6 +181,36 @@ class CompanyResponse:
 
         receptor_id = d.pop("receptorId", UNSET)
 
+        def _parse_url_recepcion(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        url_recepcion = _parse_url_recepcion(d.pop("urlRecepcion", UNSET))
+
+
+        def _parse_url_aprobacion_comercial(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        url_aprobacion_comercial = _parse_url_aprobacion_comercial(d.pop("urlAprobacionComercial", UNSET))
+
+
+        def _parse_url_autenticacion(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        url_autenticacion = _parse_url_autenticacion(d.pop("urlAutenticacion", UNSET))
+
+
         company_response = cls(
             rnc=rnc,
             legal_name=legal_name,
@@ -168,6 +221,9 @@ class CompanyResponse:
             updated_by=updated_by,
             tenant_id=tenant_id,
             receptor_id=receptor_id,
+            url_recepcion=url_recepcion,
+            url_aprobacion_comercial=url_aprobacion_comercial,
+            url_autenticacion=url_autenticacion,
         )
 
 

@@ -26,9 +26,6 @@ class Mensaje:
     Este modelo se utiliza en las respuestas de consulta de resultado para proporcionar información
     detallada sobre el estado de procesamiento y cualquier mensaje relacionado.
 
-        Example:
-            {'codigo': 1, 'valor': 'El comprobante fue aceptado correctamente'}
-
         Attributes:
             valor (None | str | Unset): Obtiene el valor textual del mensaje que describe el estado o resultado de la
                 validación.

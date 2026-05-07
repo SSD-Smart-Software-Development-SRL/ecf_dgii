@@ -24,12 +24,6 @@ T = TypeVar("T", bound="Ecf41Comprador")
 @_attrs_define
 class Ecf41Comprador:
     """ 
-        Example:
-            {'direccionComprador': 'direccionComprador', 'correoComprador': 'correoComprador', 'responsablePago':
-                'responsablePago', 'informacionAdicionalComprador': 'informacionAdicionalComprador', 'contactoComprador':
-                'contactoComprador', 'provinciaComprador': '', 'razonSocialComprador': 'razonSocialComprador',
-                'municipioComprador': '', 'rncComprador': 'rncComprador', 'codigoInternoComprador': 'codigoInternoComprador'}
-
         Attributes:
             rnc_comprador (str):
             razon_social_comprador (str):

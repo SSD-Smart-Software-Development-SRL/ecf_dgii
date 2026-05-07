@@ -1,10 +1,10 @@
 {
   "name": "ECF Recepcion API",
-  "uid": "4LT5JDPCeM5NtbFFCytVY",
+  "uid": "zx5o0aHEvwHiRvjOpagml",
   "version": "1",
   "items": [
     {
-      "uid": "Tk2o8GbXpeWZwh9vXEFqB",
+      "uid": "5WeduIizUwpZ9xgqJVib8",
       "name": "Autenticacion",
       "type": "folder",
       "root": {
@@ -24,7 +24,7 @@
       },
       "items": [
         {
-          "uid": "VEOiwVExnkzRIZfegSxSb",
+          "uid": "GQBZiEKGpPy780KIPknjO",
           "name": "semilla",
           "type": "http-request",
           "tags": [
@@ -44,7 +44,7 @@
             "headers": [],
             "params": [
               {
-                "uid": "e8EqhgcFX6eh34pgi45co",
+                "uid": "Mr176bnIJj5nTdWAHER9w",
                 "name": "receptorIdentifier",
                 "value": "",
                 "description": "",
@@ -66,8 +66,8 @@
           },
           "examples": [
             {
-              "uid": "yjxlbOm5QYdZOvxmmJt6i",
-              "itemUid": "VEOiwVExnkzRIZfegSxSb",
+              "uid": "USXij3qgSpQ0OrBiIVTYT",
+              "itemUid": "GQBZiEKGpPy780KIPknjO",
               "name": "200 Response",
               "description": "OK",
               "type": "http-request",
@@ -77,7 +77,7 @@
                 "headers": [],
                 "params": [
                   {
-                    "uid": "e8EqhgcFX6eh34pgi45co",
+                    "uid": "Mr176bnIJj5nTdWAHER9w",
                     "name": "receptorIdentifier",
                     "value": "",
                     "description": "",
@@ -109,7 +109,7 @@
           "seq": 1
         },
         {
-          "uid": "aXB9PvkOU771iuSTFO4D9",
+          "uid": "7BbEq1PUxS2bK2cby4nMr",
           "name": "validacionCertificado",
           "type": "http-request",
           "tags": [
@@ -129,7 +129,7 @@
             "headers": [],
             "params": [
               {
-                "uid": "IRrXGYPdYF6eApL2wzOkt",
+                "uid": "vDsKe2HDtiOkJPmWgIShd",
                 "name": "receptorIdentifier",
                 "value": "",
                 "description": "",
@@ -145,7 +145,7 @@
               "formUrlEncoded": [],
               "multipartForm": [
                 {
-                  "uid": "a0jCKswaXRo23KewfPR47",
+                  "uid": "7FlMUpNXbNmRDcp8YKvxJ",
                   "type": "file",
                   "name": "xml",
                   "value": [],
@@ -160,8 +160,8 @@
           },
           "examples": [
             {
-              "uid": "lpqmL1XZOOa0NFBgIuGqu",
-              "itemUid": "aXB9PvkOU771iuSTFO4D9",
+              "uid": "nH1agV8eOKnpKCGRq0uWG",
+              "itemUid": "7BbEq1PUxS2bK2cby4nMr",
               "name": "200 Response",
               "description": "OK",
               "type": "http-request",
@@ -171,7 +171,7 @@
                 "headers": [],
                 "params": [
                   {
-                    "uid": "IRrXGYPdYF6eApL2wzOkt",
+                    "uid": "vDsKe2HDtiOkJPmWgIShd",
                     "name": "receptorIdentifier",
                     "value": "",
                     "description": "",
@@ -188,7 +188,7 @@
                   "formUrlEncoded": [],
                   "multipartForm": [
                     {
-                      "uid": "PQf7CqkKmdsNhkNlLgddB",
+                      "uid": "NoLuYmxfJycxCXHTxutO3",
                       "type": "file",
                       "name": "xml",
                       "value": [],
@@ -203,7 +203,7 @@
                 "statusText": "OK",
                 "headers": [
                   {
-                    "uid": "eQHO2SjnXoIvEF9vyLPzK",
+                    "uid": "ZlU4wZpHAH1IEuz1rX9Dy",
                     "name": "Content-Type",
                     "value": "application/json",
                     "description": "",
@@ -217,8 +217,8 @@
               }
             },
             {
-              "uid": "WZaIsievklaqVjH9Sc1ik",
-              "itemUid": "aXB9PvkOU771iuSTFO4D9",
+              "uid": "ScF1xxmXJiYGPkEL3olKi",
+              "itemUid": "7BbEq1PUxS2bK2cby4nMr",
               "name": "200 Response",
               "description": "OK",
               "type": "http-request",
@@ -228,7 +228,7 @@
                 "headers": [],
                 "params": [
                   {
-                    "uid": "IRrXGYPdYF6eApL2wzOkt",
+                    "uid": "vDsKe2HDtiOkJPmWgIShd",
                     "name": "receptorIdentifier",
                     "value": "",
                     "description": "",
@@ -245,7 +245,7 @@
                   "formUrlEncoded": [],
                   "multipartForm": [
                     {
-                      "uid": "pKJCSn4K4wGLOA6NeisYU",
+                      "uid": "jBxHpuFoRoxovpN17gIfO",
                       "type": "file",
                       "name": "xml",
                       "value": [],
@@ -260,7 +260,7 @@
                 "statusText": "OK",
                 "headers": [
                   {
-                    "uid": "F1shPDh5wAPEHEdQ11fmp",
+                    "uid": "nj91BrctFpo3BidoN5VC8",
                     "name": "Content-Type",
                     "value": "text/xml",
                     "description": "",
@@ -274,8 +274,8 @@
               }
             },
             {
-              "uid": "hwGb6V37dzc0hT4eotgG2",
-              "itemUid": "aXB9PvkOU771iuSTFO4D9",
+              "uid": "Db0PT2qitZn0mFkN4Y41q",
+              "itemUid": "7BbEq1PUxS2bK2cby4nMr",
               "name": "400 Response",
               "description": "Bad Request",
               "type": "http-request",
@@ -285,7 +285,7 @@
                 "headers": [],
                 "params": [
                   {
-                    "uid": "IRrXGYPdYF6eApL2wzOkt",
+                    "uid": "vDsKe2HDtiOkJPmWgIShd",
                     "name": "receptorIdentifier",
                     "value": "",
                     "description": "",
@@ -302,7 +302,7 @@
                   "formUrlEncoded": [],
                   "multipartForm": [
                     {
-                      "uid": "FCqXFmxi9NHnf5X5to4kZ",
+                      "uid": "otAmI8S9UtKxNWlxWOF74",
                       "type": "file",
                       "name": "xml",
                       "value": [],
@@ -317,7 +317,7 @@
                 "statusText": "Bad Request",
                 "headers": [
                   {
-                    "uid": "ZPceL8uQC2xPiG7J3CXkP",
+                    "uid": "oCymQF6DYXVo4MTSD2T67",
                     "name": "Content-Type",
                     "value": "application/json",
                     "description": "",
@@ -331,8 +331,8 @@
               }
             },
             {
-              "uid": "sjiD8TCxN5LTyrXjM2na0",
-              "itemUid": "aXB9PvkOU771iuSTFO4D9",
+              "uid": "OasoBw2l80MbPJK6kAuEm",
+              "itemUid": "7BbEq1PUxS2bK2cby4nMr",
               "name": "401 Response",
               "description": "Unauthorized",
               "type": "http-request",
@@ -342,7 +342,7 @@
                 "headers": [],
                 "params": [
                   {
-                    "uid": "IRrXGYPdYF6eApL2wzOkt",
+                    "uid": "vDsKe2HDtiOkJPmWgIShd",
                     "name": "receptorIdentifier",
                     "value": "",
                     "description": "",
@@ -359,7 +359,7 @@
                   "formUrlEncoded": [],
                   "multipartForm": [
                     {
-                      "uid": "OsLLMDjJ1CJCi12dBWYtj",
+                      "uid": "6ty4czXJMVmWrwhytMGKY",
                       "type": "file",
                       "name": "xml",
                       "value": [],
@@ -374,7 +374,7 @@
                 "statusText": "Unauthorized",
                 "headers": [
                   {
-                    "uid": "Db1vP4miygt4atjenG6DQ",
+                    "uid": "knDjBnYeFo04yT9HeH6HI",
                     "name": "Content-Type",
                     "value": "application/json",
                     "description": "",
@@ -393,7 +393,7 @@
       ]
     },
     {
-      "uid": "LTsSZ0sDsMohxDojlzWQa",
+      "uid": "z4L7RW7CvF11cvfjat6PU",
       "name": "Recepcion",
       "type": "folder",
       "root": {
@@ -413,7 +413,7 @@
       },
       "items": [
         {
-          "uid": "KJ7qpiXO1jeYUmpL4VAmD",
+          "uid": "VmVylnAOp21Jmt43okAuM",
           "name": "recepcion",
           "type": "http-request",
           "tags": [
@@ -433,7 +433,7 @@
             "headers": [],
             "params": [
               {
-                "uid": "vFbRTkVuFyytEvLH1QQlg",
+                "uid": "UsrPfOsCihrhxNzJsp68N",
                 "name": "receptorIdentifier",
                 "value": "",
                 "description": "",
@@ -449,7 +449,7 @@
               "formUrlEncoded": [],
               "multipartForm": [
                 {
-                  "uid": "XW6aUnw5J8M4RLeqCFzTQ",
+                  "uid": "BhVl4C92Bfn2hmYzJsTUX",
                   "type": "file",
                   "name": "xml",
                   "value": [],
@@ -464,8 +464,8 @@
           },
           "examples": [
             {
-              "uid": "bbPMx37OXbifWWfR7sXh3",
-              "itemUid": "KJ7qpiXO1jeYUmpL4VAmD",
+              "uid": "SqWWzQS4k4XvbtOnVKiHk",
+              "itemUid": "VmVylnAOp21Jmt43okAuM",
               "name": "200 Response",
               "description": "OK",
               "type": "http-request",
@@ -475,7 +475,7 @@
                 "headers": [],
                 "params": [
                   {
-                    "uid": "vFbRTkVuFyytEvLH1QQlg",
+                    "uid": "UsrPfOsCihrhxNzJsp68N",
                     "name": "receptorIdentifier",
                     "value": "",
                     "description": "",
@@ -492,7 +492,7 @@
                   "formUrlEncoded": [],
                   "multipartForm": [
                     {
-                      "uid": "qnzrXXeQIqlKYwUchyFxN",
+                      "uid": "NVzdIQAIc90Dnrc1Fet6I",
                       "type": "file",
                       "name": "xml",
                       "value": [],
@@ -513,8 +513,8 @@
               }
             },
             {
-              "uid": "GjgUanSMkrbTOwVvaZ15G",
-              "itemUid": "KJ7qpiXO1jeYUmpL4VAmD",
+              "uid": "GT15G7dnUPWUVRQJzKbek",
+              "itemUid": "VmVylnAOp21Jmt43okAuM",
               "name": "401 Response",
               "description": "Unauthorized",
               "type": "http-request",
@@ -524,7 +524,7 @@
                 "headers": [],
                 "params": [
                   {
-                    "uid": "vFbRTkVuFyytEvLH1QQlg",
+                    "uid": "UsrPfOsCihrhxNzJsp68N",
                     "name": "receptorIdentifier",
                     "value": "",
                     "description": "",
@@ -541,7 +541,7 @@
                   "formUrlEncoded": [],
                   "multipartForm": [
                     {
-                      "uid": "lmRoaLejNanXlFz4GIh7e",
+                      "uid": "6MMr5eULx1LQ8vmHwWJjE",
                       "type": "file",
                       "name": "xml",
                       "value": [],
@@ -556,7 +556,7 @@
                 "statusText": "Unauthorized",
                 "headers": [
                   {
-                    "uid": "wjMHhwCd3i2ZbFecUXRxt",
+                    "uid": "HzIHYgNovRtDStKyYKTuF",
                     "name": "Content-Type",
                     "value": "application/json",
                     "description": "",
@@ -573,7 +573,7 @@
           "seq": 1
         },
         {
-          "uid": "BTN1PbwHrezGq4Yv6aC9q",
+          "uid": "eKEUs5FTrqI3qqoAixRFX",
           "name": "AprobacionComercial",
           "type": "http-request",
           "tags": [
@@ -593,7 +593,7 @@
             "headers": [],
             "params": [
               {
-                "uid": "2FlNcGz0hburD4SPiVfML",
+                "uid": "lIycDnNB221ndFyYJpCUx",
                 "name": "receptorIdentifier",
                 "value": "",
                 "description": "",
@@ -609,7 +609,7 @@
               "formUrlEncoded": [],
               "multipartForm": [
                 {
-                  "uid": "xidwRdpwe5mk5HaQvLHqH",
+                  "uid": "jowKCiJ36Yfm4MXFKh1yZ",
                   "type": "file",
                   "name": "xml",
                   "value": [],
@@ -624,8 +624,8 @@
           },
           "examples": [
             {
-              "uid": "CeeiBH05TJcHIJrxaX1fz",
-              "itemUid": "BTN1PbwHrezGq4Yv6aC9q",
+              "uid": "AkHgGOqjh2cOZFzqUiQy7",
+              "itemUid": "eKEUs5FTrqI3qqoAixRFX",
               "name": "200 Response",
               "description": "OK",
               "type": "http-request",
@@ -635,7 +635,7 @@
                 "headers": [],
                 "params": [
                   {
-                    "uid": "2FlNcGz0hburD4SPiVfML",
+                    "uid": "lIycDnNB221ndFyYJpCUx",
                     "name": "receptorIdentifier",
                     "value": "",
                     "description": "",
@@ -652,7 +652,7 @@
                   "formUrlEncoded": [],
                   "multipartForm": [
                     {
-                      "uid": "4TBRTX8rYgwmoCATjGmkh",
+                      "uid": "hboSiyjzuWCxo73Bxh6MY",
                       "type": "file",
                       "name": "xml",
                       "value": [],
@@ -673,8 +673,8 @@
               }
             },
             {
-              "uid": "4lQAI6aXn4CKToaimJlnI",
-              "itemUid": "BTN1PbwHrezGq4Yv6aC9q",
+              "uid": "3vQa9sOO7ZjMATaFkzsSj",
+              "itemUid": "eKEUs5FTrqI3qqoAixRFX",
               "name": "400 Response",
               "description": "Bad Request",
               "type": "http-request",
@@ -684,7 +684,7 @@
                 "headers": [],
                 "params": [
                   {
-                    "uid": "2FlNcGz0hburD4SPiVfML",
+                    "uid": "lIycDnNB221ndFyYJpCUx",
                     "name": "receptorIdentifier",
                     "value": "",
                     "description": "",
@@ -701,7 +701,7 @@
                   "formUrlEncoded": [],
                   "multipartForm": [
                     {
-                      "uid": "hgNhZ0yHOXfuODa1Yjuud",
+                      "uid": "gZhHNTNHW0C7EXdhRm70v",
                       "type": "file",
                       "name": "xml",
                       "value": [],
@@ -716,7 +716,7 @@
                 "statusText": "Bad Request",
                 "headers": [
                   {
-                    "uid": "lNWU3AcJwPPXf1LfqI8KQ",
+                    "uid": "2JXIgIOG9HrpznTHPfMUj",
                     "name": "Content-Type",
                     "value": "application/json",
                     "description": "",
@@ -730,8 +730,8 @@
               }
             },
             {
-              "uid": "r0wbAOYDSqr8ozbq7iSBX",
-              "itemUid": "BTN1PbwHrezGq4Yv6aC9q",
+              "uid": "yHVU3CXDNLp0C4cD2MFbB",
+              "itemUid": "eKEUs5FTrqI3qqoAixRFX",
               "name": "401 Response",
               "description": "Unauthorized",
               "type": "http-request",
@@ -741,7 +741,7 @@
                 "headers": [],
                 "params": [
                   {
-                    "uid": "2FlNcGz0hburD4SPiVfML",
+                    "uid": "lIycDnNB221ndFyYJpCUx",
                     "name": "receptorIdentifier",
                     "value": "",
                     "description": "",
@@ -758,7 +758,7 @@
                   "formUrlEncoded": [],
                   "multipartForm": [
                     {
-                      "uid": "BWTongSfMK6IFwUqrWj7a",
+                      "uid": "hcN26NgEHcPKCjGXDvZyR",
                       "type": "file",
                       "name": "xml",
                       "value": [],
@@ -773,7 +773,7 @@
                 "statusText": "Unauthorized",
                 "headers": [
                   {
-                    "uid": "hbSBnas9bWR0vbRp6gUik",
+                    "uid": "BbSSw5VRGmTBgT1MQDkEx",
                     "name": "Content-Type",
                     "value": "application/json",
                     "description": "",
@@ -794,11 +794,11 @@
   ],
   "environments": [
     {
-      "uid": "rAR7vKJihiRgu3F9gnKNf",
+      "uid": "zsTR1huNxtEAyIbSKSiMl",
       "name": "Environment 1",
       "variables": [
         {
-          "uid": "8XenLcJMHRXZoWkTv2ZzA",
+          "uid": "9oQapHK7xOSBwrgxhRZCI",
           "name": "baseUrl",
           "value": "https://recepcion.test.ecfx.ssd.com.do",
           "type": "text",
@@ -808,11 +808,11 @@
       ]
     },
     {
-      "uid": "jKhIgUxT9EaUn2888n7lx",
+      "uid": "JcyLpEsRpwtdX0DMaBlhV",
       "name": "Environment 2",
       "variables": [
         {
-          "uid": "f3T3rLcBcm8LFU3gdCews",
+          "uid": "PDG1qENd776C7QfSh1tvC",
           "name": "baseUrl",
           "value": "https://recepcion.cert.ecfx.ssd.com.do",
           "type": "text",
@@ -822,11 +822,11 @@
       ]
     },
     {
-      "uid": "bojXFK1zUJAn1OqNcVorx",
+      "uid": "k5Gi4RFKNbSxhM1XiC8mG",
       "name": "Environment 3",
       "variables": [
         {
-          "uid": "Un7NNJKgRddB3ecoZTHmZ",
+          "uid": "1YdrR99CZ1k9FleoFsk6W",
           "name": "baseUrl",
           "value": "https://recepcion.prod.ecfx.ssd.com.do",
           "type": "text",

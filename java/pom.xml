@@ -5,7 +5,7 @@
     <artifactId>ecf-dgii-sdk-java</artifactId>
     <packaging>jar</packaging>
     <name>ecf-dgii-sdk-java</name>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
     <url>https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii</url>
     <description>SDK de Java para la API de ECF DGII (comprobantes fiscales electrónicos de República Dominicana)</description>
     <scm>

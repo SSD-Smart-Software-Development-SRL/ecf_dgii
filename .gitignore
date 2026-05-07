@@ -384,3 +384,131 @@ __pycache__/
 
 # Claude Code
 .claude/
+
+### OS files ###
+
+# macOS
+.DS_Store
+.DS_Store?
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+Icon?
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+### Editor files ###
+
+# Vim
+*.swp
+*.swo
+*.swn
+*.swm
+.*.sw[a-p]
+Session.vim
+Sessionx.vim
+.netrwhist
+tags
+[._]*.un~
+
+# Emacs
+*~
+\#*\#
+.\#*
+.emacs.desktop
+.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+
+# VS Code
+.vscode/
+.vscode-test/
+*.code-workspace
+.history/
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# TextMate
+*.tmproj
+*.tmproject
+tmtags
+
+# Eclipse
+.metadata
+.classpath
+.project
+.settings/
+.loadpath
+.recommenders
+.target
+.springBeans
+.factorypath
+.apt_generated/
+
+# NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+### Office / temp files ###
+
+# Microsoft Office
+~$*.doc*
+~$*.xls*
+~$*.ppt*
+~$*.vsd*
+~$*.mpp*
+*.~vsd
+*.~vsdx
+*.~xlsm
+
+# LibreOffice
+.~lock.*#
+
+# Generic temp/backup
+*.bak
+*.backup
+*.orig
+*.old
+*.tmp
+*.temp

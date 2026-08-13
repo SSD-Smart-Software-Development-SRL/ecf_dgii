@@ -16,34 +16,34 @@ pip install ecf-dgii
 
 ```python
 import asyncio
-from ecf_dgii import EcfClient, ECF, Encabezado, IdDoc, Emisor, Totales, Item, Comprador, FormaDePago, DescuentoORecargo, ImpuestoAdicional, ImpuestoAdicional2
+from ecf_dgii import EcfClient, Ecf31ECF, Ecf31Encabezado, Ecf31IdDoc, Ecf31Emisor, Ecf31Totales, Ecf31Item, Ecf31Comprador, Ecf31FormaDePago, Ecf31DescuentoORecargo, Ecf31ImpuestoAdicional, Ecf31ImpuestoAdicional2, EcfEstadoType1 as EstadoType
 
 async def main():
     async with EcfClient(api_key="tu-token-jwt", environment="test") as client:
         # Enviar un ECF con enrutamiento automático y polling
-        ecf = ECF(
-            encabezado=Encabezado(
-                version="Version1_0",
-                idDoc=IdDoc(
+        ecf = Ecf31ECF(
+            encabezado=Ecf31Encabezado(
+                version=Ecf31VersionType.VERSION1_0,
+                idDoc=Ecf31IdDoc(
                     tipoeCF="FacturaDeCreditoFiscalElectronica",
                     encf="E310000051630",
                     tipoPago="Contado",
                     tipoIngresos="01",
-                    tablaFormasPago=[FormaDePago(formaPago="Efectivo", montoPago=1015.25)],
+                    tablaFormasPago=[Ecf31FormaDePago(formaPago="Efectivo", montoPago=1015.25)],
                     indicadorMontoGravado="ConITBISIncluido",
                     fechaVencimientoSecuencia="2028-12-31T00:00:00",
                 ),
-                emisor=Emisor(
+                emisor=Ecf31Emisor(
                     rncEmisor="131460941",
                     razonSocialEmisor="DOCUMENTOS ELECTRONICOS DE 02",
                     direccionEmisor="AVE. ISABEL AGUIAR NO. 269, ZONA INDUSTRIAL DE HERRERA",
                     fechaEmision="2026-01-10",
                 ),
-                comprador=Comprador(
+                comprador=Ecf31Comprador(
                     rncComprador="131880681",
                     razonSocialComprador="DOCUMENTOS ELECTRONICOS DE 03",
                 ),
-                totales=Totales(
+                totales=Ecf31Totales(
                     ITBIS1=18,
                     montoGravadoI1=762.71,
                     montoGravadoTotal=762.71,
@@ -51,7 +51,7 @@ async def main():
                     totalITBIS=137.29,
                     montoNoFacturable=100.0,
                     impuestosAdicionales=[
-                        ImpuestoAdicional2(
+                        Ecf31ImpuestoAdicional2(
                             tipoImpuesto="002",
                             tasaImpuestoAdicional=2,
                             otrosImpuestosAdicionales=15.25,
@@ -63,7 +63,7 @@ async def main():
                 ),
             ),
             detallesItems=[
-                Item(
+                Ecf31Item(
                     numeroLinea=1,
                     nombreItem="Iphone 18 Pro max",
                     indicadorFacturacion="ITBIS1_18Percent",
@@ -72,9 +72,9 @@ async def main():
                     unidadMedida="Unidad",
                     precioUnitarioItem=1016.95,
                     montoItem=1016.95,
-                    tablaImpuestoAdicional=[ImpuestoAdicional(tipoImpuesto="002")],
+                    tablaImpuestoAdicional=[Ecf31ImpuestoAdicional(tipoImpuesto="002")],
                 ),
-                Item(
+                Ecf31Item(
                     numeroLinea=2,
                     nombreItem="Costo de Envío",
                     indicadorFacturacion="NoFacturable_18Percent",
@@ -86,7 +86,7 @@ async def main():
                 ),
             ],
             descuentosORecargos=[
-                DescuentoORecargo(
+                Ecf31DescuentoORecargo(
                     tipoValor="$",
                     tipoAjuste="D",
                     numeroLinea=1,
@@ -98,7 +98,7 @@ async def main():
         )
 
         result = await client.send_ecf(ecf)
-        print(f"ECF aceptado: {result.encf} - Estatus: {result.estatus}")
+        print(f"ECF enviado: {result.encf} - Progress: {result.progress}")
 
 asyncio.run(main())
 ```
@@ -332,12 +332,15 @@ await client.delete_company("123456789")
 ### Gestión de certificados
 
 ```python
-# Obtener certificados
-certs = await client.get_certificate("123456789")
+# Obtener certificado
+cert = await client.get_certificate("123456789")
 
 # Subir certificado
-with open("cert.p12", "rb") as f:
-    await client.update_certificate("123456789", f, password="cert-password")
+await client.update_certificate(
+    "123456789",
+    certificate=open("cert.p12", "rb").read(),
+    password="mi-password",
+)
 ```
 
 ### Consultar ECFs
@@ -361,10 +364,10 @@ page = await client.search_ecfs(
 
 ```python
 from ecf_dgii import SendAcecfRequest, EstadoType
+from uuid import uuid4
 await client.aprobacion_comercial(
-    "123456789",
-    "E310000000001",
-    SendAcecfRequest(estadoType=EstadoType.ECF_ACEPTADO),
+    uuid4(),
+    SendAcecfRequest(estado_type=EstadoType.ECF_ACEPTADO),
 )
 ```
 
@@ -425,7 +428,7 @@ except EcfValidationError as e:
 except EcfAuthenticationError:
     print("API key inválido")
 except EcfProcessingError as e:
-    print(f"DGII rechazó: {e.response.errors}")
+    print(f"DGII rechazó: {e.message}")
 except PollingTimeoutError:
     print("El procesamiento tomó demasiado tiempo")
 except EcfApiError as e:

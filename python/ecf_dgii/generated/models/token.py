@@ -1,43 +1,28 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
-
-
-
-
-
-
 T = TypeVar("T", bound="Token")
-
 
 
 @_attrs_define
 class Token:
-    """ 
-        Attributes:
-            jwt (str):
-            valid_from (datetime.datetime):
-            valid_to (datetime.datetime):
-     """
+    """
+    Attributes:
+        jwt (str):
+        valid_from (datetime.datetime):
+        valid_to (datetime.datetime):
+    """
 
     jwt: str
     valid_from: datetime.datetime
     valid_to: datetime.datetime
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         jwt = self.jwt
@@ -46,40 +31,32 @@ class Token:
 
         valid_to = self.valid_to.isoformat()
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "jwt": jwt,
-            "validFrom": valid_from,
-            "validTo": valid_to,
-        })
+        field_dict.update(
+            {
+                "jwt": jwt,
+                "validFrom": valid_from,
+                "validTo": valid_to,
+            }
+        )
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         jwt = d.pop("jwt")
 
-        valid_from = isoparse(d.pop("validFrom"))
+        valid_from = datetime.datetime.fromisoformat(d.pop("validFrom"))
 
-
-
-
-        valid_to = isoparse(d.pop("validTo"))
-
-
-
+        valid_to = datetime.datetime.fromisoformat(d.pop("validTo"))
 
         token = cls(
             jwt=jwt,
             valid_from=valid_from,
             valid_to=valid_to,
         )
-
 
         token.additional_properties = d
         return token

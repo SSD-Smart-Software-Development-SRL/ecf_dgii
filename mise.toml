@@ -1,0 +1,48 @@
+[tools]
+dotnet = "10.0.105"
+node = "22.22.3"
+pnpm = "11.6.0"
+python = "3.12"
+java = "temurin-17"
+ruby = "3.4"
+kiota = "1.32.2"
+
+[tasks."regen"]
+description = "Regenera todos los SDKs del monorepo"
+run = "./scripts/regenerate-all.sh"
+
+[tasks."regen:dotnet"]
+description = "Regenera el SDK de .NET"
+run = "./scripts/regenerate-all.sh dotnet"
+
+[tasks."regen:typescript"]
+description = "Regenera el SDK de TypeScript"
+run = "./scripts/regenerate-all.sh typescript"
+
+[tasks."regen:react"]
+description = "Regenera el SDK de React"
+run = "./scripts/regenerate-all.sh react"
+
+[tasks."regen:python"]
+description = "Regenera el SDK de Python"
+run = "./scripts/regenerate-all.sh python"
+
+[tasks."regen:java"]
+description = "Regenera el SDK de Java"
+run = "./scripts/regenerate-all.sh java"
+
+[tasks."regen:kotlin"]
+description = "Regenera el SDK de Kotlin"
+run = "./scripts/regenerate-all.sh kotlin"
+
+[tasks."regen:ios"]
+description = "Regenera el SDK de iOS (Solo macOS)"
+run = "./scripts/regenerate-all.sh ios"
+
+[tasks."regen:cpp"]
+description = "Regenera el SDK de C++"
+run = "./scripts/regenerate-all.sh cpp"
+
+[tasks."regen:bruno"]
+description = "Actualiza las colecciones de Bruno"
+run = "./scripts/regenerate-all.sh bruno"

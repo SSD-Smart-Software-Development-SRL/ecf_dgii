@@ -1,63 +1,55 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
 
 from ..models.all_tipo_ecf_types import AllTipoECFTypes
 from ..models.dgii_environment import DGIIEnvironment
 from ..models.ecf_estado_type_1 import EcfEstadoType1
 from ..models.ecf_progress import EcfProgress
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-from uuid import UUID
-import datetime
 
 if TYPE_CHECKING:
-  from ..models.acecf_summary_dto import AcecfSummaryDto
-
-
-
+    from ..models.acecf_summary_dto import AcecfSummaryDto
 
 
 T = TypeVar("T", bound="EcfResponse")
 
 
-
 @_attrs_define
 class EcfResponse:
-    """ 
-        Attributes:
-            message_id (UUID):
-            timestamp (datetime.datetime):
-            fecha_emision (datetime.date):
-            queue_name (str):
-            include_ecf_content (bool):
-            ecf_content (str):
-            tipo_ecf (AllTipoECFTypes):
-            encf (str):
-            rnc_emisor (str):
-            rnc_receptor (None | str):
-            monto_total (float | str):
-            file_name (None | str):
-            tenant_id (UUID):
-            estatus (EcfEstadoType1 | None):
-            cod_sec (None | str):
-            fecha_firma (datetime.datetime | None):
-            mensaje (None | str):
-            errors (None | str):
-            progress (EcfProgress):
-            emisor_receptor_errors (None | str):
-            secuencia_utilizada (bool | None):
-            dgii_environment (DGIIEnvironment):
-            acecfs (list[AcecfSummaryDto] | Unset): ACECFs received from the receptor for this outbound ECF.
-            impresion_url (None | str | Unset):
-     """
+    """
+    Attributes:
+        message_id (UUID):
+        timestamp (datetime.datetime):
+        fecha_emision (datetime.date):
+        queue_name (str):
+        include_ecf_content (bool):
+        ecf_content (str):
+        tipo_ecf (AllTipoECFTypes):
+        encf (str):
+        rnc_emisor (str):
+        rnc_receptor (None | str):
+        monto_total (float | str):
+        file_name (None | str):
+        tenant_id (UUID):
+        estatus (EcfEstadoType1 | None):
+        cod_sec (None | str):
+        fecha_firma (datetime.datetime | None):
+        mensaje (None | str):
+        errors (None | str):
+        progress (EcfProgress):
+        emisor_receptor_errors (None | str):
+        secuencia_utilizada (bool | None):
+        dgii_environment (DGIIEnvironment):
+        acecfs (list[AcecfSummaryDto] | Unset): ACECFs received from the receptor for this outbound ECF.
+        impresion_url (None | str | Unset):
+    """
 
     message_id: UUID
     timestamp: datetime.datetime
@@ -85,12 +77,7 @@ class EcfResponse:
     impresion_url: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.acecf_summary_dto import AcecfSummaryDto
         message_id = str(self.message_id)
 
         timestamp = self.timestamp.isoformat()
@@ -158,41 +145,40 @@ class EcfResponse:
                 acecfs_item = acecfs_item_data.to_dict()
                 acecfs.append(acecfs_item)
 
-
-
         impresion_url: None | str | Unset
         if isinstance(self.impresion_url, Unset):
             impresion_url = UNSET
         else:
             impresion_url = self.impresion_url
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "messageId": message_id,
-            "timestamp": timestamp,
-            "fechaEmision": fecha_emision,
-            "queueName": queue_name,
-            "includeEcfContent": include_ecf_content,
-            "ecfContent": ecf_content,
-            "tipoEcf": tipo_ecf,
-            "encf": encf,
-            "rncEmisor": rnc_emisor,
-            "rncReceptor": rnc_receptor,
-            "montoTotal": monto_total,
-            "fileName": file_name,
-            "tenantId": tenant_id,
-            "estatus": estatus,
-            "codSec": cod_sec,
-            "fechaFirma": fecha_firma,
-            "mensaje": mensaje,
-            "errors": errors,
-            "progress": progress,
-            "emisorReceptorErrors": emisor_receptor_errors,
-            "secuenciaUtilizada": secuencia_utilizada,
-            "dgiiEnvironment": dgii_environment,
-        })
+        field_dict.update(
+            {
+                "messageId": message_id,
+                "timestamp": timestamp,
+                "fechaEmision": fecha_emision,
+                "queueName": queue_name,
+                "includeEcfContent": include_ecf_content,
+                "ecfContent": ecf_content,
+                "tipoEcf": tipo_ecf,
+                "encf": encf,
+                "rncEmisor": rnc_emisor,
+                "rncReceptor": rnc_receptor,
+                "montoTotal": monto_total,
+                "fileName": file_name,
+                "tenantId": tenant_id,
+                "estatus": estatus,
+                "codSec": cod_sec,
+                "fechaFirma": fecha_firma,
+                "mensaje": mensaje,
+                "errors": errors,
+                "progress": progress,
+                "emisorReceptorErrors": emisor_receptor_errors,
+                "secuenciaUtilizada": secuencia_utilizada,
+                "dgiiEnvironment": dgii_environment,
+            }
+        )
         if acecfs is not UNSET:
             field_dict["acecfs"] = acecfs
         if impresion_url is not UNSET:
@@ -200,26 +186,16 @@ class EcfResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.acecf_summary_dto import AcecfSummaryDto
+
         d = dict(src_dict)
         message_id = UUID(d.pop("messageId"))
 
+        timestamp = datetime.datetime.fromisoformat(d.pop("timestamp"))
 
-
-
-        timestamp = isoparse(d.pop("timestamp"))
-
-
-
-
-        fecha_emision = isoparse(d.pop("fechaEmision")).date()
-
-
-
+        fecha_emision = datetime.date.fromisoformat(d.pop("fechaEmision"))
 
         queue_name = d.pop("queueName")
 
@@ -228,9 +204,6 @@ class EcfResponse:
         ecf_content = d.pop("ecfContent")
 
         tipo_ecf = AllTipoECFTypes(d.pop("tipoEcf"))
-
-
-
 
         encf = d.pop("encf")
 
@@ -243,12 +216,10 @@ class EcfResponse:
 
         rnc_receptor = _parse_rnc_receptor(d.pop("rncReceptor"))
 
-
         def _parse_monto_total(data: object) -> float | str:
             return cast(float | str, data)
 
         monto_total = _parse_monto_total(d.pop("montoTotal"))
-
 
         def _parse_file_name(data: object) -> None | str:
             if data is None:
@@ -257,11 +228,7 @@ class EcfResponse:
 
         file_name = _parse_file_name(d.pop("fileName"))
 
-
         tenant_id = UUID(d.pop("tenantId"))
-
-
-
 
         def _parse_estatus(data: object) -> EcfEstadoType1 | None:
             if data is None:
@@ -271,15 +238,12 @@ class EcfResponse:
                     raise TypeError()
                 componentsschemas_ecf_estado_type_1 = EcfEstadoType1(data)
 
-
-
                 return componentsschemas_ecf_estado_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(EcfEstadoType1 | None, data)
 
         estatus = _parse_estatus(d.pop("estatus"))
-
 
         def _parse_cod_sec(data: object) -> None | str:
             if data is None:
@@ -288,16 +252,13 @@ class EcfResponse:
 
         cod_sec = _parse_cod_sec(d.pop("codSec"))
 
-
         def _parse_fecha_firma(data: object) -> datetime.datetime | None:
             if data is None:
                 return data
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_firma_type_1 = isoparse(data)
-
-
+                fecha_firma_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_firma_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -306,14 +267,12 @@ class EcfResponse:
 
         fecha_firma = _parse_fecha_firma(d.pop("fechaFirma"))
 
-
         def _parse_mensaje(data: object) -> None | str:
             if data is None:
                 return data
             return cast(None | str, data)
 
         mensaje = _parse_mensaje(d.pop("mensaje"))
-
 
         def _parse_errors(data: object) -> None | str:
             if data is None:
@@ -322,11 +281,7 @@ class EcfResponse:
 
         errors = _parse_errors(d.pop("errors"))
 
-
         progress = EcfProgress(d.pop("progress"))
-
-
-
 
         def _parse_emisor_receptor_errors(data: object) -> None | str:
             if data is None:
@@ -335,7 +290,6 @@ class EcfResponse:
 
         emisor_receptor_errors = _parse_emisor_receptor_errors(d.pop("emisorReceptorErrors"))
 
-
         def _parse_secuencia_utilizada(data: object) -> bool | None:
             if data is None:
                 return data
@@ -343,11 +297,7 @@ class EcfResponse:
 
         secuencia_utilizada = _parse_secuencia_utilizada(d.pop("secuenciaUtilizada"))
 
-
         dgii_environment = DGIIEnvironment(d.pop("dgiiEnvironment"))
-
-
-
 
         _acecfs = d.pop("acecfs", UNSET)
         acecfs: list[AcecfSummaryDto] | Unset = UNSET
@@ -356,10 +306,7 @@ class EcfResponse:
             for acecfs_item_data in _acecfs:
                 acecfs_item = AcecfSummaryDto.from_dict(acecfs_item_data)
 
-
-
                 acecfs.append(acecfs_item)
-
 
         def _parse_impresion_url(data: object) -> None | str | Unset:
             if data is None:
@@ -369,7 +316,6 @@ class EcfResponse:
             return cast(None | str | Unset, data)
 
         impresion_url = _parse_impresion_url(d.pop("impresionUrl", UNSET))
-
 
         ecf_response = cls(
             message_id=message_id,
@@ -397,7 +343,6 @@ class EcfResponse:
             acecfs=acecfs,
             impresion_url=impresion_url,
         )
-
 
         ecf_response.additional_properties = d
         return ecf_response

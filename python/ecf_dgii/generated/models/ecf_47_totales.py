@@ -1,37 +1,28 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="Ecf47Totales")
-
 
 
 @_attrs_define
 class Ecf47Totales:
-    """ 
-        Attributes:
-            monto_total (float | str):
-            monto_exento (float | None | str | Unset):
-            monto_periodo (float | None | str | Unset):
-            saldo_anterior (float | None | str | Unset):
-            monto_avance_pago (float | None | str | Unset):
-            valor_pagar (float | None | str | Unset):
-            total_isr_retencion (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        monto_total (float | str):
+        monto_exento (float | None | str | Unset):
+        monto_periodo (float | None | str | Unset):
+        saldo_anterior (float | None | str | Unset):
+        monto_avance_pago (float | None | str | Unset):
+        valor_pagar (float | None | str | Unset):
+        total_isr_retencion (float | None | str | Unset):
+    """
 
     monto_total: float | str
     monto_exento: float | None | str | Unset = UNSET
@@ -41,10 +32,6 @@ class Ecf47Totales:
     valor_pagar: float | None | str | Unset = UNSET
     total_isr_retencion: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         monto_total: float | str
@@ -86,12 +73,13 @@ class Ecf47Totales:
         else:
             total_isr_retencion = self.total_isr_retencion
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "montoTotal": monto_total,
-        })
+        field_dict.update(
+            {
+                "montoTotal": monto_total,
+            }
+        )
         if monto_exento is not UNSET:
             field_dict["montoExento"] = monto_exento
         if monto_periodo is not UNSET:
@@ -107,16 +95,14 @@ class Ecf47Totales:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_monto_total(data: object) -> float | str:
             return cast(float | str, data)
 
         monto_total = _parse_monto_total(d.pop("montoTotal"))
-
 
         def _parse_monto_exento(data: object) -> float | None | str | Unset:
             if data is None:
@@ -127,7 +113,6 @@ class Ecf47Totales:
 
         monto_exento = _parse_monto_exento(d.pop("montoExento", UNSET))
 
-
         def _parse_monto_periodo(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -136,7 +121,6 @@ class Ecf47Totales:
             return cast(float | None | str | Unset, data)
 
         monto_periodo = _parse_monto_periodo(d.pop("montoPeriodo", UNSET))
-
 
         def _parse_saldo_anterior(data: object) -> float | None | str | Unset:
             if data is None:
@@ -147,7 +131,6 @@ class Ecf47Totales:
 
         saldo_anterior = _parse_saldo_anterior(d.pop("saldoAnterior", UNSET))
 
-
         def _parse_monto_avance_pago(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -156,7 +139,6 @@ class Ecf47Totales:
             return cast(float | None | str | Unset, data)
 
         monto_avance_pago = _parse_monto_avance_pago(d.pop("montoAvancePago", UNSET))
-
 
         def _parse_valor_pagar(data: object) -> float | None | str | Unset:
             if data is None:
@@ -167,7 +149,6 @@ class Ecf47Totales:
 
         valor_pagar = _parse_valor_pagar(d.pop("valorPagar", UNSET))
 
-
         def _parse_total_isr_retencion(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -176,7 +157,6 @@ class Ecf47Totales:
             return cast(float | None | str | Unset, data)
 
         total_isr_retencion = _parse_total_isr_retencion(d.pop("totalISRRetencion", UNSET))
-
 
         ecf_47_totales = cls(
             monto_total=monto_total,
@@ -187,7 +167,6 @@ class Ecf47Totales:
             valor_pagar=valor_pagar,
             total_isr_retencion=total_isr_retencion,
         )
-
 
         ecf_47_totales.additional_properties = d
         return ecf_47_totales

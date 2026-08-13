@@ -1,30 +1,23 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
 if TYPE_CHECKING:
-  from ..models.mensaje import Mensaje
-
-
-
+    from ..models.mensaje import Mensaje
 
 
 T = TypeVar("T", bound="RespuestaConsultaTrackId")
 
 
-
 @_attrs_define
 class RespuestaConsultaTrackId:
-    """ Representa la respuesta del servicio de consulta de resultado de comprobantes fiscales electrónicos (e-CF).
+    """Representa la respuesta del servicio de consulta de resultado de comprobantes fiscales electrónicos (e-CF).
     Este modelo contiene la información completa sobre el estado de procesamiento y validación de un e-CF
     que fue enviado previamente mediante el servicio de recepción.
 
@@ -72,7 +65,7 @@ class RespuestaConsultaTrackId:
                 recibido.
                 Un array de mensajes que proporcionan información detallada sobre el estado
                 de validación. Puede ser null si no hay mensajes disponibles.
-     """
+    """
 
     track_id: None | str | Unset = UNSET
     codigo: None | str | Unset = UNSET
@@ -84,12 +77,7 @@ class RespuestaConsultaTrackId:
     mensajes: list[Mensaje] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.mensaje import Mensaje
         track_id: None | str | Unset
         if isinstance(self.track_id, Unset):
             track_id = UNSET
@@ -137,15 +125,12 @@ class RespuestaConsultaTrackId:
                 mensajes_type_1_item = mensajes_type_1_item_data.to_dict()
                 mensajes.append(mensajes_type_1_item)
 
-
         else:
             mensajes = self.mensajes
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if track_id is not UNSET:
             field_dict["trackId"] = track_id
         if codigo is not UNSET:
@@ -165,12 +150,12 @@ class RespuestaConsultaTrackId:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.mensaje import Mensaje
+
         d = dict(src_dict)
+
         def _parse_track_id(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -179,7 +164,6 @@ class RespuestaConsultaTrackId:
             return cast(None | str | Unset, data)
 
         track_id = _parse_track_id(d.pop("trackId", UNSET))
-
 
         def _parse_codigo(data: object) -> None | str | Unset:
             if data is None:
@@ -190,7 +174,6 @@ class RespuestaConsultaTrackId:
 
         codigo = _parse_codigo(d.pop("codigo", UNSET))
 
-
         def _parse_estado(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -199,7 +182,6 @@ class RespuestaConsultaTrackId:
             return cast(None | str | Unset, data)
 
         estado = _parse_estado(d.pop("estado", UNSET))
-
 
         def _parse_rnc(data: object) -> None | str | Unset:
             if data is None:
@@ -210,7 +192,6 @@ class RespuestaConsultaTrackId:
 
         rnc = _parse_rnc(d.pop("rnc", UNSET))
 
-
         def _parse_encf(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -219,7 +200,6 @@ class RespuestaConsultaTrackId:
             return cast(None | str | Unset, data)
 
         encf = _parse_encf(d.pop("encf", UNSET))
-
 
         secuencia_utilizada = d.pop("secuenciaUtilizada", UNSET)
 
@@ -232,7 +212,6 @@ class RespuestaConsultaTrackId:
 
         fecha_recepcion = _parse_fecha_recepcion(d.pop("fechaRecepcion", UNSET))
 
-
         def _parse_mensajes(data: object) -> list[Mensaje] | None | Unset:
             if data is None:
                 return data
@@ -243,10 +222,8 @@ class RespuestaConsultaTrackId:
                     raise TypeError()
                 mensajes_type_1 = []
                 _mensajes_type_1 = data
-                for mensajes_type_1_item_data in (_mensajes_type_1):
+                for mensajes_type_1_item_data in _mensajes_type_1:
                     mensajes_type_1_item = Mensaje.from_dict(mensajes_type_1_item_data)
-
-
 
                     mensajes_type_1.append(mensajes_type_1_item)
 
@@ -256,7 +233,6 @@ class RespuestaConsultaTrackId:
             return cast(list[Mensaje] | None | Unset, data)
 
         mensajes = _parse_mensajes(d.pop("mensajes", UNSET))
-
 
         respuesta_consulta_track_id = cls(
             track_id=track_id,
@@ -268,7 +244,6 @@ class RespuestaConsultaTrackId:
             fecha_recepcion=fecha_recepcion,
             mensajes=mensajes,
         )
-
 
         respuesta_consulta_track_id.additional_properties = d
         return respuesta_consulta_track_id

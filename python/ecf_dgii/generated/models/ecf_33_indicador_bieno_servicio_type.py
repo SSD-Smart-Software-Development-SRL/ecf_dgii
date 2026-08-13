@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Ecf33IndicadorBienoServicioType(str, Enum):
     BIEN = "Bien"
     SERVICIO = "Servicio"

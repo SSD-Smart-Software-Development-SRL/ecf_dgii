@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class AllTipoECFTypes(str, Enum):
     ACECF = "ACECF"
     ANECF = "ANECF"

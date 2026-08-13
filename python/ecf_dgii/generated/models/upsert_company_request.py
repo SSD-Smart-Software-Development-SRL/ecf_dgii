@@ -1,39 +1,30 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="UpsertCompanyRequest")
-
 
 
 @_attrs_define
 class UpsertCompanyRequest:
-    """ 
-        Attributes:
-            rnc (str):
-            name (str):
-            employee_count (None | str | Unset):
-            estimated_invoices (None | str | Unset):
-            legal_rep_first_name (None | str | Unset):
-            legal_rep_last_name (None | str | Unset):
-            address (None | str | Unset):
-            certification_declared (bool | None | Unset):
-            certification_status (None | str | Unset):
-     """
+    """
+    Attributes:
+        rnc (str):
+        name (str):
+        employee_count (None | str | Unset):
+        estimated_invoices (None | str | Unset):
+        legal_rep_first_name (None | str | Unset):
+        legal_rep_last_name (None | str | Unset):
+        address (None | str | Unset):
+        certification_declared (bool | None | Unset):
+        certification_status (None | str | Unset):
+    """
 
     rnc: str
     name: str
@@ -45,10 +36,6 @@ class UpsertCompanyRequest:
     certification_declared: bool | None | Unset = UNSET
     certification_status: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         rnc = self.rnc
@@ -97,13 +84,14 @@ class UpsertCompanyRequest:
         else:
             certification_status = self.certification_status
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "rnc": rnc,
-            "name": name,
-        })
+        field_dict.update(
+            {
+                "rnc": rnc,
+                "name": name,
+            }
+        )
         if employee_count is not UNSET:
             field_dict["employeeCount"] = employee_count
         if estimated_invoices is not UNSET:
@@ -121,8 +109,6 @@ class UpsertCompanyRequest:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -139,7 +125,6 @@ class UpsertCompanyRequest:
 
         employee_count = _parse_employee_count(d.pop("employeeCount", UNSET))
 
-
         def _parse_estimated_invoices(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -148,7 +133,6 @@ class UpsertCompanyRequest:
             return cast(None | str | Unset, data)
 
         estimated_invoices = _parse_estimated_invoices(d.pop("estimatedInvoices", UNSET))
-
 
         def _parse_legal_rep_first_name(data: object) -> None | str | Unset:
             if data is None:
@@ -159,7 +143,6 @@ class UpsertCompanyRequest:
 
         legal_rep_first_name = _parse_legal_rep_first_name(d.pop("legalRepFirstName", UNSET))
 
-
         def _parse_legal_rep_last_name(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -168,7 +151,6 @@ class UpsertCompanyRequest:
             return cast(None | str | Unset, data)
 
         legal_rep_last_name = _parse_legal_rep_last_name(d.pop("legalRepLastName", UNSET))
-
 
         def _parse_address(data: object) -> None | str | Unset:
             if data is None:
@@ -179,7 +161,6 @@ class UpsertCompanyRequest:
 
         address = _parse_address(d.pop("address", UNSET))
 
-
         def _parse_certification_declared(data: object) -> bool | None | Unset:
             if data is None:
                 return data
@@ -189,7 +170,6 @@ class UpsertCompanyRequest:
 
         certification_declared = _parse_certification_declared(d.pop("certificationDeclared", UNSET))
 
-
         def _parse_certification_status(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -198,7 +178,6 @@ class UpsertCompanyRequest:
             return cast(None | str | Unset, data)
 
         certification_status = _parse_certification_status(d.pop("certificationStatus", UNSET))
-
 
         upsert_company_request = cls(
             rnc=rnc,
@@ -211,7 +190,6 @@ class UpsertCompanyRequest:
             certification_declared=certification_declared,
             certification_status=certification_status,
         )
-
 
         upsert_company_request.additional_properties = d
         return upsert_company_request

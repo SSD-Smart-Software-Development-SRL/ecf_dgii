@@ -1,59 +1,51 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
 
 from ..models.ecf_41_indicador_bieno_servicio_type import Ecf41IndicadorBienoServicioType
 from ..models.ecf_41_indicador_facturacion_type import Ecf41IndicadorFacturacionType
 from ..models.unidad_medida_type_type_1 import UnidadMedidaTypeType1
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
 
 if TYPE_CHECKING:
-  from ..models.ecf_41_codigos_item import Ecf41CodigosItem
-  from ..models.ecf_41_otra_moneda_detalle import Ecf41OtraMonedaDetalle
-  from ..models.ecf_41_retencion import Ecf41Retencion
-  from ..models.ecf_41_sub_descuento import Ecf41SubDescuento
-  from ..models.ecf_41_sub_recargo import Ecf41SubRecargo
-
-
-
+    from ..models.ecf_41_codigos_item import Ecf41CodigosItem
+    from ..models.ecf_41_otra_moneda_detalle import Ecf41OtraMonedaDetalle
+    from ..models.ecf_41_retencion import Ecf41Retencion
+    from ..models.ecf_41_sub_descuento import Ecf41SubDescuento
+    from ..models.ecf_41_sub_recargo import Ecf41SubRecargo
 
 
 T = TypeVar("T", bound="Ecf41Item")
 
 
-
 @_attrs_define
 class Ecf41Item:
-    """ 
-        Attributes:
-            numero_linea (int | str):
-            indicador_facturacion (Ecf41IndicadorFacturacionType):
-            retencion (Ecf41Retencion):
-            nombre_item (str):
-            indicador_bieno_servicio (Ecf41IndicadorBienoServicioType):
-            cantidad_item (float | str):
-            precio_unitario_item (float | str):
-            monto_item (float | str):
-            tabla_codigos_item (list[Ecf41CodigosItem] | None | Unset):
-            descripcion_item (None | str | Unset):
-            unidad_medida (None | UnidadMedidaTypeType1 | Unset):
-            fecha_elaboracion (datetime.datetime | None | Unset):
-            fecha_vencimiento_item (datetime.datetime | None | Unset):
-            descuento_monto (float | None | str | Unset):
-            tabla_sub_descuento (list[Ecf41SubDescuento] | None | Unset):
-            recargo_monto (float | None | str | Unset):
-            tabla_sub_recargo (list[Ecf41SubRecargo] | None | Unset):
-            otra_moneda_detalle (Ecf41OtraMonedaDetalle | None | Unset):
-     """
+    """
+    Attributes:
+        numero_linea (int | str):
+        indicador_facturacion (Ecf41IndicadorFacturacionType):
+        retencion (Ecf41Retencion):
+        nombre_item (str):
+        indicador_bieno_servicio (Ecf41IndicadorBienoServicioType):
+        cantidad_item (float | str):
+        precio_unitario_item (float | str):
+        monto_item (float | str):
+        tabla_codigos_item (list[Ecf41CodigosItem] | None | Unset):
+        descripcion_item (None | str | Unset):
+        unidad_medida (None | UnidadMedidaTypeType1 | Unset):
+        fecha_elaboracion (datetime.datetime | None | Unset):
+        fecha_vencimiento_item (datetime.datetime | None | Unset):
+        descuento_monto (float | None | str | Unset):
+        tabla_sub_descuento (list[Ecf41SubDescuento] | None | Unset):
+        recargo_monto (float | None | str | Unset):
+        tabla_sub_recargo (list[Ecf41SubRecargo] | None | Unset):
+        otra_moneda_detalle (Ecf41OtraMonedaDetalle | None | Unset):
+    """
 
     numero_linea: int | str
     indicador_facturacion: Ecf41IndicadorFacturacionType
@@ -75,16 +67,9 @@ class Ecf41Item:
     otra_moneda_detalle: Ecf41OtraMonedaDetalle | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.ecf_41_codigos_item import Ecf41CodigosItem
         from ..models.ecf_41_otra_moneda_detalle import Ecf41OtraMonedaDetalle
-        from ..models.ecf_41_retencion import Ecf41Retencion
-        from ..models.ecf_41_sub_descuento import Ecf41SubDescuento
-        from ..models.ecf_41_sub_recargo import Ecf41SubRecargo
+
         numero_linea: int | str
         numero_linea = self.numero_linea
 
@@ -113,7 +98,6 @@ class Ecf41Item:
             for tabla_codigos_item_type_1_item_data in self.tabla_codigos_item:
                 tabla_codigos_item_type_1_item = tabla_codigos_item_type_1_item_data.to_dict()
                 tabla_codigos_item.append(tabla_codigos_item_type_1_item)
-
 
         else:
             tabla_codigos_item = self.tabla_codigos_item
@@ -163,7 +147,6 @@ class Ecf41Item:
                 tabla_sub_descuento_type_1_item = tabla_sub_descuento_type_1_item_data.to_dict()
                 tabla_sub_descuento.append(tabla_sub_descuento_type_1_item)
 
-
         else:
             tabla_sub_descuento = self.tabla_sub_descuento
 
@@ -182,7 +165,6 @@ class Ecf41Item:
                 tabla_sub_recargo_type_1_item = tabla_sub_recargo_type_1_item_data.to_dict()
                 tabla_sub_recargo.append(tabla_sub_recargo_type_1_item)
 
-
         else:
             tabla_sub_recargo = self.tabla_sub_recargo
 
@@ -194,19 +176,20 @@ class Ecf41Item:
         else:
             otra_moneda_detalle = self.otra_moneda_detalle
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "numeroLinea": numero_linea,
-            "indicadorFacturacion": indicador_facturacion,
-            "retencion": retencion,
-            "nombreItem": nombre_item,
-            "indicadorBienoServicio": indicador_bieno_servicio,
-            "cantidadItem": cantidad_item,
-            "precioUnitarioItem": precio_unitario_item,
-            "montoItem": monto_item,
-        })
+        field_dict.update(
+            {
+                "numeroLinea": numero_linea,
+                "indicadorFacturacion": indicador_facturacion,
+                "retencion": retencion,
+                "nombreItem": nombre_item,
+                "indicadorBienoServicio": indicador_bieno_servicio,
+                "cantidadItem": cantidad_item,
+                "precioUnitarioItem": precio_unitario_item,
+                "montoItem": monto_item,
+            }
+        )
         if tabla_codigos_item is not UNSET:
             field_dict["tablaCodigosItem"] = tabla_codigos_item
         if descripcion_item is not UNSET:
@@ -230,8 +213,6 @@ class Ecf41Item:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ecf_41_codigos_item import Ecf41CodigosItem
@@ -239,47 +220,36 @@ class Ecf41Item:
         from ..models.ecf_41_retencion import Ecf41Retencion
         from ..models.ecf_41_sub_descuento import Ecf41SubDescuento
         from ..models.ecf_41_sub_recargo import Ecf41SubRecargo
+
         d = dict(src_dict)
+
         def _parse_numero_linea(data: object) -> int | str:
             return cast(int | str, data)
 
         numero_linea = _parse_numero_linea(d.pop("numeroLinea"))
 
-
         indicador_facturacion = Ecf41IndicadorFacturacionType(d.pop("indicadorFacturacion"))
 
-
-
-
         retencion = Ecf41Retencion.from_dict(d.pop("retencion"))
-
-
-
 
         nombre_item = d.pop("nombreItem")
 
         indicador_bieno_servicio = Ecf41IndicadorBienoServicioType(d.pop("indicadorBienoServicio"))
-
-
-
 
         def _parse_cantidad_item(data: object) -> float | str:
             return cast(float | str, data)
 
         cantidad_item = _parse_cantidad_item(d.pop("cantidadItem"))
 
-
         def _parse_precio_unitario_item(data: object) -> float | str:
             return cast(float | str, data)
 
         precio_unitario_item = _parse_precio_unitario_item(d.pop("precioUnitarioItem"))
 
-
         def _parse_monto_item(data: object) -> float | str:
             return cast(float | str, data)
 
         monto_item = _parse_monto_item(d.pop("montoItem"))
-
 
         def _parse_tabla_codigos_item(data: object) -> list[Ecf41CodigosItem] | None | Unset:
             if data is None:
@@ -291,10 +261,8 @@ class Ecf41Item:
                     raise TypeError()
                 tabla_codigos_item_type_1 = []
                 _tabla_codigos_item_type_1 = data
-                for tabla_codigos_item_type_1_item_data in (_tabla_codigos_item_type_1):
+                for tabla_codigos_item_type_1_item_data in _tabla_codigos_item_type_1:
                     tabla_codigos_item_type_1_item = Ecf41CodigosItem.from_dict(tabla_codigos_item_type_1_item_data)
-
-
 
                     tabla_codigos_item_type_1.append(tabla_codigos_item_type_1_item)
 
@@ -305,7 +273,6 @@ class Ecf41Item:
 
         tabla_codigos_item = _parse_tabla_codigos_item(d.pop("tablaCodigosItem", UNSET))
 
-
         def _parse_descripcion_item(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -314,7 +281,6 @@ class Ecf41Item:
             return cast(None | str | Unset, data)
 
         descripcion_item = _parse_descripcion_item(d.pop("descripcionItem", UNSET))
-
 
         def _parse_unidad_medida(data: object) -> None | UnidadMedidaTypeType1 | Unset:
             if data is None:
@@ -326,15 +292,12 @@ class Ecf41Item:
                     raise TypeError()
                 componentsschemas_unidad_medida_type_type_1 = UnidadMedidaTypeType1(data)
 
-
-
                 return componentsschemas_unidad_medida_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | UnidadMedidaTypeType1 | Unset, data)
 
         unidad_medida = _parse_unidad_medida(d.pop("unidadMedida", UNSET))
-
 
         def _parse_fecha_elaboracion(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -344,9 +307,7 @@ class Ecf41Item:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_elaboracion_type_1 = isoparse(data)
-
-
+                fecha_elaboracion_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_elaboracion_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -354,7 +315,6 @@ class Ecf41Item:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_elaboracion = _parse_fecha_elaboracion(d.pop("fechaElaboracion", UNSET))
-
 
         def _parse_fecha_vencimiento_item(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -364,9 +324,7 @@ class Ecf41Item:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_vencimiento_item_type_1 = isoparse(data)
-
-
+                fecha_vencimiento_item_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_vencimiento_item_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -374,7 +332,6 @@ class Ecf41Item:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_vencimiento_item = _parse_fecha_vencimiento_item(d.pop("fechaVencimientoItem", UNSET))
-
 
         def _parse_descuento_monto(data: object) -> float | None | str | Unset:
             if data is None:
@@ -384,7 +341,6 @@ class Ecf41Item:
             return cast(float | None | str | Unset, data)
 
         descuento_monto = _parse_descuento_monto(d.pop("descuentoMonto", UNSET))
-
 
         def _parse_tabla_sub_descuento(data: object) -> list[Ecf41SubDescuento] | None | Unset:
             if data is None:
@@ -396,10 +352,8 @@ class Ecf41Item:
                     raise TypeError()
                 tabla_sub_descuento_type_1 = []
                 _tabla_sub_descuento_type_1 = data
-                for tabla_sub_descuento_type_1_item_data in (_tabla_sub_descuento_type_1):
+                for tabla_sub_descuento_type_1_item_data in _tabla_sub_descuento_type_1:
                     tabla_sub_descuento_type_1_item = Ecf41SubDescuento.from_dict(tabla_sub_descuento_type_1_item_data)
-
-
 
                     tabla_sub_descuento_type_1.append(tabla_sub_descuento_type_1_item)
 
@@ -410,7 +364,6 @@ class Ecf41Item:
 
         tabla_sub_descuento = _parse_tabla_sub_descuento(d.pop("tablaSubDescuento", UNSET))
 
-
         def _parse_recargo_monto(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -419,7 +372,6 @@ class Ecf41Item:
             return cast(float | None | str | Unset, data)
 
         recargo_monto = _parse_recargo_monto(d.pop("recargoMonto", UNSET))
-
 
         def _parse_tabla_sub_recargo(data: object) -> list[Ecf41SubRecargo] | None | Unset:
             if data is None:
@@ -431,10 +383,8 @@ class Ecf41Item:
                     raise TypeError()
                 tabla_sub_recargo_type_1 = []
                 _tabla_sub_recargo_type_1 = data
-                for tabla_sub_recargo_type_1_item_data in (_tabla_sub_recargo_type_1):
+                for tabla_sub_recargo_type_1_item_data in _tabla_sub_recargo_type_1:
                     tabla_sub_recargo_type_1_item = Ecf41SubRecargo.from_dict(tabla_sub_recargo_type_1_item_data)
-
-
 
                     tabla_sub_recargo_type_1.append(tabla_sub_recargo_type_1_item)
 
@@ -444,7 +394,6 @@ class Ecf41Item:
             return cast(list[Ecf41SubRecargo] | None | Unset, data)
 
         tabla_sub_recargo = _parse_tabla_sub_recargo(d.pop("tablaSubRecargo", UNSET))
-
 
         def _parse_otra_moneda_detalle(data: object) -> Ecf41OtraMonedaDetalle | None | Unset:
             if data is None:
@@ -456,15 +405,12 @@ class Ecf41Item:
                     raise TypeError()
                 otra_moneda_detalle_type_1 = Ecf41OtraMonedaDetalle.from_dict(data)
 
-
-
                 return otra_moneda_detalle_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf41OtraMonedaDetalle | None | Unset, data)
 
         otra_moneda_detalle = _parse_otra_moneda_detalle(d.pop("otraMonedaDetalle", UNSET))
-
 
         ecf_41_item = cls(
             numero_linea=numero_linea,
@@ -486,7 +432,6 @@ class Ecf41Item:
             tabla_sub_recargo=tabla_sub_recargo,
             otra_moneda_detalle=otra_moneda_detalle,
         )
-
 
         ecf_41_item.additional_properties = d
         return ecf_41_item

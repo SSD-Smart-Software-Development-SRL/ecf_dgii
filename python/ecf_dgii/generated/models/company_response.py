@@ -1,45 +1,35 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-from uuid import UUID
-import datetime
-
-
-
-
-
-
 T = TypeVar("T", bound="CompanyResponse")
-
 
 
 @_attrs_define
 class CompanyResponse:
-    """ 
-        Attributes:
-            rnc (str | Unset):
-            legal_name (str | Unset):
-            name (str | Unset):
-            created_on (datetime.datetime | Unset):
-            updated_on (datetime.datetime | Unset):
-            created_by (str | Unset):
-            updated_by (str | Unset):
-            tenant_id (UUID | Unset):
-            receptor_id (str | Unset):
-            url_recepcion (None | str | Unset):
-            url_aprobacion_comercial (None | str | Unset):
-            url_autenticacion (None | str | Unset):
-     """
+    """
+    Attributes:
+        rnc (str | Unset):
+        legal_name (str | Unset):
+        name (str | Unset):
+        created_on (datetime.datetime | Unset):
+        updated_on (datetime.datetime | Unset):
+        created_by (str | Unset):
+        updated_by (str | Unset):
+        tenant_id (UUID | Unset):
+        receptor_id (str | Unset):
+        url_recepcion (None | str | Unset):
+        url_aprobacion_comercial (None | str | Unset):
+        url_autenticacion (None | str | Unset):
+    """
 
     rnc: str | Unset = UNSET
     legal_name: str | Unset = UNSET
@@ -54,10 +44,6 @@ class CompanyResponse:
     url_aprobacion_comercial: None | str | Unset = UNSET
     url_autenticacion: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         rnc = self.rnc
@@ -102,11 +88,9 @@ class CompanyResponse:
         else:
             url_autenticacion = self.url_autenticacion
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if rnc is not UNSET:
             field_dict["rnc"] = rnc
         if legal_name is not UNSET:
@@ -134,8 +118,6 @@ class CompanyResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -147,23 +129,17 @@ class CompanyResponse:
 
         _created_on = d.pop("createdOn", UNSET)
         created_on: datetime.datetime | Unset
-        if isinstance(_created_on,  Unset):
+        if isinstance(_created_on, Unset):
             created_on = UNSET
         else:
-            created_on = isoparse(_created_on)
-
-
-
+            created_on = datetime.datetime.fromisoformat(_created_on)
 
         _updated_on = d.pop("updatedOn", UNSET)
         updated_on: datetime.datetime | Unset
-        if isinstance(_updated_on,  Unset):
+        if isinstance(_updated_on, Unset):
             updated_on = UNSET
         else:
-            updated_on = isoparse(_updated_on)
-
-
-
+            updated_on = datetime.datetime.fromisoformat(_updated_on)
 
         created_by = d.pop("createdBy", UNSET)
 
@@ -171,13 +147,10 @@ class CompanyResponse:
 
         _tenant_id = d.pop("tenantId", UNSET)
         tenant_id: UUID | Unset
-        if isinstance(_tenant_id,  Unset):
+        if isinstance(_tenant_id, Unset):
             tenant_id = UNSET
         else:
             tenant_id = UUID(_tenant_id)
-
-
-
 
         receptor_id = d.pop("receptorId", UNSET)
 
@@ -190,7 +163,6 @@ class CompanyResponse:
 
         url_recepcion = _parse_url_recepcion(d.pop("urlRecepcion", UNSET))
 
-
         def _parse_url_aprobacion_comercial(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -200,7 +172,6 @@ class CompanyResponse:
 
         url_aprobacion_comercial = _parse_url_aprobacion_comercial(d.pop("urlAprobacionComercial", UNSET))
 
-
         def _parse_url_autenticacion(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -209,7 +180,6 @@ class CompanyResponse:
             return cast(None | str | Unset, data)
 
         url_autenticacion = _parse_url_autenticacion(d.pop("urlAutenticacion", UNSET))
-
 
         company_response = cls(
             rnc=rnc,
@@ -225,7 +195,6 @@ class CompanyResponse:
             url_aprobacion_comercial=url_aprobacion_comercial,
             url_autenticacion=url_autenticacion,
         )
-
 
         company_response.additional_properties = d
         return company_response

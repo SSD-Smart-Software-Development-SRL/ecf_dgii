@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class IndicadorNorma1007TypeType1(str, Enum):
     INCLUIR = "Incluir"
     NOINCLUIR = "NoIncluir"

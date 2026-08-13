@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class EcfProgress(str, Enum):
     ERROR = "Error"
     FINISHED = "Finished"

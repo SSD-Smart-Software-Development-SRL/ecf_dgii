@@ -1,28 +1,19 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="Directorio")
-
 
 
 @_attrs_define
 class Directorio:
-    """ Representa una entrada del directorio para contribuyentes electrónicos en el sistema de facturación electrónica
+    """Representa una entrada del directorio para contribuyentes electrónicos en el sistema de facturación electrónica
     de la República Dominicana. Este modelo contiene las URLs de servicios que los contribuyentes electrónicos
     deben proporcionar para la comunicación entre contribuyentes.
 
@@ -46,7 +37,7 @@ class Directorio:
                 La URL base del servicio de autenticación, si es implementado por el contribuyente.
                 Debe seguir el formato estándar: https://host/ambiente/nombreservicio/fe/autenticacion/api/
                 Este campo es opcional pero recomendado para mayor seguridad.
-     """
+    """
 
     nombre: None | str | Unset = UNSET
     rnc: None | str | Unset = UNSET
@@ -54,10 +45,6 @@ class Directorio:
     url_aceptacion: None | str | Unset = UNSET
     url_opcional: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         nombre: None | str | Unset
@@ -90,11 +77,9 @@ class Directorio:
         else:
             url_opcional = self.url_opcional
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if nombre is not UNSET:
             field_dict["nombre"] = nombre
         if rnc is not UNSET:
@@ -108,11 +93,10 @@ class Directorio:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_nombre(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -121,7 +105,6 @@ class Directorio:
             return cast(None | str | Unset, data)
 
         nombre = _parse_nombre(d.pop("nombre", UNSET))
-
 
         def _parse_rnc(data: object) -> None | str | Unset:
             if data is None:
@@ -132,7 +115,6 @@ class Directorio:
 
         rnc = _parse_rnc(d.pop("rnc", UNSET))
 
-
         def _parse_url_recepcion(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -141,7 +123,6 @@ class Directorio:
             return cast(None | str | Unset, data)
 
         url_recepcion = _parse_url_recepcion(d.pop("urlRecepcion", UNSET))
-
 
         def _parse_url_aceptacion(data: object) -> None | str | Unset:
             if data is None:
@@ -152,7 +133,6 @@ class Directorio:
 
         url_aceptacion = _parse_url_aceptacion(d.pop("urlAceptacion", UNSET))
 
-
         def _parse_url_opcional(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -162,7 +142,6 @@ class Directorio:
 
         url_opcional = _parse_url_opcional(d.pop("urlOpcional", UNSET))
 
-
         directorio = cls(
             nombre=nombre,
             rnc=rnc,
@@ -170,7 +149,6 @@ class Directorio:
             url_aceptacion=url_aceptacion,
             url_opcional=url_opcional,
         )
-
 
         directorio.additional_properties = d
         return directorio

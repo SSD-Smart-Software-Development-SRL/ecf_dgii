@@ -1,55 +1,47 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.all_tipo_ecf_types import AllTipoECFTypes
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-from uuid import UUID
-import datetime
 
 if TYPE_CHECKING:
-  from ..models.acecf_summary_dto import AcecfSummaryDto
-
-
-
+    from ..models.acecf_summary_dto import AcecfSummaryDto
 
 
 T = TypeVar("T", bound="EcfReceptorDto")
 
 
-
 @_attrs_define
 class EcfReceptorDto:
-    """ 
-        Attributes:
-            ecf_receptor_id (UUID | Unset):
-            tenant_id (UUID | Unset):
-            company_rnc (str | Unset):
-            encf (str | Unset):
-            rnc_emisor (str | Unset):
-            rnc_receptor (str | Unset):
-            tipo_ecf (AllTipoECFTypes | Unset):
-            monto_total (float | str | Unset):
-            fecha_emision (datetime.date | Unset):
-            file_name (str | Unset):
-            raw_json_data (str | Unset):
-            created_on (datetime.datetime | Unset):
-            fecha_firma (datetime.datetime | None | Unset):
-            cod_sec (None | str | Unset):
-            estado (int | None | str | Unset): Estado from the generated ARECF (ECFRecibido / ECFNoRecibido).
-            progress (int | str | Unset): EcfReceptionRequest.Progress — Pending / Processing / Completed / Error.
-            ambiente (str | Unset): DGII environment serving this tenant ("Test"/"Certification"/"Production").
-            url_impresion (None | str | Unset): DGII consulta-timbre URL with QR query string.
-            acecfs (list[AcecfSummaryDto] | Unset):
-     """
+    """
+    Attributes:
+        ecf_receptor_id (UUID | Unset):
+        tenant_id (UUID | Unset):
+        company_rnc (str | Unset):
+        encf (str | Unset):
+        rnc_emisor (str | Unset):
+        rnc_receptor (str | Unset):
+        tipo_ecf (AllTipoECFTypes | Unset):
+        monto_total (float | str | Unset):
+        fecha_emision (datetime.date | Unset):
+        file_name (str | Unset):
+        raw_json_data (str | Unset):
+        created_on (datetime.datetime | Unset):
+        fecha_firma (datetime.datetime | None | Unset):
+        cod_sec (None | str | Unset):
+        estado (int | None | str | Unset): Estado from the generated ARECF (ECFRecibido / ECFNoRecibido).
+        progress (int | str | Unset): EcfReceptionRequest.Progress — Pending / Processing / Completed / Error.
+        ambiente (str | Unset): DGII environment serving this tenant ("Test"/"Certification"/"Production").
+        url_impresion (None | str | Unset): DGII consulta-timbre URL with QR query string.
+        acecfs (list[AcecfSummaryDto] | Unset):
+    """
 
     ecf_receptor_id: UUID | Unset = UNSET
     tenant_id: UUID | Unset = UNSET
@@ -72,12 +64,7 @@ class EcfReceptorDto:
     acecfs: list[AcecfSummaryDto] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.acecf_summary_dto import AcecfSummaryDto
         ecf_receptor_id: str | Unset = UNSET
         if not isinstance(self.ecf_receptor_id, Unset):
             ecf_receptor_id = str(self.ecf_receptor_id)
@@ -97,7 +84,6 @@ class EcfReceptorDto:
         tipo_ecf: str | Unset = UNSET
         if not isinstance(self.tipo_ecf, Unset):
             tipo_ecf = self.tipo_ecf.value
-
 
         monto_total: float | str | Unset
         if isinstance(self.monto_total, Unset):
@@ -158,13 +144,9 @@ class EcfReceptorDto:
                 acecfs_item = acecfs_item_data.to_dict()
                 acecfs.append(acecfs_item)
 
-
-
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if ecf_receptor_id is not UNSET:
             field_dict["ecfReceptorId"] = ecf_receptor_id
         if tenant_id is not UNSET:
@@ -206,31 +188,24 @@ class EcfReceptorDto:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.acecf_summary_dto import AcecfSummaryDto
+
         d = dict(src_dict)
         _ecf_receptor_id = d.pop("ecfReceptorId", UNSET)
         ecf_receptor_id: UUID | Unset
-        if isinstance(_ecf_receptor_id,  Unset):
+        if isinstance(_ecf_receptor_id, Unset):
             ecf_receptor_id = UNSET
         else:
             ecf_receptor_id = UUID(_ecf_receptor_id)
 
-
-
-
         _tenant_id = d.pop("tenantId", UNSET)
         tenant_id: UUID | Unset
-        if isinstance(_tenant_id,  Unset):
+        if isinstance(_tenant_id, Unset):
             tenant_id = UNSET
         else:
             tenant_id = UUID(_tenant_id)
-
-
-
 
         company_rnc = d.pop("companyRnc", UNSET)
 
@@ -242,13 +217,10 @@ class EcfReceptorDto:
 
         _tipo_ecf = d.pop("tipoEcf", UNSET)
         tipo_ecf: AllTipoECFTypes | Unset
-        if isinstance(_tipo_ecf,  Unset):
+        if isinstance(_tipo_ecf, Unset):
             tipo_ecf = UNSET
         else:
             tipo_ecf = AllTipoECFTypes(_tipo_ecf)
-
-
-
 
         def _parse_monto_total(data: object) -> float | str | Unset:
             if isinstance(data, Unset):
@@ -257,16 +229,12 @@ class EcfReceptorDto:
 
         monto_total = _parse_monto_total(d.pop("montoTotal", UNSET))
 
-
         _fecha_emision = d.pop("fechaEmision", UNSET)
         fecha_emision: datetime.date | Unset
-        if isinstance(_fecha_emision,  Unset):
+        if isinstance(_fecha_emision, Unset):
             fecha_emision = UNSET
         else:
-            fecha_emision = isoparse(_fecha_emision).date()
-
-
-
+            fecha_emision = datetime.date.fromisoformat(_fecha_emision)
 
         file_name = d.pop("fileName", UNSET)
 
@@ -274,13 +242,10 @@ class EcfReceptorDto:
 
         _created_on = d.pop("createdOn", UNSET)
         created_on: datetime.datetime | Unset
-        if isinstance(_created_on,  Unset):
+        if isinstance(_created_on, Unset):
             created_on = UNSET
         else:
-            created_on = isoparse(_created_on)
-
-
-
+            created_on = datetime.datetime.fromisoformat(_created_on)
 
         def _parse_fecha_firma(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -290,9 +255,7 @@ class EcfReceptorDto:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_firma_type_1 = isoparse(data)
-
-
+                fecha_firma_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_firma_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -300,7 +263,6 @@ class EcfReceptorDto:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_firma = _parse_fecha_firma(d.pop("fechaFirma", UNSET))
-
 
         def _parse_cod_sec(data: object) -> None | str | Unset:
             if data is None:
@@ -311,7 +273,6 @@ class EcfReceptorDto:
 
         cod_sec = _parse_cod_sec(d.pop("codSec", UNSET))
 
-
         def _parse_estado(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -321,14 +282,12 @@ class EcfReceptorDto:
 
         estado = _parse_estado(d.pop("estado", UNSET))
 
-
         def _parse_progress(data: object) -> int | str | Unset:
             if isinstance(data, Unset):
                 return data
             return cast(int | str | Unset, data)
 
         progress = _parse_progress(d.pop("progress", UNSET))
-
 
         ambiente = d.pop("ambiente", UNSET)
 
@@ -341,7 +300,6 @@ class EcfReceptorDto:
 
         url_impresion = _parse_url_impresion(d.pop("urlImpresion", UNSET))
 
-
         _acecfs = d.pop("acecfs", UNSET)
         acecfs: list[AcecfSummaryDto] | Unset = UNSET
         if _acecfs is not UNSET:
@@ -349,10 +307,7 @@ class EcfReceptorDto:
             for acecfs_item_data in _acecfs:
                 acecfs_item = AcecfSummaryDto.from_dict(acecfs_item_data)
 
-
-
                 acecfs.append(acecfs_item)
-
 
         ecf_receptor_dto = cls(
             ecf_receptor_id=ecf_receptor_id,
@@ -375,7 +330,6 @@ class EcfReceptorDto:
             url_impresion=url_impresion,
             acecfs=acecfs,
         )
-
 
         ecf_receptor_dto.additional_properties = d
         return ecf_receptor_dto

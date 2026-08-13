@@ -75,7 +75,8 @@ def raise_for_status(status_code: int, body: Any) -> None:
     detail = body if isinstance(body, dict) else None
     message = ""
     if isinstance(body, dict):
-        message = body.get("detail", body.get("title", str(body)))
+        val = body.get("detail", body.get("title", str(body)))
+        message = str(val) if val is not None else ""
     else:
         message = str(body) if body else f"HTTP {status_code}"
 

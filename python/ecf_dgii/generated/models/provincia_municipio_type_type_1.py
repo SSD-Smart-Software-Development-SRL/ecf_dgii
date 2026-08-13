@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class ProvinciaMunicipioTypeType1(str, Enum):
     VALUE_0 = "010000"
     VALUE_1 = "010100"

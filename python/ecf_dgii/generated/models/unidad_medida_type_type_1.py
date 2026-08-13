@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class UnidadMedidaTypeType1(str, Enum):
     BARRIL = "Barril"
     BDJBANDEJA = "BDJBandeja"

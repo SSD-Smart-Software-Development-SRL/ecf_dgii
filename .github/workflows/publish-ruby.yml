@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: publish-ruby
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'ruby/**'
+      - '.github/workflows/publish-ruby.yml'
+
+defaults:
+  run:
+    working-directory: ruby
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Para crear commits, tags y releases
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Necesario para que semantic-release lea el historial de commits
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install release dependencies
+        run: npm install
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Generate SDK code
+        run: ./generate.sh
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+          working-directory: ruby
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Run tests
+        run: bundle exec rspec
+
+      - name: Run Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+        run: npx semantic-release

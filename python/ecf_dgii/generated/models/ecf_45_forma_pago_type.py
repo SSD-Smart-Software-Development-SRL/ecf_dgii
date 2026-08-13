@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Ecf45FormaPagoType(str, Enum):
     BONOSOCERTIFICADOSDEREGALO = "BonosOCertificadosDeRegalo"
     CHEQUESLASHTRANSFERENCIASLASHDEPOSITO = "ChequeSlashTransferenciaSlashDeposito"

@@ -6,27 +6,27 @@ import base64
 import logging
 import os
 import warnings
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any, Callable, Optional, Sequence
+from typing import Any
 from uuid import UUID
 
 import httpx
 
 from .client import ENVIRONMENT_URLS, Environment
 from .exceptions import raise_for_status
+from .generated.api.company import get_companies, get_company_by_rnc
+from .generated.api.ecf import get_ecf_by_id, query_ecf, search_all_ecfs, search_ecfs
 from .generated.client import AuthenticatedClient
-from .generated.types import UNSET
 from .generated.models import (
     AllTipoECFTypes,
     CompanyResponse,
-    EcfProgress,
     EcfResponse,
     PaginatedApiResultOfCompanyResponse,
     PaginatedApiResultOfEcfResponse,
     ProblemDetails,
 )
-from .generated.api.ecf import query_ecf, search_ecfs, search_all_ecfs, get_ecf_by_id
-from .generated.api.company import get_companies, get_company_by_rnc
+from .generated.types import UNSET
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +44,7 @@ def _ensure_cache_dir() -> None:
 
 
 try:
-    from cryptography.fernet import Fernet
+    from cryptography.fernet import Fernet  # type: ignore[import-not-found]
 
     def _get_or_create_key() -> bytes:
         _ensure_cache_dir()
@@ -53,7 +53,7 @@ try:
         key = Fernet.generate_key()
         _KEY_FILE.write_bytes(key)
         _KEY_FILE.chmod(0o600)
-        return key
+        return key  # type: ignore[no-any-return]
 
     def _default_cache_token(token: str) -> None:
         """Encrypt and store token to disk using Fernet."""
@@ -64,14 +64,14 @@ try:
         _TOKEN_FILE.write_bytes(encrypted)
         _TOKEN_FILE.chmod(0o600)
 
-    def _default_get_cached_token() -> Optional[str]:
+    def _default_get_cached_token() -> str | None:
         """Read and decrypt token from disk using Fernet."""
         if not _TOKEN_FILE.exists() or not _KEY_FILE.exists():
             return None
         try:
             key = _KEY_FILE.read_bytes()
             f = Fernet(key)
-            return f.decrypt(_TOKEN_FILE.read_bytes()).decode("utf-8")
+            return f.decrypt(_TOKEN_FILE.read_bytes()).decode("utf-8")  # type: ignore[no-any-return]
         except Exception:
             logger.debug("Failed to decrypt cached token, returning None")
             return None
@@ -86,14 +86,14 @@ except ImportError:
         stacklevel=2,
     )
 
-    def _default_cache_token(token: str) -> None:  # type: ignore[misc]
+    def _default_cache_token(token: str) -> None:
         """Store token to disk using base64 encoding (no encryption)."""
         _ensure_cache_dir()
         encoded = base64.b64encode(token.encode("utf-8"))
         _TOKEN_FILE.write_bytes(encoded)
         _TOKEN_FILE.chmod(0o600)
 
-    def _default_get_cached_token() -> Optional[str]:  # type: ignore[misc]
+    def _default_get_cached_token() -> str | None:
         """Read token from disk using base64 decoding (no encryption)."""
         if not _TOKEN_FILE.exists():
             return None
@@ -145,8 +145,8 @@ class EcfFrontendClient:
         self,
         *,
         get_token: Callable[[], str],
-        cache_token: Optional[Callable[[str], None]] = None,
-        get_cached_token: Optional[Callable[[], Optional[str]]] = None,
+        cache_token: Callable[[str], None] | None = None,
+        get_cached_token: Callable[[], str | None] | None = None,
         base_url: str | None = None,
         environment: Environment = "test",
         timeout: float = 30.0,
@@ -206,11 +206,9 @@ class EcfFrontendClient:
     # ECF query operations
     # ======================================================================
 
-    async def query_ecf(
-        self, rnc: str, encf: str, *, include_ecf_content: bool = False
-    ) -> list[EcfResponse]:
+    async def query_ecf(self, rnc: str, encf: str, *, include_ecf_content: bool = False) -> list[EcfResponse]:
         """Query ECFs by RNC and eNCF."""
-        return await self._get_with_retry(
+        return await self._get_with_retry(  # type: ignore[no-any-return]
             query_ecf.asyncio_detailed,
             rnc=rnc,
             encf=encf,
@@ -232,7 +230,7 @@ class EcfFrontendClient:
         limit: int = 25,
     ) -> PaginatedApiResultOfEcfResponse:
         """Search ECFs for a specific RNC."""
-        return await self._get_with_retry(
+        return await self._get_with_retry(  # type: ignore[no-any-return]
             search_ecfs.asyncio_detailed,
             rnc=rnc,
             encfs=encfs if encfs is not None else UNSET,
@@ -260,7 +258,7 @@ class EcfFrontendClient:
         limit: int = 25,
     ) -> PaginatedApiResultOfEcfResponse:
         """Search all ECFs across all companies."""
-        return await self._get_with_retry(
+        return await self._get_with_retry(  # type: ignore[no-any-return]
             search_all_ecfs.asyncio_detailed,
             encfs=encfs if encfs is not None else UNSET,
             tipos_ecfs=tipos_ecfs if tipos_ecfs is not None else UNSET,
@@ -278,7 +276,7 @@ class EcfFrontendClient:
     ) -> list[EcfResponse]:
         """Get a specific ECF by message ID."""
         mid = message_id if isinstance(message_id, UUID) else UUID(str(message_id))
-        return await self._get_with_retry(
+        return await self._get_with_retry(  # type: ignore[no-any-return]
             get_ecf_by_id.asyncio_detailed,
             rnc=rnc,
             id=mid,
@@ -298,7 +296,7 @@ class EcfFrontendClient:
         limit: int = 25,
     ) -> PaginatedApiResultOfCompanyResponse:
         """List companies with optional filters."""
-        return await self._get_with_retry(
+        return await self._get_with_retry(  # type: ignore[no-any-return]
             get_companies.asyncio_detailed,
             rncs=rncs if rncs is not None else UNSET,
             names=names if names is not None else UNSET,
@@ -308,7 +306,7 @@ class EcfFrontendClient:
 
     async def get_company_by_rnc(self, rnc: str) -> CompanyResponse:
         """Get a company by RNC."""
-        return await self._get_with_retry(
+        return await self._get_with_retry(  # type: ignore[no-any-return]
             get_company_by_rnc.asyncio_detailed,
             rnc=rnc,
         )
@@ -317,8 +315,8 @@ class EcfFrontendClient:
 def create_frontend_client(
     *,
     get_token: Callable[[], str],
-    cache_token: Optional[Callable[[str], None]] = None,
-    get_cached_token: Optional[Callable[[], Optional[str]]] = None,
+    cache_token: Callable[[str], None] | None = None,
+    get_cached_token: Callable[[], str | None] | None = None,
     base_url: str | None = None,
     environment: Environment = "test",
     timeout: float = 30.0,

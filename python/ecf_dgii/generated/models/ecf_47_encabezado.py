@@ -1,45 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.ecf_47_version_type import Ecf47VersionType
 from ..types import UNSET, Unset
-from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.ecf_47_comprador import Ecf47Comprador
-  from ..models.ecf_47_emisor import Ecf47Emisor
-  from ..models.ecf_47_id_doc import Ecf47IdDoc
-  from ..models.ecf_47_otra_moneda import Ecf47OtraMoneda
-  from ..models.ecf_47_totales import Ecf47Totales
-  from ..models.ecf_47_transporte import Ecf47Transporte
-
-
-
+    from ..models.ecf_47_comprador import Ecf47Comprador
+    from ..models.ecf_47_emisor import Ecf47Emisor
+    from ..models.ecf_47_id_doc import Ecf47IdDoc
+    from ..models.ecf_47_otra_moneda import Ecf47OtraMoneda
+    from ..models.ecf_47_totales import Ecf47Totales
+    from ..models.ecf_47_transporte import Ecf47Transporte
 
 
 T = TypeVar("T", bound="Ecf47Encabezado")
 
 
-
 @_attrs_define
 class Ecf47Encabezado:
-    """ 
-        Attributes:
-            version (Ecf47VersionType):
-            id_doc (Ecf47IdDoc):
-            emisor (Ecf47Emisor):
-            totales (Ecf47Totales):
-            comprador (Ecf47Comprador | None | Unset):
-            transporte (Ecf47Transporte | None | Unset):
-            otra_moneda (Ecf47OtraMoneda | None | Unset):
-     """
+    """
+    Attributes:
+        version (Ecf47VersionType):
+        id_doc (Ecf47IdDoc):
+        emisor (Ecf47Emisor):
+        totales (Ecf47Totales):
+        comprador (Ecf47Comprador | None | Unset):
+        transporte (Ecf47Transporte | None | Unset):
+        otra_moneda (Ecf47OtraMoneda | None | Unset):
+    """
 
     version: Ecf47VersionType
     id_doc: Ecf47IdDoc
@@ -50,17 +43,11 @@ class Ecf47Encabezado:
     otra_moneda: Ecf47OtraMoneda | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
         from ..models.ecf_47_comprador import Ecf47Comprador
-        from ..models.ecf_47_emisor import Ecf47Emisor
-        from ..models.ecf_47_id_doc import Ecf47IdDoc
         from ..models.ecf_47_otra_moneda import Ecf47OtraMoneda
-        from ..models.ecf_47_totales import Ecf47Totales
         from ..models.ecf_47_transporte import Ecf47Transporte
+
         version = self.version.value
 
         id_doc = self.id_doc.to_dict()
@@ -93,15 +80,16 @@ class Ecf47Encabezado:
         else:
             otra_moneda = self.otra_moneda
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "version": version,
-            "idDoc": id_doc,
-            "emisor": emisor,
-            "totales": totales,
-        })
+        field_dict.update(
+            {
+                "version": version,
+                "idDoc": id_doc,
+                "emisor": emisor,
+                "totales": totales,
+            }
+        )
         if comprador is not UNSET:
             field_dict["comprador"] = comprador
         if transporte is not UNSET:
@@ -111,8 +99,6 @@ class Ecf47Encabezado:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ecf_47_comprador import Ecf47Comprador
@@ -121,26 +107,15 @@ class Ecf47Encabezado:
         from ..models.ecf_47_otra_moneda import Ecf47OtraMoneda
         from ..models.ecf_47_totales import Ecf47Totales
         from ..models.ecf_47_transporte import Ecf47Transporte
+
         d = dict(src_dict)
         version = Ecf47VersionType(d.pop("version"))
 
-
-
-
         id_doc = Ecf47IdDoc.from_dict(d.pop("idDoc"))
-
-
-
 
         emisor = Ecf47Emisor.from_dict(d.pop("emisor"))
 
-
-
-
         totales = Ecf47Totales.from_dict(d.pop("totales"))
-
-
-
 
         def _parse_comprador(data: object) -> Ecf47Comprador | None | Unset:
             if data is None:
@@ -152,15 +127,12 @@ class Ecf47Encabezado:
                     raise TypeError()
                 comprador_type_1 = Ecf47Comprador.from_dict(data)
 
-
-
                 return comprador_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf47Comprador | None | Unset, data)
 
         comprador = _parse_comprador(d.pop("comprador", UNSET))
-
 
         def _parse_transporte(data: object) -> Ecf47Transporte | None | Unset:
             if data is None:
@@ -172,15 +144,12 @@ class Ecf47Encabezado:
                     raise TypeError()
                 transporte_type_1 = Ecf47Transporte.from_dict(data)
 
-
-
                 return transporte_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf47Transporte | None | Unset, data)
 
         transporte = _parse_transporte(d.pop("transporte", UNSET))
-
 
         def _parse_otra_moneda(data: object) -> Ecf47OtraMoneda | None | Unset:
             if data is None:
@@ -192,15 +161,12 @@ class Ecf47Encabezado:
                     raise TypeError()
                 otra_moneda_type_1 = Ecf47OtraMoneda.from_dict(data)
 
-
-
                 return otra_moneda_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf47OtraMoneda | None | Unset, data)
 
         otra_moneda = _parse_otra_moneda(d.pop("otraMoneda", UNSET))
-
 
         ecf_47_encabezado = cls(
             version=version,
@@ -211,7 +177,6 @@ class Ecf47Encabezado:
             transporte=transporte,
             otra_moneda=otra_moneda,
         )
-
 
         ecf_47_encabezado.additional_properties = d
         return ecf_47_encabezado

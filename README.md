@@ -17,6 +17,7 @@
 | React | [![npm Version](https://img.shields.io/npm/v/@ssddo/ecf-react)](https://www.npmjs.com/package/@ssddo/ecf-react) [![npm Downloads](https://img.shields.io/npm/dm/@ssddo/ecf-react)](https://www.npmjs.com/package/@ssddo/ecf-react) | `npm install @ssddo/ecf-react` | [README](react/README.md) |
 | Python | [![PyPI Version](https://img.shields.io/pypi/v/ecf-dgii)](https://pypi.org/project/ecf-dgii/) [![PyPI Downloads](https://img.shields.io/pypi/dm/ecf-dgii)](https://pypi.org/project/ecf-dgii/) | `pip install ecf-dgii` | [README](python/README.md) |
 | PHP | [![Packagist Version](https://img.shields.io/packagist/v/ecfx/ecf-dgii-php)](https://packagist.org/packages/ecfx/ecf-dgii-php) [![Packagist Downloads](https://img.shields.io/packagist/dt/ecfx/ecf-dgii-php)](https://packagist.org/packages/ecfx/ecf-dgii-php) | `composer require ecfx/ecf-dgii-php` | [README](https://github.com/SSD-Smart-Software-Development-SRL/ecf-dgii-php) |
+| Ruby | [![Gem Version](https://badge.fury.io/rb/ecf-dgii.svg)](https://badge.fury.io/rb/ecf-dgii) | `gem install ecf-dgii` | [README](ruby/README.md) |
 | Java | [![Maven Central](https://img.shields.io/maven-central/v/do.com.ssd.ecfx/ecf-dgii-sdk-java)](https://central.sonatype.com/artifact/do.com.ssd.ecfx/ecf-dgii-sdk-java) | `implementation 'do.com.ssd.ecfx:ecf-dgii-sdk-java:1.0.0'` | [README](java/README.md) |
 | Kotlin | [![Maven Central](https://img.shields.io/maven-central/v/do.com.ssd.ecfx/ecf-dgii-sdk-kotlin)](https://central.sonatype.com/artifact/do.com.ssd.ecfx/ecf-dgii-sdk-kotlin) | `implementation("do.com.ssd.ecfx:ecf-dgii-sdk-kotlin:1.0.0")` | [README](kotlin/README.md) |
 | iOS/Swift | [Swift Package Manager](https://swift.org/package-manager/) | Ver [ios/README.md](ios/README.md) | [README](ios/README.md) |
@@ -66,33 +67,36 @@ Instala el SDK de tu lenguaje preferido y comienza a enviar comprobantes:
 
 ```csharp
 // .NET
+using EcfDgii.Client;
+using EcfDgii.Client.Generated.Models;
+
 var client = new EcfClient(new EcfClientOptions
 {
     ApiKey = "tu-jwt-token",
     Environment = EcfEnvironment.Prod
 });
 
-var ecf = new ECF
+var ecf = new Ecf31ECF
 {
-    Encabezado = new Encabezado
+    Encabezado = new Ecf31Encabezado
     {
-        IdDoc = new IdDoc
+        IdDoc = new Ecf31IdDoc
         {
             TipoeCF = TipoeCFType.FacturaDeCreditoFiscalElectronica,
             Encf = "E310000000001"
         },
-        Emisor = new Emisor
+        Emisor = new Ecf31Emisor
         {
             RncEmisor = "123456789",
             RazonSocialEmisor = "Mi Empresa SRL",
             DireccionEmisor = "Calle Principal #1, Santo Domingo",
             FechaEmision = DateTimeOffset.Now
         },
-        Totales = new Totales { /* montos, ITBIS, etc. */ }
+        Totales = new Ecf31Totales { /* montos, ITBIS, etc. */ }
     },
-    DetallesItems = new List<Item>
+    DetallesItems = new List<Ecf31Item>
     {
-        new Item
+        new Ecf31Item
         {
             NombreItem = "Servicio de consultoría",
             IndicadorFacturacion = IndicadorFacturacionType.NoFacturable_18Percent,
@@ -111,7 +115,7 @@ Console.WriteLine($"Código seguridad: {resultado.CodSec}");
 
 ```typescript
 // TypeScript
-import { EcfClient } from 'ecf-dgii-client';
+import { EcfClient } from '@ssddo/ecf-sdk';
 
 const client = new EcfClient({
   apiKey: 'tu-jwt-token',
@@ -142,33 +146,72 @@ const resultado = await client.sendEcf({
 ```
 
 ```python
-# Python
-from ecf_dgii_client import EcfClient
+# Python (asíncrono)
+import asyncio
+from ecf_dgii import EcfClient, Ecf31ECF, Ecf31Encabezado, Ecf31IdDoc, Ecf31Emisor, Ecf31Totales, Ecf31Item
 
-client = EcfClient(
-    api_key="tu-jwt-token",
-    environment="prod",
+async def main():
+    client = EcfClient(
+        api_key="tu-jwt-token",
+        environment="prod",
+    )
+
+    ecf = Ecf31ECF(
+        encabezado=Ecf31Encabezado(
+            idDoc=Ecf31IdDoc(
+                tipoeCF="FacturaDeCreditoFiscalElectronica",
+                encf="E310000000001",
+            ),
+            emisor=Ecf31Emisor(
+                rncEmisor="123456789",
+                razonSocialEmisor="Mi Empresa SRL",
+            ),
+            totales=Ecf31Totales(montoTotal=10000.0),
+        ),
+        detallesItems=[
+            Ecf31Item(
+                nombreItem="Servicio de consultoría",
+                cantidadItem=1,
+                precioUnitarioItem=10000.00,
+                montoItem=10000.00,
+            )
+        ],
+    )
+
+    resultado = await client.send_ecf31(ecf)
+    print(f"Estado: {resultado.estatus}")
+
+asyncio.run(main())
+```
+
+```ruby
+# Ruby
+require 'ecf-dgii'
+
+client = EcfDgii::Client.new(
+  api_key: "tu-jwt-token",
+  environment: :prod
 )
 
 resultado = client.send_ecf({
-    "encabezado": {
-        "idDoc": {
-            "tipoeCF": "FacturaDeCreditoFiscalElectronica",
-            "encf": "E310000000001",
-        },
-        "emisor": {
-            "rncEmisor": "123456789",
-            "razonSocialEmisor": "Mi Empresa SRL",
-        },
+  encabezado: {
+    id_doc: {
+      tipoe_cf: "FacturaDeCreditoFiscalElectronica",
+      encf: "E310000000001"
     },
-    "detallesItems": [
-        {
-            "nombreItem": "Servicio de consultoría",
-            "cantidadItem": 1,
-            "precioUnitarioItem": 10000.00,
-            "montoItem": 10000.00,
-        }
-    ],
+    emisor: {
+      rnc_emisor: "123456789",
+      razon_social_emisor: "Mi Empresa SRL"
+    }
+  },
+  detalles_items: [
+    {
+      nombre_item: "Servicio de consultoría",
+      cantidad_item: 1,
+      precio_unitario_item: 10000.00,
+      monto_item: 10000.00
+    }
+  ]
 })
 ```
 
@@ -273,7 +316,16 @@ const fechaFirma = resultado.fechaFirma;       // fecha de firma digital
 ```
 
 ```python
-# Python
+# Python (asíncrono)
+resultado = await client.send_ecf31(ecf)
+
+url_qr = resultado.impresion_url              # codificar como QR
+codigo_seguridad = resultado.cod_sec          # imprimir en el comprobante
+fecha_firma = resultado.fecha_firma           # fecha de firma digital
+```
+
+```ruby
+# Ruby
 resultado = client.send_ecf(ecf)
 
 url_qr = resultado.impresion_url              # codificar como QR
@@ -434,6 +486,7 @@ Cada SDK tiene su propia documentación con ejemplos específicos:
 | TypeScript | [typescript/README.md](typescript/README.md) |
 | Python | [python/README.md](python/README.md) |
 | PHP | [ecf-dgii-php](https://github.com/SSD-Smart-Software-Development-SRL/ecf-dgii-php) |
+| Ruby | [ruby/README.md](ruby/README.md) |
 | Java | [java/README.md](java/README.md) |
 | Kotlin | [kotlin/README.md](kotlin/README.md) |
 | iOS/Swift | [ios/README.md](ios/README.md) |

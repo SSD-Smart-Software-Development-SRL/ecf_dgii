@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class IndicadorEnvioDiferidoTypeType1(str, Enum):
     ENVIODIFERIDOAUTORIZADO = "EnvioDiferidoAutorizado"
 

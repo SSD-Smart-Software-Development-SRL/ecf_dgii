@@ -1,67 +1,59 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
 
 from ..models.ecf_32_indicador_bieno_servicio_type import Ecf32IndicadorBienoServicioType
 from ..models.ecf_32_indicador_facturacion_type import Ecf32IndicadorFacturacionType
 from ..models.unidad_medida_type_type_1 import UnidadMedidaTypeType1
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
 
 if TYPE_CHECKING:
-  from ..models.ecf_32_codigos_item import Ecf32CodigosItem
-  from ..models.ecf_32_impuesto_adicional import Ecf32ImpuestoAdicional
-  from ..models.ecf_32_mineria import Ecf32Mineria
-  from ..models.ecf_32_otra_moneda_detalle import Ecf32OtraMonedaDetalle
-  from ..models.ecf_32_sub_descuento import Ecf32SubDescuento
-  from ..models.ecf_32_sub_recargo import Ecf32SubRecargo
-  from ..models.ecf_32_subcantidad_item import Ecf32SubcantidadItem
-
-
-
+    from ..models.ecf_32_codigos_item import Ecf32CodigosItem
+    from ..models.ecf_32_impuesto_adicional import Ecf32ImpuestoAdicional
+    from ..models.ecf_32_mineria import Ecf32Mineria
+    from ..models.ecf_32_otra_moneda_detalle import Ecf32OtraMonedaDetalle
+    from ..models.ecf_32_sub_descuento import Ecf32SubDescuento
+    from ..models.ecf_32_sub_recargo import Ecf32SubRecargo
+    from ..models.ecf_32_subcantidad_item import Ecf32SubcantidadItem
 
 
 T = TypeVar("T", bound="Ecf32Item")
 
 
-
 @_attrs_define
 class Ecf32Item:
-    """ 
-        Attributes:
-            numero_linea (int | str):
-            indicador_facturacion (Ecf32IndicadorFacturacionType):
-            nombre_item (str):
-            indicador_bieno_servicio (Ecf32IndicadorBienoServicioType):
-            cantidad_item (float | str):
-            precio_unitario_item (float | str):
-            monto_item (float | str):
-            tabla_codigos_item (list[Ecf32CodigosItem] | None | Unset):
-            descripcion_item (None | str | Unset):
-            unidad_medida (None | UnidadMedidaTypeType1 | Unset):
-            cantidad_referencia (float | None | str | Unset):
-            unidad_referencia (None | UnidadMedidaTypeType1 | Unset):
-            tabla_subcantidad (list[Ecf32SubcantidadItem] | None | Unset):
-            grados_alcohol (float | None | str | Unset):
-            precio_unitario_referencia (float | None | str | Unset):
-            fecha_elaboracion (datetime.datetime | None | Unset):
-            fecha_vencimiento_item (datetime.datetime | None | Unset):
-            mineria (Ecf32Mineria | None | Unset):
-            descuento_monto (float | None | str | Unset):
-            tabla_sub_descuento (list[Ecf32SubDescuento] | None | Unset):
-            recargo_monto (float | None | str | Unset):
-            tabla_sub_recargo (list[Ecf32SubRecargo] | None | Unset):
-            tabla_impuesto_adicional (list[Ecf32ImpuestoAdicional] | None | Unset):
-            otra_moneda_detalle (Ecf32OtraMonedaDetalle | None | Unset):
-     """
+    """
+    Attributes:
+        numero_linea (int | str):
+        indicador_facturacion (Ecf32IndicadorFacturacionType):
+        nombre_item (str):
+        indicador_bieno_servicio (Ecf32IndicadorBienoServicioType):
+        cantidad_item (float | str):
+        precio_unitario_item (float | str):
+        monto_item (float | str):
+        tabla_codigos_item (list[Ecf32CodigosItem] | None | Unset):
+        descripcion_item (None | str | Unset):
+        unidad_medida (None | UnidadMedidaTypeType1 | Unset):
+        cantidad_referencia (float | None | str | Unset):
+        unidad_referencia (None | UnidadMedidaTypeType1 | Unset):
+        tabla_subcantidad (list[Ecf32SubcantidadItem] | None | Unset):
+        grados_alcohol (float | None | str | Unset):
+        precio_unitario_referencia (float | None | str | Unset):
+        fecha_elaboracion (datetime.datetime | None | Unset):
+        fecha_vencimiento_item (datetime.datetime | None | Unset):
+        mineria (Ecf32Mineria | None | Unset):
+        descuento_monto (float | None | str | Unset):
+        tabla_sub_descuento (list[Ecf32SubDescuento] | None | Unset):
+        recargo_monto (float | None | str | Unset):
+        tabla_sub_recargo (list[Ecf32SubRecargo] | None | Unset):
+        tabla_impuesto_adicional (list[Ecf32ImpuestoAdicional] | None | Unset):
+        otra_moneda_detalle (Ecf32OtraMonedaDetalle | None | Unset):
+    """
 
     numero_linea: int | str
     indicador_facturacion: Ecf32IndicadorFacturacionType
@@ -89,18 +81,10 @@ class Ecf32Item:
     otra_moneda_detalle: Ecf32OtraMonedaDetalle | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.ecf_32_codigos_item import Ecf32CodigosItem
-        from ..models.ecf_32_impuesto_adicional import Ecf32ImpuestoAdicional
         from ..models.ecf_32_mineria import Ecf32Mineria
         from ..models.ecf_32_otra_moneda_detalle import Ecf32OtraMonedaDetalle
-        from ..models.ecf_32_sub_descuento import Ecf32SubDescuento
-        from ..models.ecf_32_sub_recargo import Ecf32SubRecargo
-        from ..models.ecf_32_subcantidad_item import Ecf32SubcantidadItem
+
         numero_linea: int | str
         numero_linea = self.numero_linea
 
@@ -127,7 +111,6 @@ class Ecf32Item:
             for tabla_codigos_item_type_1_item_data in self.tabla_codigos_item:
                 tabla_codigos_item_type_1_item = tabla_codigos_item_type_1_item_data.to_dict()
                 tabla_codigos_item.append(tabla_codigos_item_type_1_item)
-
 
         else:
             tabla_codigos_item = self.tabla_codigos_item
@@ -168,7 +151,6 @@ class Ecf32Item:
             for tabla_subcantidad_type_1_item_data in self.tabla_subcantidad:
                 tabla_subcantidad_type_1_item = tabla_subcantidad_type_1_item_data.to_dict()
                 tabla_subcantidad.append(tabla_subcantidad_type_1_item)
-
 
         else:
             tabla_subcantidad = self.tabla_subcantidad
@@ -224,7 +206,6 @@ class Ecf32Item:
                 tabla_sub_descuento_type_1_item = tabla_sub_descuento_type_1_item_data.to_dict()
                 tabla_sub_descuento.append(tabla_sub_descuento_type_1_item)
 
-
         else:
             tabla_sub_descuento = self.tabla_sub_descuento
 
@@ -243,7 +224,6 @@ class Ecf32Item:
                 tabla_sub_recargo_type_1_item = tabla_sub_recargo_type_1_item_data.to_dict()
                 tabla_sub_recargo.append(tabla_sub_recargo_type_1_item)
 
-
         else:
             tabla_sub_recargo = self.tabla_sub_recargo
 
@@ -256,7 +236,6 @@ class Ecf32Item:
                 tabla_impuesto_adicional_type_1_item = tabla_impuesto_adicional_type_1_item_data.to_dict()
                 tabla_impuesto_adicional.append(tabla_impuesto_adicional_type_1_item)
 
-
         else:
             tabla_impuesto_adicional = self.tabla_impuesto_adicional
 
@@ -268,18 +247,19 @@ class Ecf32Item:
         else:
             otra_moneda_detalle = self.otra_moneda_detalle
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "numeroLinea": numero_linea,
-            "indicadorFacturacion": indicador_facturacion,
-            "nombreItem": nombre_item,
-            "indicadorBienoServicio": indicador_bieno_servicio,
-            "cantidadItem": cantidad_item,
-            "precioUnitarioItem": precio_unitario_item,
-            "montoItem": monto_item,
-        })
+        field_dict.update(
+            {
+                "numeroLinea": numero_linea,
+                "indicadorFacturacion": indicador_facturacion,
+                "nombreItem": nombre_item,
+                "indicadorBienoServicio": indicador_bieno_servicio,
+                "cantidadItem": cantidad_item,
+                "precioUnitarioItem": precio_unitario_item,
+                "montoItem": monto_item,
+            }
+        )
         if tabla_codigos_item is not UNSET:
             field_dict["tablaCodigosItem"] = tabla_codigos_item
         if descripcion_item is not UNSET:
@@ -317,8 +297,6 @@ class Ecf32Item:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ecf_32_codigos_item import Ecf32CodigosItem
@@ -328,42 +306,34 @@ class Ecf32Item:
         from ..models.ecf_32_sub_descuento import Ecf32SubDescuento
         from ..models.ecf_32_sub_recargo import Ecf32SubRecargo
         from ..models.ecf_32_subcantidad_item import Ecf32SubcantidadItem
+
         d = dict(src_dict)
+
         def _parse_numero_linea(data: object) -> int | str:
             return cast(int | str, data)
 
         numero_linea = _parse_numero_linea(d.pop("numeroLinea"))
 
-
         indicador_facturacion = Ecf32IndicadorFacturacionType(d.pop("indicadorFacturacion"))
-
-
-
 
         nombre_item = d.pop("nombreItem")
 
         indicador_bieno_servicio = Ecf32IndicadorBienoServicioType(d.pop("indicadorBienoServicio"))
-
-
-
 
         def _parse_cantidad_item(data: object) -> float | str:
             return cast(float | str, data)
 
         cantidad_item = _parse_cantidad_item(d.pop("cantidadItem"))
 
-
         def _parse_precio_unitario_item(data: object) -> float | str:
             return cast(float | str, data)
 
         precio_unitario_item = _parse_precio_unitario_item(d.pop("precioUnitarioItem"))
 
-
         def _parse_monto_item(data: object) -> float | str:
             return cast(float | str, data)
 
         monto_item = _parse_monto_item(d.pop("montoItem"))
-
 
         def _parse_tabla_codigos_item(data: object) -> list[Ecf32CodigosItem] | None | Unset:
             if data is None:
@@ -375,10 +345,8 @@ class Ecf32Item:
                     raise TypeError()
                 tabla_codigos_item_type_1 = []
                 _tabla_codigos_item_type_1 = data
-                for tabla_codigos_item_type_1_item_data in (_tabla_codigos_item_type_1):
+                for tabla_codigos_item_type_1_item_data in _tabla_codigos_item_type_1:
                     tabla_codigos_item_type_1_item = Ecf32CodigosItem.from_dict(tabla_codigos_item_type_1_item_data)
-
-
 
                     tabla_codigos_item_type_1.append(tabla_codigos_item_type_1_item)
 
@@ -389,7 +357,6 @@ class Ecf32Item:
 
         tabla_codigos_item = _parse_tabla_codigos_item(d.pop("tablaCodigosItem", UNSET))
 
-
         def _parse_descripcion_item(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -398,7 +365,6 @@ class Ecf32Item:
             return cast(None | str | Unset, data)
 
         descripcion_item = _parse_descripcion_item(d.pop("descripcionItem", UNSET))
-
 
         def _parse_unidad_medida(data: object) -> None | UnidadMedidaTypeType1 | Unset:
             if data is None:
@@ -410,15 +376,12 @@ class Ecf32Item:
                     raise TypeError()
                 componentsschemas_unidad_medida_type_type_1 = UnidadMedidaTypeType1(data)
 
-
-
                 return componentsschemas_unidad_medida_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | UnidadMedidaTypeType1 | Unset, data)
 
         unidad_medida = _parse_unidad_medida(d.pop("unidadMedida", UNSET))
-
 
         def _parse_cantidad_referencia(data: object) -> float | None | str | Unset:
             if data is None:
@@ -428,7 +391,6 @@ class Ecf32Item:
             return cast(float | None | str | Unset, data)
 
         cantidad_referencia = _parse_cantidad_referencia(d.pop("cantidadReferencia", UNSET))
-
 
         def _parse_unidad_referencia(data: object) -> None | UnidadMedidaTypeType1 | Unset:
             if data is None:
@@ -440,15 +402,12 @@ class Ecf32Item:
                     raise TypeError()
                 componentsschemas_unidad_medida_type_type_1 = UnidadMedidaTypeType1(data)
 
-
-
                 return componentsschemas_unidad_medida_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | UnidadMedidaTypeType1 | Unset, data)
 
         unidad_referencia = _parse_unidad_referencia(d.pop("unidadReferencia", UNSET))
-
 
         def _parse_tabla_subcantidad(data: object) -> list[Ecf32SubcantidadItem] | None | Unset:
             if data is None:
@@ -460,10 +419,8 @@ class Ecf32Item:
                     raise TypeError()
                 tabla_subcantidad_type_1 = []
                 _tabla_subcantidad_type_1 = data
-                for tabla_subcantidad_type_1_item_data in (_tabla_subcantidad_type_1):
+                for tabla_subcantidad_type_1_item_data in _tabla_subcantidad_type_1:
                     tabla_subcantidad_type_1_item = Ecf32SubcantidadItem.from_dict(tabla_subcantidad_type_1_item_data)
-
-
 
                     tabla_subcantidad_type_1.append(tabla_subcantidad_type_1_item)
 
@@ -474,7 +431,6 @@ class Ecf32Item:
 
         tabla_subcantidad = _parse_tabla_subcantidad(d.pop("tablaSubcantidad", UNSET))
 
-
         def _parse_grados_alcohol(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -483,7 +439,6 @@ class Ecf32Item:
             return cast(float | None | str | Unset, data)
 
         grados_alcohol = _parse_grados_alcohol(d.pop("gradosAlcohol", UNSET))
-
 
         def _parse_precio_unitario_referencia(data: object) -> float | None | str | Unset:
             if data is None:
@@ -494,7 +449,6 @@ class Ecf32Item:
 
         precio_unitario_referencia = _parse_precio_unitario_referencia(d.pop("precioUnitarioReferencia", UNSET))
 
-
         def _parse_fecha_elaboracion(data: object) -> datetime.datetime | None | Unset:
             if data is None:
                 return data
@@ -503,9 +457,7 @@ class Ecf32Item:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_elaboracion_type_1 = isoparse(data)
-
-
+                fecha_elaboracion_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_elaboracion_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -513,7 +465,6 @@ class Ecf32Item:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_elaboracion = _parse_fecha_elaboracion(d.pop("fechaElaboracion", UNSET))
-
 
         def _parse_fecha_vencimiento_item(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -523,9 +474,7 @@ class Ecf32Item:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_vencimiento_item_type_1 = isoparse(data)
-
-
+                fecha_vencimiento_item_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_vencimiento_item_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -533,7 +482,6 @@ class Ecf32Item:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_vencimiento_item = _parse_fecha_vencimiento_item(d.pop("fechaVencimientoItem", UNSET))
-
 
         def _parse_mineria(data: object) -> Ecf32Mineria | None | Unset:
             if data is None:
@@ -545,15 +493,12 @@ class Ecf32Item:
                     raise TypeError()
                 mineria_type_1 = Ecf32Mineria.from_dict(data)
 
-
-
                 return mineria_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf32Mineria | None | Unset, data)
 
         mineria = _parse_mineria(d.pop("mineria", UNSET))
-
 
         def _parse_descuento_monto(data: object) -> float | None | str | Unset:
             if data is None:
@@ -563,7 +508,6 @@ class Ecf32Item:
             return cast(float | None | str | Unset, data)
 
         descuento_monto = _parse_descuento_monto(d.pop("descuentoMonto", UNSET))
-
 
         def _parse_tabla_sub_descuento(data: object) -> list[Ecf32SubDescuento] | None | Unset:
             if data is None:
@@ -575,10 +519,8 @@ class Ecf32Item:
                     raise TypeError()
                 tabla_sub_descuento_type_1 = []
                 _tabla_sub_descuento_type_1 = data
-                for tabla_sub_descuento_type_1_item_data in (_tabla_sub_descuento_type_1):
+                for tabla_sub_descuento_type_1_item_data in _tabla_sub_descuento_type_1:
                     tabla_sub_descuento_type_1_item = Ecf32SubDescuento.from_dict(tabla_sub_descuento_type_1_item_data)
-
-
 
                     tabla_sub_descuento_type_1.append(tabla_sub_descuento_type_1_item)
 
@@ -589,7 +531,6 @@ class Ecf32Item:
 
         tabla_sub_descuento = _parse_tabla_sub_descuento(d.pop("tablaSubDescuento", UNSET))
 
-
         def _parse_recargo_monto(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -598,7 +539,6 @@ class Ecf32Item:
             return cast(float | None | str | Unset, data)
 
         recargo_monto = _parse_recargo_monto(d.pop("recargoMonto", UNSET))
-
 
         def _parse_tabla_sub_recargo(data: object) -> list[Ecf32SubRecargo] | None | Unset:
             if data is None:
@@ -610,10 +550,8 @@ class Ecf32Item:
                     raise TypeError()
                 tabla_sub_recargo_type_1 = []
                 _tabla_sub_recargo_type_1 = data
-                for tabla_sub_recargo_type_1_item_data in (_tabla_sub_recargo_type_1):
+                for tabla_sub_recargo_type_1_item_data in _tabla_sub_recargo_type_1:
                     tabla_sub_recargo_type_1_item = Ecf32SubRecargo.from_dict(tabla_sub_recargo_type_1_item_data)
-
-
 
                     tabla_sub_recargo_type_1.append(tabla_sub_recargo_type_1_item)
 
@@ -623,7 +561,6 @@ class Ecf32Item:
             return cast(list[Ecf32SubRecargo] | None | Unset, data)
 
         tabla_sub_recargo = _parse_tabla_sub_recargo(d.pop("tablaSubRecargo", UNSET))
-
 
         def _parse_tabla_impuesto_adicional(data: object) -> list[Ecf32ImpuestoAdicional] | None | Unset:
             if data is None:
@@ -635,10 +572,10 @@ class Ecf32Item:
                     raise TypeError()
                 tabla_impuesto_adicional_type_1 = []
                 _tabla_impuesto_adicional_type_1 = data
-                for tabla_impuesto_adicional_type_1_item_data in (_tabla_impuesto_adicional_type_1):
-                    tabla_impuesto_adicional_type_1_item = Ecf32ImpuestoAdicional.from_dict(tabla_impuesto_adicional_type_1_item_data)
-
-
+                for tabla_impuesto_adicional_type_1_item_data in _tabla_impuesto_adicional_type_1:
+                    tabla_impuesto_adicional_type_1_item = Ecf32ImpuestoAdicional.from_dict(
+                        tabla_impuesto_adicional_type_1_item_data
+                    )
 
                     tabla_impuesto_adicional_type_1.append(tabla_impuesto_adicional_type_1_item)
 
@@ -648,7 +585,6 @@ class Ecf32Item:
             return cast(list[Ecf32ImpuestoAdicional] | None | Unset, data)
 
         tabla_impuesto_adicional = _parse_tabla_impuesto_adicional(d.pop("tablaImpuestoAdicional", UNSET))
-
 
         def _parse_otra_moneda_detalle(data: object) -> Ecf32OtraMonedaDetalle | None | Unset:
             if data is None:
@@ -660,15 +596,12 @@ class Ecf32Item:
                     raise TypeError()
                 otra_moneda_detalle_type_1 = Ecf32OtraMonedaDetalle.from_dict(data)
 
-
-
                 return otra_moneda_detalle_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf32OtraMonedaDetalle | None | Unset, data)
 
         otra_moneda_detalle = _parse_otra_moneda_detalle(d.pop("otraMonedaDetalle", UNSET))
-
 
         ecf_32_item = cls(
             numero_linea=numero_linea,
@@ -696,7 +629,6 @@ class Ecf32Item:
             tabla_impuesto_adicional=tabla_impuesto_adicional,
             otra_moneda_detalle=otra_moneda_detalle,
         )
-
 
         ecf_32_item.additional_properties = d
         return ecf_32_item

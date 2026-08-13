@@ -1,18 +1,13 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.paginated_api_result_of_company_response import PaginatedApiResultOfCompanyResponse
 from ...models.problem_details import ProblemDetails
-from ...types import UNSET, Unset
-from typing import cast
-
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
@@ -21,11 +16,7 @@ def _get_kwargs(
     names: list[str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
@@ -33,13 +24,11 @@ def _get_kwargs(
     if not isinstance(rncs, Unset):
         json_rncs = rncs
 
-
     params["Rncs"] = json_rncs
 
     json_names: list[str] | Unset = UNSET
     if not isinstance(names, Unset):
         json_names = names
-
 
     params["Names"] = json_names
 
@@ -57,9 +46,7 @@ def _get_kwargs(
         json_limit = limit
     params["Limit"] = json_limit
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -67,37 +54,29 @@ def _get_kwargs(
         "params": params,
     }
 
-
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> PaginatedApiResultOfCompanyResponse | ProblemDetails | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> PaginatedApiResultOfCompanyResponse | ProblemDetails | None:
     if response.status_code == 200:
         response_200 = PaginatedApiResultOfCompanyResponse.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ProblemDetails.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ProblemDetails.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 403:
         response_403 = ProblemDetails.from_dict(response.json())
-
-
 
         return response_403
 
@@ -107,7 +86,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[PaginatedApiResultOfCompanyResponse | ProblemDetails]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[PaginatedApiResultOfCompanyResponse | ProblemDetails]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -123,9 +104,8 @@ def sync_detailed(
     names: list[str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
-
 ) -> Response[PaginatedApiResultOfCompanyResponse | ProblemDetails]:
-    """ 
+    """
     Args:
         rncs (list[str] | Unset):
         names (list[str] | Unset):
@@ -138,15 +118,13 @@ def sync_detailed(
 
     Returns:
         Response[PaginatedApiResultOfCompanyResponse | ProblemDetails]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         rncs=rncs,
-names=names,
-page=page,
-limit=limit,
-
+        names=names,
+        page=page,
+        limit=limit,
     )
 
     response = client.get_httpx_client().request(
@@ -155,6 +133,7 @@ limit=limit,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient | Client,
@@ -162,9 +141,8 @@ def sync(
     names: list[str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
-
 ) -> PaginatedApiResultOfCompanyResponse | ProblemDetails | None:
-    """ 
+    """
     Args:
         rncs (list[str] | Unset):
         names (list[str] | Unset):
@@ -177,17 +155,16 @@ def sync(
 
     Returns:
         PaginatedApiResultOfCompanyResponse | ProblemDetails
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-rncs=rncs,
-names=names,
-page=page,
-limit=limit,
-
+        rncs=rncs,
+        names=names,
+        page=page,
+        limit=limit,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
@@ -196,9 +173,8 @@ async def asyncio_detailed(
     names: list[str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
-
 ) -> Response[PaginatedApiResultOfCompanyResponse | ProblemDetails]:
-    """ 
+    """
     Args:
         rncs (list[str] | Unset):
         names (list[str] | Unset):
@@ -211,22 +187,19 @@ async def asyncio_detailed(
 
     Returns:
         Response[PaginatedApiResultOfCompanyResponse | ProblemDetails]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         rncs=rncs,
-names=names,
-page=page,
-limit=limit,
-
+        names=names,
+        page=page,
+        limit=limit,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
@@ -235,9 +208,8 @@ async def asyncio(
     names: list[str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
-
 ) -> PaginatedApiResultOfCompanyResponse | ProblemDetails | None:
-    """ 
+    """
     Args:
         rncs (list[str] | Unset):
         names (list[str] | Unset):
@@ -250,14 +222,14 @@ async def asyncio(
 
     Returns:
         PaginatedApiResultOfCompanyResponse | ProblemDetails
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-rncs=rncs,
-names=names,
-page=page,
-limit=limit,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            rncs=rncs,
+            names=names,
+            page=page,
+            limit=limit,
+        )
+    ).parsed

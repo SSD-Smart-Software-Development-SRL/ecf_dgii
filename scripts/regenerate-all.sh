@@ -23,8 +23,21 @@ set -o pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
+# Ensure user's gem bin directory is in PATH
+USER_GEM_BIN="$(ruby -e "require 'rubygems'; puts Gem.user_dir + '/bin'" 2>/dev/null || true)"
+if [[ -n "$USER_GEM_BIN" && -d "$USER_GEM_BIN" ]]; then
+  export PATH="$USER_GEM_BIN:$PATH"
+fi
+
 SPEC_PATH="${SPEC_PATH:-$HOME/Developer/puntoos/ecf_dgii/src/Apis/ECF_DGII.EcfApi/wwwroot/openapi/v1.json}"
 RECEPTOR_SPEC_PATH="${RECEPTOR_SPEC_PATH:-$HOME/Developer/puntoos/ecf_dgii/src/Apis/ECF_DGII.ReceptorApi/wwwroot/openapi/v1.json}"
+# Convert SPEC_PATH and RECEPTOR_SPEC_PATH to absolute paths if they are relative
+if [[ ! "$SPEC_PATH" =~ ^/ ]]; then
+  SPEC_PATH="$(pwd)/$SPEC_PATH"
+fi
+if [[ ! "$RECEPTOR_SPEC_PATH" =~ ^/ ]]; then
+  RECEPTOR_SPEC_PATH="$(pwd)/$RECEPTOR_SPEC_PATH"
+fi
 OPENAPI_GEN_VERSION="${OPENAPI_GEN_VERSION:-7.14.0}"
 NPX_PKG="@openapitools/openapi-generator-cli@2.32.0"
 
@@ -127,6 +140,15 @@ regen_ios() {
     && ok "ios" || bad "ios"
 }
 
+regen_ruby() {
+  step "ruby (openapi-generator)"
+  command -v npx >/dev/null && command -v java >/dev/null || { skip "ruby" "npx or java missing"; return; }
+  ( cd "$REPO_ROOT/ruby" \
+      && SPEC_PATH="$SPEC_PATH" ./generate.sh \
+      && bundle exec rake spec ) \
+    && ok "ruby" || bad "ruby"
+}
+
 regen_cpp() {
   step "cpp (openapi-generator cpp-restsdk) — regen only, no build"
   command -v npx >/dev/null && command -v java >/dev/null || { skip "cpp" "npx or java missing"; return; }
@@ -165,6 +187,7 @@ run_target() {
     java)       regen_java ;;
     kotlin)     regen_kotlin ;;
     ios)        regen_ios ;;
+    ruby)       regen_ruby ;;
     cpp|c++)    regen_cpp ;;
     bruno)      refresh_bruno ;;
     *)          echo "Unknown target: $1" >&2; exit 2 ;;
@@ -188,6 +211,7 @@ main() {
     regen_java
     regen_kotlin
     regen_ios
+    regen_ruby
     regen_cpp
     refresh_bruno
   fi

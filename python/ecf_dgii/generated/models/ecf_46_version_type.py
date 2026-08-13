@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Ecf46VersionType(str, Enum):
     VERSION1_0 = "Version1_0"
 

@@ -1,41 +1,32 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
 
 from ..models.ecf_46_tipo_ajuste_type import Ecf46TipoAjusteType
 from ..models.indicador_facturacion_dr_type_type_1 import IndicadorFacturacionDRTypeType1
 from ..models.tipo_descuento_recargo_type_type_1 import TipoDescuentoRecargoTypeType1
 from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf46DescuentoORecargo")
 
 
-
 @_attrs_define
 class Ecf46DescuentoORecargo:
-    """ 
-        Attributes:
-            numero_linea (int | str):
-            tipo_ajuste (Ecf46TipoAjusteType):
-            descripcion_descuentoo_recargo (None | str | Unset):
-            tipo_valor (None | TipoDescuentoRecargoTypeType1 | Unset):
-            valor_descuentoo_recargo (float | None | str | Unset):
-            monto_descuentoo_recargo (float | None | str | Unset):
-            monto_descuentoo_recargo_otra_moneda (float | None | str | Unset):
-            indicador_facturacion_descuentoo_recargo (IndicadorFacturacionDRTypeType1 | None | Unset):
-     """
+    """
+    Attributes:
+        numero_linea (int | str):
+        tipo_ajuste (Ecf46TipoAjusteType):
+        descripcion_descuentoo_recargo (None | str | Unset):
+        tipo_valor (None | TipoDescuentoRecargoTypeType1 | Unset):
+        valor_descuentoo_recargo (float | None | str | Unset):
+        monto_descuentoo_recargo (float | None | str | Unset):
+        monto_descuentoo_recargo_otra_moneda (float | None | str | Unset):
+        indicador_facturacion_descuentoo_recargo (IndicadorFacturacionDRTypeType1 | None | Unset):
+    """
 
     numero_linea: int | str
     tipo_ajuste: Ecf46TipoAjusteType
@@ -46,10 +37,6 @@ class Ecf46DescuentoORecargo:
     monto_descuentoo_recargo_otra_moneda: float | None | str | Unset = UNSET
     indicador_facturacion_descuentoo_recargo: IndicadorFacturacionDRTypeType1 | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         numero_linea: int | str
@@ -97,13 +84,14 @@ class Ecf46DescuentoORecargo:
         else:
             indicador_facturacion_descuentoo_recargo = self.indicador_facturacion_descuentoo_recargo
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "numeroLinea": numero_linea,
-            "tipoAjuste": tipo_ajuste,
-        })
+        field_dict.update(
+            {
+                "numeroLinea": numero_linea,
+                "tipoAjuste": tipo_ajuste,
+            }
+        )
         if descripcion_descuentoo_recargo is not UNSET:
             field_dict["descripcionDescuentooRecargo"] = descripcion_descuentoo_recargo
         if tipo_valor is not UNSET:
@@ -119,21 +107,16 @@ class Ecf46DescuentoORecargo:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_numero_linea(data: object) -> int | str:
             return cast(int | str, data)
 
         numero_linea = _parse_numero_linea(d.pop("numeroLinea"))
 
-
         tipo_ajuste = Ecf46TipoAjusteType(d.pop("tipoAjuste"))
-
-
-
 
         def _parse_descripcion_descuentoo_recargo(data: object) -> None | str | Unset:
             if data is None:
@@ -142,8 +125,9 @@ class Ecf46DescuentoORecargo:
                 return data
             return cast(None | str | Unset, data)
 
-        descripcion_descuentoo_recargo = _parse_descripcion_descuentoo_recargo(d.pop("descripcionDescuentooRecargo", UNSET))
-
+        descripcion_descuentoo_recargo = _parse_descripcion_descuentoo_recargo(
+            d.pop("descripcionDescuentooRecargo", UNSET)
+        )
 
         def _parse_tipo_valor(data: object) -> None | TipoDescuentoRecargoTypeType1 | Unset:
             if data is None:
@@ -155,15 +139,12 @@ class Ecf46DescuentoORecargo:
                     raise TypeError()
                 componentsschemas_tipo_descuento_recargo_type_type_1 = TipoDescuentoRecargoTypeType1(data)
 
-
-
                 return componentsschemas_tipo_descuento_recargo_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | TipoDescuentoRecargoTypeType1 | Unset, data)
 
         tipo_valor = _parse_tipo_valor(d.pop("tipoValor", UNSET))
-
 
         def _parse_valor_descuentoo_recargo(data: object) -> float | None | str | Unset:
             if data is None:
@@ -174,7 +155,6 @@ class Ecf46DescuentoORecargo:
 
         valor_descuentoo_recargo = _parse_valor_descuentoo_recargo(d.pop("valorDescuentooRecargo", UNSET))
 
-
         def _parse_monto_descuentoo_recargo(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -184,7 +164,6 @@ class Ecf46DescuentoORecargo:
 
         monto_descuentoo_recargo = _parse_monto_descuentoo_recargo(d.pop("montoDescuentooRecargo", UNSET))
 
-
         def _parse_monto_descuentoo_recargo_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -192,10 +171,13 @@ class Ecf46DescuentoORecargo:
                 return data
             return cast(float | None | str | Unset, data)
 
-        monto_descuentoo_recargo_otra_moneda = _parse_monto_descuentoo_recargo_otra_moneda(d.pop("montoDescuentooRecargoOtraMoneda", UNSET))
+        monto_descuentoo_recargo_otra_moneda = _parse_monto_descuentoo_recargo_otra_moneda(
+            d.pop("montoDescuentooRecargoOtraMoneda", UNSET)
+        )
 
-
-        def _parse_indicador_facturacion_descuentoo_recargo(data: object) -> IndicadorFacturacionDRTypeType1 | None | Unset:
+        def _parse_indicador_facturacion_descuentoo_recargo(
+            data: object,
+        ) -> IndicadorFacturacionDRTypeType1 | None | Unset:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -205,15 +187,14 @@ class Ecf46DescuentoORecargo:
                     raise TypeError()
                 componentsschemas_indicador_facturacion_dr_type_type_1 = IndicadorFacturacionDRTypeType1(data)
 
-
-
                 return componentsschemas_indicador_facturacion_dr_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(IndicadorFacturacionDRTypeType1 | None | Unset, data)
 
-        indicador_facturacion_descuentoo_recargo = _parse_indicador_facturacion_descuentoo_recargo(d.pop("indicadorFacturacionDescuentooRecargo", UNSET))
-
+        indicador_facturacion_descuentoo_recargo = _parse_indicador_facturacion_descuentoo_recargo(
+            d.pop("indicadorFacturacionDescuentooRecargo", UNSET)
+        )
 
         ecf_46_descuento_o_recargo = cls(
             numero_linea=numero_linea,
@@ -225,7 +206,6 @@ class Ecf46DescuentoORecargo:
             monto_descuentoo_recargo_otra_moneda=monto_descuentoo_recargo_otra_moneda,
             indicador_facturacion_descuentoo_recargo=indicador_facturacion_descuentoo_recargo,
         )
-
 
         ecf_46_descuento_o_recargo.additional_properties = d
         return ecf_46_descuento_o_recargo

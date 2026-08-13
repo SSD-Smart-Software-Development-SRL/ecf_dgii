@@ -1,41 +1,34 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.ecf_43_version_type import Ecf43VersionType
 from ..types import UNSET, Unset
-from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.ecf_43_emisor import Ecf43Emisor
-  from ..models.ecf_43_id_doc import Ecf43IdDoc
-  from ..models.ecf_43_otra_moneda import Ecf43OtraMoneda
-  from ..models.ecf_43_totales import Ecf43Totales
-
-
-
+    from ..models.ecf_43_emisor import Ecf43Emisor
+    from ..models.ecf_43_id_doc import Ecf43IdDoc
+    from ..models.ecf_43_otra_moneda import Ecf43OtraMoneda
+    from ..models.ecf_43_totales import Ecf43Totales
 
 
 T = TypeVar("T", bound="Ecf43Encabezado")
 
 
-
 @_attrs_define
 class Ecf43Encabezado:
-    """ 
-        Attributes:
-            version (Ecf43VersionType):
-            id_doc (Ecf43IdDoc):
-            emisor (Ecf43Emisor):
-            totales (Ecf43Totales):
-            otra_moneda (Ecf43OtraMoneda | None | Unset):
-     """
+    """
+    Attributes:
+        version (Ecf43VersionType):
+        id_doc (Ecf43IdDoc):
+        emisor (Ecf43Emisor):
+        totales (Ecf43Totales):
+        otra_moneda (Ecf43OtraMoneda | None | Unset):
+    """
 
     version: Ecf43VersionType
     id_doc: Ecf43IdDoc
@@ -44,15 +37,9 @@ class Ecf43Encabezado:
     otra_moneda: Ecf43OtraMoneda | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.ecf_43_emisor import Ecf43Emisor
-        from ..models.ecf_43_id_doc import Ecf43IdDoc
         from ..models.ecf_43_otra_moneda import Ecf43OtraMoneda
-        from ..models.ecf_43_totales import Ecf43Totales
+
         version = self.version.value
 
         id_doc = self.id_doc.to_dict()
@@ -69,21 +56,20 @@ class Ecf43Encabezado:
         else:
             otra_moneda = self.otra_moneda
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "version": version,
-            "idDoc": id_doc,
-            "emisor": emisor,
-            "totales": totales,
-        })
+        field_dict.update(
+            {
+                "version": version,
+                "idDoc": id_doc,
+                "emisor": emisor,
+                "totales": totales,
+            }
+        )
         if otra_moneda is not UNSET:
             field_dict["otraMoneda"] = otra_moneda
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -91,26 +77,15 @@ class Ecf43Encabezado:
         from ..models.ecf_43_id_doc import Ecf43IdDoc
         from ..models.ecf_43_otra_moneda import Ecf43OtraMoneda
         from ..models.ecf_43_totales import Ecf43Totales
+
         d = dict(src_dict)
         version = Ecf43VersionType(d.pop("version"))
 
-
-
-
         id_doc = Ecf43IdDoc.from_dict(d.pop("idDoc"))
-
-
-
 
         emisor = Ecf43Emisor.from_dict(d.pop("emisor"))
 
-
-
-
         totales = Ecf43Totales.from_dict(d.pop("totales"))
-
-
-
 
         def _parse_otra_moneda(data: object) -> Ecf43OtraMoneda | None | Unset:
             if data is None:
@@ -122,15 +97,12 @@ class Ecf43Encabezado:
                     raise TypeError()
                 otra_moneda_type_1 = Ecf43OtraMoneda.from_dict(data)
 
-
-
                 return otra_moneda_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf43OtraMoneda | None | Unset, data)
 
         otra_moneda = _parse_otra_moneda(d.pop("otraMoneda", UNSET))
-
 
         ecf_43_encabezado = cls(
             version=version,
@@ -139,7 +111,6 @@ class Ecf43Encabezado:
             totales=totales,
             otra_moneda=otra_moneda,
         )
-
 
         ecf_43_encabezado.additional_properties = d
         return ecf_43_encabezado

@@ -1,49 +1,41 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-from uuid import UUID
-import datetime
-
 if TYPE_CHECKING:
-  from ..models.detalle_anulacion_request_dto import DetalleAnulacionRequestDto
-  from ..models.respuesta_anulacion_rango import RespuestaAnulacionRango
-
-
-
+    from ..models.detalle_anulacion_request_dto import DetalleAnulacionRequestDto
+    from ..models.respuesta_anulacion_rango import RespuestaAnulacionRango
 
 
 T = TypeVar("T", bound="AnulacionListResponse")
 
 
-
 @_attrs_define
 class AnulacionListResponse:
-    """ 
-        Attributes:
-            anulacion_id (UUID | Unset):
-            tenant_id (UUID | Unset):
-            company_rnc (str | Unset):
-            cantidade_ncf_anulados (int | str | Unset):
-            detalle_anulacion (list[DetalleAnulacionRequestDto] | None | Unset):
-            response (None | RespuestaAnulacionRango | Unset):
-            status_code (int | str | Unset):
-            file_name (str | Unset):
-            fecha_hora_anulacione_ncf (datetime.datetime | Unset):
-            created_on (datetime.datetime | Unset):
-            updated_on (datetime.datetime | Unset):
-            created_by (str | Unset):
-            updated_by (str | Unset):
-     """
+    """
+    Attributes:
+        anulacion_id (UUID | Unset):
+        tenant_id (UUID | Unset):
+        company_rnc (str | Unset):
+        cantidade_ncf_anulados (int | str | Unset):
+        detalle_anulacion (list[DetalleAnulacionRequestDto] | None | Unset):
+        response (None | RespuestaAnulacionRango | Unset):
+        status_code (int | str | Unset):
+        file_name (str | Unset):
+        fecha_hora_anulacione_ncf (datetime.datetime | Unset):
+        created_on (datetime.datetime | Unset):
+        updated_on (datetime.datetime | Unset):
+        created_by (str | Unset):
+        updated_by (str | Unset):
+    """
 
     anulacion_id: UUID | Unset = UNSET
     tenant_id: UUID | Unset = UNSET
@@ -60,13 +52,9 @@ class AnulacionListResponse:
     updated_by: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.detalle_anulacion_request_dto import DetalleAnulacionRequestDto
         from ..models.respuesta_anulacion_rango import RespuestaAnulacionRango
+
         anulacion_id: str | Unset = UNSET
         if not isinstance(self.anulacion_id, Unset):
             anulacion_id = str(self.anulacion_id)
@@ -91,7 +79,6 @@ class AnulacionListResponse:
             for detalle_anulacion_type_1_item_data in self.detalle_anulacion:
                 detalle_anulacion_type_1_item = detalle_anulacion_type_1_item_data.to_dict()
                 detalle_anulacion.append(detalle_anulacion_type_1_item)
-
 
         else:
             detalle_anulacion = self.detalle_anulacion
@@ -128,11 +115,9 @@ class AnulacionListResponse:
 
         updated_by = self.updated_by
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if anulacion_id is not UNSET:
             field_dict["anulacionId"] = anulacion_id
         if tenant_id is not UNSET:
@@ -162,32 +147,25 @@ class AnulacionListResponse:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.detalle_anulacion_request_dto import DetalleAnulacionRequestDto
         from ..models.respuesta_anulacion_rango import RespuestaAnulacionRango
+
         d = dict(src_dict)
         _anulacion_id = d.pop("anulacionId", UNSET)
         anulacion_id: UUID | Unset
-        if isinstance(_anulacion_id,  Unset):
+        if isinstance(_anulacion_id, Unset):
             anulacion_id = UNSET
         else:
             anulacion_id = UUID(_anulacion_id)
 
-
-
-
         _tenant_id = d.pop("tenantId", UNSET)
         tenant_id: UUID | Unset
-        if isinstance(_tenant_id,  Unset):
+        if isinstance(_tenant_id, Unset):
             tenant_id = UNSET
         else:
             tenant_id = UUID(_tenant_id)
-
-
-
 
         company_rnc = d.pop("companyRnc", UNSET)
 
@@ -197,7 +175,6 @@ class AnulacionListResponse:
             return cast(int | str | Unset, data)
 
         cantidade_ncf_anulados = _parse_cantidade_ncf_anulados(d.pop("cantidadeNCFAnulados", UNSET))
-
 
         def _parse_detalle_anulacion(data: object) -> list[DetalleAnulacionRequestDto] | None | Unset:
             if data is None:
@@ -209,10 +186,10 @@ class AnulacionListResponse:
                     raise TypeError()
                 detalle_anulacion_type_1 = []
                 _detalle_anulacion_type_1 = data
-                for detalle_anulacion_type_1_item_data in (_detalle_anulacion_type_1):
-                    detalle_anulacion_type_1_item = DetalleAnulacionRequestDto.from_dict(detalle_anulacion_type_1_item_data)
-
-
+                for detalle_anulacion_type_1_item_data in _detalle_anulacion_type_1:
+                    detalle_anulacion_type_1_item = DetalleAnulacionRequestDto.from_dict(
+                        detalle_anulacion_type_1_item_data
+                    )
 
                     detalle_anulacion_type_1.append(detalle_anulacion_type_1_item)
 
@@ -222,7 +199,6 @@ class AnulacionListResponse:
             return cast(list[DetalleAnulacionRequestDto] | None | Unset, data)
 
         detalle_anulacion = _parse_detalle_anulacion(d.pop("detalleAnulacion", UNSET))
-
 
         def _parse_response(data: object) -> None | RespuestaAnulacionRango | Unset:
             if data is None:
@@ -234,15 +210,12 @@ class AnulacionListResponse:
                     raise TypeError()
                 response_type_1 = RespuestaAnulacionRango.from_dict(data)
 
-
-
                 return response_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | RespuestaAnulacionRango | Unset, data)
 
         response = _parse_response(d.pop("response", UNSET))
-
 
         def _parse_status_code(data: object) -> int | str | Unset:
             if isinstance(data, Unset):
@@ -251,38 +224,28 @@ class AnulacionListResponse:
 
         status_code = _parse_status_code(d.pop("statusCode", UNSET))
 
-
         file_name = d.pop("fileName", UNSET)
 
         _fecha_hora_anulacione_ncf = d.pop("fechaHoraAnulacioneNCF", UNSET)
         fecha_hora_anulacione_ncf: datetime.datetime | Unset
-        if isinstance(_fecha_hora_anulacione_ncf,  Unset):
+        if isinstance(_fecha_hora_anulacione_ncf, Unset):
             fecha_hora_anulacione_ncf = UNSET
         else:
-            fecha_hora_anulacione_ncf = isoparse(_fecha_hora_anulacione_ncf)
-
-
-
+            fecha_hora_anulacione_ncf = datetime.datetime.fromisoformat(_fecha_hora_anulacione_ncf)
 
         _created_on = d.pop("createdOn", UNSET)
         created_on: datetime.datetime | Unset
-        if isinstance(_created_on,  Unset):
+        if isinstance(_created_on, Unset):
             created_on = UNSET
         else:
-            created_on = isoparse(_created_on)
-
-
-
+            created_on = datetime.datetime.fromisoformat(_created_on)
 
         _updated_on = d.pop("updatedOn", UNSET)
         updated_on: datetime.datetime | Unset
-        if isinstance(_updated_on,  Unset):
+        if isinstance(_updated_on, Unset):
             updated_on = UNSET
         else:
-            updated_on = isoparse(_updated_on)
-
-
-
+            updated_on = datetime.datetime.fromisoformat(_updated_on)
 
         created_by = d.pop("createdBy", UNSET)
 
@@ -303,7 +266,6 @@ class AnulacionListResponse:
             created_by=created_by,
             updated_by=updated_by,
         )
-
 
         anulacion_list_response.additional_properties = d
         return anulacion_list_response

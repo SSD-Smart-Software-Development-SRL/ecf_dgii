@@ -1,12 +1,11 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
 
 from ..models.ecf_46_tipo_ingresos_validation_type import Ecf46TipoIngresosValidationType
 from ..models.ecf_46_tipo_pago_type import Ecf46TipoPagoType
@@ -14,41 +13,34 @@ from ..models.indicador_envio_diferido_type_type_1 import IndicadorEnvioDiferido
 from ..models.tipo_cuenta_pago_type_type_1 import TipoCuentaPagoTypeType1
 from ..models.tipoe_cf_type import TipoeCFType
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
 
 if TYPE_CHECKING:
-  from ..models.ecf_46_forma_de_pago import Ecf46FormaDePago
-
-
-
+    from ..models.ecf_46_forma_de_pago import Ecf46FormaDePago
 
 
 T = TypeVar("T", bound="Ecf46IdDoc")
 
 
-
 @_attrs_define
 class Ecf46IdDoc:
-    """ 
-        Attributes:
-            tipoe_cf (TipoeCFType):
-            encf (str):
-            tipo_ingresos (Ecf46TipoIngresosValidationType):
-            tipo_pago (Ecf46TipoPagoType):
-            fecha_vencimiento_secuencia (datetime.datetime | Unset):
-            indicador_envio_diferido (IndicadorEnvioDiferidoTypeType1 | None | Unset):
-            fecha_limite_pago (datetime.datetime | None | Unset):
-            termino_pago (None | str | Unset):
-            tabla_formas_pago (list[Ecf46FormaDePago] | None | Unset):
-            tipo_cuenta_pago (None | TipoCuentaPagoTypeType1 | Unset):
-            numero_cuenta_pago (None | str | Unset):
-            banco_pago (None | str | Unset):
-            fecha_desde (datetime.datetime | None | Unset):
-            fecha_hasta (datetime.datetime | None | Unset):
-            total_paginas (int | None | str | Unset):
-     """
+    """
+    Attributes:
+        tipoe_cf (TipoeCFType):
+        encf (str):
+        tipo_ingresos (Ecf46TipoIngresosValidationType):
+        tipo_pago (Ecf46TipoPagoType):
+        fecha_vencimiento_secuencia (datetime.datetime | Unset):
+        indicador_envio_diferido (IndicadorEnvioDiferidoTypeType1 | None | Unset):
+        fecha_limite_pago (datetime.datetime | None | Unset):
+        termino_pago (None | str | Unset):
+        tabla_formas_pago (list[Ecf46FormaDePago] | None | Unset):
+        tipo_cuenta_pago (None | TipoCuentaPagoTypeType1 | Unset):
+        numero_cuenta_pago (None | str | Unset):
+        banco_pago (None | str | Unset):
+        fecha_desde (datetime.datetime | None | Unset):
+        fecha_hasta (datetime.datetime | None | Unset):
+        total_paginas (int | None | str | Unset):
+    """
 
     tipoe_cf: TipoeCFType
     encf: str
@@ -67,12 +59,7 @@ class Ecf46IdDoc:
     total_paginas: int | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.ecf_46_forma_de_pago import Ecf46FormaDePago
         tipoe_cf = self.tipoe_cf.value
 
         encf = self.encf
@@ -115,7 +102,6 @@ class Ecf46IdDoc:
             for tabla_formas_pago_type_1_item_data in self.tabla_formas_pago:
                 tabla_formas_pago_type_1_item = tabla_formas_pago_type_1_item_data.to_dict()
                 tabla_formas_pago.append(tabla_formas_pago_type_1_item)
-
 
         else:
             tabla_formas_pago = self.tabla_formas_pago
@@ -162,15 +148,16 @@ class Ecf46IdDoc:
         else:
             total_paginas = self.total_paginas
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "tipoeCF": tipoe_cf,
-            "encf": encf,
-            "tipoIngresos": tipo_ingresos,
-            "tipoPago": tipo_pago,
-        })
+        field_dict.update(
+            {
+                "tipoeCF": tipoe_cf,
+                "encf": encf,
+                "tipoIngresos": tipo_ingresos,
+                "tipoPago": tipo_pago,
+            }
+        )
         if fecha_vencimiento_secuencia is not UNSET:
             field_dict["fechaVencimientoSecuencia"] = fecha_vencimiento_secuencia
         if indicador_envio_diferido is not UNSET:
@@ -196,38 +183,25 @@ class Ecf46IdDoc:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ecf_46_forma_de_pago import Ecf46FormaDePago
+
         d = dict(src_dict)
         tipoe_cf = TipoeCFType(d.pop("tipoeCF"))
-
-
-
 
         encf = d.pop("encf")
 
         tipo_ingresos = Ecf46TipoIngresosValidationType(d.pop("tipoIngresos"))
 
-
-
-
         tipo_pago = Ecf46TipoPagoType(d.pop("tipoPago"))
-
-
-
 
         _fecha_vencimiento_secuencia = d.pop("fechaVencimientoSecuencia", UNSET)
         fecha_vencimiento_secuencia: datetime.datetime | Unset
-        if isinstance(_fecha_vencimiento_secuencia,  Unset):
+        if isinstance(_fecha_vencimiento_secuencia, Unset):
             fecha_vencimiento_secuencia = UNSET
         else:
-            fecha_vencimiento_secuencia = isoparse(_fecha_vencimiento_secuencia)
-
-
-
+            fecha_vencimiento_secuencia = datetime.datetime.fromisoformat(_fecha_vencimiento_secuencia)
 
         def _parse_indicador_envio_diferido(data: object) -> IndicadorEnvioDiferidoTypeType1 | None | Unset:
             if data is None:
@@ -239,15 +213,12 @@ class Ecf46IdDoc:
                     raise TypeError()
                 componentsschemas_indicador_envio_diferido_type_type_1 = IndicadorEnvioDiferidoTypeType1(data)
 
-
-
                 return componentsschemas_indicador_envio_diferido_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(IndicadorEnvioDiferidoTypeType1 | None | Unset, data)
 
         indicador_envio_diferido = _parse_indicador_envio_diferido(d.pop("indicadorEnvioDiferido", UNSET))
-
 
         def _parse_fecha_limite_pago(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -257,9 +228,7 @@ class Ecf46IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_limite_pago_type_1 = isoparse(data)
-
-
+                fecha_limite_pago_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_limite_pago_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -267,7 +236,6 @@ class Ecf46IdDoc:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_limite_pago = _parse_fecha_limite_pago(d.pop("fechaLimitePago", UNSET))
-
 
         def _parse_termino_pago(data: object) -> None | str | Unset:
             if data is None:
@@ -277,7 +245,6 @@ class Ecf46IdDoc:
             return cast(None | str | Unset, data)
 
         termino_pago = _parse_termino_pago(d.pop("terminoPago", UNSET))
-
 
         def _parse_tabla_formas_pago(data: object) -> list[Ecf46FormaDePago] | None | Unset:
             if data is None:
@@ -289,10 +256,8 @@ class Ecf46IdDoc:
                     raise TypeError()
                 tabla_formas_pago_type_1 = []
                 _tabla_formas_pago_type_1 = data
-                for tabla_formas_pago_type_1_item_data in (_tabla_formas_pago_type_1):
+                for tabla_formas_pago_type_1_item_data in _tabla_formas_pago_type_1:
                     tabla_formas_pago_type_1_item = Ecf46FormaDePago.from_dict(tabla_formas_pago_type_1_item_data)
-
-
 
                     tabla_formas_pago_type_1.append(tabla_formas_pago_type_1_item)
 
@@ -302,7 +267,6 @@ class Ecf46IdDoc:
             return cast(list[Ecf46FormaDePago] | None | Unset, data)
 
         tabla_formas_pago = _parse_tabla_formas_pago(d.pop("tablaFormasPago", UNSET))
-
 
         def _parse_tipo_cuenta_pago(data: object) -> None | TipoCuentaPagoTypeType1 | Unset:
             if data is None:
@@ -314,15 +278,12 @@ class Ecf46IdDoc:
                     raise TypeError()
                 componentsschemas_tipo_cuenta_pago_type_type_1 = TipoCuentaPagoTypeType1(data)
 
-
-
                 return componentsschemas_tipo_cuenta_pago_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | TipoCuentaPagoTypeType1 | Unset, data)
 
         tipo_cuenta_pago = _parse_tipo_cuenta_pago(d.pop("tipoCuentaPago", UNSET))
-
 
         def _parse_numero_cuenta_pago(data: object) -> None | str | Unset:
             if data is None:
@@ -333,7 +294,6 @@ class Ecf46IdDoc:
 
         numero_cuenta_pago = _parse_numero_cuenta_pago(d.pop("numeroCuentaPago", UNSET))
 
-
         def _parse_banco_pago(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -343,7 +303,6 @@ class Ecf46IdDoc:
 
         banco_pago = _parse_banco_pago(d.pop("bancoPago", UNSET))
 
-
         def _parse_fecha_desde(data: object) -> datetime.datetime | None | Unset:
             if data is None:
                 return data
@@ -352,9 +311,7 @@ class Ecf46IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_desde_type_1 = isoparse(data)
-
-
+                fecha_desde_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_desde_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -362,7 +319,6 @@ class Ecf46IdDoc:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_desde = _parse_fecha_desde(d.pop("fechaDesde", UNSET))
-
 
         def _parse_fecha_hasta(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -372,9 +328,7 @@ class Ecf46IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_hasta_type_1 = isoparse(data)
-
-
+                fecha_hasta_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_hasta_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -382,7 +336,6 @@ class Ecf46IdDoc:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_hasta = _parse_fecha_hasta(d.pop("fechaHasta", UNSET))
-
 
         def _parse_total_paginas(data: object) -> int | None | str | Unset:
             if data is None:
@@ -392,7 +345,6 @@ class Ecf46IdDoc:
             return cast(int | None | str | Unset, data)
 
         total_paginas = _parse_total_paginas(d.pop("totalPaginas", UNSET))
-
 
         ecf_46_id_doc = cls(
             tipoe_cf=tipoe_cf,
@@ -411,7 +363,6 @@ class Ecf46IdDoc:
             fecha_hasta=fecha_hasta,
             total_paginas=total_paginas,
         )
-
 
         ecf_46_id_doc.additional_properties = d
         return ecf_46_id_doc

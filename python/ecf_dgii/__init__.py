@@ -1,7 +1,6 @@
 """ECF DGII Python SDK - Client for the Dominican Republic Electronic Fiscal Receipts API."""
 
-from .client import EcfClient, Environment, ENVIRONMENT_URLS
-from .frontend_client import EcfFrontendClient, create_frontend_client
+from .client import ENVIRONMENT_URLS, EcfClient, Environment
 from .exceptions import (
     EcfApiError,
     EcfAuthenticationError,
@@ -13,7 +12,7 @@ from .exceptions import (
     PollingMaxRetriesError,
     PollingTimeoutError,
 )
-from .polling import PollingOptions
+from .frontend_client import EcfFrontendClient, create_frontend_client
 
 # Re-export generated models and enums for convenience
 from .generated.client import AuthenticatedClient, Client
@@ -66,6 +65,10 @@ from .generated.models import (
     Token,
     UpsertCompanyRequest,
 )
+from .polling import PollingOptions
+
+# Alias for backward compatibility
+EstadoType = EcfEstadoType1
 
 __all__ = [
     # Client
@@ -136,4 +139,5 @@ __all__ = [
     "SendAcecfRequest",
     "Token",
     "UpsertCompanyRequest",
+    "EstadoType",
 ]

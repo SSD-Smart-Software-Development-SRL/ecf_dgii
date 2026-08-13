@@ -1,39 +1,32 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
 if TYPE_CHECKING:
-  from ..models.ecf_reception_request_dto import EcfReceptionRequestDto
-
-
-
+    from ..models.ecf_reception_request_dto import EcfReceptionRequestDto
 
 
 T = TypeVar("T", bound="PaginatedApiResultOfEcfReceptionRequestDto")
 
 
-
 @_attrs_define
 class PaginatedApiResultOfEcfReceptionRequestDto:
-    """ 
-        Attributes:
-            next_page_uri (None | str):
-            values (list[EcfReceptionRequestDto] | Unset):
-            total (int | str | Unset):
-            page (int | str | Unset):
-            limit (int | str | Unset):
-            next_page (int | None | str | Unset):
-            previous_page (int | None | str | Unset):
-     """
+    """
+    Attributes:
+        next_page_uri (None | str):
+        values (list[EcfReceptionRequestDto] | Unset):
+        total (int | str | Unset):
+        page (int | str | Unset):
+        limit (int | str | Unset):
+        next_page (int | None | str | Unset):
+        previous_page (int | None | str | Unset):
+    """
 
     next_page_uri: None | str
     values: list[EcfReceptionRequestDto] | Unset = UNSET
@@ -44,12 +37,7 @@ class PaginatedApiResultOfEcfReceptionRequestDto:
     previous_page: int | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.ecf_reception_request_dto import EcfReceptionRequestDto
         next_page_uri: None | str
         next_page_uri = self.next_page_uri
 
@@ -59,8 +47,6 @@ class PaginatedApiResultOfEcfReceptionRequestDto:
             for values_item_data in self.values:
                 values_item = values_item_data.to_dict()
                 values.append(values_item)
-
-
 
         total: int | str | Unset
         if isinstance(self.total, Unset):
@@ -92,12 +78,13 @@ class PaginatedApiResultOfEcfReceptionRequestDto:
         else:
             previous_page = self.previous_page
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "nextPageUri": next_page_uri,
-        })
+        field_dict.update(
+            {
+                "nextPageUri": next_page_uri,
+            }
+        )
         if values is not UNSET:
             field_dict["values"] = values
         if total is not UNSET:
@@ -113,19 +100,18 @@ class PaginatedApiResultOfEcfReceptionRequestDto:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ecf_reception_request_dto import EcfReceptionRequestDto
+
         d = dict(src_dict)
+
         def _parse_next_page_uri(data: object) -> None | str:
             if data is None:
                 return data
             return cast(None | str, data)
 
         next_page_uri = _parse_next_page_uri(d.pop("nextPageUri"))
-
 
         _values = d.pop("values", UNSET)
         values: list[EcfReceptionRequestDto] | Unset = UNSET
@@ -134,10 +120,7 @@ class PaginatedApiResultOfEcfReceptionRequestDto:
             for values_item_data in _values:
                 values_item = EcfReceptionRequestDto.from_dict(values_item_data)
 
-
-
                 values.append(values_item)
-
 
         def _parse_total(data: object) -> int | str | Unset:
             if isinstance(data, Unset):
@@ -146,7 +129,6 @@ class PaginatedApiResultOfEcfReceptionRequestDto:
 
         total = _parse_total(d.pop("total", UNSET))
 
-
         def _parse_page(data: object) -> int | str | Unset:
             if isinstance(data, Unset):
                 return data
@@ -154,14 +136,12 @@ class PaginatedApiResultOfEcfReceptionRequestDto:
 
         page = _parse_page(d.pop("page", UNSET))
 
-
         def _parse_limit(data: object) -> int | str | Unset:
             if isinstance(data, Unset):
                 return data
             return cast(int | str | Unset, data)
 
         limit = _parse_limit(d.pop("limit", UNSET))
-
 
         def _parse_next_page(data: object) -> int | None | str | Unset:
             if data is None:
@@ -172,7 +152,6 @@ class PaginatedApiResultOfEcfReceptionRequestDto:
 
         next_page = _parse_next_page(d.pop("nextPage", UNSET))
 
-
         def _parse_previous_page(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -181,7 +160,6 @@ class PaginatedApiResultOfEcfReceptionRequestDto:
             return cast(int | None | str | Unset, data)
 
         previous_page = _parse_previous_page(d.pop("previousPage", UNSET))
-
 
         paginated_api_result_of_ecf_reception_request_dto = cls(
             next_page_uri=next_page_uri,
@@ -192,7 +170,6 @@ class PaginatedApiResultOfEcfReceptionRequestDto:
             next_page=next_page,
             previous_page=previous_page,
         )
-
 
         paginated_api_result_of_ecf_reception_request_dto.additional_properties = d
         return paginated_api_result_of_ecf_reception_request_dto

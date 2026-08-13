@@ -1,0 +1,15 @@
+# config/initializers/ecf_dgii.rb
+
+EcfDgii.configure do |config|
+  # Token JWT (Bearer) proveído por SSD
+  config.api_key = ENV["ECF_API_KEY"]
+
+  # Ambiente de trabajo: :test, :cert, o :prod (por defecto es :test)
+  config.environment = ENV.fetch("ECF_ENVIRONMENT", "test").to_sym
+
+  # URL base personalizada (opcional, sobreescribe el ambiente)
+  # config.base_url = ENV["ECF_API_URL"]
+
+  # Tiempo de espera máximo para solicitudes HTTP (por defecto es 30 segundos)
+  # config.timeout = 30
+end

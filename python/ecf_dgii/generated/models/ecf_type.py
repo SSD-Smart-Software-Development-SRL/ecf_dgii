@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class ECFType(str, Enum):
     ECF31 = "ECF31"
     ECF32 = "ECF32"

@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Ecf34TipoPagoType(str, Enum):
     CONTADO = "Contado"
     CREDITO = "Credito"

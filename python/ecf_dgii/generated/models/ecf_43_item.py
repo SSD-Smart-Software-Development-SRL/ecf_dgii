@@ -1,47 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
 
 from ..models.ecf_43_indicador_bieno_servicio_type import Ecf43IndicadorBienoServicioType
 from ..models.ecf_43_indicador_facturacion_type import Ecf43IndicadorFacturacionType
 from ..models.unidad_medida_type_type_1 import UnidadMedidaTypeType1
 from ..types import UNSET, Unset
-from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.ecf_43_codigos_item import Ecf43CodigosItem
-  from ..models.ecf_43_otra_moneda_detalle import Ecf43OtraMonedaDetalle
-
-
-
+    from ..models.ecf_43_codigos_item import Ecf43CodigosItem
+    from ..models.ecf_43_otra_moneda_detalle import Ecf43OtraMonedaDetalle
 
 
 T = TypeVar("T", bound="Ecf43Item")
 
 
-
 @_attrs_define
 class Ecf43Item:
-    """ 
-        Attributes:
-            numero_linea (int | str):
-            indicador_facturacion (Ecf43IndicadorFacturacionType):
-            nombre_item (str):
-            indicador_bieno_servicio (Ecf43IndicadorBienoServicioType):
-            cantidad_item (float | str):
-            precio_unitario_item (float | str):
-            monto_item (float | str):
-            tabla_codigos_item (list[Ecf43CodigosItem] | None | Unset):
-            descripcion_item (None | str | Unset):
-            unidad_medida (None | UnidadMedidaTypeType1 | Unset):
-            otra_moneda_detalle (Ecf43OtraMonedaDetalle | None | Unset):
-     """
+    """
+    Attributes:
+        numero_linea (int | str):
+        indicador_facturacion (Ecf43IndicadorFacturacionType):
+        nombre_item (str):
+        indicador_bieno_servicio (Ecf43IndicadorBienoServicioType):
+        cantidad_item (float | str):
+        precio_unitario_item (float | str):
+        monto_item (float | str):
+        tabla_codigos_item (list[Ecf43CodigosItem] | None | Unset):
+        descripcion_item (None | str | Unset):
+        unidad_medida (None | UnidadMedidaTypeType1 | Unset):
+        otra_moneda_detalle (Ecf43OtraMonedaDetalle | None | Unset):
+    """
 
     numero_linea: int | str
     indicador_facturacion: Ecf43IndicadorFacturacionType
@@ -56,13 +49,9 @@ class Ecf43Item:
     otra_moneda_detalle: Ecf43OtraMonedaDetalle | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.ecf_43_codigos_item import Ecf43CodigosItem
         from ..models.ecf_43_otra_moneda_detalle import Ecf43OtraMonedaDetalle
+
         numero_linea: int | str
         numero_linea = self.numero_linea
 
@@ -90,7 +79,6 @@ class Ecf43Item:
                 tabla_codigos_item_type_1_item = tabla_codigos_item_type_1_item_data.to_dict()
                 tabla_codigos_item.append(tabla_codigos_item_type_1_item)
 
-
         else:
             tabla_codigos_item = self.tabla_codigos_item
 
@@ -116,18 +104,19 @@ class Ecf43Item:
         else:
             otra_moneda_detalle = self.otra_moneda_detalle
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "numeroLinea": numero_linea,
-            "indicadorFacturacion": indicador_facturacion,
-            "nombreItem": nombre_item,
-            "indicadorBienoServicio": indicador_bieno_servicio,
-            "cantidadItem": cantidad_item,
-            "precioUnitarioItem": precio_unitario_item,
-            "montoItem": monto_item,
-        })
+        field_dict.update(
+            {
+                "numeroLinea": numero_linea,
+                "indicadorFacturacion": indicador_facturacion,
+                "nombreItem": nombre_item,
+                "indicadorBienoServicio": indicador_bieno_servicio,
+                "cantidadItem": cantidad_item,
+                "precioUnitarioItem": precio_unitario_item,
+                "montoItem": monto_item,
+            }
+        )
         if tabla_codigos_item is not UNSET:
             field_dict["tablaCodigosItem"] = tabla_codigos_item
         if descripcion_item is not UNSET:
@@ -139,48 +128,38 @@ class Ecf43Item:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ecf_43_codigos_item import Ecf43CodigosItem
         from ..models.ecf_43_otra_moneda_detalle import Ecf43OtraMonedaDetalle
+
         d = dict(src_dict)
+
         def _parse_numero_linea(data: object) -> int | str:
             return cast(int | str, data)
 
         numero_linea = _parse_numero_linea(d.pop("numeroLinea"))
 
-
         indicador_facturacion = Ecf43IndicadorFacturacionType(d.pop("indicadorFacturacion"))
-
-
-
 
         nombre_item = d.pop("nombreItem")
 
         indicador_bieno_servicio = Ecf43IndicadorBienoServicioType(d.pop("indicadorBienoServicio"))
-
-
-
 
         def _parse_cantidad_item(data: object) -> float | str:
             return cast(float | str, data)
 
         cantidad_item = _parse_cantidad_item(d.pop("cantidadItem"))
 
-
         def _parse_precio_unitario_item(data: object) -> float | str:
             return cast(float | str, data)
 
         precio_unitario_item = _parse_precio_unitario_item(d.pop("precioUnitarioItem"))
 
-
         def _parse_monto_item(data: object) -> float | str:
             return cast(float | str, data)
 
         monto_item = _parse_monto_item(d.pop("montoItem"))
-
 
         def _parse_tabla_codigos_item(data: object) -> list[Ecf43CodigosItem] | None | Unset:
             if data is None:
@@ -192,10 +171,8 @@ class Ecf43Item:
                     raise TypeError()
                 tabla_codigos_item_type_1 = []
                 _tabla_codigos_item_type_1 = data
-                for tabla_codigos_item_type_1_item_data in (_tabla_codigos_item_type_1):
+                for tabla_codigos_item_type_1_item_data in _tabla_codigos_item_type_1:
                     tabla_codigos_item_type_1_item = Ecf43CodigosItem.from_dict(tabla_codigos_item_type_1_item_data)
-
-
 
                     tabla_codigos_item_type_1.append(tabla_codigos_item_type_1_item)
 
@@ -206,7 +183,6 @@ class Ecf43Item:
 
         tabla_codigos_item = _parse_tabla_codigos_item(d.pop("tablaCodigosItem", UNSET))
 
-
         def _parse_descripcion_item(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -215,7 +191,6 @@ class Ecf43Item:
             return cast(None | str | Unset, data)
 
         descripcion_item = _parse_descripcion_item(d.pop("descripcionItem", UNSET))
-
 
         def _parse_unidad_medida(data: object) -> None | UnidadMedidaTypeType1 | Unset:
             if data is None:
@@ -227,15 +202,12 @@ class Ecf43Item:
                     raise TypeError()
                 componentsschemas_unidad_medida_type_type_1 = UnidadMedidaTypeType1(data)
 
-
-
                 return componentsschemas_unidad_medida_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | UnidadMedidaTypeType1 | Unset, data)
 
         unidad_medida = _parse_unidad_medida(d.pop("unidadMedida", UNSET))
-
 
         def _parse_otra_moneda_detalle(data: object) -> Ecf43OtraMonedaDetalle | None | Unset:
             if data is None:
@@ -247,15 +219,12 @@ class Ecf43Item:
                     raise TypeError()
                 otra_moneda_detalle_type_1 = Ecf43OtraMonedaDetalle.from_dict(data)
 
-
-
                 return otra_moneda_detalle_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf43OtraMonedaDetalle | None | Unset, data)
 
         otra_moneda_detalle = _parse_otra_moneda_detalle(d.pop("otraMonedaDetalle", UNSET))
-
 
         ecf_43_item = cls(
             numero_linea=numero_linea,
@@ -270,7 +239,6 @@ class Ecf43Item:
             unidad_medida=unidad_medida,
             otra_moneda_detalle=otra_moneda_detalle,
         )
-
 
         ecf_43_item.additional_properties = d
         return ecf_43_item

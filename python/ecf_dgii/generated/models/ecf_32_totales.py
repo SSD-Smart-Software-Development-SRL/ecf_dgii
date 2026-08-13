@@ -1,52 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
 if TYPE_CHECKING:
-  from ..models.ecf_32_impuesto_adicional_2 import Ecf32ImpuestoAdicional2
-
-
-
+    from ..models.ecf_32_impuesto_adicional_2 import Ecf32ImpuestoAdicional2
 
 
 T = TypeVar("T", bound="Ecf32Totales")
 
 
-
 @_attrs_define
 class Ecf32Totales:
-    """ 
-        Attributes:
-            monto_total (float | str):
-            monto_gravado_total (float | None | str | Unset):
-            monto_gravado_i1 (float | None | str | Unset):
-            monto_gravado_i2 (float | None | str | Unset):
-            monto_gravado_i3 (float | None | str | Unset):
-            monto_exento (float | None | str | Unset):
-            itbi_s1 (int | None | str | Unset):
-            itbi_s2 (int | None | str | Unset):
-            itbi_s3 (int | None | str | Unset):
-            total_itbis (float | None | str | Unset):
-            total_itbis1 (float | None | str | Unset):
-            total_itbis2 (float | None | str | Unset):
-            total_itbis3 (float | None | str | Unset):
-            monto_impuesto_adicional (float | None | str | Unset):
-            impuestos_adicionales (list[Ecf32ImpuestoAdicional2] | None | Unset):
-            monto_no_facturable (float | None | str | Unset):
-            monto_periodo (float | None | str | Unset):
-            saldo_anterior (float | None | str | Unset):
-            monto_avance_pago (float | None | str | Unset):
-            valor_pagar (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        monto_total (float | str):
+        monto_gravado_total (float | None | str | Unset):
+        monto_gravado_i1 (float | None | str | Unset):
+        monto_gravado_i2 (float | None | str | Unset):
+        monto_gravado_i3 (float | None | str | Unset):
+        monto_exento (float | None | str | Unset):
+        itbi_s1 (int | None | str | Unset):
+        itbi_s2 (int | None | str | Unset):
+        itbi_s3 (int | None | str | Unset):
+        total_itbis (float | None | str | Unset):
+        total_itbis1 (float | None | str | Unset):
+        total_itbis2 (float | None | str | Unset):
+        total_itbis3 (float | None | str | Unset):
+        monto_impuesto_adicional (float | None | str | Unset):
+        impuestos_adicionales (list[Ecf32ImpuestoAdicional2] | None | Unset):
+        monto_no_facturable (float | None | str | Unset):
+        monto_periodo (float | None | str | Unset):
+        saldo_anterior (float | None | str | Unset):
+        monto_avance_pago (float | None | str | Unset):
+        valor_pagar (float | None | str | Unset):
+    """
 
     monto_total: float | str
     monto_gravado_total: float | None | str | Unset = UNSET
@@ -70,12 +63,7 @@ class Ecf32Totales:
     valor_pagar: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.ecf_32_impuesto_adicional_2 import Ecf32ImpuestoAdicional2
         monto_total: float | str
         monto_total = self.monto_total
 
@@ -166,7 +154,6 @@ class Ecf32Totales:
                 impuestos_adicionales_type_1_item = impuestos_adicionales_type_1_item_data.to_dict()
                 impuestos_adicionales.append(impuestos_adicionales_type_1_item)
 
-
         else:
             impuestos_adicionales = self.impuestos_adicionales
 
@@ -200,12 +187,13 @@ class Ecf32Totales:
         else:
             valor_pagar = self.valor_pagar
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "montoTotal": monto_total,
-        })
+        field_dict.update(
+            {
+                "montoTotal": monto_total,
+            }
+        )
         if monto_gravado_total is not UNSET:
             field_dict["montoGravadoTotal"] = monto_gravado_total
         if monto_gravado_i1 is not UNSET:
@@ -247,17 +235,16 @@ class Ecf32Totales:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ecf_32_impuesto_adicional_2 import Ecf32ImpuestoAdicional2
+
         d = dict(src_dict)
+
         def _parse_monto_total(data: object) -> float | str:
             return cast(float | str, data)
 
         monto_total = _parse_monto_total(d.pop("montoTotal"))
-
 
         def _parse_monto_gravado_total(data: object) -> float | None | str | Unset:
             if data is None:
@@ -268,7 +255,6 @@ class Ecf32Totales:
 
         monto_gravado_total = _parse_monto_gravado_total(d.pop("montoGravadoTotal", UNSET))
 
-
         def _parse_monto_gravado_i1(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -277,7 +263,6 @@ class Ecf32Totales:
             return cast(float | None | str | Unset, data)
 
         monto_gravado_i1 = _parse_monto_gravado_i1(d.pop("montoGravadoI1", UNSET))
-
 
         def _parse_monto_gravado_i2(data: object) -> float | None | str | Unset:
             if data is None:
@@ -288,7 +273,6 @@ class Ecf32Totales:
 
         monto_gravado_i2 = _parse_monto_gravado_i2(d.pop("montoGravadoI2", UNSET))
 
-
         def _parse_monto_gravado_i3(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -297,7 +281,6 @@ class Ecf32Totales:
             return cast(float | None | str | Unset, data)
 
         monto_gravado_i3 = _parse_monto_gravado_i3(d.pop("montoGravadoI3", UNSET))
-
 
         def _parse_monto_exento(data: object) -> float | None | str | Unset:
             if data is None:
@@ -308,7 +291,6 @@ class Ecf32Totales:
 
         monto_exento = _parse_monto_exento(d.pop("montoExento", UNSET))
 
-
         def _parse_itbi_s1(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -317,7 +299,6 @@ class Ecf32Totales:
             return cast(int | None | str | Unset, data)
 
         itbi_s1 = _parse_itbi_s1(d.pop("itbiS1", UNSET))
-
 
         def _parse_itbi_s2(data: object) -> int | None | str | Unset:
             if data is None:
@@ -328,7 +309,6 @@ class Ecf32Totales:
 
         itbi_s2 = _parse_itbi_s2(d.pop("itbiS2", UNSET))
 
-
         def _parse_itbi_s3(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -337,7 +317,6 @@ class Ecf32Totales:
             return cast(int | None | str | Unset, data)
 
         itbi_s3 = _parse_itbi_s3(d.pop("itbiS3", UNSET))
-
 
         def _parse_total_itbis(data: object) -> float | None | str | Unset:
             if data is None:
@@ -348,7 +327,6 @@ class Ecf32Totales:
 
         total_itbis = _parse_total_itbis(d.pop("totalITBIS", UNSET))
 
-
         def _parse_total_itbis1(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -357,7 +335,6 @@ class Ecf32Totales:
             return cast(float | None | str | Unset, data)
 
         total_itbis1 = _parse_total_itbis1(d.pop("totalITBIS1", UNSET))
-
 
         def _parse_total_itbis2(data: object) -> float | None | str | Unset:
             if data is None:
@@ -368,7 +345,6 @@ class Ecf32Totales:
 
         total_itbis2 = _parse_total_itbis2(d.pop("totalITBIS2", UNSET))
 
-
         def _parse_total_itbis3(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -378,7 +354,6 @@ class Ecf32Totales:
 
         total_itbis3 = _parse_total_itbis3(d.pop("totalITBIS3", UNSET))
 
-
         def _parse_monto_impuesto_adicional(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -387,7 +362,6 @@ class Ecf32Totales:
             return cast(float | None | str | Unset, data)
 
         monto_impuesto_adicional = _parse_monto_impuesto_adicional(d.pop("montoImpuestoAdicional", UNSET))
-
 
         def _parse_impuestos_adicionales(data: object) -> list[Ecf32ImpuestoAdicional2] | None | Unset:
             if data is None:
@@ -399,10 +373,10 @@ class Ecf32Totales:
                     raise TypeError()
                 impuestos_adicionales_type_1 = []
                 _impuestos_adicionales_type_1 = data
-                for impuestos_adicionales_type_1_item_data in (_impuestos_adicionales_type_1):
-                    impuestos_adicionales_type_1_item = Ecf32ImpuestoAdicional2.from_dict(impuestos_adicionales_type_1_item_data)
-
-
+                for impuestos_adicionales_type_1_item_data in _impuestos_adicionales_type_1:
+                    impuestos_adicionales_type_1_item = Ecf32ImpuestoAdicional2.from_dict(
+                        impuestos_adicionales_type_1_item_data
+                    )
 
                     impuestos_adicionales_type_1.append(impuestos_adicionales_type_1_item)
 
@@ -413,7 +387,6 @@ class Ecf32Totales:
 
         impuestos_adicionales = _parse_impuestos_adicionales(d.pop("impuestosAdicionales", UNSET))
 
-
         def _parse_monto_no_facturable(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -422,7 +395,6 @@ class Ecf32Totales:
             return cast(float | None | str | Unset, data)
 
         monto_no_facturable = _parse_monto_no_facturable(d.pop("montoNoFacturable", UNSET))
-
 
         def _parse_monto_periodo(data: object) -> float | None | str | Unset:
             if data is None:
@@ -433,7 +405,6 @@ class Ecf32Totales:
 
         monto_periodo = _parse_monto_periodo(d.pop("montoPeriodo", UNSET))
 
-
         def _parse_saldo_anterior(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -442,7 +413,6 @@ class Ecf32Totales:
             return cast(float | None | str | Unset, data)
 
         saldo_anterior = _parse_saldo_anterior(d.pop("saldoAnterior", UNSET))
-
 
         def _parse_monto_avance_pago(data: object) -> float | None | str | Unset:
             if data is None:
@@ -453,7 +423,6 @@ class Ecf32Totales:
 
         monto_avance_pago = _parse_monto_avance_pago(d.pop("montoAvancePago", UNSET))
 
-
         def _parse_valor_pagar(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -462,7 +431,6 @@ class Ecf32Totales:
             return cast(float | None | str | Unset, data)
 
         valor_pagar = _parse_valor_pagar(d.pop("valorPagar", UNSET))
-
 
         ecf_32_totales = cls(
             monto_total=monto_total,
@@ -486,7 +454,6 @@ class Ecf32Totales:
             monto_avance_pago=monto_avance_pago,
             valor_pagar=valor_pagar,
         )
-
 
         ecf_32_totales.additional_properties = d
         return ecf_32_totales

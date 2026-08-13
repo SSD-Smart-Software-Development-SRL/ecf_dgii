@@ -1,0 +1,7 @@
+generatorName: ruby
+moduleName: EcfDgii::Generated
+gemName: ecf_dgii_generated
+library: faraday
+additionalProperties:
+  hideGenerationTimestamp: true
+

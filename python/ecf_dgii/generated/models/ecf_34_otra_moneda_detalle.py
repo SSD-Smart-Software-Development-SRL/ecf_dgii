@@ -1,44 +1,31 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="Ecf34OtraMonedaDetalle")
-
 
 
 @_attrs_define
 class Ecf34OtraMonedaDetalle:
-    """ 
-        Attributes:
-            precio_otra_moneda (float | None | str | Unset):
-            descuento_otra_moneda (float | None | str | Unset):
-            recargo_otra_moneda (float | None | str | Unset):
-            monto_item_otra_moneda (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        precio_otra_moneda (float | None | str | Unset):
+        descuento_otra_moneda (float | None | str | Unset):
+        recargo_otra_moneda (float | None | str | Unset):
+        monto_item_otra_moneda (float | None | str | Unset):
+    """
 
     precio_otra_moneda: float | None | str | Unset = UNSET
     descuento_otra_moneda: float | None | str | Unset = UNSET
     recargo_otra_moneda: float | None | str | Unset = UNSET
     monto_item_otra_moneda: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         precio_otra_moneda: float | None | str | Unset
@@ -65,11 +52,9 @@ class Ecf34OtraMonedaDetalle:
         else:
             monto_item_otra_moneda = self.monto_item_otra_moneda
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if precio_otra_moneda is not UNSET:
             field_dict["precioOtraMoneda"] = precio_otra_moneda
         if descuento_otra_moneda is not UNSET:
@@ -81,11 +66,10 @@ class Ecf34OtraMonedaDetalle:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_precio_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -94,7 +78,6 @@ class Ecf34OtraMonedaDetalle:
             return cast(float | None | str | Unset, data)
 
         precio_otra_moneda = _parse_precio_otra_moneda(d.pop("precioOtraMoneda", UNSET))
-
 
         def _parse_descuento_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
@@ -105,7 +88,6 @@ class Ecf34OtraMonedaDetalle:
 
         descuento_otra_moneda = _parse_descuento_otra_moneda(d.pop("descuentoOtraMoneda", UNSET))
 
-
         def _parse_recargo_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -114,7 +96,6 @@ class Ecf34OtraMonedaDetalle:
             return cast(float | None | str | Unset, data)
 
         recargo_otra_moneda = _parse_recargo_otra_moneda(d.pop("recargoOtraMoneda", UNSET))
-
 
         def _parse_monto_item_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
@@ -125,14 +106,12 @@ class Ecf34OtraMonedaDetalle:
 
         monto_item_otra_moneda = _parse_monto_item_otra_moneda(d.pop("montoItemOtraMoneda", UNSET))
 
-
         ecf_34_otra_moneda_detalle = cls(
             precio_otra_moneda=precio_otra_moneda,
             descuento_otra_moneda=descuento_otra_moneda,
             recargo_otra_moneda=recargo_otra_moneda,
             monto_item_otra_moneda=monto_item_otra_moneda,
         )
-
 
         ecf_34_otra_moneda_detalle.additional_properties = d
         return ecf_34_otra_moneda_detalle

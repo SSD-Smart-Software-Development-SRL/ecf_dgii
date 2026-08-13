@@ -1,30 +1,23 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
 if TYPE_CHECKING:
-  from ..models.mensaje import Mensaje
-
-
-
+    from ..models.mensaje import Mensaje
 
 
 T = TypeVar("T", bound="RespuestaConsultaRFCE")
 
 
-
 @_attrs_define
 class RespuestaConsultaRFCE:
-    """ Representa la respuesta del servicio de Consulta de Resumen de Factura (RFCE) de la DGII.
+    """Representa la respuesta del servicio de Consulta de Resumen de Factura (RFCE) de la DGII.
     Este servicio permite validar la validez fiscal de un comprobante fiscal electrónico
     a través del RNC emisor, e-NCF y código de seguridad.
 
@@ -46,7 +39,7 @@ class RespuestaConsultaRFCE:
                 Descripción textual del estado de validación del comprobante.
             mensajes (list[Mensaje] | None | Unset): Mensajes y códigos asociados al estado de validación del e-CF recibido.
                 Array de mensajes que proporcionan detalles adicionales sobre la validación.
-     """
+    """
 
     rnc: None | str | Unset = UNSET
     encf: str | Unset = UNSET
@@ -56,12 +49,7 @@ class RespuestaConsultaRFCE:
     mensajes: list[Mensaje] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.mensaje import Mensaje
         rnc: None | str | Unset
         if isinstance(self.rnc, Unset):
             rnc = UNSET
@@ -93,15 +81,12 @@ class RespuestaConsultaRFCE:
                 mensajes_type_1_item = mensajes_type_1_item_data.to_dict()
                 mensajes.append(mensajes_type_1_item)
 
-
         else:
             mensajes = self.mensajes
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if rnc is not UNSET:
             field_dict["rnc"] = rnc
         if encf is not UNSET:
@@ -117,12 +102,12 @@ class RespuestaConsultaRFCE:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.mensaje import Mensaje
+
         d = dict(src_dict)
+
         def _parse_rnc(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -131,7 +116,6 @@ class RespuestaConsultaRFCE:
             return cast(None | str | Unset, data)
 
         rnc = _parse_rnc(d.pop("rnc", UNSET))
-
 
         encf = d.pop("encf", UNSET)
 
@@ -146,7 +130,6 @@ class RespuestaConsultaRFCE:
 
         codigo = _parse_codigo(d.pop("codigo", UNSET))
 
-
         def _parse_estado(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -155,7 +138,6 @@ class RespuestaConsultaRFCE:
             return cast(None | str | Unset, data)
 
         estado = _parse_estado(d.pop("estado", UNSET))
-
 
         def _parse_mensajes(data: object) -> list[Mensaje] | None | Unset:
             if data is None:
@@ -167,10 +149,8 @@ class RespuestaConsultaRFCE:
                     raise TypeError()
                 mensajes_type_1 = []
                 _mensajes_type_1 = data
-                for mensajes_type_1_item_data in (_mensajes_type_1):
+                for mensajes_type_1_item_data in _mensajes_type_1:
                     mensajes_type_1_item = Mensaje.from_dict(mensajes_type_1_item_data)
-
-
 
                     mensajes_type_1.append(mensajes_type_1_item)
 
@@ -181,7 +161,6 @@ class RespuestaConsultaRFCE:
 
         mensajes = _parse_mensajes(d.pop("mensajes", UNSET))
 
-
         respuesta_consulta_rfce = cls(
             rnc=rnc,
             encf=encf,
@@ -190,7 +169,6 @@ class RespuestaConsultaRFCE:
             estado=estado,
             mensajes=mensajes,
         )
-
 
         respuesta_consulta_rfce.additional_properties = d
         return respuesta_consulta_rfce

@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class TipoCuentaPagoTypeType1(str, Enum):
     AH = "AH"
     CT = "CT"

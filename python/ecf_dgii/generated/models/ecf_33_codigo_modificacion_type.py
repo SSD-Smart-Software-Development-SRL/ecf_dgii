@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Ecf33CodigoModificacionType(str, Enum):
     ANULAELNCFMODIFICADO = "AnulaElNCFModificado"
     CORRIGEMONTOSDELNCFMODIFICADO = "CorrigeMontosDelNCFModificado"

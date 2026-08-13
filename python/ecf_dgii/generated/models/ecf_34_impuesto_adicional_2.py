@@ -1,36 +1,27 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.codificacion_tipo_impuestos_type_type_1 import CodificacionTipoImpuestosTypeType1
 from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf34ImpuestoAdicional2")
 
 
-
 @_attrs_define
 class Ecf34ImpuestoAdicional2:
-    """ 
-        Attributes:
-            tipo_impuesto (CodificacionTipoImpuestosTypeType1 | None | Unset):
-            tasa_impuesto_adicional (float | None | str | Unset):
-            monto_impuesto_selectivo_consumo_especifico (float | None | str | Unset):
-            monto_impuesto_selectivo_consumo_advalorem (float | None | str | Unset):
-            otros_impuestos_adicionales (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        tipo_impuesto (CodificacionTipoImpuestosTypeType1 | None | Unset):
+        tasa_impuesto_adicional (float | None | str | Unset):
+        monto_impuesto_selectivo_consumo_especifico (float | None | str | Unset):
+        monto_impuesto_selectivo_consumo_advalorem (float | None | str | Unset):
+        otros_impuestos_adicionales (float | None | str | Unset):
+    """
 
     tipo_impuesto: CodificacionTipoImpuestosTypeType1 | None | Unset = UNSET
     tasa_impuesto_adicional: float | None | str | Unset = UNSET
@@ -38,10 +29,6 @@ class Ecf34ImpuestoAdicional2:
     monto_impuesto_selectivo_consumo_advalorem: float | None | str | Unset = UNSET
     otros_impuestos_adicionales: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         tipo_impuesto: None | str | Unset
@@ -76,11 +63,9 @@ class Ecf34ImpuestoAdicional2:
         else:
             otros_impuestos_adicionales = self.otros_impuestos_adicionales
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if tipo_impuesto is not UNSET:
             field_dict["tipoImpuesto"] = tipo_impuesto
         if tasa_impuesto_adicional is not UNSET:
@@ -94,11 +79,10 @@ class Ecf34ImpuestoAdicional2:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_tipo_impuesto(data: object) -> CodificacionTipoImpuestosTypeType1 | None | Unset:
             if data is None:
                 return data
@@ -109,15 +93,12 @@ class Ecf34ImpuestoAdicional2:
                     raise TypeError()
                 componentsschemas_codificacion_tipo_impuestos_type_type_1 = CodificacionTipoImpuestosTypeType1(data)
 
-
-
                 return componentsschemas_codificacion_tipo_impuestos_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(CodificacionTipoImpuestosTypeType1 | None | Unset, data)
 
         tipo_impuesto = _parse_tipo_impuesto(d.pop("tipoImpuesto", UNSET))
-
 
         def _parse_tasa_impuesto_adicional(data: object) -> float | None | str | Unset:
             if data is None:
@@ -128,7 +109,6 @@ class Ecf34ImpuestoAdicional2:
 
         tasa_impuesto_adicional = _parse_tasa_impuesto_adicional(d.pop("tasaImpuestoAdicional", UNSET))
 
-
         def _parse_monto_impuesto_selectivo_consumo_especifico(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -136,8 +116,9 @@ class Ecf34ImpuestoAdicional2:
                 return data
             return cast(float | None | str | Unset, data)
 
-        monto_impuesto_selectivo_consumo_especifico = _parse_monto_impuesto_selectivo_consumo_especifico(d.pop("montoImpuestoSelectivoConsumoEspecifico", UNSET))
-
+        monto_impuesto_selectivo_consumo_especifico = _parse_monto_impuesto_selectivo_consumo_especifico(
+            d.pop("montoImpuestoSelectivoConsumoEspecifico", UNSET)
+        )
 
         def _parse_monto_impuesto_selectivo_consumo_advalorem(data: object) -> float | None | str | Unset:
             if data is None:
@@ -146,8 +127,9 @@ class Ecf34ImpuestoAdicional2:
                 return data
             return cast(float | None | str | Unset, data)
 
-        monto_impuesto_selectivo_consumo_advalorem = _parse_monto_impuesto_selectivo_consumo_advalorem(d.pop("montoImpuestoSelectivoConsumoAdvalorem", UNSET))
-
+        monto_impuesto_selectivo_consumo_advalorem = _parse_monto_impuesto_selectivo_consumo_advalorem(
+            d.pop("montoImpuestoSelectivoConsumoAdvalorem", UNSET)
+        )
 
         def _parse_otros_impuestos_adicionales(data: object) -> float | None | str | Unset:
             if data is None:
@@ -158,7 +140,6 @@ class Ecf34ImpuestoAdicional2:
 
         otros_impuestos_adicionales = _parse_otros_impuestos_adicionales(d.pop("otrosImpuestosAdicionales", UNSET))
 
-
         ecf_34_impuesto_adicional_2 = cls(
             tipo_impuesto=tipo_impuesto,
             tasa_impuesto_adicional=tasa_impuesto_adicional,
@@ -166,7 +147,6 @@ class Ecf34ImpuestoAdicional2:
             monto_impuesto_selectivo_consumo_advalorem=monto_impuesto_selectivo_consumo_advalorem,
             otros_impuestos_adicionales=otros_impuestos_adicionales,
         )
-
 
         ecf_34_impuesto_adicional_2.additional_properties = d
         return ecf_34_impuesto_adicional_2

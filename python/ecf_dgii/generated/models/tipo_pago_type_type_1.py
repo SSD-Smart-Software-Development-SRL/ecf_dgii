@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class TipoPagoTypeType1(str, Enum):
     CONTADO = "Contado"
     CREDITO = "Credito"

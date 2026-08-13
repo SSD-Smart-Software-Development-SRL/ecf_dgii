@@ -1,69 +1,61 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
 
 from ..models.ecf_33_indicador_bieno_servicio_type import Ecf33IndicadorBienoServicioType
 from ..models.ecf_33_indicador_facturacion_type import Ecf33IndicadorFacturacionType
 from ..models.unidad_medida_type_type_1 import UnidadMedidaTypeType1
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
 
 if TYPE_CHECKING:
-  from ..models.ecf_33_codigos_item import Ecf33CodigosItem
-  from ..models.ecf_33_impuesto_adicional import Ecf33ImpuestoAdicional
-  from ..models.ecf_33_mineria import Ecf33Mineria
-  from ..models.ecf_33_otra_moneda_detalle import Ecf33OtraMonedaDetalle
-  from ..models.ecf_33_retencion import Ecf33Retencion
-  from ..models.ecf_33_sub_descuento import Ecf33SubDescuento
-  from ..models.ecf_33_sub_recargo import Ecf33SubRecargo
-  from ..models.ecf_33_subcantidad_item import Ecf33SubcantidadItem
-
-
-
+    from ..models.ecf_33_codigos_item import Ecf33CodigosItem
+    from ..models.ecf_33_impuesto_adicional import Ecf33ImpuestoAdicional
+    from ..models.ecf_33_mineria import Ecf33Mineria
+    from ..models.ecf_33_otra_moneda_detalle import Ecf33OtraMonedaDetalle
+    from ..models.ecf_33_retencion import Ecf33Retencion
+    from ..models.ecf_33_sub_descuento import Ecf33SubDescuento
+    from ..models.ecf_33_sub_recargo import Ecf33SubRecargo
+    from ..models.ecf_33_subcantidad_item import Ecf33SubcantidadItem
 
 
 T = TypeVar("T", bound="Ecf33Item")
 
 
-
 @_attrs_define
 class Ecf33Item:
-    """ 
-        Attributes:
-            numero_linea (int | str):
-            indicador_facturacion (Ecf33IndicadorFacturacionType):
-            nombre_item (str):
-            indicador_bieno_servicio (Ecf33IndicadorBienoServicioType):
-            cantidad_item (float | str):
-            precio_unitario_item (float | str):
-            monto_item (float | str):
-            tabla_codigos_item (list[Ecf33CodigosItem] | None | Unset):
-            retencion (Ecf33Retencion | None | Unset):
-            descripcion_item (None | str | Unset):
-            unidad_medida (None | UnidadMedidaTypeType1 | Unset):
-            cantidad_referencia (float | None | str | Unset):
-            unidad_referencia (None | UnidadMedidaTypeType1 | Unset):
-            tabla_subcantidad (list[Ecf33SubcantidadItem] | None | Unset):
-            grados_alcohol (float | None | str | Unset):
-            precio_unitario_referencia (float | None | str | Unset):
-            fecha_elaboracion (datetime.datetime | None | Unset):
-            fecha_vencimiento_item (datetime.datetime | None | Unset):
-            mineria (Ecf33Mineria | None | Unset):
-            descuento_monto (float | None | str | Unset):
-            tabla_sub_descuento (list[Ecf33SubDescuento] | None | Unset):
-            recargo_monto (float | None | str | Unset):
-            tabla_sub_recargo (list[Ecf33SubRecargo] | None | Unset):
-            tabla_impuesto_adicional (list[Ecf33ImpuestoAdicional] | None | Unset):
-            otra_moneda_detalle (Ecf33OtraMonedaDetalle | None | Unset):
-     """
+    """
+    Attributes:
+        numero_linea (int | str):
+        indicador_facturacion (Ecf33IndicadorFacturacionType):
+        nombre_item (str):
+        indicador_bieno_servicio (Ecf33IndicadorBienoServicioType):
+        cantidad_item (float | str):
+        precio_unitario_item (float | str):
+        monto_item (float | str):
+        tabla_codigos_item (list[Ecf33CodigosItem] | None | Unset):
+        retencion (Ecf33Retencion | None | Unset):
+        descripcion_item (None | str | Unset):
+        unidad_medida (None | UnidadMedidaTypeType1 | Unset):
+        cantidad_referencia (float | None | str | Unset):
+        unidad_referencia (None | UnidadMedidaTypeType1 | Unset):
+        tabla_subcantidad (list[Ecf33SubcantidadItem] | None | Unset):
+        grados_alcohol (float | None | str | Unset):
+        precio_unitario_referencia (float | None | str | Unset):
+        fecha_elaboracion (datetime.datetime | None | Unset):
+        fecha_vencimiento_item (datetime.datetime | None | Unset):
+        mineria (Ecf33Mineria | None | Unset):
+        descuento_monto (float | None | str | Unset):
+        tabla_sub_descuento (list[Ecf33SubDescuento] | None | Unset):
+        recargo_monto (float | None | str | Unset):
+        tabla_sub_recargo (list[Ecf33SubRecargo] | None | Unset):
+        tabla_impuesto_adicional (list[Ecf33ImpuestoAdicional] | None | Unset):
+        otra_moneda_detalle (Ecf33OtraMonedaDetalle | None | Unset):
+    """
 
     numero_linea: int | str
     indicador_facturacion: Ecf33IndicadorFacturacionType
@@ -92,19 +84,11 @@ class Ecf33Item:
     otra_moneda_detalle: Ecf33OtraMonedaDetalle | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.ecf_33_codigos_item import Ecf33CodigosItem
-        from ..models.ecf_33_impuesto_adicional import Ecf33ImpuestoAdicional
         from ..models.ecf_33_mineria import Ecf33Mineria
         from ..models.ecf_33_otra_moneda_detalle import Ecf33OtraMonedaDetalle
         from ..models.ecf_33_retencion import Ecf33Retencion
-        from ..models.ecf_33_sub_descuento import Ecf33SubDescuento
-        from ..models.ecf_33_sub_recargo import Ecf33SubRecargo
-        from ..models.ecf_33_subcantidad_item import Ecf33SubcantidadItem
+
         numero_linea: int | str
         numero_linea = self.numero_linea
 
@@ -131,7 +115,6 @@ class Ecf33Item:
             for tabla_codigos_item_type_1_item_data in self.tabla_codigos_item:
                 tabla_codigos_item_type_1_item = tabla_codigos_item_type_1_item_data.to_dict()
                 tabla_codigos_item.append(tabla_codigos_item_type_1_item)
-
 
         else:
             tabla_codigos_item = self.tabla_codigos_item
@@ -180,7 +163,6 @@ class Ecf33Item:
             for tabla_subcantidad_type_1_item_data in self.tabla_subcantidad:
                 tabla_subcantidad_type_1_item = tabla_subcantidad_type_1_item_data.to_dict()
                 tabla_subcantidad.append(tabla_subcantidad_type_1_item)
-
 
         else:
             tabla_subcantidad = self.tabla_subcantidad
@@ -236,7 +218,6 @@ class Ecf33Item:
                 tabla_sub_descuento_type_1_item = tabla_sub_descuento_type_1_item_data.to_dict()
                 tabla_sub_descuento.append(tabla_sub_descuento_type_1_item)
 
-
         else:
             tabla_sub_descuento = self.tabla_sub_descuento
 
@@ -255,7 +236,6 @@ class Ecf33Item:
                 tabla_sub_recargo_type_1_item = tabla_sub_recargo_type_1_item_data.to_dict()
                 tabla_sub_recargo.append(tabla_sub_recargo_type_1_item)
 
-
         else:
             tabla_sub_recargo = self.tabla_sub_recargo
 
@@ -268,7 +248,6 @@ class Ecf33Item:
                 tabla_impuesto_adicional_type_1_item = tabla_impuesto_adicional_type_1_item_data.to_dict()
                 tabla_impuesto_adicional.append(tabla_impuesto_adicional_type_1_item)
 
-
         else:
             tabla_impuesto_adicional = self.tabla_impuesto_adicional
 
@@ -280,18 +259,19 @@ class Ecf33Item:
         else:
             otra_moneda_detalle = self.otra_moneda_detalle
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "numeroLinea": numero_linea,
-            "indicadorFacturacion": indicador_facturacion,
-            "nombreItem": nombre_item,
-            "indicadorBienoServicio": indicador_bieno_servicio,
-            "cantidadItem": cantidad_item,
-            "precioUnitarioItem": precio_unitario_item,
-            "montoItem": monto_item,
-        })
+        field_dict.update(
+            {
+                "numeroLinea": numero_linea,
+                "indicadorFacturacion": indicador_facturacion,
+                "nombreItem": nombre_item,
+                "indicadorBienoServicio": indicador_bieno_servicio,
+                "cantidadItem": cantidad_item,
+                "precioUnitarioItem": precio_unitario_item,
+                "montoItem": monto_item,
+            }
+        )
         if tabla_codigos_item is not UNSET:
             field_dict["tablaCodigosItem"] = tabla_codigos_item
         if retencion is not UNSET:
@@ -331,8 +311,6 @@ class Ecf33Item:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ecf_33_codigos_item import Ecf33CodigosItem
@@ -343,42 +321,34 @@ class Ecf33Item:
         from ..models.ecf_33_sub_descuento import Ecf33SubDescuento
         from ..models.ecf_33_sub_recargo import Ecf33SubRecargo
         from ..models.ecf_33_subcantidad_item import Ecf33SubcantidadItem
+
         d = dict(src_dict)
+
         def _parse_numero_linea(data: object) -> int | str:
             return cast(int | str, data)
 
         numero_linea = _parse_numero_linea(d.pop("numeroLinea"))
 
-
         indicador_facturacion = Ecf33IndicadorFacturacionType(d.pop("indicadorFacturacion"))
-
-
-
 
         nombre_item = d.pop("nombreItem")
 
         indicador_bieno_servicio = Ecf33IndicadorBienoServicioType(d.pop("indicadorBienoServicio"))
-
-
-
 
         def _parse_cantidad_item(data: object) -> float | str:
             return cast(float | str, data)
 
         cantidad_item = _parse_cantidad_item(d.pop("cantidadItem"))
 
-
         def _parse_precio_unitario_item(data: object) -> float | str:
             return cast(float | str, data)
 
         precio_unitario_item = _parse_precio_unitario_item(d.pop("precioUnitarioItem"))
 
-
         def _parse_monto_item(data: object) -> float | str:
             return cast(float | str, data)
 
         monto_item = _parse_monto_item(d.pop("montoItem"))
-
 
         def _parse_tabla_codigos_item(data: object) -> list[Ecf33CodigosItem] | None | Unset:
             if data is None:
@@ -390,10 +360,8 @@ class Ecf33Item:
                     raise TypeError()
                 tabla_codigos_item_type_1 = []
                 _tabla_codigos_item_type_1 = data
-                for tabla_codigos_item_type_1_item_data in (_tabla_codigos_item_type_1):
+                for tabla_codigos_item_type_1_item_data in _tabla_codigos_item_type_1:
                     tabla_codigos_item_type_1_item = Ecf33CodigosItem.from_dict(tabla_codigos_item_type_1_item_data)
-
-
 
                     tabla_codigos_item_type_1.append(tabla_codigos_item_type_1_item)
 
@@ -403,7 +371,6 @@ class Ecf33Item:
             return cast(list[Ecf33CodigosItem] | None | Unset, data)
 
         tabla_codigos_item = _parse_tabla_codigos_item(d.pop("tablaCodigosItem", UNSET))
-
 
         def _parse_retencion(data: object) -> Ecf33Retencion | None | Unset:
             if data is None:
@@ -415,15 +382,12 @@ class Ecf33Item:
                     raise TypeError()
                 retencion_type_1 = Ecf33Retencion.from_dict(data)
 
-
-
                 return retencion_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf33Retencion | None | Unset, data)
 
         retencion = _parse_retencion(d.pop("retencion", UNSET))
-
 
         def _parse_descripcion_item(data: object) -> None | str | Unset:
             if data is None:
@@ -433,7 +397,6 @@ class Ecf33Item:
             return cast(None | str | Unset, data)
 
         descripcion_item = _parse_descripcion_item(d.pop("descripcionItem", UNSET))
-
 
         def _parse_unidad_medida(data: object) -> None | UnidadMedidaTypeType1 | Unset:
             if data is None:
@@ -445,15 +408,12 @@ class Ecf33Item:
                     raise TypeError()
                 componentsschemas_unidad_medida_type_type_1 = UnidadMedidaTypeType1(data)
 
-
-
                 return componentsschemas_unidad_medida_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | UnidadMedidaTypeType1 | Unset, data)
 
         unidad_medida = _parse_unidad_medida(d.pop("unidadMedida", UNSET))
-
 
         def _parse_cantidad_referencia(data: object) -> float | None | str | Unset:
             if data is None:
@@ -463,7 +423,6 @@ class Ecf33Item:
             return cast(float | None | str | Unset, data)
 
         cantidad_referencia = _parse_cantidad_referencia(d.pop("cantidadReferencia", UNSET))
-
 
         def _parse_unidad_referencia(data: object) -> None | UnidadMedidaTypeType1 | Unset:
             if data is None:
@@ -475,15 +434,12 @@ class Ecf33Item:
                     raise TypeError()
                 componentsschemas_unidad_medida_type_type_1 = UnidadMedidaTypeType1(data)
 
-
-
                 return componentsschemas_unidad_medida_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | UnidadMedidaTypeType1 | Unset, data)
 
         unidad_referencia = _parse_unidad_referencia(d.pop("unidadReferencia", UNSET))
-
 
         def _parse_tabla_subcantidad(data: object) -> list[Ecf33SubcantidadItem] | None | Unset:
             if data is None:
@@ -495,10 +451,8 @@ class Ecf33Item:
                     raise TypeError()
                 tabla_subcantidad_type_1 = []
                 _tabla_subcantidad_type_1 = data
-                for tabla_subcantidad_type_1_item_data in (_tabla_subcantidad_type_1):
+                for tabla_subcantidad_type_1_item_data in _tabla_subcantidad_type_1:
                     tabla_subcantidad_type_1_item = Ecf33SubcantidadItem.from_dict(tabla_subcantidad_type_1_item_data)
-
-
 
                     tabla_subcantidad_type_1.append(tabla_subcantidad_type_1_item)
 
@@ -509,7 +463,6 @@ class Ecf33Item:
 
         tabla_subcantidad = _parse_tabla_subcantidad(d.pop("tablaSubcantidad", UNSET))
 
-
         def _parse_grados_alcohol(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -518,7 +471,6 @@ class Ecf33Item:
             return cast(float | None | str | Unset, data)
 
         grados_alcohol = _parse_grados_alcohol(d.pop("gradosAlcohol", UNSET))
-
 
         def _parse_precio_unitario_referencia(data: object) -> float | None | str | Unset:
             if data is None:
@@ -529,7 +481,6 @@ class Ecf33Item:
 
         precio_unitario_referencia = _parse_precio_unitario_referencia(d.pop("precioUnitarioReferencia", UNSET))
 
-
         def _parse_fecha_elaboracion(data: object) -> datetime.datetime | None | Unset:
             if data is None:
                 return data
@@ -538,9 +489,7 @@ class Ecf33Item:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_elaboracion_type_1 = isoparse(data)
-
-
+                fecha_elaboracion_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_elaboracion_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -548,7 +497,6 @@ class Ecf33Item:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_elaboracion = _parse_fecha_elaboracion(d.pop("fechaElaboracion", UNSET))
-
 
         def _parse_fecha_vencimiento_item(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -558,9 +506,7 @@ class Ecf33Item:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_vencimiento_item_type_1 = isoparse(data)
-
-
+                fecha_vencimiento_item_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_vencimiento_item_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -568,7 +514,6 @@ class Ecf33Item:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_vencimiento_item = _parse_fecha_vencimiento_item(d.pop("fechaVencimientoItem", UNSET))
-
 
         def _parse_mineria(data: object) -> Ecf33Mineria | None | Unset:
             if data is None:
@@ -580,15 +525,12 @@ class Ecf33Item:
                     raise TypeError()
                 mineria_type_1 = Ecf33Mineria.from_dict(data)
 
-
-
                 return mineria_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf33Mineria | None | Unset, data)
 
         mineria = _parse_mineria(d.pop("mineria", UNSET))
-
 
         def _parse_descuento_monto(data: object) -> float | None | str | Unset:
             if data is None:
@@ -598,7 +540,6 @@ class Ecf33Item:
             return cast(float | None | str | Unset, data)
 
         descuento_monto = _parse_descuento_monto(d.pop("descuentoMonto", UNSET))
-
 
         def _parse_tabla_sub_descuento(data: object) -> list[Ecf33SubDescuento] | None | Unset:
             if data is None:
@@ -610,10 +551,8 @@ class Ecf33Item:
                     raise TypeError()
                 tabla_sub_descuento_type_1 = []
                 _tabla_sub_descuento_type_1 = data
-                for tabla_sub_descuento_type_1_item_data in (_tabla_sub_descuento_type_1):
+                for tabla_sub_descuento_type_1_item_data in _tabla_sub_descuento_type_1:
                     tabla_sub_descuento_type_1_item = Ecf33SubDescuento.from_dict(tabla_sub_descuento_type_1_item_data)
-
-
 
                     tabla_sub_descuento_type_1.append(tabla_sub_descuento_type_1_item)
 
@@ -624,7 +563,6 @@ class Ecf33Item:
 
         tabla_sub_descuento = _parse_tabla_sub_descuento(d.pop("tablaSubDescuento", UNSET))
 
-
         def _parse_recargo_monto(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -633,7 +571,6 @@ class Ecf33Item:
             return cast(float | None | str | Unset, data)
 
         recargo_monto = _parse_recargo_monto(d.pop("recargoMonto", UNSET))
-
 
         def _parse_tabla_sub_recargo(data: object) -> list[Ecf33SubRecargo] | None | Unset:
             if data is None:
@@ -645,10 +582,8 @@ class Ecf33Item:
                     raise TypeError()
                 tabla_sub_recargo_type_1 = []
                 _tabla_sub_recargo_type_1 = data
-                for tabla_sub_recargo_type_1_item_data in (_tabla_sub_recargo_type_1):
+                for tabla_sub_recargo_type_1_item_data in _tabla_sub_recargo_type_1:
                     tabla_sub_recargo_type_1_item = Ecf33SubRecargo.from_dict(tabla_sub_recargo_type_1_item_data)
-
-
 
                     tabla_sub_recargo_type_1.append(tabla_sub_recargo_type_1_item)
 
@@ -658,7 +593,6 @@ class Ecf33Item:
             return cast(list[Ecf33SubRecargo] | None | Unset, data)
 
         tabla_sub_recargo = _parse_tabla_sub_recargo(d.pop("tablaSubRecargo", UNSET))
-
 
         def _parse_tabla_impuesto_adicional(data: object) -> list[Ecf33ImpuestoAdicional] | None | Unset:
             if data is None:
@@ -670,10 +604,10 @@ class Ecf33Item:
                     raise TypeError()
                 tabla_impuesto_adicional_type_1 = []
                 _tabla_impuesto_adicional_type_1 = data
-                for tabla_impuesto_adicional_type_1_item_data in (_tabla_impuesto_adicional_type_1):
-                    tabla_impuesto_adicional_type_1_item = Ecf33ImpuestoAdicional.from_dict(tabla_impuesto_adicional_type_1_item_data)
-
-
+                for tabla_impuesto_adicional_type_1_item_data in _tabla_impuesto_adicional_type_1:
+                    tabla_impuesto_adicional_type_1_item = Ecf33ImpuestoAdicional.from_dict(
+                        tabla_impuesto_adicional_type_1_item_data
+                    )
 
                     tabla_impuesto_adicional_type_1.append(tabla_impuesto_adicional_type_1_item)
 
@@ -683,7 +617,6 @@ class Ecf33Item:
             return cast(list[Ecf33ImpuestoAdicional] | None | Unset, data)
 
         tabla_impuesto_adicional = _parse_tabla_impuesto_adicional(d.pop("tablaImpuestoAdicional", UNSET))
-
 
         def _parse_otra_moneda_detalle(data: object) -> Ecf33OtraMonedaDetalle | None | Unset:
             if data is None:
@@ -695,15 +628,12 @@ class Ecf33Item:
                     raise TypeError()
                 otra_moneda_detalle_type_1 = Ecf33OtraMonedaDetalle.from_dict(data)
 
-
-
                 return otra_moneda_detalle_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf33OtraMonedaDetalle | None | Unset, data)
 
         otra_moneda_detalle = _parse_otra_moneda_detalle(d.pop("otraMonedaDetalle", UNSET))
-
 
         ecf_33_item = cls(
             numero_linea=numero_linea,
@@ -732,7 +662,6 @@ class Ecf33Item:
             tabla_impuesto_adicional=tabla_impuesto_adicional,
             otra_moneda_detalle=otra_moneda_detalle,
         )
-
 
         ecf_33_item.additional_properties = d
         return ecf_33_item

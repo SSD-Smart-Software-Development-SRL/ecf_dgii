@@ -1,37 +1,30 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.ecf_type import ECFType
 from ..types import UNSET, Unset
-from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.secuencia_request_dto import SecuenciaRequestDto
-
-
-
+    from ..models.secuencia_request_dto import SecuenciaRequestDto
 
 
 T = TypeVar("T", bound="DetalleAnulacionRequestDto")
 
 
-
 @_attrs_define
 class DetalleAnulacionRequestDto:
-    """ 
-        Attributes:
-            tipo_ecf (ECFType | Unset):
-            cantidade_ncf_anulados (int | str | Unset):
-            no_linea (list[int | str] | Unset):
-            secuencias (list[SecuenciaRequestDto] | Unset):
-     """
+    """
+    Attributes:
+        tipo_ecf (ECFType | Unset):
+        cantidade_ncf_anulados (int | str | Unset):
+        no_linea (list[int | str] | Unset):
+        secuencias (list[SecuenciaRequestDto] | Unset):
+    """
 
     tipo_ecf: ECFType | Unset = UNSET
     cantidade_ncf_anulados: int | str | Unset = UNSET
@@ -39,16 +32,10 @@ class DetalleAnulacionRequestDto:
     secuencias: list[SecuenciaRequestDto] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.secuencia_request_dto import SecuenciaRequestDto
         tipo_ecf: str | Unset = UNSET
         if not isinstance(self.tipo_ecf, Unset):
             tipo_ecf = self.tipo_ecf.value
-
 
         cantidade_ncf_anulados: int | str | Unset
         if isinstance(self.cantidade_ncf_anulados, Unset):
@@ -64,8 +51,6 @@ class DetalleAnulacionRequestDto:
                 no_linea_item = no_linea_item_data
                 no_linea.append(no_linea_item)
 
-
-
         secuencias: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.secuencias, Unset):
             secuencias = []
@@ -73,13 +58,9 @@ class DetalleAnulacionRequestDto:
                 secuencias_item = secuencias_item_data.to_dict()
                 secuencias.append(secuencias_item)
 
-
-
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if tipo_ecf is not UNSET:
             field_dict["tipoEcf"] = tipo_ecf
         if cantidade_ncf_anulados is not UNSET:
@@ -91,21 +72,17 @@ class DetalleAnulacionRequestDto:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.secuencia_request_dto import SecuenciaRequestDto
+
         d = dict(src_dict)
         _tipo_ecf = d.pop("tipoEcf", UNSET)
         tipo_ecf: ECFType | Unset
-        if isinstance(_tipo_ecf,  Unset):
+        if isinstance(_tipo_ecf, Unset):
             tipo_ecf = UNSET
         else:
             tipo_ecf = ECFType(_tipo_ecf)
-
-
-
 
         def _parse_cantidade_ncf_anulados(data: object) -> int | str | Unset:
             if isinstance(data, Unset):
@@ -114,19 +91,18 @@ class DetalleAnulacionRequestDto:
 
         cantidade_ncf_anulados = _parse_cantidade_ncf_anulados(d.pop("cantidadeNcfAnulados", UNSET))
 
-
         _no_linea = d.pop("noLinea", UNSET)
         no_linea: list[int | str] | Unset = UNSET
         if _no_linea is not UNSET:
             no_linea = []
             for no_linea_item_data in _no_linea:
+
                 def _parse_no_linea_item(data: object) -> int | str:
                     return cast(int | str, data)
 
                 no_linea_item = _parse_no_linea_item(no_linea_item_data)
 
                 no_linea.append(no_linea_item)
-
 
         _secuencias = d.pop("secuencias", UNSET)
         secuencias: list[SecuenciaRequestDto] | Unset = UNSET
@@ -135,10 +111,7 @@ class DetalleAnulacionRequestDto:
             for secuencias_item_data in _secuencias:
                 secuencias_item = SecuenciaRequestDto.from_dict(secuencias_item_data)
 
-
-
                 secuencias.append(secuencias_item)
-
 
         detalle_anulacion_request_dto = cls(
             tipo_ecf=tipo_ecf,
@@ -146,7 +119,6 @@ class DetalleAnulacionRequestDto:
             no_linea=no_linea,
             secuencias=secuencias,
         )
-
 
         detalle_anulacion_request_dto.additional_properties = d
         return detalle_anulacion_request_dto

@@ -1,4 +1,4 @@
-""" Contains all the data models used in inputs/outputs """
+"""Contains all the data models used in inputs/outputs"""
 
 from .acecf_reception_request_dto import AcecfReceptionRequestDto
 from .acecf_summary_dto import AcecfSummaryDto

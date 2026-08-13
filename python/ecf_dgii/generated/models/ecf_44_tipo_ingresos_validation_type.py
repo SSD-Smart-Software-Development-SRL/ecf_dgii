@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Ecf44TipoIngresosValidationType(str, Enum):
     VALUE_0 = "01"
     VALUE_1 = "02"

@@ -1,47 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.ecf_44_version_type import Ecf44VersionType
 from ..types import UNSET, Unset
-from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.ecf_44_comprador import Ecf44Comprador
-  from ..models.ecf_44_emisor import Ecf44Emisor
-  from ..models.ecf_44_id_doc import Ecf44IdDoc
-  from ..models.ecf_44_informaciones_adicionales import Ecf44InformacionesAdicionales
-  from ..models.ecf_44_otra_moneda import Ecf44OtraMoneda
-  from ..models.ecf_44_totales import Ecf44Totales
-  from ..models.ecf_44_transporte import Ecf44Transporte
-
-
-
+    from ..models.ecf_44_comprador import Ecf44Comprador
+    from ..models.ecf_44_emisor import Ecf44Emisor
+    from ..models.ecf_44_id_doc import Ecf44IdDoc
+    from ..models.ecf_44_informaciones_adicionales import Ecf44InformacionesAdicionales
+    from ..models.ecf_44_otra_moneda import Ecf44OtraMoneda
+    from ..models.ecf_44_totales import Ecf44Totales
+    from ..models.ecf_44_transporte import Ecf44Transporte
 
 
 T = TypeVar("T", bound="Ecf44Encabezado")
 
 
-
 @_attrs_define
 class Ecf44Encabezado:
-    """ 
-        Attributes:
-            version (Ecf44VersionType):
-            id_doc (Ecf44IdDoc):
-            emisor (Ecf44Emisor):
-            comprador (Ecf44Comprador):
-            totales (Ecf44Totales):
-            informaciones_adicionales (Ecf44InformacionesAdicionales | None | Unset):
-            transporte (Ecf44Transporte | None | Unset):
-            otra_moneda (Ecf44OtraMoneda | None | Unset):
-     """
+    """
+    Attributes:
+        version (Ecf44VersionType):
+        id_doc (Ecf44IdDoc):
+        emisor (Ecf44Emisor):
+        comprador (Ecf44Comprador):
+        totales (Ecf44Totales):
+        informaciones_adicionales (Ecf44InformacionesAdicionales | None | Unset):
+        transporte (Ecf44Transporte | None | Unset):
+        otra_moneda (Ecf44OtraMoneda | None | Unset):
+    """
 
     version: Ecf44VersionType
     id_doc: Ecf44IdDoc
@@ -53,18 +46,11 @@ class Ecf44Encabezado:
     otra_moneda: Ecf44OtraMoneda | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.ecf_44_comprador import Ecf44Comprador
-        from ..models.ecf_44_emisor import Ecf44Emisor
-        from ..models.ecf_44_id_doc import Ecf44IdDoc
         from ..models.ecf_44_informaciones_adicionales import Ecf44InformacionesAdicionales
         from ..models.ecf_44_otra_moneda import Ecf44OtraMoneda
-        from ..models.ecf_44_totales import Ecf44Totales
         from ..models.ecf_44_transporte import Ecf44Transporte
+
         version = self.version.value
 
         id_doc = self.id_doc.to_dict()
@@ -99,16 +85,17 @@ class Ecf44Encabezado:
         else:
             otra_moneda = self.otra_moneda
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "version": version,
-            "idDoc": id_doc,
-            "emisor": emisor,
-            "comprador": comprador,
-            "totales": totales,
-        })
+        field_dict.update(
+            {
+                "version": version,
+                "idDoc": id_doc,
+                "emisor": emisor,
+                "comprador": comprador,
+                "totales": totales,
+            }
+        )
         if informaciones_adicionales is not UNSET:
             field_dict["informacionesAdicionales"] = informaciones_adicionales
         if transporte is not UNSET:
@@ -117,8 +104,6 @@ class Ecf44Encabezado:
             field_dict["otraMoneda"] = otra_moneda
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -129,31 +114,17 @@ class Ecf44Encabezado:
         from ..models.ecf_44_otra_moneda import Ecf44OtraMoneda
         from ..models.ecf_44_totales import Ecf44Totales
         from ..models.ecf_44_transporte import Ecf44Transporte
+
         d = dict(src_dict)
         version = Ecf44VersionType(d.pop("version"))
 
-
-
-
         id_doc = Ecf44IdDoc.from_dict(d.pop("idDoc"))
-
-
-
 
         emisor = Ecf44Emisor.from_dict(d.pop("emisor"))
 
-
-
-
         comprador = Ecf44Comprador.from_dict(d.pop("comprador"))
 
-
-
-
         totales = Ecf44Totales.from_dict(d.pop("totales"))
-
-
-
 
         def _parse_informaciones_adicionales(data: object) -> Ecf44InformacionesAdicionales | None | Unset:
             if data is None:
@@ -165,15 +136,12 @@ class Ecf44Encabezado:
                     raise TypeError()
                 informaciones_adicionales_type_1 = Ecf44InformacionesAdicionales.from_dict(data)
 
-
-
                 return informaciones_adicionales_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf44InformacionesAdicionales | None | Unset, data)
 
         informaciones_adicionales = _parse_informaciones_adicionales(d.pop("informacionesAdicionales", UNSET))
-
 
         def _parse_transporte(data: object) -> Ecf44Transporte | None | Unset:
             if data is None:
@@ -185,15 +153,12 @@ class Ecf44Encabezado:
                     raise TypeError()
                 transporte_type_1 = Ecf44Transporte.from_dict(data)
 
-
-
                 return transporte_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf44Transporte | None | Unset, data)
 
         transporte = _parse_transporte(d.pop("transporte", UNSET))
-
 
         def _parse_otra_moneda(data: object) -> Ecf44OtraMoneda | None | Unset:
             if data is None:
@@ -205,15 +170,12 @@ class Ecf44Encabezado:
                     raise TypeError()
                 otra_moneda_type_1 = Ecf44OtraMoneda.from_dict(data)
 
-
-
                 return otra_moneda_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(Ecf44OtraMoneda | None | Unset, data)
 
         otra_moneda = _parse_otra_moneda(d.pop("otraMoneda", UNSET))
-
 
         ecf_44_encabezado = cls(
             version=version,
@@ -225,7 +187,6 @@ class Ecf44Encabezado:
             transporte=transporte,
             otra_moneda=otra_moneda,
         )
-
 
         ecf_44_encabezado.additional_properties = d
         return ecf_44_encabezado

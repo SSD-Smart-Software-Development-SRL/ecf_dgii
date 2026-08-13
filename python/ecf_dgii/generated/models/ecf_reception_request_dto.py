@@ -1,47 +1,37 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.all_tipo_ecf_types import AllTipoECFTypes
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-from uuid import UUID
-import datetime
-
-
-
-
-
 
 T = TypeVar("T", bound="EcfReceptionRequestDto")
 
 
-
 @_attrs_define
 class EcfReceptionRequestDto:
-    """ 
-        Attributes:
-            message_id (UUID | Unset):
-            tenant_id (UUID | Unset):
-            company_rnc (str | Unset):
-            file_name (str | Unset):
-            progress (int | str | Unset):
-            created_on (datetime.datetime | Unset):
-            updated_on (datetime.datetime | Unset):
-            error_message (None | str | Unset):
-            encf (None | str | Unset):
-            rnc_emisor (None | str | Unset):
-            tipo_ecf (AllTipoECFTypes | None | Unset):
-            result_internal_file_name (None | str | Unset):
-            monto_total (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        message_id (UUID | Unset):
+        tenant_id (UUID | Unset):
+        company_rnc (str | Unset):
+        file_name (str | Unset):
+        progress (int | str | Unset):
+        created_on (datetime.datetime | Unset):
+        updated_on (datetime.datetime | Unset):
+        error_message (None | str | Unset):
+        encf (None | str | Unset):
+        rnc_emisor (None | str | Unset):
+        tipo_ecf (AllTipoECFTypes | None | Unset):
+        result_internal_file_name (None | str | Unset):
+        monto_total (float | None | str | Unset):
+    """
 
     message_id: UUID | Unset = UNSET
     tenant_id: UUID | Unset = UNSET
@@ -57,10 +47,6 @@ class EcfReceptionRequestDto:
     result_internal_file_name: None | str | Unset = UNSET
     monto_total: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         message_id: str | Unset = UNSET
@@ -127,11 +113,9 @@ class EcfReceptionRequestDto:
         else:
             monto_total = self.monto_total
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if message_id is not UNSET:
             field_dict["messageId"] = message_id
         if tenant_id is not UNSET:
@@ -161,30 +145,22 @@ class EcfReceptionRequestDto:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         _message_id = d.pop("messageId", UNSET)
         message_id: UUID | Unset
-        if isinstance(_message_id,  Unset):
+        if isinstance(_message_id, Unset):
             message_id = UNSET
         else:
             message_id = UUID(_message_id)
 
-
-
-
         _tenant_id = d.pop("tenantId", UNSET)
         tenant_id: UUID | Unset
-        if isinstance(_tenant_id,  Unset):
+        if isinstance(_tenant_id, Unset):
             tenant_id = UNSET
         else:
             tenant_id = UUID(_tenant_id)
-
-
-
 
         company_rnc = d.pop("companyRnc", UNSET)
 
@@ -197,26 +173,19 @@ class EcfReceptionRequestDto:
 
         progress = _parse_progress(d.pop("progress", UNSET))
 
-
         _created_on = d.pop("createdOn", UNSET)
         created_on: datetime.datetime | Unset
-        if isinstance(_created_on,  Unset):
+        if isinstance(_created_on, Unset):
             created_on = UNSET
         else:
-            created_on = isoparse(_created_on)
-
-
-
+            created_on = datetime.datetime.fromisoformat(_created_on)
 
         _updated_on = d.pop("updatedOn", UNSET)
         updated_on: datetime.datetime | Unset
-        if isinstance(_updated_on,  Unset):
+        if isinstance(_updated_on, Unset):
             updated_on = UNSET
         else:
-            updated_on = isoparse(_updated_on)
-
-
-
+            updated_on = datetime.datetime.fromisoformat(_updated_on)
 
         def _parse_error_message(data: object) -> None | str | Unset:
             if data is None:
@@ -227,7 +196,6 @@ class EcfReceptionRequestDto:
 
         error_message = _parse_error_message(d.pop("errorMessage", UNSET))
 
-
         def _parse_encf(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -237,7 +205,6 @@ class EcfReceptionRequestDto:
 
         encf = _parse_encf(d.pop("encf", UNSET))
 
-
         def _parse_rnc_emisor(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -246,7 +213,6 @@ class EcfReceptionRequestDto:
             return cast(None | str | Unset, data)
 
         rnc_emisor = _parse_rnc_emisor(d.pop("rncEmisor", UNSET))
-
 
         def _parse_tipo_ecf(data: object) -> AllTipoECFTypes | None | Unset:
             if data is None:
@@ -258,15 +224,12 @@ class EcfReceptionRequestDto:
                     raise TypeError()
                 tipo_ecf_type_1 = AllTipoECFTypes(data)
 
-
-
                 return tipo_ecf_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(AllTipoECFTypes | None | Unset, data)
 
         tipo_ecf = _parse_tipo_ecf(d.pop("tipoEcf", UNSET))
-
 
         def _parse_result_internal_file_name(data: object) -> None | str | Unset:
             if data is None:
@@ -277,7 +240,6 @@ class EcfReceptionRequestDto:
 
         result_internal_file_name = _parse_result_internal_file_name(d.pop("resultInternalFileName", UNSET))
 
-
         def _parse_monto_total(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -286,7 +248,6 @@ class EcfReceptionRequestDto:
             return cast(float | None | str | Unset, data)
 
         monto_total = _parse_monto_total(d.pop("montoTotal", UNSET))
-
 
         ecf_reception_request_dto = cls(
             message_id=message_id,
@@ -303,7 +264,6 @@ class EcfReceptionRequestDto:
             result_internal_file_name=result_internal_file_name,
             monto_total=monto_total,
         )
-
 
         ecf_reception_request_dto.additional_properties = d
         return ecf_reception_request_dto

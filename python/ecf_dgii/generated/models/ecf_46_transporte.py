@@ -1,45 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.via_transporte_type_type_1 import ViaTransporteTypeType1
 from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf46Transporte")
 
 
-
 @_attrs_define
 class Ecf46Transporte:
-    """ 
-        Attributes:
-            via_transporte (None | Unset | ViaTransporteTypeType1):
-            pais_origen (None | str | Unset):
-            direccion_destino (None | str | Unset):
-            pais_destino (None | str | Unset):
-            rnc_identificacion_compania_transportista (None | str | Unset):
-            nombre_compania_transportista (None | str | Unset):
-            numero_viaje (None | str | Unset):
-            conductor (None | str | Unset):
-            documento_transporte (None | str | Unset):
-            ficha (None | str | Unset):
-            placa (None | str | Unset):
-            ruta_transporte (None | str | Unset):
-            zona_transporte (None | str | Unset):
-            numero_albaran (None | str | Unset):
-     """
+    """
+    Attributes:
+        via_transporte (None | Unset | ViaTransporteTypeType1):
+        pais_origen (None | str | Unset):
+        direccion_destino (None | str | Unset):
+        pais_destino (None | str | Unset):
+        rnc_identificacion_compania_transportista (None | str | Unset):
+        nombre_compania_transportista (None | str | Unset):
+        numero_viaje (None | str | Unset):
+        conductor (None | str | Unset):
+        documento_transporte (None | str | Unset):
+        ficha (None | str | Unset):
+        placa (None | str | Unset):
+        ruta_transporte (None | str | Unset):
+        zona_transporte (None | str | Unset):
+        numero_albaran (None | str | Unset):
+    """
 
     via_transporte: None | Unset | ViaTransporteTypeType1 = UNSET
     pais_origen: None | str | Unset = UNSET
@@ -56,10 +47,6 @@ class Ecf46Transporte:
     zona_transporte: None | str | Unset = UNSET
     numero_albaran: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         via_transporte: None | str | Unset
@@ -148,11 +135,9 @@ class Ecf46Transporte:
         else:
             numero_albaran = self.numero_albaran
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if via_transporte is not UNSET:
             field_dict["viaTransporte"] = via_transporte
         if pais_origen is not UNSET:
@@ -184,11 +169,10 @@ class Ecf46Transporte:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_via_transporte(data: object) -> None | Unset | ViaTransporteTypeType1:
             if data is None:
                 return data
@@ -199,15 +183,12 @@ class Ecf46Transporte:
                     raise TypeError()
                 componentsschemas_via_transporte_type_type_1 = ViaTransporteTypeType1(data)
 
-
-
                 return componentsschemas_via_transporte_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | Unset | ViaTransporteTypeType1, data)
 
         via_transporte = _parse_via_transporte(d.pop("viaTransporte", UNSET))
-
 
         def _parse_pais_origen(data: object) -> None | str | Unset:
             if data is None:
@@ -218,7 +199,6 @@ class Ecf46Transporte:
 
         pais_origen = _parse_pais_origen(d.pop("paisOrigen", UNSET))
 
-
         def _parse_direccion_destino(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -227,7 +207,6 @@ class Ecf46Transporte:
             return cast(None | str | Unset, data)
 
         direccion_destino = _parse_direccion_destino(d.pop("direccionDestino", UNSET))
-
 
         def _parse_pais_destino(data: object) -> None | str | Unset:
             if data is None:
@@ -238,7 +217,6 @@ class Ecf46Transporte:
 
         pais_destino = _parse_pais_destino(d.pop("paisDestino", UNSET))
 
-
         def _parse_rnc_identificacion_compania_transportista(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -246,8 +224,9 @@ class Ecf46Transporte:
                 return data
             return cast(None | str | Unset, data)
 
-        rnc_identificacion_compania_transportista = _parse_rnc_identificacion_compania_transportista(d.pop("rncIdentificacionCompaniaTransportista", UNSET))
-
+        rnc_identificacion_compania_transportista = _parse_rnc_identificacion_compania_transportista(
+            d.pop("rncIdentificacionCompaniaTransportista", UNSET)
+        )
 
         def _parse_nombre_compania_transportista(data: object) -> None | str | Unset:
             if data is None:
@@ -256,8 +235,9 @@ class Ecf46Transporte:
                 return data
             return cast(None | str | Unset, data)
 
-        nombre_compania_transportista = _parse_nombre_compania_transportista(d.pop("nombreCompaniaTransportista", UNSET))
-
+        nombre_compania_transportista = _parse_nombre_compania_transportista(
+            d.pop("nombreCompaniaTransportista", UNSET)
+        )
 
         def _parse_numero_viaje(data: object) -> None | str | Unset:
             if data is None:
@@ -268,7 +248,6 @@ class Ecf46Transporte:
 
         numero_viaje = _parse_numero_viaje(d.pop("numeroViaje", UNSET))
 
-
         def _parse_conductor(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -277,7 +256,6 @@ class Ecf46Transporte:
             return cast(None | str | Unset, data)
 
         conductor = _parse_conductor(d.pop("conductor", UNSET))
-
 
         def _parse_documento_transporte(data: object) -> None | str | Unset:
             if data is None:
@@ -288,7 +266,6 @@ class Ecf46Transporte:
 
         documento_transporte = _parse_documento_transporte(d.pop("documentoTransporte", UNSET))
 
-
         def _parse_ficha(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -297,7 +274,6 @@ class Ecf46Transporte:
             return cast(None | str | Unset, data)
 
         ficha = _parse_ficha(d.pop("ficha", UNSET))
-
 
         def _parse_placa(data: object) -> None | str | Unset:
             if data is None:
@@ -308,7 +284,6 @@ class Ecf46Transporte:
 
         placa = _parse_placa(d.pop("placa", UNSET))
 
-
         def _parse_ruta_transporte(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -317,7 +292,6 @@ class Ecf46Transporte:
             return cast(None | str | Unset, data)
 
         ruta_transporte = _parse_ruta_transporte(d.pop("rutaTransporte", UNSET))
-
 
         def _parse_zona_transporte(data: object) -> None | str | Unset:
             if data is None:
@@ -328,7 +302,6 @@ class Ecf46Transporte:
 
         zona_transporte = _parse_zona_transporte(d.pop("zonaTransporte", UNSET))
 
-
         def _parse_numero_albaran(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -337,7 +310,6 @@ class Ecf46Transporte:
             return cast(None | str | Unset, data)
 
         numero_albaran = _parse_numero_albaran(d.pop("numeroAlbaran", UNSET))
-
 
         ecf_46_transporte = cls(
             via_transporte=via_transporte,
@@ -355,7 +327,6 @@ class Ecf46Transporte:
             zona_transporte=zona_transporte,
             numero_albaran=numero_albaran,
         )
-
 
         ecf_46_transporte.additional_properties = d
         return ecf_46_transporte

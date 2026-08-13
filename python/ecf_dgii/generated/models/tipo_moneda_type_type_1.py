@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class TipoMonedaTypeType1(str, Enum):
     BRL = "BRL"
     CAD = "CAD"

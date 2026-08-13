@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class CodigoModificacionTypeType1(str, Enum):
     ANULAELNCFMODIFICADO = "AnulaElNCFModificado"
     CORRIGEMONTOSDELNCFMODIFICADO = "CorrigeMontosDelNCFModificado"

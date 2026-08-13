@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Ecf34IndicadorFacturacionType(str, Enum):
     EXENTO_E = "Exento_E"
     ITBIS1_18PERCENT = "ITBIS1_18Percent"

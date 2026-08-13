@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class EstadoType(str, Enum):
     ECFACEPTADO = "ECFAceptado"
     ECFRECHAZADO = "ECFRechazado"

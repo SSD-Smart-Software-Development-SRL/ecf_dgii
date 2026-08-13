@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Ecf31TipoAjusteType(str, Enum):
     D = "D"
     R = "R"

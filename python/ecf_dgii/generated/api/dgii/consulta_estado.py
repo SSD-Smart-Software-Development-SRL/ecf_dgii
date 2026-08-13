@@ -1,17 +1,14 @@
 from http import HTTPStatus
-from typing import Any, cast
+from typing import Any
 from urllib.parse import quote
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.problem_details import ProblemDetails
 from ...models.respuesta_consulta_estado import RespuestaConsultaEstado
-from typing import cast
-
+from ...types import UNSET, Response
 
 
 def _get_kwargs(
@@ -21,11 +18,7 @@ def _get_kwargs(
     ncf_electronico: str,
     rnc_comprador: str,
     codigo_seguridad: str,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
@@ -37,54 +30,44 @@ def _get_kwargs(
 
     params["codigoSeguridad"] = codigo_seguridad
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/dgii/{rnc}/consultaestado/estado".format(rnc=quote(str(rnc), safe=""),),
+        "url": "/dgii/{rnc}/consultaestado/estado".format(
+            rnc=quote(str(rnc), safe=""),
+        ),
         "params": params,
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ProblemDetails | RespuestaConsultaEstado | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ProblemDetails | RespuestaConsultaEstado | None:
     if response.status_code == 200:
         response_200 = RespuestaConsultaEstado.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ProblemDetails.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ProblemDetails.from_dict(response.json())
-
-
 
         return response_401
 
     if response.status_code == 403:
         response_403 = ProblemDetails.from_dict(response.json())
 
-
-
         return response_403
 
     if response.status_code == 500:
         response_500 = ProblemDetails.from_dict(response.json())
-
-
 
         return response_500
 
@@ -94,7 +77,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ProblemDetails | RespuestaConsultaEstado]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ProblemDetails | RespuestaConsultaEstado]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -111,9 +96,8 @@ def sync_detailed(
     ncf_electronico: str,
     rnc_comprador: str,
     codigo_seguridad: str,
-
 ) -> Response[ProblemDetails | RespuestaConsultaEstado]:
-    """ 
+    """
     Args:
         rnc (str):
         rnc_emisor (str):
@@ -127,16 +111,14 @@ def sync_detailed(
 
     Returns:
         Response[ProblemDetails | RespuestaConsultaEstado]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         rnc=rnc,
-rnc_emisor=rnc_emisor,
-ncf_electronico=ncf_electronico,
-rnc_comprador=rnc_comprador,
-codigo_seguridad=codigo_seguridad,
-
+        rnc_emisor=rnc_emisor,
+        ncf_electronico=ncf_electronico,
+        rnc_comprador=rnc_comprador,
+        codigo_seguridad=codigo_seguridad,
     )
 
     response = client.get_httpx_client().request(
@@ -144,6 +126,7 @@ codigo_seguridad=codigo_seguridad,
     )
 
     return _build_response(client=client, response=response)
+
 
 def sync(
     rnc: str,
@@ -153,9 +136,8 @@ def sync(
     ncf_electronico: str,
     rnc_comprador: str,
     codigo_seguridad: str,
-
 ) -> ProblemDetails | RespuestaConsultaEstado | None:
-    """ 
+    """
     Args:
         rnc (str):
         rnc_emisor (str):
@@ -169,18 +151,17 @@ def sync(
 
     Returns:
         ProblemDetails | RespuestaConsultaEstado
-     """
-
+    """
 
     return sync_detailed(
         rnc=rnc,
-client=client,
-rnc_emisor=rnc_emisor,
-ncf_electronico=ncf_electronico,
-rnc_comprador=rnc_comprador,
-codigo_seguridad=codigo_seguridad,
-
+        client=client,
+        rnc_emisor=rnc_emisor,
+        ncf_electronico=ncf_electronico,
+        rnc_comprador=rnc_comprador,
+        codigo_seguridad=codigo_seguridad,
     ).parsed
+
 
 async def asyncio_detailed(
     rnc: str,
@@ -190,9 +171,8 @@ async def asyncio_detailed(
     ncf_electronico: str,
     rnc_comprador: str,
     codigo_seguridad: str,
-
 ) -> Response[ProblemDetails | RespuestaConsultaEstado]:
-    """ 
+    """
     Args:
         rnc (str):
         rnc_emisor (str):
@@ -206,23 +186,20 @@ async def asyncio_detailed(
 
     Returns:
         Response[ProblemDetails | RespuestaConsultaEstado]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         rnc=rnc,
-rnc_emisor=rnc_emisor,
-ncf_electronico=ncf_electronico,
-rnc_comprador=rnc_comprador,
-codigo_seguridad=codigo_seguridad,
-
+        rnc_emisor=rnc_emisor,
+        ncf_electronico=ncf_electronico,
+        rnc_comprador=rnc_comprador,
+        codigo_seguridad=codigo_seguridad,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     rnc: str,
@@ -232,9 +209,8 @@ async def asyncio(
     ncf_electronico: str,
     rnc_comprador: str,
     codigo_seguridad: str,
-
 ) -> ProblemDetails | RespuestaConsultaEstado | None:
-    """ 
+    """
     Args:
         rnc (str):
         rnc_emisor (str):
@@ -248,15 +224,15 @@ async def asyncio(
 
     Returns:
         ProblemDetails | RespuestaConsultaEstado
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        rnc=rnc,
-client=client,
-rnc_emisor=rnc_emisor,
-ncf_electronico=ncf_electronico,
-rnc_comprador=rnc_comprador,
-codigo_seguridad=codigo_seguridad,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            rnc=rnc,
+            client=client,
+            rnc_emisor=rnc_emisor,
+            ncf_electronico=ncf_electronico,
+            rnc_comprador=rnc_comprador,
+            codigo_seguridad=codigo_seguridad,
+        )
+    ).parsed

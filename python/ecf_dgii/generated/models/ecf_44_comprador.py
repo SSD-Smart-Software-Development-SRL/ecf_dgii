@@ -1,50 +1,40 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.provincia_municipio_type_type_1 import ProvinciaMunicipioTypeType1
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf44Comprador")
 
 
-
 @_attrs_define
 class Ecf44Comprador:
-    """ 
-        Attributes:
-            razon_social_comprador (str):
-            rnc_comprador (None | str | Unset):
-            identificador_extranjero (None | str | Unset):
-            contacto_comprador (None | str | Unset):
-            correo_comprador (None | str | Unset):
-            direccion_comprador (None | str | Unset):
-            municipio_comprador (None | ProvinciaMunicipioTypeType1 | Unset):
-            provincia_comprador (None | ProvinciaMunicipioTypeType1 | Unset):
-            fecha_entrega (datetime.datetime | None | Unset):
-            contacto_entrega (None | str | Unset):
-            direccion_entrega (None | str | Unset):
-            telefono_adicional (None | str | Unset):
-            fecha_orden_compra (datetime.datetime | None | Unset):
-            numero_orden_compra (None | str | Unset):
-            codigo_interno_comprador (None | str | Unset):
-            responsable_pago (None | str | Unset):
-            informacion_adicional_comprador (None | str | Unset):
-     """
+    """
+    Attributes:
+        razon_social_comprador (str):
+        rnc_comprador (None | str | Unset):
+        identificador_extranjero (None | str | Unset):
+        contacto_comprador (None | str | Unset):
+        correo_comprador (None | str | Unset):
+        direccion_comprador (None | str | Unset):
+        municipio_comprador (None | ProvinciaMunicipioTypeType1 | Unset):
+        provincia_comprador (None | ProvinciaMunicipioTypeType1 | Unset):
+        fecha_entrega (datetime.datetime | None | Unset):
+        contacto_entrega (None | str | Unset):
+        direccion_entrega (None | str | Unset):
+        telefono_adicional (None | str | Unset):
+        fecha_orden_compra (datetime.datetime | None | Unset):
+        numero_orden_compra (None | str | Unset):
+        codigo_interno_comprador (None | str | Unset):
+        responsable_pago (None | str | Unset):
+        informacion_adicional_comprador (None | str | Unset):
+    """
 
     razon_social_comprador: str
     rnc_comprador: None | str | Unset = UNSET
@@ -64,10 +54,6 @@ class Ecf44Comprador:
     responsable_pago: None | str | Unset = UNSET
     informacion_adicional_comprador: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         razon_social_comprador = self.razon_social_comprador
@@ -176,12 +162,13 @@ class Ecf44Comprador:
         else:
             informacion_adicional_comprador = self.informacion_adicional_comprador
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "razonSocialComprador": razon_social_comprador,
-        })
+        field_dict.update(
+            {
+                "razonSocialComprador": razon_social_comprador,
+            }
+        )
         if rnc_comprador is not UNSET:
             field_dict["rncComprador"] = rnc_comprador
         if identificador_extranjero is not UNSET:
@@ -217,8 +204,6 @@ class Ecf44Comprador:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -233,7 +218,6 @@ class Ecf44Comprador:
 
         rnc_comprador = _parse_rnc_comprador(d.pop("rncComprador", UNSET))
 
-
         def _parse_identificador_extranjero(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -242,7 +226,6 @@ class Ecf44Comprador:
             return cast(None | str | Unset, data)
 
         identificador_extranjero = _parse_identificador_extranjero(d.pop("identificadorExtranjero", UNSET))
-
 
         def _parse_contacto_comprador(data: object) -> None | str | Unset:
             if data is None:
@@ -253,7 +236,6 @@ class Ecf44Comprador:
 
         contacto_comprador = _parse_contacto_comprador(d.pop("contactoComprador", UNSET))
 
-
         def _parse_correo_comprador(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -263,7 +245,6 @@ class Ecf44Comprador:
 
         correo_comprador = _parse_correo_comprador(d.pop("correoComprador", UNSET))
 
-
         def _parse_direccion_comprador(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -272,7 +253,6 @@ class Ecf44Comprador:
             return cast(None | str | Unset, data)
 
         direccion_comprador = _parse_direccion_comprador(d.pop("direccionComprador", UNSET))
-
 
         def _parse_municipio_comprador(data: object) -> None | ProvinciaMunicipioTypeType1 | Unset:
             if data is None:
@@ -284,15 +264,12 @@ class Ecf44Comprador:
                     raise TypeError()
                 componentsschemas_provincia_municipio_type_type_1 = ProvinciaMunicipioTypeType1(data)
 
-
-
                 return componentsschemas_provincia_municipio_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | ProvinciaMunicipioTypeType1 | Unset, data)
 
         municipio_comprador = _parse_municipio_comprador(d.pop("municipioComprador", UNSET))
-
 
         def _parse_provincia_comprador(data: object) -> None | ProvinciaMunicipioTypeType1 | Unset:
             if data is None:
@@ -304,15 +281,12 @@ class Ecf44Comprador:
                     raise TypeError()
                 componentsschemas_provincia_municipio_type_type_1 = ProvinciaMunicipioTypeType1(data)
 
-
-
                 return componentsschemas_provincia_municipio_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | ProvinciaMunicipioTypeType1 | Unset, data)
 
         provincia_comprador = _parse_provincia_comprador(d.pop("provinciaComprador", UNSET))
-
 
         def _parse_fecha_entrega(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -322,9 +296,7 @@ class Ecf44Comprador:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_entrega_type_1 = isoparse(data)
-
-
+                fecha_entrega_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_entrega_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -332,7 +304,6 @@ class Ecf44Comprador:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_entrega = _parse_fecha_entrega(d.pop("fechaEntrega", UNSET))
-
 
         def _parse_contacto_entrega(data: object) -> None | str | Unset:
             if data is None:
@@ -343,7 +314,6 @@ class Ecf44Comprador:
 
         contacto_entrega = _parse_contacto_entrega(d.pop("contactoEntrega", UNSET))
 
-
         def _parse_direccion_entrega(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -352,7 +322,6 @@ class Ecf44Comprador:
             return cast(None | str | Unset, data)
 
         direccion_entrega = _parse_direccion_entrega(d.pop("direccionEntrega", UNSET))
-
 
         def _parse_telefono_adicional(data: object) -> None | str | Unset:
             if data is None:
@@ -363,7 +332,6 @@ class Ecf44Comprador:
 
         telefono_adicional = _parse_telefono_adicional(d.pop("telefonoAdicional", UNSET))
 
-
         def _parse_fecha_orden_compra(data: object) -> datetime.datetime | None | Unset:
             if data is None:
                 return data
@@ -372,9 +340,7 @@ class Ecf44Comprador:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_orden_compra_type_1 = isoparse(data)
-
-
+                fecha_orden_compra_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_orden_compra_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -382,7 +348,6 @@ class Ecf44Comprador:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_orden_compra = _parse_fecha_orden_compra(d.pop("fechaOrdenCompra", UNSET))
-
 
         def _parse_numero_orden_compra(data: object) -> None | str | Unset:
             if data is None:
@@ -393,7 +358,6 @@ class Ecf44Comprador:
 
         numero_orden_compra = _parse_numero_orden_compra(d.pop("numeroOrdenCompra", UNSET))
 
-
         def _parse_codigo_interno_comprador(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -402,7 +366,6 @@ class Ecf44Comprador:
             return cast(None | str | Unset, data)
 
         codigo_interno_comprador = _parse_codigo_interno_comprador(d.pop("codigoInternoComprador", UNSET))
-
 
         def _parse_responsable_pago(data: object) -> None | str | Unset:
             if data is None:
@@ -413,7 +376,6 @@ class Ecf44Comprador:
 
         responsable_pago = _parse_responsable_pago(d.pop("responsablePago", UNSET))
 
-
         def _parse_informacion_adicional_comprador(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -421,8 +383,9 @@ class Ecf44Comprador:
                 return data
             return cast(None | str | Unset, data)
 
-        informacion_adicional_comprador = _parse_informacion_adicional_comprador(d.pop("informacionAdicionalComprador", UNSET))
-
+        informacion_adicional_comprador = _parse_informacion_adicional_comprador(
+            d.pop("informacionAdicionalComprador", UNSET)
+        )
 
         ecf_44_comprador = cls(
             razon_social_comprador=razon_social_comprador,
@@ -443,7 +406,6 @@ class Ecf44Comprador:
             responsable_pago=responsable_pago,
             informacion_adicional_comprador=informacion_adicional_comprador,
         )
-
 
         ecf_44_comprador.additional_properties = d
         return ecf_44_comprador

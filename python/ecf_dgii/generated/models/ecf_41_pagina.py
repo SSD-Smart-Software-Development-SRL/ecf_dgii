@@ -1,43 +1,34 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="Ecf41Pagina")
-
 
 
 @_attrs_define
 class Ecf41Pagina:
-    """ 
-        Attributes:
-            pagina_no (int | None | str | Unset):
-            no_linea_desde (int | None | str | Unset):
-            no_linea_hasta (int | None | str | Unset):
-            subtotal_monto_gravado_pagina (float | None | str | Unset):
-            subtotal_monto_gravado_1_pagina (float | None | str | Unset):
-            subtotal_monto_gravado_2_pagina (float | None | str | Unset):
-            subtotal_monto_gravado_3_pagina (float | None | str | Unset):
-            subtotal_exento_pagina (float | None | str | Unset):
-            subtotal_itbis_pagina (float | None | str | Unset):
-            subtotal_itbis_1_pagina (float | None | str | Unset):
-            subtotal_itbis_2_pagina (float | None | str | Unset):
-            subtotal_itbis_3_pagina (float | None | str | Unset):
-            monto_subtotal_pagina (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        pagina_no (int | None | str | Unset):
+        no_linea_desde (int | None | str | Unset):
+        no_linea_hasta (int | None | str | Unset):
+        subtotal_monto_gravado_pagina (float | None | str | Unset):
+        subtotal_monto_gravado_1_pagina (float | None | str | Unset):
+        subtotal_monto_gravado_2_pagina (float | None | str | Unset):
+        subtotal_monto_gravado_3_pagina (float | None | str | Unset):
+        subtotal_exento_pagina (float | None | str | Unset):
+        subtotal_itbis_pagina (float | None | str | Unset):
+        subtotal_itbis_1_pagina (float | None | str | Unset):
+        subtotal_itbis_2_pagina (float | None | str | Unset):
+        subtotal_itbis_3_pagina (float | None | str | Unset):
+        monto_subtotal_pagina (float | None | str | Unset):
+    """
 
     pagina_no: int | None | str | Unset = UNSET
     no_linea_desde: int | None | str | Unset = UNSET
@@ -53,10 +44,6 @@ class Ecf41Pagina:
     subtotal_itbis_3_pagina: float | None | str | Unset = UNSET
     monto_subtotal_pagina: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         pagina_no: int | None | str | Unset
@@ -137,11 +124,9 @@ class Ecf41Pagina:
         else:
             monto_subtotal_pagina = self.monto_subtotal_pagina
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if pagina_no is not UNSET:
             field_dict["paginaNo"] = pagina_no
         if no_linea_desde is not UNSET:
@@ -171,11 +156,10 @@ class Ecf41Pagina:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_pagina_no(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -184,7 +168,6 @@ class Ecf41Pagina:
             return cast(int | None | str | Unset, data)
 
         pagina_no = _parse_pagina_no(d.pop("paginaNo", UNSET))
-
 
         def _parse_no_linea_desde(data: object) -> int | None | str | Unset:
             if data is None:
@@ -195,7 +178,6 @@ class Ecf41Pagina:
 
         no_linea_desde = _parse_no_linea_desde(d.pop("noLineaDesde", UNSET))
 
-
         def _parse_no_linea_hasta(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -204,7 +186,6 @@ class Ecf41Pagina:
             return cast(int | None | str | Unset, data)
 
         no_linea_hasta = _parse_no_linea_hasta(d.pop("noLineaHasta", UNSET))
-
 
         def _parse_subtotal_monto_gravado_pagina(data: object) -> float | None | str | Unset:
             if data is None:
@@ -215,7 +196,6 @@ class Ecf41Pagina:
 
         subtotal_monto_gravado_pagina = _parse_subtotal_monto_gravado_pagina(d.pop("subtotalMontoGravadoPagina", UNSET))
 
-
         def _parse_subtotal_monto_gravado_1_pagina(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -223,8 +203,9 @@ class Ecf41Pagina:
                 return data
             return cast(float | None | str | Unset, data)
 
-        subtotal_monto_gravado_1_pagina = _parse_subtotal_monto_gravado_1_pagina(d.pop("subtotalMontoGravado1Pagina", UNSET))
-
+        subtotal_monto_gravado_1_pagina = _parse_subtotal_monto_gravado_1_pagina(
+            d.pop("subtotalMontoGravado1Pagina", UNSET)
+        )
 
         def _parse_subtotal_monto_gravado_2_pagina(data: object) -> float | None | str | Unset:
             if data is None:
@@ -233,8 +214,9 @@ class Ecf41Pagina:
                 return data
             return cast(float | None | str | Unset, data)
 
-        subtotal_monto_gravado_2_pagina = _parse_subtotal_monto_gravado_2_pagina(d.pop("subtotalMontoGravado2Pagina", UNSET))
-
+        subtotal_monto_gravado_2_pagina = _parse_subtotal_monto_gravado_2_pagina(
+            d.pop("subtotalMontoGravado2Pagina", UNSET)
+        )
 
         def _parse_subtotal_monto_gravado_3_pagina(data: object) -> float | None | str | Unset:
             if data is None:
@@ -243,8 +225,9 @@ class Ecf41Pagina:
                 return data
             return cast(float | None | str | Unset, data)
 
-        subtotal_monto_gravado_3_pagina = _parse_subtotal_monto_gravado_3_pagina(d.pop("subtotalMontoGravado3Pagina", UNSET))
-
+        subtotal_monto_gravado_3_pagina = _parse_subtotal_monto_gravado_3_pagina(
+            d.pop("subtotalMontoGravado3Pagina", UNSET)
+        )
 
         def _parse_subtotal_exento_pagina(data: object) -> float | None | str | Unset:
             if data is None:
@@ -255,7 +238,6 @@ class Ecf41Pagina:
 
         subtotal_exento_pagina = _parse_subtotal_exento_pagina(d.pop("subtotalExentoPagina", UNSET))
 
-
         def _parse_subtotal_itbis_pagina(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -264,7 +246,6 @@ class Ecf41Pagina:
             return cast(float | None | str | Unset, data)
 
         subtotal_itbis_pagina = _parse_subtotal_itbis_pagina(d.pop("subtotalItbisPagina", UNSET))
-
 
         def _parse_subtotal_itbis_1_pagina(data: object) -> float | None | str | Unset:
             if data is None:
@@ -275,7 +256,6 @@ class Ecf41Pagina:
 
         subtotal_itbis_1_pagina = _parse_subtotal_itbis_1_pagina(d.pop("subtotalItbis1Pagina", UNSET))
 
-
         def _parse_subtotal_itbis_2_pagina(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -284,7 +264,6 @@ class Ecf41Pagina:
             return cast(float | None | str | Unset, data)
 
         subtotal_itbis_2_pagina = _parse_subtotal_itbis_2_pagina(d.pop("subtotalItbis2Pagina", UNSET))
-
 
         def _parse_subtotal_itbis_3_pagina(data: object) -> float | None | str | Unset:
             if data is None:
@@ -295,7 +274,6 @@ class Ecf41Pagina:
 
         subtotal_itbis_3_pagina = _parse_subtotal_itbis_3_pagina(d.pop("subtotalItbis3Pagina", UNSET))
 
-
         def _parse_monto_subtotal_pagina(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -304,7 +282,6 @@ class Ecf41Pagina:
             return cast(float | None | str | Unset, data)
 
         monto_subtotal_pagina = _parse_monto_subtotal_pagina(d.pop("montoSubtotalPagina", UNSET))
-
 
         ecf_41_pagina = cls(
             pagina_no=pagina_no,
@@ -321,7 +298,6 @@ class Ecf41Pagina:
             subtotal_itbis_3_pagina=subtotal_itbis_3_pagina,
             monto_subtotal_pagina=monto_subtotal_pagina,
         )
-
 
         ecf_41_pagina.additional_properties = d
         return ecf_41_pagina

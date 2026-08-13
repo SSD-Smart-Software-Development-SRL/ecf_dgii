@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Ecf31CodificacionTipoImpuestosType(str, Enum):
     VALUE_0 = "001"
     VALUE_1 = "002"

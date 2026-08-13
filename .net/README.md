@@ -48,43 +48,43 @@ var client = new EcfClient(new EcfClientOptions
     Environment = EcfEnvironment.Prod
 });
 
-// Construye el comprobante
-var ecf = new ECF
+// Construye el comprobante (ejemplo e-CF 31)
+var ecf = new Ecf31ECF
 {
-    Encabezado = new Encabezado
+    Encabezado = new Ecf31Encabezado
     {
-        IdDoc = new IdDoc
+        IdDoc = new Ecf31IdDoc
         {
             TipoeCF = TipoeCFType.FacturaDeCreditoFiscalElectronica,
             Encf = "E310000000001"
         },
-        Emisor = new Emisor
+        Emisor = new Ecf31Emisor
         {
             RncEmisor = "123456789",
             RazonSocialEmisor = "Mi Empresa SRL",
             DireccionEmisor = "Calle Principal #1, Santo Domingo",
-            FechaEmision = new Date(2026, 1, 10)
+            FechaEmision = DateTimeOffset.Now
         },
-        Totales = new Totales
+        Totales = new Ecf31Totales
         {
             // montos, ITBIS, etc.
         }
     },
-    DetallesItems = new List<Item>
+    DetallesItems = new List<Ecf31Item>
     {
-        new Item
+        new Ecf31Item
         {
             NombreItem = "Servicio de consultoría",
-            IndicadorFacturacion = IndicadorFacturacionType.NoFacturable_18Percent,
-            CantidadItem = new UntypedDouble(1),
-            PrecioUnitarioItem = new UntypedDouble(10000.00),
-            MontoItem = new UntypedDouble(10000.00)
+            IndicadorFacturacion = Ecf31IndicadorFacturacionType.NoFacturable_18Percent,
+            CantidadItem = 1,
+            PrecioUnitarioItem = 10000.00,
+            MontoItem = 10000.00
         }
     }
 };
 
 // Envía y espera el resultado
-// SendEcfAsync hace todo: enruta al endpoint correcto, envía, y espera hasta que la DGII responda
+// SendEcfAsync es genérico y soporta los 10 tipos de e-CF (31, 32, 33, 34, 41, 43, 44, 45, 46, 47)
 try
 {
     EcfResponse resultado = await client.SendEcfAsync(ecf);
@@ -285,6 +285,51 @@ El SDK genera modelos específicos por tipo de comprobante (`Ecf31ECF`, `Ecf31En
 
 ## Arquitectura Backend / Frontend
 
+En la mayoría de implementaciones, el backend maneja la lógica de negocio (validación, almacenamiento, conversión) y envía el comprobante. El frontend obtiene un token de solo lectura para consultar el estado directamente.
+
+### Ejemplo: Frontend con IDistributedCache
+
+```csharp
+// 1. Enviar la factura al backend
+var invoiceResponse = await httpClient.PostAsJsonAsync("/api/v1/invoices", invoiceData);
+var result = await invoiceResponse.Content.ReadFromJsonAsync<InvoiceResult>();
+
+// 2. Crear cliente de solo lectura (GetToken se llama automáticamente)
+// Requiere IDistributedCache (inyectado vía DI o manual)
+var frontend = new EcfFrontendClient(new EcfFrontendClientOptions
+{
+    GetToken = async () =>
+    {
+        var response = await httpClient.GetAsync("/api/v1/ecf-token");
+        var json = await response.Content.ReadFromJsonAsync<TokenResponse>();
+        return json.ApiKey;
+    },
+    Cache = myDistributedCache, // Instancia de IDistributedCache
+    Environment = EcfEnvironment.Prod
+});
+
+// 3. Consultar el estado del ECF
+var ecf = await frontend.QueryEcfAsync(result.Rnc, result.Encf);
+```
+
+### Inyección de Dependencias (ASP.NET Core)
+
+El SDK incluye extensiones para facilitar la configuración en `Program.cs`:
+
+```csharp
+// Registrar el cliente principal
+builder.Services.AddEcfClient(options => {
+    options.ApiKey = builder.Configuration["ECF_API_KEY"];
+    options.Environment = EcfEnvironment.Prod;
+});
+
+// Registrar el cliente frontend (solo lectura)
+builder.Services.AddEcfFrontendClient(options => {
+    options.GetToken = async () => { /* lógica para obtener token */ };
+    options.Cache = sp.GetRequiredService<IDistributedCache>();
+});
+```
+
 ```mermaid
 sequenceDiagram
     participant C as Cliente (Browser/App)
@@ -307,7 +352,7 @@ sequenceDiagram
         BE->>ECF: POST /apikey (solo lectura, scoped a RNC)
         ECF-->>BE: { apiKey }
         BE-->>C: { apiKey }
-        C->>C: Almacenar token en cache
+        C->>C: Almacenar token en cache (IDistributedCache)
     end
 
     loop Polling hasta completar
@@ -323,89 +368,45 @@ sequenceDiagram
 3. El **backend** envía el ECF a la API de ECF SSD (`POST /ecf/{tipo}`) y recibe un `messageId`
 4. El **backend** retorna el `messageId` al cliente — **el cliente no espera**, puede continuar
 5. Cuando el cliente necesita consultar el estado del ECF, usa `EcfFrontendClient` que internamente:
-   - Verifica si hay un **token de solo lectura** en cache
-   - Si **no existe o expiró**: llama a `getToken()` (que el consumidor provee — típicamente un `fetch('/ecf-token')` a su backend), luego llama a `cacheToken(token)` para almacenarlo
-   - Si la API retorna **401**: automáticamente llama a `getToken()` de nuevo, actualiza el cache, y reintenta
-6. El cliente hace **polling** directamente contra la API de ECF SSD (`GET /ecf/{rnc}/{encf}`) hasta que `progress` sea `Finished`
+    - Verifica si hay un **token de solo lectura** en el `IDistributedCache`
+    - Si **no existe o expiró**: llama a `GetToken()` (que el consumidor provee), luego almacena el token en el cache.
+    - Si la API retorna **401**: automáticamente llama a `GetToken()` de nuevo, actualiza el cache, y reintenta.
+6. El cliente hace **polling** directamente contra la API de ECF SSD (`GET /ecf/{rnc}/{encf}`) hasta que `progress` sea `Finished`.
 
-### Ejemplo: Frontend con callbacks
+> **`SendEcfAsync`** es una conveniencia que encapsula envío + polling en una sola llamada. Ideal para scripts o backends simples sin frontend.
+
+## Acceso de Alto Nivel
+
+El SDK proporciona métodos de alto nivel en `EcfClient` para las operaciones más comunes, alineados con el SDK de TypeScript:
 
 ```csharp
-// 1. Enviar la factura al backend
-var invoiceResponse = await httpClient.PostAsJsonAsync("/api/v1/invoices", invoiceData);
-var result = await invoiceResponse.Content.ReadFromJsonAsync<InvoiceResult>();
-// El cliente no espera — puede continuar con otras operaciones
+// Gestión de empresas
+var empresas = await client.GetCompaniesAsync(rncs: new[] { "123456789" });
+await client.UpsertCompanyAsync(new UpsertCompanyRequest { /* ... */ });
 
-// 2. Crear cliente de solo lectura (GetToken se llama automáticamente)
-var frontend = new EcfFrontendClient(new EcfFrontendClientOptions
-{
-    GetToken = async () =>
-    {
-        var response = await httpClient.GetAsync("/api/v1/ecf-token");
-        var json = await response.Content.ReadFromJsonAsync<TokenResponse>();
-        return json.ApiKey;
-    },
-    Environment = EcfEnvironment.Prod
-    // CacheToken usa archivo encriptado en disco por defecto
-});
+// Certificados
+var cert = await client.GetCertificateAsync("123456789");
+await client.UpdateCertificateAsync("123456789", streamCert, "password");
 
-// 3. Consultar el estado del ECF
-var ecf = await frontend.QueryEcfAsync(result.Rnc, result.Encf);
-var ecfs = await frontend.SearchEcfsAsync(result.Rnc);
+// Consultas de comprobantes
+var ecf = await client.QueryEcfAsync("123456789", "E310000000001");
+var busqueda = await client.SearchEcfsAsync("123456789", page: "1", limit: "10");
+
+// Recepción y Aprobación Comercial (ACECF)
+var recepciones = await client.SearchEcfReceptionRequestsAsync(rncs: new[] { "123456789" });
+await client.AprobacionComercialAsync(messageId, new SendAcecfRequest { /* ... */ });
+
+// Operaciones DGII
+var estatus = await client.EstatusServiciosAsync("123456789");
+var trackId = await client.ConsultaTrackIdAsync("123456789", rncEmisor, encf);
 ```
 
-### Ejemplo: Backend
+## Acceso Directo al API (Kiota)
 
-En la mayoría de implementaciones, el backend maneja la lógica de negocio (validación, almacenamiento, conversión) y envía el comprobante:
-
-```csharp
-var ecfClient = new EcfClient(new EcfClientOptions
-{
-    ApiKey = backendJwtToken,
-    Environment = EcfEnvironment.Prod
-});
-
-// Endpoint de facturación — tu lógica de negocio + envío a ECF SSD
-[HttpPost("/api/v1/invoices")]
-public async Task<IActionResult> CreateInvoice(CreateInvoiceRequest request)
-{
-    // 1. Validar y guardar la factura en tu base de datos
-    var invoice = await _invoiceService.ValidateAndSave(request);
-
-    // 2. Convertir tu factura interna al formato ECF
-    var ecf = _mapper.ToEcf(invoice);
-
-    // 3. Enviar a ECF SSD (sin polling)
-    var response = await ecfClient.Api.Ecf.E31[rnc].PostAsync(ecf);
-    await _invoiceService.UpdateMessageId(invoice.Id, response.MessageId);
-
-    return Ok(new { invoice.Id, response.MessageId });
-}
-
-// Endpoint separado: generar token de lectura para el cliente
-[HttpGet("/api/v1/ecf-token")]
-public async Task<IActionResult> GetEcfToken()
-{
-    var apiKey = await ecfClient.Api.ApiKey.PostAsync(new NewCompanyApiKeyRequest
-    {
-        // token restringido al tenant y RNC, solo lectura
-    });
-    return Ok(new { apiKey.Token });
-}
-```
-
-## Acceso Directo al API
-
-Para operaciones que no cubre `SendEcfAsync`, usa `client.Api` directamente:
+Para operaciones granulares o si prefieres el estilo fluido de Kiota, usa `client.Api`:
 
 ```csharp
-// Consultar comprobantes
-var comprobantes = await client.Api.Ecf["123456789"].GetAsync();
-
-// Buscar un comprobante específico
-var resultado = await client.Api.Ecf["123456789"]["E310000000001"].GetAsync();
-
-// Consultar estado en la DGII
+// Ejemplo: Consultar estado directamente en la DGII vía Kiota
 var estado = await client.Api.Dgii["123456789"].Consultaestado.Estado.GetAsync(config =>
 {
     config.QueryParameters.RncEmisor = "123456789";
@@ -413,21 +414,6 @@ var estado = await client.Api.Dgii["123456789"].Consultaestado.Estado.GetAsync(c
     config.QueryParameters.RncComprador = "987654321";
     config.QueryParameters.CodigoSeguridad = "ABC123";
 });
-
-// Gestión de empresas
-var empresas = await client.Api.Company.GetAsync();
-await client.Api.Company.PutAsync(new UpsertCompanyRequest { /* ... */ });
-
-// Aprobación comercial
-await client.Api.Ecf.Aprobacioncomercial["123456789"]["E310000000001"]
-    .PostAsync(new SendAcecfRequest { /* ... */ });
-
-// Anulación de rangos
-await client.Api.Ecf.Anularrango["123456789"]
-    .PostAsync(new AnulacionRequest { /* ... */ });
-
-// Estatus de servicios DGII
-var estatus = await client.Api.Dgii["123456789"].Estatusservicios.ObtenerEstatus.GetAsync();
 ```
 
 ## Manejo de Errores

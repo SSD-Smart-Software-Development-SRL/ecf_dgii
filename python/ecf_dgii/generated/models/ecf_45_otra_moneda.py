@@ -1,47 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.tipo_moneda_type_type_1 import TipoMonedaTypeType1
 from ..types import UNSET, Unset
-from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.ecf_45_impuesto_adicional_otra_moneda import Ecf45ImpuestoAdicionalOtraMoneda
-
-
-
+    from ..models.ecf_45_impuesto_adicional_otra_moneda import Ecf45ImpuestoAdicionalOtraMoneda
 
 
 T = TypeVar("T", bound="Ecf45OtraMoneda")
 
 
-
 @_attrs_define
 class Ecf45OtraMoneda:
-    """ 
-        Attributes:
-            tipo_moneda (None | TipoMonedaTypeType1 | Unset):
-            tipo_cambio (float | None | str | Unset):
-            monto_gravado_total_otra_moneda (float | None | str | Unset):
-            monto_gravado_1_otra_moneda (float | None | str | Unset):
-            monto_gravado_2_otra_moneda (float | None | str | Unset):
-            monto_gravado_3_otra_moneda (float | None | str | Unset):
-            monto_exento_otra_moneda (float | None | str | Unset):
-            total_itbis_otra_moneda (float | None | str | Unset):
-            total_itbis1_otra_moneda (float | None | str | Unset):
-            total_itbis2_otra_moneda (float | None | str | Unset):
-            total_itbis3_otra_moneda (float | None | str | Unset):
-            monto_impuesto_adicional_otra_moneda (float | None | str | Unset):
-            impuestos_adicionales_otra_moneda (list[Ecf45ImpuestoAdicionalOtraMoneda] | None | Unset):
-            monto_total_otra_moneda (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        tipo_moneda (None | TipoMonedaTypeType1 | Unset):
+        tipo_cambio (float | None | str | Unset):
+        monto_gravado_total_otra_moneda (float | None | str | Unset):
+        monto_gravado_1_otra_moneda (float | None | str | Unset):
+        monto_gravado_2_otra_moneda (float | None | str | Unset):
+        monto_gravado_3_otra_moneda (float | None | str | Unset):
+        monto_exento_otra_moneda (float | None | str | Unset):
+        total_itbis_otra_moneda (float | None | str | Unset):
+        total_itbis1_otra_moneda (float | None | str | Unset):
+        total_itbis2_otra_moneda (float | None | str | Unset):
+        total_itbis3_otra_moneda (float | None | str | Unset):
+        monto_impuesto_adicional_otra_moneda (float | None | str | Unset):
+        impuestos_adicionales_otra_moneda (list[Ecf45ImpuestoAdicionalOtraMoneda] | None | Unset):
+        monto_total_otra_moneda (float | None | str | Unset):
+    """
 
     tipo_moneda: None | TipoMonedaTypeType1 | Unset = UNSET
     tipo_cambio: float | None | str | Unset = UNSET
@@ -59,12 +52,7 @@ class Ecf45OtraMoneda:
     monto_total_otra_moneda: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.ecf_45_impuesto_adicional_otra_moneda import Ecf45ImpuestoAdicionalOtraMoneda
         tipo_moneda: None | str | Unset
         if isinstance(self.tipo_moneda, Unset):
             tipo_moneda = UNSET
@@ -145,9 +133,10 @@ class Ecf45OtraMoneda:
         elif isinstance(self.impuestos_adicionales_otra_moneda, list):
             impuestos_adicionales_otra_moneda = []
             for impuestos_adicionales_otra_moneda_type_1_item_data in self.impuestos_adicionales_otra_moneda:
-                impuestos_adicionales_otra_moneda_type_1_item = impuestos_adicionales_otra_moneda_type_1_item_data.to_dict()
+                impuestos_adicionales_otra_moneda_type_1_item = (
+                    impuestos_adicionales_otra_moneda_type_1_item_data.to_dict()
+                )
                 impuestos_adicionales_otra_moneda.append(impuestos_adicionales_otra_moneda_type_1_item)
-
 
         else:
             impuestos_adicionales_otra_moneda = self.impuestos_adicionales_otra_moneda
@@ -158,11 +147,9 @@ class Ecf45OtraMoneda:
         else:
             monto_total_otra_moneda = self.monto_total_otra_moneda
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if tipo_moneda is not UNSET:
             field_dict["tipoMoneda"] = tipo_moneda
         if tipo_cambio is not UNSET:
@@ -194,12 +181,12 @@ class Ecf45OtraMoneda:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ecf_45_impuesto_adicional_otra_moneda import Ecf45ImpuestoAdicionalOtraMoneda
+
         d = dict(src_dict)
+
         def _parse_tipo_moneda(data: object) -> None | TipoMonedaTypeType1 | Unset:
             if data is None:
                 return data
@@ -210,15 +197,12 @@ class Ecf45OtraMoneda:
                     raise TypeError()
                 componentsschemas_tipo_moneda_type_type_1 = TipoMonedaTypeType1(data)
 
-
-
                 return componentsschemas_tipo_moneda_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | TipoMonedaTypeType1 | Unset, data)
 
         tipo_moneda = _parse_tipo_moneda(d.pop("tipoMoneda", UNSET))
-
 
         def _parse_tipo_cambio(data: object) -> float | None | str | Unset:
             if data is None:
@@ -229,7 +213,6 @@ class Ecf45OtraMoneda:
 
         tipo_cambio = _parse_tipo_cambio(d.pop("tipoCambio", UNSET))
 
-
         def _parse_monto_gravado_total_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -237,8 +220,9 @@ class Ecf45OtraMoneda:
                 return data
             return cast(float | None | str | Unset, data)
 
-        monto_gravado_total_otra_moneda = _parse_monto_gravado_total_otra_moneda(d.pop("montoGravadoTotalOtraMoneda", UNSET))
-
+        monto_gravado_total_otra_moneda = _parse_monto_gravado_total_otra_moneda(
+            d.pop("montoGravadoTotalOtraMoneda", UNSET)
+        )
 
         def _parse_monto_gravado_1_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
@@ -249,7 +233,6 @@ class Ecf45OtraMoneda:
 
         monto_gravado_1_otra_moneda = _parse_monto_gravado_1_otra_moneda(d.pop("montoGravado1OtraMoneda", UNSET))
 
-
         def _parse_monto_gravado_2_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -258,7 +241,6 @@ class Ecf45OtraMoneda:
             return cast(float | None | str | Unset, data)
 
         monto_gravado_2_otra_moneda = _parse_monto_gravado_2_otra_moneda(d.pop("montoGravado2OtraMoneda", UNSET))
-
 
         def _parse_monto_gravado_3_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
@@ -269,7 +251,6 @@ class Ecf45OtraMoneda:
 
         monto_gravado_3_otra_moneda = _parse_monto_gravado_3_otra_moneda(d.pop("montoGravado3OtraMoneda", UNSET))
 
-
         def _parse_monto_exento_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -278,7 +259,6 @@ class Ecf45OtraMoneda:
             return cast(float | None | str | Unset, data)
 
         monto_exento_otra_moneda = _parse_monto_exento_otra_moneda(d.pop("montoExentoOtraMoneda", UNSET))
-
 
         def _parse_total_itbis_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
@@ -289,7 +269,6 @@ class Ecf45OtraMoneda:
 
         total_itbis_otra_moneda = _parse_total_itbis_otra_moneda(d.pop("totalITBISOtraMoneda", UNSET))
 
-
         def _parse_total_itbis1_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -298,7 +277,6 @@ class Ecf45OtraMoneda:
             return cast(float | None | str | Unset, data)
 
         total_itbis1_otra_moneda = _parse_total_itbis1_otra_moneda(d.pop("totalITBIS1OtraMoneda", UNSET))
-
 
         def _parse_total_itbis2_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
@@ -309,7 +287,6 @@ class Ecf45OtraMoneda:
 
         total_itbis2_otra_moneda = _parse_total_itbis2_otra_moneda(d.pop("totalITBIS2OtraMoneda", UNSET))
 
-
         def _parse_total_itbis3_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -319,7 +296,6 @@ class Ecf45OtraMoneda:
 
         total_itbis3_otra_moneda = _parse_total_itbis3_otra_moneda(d.pop("totalITBIS3OtraMoneda", UNSET))
 
-
         def _parse_monto_impuesto_adicional_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -327,10 +303,13 @@ class Ecf45OtraMoneda:
                 return data
             return cast(float | None | str | Unset, data)
 
-        monto_impuesto_adicional_otra_moneda = _parse_monto_impuesto_adicional_otra_moneda(d.pop("montoImpuestoAdicionalOtraMoneda", UNSET))
+        monto_impuesto_adicional_otra_moneda = _parse_monto_impuesto_adicional_otra_moneda(
+            d.pop("montoImpuestoAdicionalOtraMoneda", UNSET)
+        )
 
-
-        def _parse_impuestos_adicionales_otra_moneda(data: object) -> list[Ecf45ImpuestoAdicionalOtraMoneda] | None | Unset:
+        def _parse_impuestos_adicionales_otra_moneda(
+            data: object,
+        ) -> list[Ecf45ImpuestoAdicionalOtraMoneda] | None | Unset:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -340,10 +319,10 @@ class Ecf45OtraMoneda:
                     raise TypeError()
                 impuestos_adicionales_otra_moneda_type_1 = []
                 _impuestos_adicionales_otra_moneda_type_1 = data
-                for impuestos_adicionales_otra_moneda_type_1_item_data in (_impuestos_adicionales_otra_moneda_type_1):
-                    impuestos_adicionales_otra_moneda_type_1_item = Ecf45ImpuestoAdicionalOtraMoneda.from_dict(impuestos_adicionales_otra_moneda_type_1_item_data)
-
-
+                for impuestos_adicionales_otra_moneda_type_1_item_data in _impuestos_adicionales_otra_moneda_type_1:
+                    impuestos_adicionales_otra_moneda_type_1_item = Ecf45ImpuestoAdicionalOtraMoneda.from_dict(
+                        impuestos_adicionales_otra_moneda_type_1_item_data
+                    )
 
                     impuestos_adicionales_otra_moneda_type_1.append(impuestos_adicionales_otra_moneda_type_1_item)
 
@@ -352,8 +331,9 @@ class Ecf45OtraMoneda:
                 pass
             return cast(list[Ecf45ImpuestoAdicionalOtraMoneda] | None | Unset, data)
 
-        impuestos_adicionales_otra_moneda = _parse_impuestos_adicionales_otra_moneda(d.pop("impuestosAdicionalesOtraMoneda", UNSET))
-
+        impuestos_adicionales_otra_moneda = _parse_impuestos_adicionales_otra_moneda(
+            d.pop("impuestosAdicionalesOtraMoneda", UNSET)
+        )
 
         def _parse_monto_total_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
@@ -363,7 +343,6 @@ class Ecf45OtraMoneda:
             return cast(float | None | str | Unset, data)
 
         monto_total_otra_moneda = _parse_monto_total_otra_moneda(d.pop("montoTotalOtraMoneda", UNSET))
-
 
         ecf_45_otra_moneda = cls(
             tipo_moneda=tipo_moneda,
@@ -381,7 +360,6 @@ class Ecf45OtraMoneda:
             impuestos_adicionales_otra_moneda=impuestos_adicionales_otra_moneda,
             monto_total_otra_moneda=monto_total_otra_moneda,
         )
-
 
         ecf_45_otra_moneda.additional_properties = d
         return ecf_45_otra_moneda

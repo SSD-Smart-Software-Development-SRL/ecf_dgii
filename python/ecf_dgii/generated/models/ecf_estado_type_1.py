@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class EcfEstadoType1(str, Enum):
     ACEPTADO = "Aceptado"
     ACEPTADOCONDICIONAL = "AceptadoCondicional"

@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class TipoeCFType(str, Enum):
     COMPRASELECTRONICO = "ComprasElectronico"
     COMPROBANTEDEEXPORTACIONESELECTRONICO = "ComprobanteDeExportacionesElectronico"

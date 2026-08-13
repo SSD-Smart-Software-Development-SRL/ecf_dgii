@@ -1,0 +1,10 @@
+{
+  "name": "ecf-dgii-ruby",
+  "private": true,
+  "devDependencies": {
+    "semantic-release": "^24.2.9",
+    "semantic-release-monorepo": "^8.0.2",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^10.0.1"
+  }
+}

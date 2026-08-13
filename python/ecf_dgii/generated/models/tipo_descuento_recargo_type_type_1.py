@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class TipoDescuentoRecargoTypeType1(str, Enum):
     VALUE_0 = "$"
     VALUE_1 = "%"

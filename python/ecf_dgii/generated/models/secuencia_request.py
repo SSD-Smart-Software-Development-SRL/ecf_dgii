@@ -1,55 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
-
-
-
-
-
-
 T = TypeVar("T", bound="SecuenciaRequest")
-
 
 
 @_attrs_define
 class SecuenciaRequest:
-    """ 
-        Attributes:
-            desde_encf (str):
-            hasta_encf (str):
-     """
+    """
+    Attributes:
+        desde_encf (str):
+        hasta_encf (str):
+    """
 
     desde_encf: str
     hasta_encf: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         desde_encf = self.desde_encf
 
         hasta_encf = self.hasta_encf
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "desdeEncf": desde_encf,
-            "hastaEncf": hasta_encf,
-        })
+        field_dict.update(
+            {
+                "desdeEncf": desde_encf,
+                "hastaEncf": hasta_encf,
+            }
+        )
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -62,7 +48,6 @@ class SecuenciaRequest:
             desde_encf=desde_encf,
             hasta_encf=hasta_encf,
         )
-
 
         secuencia_request.additional_properties = d
         return secuencia_request

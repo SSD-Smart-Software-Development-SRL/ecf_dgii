@@ -1,12 +1,11 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
-
-from ..types import UNSET, Unset
 
 from ..models.ecf_32_tipo_ingresos_validation_type import Ecf32TipoIngresosValidationType
 from ..models.ecf_32_tipo_pago_type import Ecf32TipoPagoType
@@ -16,42 +15,35 @@ from ..models.indicador_servicio_todo_incluido_type_type_1 import IndicadorServi
 from ..models.tipo_cuenta_pago_type_type_1 import TipoCuentaPagoTypeType1
 from ..models.tipoe_cf_type import TipoeCFType
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
 
 if TYPE_CHECKING:
-  from ..models.ecf_32_forma_de_pago import Ecf32FormaDePago
-
-
-
+    from ..models.ecf_32_forma_de_pago import Ecf32FormaDePago
 
 
 T = TypeVar("T", bound="Ecf32IdDoc")
 
 
-
 @_attrs_define
 class Ecf32IdDoc:
-    """ 
-        Attributes:
-            tipoe_cf (TipoeCFType):
-            encf (str):
-            tipo_ingresos (Ecf32TipoIngresosValidationType):
-            tipo_pago (Ecf32TipoPagoType):
-            indicador_envio_diferido (IndicadorEnvioDiferidoTypeType1 | None | Unset):
-            indicador_monto_gravado (IndicadorMontoGravadoTypeType1 | None | Unset):
-            indicador_servicio_todo_incluido (IndicadorServicioTodoIncluidoTypeType1 | None | Unset):
-            fecha_limite_pago (datetime.datetime | None | Unset):
-            termino_pago (None | str | Unset):
-            tabla_formas_pago (list[Ecf32FormaDePago] | None | Unset):
-            tipo_cuenta_pago (None | TipoCuentaPagoTypeType1 | Unset):
-            numero_cuenta_pago (None | str | Unset):
-            banco_pago (None | str | Unset):
-            fecha_desde (datetime.datetime | None | Unset):
-            fecha_hasta (datetime.datetime | None | Unset):
-            total_paginas (int | None | str | Unset):
-     """
+    """
+    Attributes:
+        tipoe_cf (TipoeCFType):
+        encf (str):
+        tipo_ingresos (Ecf32TipoIngresosValidationType):
+        tipo_pago (Ecf32TipoPagoType):
+        indicador_envio_diferido (IndicadorEnvioDiferidoTypeType1 | None | Unset):
+        indicador_monto_gravado (IndicadorMontoGravadoTypeType1 | None | Unset):
+        indicador_servicio_todo_incluido (IndicadorServicioTodoIncluidoTypeType1 | None | Unset):
+        fecha_limite_pago (datetime.datetime | None | Unset):
+        termino_pago (None | str | Unset):
+        tabla_formas_pago (list[Ecf32FormaDePago] | None | Unset):
+        tipo_cuenta_pago (None | TipoCuentaPagoTypeType1 | Unset):
+        numero_cuenta_pago (None | str | Unset):
+        banco_pago (None | str | Unset):
+        fecha_desde (datetime.datetime | None | Unset):
+        fecha_hasta (datetime.datetime | None | Unset):
+        total_paginas (int | None | str | Unset):
+    """
 
     tipoe_cf: TipoeCFType
     encf: str
@@ -71,12 +63,7 @@ class Ecf32IdDoc:
     total_paginas: int | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
-        from ..models.ecf_32_forma_de_pago import Ecf32FormaDePago
         tipoe_cf = self.tipoe_cf.value
 
         encf = self.encf
@@ -132,7 +119,6 @@ class Ecf32IdDoc:
                 tabla_formas_pago_type_1_item = tabla_formas_pago_type_1_item_data.to_dict()
                 tabla_formas_pago.append(tabla_formas_pago_type_1_item)
 
-
         else:
             tabla_formas_pago = self.tabla_formas_pago
 
@@ -178,15 +164,16 @@ class Ecf32IdDoc:
         else:
             total_paginas = self.total_paginas
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "tipoeCF": tipoe_cf,
-            "encf": encf,
-            "tipoIngresos": tipo_ingresos,
-            "tipoPago": tipo_pago,
-        })
+        field_dict.update(
+            {
+                "tipoeCF": tipoe_cf,
+                "encf": encf,
+                "tipoIngresos": tipo_ingresos,
+                "tipoPago": tipo_pago,
+            }
+        )
         if indicador_envio_diferido is not UNSET:
             field_dict["indicadorEnvioDiferido"] = indicador_envio_diferido
         if indicador_monto_gravado is not UNSET:
@@ -214,28 +201,18 @@ class Ecf32IdDoc:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.ecf_32_forma_de_pago import Ecf32FormaDePago
+
         d = dict(src_dict)
         tipoe_cf = TipoeCFType(d.pop("tipoeCF"))
-
-
-
 
         encf = d.pop("encf")
 
         tipo_ingresos = Ecf32TipoIngresosValidationType(d.pop("tipoIngresos"))
 
-
-
-
         tipo_pago = Ecf32TipoPagoType(d.pop("tipoPago"))
-
-
-
 
         def _parse_indicador_envio_diferido(data: object) -> IndicadorEnvioDiferidoTypeType1 | None | Unset:
             if data is None:
@@ -247,15 +224,12 @@ class Ecf32IdDoc:
                     raise TypeError()
                 componentsschemas_indicador_envio_diferido_type_type_1 = IndicadorEnvioDiferidoTypeType1(data)
 
-
-
                 return componentsschemas_indicador_envio_diferido_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(IndicadorEnvioDiferidoTypeType1 | None | Unset, data)
 
         indicador_envio_diferido = _parse_indicador_envio_diferido(d.pop("indicadorEnvioDiferido", UNSET))
-
 
         def _parse_indicador_monto_gravado(data: object) -> IndicadorMontoGravadoTypeType1 | None | Unset:
             if data is None:
@@ -267,8 +241,6 @@ class Ecf32IdDoc:
                     raise TypeError()
                 componentsschemas_indicador_monto_gravado_type_type_1 = IndicadorMontoGravadoTypeType1(data)
 
-
-
                 return componentsschemas_indicador_monto_gravado_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
@@ -276,8 +248,9 @@ class Ecf32IdDoc:
 
         indicador_monto_gravado = _parse_indicador_monto_gravado(d.pop("indicadorMontoGravado", UNSET))
 
-
-        def _parse_indicador_servicio_todo_incluido(data: object) -> IndicadorServicioTodoIncluidoTypeType1 | None | Unset:
+        def _parse_indicador_servicio_todo_incluido(
+            data: object,
+        ) -> IndicadorServicioTodoIncluidoTypeType1 | None | Unset:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -285,17 +258,18 @@ class Ecf32IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                componentsschemas_indicador_servicio_todo_incluido_type_type_1 = IndicadorServicioTodoIncluidoTypeType1(data)
-
-
+                componentsschemas_indicador_servicio_todo_incluido_type_type_1 = IndicadorServicioTodoIncluidoTypeType1(
+                    data
+                )
 
                 return componentsschemas_indicador_servicio_todo_incluido_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(IndicadorServicioTodoIncluidoTypeType1 | None | Unset, data)
 
-        indicador_servicio_todo_incluido = _parse_indicador_servicio_todo_incluido(d.pop("indicadorServicioTodoIncluido", UNSET))
-
+        indicador_servicio_todo_incluido = _parse_indicador_servicio_todo_incluido(
+            d.pop("indicadorServicioTodoIncluido", UNSET)
+        )
 
         def _parse_fecha_limite_pago(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -305,9 +279,7 @@ class Ecf32IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_limite_pago_type_1 = isoparse(data)
-
-
+                fecha_limite_pago_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_limite_pago_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -315,7 +287,6 @@ class Ecf32IdDoc:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_limite_pago = _parse_fecha_limite_pago(d.pop("fechaLimitePago", UNSET))
-
 
         def _parse_termino_pago(data: object) -> None | str | Unset:
             if data is None:
@@ -325,7 +296,6 @@ class Ecf32IdDoc:
             return cast(None | str | Unset, data)
 
         termino_pago = _parse_termino_pago(d.pop("terminoPago", UNSET))
-
 
         def _parse_tabla_formas_pago(data: object) -> list[Ecf32FormaDePago] | None | Unset:
             if data is None:
@@ -337,10 +307,8 @@ class Ecf32IdDoc:
                     raise TypeError()
                 tabla_formas_pago_type_1 = []
                 _tabla_formas_pago_type_1 = data
-                for tabla_formas_pago_type_1_item_data in (_tabla_formas_pago_type_1):
+                for tabla_formas_pago_type_1_item_data in _tabla_formas_pago_type_1:
                     tabla_formas_pago_type_1_item = Ecf32FormaDePago.from_dict(tabla_formas_pago_type_1_item_data)
-
-
 
                     tabla_formas_pago_type_1.append(tabla_formas_pago_type_1_item)
 
@@ -350,7 +318,6 @@ class Ecf32IdDoc:
             return cast(list[Ecf32FormaDePago] | None | Unset, data)
 
         tabla_formas_pago = _parse_tabla_formas_pago(d.pop("tablaFormasPago", UNSET))
-
 
         def _parse_tipo_cuenta_pago(data: object) -> None | TipoCuentaPagoTypeType1 | Unset:
             if data is None:
@@ -362,15 +329,12 @@ class Ecf32IdDoc:
                     raise TypeError()
                 componentsschemas_tipo_cuenta_pago_type_type_1 = TipoCuentaPagoTypeType1(data)
 
-
-
                 return componentsschemas_tipo_cuenta_pago_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | TipoCuentaPagoTypeType1 | Unset, data)
 
         tipo_cuenta_pago = _parse_tipo_cuenta_pago(d.pop("tipoCuentaPago", UNSET))
-
 
         def _parse_numero_cuenta_pago(data: object) -> None | str | Unset:
             if data is None:
@@ -381,7 +345,6 @@ class Ecf32IdDoc:
 
         numero_cuenta_pago = _parse_numero_cuenta_pago(d.pop("numeroCuentaPago", UNSET))
 
-
         def _parse_banco_pago(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -391,7 +354,6 @@ class Ecf32IdDoc:
 
         banco_pago = _parse_banco_pago(d.pop("bancoPago", UNSET))
 
-
         def _parse_fecha_desde(data: object) -> datetime.datetime | None | Unset:
             if data is None:
                 return data
@@ -400,9 +362,7 @@ class Ecf32IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_desde_type_1 = isoparse(data)
-
-
+                fecha_desde_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_desde_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -410,7 +370,6 @@ class Ecf32IdDoc:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_desde = _parse_fecha_desde(d.pop("fechaDesde", UNSET))
-
 
         def _parse_fecha_hasta(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -420,9 +379,7 @@ class Ecf32IdDoc:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_hasta_type_1 = isoparse(data)
-
-
+                fecha_hasta_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_hasta_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -430,7 +387,6 @@ class Ecf32IdDoc:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_hasta = _parse_fecha_hasta(d.pop("fechaHasta", UNSET))
-
 
         def _parse_total_paginas(data: object) -> int | None | str | Unset:
             if data is None:
@@ -440,7 +396,6 @@ class Ecf32IdDoc:
             return cast(int | None | str | Unset, data)
 
         total_paginas = _parse_total_paginas(d.pop("totalPaginas", UNSET))
-
 
         ecf_32_id_doc = cls(
             tipoe_cf=tipoe_cf,
@@ -460,7 +415,6 @@ class Ecf32IdDoc:
             fecha_hasta=fecha_hasta,
             total_paginas=total_paginas,
         )
-
 
         ecf_32_id_doc.additional_properties = d
         return ecf_32_id_doc

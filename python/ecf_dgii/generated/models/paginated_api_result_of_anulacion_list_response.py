@@ -19,7 +19,7 @@ T = TypeVar("T", bound="PaginatedApiResultOfAnulacionListResponse")
 class PaginatedApiResultOfAnulacionListResponse:
     """
     Attributes:
-        next_page_uri (None | str):
+        next_page_uri (None | str | Unset):
         values (list[AnulacionListResponse] | Unset):
         total (int | str | Unset):
         page (int | str | Unset):
@@ -28,7 +28,7 @@ class PaginatedApiResultOfAnulacionListResponse:
         previous_page (int | None | str | Unset):
     """
 
-    next_page_uri: None | str
+    next_page_uri: None | str | Unset = UNSET
     values: list[AnulacionListResponse] | Unset = UNSET
     total: int | str | Unset = UNSET
     page: int | str | Unset = UNSET
@@ -38,8 +38,11 @@ class PaginatedApiResultOfAnulacionListResponse:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        next_page_uri: None | str
-        next_page_uri = self.next_page_uri
+        next_page_uri: None | str | Unset
+        if isinstance(self.next_page_uri, Unset):
+            next_page_uri = UNSET
+        else:
+            next_page_uri = self.next_page_uri
 
         values: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.values, Unset):
@@ -80,11 +83,9 @@ class PaginatedApiResultOfAnulacionListResponse:
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "nextPageUri": next_page_uri,
-            }
-        )
+        field_dict.update({})
+        if next_page_uri is not UNSET:
+            field_dict["nextPageUri"] = next_page_uri
         if values is not UNSET:
             field_dict["values"] = values
         if total is not UNSET:
@@ -106,12 +107,14 @@ class PaginatedApiResultOfAnulacionListResponse:
 
         d = dict(src_dict)
 
-        def _parse_next_page_uri(data: object) -> None | str:
+        def _parse_next_page_uri(data: object) -> None | str | Unset:
             if data is None:
                 return data
-            return cast(None | str, data)
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        next_page_uri = _parse_next_page_uri(d.pop("nextPageUri"))
+        next_page_uri = _parse_next_page_uri(d.pop("nextPageUri", UNSET))
 
         _values = d.pop("values", UNSET)
         values: list[AnulacionListResponse] | Unset = UNSET

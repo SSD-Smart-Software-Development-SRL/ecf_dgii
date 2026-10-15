@@ -8,7 +8,7 @@ from uuid import UUID
 
 import httpx
 
-from .exceptions import raise_for_status
+from .exceptions import EcfConnectionError, EcfProcessingError, raise_for_status
 from .generated.client import AuthenticatedClient
 from .generated.types import UNSET
 from .generated.models import (
@@ -109,6 +109,32 @@ ENVIRONMENT_URLS: dict[str, str] = {
 }
 
 
+class _EcfTransport(httpx.AsyncBaseTransport):
+    """Turns transport failures and non-JSON error pages into SDK exceptions.
+
+    Network problems surface as :class:`EcfConnectionError` instead of raw
+    ``httpx`` errors, and error responses that are not JSON (e.g. an HTML 502
+    from a proxy) raise the typed status error instead of a ``JSONDecodeError``
+    inside the generated parsers.
+    """
+
+    def __init__(self, inner: httpx.AsyncBaseTransport | None = None) -> None:
+        self._inner = inner or httpx.AsyncHTTPTransport()
+
+    async def handle_async_request(self, request: httpx.Request) -> httpx.Response:
+        try:
+            response = await self._inner.handle_async_request(request)
+        except httpx.TransportError as exc:
+            raise EcfConnectionError(f"{type(exc).__name__}: {exc}") from exc
+        if response.status_code >= 400 and "json" not in response.headers.get("content-type", ""):
+            body = (await response.aread()).decode(errors="ignore")
+            raise_for_status(response.status_code, body[:500] or f"HTTP {response.status_code}")
+        return response
+
+    async def aclose(self) -> None:
+        await self._inner.aclose()
+
+
 def _parse_or_raise(response: Any) -> Any:
     """Extract the parsed value from a Response, raising on error."""
     if isinstance(response.parsed, ProblemDetails):
@@ -143,6 +169,7 @@ class EcfClient:
             token=token,
             raise_on_unexpected_status=False,
             timeout=httpx.Timeout(timeout),
+            httpx_args={"transport": _EcfTransport()},
         )
         self._environment = environment
 
@@ -727,14 +754,17 @@ class EcfClient:
         initial: EcfResponse = await send_coro
 
         async def _poll() -> EcfResponse:
-            results = await self.query_ecf(
-                initial.rnc_emisor,
-                initial.encf,
-                include_ecf_content=False,
-            )
+            results = await self.get_ecf_by_id(initial.rnc_emisor, initial.message_id)
             return results[0] if results else initial
 
-        return await poll_until_complete(_poll, options=polling_options)
+        result: EcfResponse = await poll_until_complete(_poll, options=polling_options)
+        if result.progress == EcfProgress.ERROR:
+            raise EcfProcessingError(
+                422,
+                result.errors or result.mensaje or "DGII rejected the e-CF",
+                detail=result.to_dict(),
+            )
+        return result
 
     async def send_ecf31_and_poll(
         self, ecf: Ecf31ECF, *, polling_options: PollingOptions | None = None,

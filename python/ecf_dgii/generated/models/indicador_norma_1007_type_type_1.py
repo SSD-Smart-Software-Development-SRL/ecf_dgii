@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class IndicadorNorma1007TypeType1(str, Enum):
+
+class IndicadorNorma1007TypeType1(StrEnum):
     INCLUIR = "Incluir"
     NOINCLUIR = "NoIncluir"
 

@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class IndicadorServicioTodoIncluidoTypeType1(str, Enum):
+
+class IndicadorServicioTodoIncluidoTypeType1(StrEnum):
     INDICADORSERVICIOTODOINCLUIDO = "IndicadorServicioTodoIncluido"
 
     def __str__(self) -> str:

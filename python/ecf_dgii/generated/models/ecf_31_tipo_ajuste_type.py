@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class Ecf31TipoAjusteType(str, Enum):
+
+class Ecf31TipoAjusteType(StrEnum):
     D = "D"
     R = "R"
 

@@ -5,9 +5,11 @@ from .frontend_client import EcfFrontendClient, create_frontend_client
 from .exceptions import (
     EcfApiError,
     EcfAuthenticationError,
+    EcfConnectionError,
     EcfForbiddenError,
     EcfNotFoundError,
     EcfProcessingError,
+    EcfRateLimitError,
     EcfServerError,
     EcfValidationError,
     PollingMaxRetriesError,
@@ -81,9 +83,11 @@ __all__ = [
     # Exceptions
     "EcfApiError",
     "EcfAuthenticationError",
+    "EcfConnectionError",
     "EcfForbiddenError",
     "EcfNotFoundError",
     "EcfProcessingError",
+    "EcfRateLimitError",
     "EcfServerError",
     "EcfValidationError",
     "PollingMaxRetriesError",

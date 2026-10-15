@@ -1,45 +1,37 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import TYPE_CHECKING, Any, TypeVar, cast
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-from uuid import UUID
-import datetime
-
-
-
-
+if TYPE_CHECKING:
+    from ..models.company_urls_response import CompanyUrlsResponse
 
 
 T = TypeVar("T", bound="CompanyResponse")
 
 
-
 @_attrs_define
 class CompanyResponse:
-    """ 
-        Attributes:
-            rnc (str | Unset):
-            legal_name (str | Unset):
-            name (str | Unset):
-            created_on (datetime.datetime | Unset):
-            updated_on (datetime.datetime | Unset):
-            created_by (str | Unset):
-            updated_by (str | Unset):
-            tenant_id (UUID | Unset):
-            receptor_id (str | Unset):
-            url_recepcion (None | str | Unset):
-            url_aprobacion_comercial (None | str | Unset):
-            url_autenticacion (None | str | Unset):
-     """
+    """
+    Attributes:
+        rnc (str | Unset):
+        legal_name (str | Unset):
+        name (str | Unset):
+        created_on (datetime.datetime | Unset):
+        updated_on (datetime.datetime | Unset):
+        created_by (str | Unset):
+        updated_by (str | Unset):
+        tenant_id (UUID | Unset):
+        receptor_id (str | Unset):
+        urls (CompanyUrlsResponse | None | Unset):
+    """
 
     rnc: str | Unset = UNSET
     legal_name: str | Unset = UNSET
@@ -50,16 +42,12 @@ class CompanyResponse:
     updated_by: str | Unset = UNSET
     tenant_id: UUID | Unset = UNSET
     receptor_id: str | Unset = UNSET
-    url_recepcion: None | str | Unset = UNSET
-    url_aprobacion_comercial: None | str | Unset = UNSET
-    url_autenticacion: None | str | Unset = UNSET
+    urls: CompanyUrlsResponse | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-
-
-
-
     def to_dict(self) -> dict[str, Any]:
+        from ..models.company_urls_response import CompanyUrlsResponse  # noqa: PLC0415
+
         rnc = self.rnc
 
         legal_name = self.legal_name
@@ -84,29 +72,17 @@ class CompanyResponse:
 
         receptor_id = self.receptor_id
 
-        url_recepcion: None | str | Unset
-        if isinstance(self.url_recepcion, Unset):
-            url_recepcion = UNSET
+        urls: dict[str, Any] | None | Unset
+        if isinstance(self.urls, Unset):
+            urls = UNSET
+        elif isinstance(self.urls, CompanyUrlsResponse):
+            urls = self.urls.to_dict()
         else:
-            url_recepcion = self.url_recepcion
-
-        url_aprobacion_comercial: None | str | Unset
-        if isinstance(self.url_aprobacion_comercial, Unset):
-            url_aprobacion_comercial = UNSET
-        else:
-            url_aprobacion_comercial = self.url_aprobacion_comercial
-
-        url_autenticacion: None | str | Unset
-        if isinstance(self.url_autenticacion, Unset):
-            url_autenticacion = UNSET
-        else:
-            url_autenticacion = self.url_autenticacion
-
+            urls = self.urls
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if rnc is not UNSET:
             field_dict["rnc"] = rnc
         if legal_name is not UNSET:
@@ -125,19 +101,15 @@ class CompanyResponse:
             field_dict["tenantId"] = tenant_id
         if receptor_id is not UNSET:
             field_dict["receptorId"] = receptor_id
-        if url_recepcion is not UNSET:
-            field_dict["urlRecepcion"] = url_recepcion
-        if url_aprobacion_comercial is not UNSET:
-            field_dict["urlAprobacionComercial"] = url_aprobacion_comercial
-        if url_autenticacion is not UNSET:
-            field_dict["urlAutenticacion"] = url_autenticacion
+        if urls is not UNSET:
+            field_dict["urls"] = urls
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.company_urls_response import CompanyUrlsResponse  # noqa: PLC0415
+
         d = dict(src_dict)
         rnc = d.pop("rnc", UNSET)
 
@@ -147,23 +119,17 @@ class CompanyResponse:
 
         _created_on = d.pop("createdOn", UNSET)
         created_on: datetime.datetime | Unset
-        if isinstance(_created_on,  Unset):
+        if isinstance(_created_on, Unset):
             created_on = UNSET
         else:
-            created_on = isoparse(_created_on)
-
-
-
+            created_on = datetime.datetime.fromisoformat(_created_on)
 
         _updated_on = d.pop("updatedOn", UNSET)
         updated_on: datetime.datetime | Unset
-        if isinstance(_updated_on,  Unset):
+        if isinstance(_updated_on, Unset):
             updated_on = UNSET
         else:
-            updated_on = isoparse(_updated_on)
-
-
-
+            updated_on = datetime.datetime.fromisoformat(_updated_on)
 
         created_by = d.pop("createdBy", UNSET)
 
@@ -171,45 +137,29 @@ class CompanyResponse:
 
         _tenant_id = d.pop("tenantId", UNSET)
         tenant_id: UUID | Unset
-        if isinstance(_tenant_id,  Unset):
+        if isinstance(_tenant_id, Unset):
             tenant_id = UNSET
         else:
             tenant_id = UUID(_tenant_id)
 
-
-
-
         receptor_id = d.pop("receptorId", UNSET)
 
-        def _parse_url_recepcion(data: object) -> None | str | Unset:
+        def _parse_urls(data: object) -> CompanyUrlsResponse | None | Unset:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(None | str | Unset, data)
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                urls_type_1 = CompanyUrlsResponse.from_dict(data)
 
-        url_recepcion = _parse_url_recepcion(d.pop("urlRecepcion", UNSET))
+                return urls_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(CompanyUrlsResponse | None | Unset, data)
 
-
-        def _parse_url_aprobacion_comercial(data: object) -> None | str | Unset:
-            if data is None:
-                return data
-            if isinstance(data, Unset):
-                return data
-            return cast(None | str | Unset, data)
-
-        url_aprobacion_comercial = _parse_url_aprobacion_comercial(d.pop("urlAprobacionComercial", UNSET))
-
-
-        def _parse_url_autenticacion(data: object) -> None | str | Unset:
-            if data is None:
-                return data
-            if isinstance(data, Unset):
-                return data
-            return cast(None | str | Unset, data)
-
-        url_autenticacion = _parse_url_autenticacion(d.pop("urlAutenticacion", UNSET))
-
+        urls = _parse_urls(d.pop("urls", UNSET))
 
         company_response = cls(
             rnc=rnc,
@@ -221,11 +171,8 @@ class CompanyResponse:
             updated_by=updated_by,
             tenant_id=tenant_id,
             receptor_id=receptor_id,
-            url_recepcion=url_recepcion,
-            url_aprobacion_comercial=url_aprobacion_comercial,
-            url_autenticacion=url_autenticacion,
+            urls=urls,
         )
-
 
         company_response.additional_properties = d
         return company_response

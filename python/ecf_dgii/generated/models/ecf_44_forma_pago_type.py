@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class Ecf44FormaPagoType(str, Enum):
+
+class Ecf44FormaPagoType(StrEnum):
     BONOSOCERTIFICADOSDEREGALO = "BonosOCertificadosDeRegalo"
     CHEQUESLASHTRANSFERENCIASLASHDEPOSITO = "ChequeSlashTransferenciaSlashDeposito"
     EFECTIVO = "Efectivo"

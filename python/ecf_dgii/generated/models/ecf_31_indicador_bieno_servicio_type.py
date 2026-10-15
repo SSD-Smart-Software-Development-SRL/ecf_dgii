@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class Ecf31IndicadorBienoServicioType(str, Enum):
+
+class Ecf31IndicadorBienoServicioType(StrEnum):
     BIEN = "Bien"
     SERVICIO = "Servicio"
 

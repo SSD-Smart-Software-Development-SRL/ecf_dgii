@@ -1,28 +1,19 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="RespuestaConsultaTimbre")
-
 
 
 @_attrs_define
 class RespuestaConsultaTimbre:
-    """ Representa la respuesta del servicio de Consulta Timbre Fiscal (QR) de la DGII.
+    """Representa la respuesta del servicio de Consulta Timbre Fiscal (QR) de la DGII.
     Este servicio permite validar la validez de un e-CF remitido exclusivamente por el servicio web
     de recepción de e-CF, a partir de los datos incluidos en el timbre de su representación impresa (RI).
 
@@ -42,17 +33,13 @@ class RespuestaConsultaTimbre:
                 - "Aceptado": Implica la validez del e-CF de la RI, incluyendo el aceptado condicional que corresponde
                   a que no cumplió en algún punto pero que no amerita el rechazo de este.
                 - "Rechazado": Corresponde a que el e-CF de la RI le fue rechazado al emisor.
-     """
+    """
 
     rnc_emisor: None | str | Unset = UNSET
     razon_social: None | str | Unset = UNSET
     encf: None | str | Unset = UNSET
     estado: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         rnc_emisor: None | str | Unset
@@ -79,11 +66,9 @@ class RespuestaConsultaTimbre:
         else:
             estado = self.estado
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if rnc_emisor is not UNSET:
             field_dict["rncEmisor"] = rnc_emisor
         if razon_social is not UNSET:
@@ -95,11 +80,10 @@ class RespuestaConsultaTimbre:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_rnc_emisor(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -108,7 +92,6 @@ class RespuestaConsultaTimbre:
             return cast(None | str | Unset, data)
 
         rnc_emisor = _parse_rnc_emisor(d.pop("rncEmisor", UNSET))
-
 
         def _parse_razon_social(data: object) -> None | str | Unset:
             if data is None:
@@ -119,7 +102,6 @@ class RespuestaConsultaTimbre:
 
         razon_social = _parse_razon_social(d.pop("razonSocial", UNSET))
 
-
         def _parse_encf(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -128,7 +110,6 @@ class RespuestaConsultaTimbre:
             return cast(None | str | Unset, data)
 
         encf = _parse_encf(d.pop("encf", UNSET))
-
 
         def _parse_estado(data: object) -> None | str | Unset:
             if data is None:
@@ -139,14 +120,12 @@ class RespuestaConsultaTimbre:
 
         estado = _parse_estado(d.pop("estado", UNSET))
 
-
         respuesta_consulta_timbre = cls(
             rnc_emisor=rnc_emisor,
             razon_social=razon_social,
             encf=encf,
             estado=estado,
         )
-
 
         respuesta_consulta_timbre.additional_properties = d
         return respuesta_consulta_timbre

@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class Ecf33VersionType(str, Enum):
+
+class Ecf33VersionType(StrEnum):
     VERSION1_0 = "Version1_0"
 
     def __str__(self) -> str:

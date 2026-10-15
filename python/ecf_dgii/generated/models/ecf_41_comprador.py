@@ -1,41 +1,32 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.provincia_municipio_type_type_1 import ProvinciaMunicipioTypeType1
 from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf41Comprador")
 
 
-
 @_attrs_define
 class Ecf41Comprador:
-    """ 
-        Attributes:
-            rnc_comprador (str):
-            razon_social_comprador (str):
-            contacto_comprador (None | str | Unset):
-            correo_comprador (None | str | Unset):
-            direccion_comprador (None | str | Unset):
-            municipio_comprador (None | ProvinciaMunicipioTypeType1 | Unset):
-            provincia_comprador (None | ProvinciaMunicipioTypeType1 | Unset):
-            codigo_interno_comprador (None | str | Unset):
-            responsable_pago (None | str | Unset):
-            informacion_adicional_comprador (None | str | Unset):
-     """
+    """
+    Attributes:
+        rnc_comprador (str):
+        razon_social_comprador (str):
+        contacto_comprador (None | str | Unset):
+        correo_comprador (None | str | Unset):
+        direccion_comprador (None | str | Unset):
+        municipio_comprador (None | ProvinciaMunicipioTypeType1 | Unset):
+        provincia_comprador (None | ProvinciaMunicipioTypeType1 | Unset):
+        codigo_interno_comprador (None | str | Unset):
+        responsable_pago (None | str | Unset):
+        informacion_adicional_comprador (None | str | Unset):
+    """
 
     rnc_comprador: str
     razon_social_comprador: str
@@ -48,10 +39,6 @@ class Ecf41Comprador:
     responsable_pago: None | str | Unset = UNSET
     informacion_adicional_comprador: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         rnc_comprador = self.rnc_comprador
@@ -110,13 +97,14 @@ class Ecf41Comprador:
         else:
             informacion_adicional_comprador = self.informacion_adicional_comprador
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "rncComprador": rnc_comprador,
-            "razonSocialComprador": razon_social_comprador,
-        })
+        field_dict.update(
+            {
+                "rncComprador": rnc_comprador,
+                "razonSocialComprador": razon_social_comprador,
+            }
+        )
         if contacto_comprador is not UNSET:
             field_dict["contactoComprador"] = contacto_comprador
         if correo_comprador is not UNSET:
@@ -136,8 +124,6 @@ class Ecf41Comprador:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -154,7 +140,6 @@ class Ecf41Comprador:
 
         contacto_comprador = _parse_contacto_comprador(d.pop("contactoComprador", UNSET))
 
-
         def _parse_correo_comprador(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -164,7 +149,6 @@ class Ecf41Comprador:
 
         correo_comprador = _parse_correo_comprador(d.pop("correoComprador", UNSET))
 
-
         def _parse_direccion_comprador(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -173,7 +157,6 @@ class Ecf41Comprador:
             return cast(None | str | Unset, data)
 
         direccion_comprador = _parse_direccion_comprador(d.pop("direccionComprador", UNSET))
-
 
         def _parse_municipio_comprador(data: object) -> None | ProvinciaMunicipioTypeType1 | Unset:
             if data is None:
@@ -185,15 +168,12 @@ class Ecf41Comprador:
                     raise TypeError()
                 componentsschemas_provincia_municipio_type_type_1 = ProvinciaMunicipioTypeType1(data)
 
-
-
                 return componentsschemas_provincia_municipio_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | ProvinciaMunicipioTypeType1 | Unset, data)
 
         municipio_comprador = _parse_municipio_comprador(d.pop("municipioComprador", UNSET))
-
 
         def _parse_provincia_comprador(data: object) -> None | ProvinciaMunicipioTypeType1 | Unset:
             if data is None:
@@ -205,15 +185,12 @@ class Ecf41Comprador:
                     raise TypeError()
                 componentsschemas_provincia_municipio_type_type_1 = ProvinciaMunicipioTypeType1(data)
 
-
-
                 return componentsschemas_provincia_municipio_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | ProvinciaMunicipioTypeType1 | Unset, data)
 
         provincia_comprador = _parse_provincia_comprador(d.pop("provinciaComprador", UNSET))
-
 
         def _parse_codigo_interno_comprador(data: object) -> None | str | Unset:
             if data is None:
@@ -224,7 +201,6 @@ class Ecf41Comprador:
 
         codigo_interno_comprador = _parse_codigo_interno_comprador(d.pop("codigoInternoComprador", UNSET))
 
-
         def _parse_responsable_pago(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -234,7 +210,6 @@ class Ecf41Comprador:
 
         responsable_pago = _parse_responsable_pago(d.pop("responsablePago", UNSET))
 
-
         def _parse_informacion_adicional_comprador(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -242,8 +217,9 @@ class Ecf41Comprador:
                 return data
             return cast(None | str | Unset, data)
 
-        informacion_adicional_comprador = _parse_informacion_adicional_comprador(d.pop("informacionAdicionalComprador", UNSET))
-
+        informacion_adicional_comprador = _parse_informacion_adicional_comprador(
+            d.pop("informacionAdicionalComprador", UNSET)
+        )
 
         ecf_41_comprador = cls(
             rnc_comprador=rnc_comprador,
@@ -257,7 +233,6 @@ class Ecf41Comprador:
             responsable_pago=responsable_pago,
             informacion_adicional_comprador=informacion_adicional_comprador,
         )
-
 
         ecf_41_comprador.additional_properties = d
         return ecf_41_comprador

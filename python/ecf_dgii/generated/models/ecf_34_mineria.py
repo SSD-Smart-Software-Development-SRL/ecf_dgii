@@ -1,46 +1,33 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.liquidacion_type_type_1 import LiquidacionTypeType1
 from ..models.tipo_afiliacion_type_type_1 import TipoAfiliacionTypeType1
 from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf34Mineria")
 
 
-
 @_attrs_define
 class Ecf34Mineria:
-    """ 
-        Attributes:
-            peso_neto_kilogramo (float | None | str | Unset):
-            peso_neto_mineria (float | None | str | Unset):
-            tipo_afiliacion (None | TipoAfiliacionTypeType1 | Unset):
-            liquidacion (LiquidacionTypeType1 | None | Unset):
-     """
+    """
+    Attributes:
+        peso_neto_kilogramo (float | None | str | Unset):
+        peso_neto_mineria (float | None | str | Unset):
+        tipo_afiliacion (None | TipoAfiliacionTypeType1 | Unset):
+        liquidacion (LiquidacionTypeType1 | None | Unset):
+    """
 
     peso_neto_kilogramo: float | None | str | Unset = UNSET
     peso_neto_mineria: float | None | str | Unset = UNSET
     tipo_afiliacion: None | TipoAfiliacionTypeType1 | Unset = UNSET
     liquidacion: LiquidacionTypeType1 | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         peso_neto_kilogramo: float | None | str | Unset
@@ -71,11 +58,9 @@ class Ecf34Mineria:
         else:
             liquidacion = self.liquidacion
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if peso_neto_kilogramo is not UNSET:
             field_dict["pesoNetoKilogramo"] = peso_neto_kilogramo
         if peso_neto_mineria is not UNSET:
@@ -87,11 +72,10 @@ class Ecf34Mineria:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_peso_neto_kilogramo(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -101,7 +85,6 @@ class Ecf34Mineria:
 
         peso_neto_kilogramo = _parse_peso_neto_kilogramo(d.pop("pesoNetoKilogramo", UNSET))
 
-
         def _parse_peso_neto_mineria(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -110,7 +93,6 @@ class Ecf34Mineria:
             return cast(float | None | str | Unset, data)
 
         peso_neto_mineria = _parse_peso_neto_mineria(d.pop("pesoNetoMineria", UNSET))
-
 
         def _parse_tipo_afiliacion(data: object) -> None | TipoAfiliacionTypeType1 | Unset:
             if data is None:
@@ -122,15 +104,12 @@ class Ecf34Mineria:
                     raise TypeError()
                 componentsschemas_tipo_afiliacion_type_type_1 = TipoAfiliacionTypeType1(data)
 
-
-
                 return componentsschemas_tipo_afiliacion_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | TipoAfiliacionTypeType1 | Unset, data)
 
         tipo_afiliacion = _parse_tipo_afiliacion(d.pop("tipoAfiliacion", UNSET))
-
 
         def _parse_liquidacion(data: object) -> LiquidacionTypeType1 | None | Unset:
             if data is None:
@@ -142,8 +121,6 @@ class Ecf34Mineria:
                     raise TypeError()
                 componentsschemas_liquidacion_type_type_1 = LiquidacionTypeType1(data)
 
-
-
                 return componentsschemas_liquidacion_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
@@ -151,14 +128,12 @@ class Ecf34Mineria:
 
         liquidacion = _parse_liquidacion(d.pop("liquidacion", UNSET))
 
-
         ecf_34_mineria = cls(
             peso_neto_kilogramo=peso_neto_kilogramo,
             peso_neto_mineria=peso_neto_mineria,
             tipo_afiliacion=tipo_afiliacion,
             liquidacion=liquidacion,
         )
-
 
         ecf_34_mineria.additional_properties = d
         return ecf_34_mineria

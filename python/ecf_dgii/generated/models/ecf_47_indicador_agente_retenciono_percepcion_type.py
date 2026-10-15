@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class Ecf47IndicadorAgenteRetencionoPercepcionType(str, Enum):
+
+class Ecf47IndicadorAgenteRetencionoPercepcionType(StrEnum):
     PERCEPCION = "Percepcion"
     RETENCION = "Retencion"
 

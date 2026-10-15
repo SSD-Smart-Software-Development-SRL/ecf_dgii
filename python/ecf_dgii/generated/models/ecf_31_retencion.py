@@ -1,43 +1,30 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.indicador_agente_retenciono_percepcion_type_type_1 import IndicadorAgenteRetencionoPercepcionTypeType1
 from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf31Retencion")
 
 
-
 @_attrs_define
 class Ecf31Retencion:
-    """ 
-        Attributes:
-            indicador_agente_retenciono_percepcion (IndicadorAgenteRetencionoPercepcionTypeType1 | None | Unset):
-            monto_itbis_retenido (float | None | str | Unset):
-            monto_isr_retenido (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        indicador_agente_retenciono_percepcion (IndicadorAgenteRetencionoPercepcionTypeType1 | None | Unset):
+        monto_itbis_retenido (float | None | str | Unset):
+        monto_isr_retenido (float | None | str | Unset):
+    """
 
     indicador_agente_retenciono_percepcion: IndicadorAgenteRetencionoPercepcionTypeType1 | None | Unset = UNSET
     monto_itbis_retenido: float | None | str | Unset = UNSET
     monto_isr_retenido: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         indicador_agente_retenciono_percepcion: None | str | Unset
@@ -60,11 +47,9 @@ class Ecf31Retencion:
         else:
             monto_isr_retenido = self.monto_isr_retenido
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if indicador_agente_retenciono_percepcion is not UNSET:
             field_dict["indicadorAgenteRetencionoPercepcion"] = indicador_agente_retenciono_percepcion
         if monto_itbis_retenido is not UNSET:
@@ -74,12 +59,13 @@ class Ecf31Retencion:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        def _parse_indicador_agente_retenciono_percepcion(data: object) -> IndicadorAgenteRetencionoPercepcionTypeType1 | None | Unset:
+
+        def _parse_indicador_agente_retenciono_percepcion(
+            data: object,
+        ) -> IndicadorAgenteRetencionoPercepcionTypeType1 | None | Unset:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -87,17 +73,18 @@ class Ecf31Retencion:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                componentsschemas_indicador_agente_retenciono_percepcion_type_type_1 = IndicadorAgenteRetencionoPercepcionTypeType1(data)
-
-
+                componentsschemas_indicador_agente_retenciono_percepcion_type_type_1 = (
+                    IndicadorAgenteRetencionoPercepcionTypeType1(data)
+                )
 
                 return componentsschemas_indicador_agente_retenciono_percepcion_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(IndicadorAgenteRetencionoPercepcionTypeType1 | None | Unset, data)
 
-        indicador_agente_retenciono_percepcion = _parse_indicador_agente_retenciono_percepcion(d.pop("indicadorAgenteRetencionoPercepcion", UNSET))
-
+        indicador_agente_retenciono_percepcion = _parse_indicador_agente_retenciono_percepcion(
+            d.pop("indicadorAgenteRetencionoPercepcion", UNSET)
+        )
 
         def _parse_monto_itbis_retenido(data: object) -> float | None | str | Unset:
             if data is None:
@@ -108,7 +95,6 @@ class Ecf31Retencion:
 
         monto_itbis_retenido = _parse_monto_itbis_retenido(d.pop("montoITBISRetenido", UNSET))
 
-
         def _parse_monto_isr_retenido(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -118,13 +104,11 @@ class Ecf31Retencion:
 
         monto_isr_retenido = _parse_monto_isr_retenido(d.pop("montoISRRetenido", UNSET))
 
-
         ecf_31_retencion = cls(
             indicador_agente_retenciono_percepcion=indicador_agente_retenciono_percepcion,
             monto_itbis_retenido=monto_itbis_retenido,
             monto_isr_retenido=monto_isr_retenido,
         )
-
 
         ecf_31_retencion.additional_properties = d
         return ecf_31_retencion

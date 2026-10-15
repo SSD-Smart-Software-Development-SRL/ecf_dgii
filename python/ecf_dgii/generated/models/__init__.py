@@ -1,4 +1,4 @@
-""" Contains all the data models used in inputs/outputs """
+"""Contains all the data models used in inputs/outputs"""
 
 from .acecf_reception_request_dto import AcecfReceptionRequestDto
 from .acecf_summary_dto import AcecfSummaryDto
@@ -8,7 +8,9 @@ from .anulacion_request import AnulacionRequest
 from .certificate_response import CertificateResponse
 from .codificacion_tipo_impuestos_type_type_1 import CodificacionTipoImpuestosTypeType1
 from .codigo_modificacion_type_type_1 import CodigoModificacionTypeType1
+from .company_environment_urls import CompanyEnvironmentUrls
 from .company_response import CompanyResponse
+from .company_urls_response import CompanyUrlsResponse
 from .detalle_anulacion_request import DetalleAnulacionRequest
 from .detalle_anulacion_request_dto import DetalleAnulacionRequestDto
 from .dgii_environment import DGIIEnvironment
@@ -360,7 +362,9 @@ __all__ = (
     "CertificateResponse",
     "CodificacionTipoImpuestosTypeType1",
     "CodigoModificacionTypeType1",
+    "CompanyEnvironmentUrls",
     "CompanyResponse",
+    "CompanyUrlsResponse",
     "DetalleAnulacionRequest",
     "DetalleAnulacionRequestDto",
     "DGIIEnvironment",

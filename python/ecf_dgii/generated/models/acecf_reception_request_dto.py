@@ -1,43 +1,33 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-from uuid import UUID
-import datetime
-
-
-
-
-
-
 T = TypeVar("T", bound="AcecfReceptionRequestDto")
-
 
 
 @_attrs_define
 class AcecfReceptionRequestDto:
-    """ 
-        Attributes:
-            message_id (UUID | Unset):
-            tenant_id (UUID | Unset):
-            company_rnc (str | Unset):
-            file_name (str | Unset):
-            progress (int | str | Unset):
-            created_on (datetime.datetime | Unset):
-            updated_on (datetime.datetime | Unset):
-            error_message (None | str | Unset):
-            encf (None | str | Unset):
-            rnc_emisor (None | str | Unset):
-     """
+    """
+    Attributes:
+        message_id (UUID | Unset):
+        tenant_id (UUID | Unset):
+        company_rnc (str | Unset):
+        file_name (str | Unset):
+        progress (int | str | Unset):
+        created_on (datetime.datetime | Unset):
+        updated_on (datetime.datetime | Unset):
+        error_message (None | str | Unset):
+        encf (None | str | Unset):
+        rnc_emisor (None | str | Unset):
+    """
 
     message_id: UUID | Unset = UNSET
     tenant_id: UUID | Unset = UNSET
@@ -50,10 +40,6 @@ class AcecfReceptionRequestDto:
     encf: None | str | Unset = UNSET
     rnc_emisor: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         message_id: str | Unset = UNSET
@@ -100,11 +86,9 @@ class AcecfReceptionRequestDto:
         else:
             rnc_emisor = self.rnc_emisor
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if message_id is not UNSET:
             field_dict["messageId"] = message_id
         if tenant_id is not UNSET:
@@ -128,30 +112,22 @@ class AcecfReceptionRequestDto:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         _message_id = d.pop("messageId", UNSET)
         message_id: UUID | Unset
-        if isinstance(_message_id,  Unset):
+        if isinstance(_message_id, Unset):
             message_id = UNSET
         else:
             message_id = UUID(_message_id)
 
-
-
-
         _tenant_id = d.pop("tenantId", UNSET)
         tenant_id: UUID | Unset
-        if isinstance(_tenant_id,  Unset):
+        if isinstance(_tenant_id, Unset):
             tenant_id = UNSET
         else:
             tenant_id = UUID(_tenant_id)
-
-
-
 
         company_rnc = d.pop("companyRnc", UNSET)
 
@@ -164,26 +140,19 @@ class AcecfReceptionRequestDto:
 
         progress = _parse_progress(d.pop("progress", UNSET))
 
-
         _created_on = d.pop("createdOn", UNSET)
         created_on: datetime.datetime | Unset
-        if isinstance(_created_on,  Unset):
+        if isinstance(_created_on, Unset):
             created_on = UNSET
         else:
-            created_on = isoparse(_created_on)
-
-
-
+            created_on = datetime.datetime.fromisoformat(_created_on)
 
         _updated_on = d.pop("updatedOn", UNSET)
         updated_on: datetime.datetime | Unset
-        if isinstance(_updated_on,  Unset):
+        if isinstance(_updated_on, Unset):
             updated_on = UNSET
         else:
-            updated_on = isoparse(_updated_on)
-
-
-
+            updated_on = datetime.datetime.fromisoformat(_updated_on)
 
         def _parse_error_message(data: object) -> None | str | Unset:
             if data is None:
@@ -194,7 +163,6 @@ class AcecfReceptionRequestDto:
 
         error_message = _parse_error_message(d.pop("errorMessage", UNSET))
 
-
         def _parse_encf(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -204,7 +172,6 @@ class AcecfReceptionRequestDto:
 
         encf = _parse_encf(d.pop("encf", UNSET))
 
-
         def _parse_rnc_emisor(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -213,7 +180,6 @@ class AcecfReceptionRequestDto:
             return cast(None | str | Unset, data)
 
         rnc_emisor = _parse_rnc_emisor(d.pop("rncEmisor", UNSET))
-
 
         acecf_reception_request_dto = cls(
             message_id=message_id,
@@ -227,7 +193,6 @@ class AcecfReceptionRequestDto:
             encf=encf,
             rnc_emisor=rnc_emisor,
         )
-
 
         acecf_reception_request_dto.additional_properties = d
         return acecf_reception_request_dto

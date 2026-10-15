@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class IndicadorEnvioDiferidoTypeType1(str, Enum):
+
+class IndicadorEnvioDiferidoTypeType1(StrEnum):
     ENVIODIFERIDOAUTORIZADO = "EnvioDiferidoAutorizado"
 
     def __str__(self) -> str:

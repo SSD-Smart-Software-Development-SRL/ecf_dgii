@@ -1,38 +1,28 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.ecf_33_codigo_modificacion_type import Ecf33CodigoModificacionType
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf33InformacionReferencia")
 
 
-
 @_attrs_define
 class Ecf33InformacionReferencia:
-    """ 
-        Attributes:
-            ncf_modificado (str):
-            codigo_modificacion (Ecf33CodigoModificacionType):
-            rnc_otro_contribuyente (None | str | Unset):
-            fecha_ncf_modificado (datetime.datetime | Unset):
-            razon_modificacion (None | str | Unset):
-     """
+    """
+    Attributes:
+        ncf_modificado (str):
+        codigo_modificacion (Ecf33CodigoModificacionType):
+        rnc_otro_contribuyente (None | str | Unset):
+        fecha_ncf_modificado (datetime.datetime | Unset):
+        razon_modificacion (None | str | Unset):
+    """
 
     ncf_modificado: str
     codigo_modificacion: Ecf33CodigoModificacionType
@@ -40,10 +30,6 @@ class Ecf33InformacionReferencia:
     fecha_ncf_modificado: datetime.datetime | Unset = UNSET
     razon_modificacion: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         ncf_modificado = self.ncf_modificado
@@ -66,13 +52,14 @@ class Ecf33InformacionReferencia:
         else:
             razon_modificacion = self.razon_modificacion
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "ncfModificado": ncf_modificado,
-            "codigoModificacion": codigo_modificacion,
-        })
+        field_dict.update(
+            {
+                "ncfModificado": ncf_modificado,
+                "codigoModificacion": codigo_modificacion,
+            }
+        )
         if rnc_otro_contribuyente is not UNSET:
             field_dict["rncOtroContribuyente"] = rnc_otro_contribuyente
         if fecha_ncf_modificado is not UNSET:
@@ -82,17 +69,12 @@ class Ecf33InformacionReferencia:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         ncf_modificado = d.pop("ncfModificado")
 
         codigo_modificacion = Ecf33CodigoModificacionType(d.pop("codigoModificacion"))
-
-
-
 
         def _parse_rnc_otro_contribuyente(data: object) -> None | str | Unset:
             if data is None:
@@ -103,16 +85,12 @@ class Ecf33InformacionReferencia:
 
         rnc_otro_contribuyente = _parse_rnc_otro_contribuyente(d.pop("rncOtroContribuyente", UNSET))
 
-
         _fecha_ncf_modificado = d.pop("fechaNCFModificado", UNSET)
         fecha_ncf_modificado: datetime.datetime | Unset
-        if isinstance(_fecha_ncf_modificado,  Unset):
+        if isinstance(_fecha_ncf_modificado, Unset):
             fecha_ncf_modificado = UNSET
         else:
-            fecha_ncf_modificado = isoparse(_fecha_ncf_modificado)
-
-
-
+            fecha_ncf_modificado = datetime.datetime.fromisoformat(_fecha_ncf_modificado)
 
         def _parse_razon_modificacion(data: object) -> None | str | Unset:
             if data is None:
@@ -123,7 +101,6 @@ class Ecf33InformacionReferencia:
 
         razon_modificacion = _parse_razon_modificacion(d.pop("razonModificacion", UNSET))
 
-
         ecf_33_informacion_referencia = cls(
             ncf_modificado=ncf_modificado,
             codigo_modificacion=codigo_modificacion,
@@ -131,7 +108,6 @@ class Ecf33InformacionReferencia:
             fecha_ncf_modificado=fecha_ncf_modificado,
             razon_modificacion=razon_modificacion,
         )
-
 
         ecf_33_informacion_referencia.additional_properties = d
         return ecf_33_informacion_referencia

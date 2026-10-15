@@ -1,19 +1,14 @@
 from http import HTTPStatus
-from typing import Any, cast
-from urllib.parse import quote
+from typing import Any
+from uuid import UUID
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.paginated_api_result_of_acecf_reception_request_dto import PaginatedApiResultOfAcecfReceptionRequestDto
 from ...models.problem_details import ProblemDetails
-from ...types import UNSET, Unset
-from typing import cast
-from uuid import UUID
-
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
@@ -24,11 +19,7 @@ def _get_kwargs(
     progresses: list[int | str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
@@ -39,20 +30,17 @@ def _get_kwargs(
             message_ids_item = str(message_ids_item_data)
             json_message_ids.append(message_ids_item)
 
-
     params["MessageIds"] = json_message_ids
 
     json_encfs: list[str] | Unset = UNSET
     if not isinstance(encfs, Unset):
         json_encfs = encfs
 
-
     params["Encfs"] = json_encfs
 
     json_rncs: list[str] | Unset = UNSET
     if not isinstance(rncs, Unset):
         json_rncs = rncs
-
 
     params["Rncs"] = json_rncs
 
@@ -63,7 +51,6 @@ def _get_kwargs(
             progresses_item: int | str
             progresses_item = progresses_item_data
             json_progresses.append(progresses_item)
-
 
     params["Progresses"] = json_progresses
 
@@ -81,9 +68,7 @@ def _get_kwargs(
         json_limit = limit
     params["Limit"] = json_limit
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -91,30 +76,24 @@ def _get_kwargs(
         "params": params,
     }
 
-
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails | None:
     if response.status_code == 200:
         response_200 = PaginatedApiResultOfAcecfReceptionRequestDto.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 401:
         response_401 = ProblemDetails.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 403:
         response_403 = ProblemDetails.from_dict(response.json())
-
-
 
         return response_403
 
@@ -124,7 +103,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -142,9 +123,8 @@ def sync_detailed(
     progresses: list[int | str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
-
 ) -> Response[PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails]:
-    """ 
+    """
     Args:
         message_ids (list[UUID] | Unset):
         encfs (list[str] | Unset):
@@ -159,17 +139,15 @@ def sync_detailed(
 
     Returns:
         Response[PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         message_ids=message_ids,
-encfs=encfs,
-rncs=rncs,
-progresses=progresses,
-page=page,
-limit=limit,
-
+        encfs=encfs,
+        rncs=rncs,
+        progresses=progresses,
+        page=page,
+        limit=limit,
     )
 
     response = client.get_httpx_client().request(
@@ -177,6 +155,7 @@ limit=limit,
     )
 
     return _build_response(client=client, response=response)
+
 
 def sync(
     *,
@@ -187,9 +166,8 @@ def sync(
     progresses: list[int | str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
-
 ) -> PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails | None:
-    """ 
+    """
     Args:
         message_ids (list[UUID] | Unset):
         encfs (list[str] | Unset):
@@ -204,19 +182,18 @@ def sync(
 
     Returns:
         PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-message_ids=message_ids,
-encfs=encfs,
-rncs=rncs,
-progresses=progresses,
-page=page,
-limit=limit,
-
+        message_ids=message_ids,
+        encfs=encfs,
+        rncs=rncs,
+        progresses=progresses,
+        page=page,
+        limit=limit,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
@@ -227,9 +204,8 @@ async def asyncio_detailed(
     progresses: list[int | str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
-
 ) -> Response[PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails]:
-    """ 
+    """
     Args:
         message_ids (list[UUID] | Unset):
         encfs (list[str] | Unset):
@@ -244,24 +220,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         message_ids=message_ids,
-encfs=encfs,
-rncs=rncs,
-progresses=progresses,
-page=page,
-limit=limit,
-
+        encfs=encfs,
+        rncs=rncs,
+        progresses=progresses,
+        page=page,
+        limit=limit,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
@@ -272,9 +245,8 @@ async def asyncio(
     progresses: list[int | str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
-
 ) -> PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails | None:
-    """ 
+    """
     Args:
         message_ids (list[UUID] | Unset):
         encfs (list[str] | Unset):
@@ -289,16 +261,16 @@ async def asyncio(
 
     Returns:
         PaginatedApiResultOfAcecfReceptionRequestDto | ProblemDetails
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-message_ids=message_ids,
-encfs=encfs,
-rncs=rncs,
-progresses=progresses,
-page=page,
-limit=limit,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            message_ids=message_ids,
+            encfs=encfs,
+            rncs=rncs,
+            progresses=progresses,
+            page=page,
+            limit=limit,
+        )
+    ).parsed

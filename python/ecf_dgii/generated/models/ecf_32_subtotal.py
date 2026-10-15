@@ -1,45 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="Ecf32Subtotal")
-
 
 
 @_attrs_define
 class Ecf32Subtotal:
-    """ 
-        Attributes:
-            numero_sub_total (int | None | str | Unset):
-            descripcion_subtotal (None | str | Unset):
-            orden (int | None | str | Unset):
-            sub_total_monto_gravado_total (float | None | str | Unset):
-            sub_total_monto_gravado_i1 (float | None | str | Unset):
-            sub_total_monto_gravado_i2 (float | None | str | Unset):
-            sub_total_monto_gravado_i3 (float | None | str | Unset):
-            sub_tota_itbis (float | None | str | Unset):
-            sub_tota_itbis1 (float | None | str | Unset):
-            sub_tota_itbis2 (float | None | str | Unset):
-            sub_tota_itbis3 (float | None | str | Unset):
-            sub_total_impuesto_adicional (float | None | str | Unset):
-            sub_total_exento (float | None | str | Unset):
-            monto_sub_total (float | None | str | Unset):
-            lineas (int | None | str | Unset):
-     """
+    """
+    Attributes:
+        numero_sub_total (int | None | str | Unset):
+        descripcion_subtotal (None | str | Unset):
+        orden (int | None | str | Unset):
+        sub_total_monto_gravado_total (float | None | str | Unset):
+        sub_total_monto_gravado_i1 (float | None | str | Unset):
+        sub_total_monto_gravado_i2 (float | None | str | Unset):
+        sub_total_monto_gravado_i3 (float | None | str | Unset):
+        sub_tota_itbis (float | None | str | Unset):
+        sub_tota_itbis1 (float | None | str | Unset):
+        sub_tota_itbis2 (float | None | str | Unset):
+        sub_tota_itbis3 (float | None | str | Unset):
+        sub_total_impuesto_adicional (float | None | str | Unset):
+        sub_total_exento (float | None | str | Unset):
+        monto_sub_total (float | None | str | Unset):
+        lineas (int | None | str | Unset):
+    """
 
     numero_sub_total: int | None | str | Unset = UNSET
     descripcion_subtotal: None | str | Unset = UNSET
@@ -57,10 +48,6 @@ class Ecf32Subtotal:
     monto_sub_total: float | None | str | Unset = UNSET
     lineas: int | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         numero_sub_total: int | None | str | Unset
@@ -153,11 +140,9 @@ class Ecf32Subtotal:
         else:
             lineas = self.lineas
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if numero_sub_total is not UNSET:
             field_dict["numeroSubTotal"] = numero_sub_total
         if descripcion_subtotal is not UNSET:
@@ -191,11 +176,10 @@ class Ecf32Subtotal:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_numero_sub_total(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -204,7 +188,6 @@ class Ecf32Subtotal:
             return cast(int | None | str | Unset, data)
 
         numero_sub_total = _parse_numero_sub_total(d.pop("numeroSubTotal", UNSET))
-
 
         def _parse_descripcion_subtotal(data: object) -> None | str | Unset:
             if data is None:
@@ -215,7 +198,6 @@ class Ecf32Subtotal:
 
         descripcion_subtotal = _parse_descripcion_subtotal(d.pop("descripcionSubtotal", UNSET))
 
-
         def _parse_orden(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -224,7 +206,6 @@ class Ecf32Subtotal:
             return cast(int | None | str | Unset, data)
 
         orden = _parse_orden(d.pop("orden", UNSET))
-
 
         def _parse_sub_total_monto_gravado_total(data: object) -> float | None | str | Unset:
             if data is None:
@@ -235,7 +216,6 @@ class Ecf32Subtotal:
 
         sub_total_monto_gravado_total = _parse_sub_total_monto_gravado_total(d.pop("subTotalMontoGravadoTotal", UNSET))
 
-
         def _parse_sub_total_monto_gravado_i1(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -244,7 +224,6 @@ class Ecf32Subtotal:
             return cast(float | None | str | Unset, data)
 
         sub_total_monto_gravado_i1 = _parse_sub_total_monto_gravado_i1(d.pop("subTotalMontoGravadoI1", UNSET))
-
 
         def _parse_sub_total_monto_gravado_i2(data: object) -> float | None | str | Unset:
             if data is None:
@@ -255,7 +234,6 @@ class Ecf32Subtotal:
 
         sub_total_monto_gravado_i2 = _parse_sub_total_monto_gravado_i2(d.pop("subTotalMontoGravadoI2", UNSET))
 
-
         def _parse_sub_total_monto_gravado_i3(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -264,7 +242,6 @@ class Ecf32Subtotal:
             return cast(float | None | str | Unset, data)
 
         sub_total_monto_gravado_i3 = _parse_sub_total_monto_gravado_i3(d.pop("subTotalMontoGravadoI3", UNSET))
-
 
         def _parse_sub_tota_itbis(data: object) -> float | None | str | Unset:
             if data is None:
@@ -275,7 +252,6 @@ class Ecf32Subtotal:
 
         sub_tota_itbis = _parse_sub_tota_itbis(d.pop("subTotaITBIS", UNSET))
 
-
         def _parse_sub_tota_itbis1(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -284,7 +260,6 @@ class Ecf32Subtotal:
             return cast(float | None | str | Unset, data)
 
         sub_tota_itbis1 = _parse_sub_tota_itbis1(d.pop("subTotaITBIS1", UNSET))
-
 
         def _parse_sub_tota_itbis2(data: object) -> float | None | str | Unset:
             if data is None:
@@ -295,7 +270,6 @@ class Ecf32Subtotal:
 
         sub_tota_itbis2 = _parse_sub_tota_itbis2(d.pop("subTotaITBIS2", UNSET))
 
-
         def _parse_sub_tota_itbis3(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -304,7 +278,6 @@ class Ecf32Subtotal:
             return cast(float | None | str | Unset, data)
 
         sub_tota_itbis3 = _parse_sub_tota_itbis3(d.pop("subTotaITBIS3", UNSET))
-
 
         def _parse_sub_total_impuesto_adicional(data: object) -> float | None | str | Unset:
             if data is None:
@@ -315,7 +288,6 @@ class Ecf32Subtotal:
 
         sub_total_impuesto_adicional = _parse_sub_total_impuesto_adicional(d.pop("subTotalImpuestoAdicional", UNSET))
 
-
         def _parse_sub_total_exento(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -324,7 +296,6 @@ class Ecf32Subtotal:
             return cast(float | None | str | Unset, data)
 
         sub_total_exento = _parse_sub_total_exento(d.pop("subTotalExento", UNSET))
-
 
         def _parse_monto_sub_total(data: object) -> float | None | str | Unset:
             if data is None:
@@ -335,7 +306,6 @@ class Ecf32Subtotal:
 
         monto_sub_total = _parse_monto_sub_total(d.pop("montoSubTotal", UNSET))
 
-
         def _parse_lineas(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -344,7 +314,6 @@ class Ecf32Subtotal:
             return cast(int | None | str | Unset, data)
 
         lineas = _parse_lineas(d.pop("lineas", UNSET))
-
 
         ecf_32_subtotal = cls(
             numero_sub_total=numero_sub_total,
@@ -363,7 +332,6 @@ class Ecf32Subtotal:
             monto_sub_total=monto_sub_total,
             lineas=lineas,
         )
-
 
         ecf_32_subtotal.additional_properties = d
         return ecf_32_subtotal

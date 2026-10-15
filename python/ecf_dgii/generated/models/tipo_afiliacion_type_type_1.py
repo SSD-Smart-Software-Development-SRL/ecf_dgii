@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class TipoAfiliacionTypeType1(str, Enum):
+
+class TipoAfiliacionTypeType1(StrEnum):
     AFILIADA = "Afiliada"
     NOAFILIADA = "NoAfiliada"
 

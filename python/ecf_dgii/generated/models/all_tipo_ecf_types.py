@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class AllTipoECFTypes(str, Enum):
+
+class AllTipoECFTypes(StrEnum):
     ACECF = "ACECF"
     ANECF = "ANECF"
     ARECF = "ARECF"

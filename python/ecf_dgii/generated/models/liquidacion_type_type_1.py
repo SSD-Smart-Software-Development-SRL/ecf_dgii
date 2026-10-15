@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class LiquidacionTypeType1(str, Enum):
+
+class LiquidacionTypeType1(StrEnum):
     FINAL = "Final"
     PROVISIONAL = "Provisional"
 

@@ -29,7 +29,7 @@ class PollingOptions:
     timeout: float = 300.0
 
 
-TERMINAL_PROGRESS = {"Completed", "Failed", "Rejected"}
+TERMINAL_PROGRESS = {"Finished", "Error"}
 
 
 async def poll_until_complete(

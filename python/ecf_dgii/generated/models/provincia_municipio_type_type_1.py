@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class ProvinciaMunicipioTypeType1(str, Enum):
+
+class ProvinciaMunicipioTypeType1(StrEnum):
     VALUE_0 = "010000"
     VALUE_1 = "010100"
     VALUE_10 = "020106"

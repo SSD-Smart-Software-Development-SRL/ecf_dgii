@@ -1,30 +1,20 @@
 from http import HTTPStatus
 from typing import Any, cast
-from urllib.parse import quote
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.problem_details import ProblemDetails
 from ...models.upsert_company_request import UpsertCompanyRequest
-from typing import cast
-
+from ...types import Response
 
 
 def _get_kwargs(
     *,
     body: UpsertCompanyRequest,
-
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
-
-
-    
-
-    
 
     _kwargs: dict[str, Any] = {
         "method": "put",
@@ -33,12 +23,10 @@ def _get_kwargs(
 
     _kwargs["json"] = body.to_dict()
 
-
     headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers
     return _kwargs
-
 
 
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | ProblemDetails | None:
@@ -49,21 +37,15 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     if response.status_code == 400:
         response_400 = ProblemDetails.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ProblemDetails.from_dict(response.json())
 
-
-
         return response_401
 
     if response.status_code == 403:
         response_403 = ProblemDetails.from_dict(response.json())
-
-
 
         return response_403
 
@@ -73,7 +55,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | ProblemDetails]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Any | ProblemDetails]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -86,9 +70,8 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: UpsertCompanyRequest,
-
 ) -> Response[Any | ProblemDetails]:
-    """ 
+    """
     Args:
         body (UpsertCompanyRequest):
 
@@ -98,12 +81,10 @@ def sync_detailed(
 
     Returns:
         Response[Any | ProblemDetails]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
     response = client.get_httpx_client().request(
@@ -112,13 +93,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: UpsertCompanyRequest,
-
 ) -> Any | ProblemDetails | None:
-    """ 
+    """
     Args:
         body (UpsertCompanyRequest):
 
@@ -128,22 +109,20 @@ def sync(
 
     Returns:
         Any | ProblemDetails
-     """
-
+    """
 
     return sync_detailed(
         client=client,
-body=body,
-
+        body=body,
     ).parsed
+
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: UpsertCompanyRequest,
-
 ) -> Response[Any | ProblemDetails]:
-    """ 
+    """
     Args:
         body (UpsertCompanyRequest):
 
@@ -153,27 +132,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[Any | ProblemDetails]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         body=body,
-
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: UpsertCompanyRequest,
-
 ) -> Any | ProblemDetails | None:
-    """ 
+    """
     Args:
         body (UpsertCompanyRequest):
 
@@ -183,11 +158,11 @@ async def asyncio(
 
     Returns:
         Any | ProblemDetails
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        client=client,
-body=body,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            client=client,
+            body=body,
+        )
+    ).parsed

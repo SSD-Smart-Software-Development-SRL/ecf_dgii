@@ -1,35 +1,26 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="Ecf47Pagina")
-
 
 
 @_attrs_define
 class Ecf47Pagina:
-    """ 
-        Attributes:
-            pagina_no (int | None | str | Unset):
-            no_linea_desde (int | None | str | Unset):
-            no_linea_hasta (int | None | str | Unset):
-            subtotal_exento_pagina (float | None | str | Unset):
-            monto_subtotal_pagina (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        pagina_no (int | None | str | Unset):
+        no_linea_desde (int | None | str | Unset):
+        no_linea_hasta (int | None | str | Unset):
+        subtotal_exento_pagina (float | None | str | Unset):
+        monto_subtotal_pagina (float | None | str | Unset):
+    """
 
     pagina_no: int | None | str | Unset = UNSET
     no_linea_desde: int | None | str | Unset = UNSET
@@ -37,10 +28,6 @@ class Ecf47Pagina:
     subtotal_exento_pagina: float | None | str | Unset = UNSET
     monto_subtotal_pagina: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         pagina_no: int | None | str | Unset
@@ -73,11 +60,9 @@ class Ecf47Pagina:
         else:
             monto_subtotal_pagina = self.monto_subtotal_pagina
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if pagina_no is not UNSET:
             field_dict["paginaNo"] = pagina_no
         if no_linea_desde is not UNSET:
@@ -91,11 +76,10 @@ class Ecf47Pagina:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_pagina_no(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -104,7 +88,6 @@ class Ecf47Pagina:
             return cast(int | None | str | Unset, data)
 
         pagina_no = _parse_pagina_no(d.pop("paginaNo", UNSET))
-
 
         def _parse_no_linea_desde(data: object) -> int | None | str | Unset:
             if data is None:
@@ -115,7 +98,6 @@ class Ecf47Pagina:
 
         no_linea_desde = _parse_no_linea_desde(d.pop("noLineaDesde", UNSET))
 
-
         def _parse_no_linea_hasta(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -124,7 +106,6 @@ class Ecf47Pagina:
             return cast(int | None | str | Unset, data)
 
         no_linea_hasta = _parse_no_linea_hasta(d.pop("noLineaHasta", UNSET))
-
 
         def _parse_subtotal_exento_pagina(data: object) -> float | None | str | Unset:
             if data is None:
@@ -135,7 +116,6 @@ class Ecf47Pagina:
 
         subtotal_exento_pagina = _parse_subtotal_exento_pagina(d.pop("subtotalExentoPagina", UNSET))
 
-
         def _parse_monto_subtotal_pagina(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -145,7 +125,6 @@ class Ecf47Pagina:
 
         monto_subtotal_pagina = _parse_monto_subtotal_pagina(d.pop("montoSubtotalPagina", UNSET))
 
-
         ecf_47_pagina = cls(
             pagina_no=pagina_no,
             no_linea_desde=no_linea_desde,
@@ -153,7 +132,6 @@ class Ecf47Pagina:
             subtotal_exento_pagina=subtotal_exento_pagina,
             monto_subtotal_pagina=monto_subtotal_pagina,
         )
-
 
         ecf_47_pagina.additional_properties = d
         return ecf_47_pagina

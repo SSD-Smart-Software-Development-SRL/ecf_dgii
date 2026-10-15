@@ -1,37 +1,28 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="Ecf45Transporte")
-
 
 
 @_attrs_define
 class Ecf45Transporte:
-    """ 
-        Attributes:
-            conductor (None | str | Unset):
-            documento_transporte (None | str | Unset):
-            ficha (None | str | Unset):
-            placa (None | str | Unset):
-            ruta_transporte (None | str | Unset):
-            zona_transporte (None | str | Unset):
-            numero_albaran (None | str | Unset):
-     """
+    """
+    Attributes:
+        conductor (None | str | Unset):
+        documento_transporte (None | str | Unset):
+        ficha (None | str | Unset):
+        placa (None | str | Unset):
+        ruta_transporte (None | str | Unset):
+        zona_transporte (None | str | Unset):
+        numero_albaran (None | str | Unset):
+    """
 
     conductor: None | str | Unset = UNSET
     documento_transporte: None | str | Unset = UNSET
@@ -41,10 +32,6 @@ class Ecf45Transporte:
     zona_transporte: None | str | Unset = UNSET
     numero_albaran: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         conductor: None | str | Unset
@@ -89,11 +76,9 @@ class Ecf45Transporte:
         else:
             numero_albaran = self.numero_albaran
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if conductor is not UNSET:
             field_dict["conductor"] = conductor
         if documento_transporte is not UNSET:
@@ -111,11 +96,10 @@ class Ecf45Transporte:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_conductor(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -124,7 +108,6 @@ class Ecf45Transporte:
             return cast(None | str | Unset, data)
 
         conductor = _parse_conductor(d.pop("conductor", UNSET))
-
 
         def _parse_documento_transporte(data: object) -> None | str | Unset:
             if data is None:
@@ -135,7 +118,6 @@ class Ecf45Transporte:
 
         documento_transporte = _parse_documento_transporte(d.pop("documentoTransporte", UNSET))
 
-
         def _parse_ficha(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -144,7 +126,6 @@ class Ecf45Transporte:
             return cast(None | str | Unset, data)
 
         ficha = _parse_ficha(d.pop("ficha", UNSET))
-
 
         def _parse_placa(data: object) -> None | str | Unset:
             if data is None:
@@ -155,7 +136,6 @@ class Ecf45Transporte:
 
         placa = _parse_placa(d.pop("placa", UNSET))
 
-
         def _parse_ruta_transporte(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -164,7 +144,6 @@ class Ecf45Transporte:
             return cast(None | str | Unset, data)
 
         ruta_transporte = _parse_ruta_transporte(d.pop("rutaTransporte", UNSET))
-
 
         def _parse_zona_transporte(data: object) -> None | str | Unset:
             if data is None:
@@ -175,7 +154,6 @@ class Ecf45Transporte:
 
         zona_transporte = _parse_zona_transporte(d.pop("zonaTransporte", UNSET))
 
-
         def _parse_numero_albaran(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -184,7 +162,6 @@ class Ecf45Transporte:
             return cast(None | str | Unset, data)
 
         numero_albaran = _parse_numero_albaran(d.pop("numeroAlbaran", UNSET))
-
 
         ecf_45_transporte = cls(
             conductor=conductor,
@@ -195,7 +172,6 @@ class Ecf45Transporte:
             zona_transporte=zona_transporte,
             numero_albaran=numero_albaran,
         )
-
 
         ecf_45_transporte.additional_properties = d
         return ecf_45_transporte

@@ -29,6 +29,11 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Run tests
+        run: |
+          pip install -e '.[dev]'
+          pytest -q
+
       - name: Install build tools
         run: pip install build twine
 

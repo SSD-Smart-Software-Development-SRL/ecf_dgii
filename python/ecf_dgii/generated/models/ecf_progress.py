@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class EcfProgress(str, Enum):
+
+class EcfProgress(StrEnum):
     ERROR = "Error"
     FINISHED = "Finished"
     NEW = "New"

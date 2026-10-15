@@ -67,7 +67,8 @@ def ecf_response(progress: str = "New", estatus: str | None = None, **overrides)
         "dgiiEnvironment": "Test",
     }
     body.update(overrides)
-    return body
+    # The API omits null values (System.Text.Json WhenWritingNull), like the live service does.
+    return {key: value for key, value in body.items() if value is not None}
 
 
 def minimal_ecf32() -> Ecf32ECF:

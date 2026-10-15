@@ -14,9 +14,13 @@ echo "Removing old generated code..."
 rm -rf "$GENERATED_DIR"
 rm -rf ecf_dgii_generated
 
+RELAXED_SPEC="$(mktemp -t ecf-openapi.XXXXXX).json"
+trap 'rm -f "$RELAXED_SPEC"' EXIT
+python3 relax_spec.py "$SPEC_PATH" "$RELAXED_SPEC"
+
 echo "Generating Python SDK from $SPEC_PATH..."
 openapi-python-client generate \
-  --path "$SPEC_PATH" \
+  --path "$RELAXED_SPEC" \
   --config "$CONFIG_PATH" \
   --meta none
 

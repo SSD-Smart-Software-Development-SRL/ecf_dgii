@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class Ecf32CodificacionTipoImpuestosType(str, Enum):
+
+class Ecf32CodificacionTipoImpuestosType(StrEnum):
     VALUE_0 = "001"
     VALUE_1 = "002"
     VALUE_10 = "011"

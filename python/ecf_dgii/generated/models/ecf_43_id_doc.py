@@ -1,39 +1,29 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.tipo_pago_type_type_1 import TipoPagoTypeType1
 from ..models.tipoe_cf_type import TipoeCFType
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf43IdDoc")
 
 
-
 @_attrs_define
 class Ecf43IdDoc:
-    """ 
-        Attributes:
-            tipoe_cf (TipoeCFType):
-            encf (str):
-            fecha_vencimiento_secuencia (datetime.datetime | Unset):
-            tipo_pago (None | TipoPagoTypeType1 | Unset):
-            total_paginas (int | None | str | Unset):
-     """
+    """
+    Attributes:
+        tipoe_cf (TipoeCFType):
+        encf (str):
+        fecha_vencimiento_secuencia (datetime.datetime | Unset):
+        tipo_pago (None | TipoPagoTypeType1 | Unset):
+        total_paginas (int | None | str | Unset):
+    """
 
     tipoe_cf: TipoeCFType
     encf: str
@@ -41,10 +31,6 @@ class Ecf43IdDoc:
     tipo_pago: None | TipoPagoTypeType1 | Unset = UNSET
     total_paginas: int | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         tipoe_cf = self.tipoe_cf.value
@@ -69,13 +55,14 @@ class Ecf43IdDoc:
         else:
             total_paginas = self.total_paginas
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "tipoeCF": tipoe_cf,
-            "encf": encf,
-        })
+        field_dict.update(
+            {
+                "tipoeCF": tipoe_cf,
+                "encf": encf,
+            }
+        )
         if fecha_vencimiento_secuencia is not UNSET:
             field_dict["fechaVencimientoSecuencia"] = fecha_vencimiento_secuencia
         if tipo_pago is not UNSET:
@@ -85,27 +72,19 @@ class Ecf43IdDoc:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         tipoe_cf = TipoeCFType(d.pop("tipoeCF"))
 
-
-
-
         encf = d.pop("encf")
 
         _fecha_vencimiento_secuencia = d.pop("fechaVencimientoSecuencia", UNSET)
         fecha_vencimiento_secuencia: datetime.datetime | Unset
-        if isinstance(_fecha_vencimiento_secuencia,  Unset):
+        if isinstance(_fecha_vencimiento_secuencia, Unset):
             fecha_vencimiento_secuencia = UNSET
         else:
-            fecha_vencimiento_secuencia = isoparse(_fecha_vencimiento_secuencia)
-
-
-
+            fecha_vencimiento_secuencia = datetime.datetime.fromisoformat(_fecha_vencimiento_secuencia)
 
         def _parse_tipo_pago(data: object) -> None | TipoPagoTypeType1 | Unset:
             if data is None:
@@ -117,15 +96,12 @@ class Ecf43IdDoc:
                     raise TypeError()
                 componentsschemas_tipo_pago_type_type_1 = TipoPagoTypeType1(data)
 
-
-
                 return componentsschemas_tipo_pago_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | TipoPagoTypeType1 | Unset, data)
 
         tipo_pago = _parse_tipo_pago(d.pop("tipoPago", UNSET))
-
 
         def _parse_total_paginas(data: object) -> int | None | str | Unset:
             if data is None:
@@ -136,7 +112,6 @@ class Ecf43IdDoc:
 
         total_paginas = _parse_total_paginas(d.pop("totalPaginas", UNSET))
 
-
         ecf_43_id_doc = cls(
             tipoe_cf=tipoe_cf,
             encf=encf,
@@ -144,7 +119,6 @@ class Ecf43IdDoc:
             tipo_pago=tipo_pago,
             total_paginas=total_paginas,
         )
-
 
         ecf_43_id_doc.additional_properties = d
         return ecf_43_id_doc

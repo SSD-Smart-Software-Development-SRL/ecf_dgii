@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class IndicadorFacturacionDRTypeType1(str, Enum):
+
+class IndicadorFacturacionDRTypeType1(StrEnum):
     EXENTO_E = "Exento_E"
     ITBIS1_18PERCENT = "ITBIS1_18Percent"
     ITBIS2_16PERCENT = "ITBIS2_16Percent"

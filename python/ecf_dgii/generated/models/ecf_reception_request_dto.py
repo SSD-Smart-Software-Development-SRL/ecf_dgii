@@ -1,47 +1,42 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.all_tipo_ecf_types import AllTipoECFTypes
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-from uuid import UUID
-import datetime
-
-
-
-
-
 
 T = TypeVar("T", bound="EcfReceptionRequestDto")
 
 
-
 @_attrs_define
 class EcfReceptionRequestDto:
-    """ 
-        Attributes:
-            message_id (UUID | Unset):
-            tenant_id (UUID | Unset):
-            company_rnc (str | Unset):
-            file_name (str | Unset):
-            progress (int | str | Unset):
-            created_on (datetime.datetime | Unset):
-            updated_on (datetime.datetime | Unset):
-            error_message (None | str | Unset):
-            encf (None | str | Unset):
-            rnc_emisor (None | str | Unset):
-            tipo_ecf (AllTipoECFTypes | None | Unset):
-            result_internal_file_name (None | str | Unset):
-            monto_total (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        message_id (UUID | Unset):
+        tenant_id (UUID | Unset):
+        company_rnc (str | Unset):
+        file_name (str | Unset):
+        progress (int | str | Unset):
+        created_on (datetime.datetime | Unset):
+        updated_on (datetime.datetime | Unset):
+        error_message (None | str | Unset):
+        encf (None | str | Unset):
+        rnc_emisor (None | str | Unset):
+        tipo_ecf (AllTipoECFTypes | None | Unset):
+        result_internal_file_name (None | str | Unset):
+        monto_total (float | None | str | Unset):
+        reprocessed_on (datetime.datetime | None | Unset): When the reception was run again after it ended without
+            registering the e-CF.
+        recuperada (bool | Unset): True when the first reception failed and the e-CF was registered by running it again,
+            so the UI can
+            flag it as recovered.
+    """
 
     message_id: UUID | Unset = UNSET
     tenant_id: UUID | Unset = UNSET
@@ -56,11 +51,9 @@ class EcfReceptionRequestDto:
     tipo_ecf: AllTipoECFTypes | None | Unset = UNSET
     result_internal_file_name: None | str | Unset = UNSET
     monto_total: float | None | str | Unset = UNSET
+    reprocessed_on: datetime.datetime | None | Unset = UNSET
+    recuperada: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         message_id: str | Unset = UNSET
@@ -127,11 +120,19 @@ class EcfReceptionRequestDto:
         else:
             monto_total = self.monto_total
 
+        reprocessed_on: None | str | Unset
+        if isinstance(self.reprocessed_on, Unset):
+            reprocessed_on = UNSET
+        elif isinstance(self.reprocessed_on, datetime.datetime):
+            reprocessed_on = self.reprocessed_on.isoformat()
+        else:
+            reprocessed_on = self.reprocessed_on
+
+        recuperada = self.recuperada
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if message_id is not UNSET:
             field_dict["messageId"] = message_id
         if tenant_id is not UNSET:
@@ -158,33 +159,29 @@ class EcfReceptionRequestDto:
             field_dict["resultInternalFileName"] = result_internal_file_name
         if monto_total is not UNSET:
             field_dict["montoTotal"] = monto_total
+        if reprocessed_on is not UNSET:
+            field_dict["reprocessedOn"] = reprocessed_on
+        if recuperada is not UNSET:
+            field_dict["recuperada"] = recuperada
 
         return field_dict
-
-
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         _message_id = d.pop("messageId", UNSET)
         message_id: UUID | Unset
-        if isinstance(_message_id,  Unset):
+        if isinstance(_message_id, Unset):
             message_id = UNSET
         else:
             message_id = UUID(_message_id)
 
-
-
-
         _tenant_id = d.pop("tenantId", UNSET)
         tenant_id: UUID | Unset
-        if isinstance(_tenant_id,  Unset):
+        if isinstance(_tenant_id, Unset):
             tenant_id = UNSET
         else:
             tenant_id = UUID(_tenant_id)
-
-
-
 
         company_rnc = d.pop("companyRnc", UNSET)
 
@@ -197,26 +194,19 @@ class EcfReceptionRequestDto:
 
         progress = _parse_progress(d.pop("progress", UNSET))
 
-
         _created_on = d.pop("createdOn", UNSET)
         created_on: datetime.datetime | Unset
-        if isinstance(_created_on,  Unset):
+        if isinstance(_created_on, Unset):
             created_on = UNSET
         else:
-            created_on = isoparse(_created_on)
-
-
-
+            created_on = datetime.datetime.fromisoformat(_created_on)
 
         _updated_on = d.pop("updatedOn", UNSET)
         updated_on: datetime.datetime | Unset
-        if isinstance(_updated_on,  Unset):
+        if isinstance(_updated_on, Unset):
             updated_on = UNSET
         else:
-            updated_on = isoparse(_updated_on)
-
-
-
+            updated_on = datetime.datetime.fromisoformat(_updated_on)
 
         def _parse_error_message(data: object) -> None | str | Unset:
             if data is None:
@@ -227,7 +217,6 @@ class EcfReceptionRequestDto:
 
         error_message = _parse_error_message(d.pop("errorMessage", UNSET))
 
-
         def _parse_encf(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -237,7 +226,6 @@ class EcfReceptionRequestDto:
 
         encf = _parse_encf(d.pop("encf", UNSET))
 
-
         def _parse_rnc_emisor(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -246,7 +234,6 @@ class EcfReceptionRequestDto:
             return cast(None | str | Unset, data)
 
         rnc_emisor = _parse_rnc_emisor(d.pop("rncEmisor", UNSET))
-
 
         def _parse_tipo_ecf(data: object) -> AllTipoECFTypes | None | Unset:
             if data is None:
@@ -258,15 +245,12 @@ class EcfReceptionRequestDto:
                     raise TypeError()
                 tipo_ecf_type_1 = AllTipoECFTypes(data)
 
-
-
                 return tipo_ecf_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(AllTipoECFTypes | None | Unset, data)
 
         tipo_ecf = _parse_tipo_ecf(d.pop("tipoEcf", UNSET))
-
 
         def _parse_result_internal_file_name(data: object) -> None | str | Unset:
             if data is None:
@@ -277,7 +261,6 @@ class EcfReceptionRequestDto:
 
         result_internal_file_name = _parse_result_internal_file_name(d.pop("resultInternalFileName", UNSET))
 
-
         def _parse_monto_total(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -287,6 +270,24 @@ class EcfReceptionRequestDto:
 
         monto_total = _parse_monto_total(d.pop("montoTotal", UNSET))
 
+        def _parse_reprocessed_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                reprocessed_on_type_1 = datetime.datetime.fromisoformat(data)
+
+                return reprocessed_on_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        reprocessed_on = _parse_reprocessed_on(d.pop("reprocessedOn", UNSET))
+
+        recuperada = d.pop("recuperada", UNSET)
 
         ecf_reception_request_dto = cls(
             message_id=message_id,
@@ -302,8 +303,9 @@ class EcfReceptionRequestDto:
             tipo_ecf=tipo_ecf,
             result_internal_file_name=result_internal_file_name,
             monto_total=monto_total,
+            reprocessed_on=reprocessed_on,
+            recuperada=recuperada,
         )
-
 
         ecf_reception_request_dto.additional_properties = d
         return ecf_reception_request_dto

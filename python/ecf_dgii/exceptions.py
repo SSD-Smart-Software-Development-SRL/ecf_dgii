@@ -37,8 +37,19 @@ class EcfNotFoundError(EcfApiError):
     """404 Not Found."""
 
 
+class EcfRateLimitError(EcfApiError):
+    """429 Too Many Requests - retry later."""
+
+
 class EcfServerError(EcfApiError):
     """5xx Server Error."""
+
+
+class EcfConnectionError(EcfApiError):
+    """The API could not be reached (DNS, refused connection, TLS or timeout)."""
+
+    def __init__(self, message: str) -> None:
+        super().__init__(status_code=0, message=message)
 
 
 class EcfProcessingError(EcfApiError):
@@ -64,6 +75,7 @@ _STATUS_MAP: dict[int, type[EcfApiError]] = {
     401: EcfAuthenticationError,
     403: EcfForbiddenError,
     404: EcfNotFoundError,
+    429: EcfRateLimitError,
 }
 
 

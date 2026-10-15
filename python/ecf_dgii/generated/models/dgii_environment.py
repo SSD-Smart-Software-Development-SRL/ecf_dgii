@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class DGIIEnvironment(str, Enum):
+
+class DGIIEnvironment(StrEnum):
     CERTIFICATION = "Certification"
     PRODUCTION = "Production"
     TEST = "Test"

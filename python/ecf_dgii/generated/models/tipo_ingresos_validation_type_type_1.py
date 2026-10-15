@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class TipoIngresosValidationTypeType1(str, Enum):
+
+class TipoIngresosValidationTypeType1(StrEnum):
     VALUE_0 = "01"
     VALUE_1 = "02"
     VALUE_2 = "03"

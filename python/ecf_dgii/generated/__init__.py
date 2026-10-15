@@ -1,5 +1,5 @@
+"""A client library for accessing ECF API"""
 
-""" A client library for accessing ECF API """
 from .client import AuthenticatedClient, Client
 
 __all__ = (

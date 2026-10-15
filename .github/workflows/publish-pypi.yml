@@ -20,7 +20,7 @@ defaults:
 jobs:
   build:
     if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'python-v')
-    runs-on: ubuntu-latest
+    runs-on: ssd-linux  # self-hosted; GitHub-hosted runners are billing-blocked
     steps:
       - uses: actions/checkout@v4
 
@@ -28,6 +28,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Run tests
+        run: |
+          pip install -e '.[dev]'
+          pytest -q
 
       - name: Install build tools
         run: pip install build twine
@@ -47,7 +52,7 @@ jobs:
 
   deploy:
     if: github.event_name == 'release'
-    runs-on: ubuntu-latest
+    runs-on: ssd-linux  # self-hosted; GitHub-hosted runners are billing-blocked
     needs: [ build ]
     permissions:
       id-token: write  # Required for trusted publishing
@@ -57,5 +62,9 @@ jobs:
           name: pypi-package
           path: dist/
 
+      # uv publishes with PyPI trusted publishing (OIDC) and needs no Docker,
+      # unlike pypa/gh-action-pypi-publish, so it works on the ssd-linux runner.
+      - uses: astral-sh/setup-uv@v6
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        working-directory: ${{ github.workspace }}  # no checkout here, so not the default python/
+        run: uv publish --trusted-publishing always dist/*

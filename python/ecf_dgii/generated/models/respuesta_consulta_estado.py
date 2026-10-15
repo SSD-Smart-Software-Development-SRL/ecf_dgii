@@ -1,28 +1,19 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="RespuestaConsultaEstado")
-
 
 
 @_attrs_define
 class RespuestaConsultaEstado:
-    """ Representa la respuesta del servicio de consulta de estado de e-CF.
+    """Representa la respuesta del servicio de consulta de estado de e-CF.
     Este modelo contiene la información de validez y estado de un comprobante fiscal electrónico
     consultado a través del servicio web de consulta estado de la DGII.
 
@@ -54,7 +45,7 @@ class RespuestaConsultaEstado:
                 Código de seguridad de 6 caracteres para validación del comprobante.
             id_extranjero (None | str | Unset): Identificación de extranjero extraída del e-CF recibido (si aplica).
                 Número de identificación del comprador extranjero cuando corresponde.
-     """
+    """
 
     codigo: int | str | Unset = UNSET
     estado: None | str | Unset = UNSET
@@ -68,10 +59,6 @@ class RespuestaConsultaEstado:
     codigo_seguridad: None | str | Unset = UNSET
     id_extranjero: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         codigo: int | str | Unset
@@ -140,11 +127,9 @@ class RespuestaConsultaEstado:
         else:
             id_extranjero = self.id_extranjero
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if codigo is not UNSET:
             field_dict["codigo"] = codigo
         if estado is not UNSET:
@@ -170,18 +155,16 @@ class RespuestaConsultaEstado:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_codigo(data: object) -> int | str | Unset:
             if isinstance(data, Unset):
                 return data
             return cast(int | str | Unset, data)
 
         codigo = _parse_codigo(d.pop("codigo", UNSET))
-
 
         def _parse_estado(data: object) -> None | str | Unset:
             if data is None:
@@ -192,7 +175,6 @@ class RespuestaConsultaEstado:
 
         estado = _parse_estado(d.pop("estado", UNSET))
 
-
         def _parse_rnc_emisor(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -201,7 +183,6 @@ class RespuestaConsultaEstado:
             return cast(None | str | Unset, data)
 
         rnc_emisor = _parse_rnc_emisor(d.pop("rncEmisor", UNSET))
-
 
         def _parse_ncf_electronico(data: object) -> None | str | Unset:
             if data is None:
@@ -212,7 +193,6 @@ class RespuestaConsultaEstado:
 
         ncf_electronico = _parse_ncf_electronico(d.pop("ncfElectronico", UNSET))
 
-
         def _parse_monto_total(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -221,7 +201,6 @@ class RespuestaConsultaEstado:
             return cast(float | None | str | Unset, data)
 
         monto_total = _parse_monto_total(d.pop("montoTotal", UNSET))
-
 
         def _parse_total_itbis(data: object) -> float | None | str | Unset:
             if data is None:
@@ -232,7 +211,6 @@ class RespuestaConsultaEstado:
 
         total_itbis = _parse_total_itbis(d.pop("totalITBIS", UNSET))
 
-
         def _parse_fecha_emision(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -241,7 +219,6 @@ class RespuestaConsultaEstado:
             return cast(None | str | Unset, data)
 
         fecha_emision = _parse_fecha_emision(d.pop("fechaEmision", UNSET))
-
 
         def _parse_fecha_firma(data: object) -> None | str | Unset:
             if data is None:
@@ -252,7 +229,6 @@ class RespuestaConsultaEstado:
 
         fecha_firma = _parse_fecha_firma(d.pop("fechaFirma", UNSET))
 
-
         def _parse_rnc_comprador(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -261,7 +237,6 @@ class RespuestaConsultaEstado:
             return cast(None | str | Unset, data)
 
         rnc_comprador = _parse_rnc_comprador(d.pop("rncComprador", UNSET))
-
 
         def _parse_codigo_seguridad(data: object) -> None | str | Unset:
             if data is None:
@@ -272,7 +247,6 @@ class RespuestaConsultaEstado:
 
         codigo_seguridad = _parse_codigo_seguridad(d.pop("codigoSeguridad", UNSET))
 
-
         def _parse_id_extranjero(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -281,7 +255,6 @@ class RespuestaConsultaEstado:
             return cast(None | str | Unset, data)
 
         id_extranjero = _parse_id_extranjero(d.pop("idExtranjero", UNSET))
-
 
         respuesta_consulta_estado = cls(
             codigo=codigo,
@@ -296,7 +269,6 @@ class RespuestaConsultaEstado:
             codigo_seguridad=codigo_seguridad,
             id_extranjero=id_extranjero,
         )
-
 
         respuesta_consulta_estado.additional_properties = d
         return respuesta_consulta_estado

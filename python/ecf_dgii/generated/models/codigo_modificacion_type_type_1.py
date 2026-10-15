@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class CodigoModificacionTypeType1(str, Enum):
+
+class CodigoModificacionTypeType1(StrEnum):
     ANULAELNCFMODIFICADO = "AnulaElNCFModificado"
     CORRIGEMONTOSDELNCFMODIFICADO = "CorrigeMontosDelNCFModificado"
     CORRIGETEXTODELCOMPROBANTEFISCALMODIFICADO = "CorrigeTextoDelComprobanteFiscalModificado"

@@ -1,47 +1,33 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.codigo_modificacion_type_type_1 import CodigoModificacionTypeType1
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf44InformacionReferencia")
 
 
-
 @_attrs_define
 class Ecf44InformacionReferencia:
-    """ 
-        Attributes:
-            ncf_modificado (None | str | Unset):
-            rnc_otro_contribuyente (None | str | Unset):
-            fecha_ncf_modificado (datetime.datetime | None | Unset):
-            codigo_modificacion (CodigoModificacionTypeType1 | None | Unset):
-     """
+    """
+    Attributes:
+        ncf_modificado (None | str | Unset):
+        rnc_otro_contribuyente (None | str | Unset):
+        fecha_ncf_modificado (datetime.datetime | None | Unset):
+        codigo_modificacion (CodigoModificacionTypeType1 | None | Unset):
+    """
 
     ncf_modificado: None | str | Unset = UNSET
     rnc_otro_contribuyente: None | str | Unset = UNSET
     fecha_ncf_modificado: datetime.datetime | None | Unset = UNSET
     codigo_modificacion: CodigoModificacionTypeType1 | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         ncf_modificado: None | str | Unset
@@ -72,11 +58,9 @@ class Ecf44InformacionReferencia:
         else:
             codigo_modificacion = self.codigo_modificacion
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if ncf_modificado is not UNSET:
             field_dict["ncfModificado"] = ncf_modificado
         if rnc_otro_contribuyente is not UNSET:
@@ -88,11 +72,10 @@ class Ecf44InformacionReferencia:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_ncf_modificado(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -101,7 +84,6 @@ class Ecf44InformacionReferencia:
             return cast(None | str | Unset, data)
 
         ncf_modificado = _parse_ncf_modificado(d.pop("ncfModificado", UNSET))
-
 
         def _parse_rnc_otro_contribuyente(data: object) -> None | str | Unset:
             if data is None:
@@ -112,7 +94,6 @@ class Ecf44InformacionReferencia:
 
         rnc_otro_contribuyente = _parse_rnc_otro_contribuyente(d.pop("rncOtroContribuyente", UNSET))
 
-
         def _parse_fecha_ncf_modificado(data: object) -> datetime.datetime | None | Unset:
             if data is None:
                 return data
@@ -121,9 +102,7 @@ class Ecf44InformacionReferencia:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_ncf_modificado_type_1 = isoparse(data)
-
-
+                fecha_ncf_modificado_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_ncf_modificado_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -131,7 +110,6 @@ class Ecf44InformacionReferencia:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_ncf_modificado = _parse_fecha_ncf_modificado(d.pop("fechaNCFModificado", UNSET))
-
 
         def _parse_codigo_modificacion(data: object) -> CodigoModificacionTypeType1 | None | Unset:
             if data is None:
@@ -143,8 +121,6 @@ class Ecf44InformacionReferencia:
                     raise TypeError()
                 componentsschemas_codigo_modificacion_type_type_1 = CodigoModificacionTypeType1(data)
 
-
-
                 return componentsschemas_codigo_modificacion_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
@@ -152,14 +128,12 @@ class Ecf44InformacionReferencia:
 
         codigo_modificacion = _parse_codigo_modificacion(d.pop("codigoModificacion", UNSET))
 
-
         ecf_44_informacion_referencia = cls(
             ncf_modificado=ncf_modificado,
             rnc_otro_contribuyente=rnc_otro_contribuyente,
             fecha_ncf_modificado=fecha_ncf_modificado,
             codigo_modificacion=codigo_modificacion,
         )
-
 
         ecf_44_informacion_referencia.additional_properties = d
         return ecf_44_informacion_referencia

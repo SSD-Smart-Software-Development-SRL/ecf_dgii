@@ -1,45 +1,35 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.unidad_medida_type_type_1 import UnidadMedidaTypeType1
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf44InformacionesAdicionales")
 
 
-
 @_attrs_define
 class Ecf44InformacionesAdicionales:
-    """ 
-        Attributes:
-            fecha_embarque (datetime.datetime | None | Unset):
-            numero_embarque (None | str | Unset):
-            numero_contenedor (None | str | Unset):
-            numero_referencia (None | str | Unset):
-            peso_bruto (float | None | str | Unset):
-            peso_neto (float | None | str | Unset):
-            unidad_peso_bruto (None | UnidadMedidaTypeType1 | Unset):
-            unidad_peso_neto (None | UnidadMedidaTypeType1 | Unset):
-            cantidad_bulto (float | None | str | Unset):
-            unidad_bulto (None | UnidadMedidaTypeType1 | Unset):
-            volumen_bulto (float | None | str | Unset):
-            unidad_volumen (None | UnidadMedidaTypeType1 | Unset):
-     """
+    """
+    Attributes:
+        fecha_embarque (datetime.datetime | None | Unset):
+        numero_embarque (None | str | Unset):
+        numero_contenedor (None | str | Unset):
+        numero_referencia (None | str | Unset):
+        peso_bruto (float | None | str | Unset):
+        peso_neto (float | None | str | Unset):
+        unidad_peso_bruto (None | UnidadMedidaTypeType1 | Unset):
+        unidad_peso_neto (None | UnidadMedidaTypeType1 | Unset):
+        cantidad_bulto (float | None | str | Unset):
+        unidad_bulto (None | UnidadMedidaTypeType1 | Unset):
+        volumen_bulto (float | None | str | Unset):
+        unidad_volumen (None | UnidadMedidaTypeType1 | Unset):
+    """
 
     fecha_embarque: datetime.datetime | None | Unset = UNSET
     numero_embarque: None | str | Unset = UNSET
@@ -54,10 +44,6 @@ class Ecf44InformacionesAdicionales:
     volumen_bulto: float | None | str | Unset = UNSET
     unidad_volumen: None | UnidadMedidaTypeType1 | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         fecha_embarque: None | str | Unset
@@ -142,11 +128,9 @@ class Ecf44InformacionesAdicionales:
         else:
             unidad_volumen = self.unidad_volumen
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if fecha_embarque is not UNSET:
             field_dict["fechaEmbarque"] = fecha_embarque
         if numero_embarque is not UNSET:
@@ -174,11 +158,10 @@ class Ecf44InformacionesAdicionales:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_fecha_embarque(data: object) -> datetime.datetime | None | Unset:
             if data is None:
                 return data
@@ -187,9 +170,7 @@ class Ecf44InformacionesAdicionales:
             try:
                 if not isinstance(data, str):
                     raise TypeError()
-                fecha_embarque_type_1 = isoparse(data)
-
-
+                fecha_embarque_type_1 = datetime.datetime.fromisoformat(data)
 
                 return fecha_embarque_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
@@ -197,7 +178,6 @@ class Ecf44InformacionesAdicionales:
             return cast(datetime.datetime | None | Unset, data)
 
         fecha_embarque = _parse_fecha_embarque(d.pop("fechaEmbarque", UNSET))
-
 
         def _parse_numero_embarque(data: object) -> None | str | Unset:
             if data is None:
@@ -208,7 +188,6 @@ class Ecf44InformacionesAdicionales:
 
         numero_embarque = _parse_numero_embarque(d.pop("numeroEmbarque", UNSET))
 
-
         def _parse_numero_contenedor(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -217,7 +196,6 @@ class Ecf44InformacionesAdicionales:
             return cast(None | str | Unset, data)
 
         numero_contenedor = _parse_numero_contenedor(d.pop("numeroContenedor", UNSET))
-
 
         def _parse_numero_referencia(data: object) -> None | str | Unset:
             if data is None:
@@ -228,7 +206,6 @@ class Ecf44InformacionesAdicionales:
 
         numero_referencia = _parse_numero_referencia(d.pop("numeroReferencia", UNSET))
 
-
         def _parse_peso_bruto(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -238,7 +215,6 @@ class Ecf44InformacionesAdicionales:
 
         peso_bruto = _parse_peso_bruto(d.pop("pesoBruto", UNSET))
 
-
         def _parse_peso_neto(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -247,7 +223,6 @@ class Ecf44InformacionesAdicionales:
             return cast(float | None | str | Unset, data)
 
         peso_neto = _parse_peso_neto(d.pop("pesoNeto", UNSET))
-
 
         def _parse_unidad_peso_bruto(data: object) -> None | UnidadMedidaTypeType1 | Unset:
             if data is None:
@@ -259,15 +234,12 @@ class Ecf44InformacionesAdicionales:
                     raise TypeError()
                 componentsschemas_unidad_medida_type_type_1 = UnidadMedidaTypeType1(data)
 
-
-
                 return componentsschemas_unidad_medida_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | UnidadMedidaTypeType1 | Unset, data)
 
         unidad_peso_bruto = _parse_unidad_peso_bruto(d.pop("unidadPesoBruto", UNSET))
-
 
         def _parse_unidad_peso_neto(data: object) -> None | UnidadMedidaTypeType1 | Unset:
             if data is None:
@@ -279,15 +251,12 @@ class Ecf44InformacionesAdicionales:
                     raise TypeError()
                 componentsschemas_unidad_medida_type_type_1 = UnidadMedidaTypeType1(data)
 
-
-
                 return componentsschemas_unidad_medida_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | UnidadMedidaTypeType1 | Unset, data)
 
         unidad_peso_neto = _parse_unidad_peso_neto(d.pop("unidadPesoNeto", UNSET))
-
 
         def _parse_cantidad_bulto(data: object) -> float | None | str | Unset:
             if data is None:
@@ -297,7 +266,6 @@ class Ecf44InformacionesAdicionales:
             return cast(float | None | str | Unset, data)
 
         cantidad_bulto = _parse_cantidad_bulto(d.pop("cantidadBulto", UNSET))
-
 
         def _parse_unidad_bulto(data: object) -> None | UnidadMedidaTypeType1 | Unset:
             if data is None:
@@ -309,15 +277,12 @@ class Ecf44InformacionesAdicionales:
                     raise TypeError()
                 componentsschemas_unidad_medida_type_type_1 = UnidadMedidaTypeType1(data)
 
-
-
                 return componentsschemas_unidad_medida_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | UnidadMedidaTypeType1 | Unset, data)
 
         unidad_bulto = _parse_unidad_bulto(d.pop("unidadBulto", UNSET))
-
 
         def _parse_volumen_bulto(data: object) -> float | None | str | Unset:
             if data is None:
@@ -327,7 +292,6 @@ class Ecf44InformacionesAdicionales:
             return cast(float | None | str | Unset, data)
 
         volumen_bulto = _parse_volumen_bulto(d.pop("volumenBulto", UNSET))
-
 
         def _parse_unidad_volumen(data: object) -> None | UnidadMedidaTypeType1 | Unset:
             if data is None:
@@ -339,15 +303,12 @@ class Ecf44InformacionesAdicionales:
                     raise TypeError()
                 componentsschemas_unidad_medida_type_type_1 = UnidadMedidaTypeType1(data)
 
-
-
                 return componentsschemas_unidad_medida_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | UnidadMedidaTypeType1 | Unset, data)
 
         unidad_volumen = _parse_unidad_volumen(d.pop("unidadVolumen", UNSET))
-
 
         ecf_44_informaciones_adicionales = cls(
             fecha_embarque=fecha_embarque,
@@ -363,7 +324,6 @@ class Ecf44InformacionesAdicionales:
             volumen_bulto=volumen_bulto,
             unidad_volumen=unidad_volumen,
         )
-
 
         ecf_44_informaciones_adicionales.additional_properties = d
         return ecf_44_informaciones_adicionales

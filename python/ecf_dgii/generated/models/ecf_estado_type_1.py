@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class EcfEstadoType1(str, Enum):
+
+class EcfEstadoType1(StrEnum):
     ACEPTADO = "Aceptado"
     ACEPTADOCONDICIONAL = "AceptadoCondicional"
     ENPROCESO = "EnProceso"

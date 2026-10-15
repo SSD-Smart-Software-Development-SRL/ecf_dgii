@@ -1,47 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="Ecf34SubtotalImpuestoAdicional")
-
 
 
 @_attrs_define
 class Ecf34SubtotalImpuestoAdicional:
-    """ 
-        Attributes:
-            subtotal_impuesto_selectivo_consumo_especifico_pagina (float | None | str | Unset):
-            subtotal_otros_impuesto (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        subtotal_impuesto_selectivo_consumo_especifico_pagina (float | None | str | Unset):
+        subtotal_otros_impuesto (float | None | str | Unset):
+    """
 
     subtotal_impuesto_selectivo_consumo_especifico_pagina: float | None | str | Unset = UNSET
     subtotal_otros_impuesto: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         subtotal_impuesto_selectivo_consumo_especifico_pagina: float | None | str | Unset
         if isinstance(self.subtotal_impuesto_selectivo_consumo_especifico_pagina, Unset):
             subtotal_impuesto_selectivo_consumo_especifico_pagina = UNSET
         else:
-            subtotal_impuesto_selectivo_consumo_especifico_pagina = self.subtotal_impuesto_selectivo_consumo_especifico_pagina
+            subtotal_impuesto_selectivo_consumo_especifico_pagina = (
+                self.subtotal_impuesto_selectivo_consumo_especifico_pagina
+            )
 
         subtotal_otros_impuesto: float | None | str | Unset
         if isinstance(self.subtotal_otros_impuesto, Unset):
@@ -49,23 +38,22 @@ class Ecf34SubtotalImpuestoAdicional:
         else:
             subtotal_otros_impuesto = self.subtotal_otros_impuesto
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if subtotal_impuesto_selectivo_consumo_especifico_pagina is not UNSET:
-            field_dict["subtotalImpuestoSelectivoConsumoEspecificoPagina"] = subtotal_impuesto_selectivo_consumo_especifico_pagina
+            field_dict["subtotalImpuestoSelectivoConsumoEspecificoPagina"] = (
+                subtotal_impuesto_selectivo_consumo_especifico_pagina
+            )
         if subtotal_otros_impuesto is not UNSET:
             field_dict["subtotalOtrosImpuesto"] = subtotal_otros_impuesto
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_subtotal_impuesto_selectivo_consumo_especifico_pagina(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -73,8 +61,11 @@ class Ecf34SubtotalImpuestoAdicional:
                 return data
             return cast(float | None | str | Unset, data)
 
-        subtotal_impuesto_selectivo_consumo_especifico_pagina = _parse_subtotal_impuesto_selectivo_consumo_especifico_pagina(d.pop("subtotalImpuestoSelectivoConsumoEspecificoPagina", UNSET))
-
+        subtotal_impuesto_selectivo_consumo_especifico_pagina = (
+            _parse_subtotal_impuesto_selectivo_consumo_especifico_pagina(
+                d.pop("subtotalImpuestoSelectivoConsumoEspecificoPagina", UNSET)
+            )
+        )
 
         def _parse_subtotal_otros_impuesto(data: object) -> float | None | str | Unset:
             if data is None:
@@ -85,12 +76,10 @@ class Ecf34SubtotalImpuestoAdicional:
 
         subtotal_otros_impuesto = _parse_subtotal_otros_impuesto(d.pop("subtotalOtrosImpuesto", UNSET))
 
-
         ecf_34_subtotal_impuesto_adicional = cls(
             subtotal_impuesto_selectivo_consumo_especifico_pagina=subtotal_impuesto_selectivo_consumo_especifico_pagina,
             subtotal_otros_impuesto=subtotal_otros_impuesto,
         )
-
 
         ecf_34_subtotal_impuesto_adicional.additional_properties = d
         return ecf_34_subtotal_impuesto_adicional

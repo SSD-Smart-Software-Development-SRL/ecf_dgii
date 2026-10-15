@@ -14,182 +14,73 @@ pip install ecf-dgii
 
 ## Inicio rápido
 
+Cada tipo de e-CF tiene sus propios modelos (`Ecf31ECF`, `Ecf32ECF`, … `Ecf47ECF`) y su
+método de envío (`send_ecf31`, `send_ecf32`, …). Los modelos se construyen con
+argumentos en *snake_case*; el SDK los serializa con los nombres de la API.
+
 ```python
 import asyncio
-from ecf_dgii import EcfClient, ECF, Encabezado, IdDoc, Emisor, Totales, Item, Comprador, FormaDePago, DescuentoORecargo, ImpuestoAdicional, ImpuestoAdicional2
+import datetime
+
+from ecf_dgii import EcfClient, PollingOptions
+from ecf_dgii.generated.models import (
+    Ecf32Comprador, Ecf32ECF, Ecf32Emisor, Ecf32Encabezado, Ecf32IdDoc,
+    Ecf32IndicadorBienoServicioType, Ecf32IndicadorFacturacionType, Ecf32Item,
+    Ecf32TipoIngresosValidationType, Ecf32TipoPagoType, Ecf32Totales,
+    Ecf32VersionType, TipoeCFType,
+)
+
 
 async def main():
-    async with EcfClient(api_key="tu-token-jwt", environment="test") as client:
-        # Enviar un ECF con enrutamiento automático y polling
-        ecf = ECF(
-            encabezado=Encabezado(
-                version="Version1_0",
-                idDoc=IdDoc(
-                    tipoeCF="FacturaDeCreditoFiscalElectronica",
-                    encf="E310000051630",
-                    tipoPago="Contado",
-                    tipoIngresos="01",
-                    tablaFormasPago=[FormaDePago(formaPago="Efectivo", montoPago=1015.25)],
-                    indicadorMontoGravado="ConITBISIncluido",
-                    fechaVencimientoSecuencia="2028-12-31T00:00:00",
-                ),
-                emisor=Emisor(
-                    rncEmisor="131460941",
-                    razonSocialEmisor="DOCUMENTOS ELECTRONICOS DE 02",
-                    direccionEmisor="AVE. ISABEL AGUIAR NO. 269, ZONA INDUSTRIAL DE HERRERA",
-                    fechaEmision="2026-01-10",
-                ),
-                comprador=Comprador(
-                    rncComprador="131880681",
-                    razonSocialComprador="DOCUMENTOS ELECTRONICOS DE 03",
-                ),
-                totales=Totales(
-                    ITBIS1=18,
-                    montoGravadoI1=762.71,
-                    montoGravadoTotal=762.71,
-                    totalITBIS1=137.29,
-                    totalITBIS=137.29,
-                    montoNoFacturable=100.0,
-                    impuestosAdicionales=[
-                        ImpuestoAdicional2(
-                            tipoImpuesto="002",
-                            tasaImpuestoAdicional=2,
-                            otrosImpuestosAdicionales=15.25,
-                        )
-                    ],
-                    montoImpuestoAdicional=15.25,
-                    montoTotal=1015.25,
-                    montoPeriodo=1015.25,
-                ),
+    ecf = Ecf32ECF(
+        encabezado=Ecf32Encabezado(
+            version=Ecf32VersionType.VERSION1_0,
+            id_doc=Ecf32IdDoc(
+                tipoe_cf=TipoeCFType.FACTURADECONSUMOELECTRONICA,
+                encf="E320000000001",
+                tipo_ingresos=Ecf32TipoIngresosValidationType.VALUE_0,  # "01"
+                tipo_pago=Ecf32TipoPagoType.CONTADO,
             ),
-            detallesItems=[
-                Item(
-                    numeroLinea=1,
-                    nombreItem="Iphone 18 Pro max",
-                    indicadorFacturacion="ITBIS1_18Percent",
-                    indicadorBienoServicio="Bien",
-                    cantidadItem=1,
-                    unidadMedida="Unidad",
-                    precioUnitarioItem=1016.95,
-                    montoItem=1016.95,
-                    tablaImpuestoAdicional=[ImpuestoAdicional(tipoImpuesto="002")],
-                ),
-                Item(
-                    numeroLinea=2,
-                    nombreItem="Costo de Envío",
-                    indicadorFacturacion="NoFacturable_18Percent",
-                    indicadorBienoServicio="Servicio",
-                    cantidadItem=1,
-                    unidadMedida="Unidad",
-                    precioUnitarioItem=100.0,
-                    montoItem=100.0,
-                ),
-            ],
-            descuentosORecargos=[
-                DescuentoORecargo(
-                    tipoValor="$",
-                    tipoAjuste="D",
-                    numeroLinea=1,
-                    montoDescuentooRecargo=84.75,
-                    descripcionDescuentooRecargo="Descuento",
-                    indicadorFacturacionDescuentooRecargo="ITBIS1_18Percent",
-                ),
-            ],
-        )
+            emisor=Ecf32Emisor(
+                rnc_emisor="131460941",
+                razon_social_emisor="DOCUMENTOS ELECTRONICOS DE 02",
+                direccion_emisor="AVE. ISABEL AGUIAR NO. 269",
+                fecha_emision=datetime.date.today(),
+            ),
+            comprador=Ecf32Comprador(),
+            totales=Ecf32Totales(
+                monto_gravado_total=100.0,
+                monto_gravado_i1=100.0,
+                itbi_s1=18,
+                total_itbis=18.0,
+                total_itbis1=18.0,
+                monto_total=118.0,
+            ),
+        ),
+        detalles_items=[
+            Ecf32Item(
+                numero_linea=1,
+                indicador_facturacion=Ecf32IndicadorFacturacionType.ITBIS1_18PERCENT,
+                nombre_item="Producto",
+                indicador_bieno_servicio=Ecf32IndicadorBienoServicioType.BIEN,
+                cantidad_item=1,
+                precio_unitario_item=100.0,
+                monto_item=100.0,
+            )
+        ],
+    )
 
-        result = await client.send_ecf(ecf)
-        print(f"ECF aceptado: {result.encf} - Estatus: {result.estatus}")
+    async with EcfClient(api_key="tu-token-jwt", environment="test") as client:
+        # Solo encolar (retorna messageId y progress=New)
+        queued = await client.send_ecf32(ecf)
+        print(queued.message_id, queued.progress)
+
+        # …o encolar y esperar el resultado de la DGII
+        # result = await client.send_ecf32_and_poll(ecf)
+        # print(result.estatus, result.cod_sec, result.impresion_url)
+
 
 asyncio.run(main())
-```
-
-Este es el JSON equivalente que se envía a la API:
-
-```json
-{
-  "encabezado": {
-    "idDoc": {
-      "encf": "E310000051630",
-      "TipoeCF": "FacturaDeCreditoFiscalElectronica",
-      "TipoPago": "Contado",
-      "TipoIngresos": "01",
-      "TablaFormasPago": [
-        {
-          "FormaPago": "Efectivo",
-          "MontoPago": 1015.25
-        }
-      ],
-      "IndicadorMontoGravado": "ConITBISIncluido",
-      "FechaVencimientoSecuencia": "2028-12-31T00:00:00"
-    },
-    "Emisor": {
-      "RNCEmisor": "131460941",
-      "FechaEmision": "2026-01-10",
-      "DireccionEmisor": "AVE. ISABEL AGUIAR NO. 269, ZONA INDUSTRIAL DE HERRERA",
-      "RazonSocialEmisor": "DOCUMENTOS ELECTRONICOS DE 02"
-    },
-    "Totales": {
-      "ITBIS1": 18,
-      "MontoGravadoI1": 762.71,
-      "MontoGravadoTotal": 762.71,
-      "TotalITBIS1": 137.29,
-      "TotalITBIS": 137.29,
-      "MontoNoFacturable": 100.0,
-      "ImpuestosAdicionales": [
-        {
-          "TipoImpuesto": "002",
-          "TasaImpuestoAdicional": 2,
-          "OtrosImpuestosAdicionales": 15.25
-        }
-      ],
-      "MontoImpuestoAdicional": 15.25,
-      "MontoTotal": 1015.25,
-      "MontoPeriodo": 1015.25
-    },
-    "Version": "Version1_0",
-    "Comprador": {
-      "RNCComprador": "131880681",
-      "RazonSocialComprador": "DOCUMENTOS ELECTRONICOS DE 03"
-    }
-  },
-  "DetallesItems": [
-    {
-      "MontoItem": 1016.95,
-      "NombreItem": "Iphone 18 Pro max",
-      "NumeroLinea": 1,
-      "CantidadItem": 1,
-      "UnidadMedida": "Unidad",
-      "PrecioUnitarioItem": 1016.95,
-      "IndicadorFacturacion": "ITBIS1_18Percent",
-      "IndicadorBienoServicio": "Bien",
-      "TablaImpuestoAdicional": [
-        {
-          "TipoImpuesto": "002"
-        }
-      ]
-    },
-    {
-      "MontoItem": 100.0,
-      "NombreItem": "Costo de Envío",
-      "NumeroLinea": 2,
-      "CantidadItem": 1,
-      "UnidadMedida": "Unidad",
-      "PrecioUnitarioItem": 100.0,
-      "IndicadorFacturacion": "NoFacturable_18Percent",
-      "IndicadorBienoServicio": "Servicio"
-    }
-  ],
-  "DescuentosORecargos": [
-    {
-      "TipoValor": "$",
-      "TipoAjuste": "D",
-      "NumeroLinea": 1,
-      "MontoDescuentooRecargo": 84.75,
-      "DescripcionDescuentooRecargo": "Descuento",
-      "IndicadorFacturacionDescuentooRecargo": "ITBIS1_18Percent"
-    }
-  ]
-}
 ```
 
 ## Configuración
@@ -222,15 +113,14 @@ client = EcfClient(api_key="...", base_url="https://custom.api.url")
 
 ### Enviar ECF con polling automático
 
-El método `send_ecf` maneja:
-- **Enrutamiento** — selecciona automáticamente el endpoint correcto según el tipo de ECF
-- **Polling** — espera el procesamiento de DGII con backoff exponencial
-- **Manejo de errores** — lanza `EcfProcessingError` si DGII rechaza el ECF
+Los métodos `send_ecfXX_and_poll` envían el comprobante y consultan
+`GET /ecf/{rnc}/message/{messageId}` con backoff exponencial hasta que `progress`
+sea `Finished` (retorna la respuesta) o `Error` (lanza `EcfProcessingError`).
 
 ```python
 from ecf_dgii import PollingOptions
 
-result = await client.send_ecf(
+result = await client.send_ecf31_and_poll(
     ecf,
     polling_options=PollingOptions(
         initial_delay=1.0,     # segundos
@@ -240,6 +130,7 @@ result = await client.send_ecf(
         timeout=300.0,         # timeout total en segundos
     ),
 )
+print(result.estatus, result.cod_sec, result.fecha_firma, result.impresion_url)
 ```
 
 ## Arquitectura Backend / Frontend
@@ -350,7 +241,7 @@ results = await client.query_ecf("123456789", "E310000000001")
 from ecf_dgii import AllTipoECFTypes
 page = await client.search_ecfs(
     "123456789",
-    tipos_ecfs=[AllTipoECFTypes.FACTURA_DE_CREDITO_FISCAL_ELECTRONICA],
+    tipos_ecfs=[AllTipoECFTypes.FACTURADECREDITOFISCALELECTRONICA],
     from_fecha_emision="2024-01-01T00:00:00",
     page=1,
     limit=50,
@@ -360,11 +251,12 @@ page = await client.search_ecfs(
 ### Aprobación comercial
 
 ```python
-from ecf_dgii import SendAcecfRequest, EstadoType
-await client.aprobacion_comercial(
-    "123456789",
-    "E310000000001",
-    SendAcecfRequest(estadoType=EstadoType.ECF_ACEPTADO),
+from ecf_dgii.generated.models import EstadoType, SendAcecfRequest
+
+# message_id del e-CF recibido (ver search_ecf_reception_requests_by_rnc)
+await client.send_aprobacion_comercial(
+    message_id,
+    SendAcecfRequest(estado_type=EstadoType.ECFACEPTADO),
 )
 ```
 
@@ -404,7 +296,7 @@ estado = await client.consulta_estado(
 )
 
 # Estatus servicios
-servicios = await client.estatus_servicios("123456789")
+servicios = await client.estatus_servicio("123456789")
 ```
 
 ## Manejo de errores
@@ -412,22 +304,25 @@ servicios = await client.estatus_servicios("123456789")
 ```python
 from ecf_dgii import (
     EcfApiError,
-    EcfValidationError,
     EcfAuthenticationError,
+    EcfConnectionError,
     EcfProcessingError,
+    EcfRateLimitError,
+    EcfServerError,
+    EcfValidationError,
     PollingTimeoutError,
 )
 
 try:
-    result = await client.send_ecf(ecf)
-except EcfValidationError as e:
-    print(f"Solicitud inválida: {e.detail}")
-except EcfAuthenticationError:
+    result = await client.send_ecf31_and_poll(ecf)
+except EcfValidationError as e:          # 400: corregir el comprobante
+    print(f"Solicitud inválida: {e.message}")
+except EcfAuthenticationError:           # 401
     print("API key inválido")
-except EcfProcessingError as e:
-    print(f"DGII rechazó: {e.response.errors}")
-except PollingTimeoutError:
-    print("El procesamiento tomó demasiado tiempo")
+except EcfProcessingError as e:          # la DGII rechazó el e-CF
+    print(f"DGII rechazó: {e.message}")
+except (EcfConnectionError, EcfServerError, EcfRateLimitError, PollingTimeoutError):
+    print("Falla transitoria: reintentar más tarde (o usar contingencia)")
 except EcfApiError as e:
     print(f"Error de API {e.status_code}: {e}")
 ```

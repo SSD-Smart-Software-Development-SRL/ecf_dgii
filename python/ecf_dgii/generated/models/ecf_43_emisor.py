@@ -1,48 +1,38 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.provincia_municipio_type_type_1 import ProvinciaMunicipioTypeType1
 from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-import datetime
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf43Emisor")
 
 
-
 @_attrs_define
 class Ecf43Emisor:
-    """ 
-        Attributes:
-            rnc_emisor (str):
-            razon_social_emisor (str):
-            direccion_emisor (str):
-            nombre_comercial (None | str | Unset):
-            sucursal (None | str | Unset):
-            municipio (None | ProvinciaMunicipioTypeType1 | Unset):
-            provincia (None | ProvinciaMunicipioTypeType1 | Unset):
-            tabla_telefono_emisor (list[str] | None | Unset):
-            correo_emisor (None | str | Unset):
-            web_site (None | str | Unset):
-            actividad_economica (None | str | Unset):
-            numero_factura_interna (None | str | Unset):
-            numero_pedido_interno (None | str | Unset):
-            informacion_adicional_emisor (None | str | Unset):
-            fecha_emision (datetime.date | Unset):
-     """
+    """
+    Attributes:
+        rnc_emisor (str):
+        razon_social_emisor (str):
+        direccion_emisor (str):
+        nombre_comercial (None | str | Unset):
+        sucursal (None | str | Unset):
+        municipio (None | ProvinciaMunicipioTypeType1 | Unset):
+        provincia (None | ProvinciaMunicipioTypeType1 | Unset):
+        tabla_telefono_emisor (list[str] | None | Unset):
+        correo_emisor (None | str | Unset):
+        web_site (None | str | Unset):
+        actividad_economica (None | str | Unset):
+        numero_factura_interna (None | str | Unset):
+        numero_pedido_interno (None | str | Unset):
+        informacion_adicional_emisor (None | str | Unset):
+        fecha_emision (datetime.date | Unset):
+    """
 
     rnc_emisor: str
     razon_social_emisor: str
@@ -60,10 +50,6 @@ class Ecf43Emisor:
     informacion_adicional_emisor: None | str | Unset = UNSET
     fecha_emision: datetime.date | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         rnc_emisor = self.rnc_emisor
@@ -105,7 +91,6 @@ class Ecf43Emisor:
             tabla_telefono_emisor = UNSET
         elif isinstance(self.tabla_telefono_emisor, list):
             tabla_telefono_emisor = self.tabla_telefono_emisor
-
 
         else:
             tabla_telefono_emisor = self.tabla_telefono_emisor
@@ -150,14 +135,15 @@ class Ecf43Emisor:
         if not isinstance(self.fecha_emision, Unset):
             fecha_emision = self.fecha_emision.isoformat()
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-            "rncEmisor": rnc_emisor,
-            "razonSocialEmisor": razon_social_emisor,
-            "direccionEmisor": direccion_emisor,
-        })
+        field_dict.update(
+            {
+                "rncEmisor": rnc_emisor,
+                "razonSocialEmisor": razon_social_emisor,
+                "direccionEmisor": direccion_emisor,
+            }
+        )
         if nombre_comercial is not UNSET:
             field_dict["nombreComercial"] = nombre_comercial
         if sucursal is not UNSET:
@@ -185,8 +171,6 @@ class Ecf43Emisor:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -205,7 +189,6 @@ class Ecf43Emisor:
 
         nombre_comercial = _parse_nombre_comercial(d.pop("nombreComercial", UNSET))
 
-
         def _parse_sucursal(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -214,7 +197,6 @@ class Ecf43Emisor:
             return cast(None | str | Unset, data)
 
         sucursal = _parse_sucursal(d.pop("sucursal", UNSET))
-
 
         def _parse_municipio(data: object) -> None | ProvinciaMunicipioTypeType1 | Unset:
             if data is None:
@@ -226,15 +208,12 @@ class Ecf43Emisor:
                     raise TypeError()
                 componentsschemas_provincia_municipio_type_type_1 = ProvinciaMunicipioTypeType1(data)
 
-
-
                 return componentsschemas_provincia_municipio_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | ProvinciaMunicipioTypeType1 | Unset, data)
 
         municipio = _parse_municipio(d.pop("municipio", UNSET))
-
 
         def _parse_provincia(data: object) -> None | ProvinciaMunicipioTypeType1 | Unset:
             if data is None:
@@ -246,15 +225,12 @@ class Ecf43Emisor:
                     raise TypeError()
                 componentsschemas_provincia_municipio_type_type_1 = ProvinciaMunicipioTypeType1(data)
 
-
-
                 return componentsschemas_provincia_municipio_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | ProvinciaMunicipioTypeType1 | Unset, data)
 
         provincia = _parse_provincia(d.pop("provincia", UNSET))
-
 
         def _parse_tabla_telefono_emisor(data: object) -> list[str] | None | Unset:
             if data is None:
@@ -273,7 +249,6 @@ class Ecf43Emisor:
 
         tabla_telefono_emisor = _parse_tabla_telefono_emisor(d.pop("tablaTelefonoEmisor", UNSET))
 
-
         def _parse_correo_emisor(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -282,7 +257,6 @@ class Ecf43Emisor:
             return cast(None | str | Unset, data)
 
         correo_emisor = _parse_correo_emisor(d.pop("correoEmisor", UNSET))
-
 
         def _parse_web_site(data: object) -> None | str | Unset:
             if data is None:
@@ -293,7 +267,6 @@ class Ecf43Emisor:
 
         web_site = _parse_web_site(d.pop("webSite", UNSET))
 
-
         def _parse_actividad_economica(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -302,7 +275,6 @@ class Ecf43Emisor:
             return cast(None | str | Unset, data)
 
         actividad_economica = _parse_actividad_economica(d.pop("actividadEconomica", UNSET))
-
 
         def _parse_numero_factura_interna(data: object) -> None | str | Unset:
             if data is None:
@@ -313,7 +285,6 @@ class Ecf43Emisor:
 
         numero_factura_interna = _parse_numero_factura_interna(d.pop("numeroFacturaInterna", UNSET))
 
-
         def _parse_numero_pedido_interno(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -322,7 +293,6 @@ class Ecf43Emisor:
             return cast(None | str | Unset, data)
 
         numero_pedido_interno = _parse_numero_pedido_interno(d.pop("numeroPedidoInterno", UNSET))
-
 
         def _parse_informacion_adicional_emisor(data: object) -> None | str | Unset:
             if data is None:
@@ -333,16 +303,12 @@ class Ecf43Emisor:
 
         informacion_adicional_emisor = _parse_informacion_adicional_emisor(d.pop("informacionAdicionalEmisor", UNSET))
 
-
         _fecha_emision = d.pop("fechaEmision", UNSET)
         fecha_emision: datetime.date | Unset
-        if isinstance(_fecha_emision,  Unset):
+        if isinstance(_fecha_emision, Unset):
             fecha_emision = UNSET
         else:
-            fecha_emision = isoparse(_fecha_emision).date()
-
-
-
+            fecha_emision = datetime.date.fromisoformat(_fecha_emision)
 
         ecf_43_emisor = cls(
             rnc_emisor=rnc_emisor,
@@ -361,7 +327,6 @@ class Ecf43Emisor:
             informacion_adicional_emisor=informacion_adicional_emisor,
             fecha_emision=fecha_emision,
         )
-
 
         ecf_43_emisor.additional_properties = d
         return ecf_43_emisor

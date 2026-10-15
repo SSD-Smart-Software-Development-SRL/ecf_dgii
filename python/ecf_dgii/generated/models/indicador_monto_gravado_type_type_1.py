@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class IndicadorMontoGravadoTypeType1(str, Enum):
+
+class IndicadorMontoGravadoTypeType1(StrEnum):
     CONITBISINCLUIDO = "ConITBISIncluido"
     SINITBISINCLUIDO = "SinITBISIncluido"
 

@@ -1,46 +1,36 @@
 from __future__ import annotations
 
+import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from dateutil.parser import isoparse
-from typing import cast
-from uuid import UUID
-import datetime
-
-
-
-
-
-
 T = TypeVar("T", bound="AcecfSummaryDto")
-
 
 
 @_attrs_define
 class AcecfSummaryDto:
-    """ 
-        Attributes:
-            acecf_id (UUID | Unset):
-            estado (int | str | Unset):
-            detalle_motivo_rechazo (None | str | Unset):
-            fecha_hora_aprobacion_comercial (datetime.datetime | Unset):
-            file_name (None | str | Unset):
-            created_on (datetime.datetime | Unset):
-            progress (int | str | Unset): Lifecycle progress (Pending / Building / DirectorioResolved / SendingToEmisor /
-                SentToEmisor / Completed / Failed).
-            error_message (None | str | Unset): Last failure reason when Progress = Failed.
-            receptor_http_status (int | None | str | Unset): HTTP status code from the receptor (set after SendingToEmisor).
-            dgii_codigo_response (None | str | Unset):
-            dgii_estado_response (None | str | Unset):
-            dgii_mensajes_response (None | str | Unset):
-     """
+    """
+    Attributes:
+        acecf_id (UUID | Unset):
+        estado (int | str | Unset):
+        detalle_motivo_rechazo (None | str | Unset):
+        fecha_hora_aprobacion_comercial (datetime.datetime | Unset):
+        file_name (None | str | Unset):
+        created_on (datetime.datetime | Unset):
+        progress (int | str | Unset): Lifecycle progress (Pending / Building / DirectorioResolved / SendingToEmisor /
+            SentToEmisor / Completed / Failed).
+        error_message (None | str | Unset): Last failure reason when Progress = Failed.
+        receptor_http_status (int | None | str | Unset): HTTP status code from the receptor (set after SendingToEmisor).
+        dgii_codigo_response (None | str | Unset):
+        dgii_estado_response (None | str | Unset):
+        dgii_mensajes_response (None | str | Unset):
+    """
 
     acecf_id: UUID | Unset = UNSET
     estado: int | str | Unset = UNSET
@@ -55,10 +45,6 @@ class AcecfSummaryDto:
     dgii_estado_response: None | str | Unset = UNSET
     dgii_mensajes_response: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         acecf_id: str | Unset = UNSET
@@ -127,11 +113,9 @@ class AcecfSummaryDto:
         else:
             dgii_mensajes_response = self.dgii_mensajes_response
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if acecf_id is not UNSET:
             field_dict["acecfId"] = acecf_id
         if estado is not UNSET:
@@ -159,20 +143,15 @@ class AcecfSummaryDto:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         _acecf_id = d.pop("acecfId", UNSET)
         acecf_id: UUID | Unset
-        if isinstance(_acecf_id,  Unset):
+        if isinstance(_acecf_id, Unset):
             acecf_id = UNSET
         else:
             acecf_id = UUID(_acecf_id)
-
-
-
 
         def _parse_estado(data: object) -> int | str | Unset:
             if isinstance(data, Unset):
@@ -180,7 +159,6 @@ class AcecfSummaryDto:
             return cast(int | str | Unset, data)
 
         estado = _parse_estado(d.pop("estado", UNSET))
-
 
         def _parse_detalle_motivo_rechazo(data: object) -> None | str | Unset:
             if data is None:
@@ -191,16 +169,12 @@ class AcecfSummaryDto:
 
         detalle_motivo_rechazo = _parse_detalle_motivo_rechazo(d.pop("detalleMotivoRechazo", UNSET))
 
-
         _fecha_hora_aprobacion_comercial = d.pop("fechaHoraAprobacionComercial", UNSET)
         fecha_hora_aprobacion_comercial: datetime.datetime | Unset
-        if isinstance(_fecha_hora_aprobacion_comercial,  Unset):
+        if isinstance(_fecha_hora_aprobacion_comercial, Unset):
             fecha_hora_aprobacion_comercial = UNSET
         else:
-            fecha_hora_aprobacion_comercial = isoparse(_fecha_hora_aprobacion_comercial)
-
-
-
+            fecha_hora_aprobacion_comercial = datetime.datetime.fromisoformat(_fecha_hora_aprobacion_comercial)
 
         def _parse_file_name(data: object) -> None | str | Unset:
             if data is None:
@@ -211,16 +185,12 @@ class AcecfSummaryDto:
 
         file_name = _parse_file_name(d.pop("fileName", UNSET))
 
-
         _created_on = d.pop("createdOn", UNSET)
         created_on: datetime.datetime | Unset
-        if isinstance(_created_on,  Unset):
+        if isinstance(_created_on, Unset):
             created_on = UNSET
         else:
-            created_on = isoparse(_created_on)
-
-
-
+            created_on = datetime.datetime.fromisoformat(_created_on)
 
         def _parse_progress(data: object) -> int | str | Unset:
             if isinstance(data, Unset):
@@ -228,7 +198,6 @@ class AcecfSummaryDto:
             return cast(int | str | Unset, data)
 
         progress = _parse_progress(d.pop("progress", UNSET))
-
 
         def _parse_error_message(data: object) -> None | str | Unset:
             if data is None:
@@ -239,7 +208,6 @@ class AcecfSummaryDto:
 
         error_message = _parse_error_message(d.pop("errorMessage", UNSET))
 
-
         def _parse_receptor_http_status(data: object) -> int | None | str | Unset:
             if data is None:
                 return data
@@ -248,7 +216,6 @@ class AcecfSummaryDto:
             return cast(int | None | str | Unset, data)
 
         receptor_http_status = _parse_receptor_http_status(d.pop("receptorHttpStatus", UNSET))
-
 
         def _parse_dgii_codigo_response(data: object) -> None | str | Unset:
             if data is None:
@@ -259,7 +226,6 @@ class AcecfSummaryDto:
 
         dgii_codigo_response = _parse_dgii_codigo_response(d.pop("dgiiCodigoResponse", UNSET))
 
-
         def _parse_dgii_estado_response(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -269,7 +235,6 @@ class AcecfSummaryDto:
 
         dgii_estado_response = _parse_dgii_estado_response(d.pop("dgiiEstadoResponse", UNSET))
 
-
         def _parse_dgii_mensajes_response(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -278,7 +243,6 @@ class AcecfSummaryDto:
             return cast(None | str | Unset, data)
 
         dgii_mensajes_response = _parse_dgii_mensajes_response(d.pop("dgiiMensajesResponse", UNSET))
-
 
         acecf_summary_dto = cls(
             acecf_id=acecf_id,
@@ -294,7 +258,6 @@ class AcecfSummaryDto:
             dgii_estado_response=dgii_estado_response,
             dgii_mensajes_response=dgii_mensajes_response,
         )
-
 
         acecf_summary_dto.additional_properties = d
         return acecf_summary_dto

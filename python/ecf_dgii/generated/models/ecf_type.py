@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class ECFType(str, Enum):
+
+class ECFType(StrEnum):
     ECF31 = "ECF31"
     ECF32 = "ECF32"
     ECF33 = "ECF33"

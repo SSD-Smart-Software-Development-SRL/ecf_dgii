@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class TipoCuentaPagoTypeType1(str, Enum):
+
+class TipoCuentaPagoTypeType1(StrEnum):
     AH = "AH"
     CT = "CT"
     OT = "OT"

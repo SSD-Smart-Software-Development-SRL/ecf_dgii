@@ -1,38 +1,29 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 from ..models.tipo_moneda_type_type_1 import TipoMonedaTypeType1
 from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
 
 T = TypeVar("T", bound="Ecf46OtraMoneda")
 
 
-
 @_attrs_define
 class Ecf46OtraMoneda:
-    """ 
-        Attributes:
-            tipo_moneda (None | TipoMonedaTypeType1 | Unset):
-            tipo_cambio (float | None | str | Unset):
-            monto_gravado_total_otra_moneda (float | None | str | Unset):
-            monto_gravado_3_otra_moneda (float | None | str | Unset):
-            total_itbis_otra_moneda (float | None | str | Unset):
-            total_itbis3_otra_moneda (float | None | str | Unset):
-            monto_total_otra_moneda (float | None | str | Unset):
-     """
+    """
+    Attributes:
+        tipo_moneda (None | TipoMonedaTypeType1 | Unset):
+        tipo_cambio (float | None | str | Unset):
+        monto_gravado_total_otra_moneda (float | None | str | Unset):
+        monto_gravado_3_otra_moneda (float | None | str | Unset):
+        total_itbis_otra_moneda (float | None | str | Unset):
+        total_itbis3_otra_moneda (float | None | str | Unset):
+        monto_total_otra_moneda (float | None | str | Unset):
+    """
 
     tipo_moneda: None | TipoMonedaTypeType1 | Unset = UNSET
     tipo_cambio: float | None | str | Unset = UNSET
@@ -42,10 +33,6 @@ class Ecf46OtraMoneda:
     total_itbis3_otra_moneda: float | None | str | Unset = UNSET
     monto_total_otra_moneda: float | None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         tipo_moneda: None | str | Unset
@@ -92,11 +79,9 @@ class Ecf46OtraMoneda:
         else:
             monto_total_otra_moneda = self.monto_total_otra_moneda
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if tipo_moneda is not UNSET:
             field_dict["tipoMoneda"] = tipo_moneda
         if tipo_cambio is not UNSET:
@@ -114,11 +99,10 @@ class Ecf46OtraMoneda:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_tipo_moneda(data: object) -> None | TipoMonedaTypeType1 | Unset:
             if data is None:
                 return data
@@ -129,15 +113,12 @@ class Ecf46OtraMoneda:
                     raise TypeError()
                 componentsschemas_tipo_moneda_type_type_1 = TipoMonedaTypeType1(data)
 
-
-
                 return componentsschemas_tipo_moneda_type_type_1
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
             return cast(None | TipoMonedaTypeType1 | Unset, data)
 
         tipo_moneda = _parse_tipo_moneda(d.pop("tipoMoneda", UNSET))
-
 
         def _parse_tipo_cambio(data: object) -> float | None | str | Unset:
             if data is None:
@@ -148,7 +129,6 @@ class Ecf46OtraMoneda:
 
         tipo_cambio = _parse_tipo_cambio(d.pop("tipoCambio", UNSET))
 
-
         def _parse_monto_gravado_total_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -156,8 +136,9 @@ class Ecf46OtraMoneda:
                 return data
             return cast(float | None | str | Unset, data)
 
-        monto_gravado_total_otra_moneda = _parse_monto_gravado_total_otra_moneda(d.pop("montoGravadoTotalOtraMoneda", UNSET))
-
+        monto_gravado_total_otra_moneda = _parse_monto_gravado_total_otra_moneda(
+            d.pop("montoGravadoTotalOtraMoneda", UNSET)
+        )
 
         def _parse_monto_gravado_3_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
@@ -168,7 +149,6 @@ class Ecf46OtraMoneda:
 
         monto_gravado_3_otra_moneda = _parse_monto_gravado_3_otra_moneda(d.pop("montoGravado3OtraMoneda", UNSET))
 
-
         def _parse_total_itbis_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -177,7 +157,6 @@ class Ecf46OtraMoneda:
             return cast(float | None | str | Unset, data)
 
         total_itbis_otra_moneda = _parse_total_itbis_otra_moneda(d.pop("totalITBISOtraMoneda", UNSET))
-
 
         def _parse_total_itbis3_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
@@ -188,7 +167,6 @@ class Ecf46OtraMoneda:
 
         total_itbis3_otra_moneda = _parse_total_itbis3_otra_moneda(d.pop("totalITBIS3OtraMoneda", UNSET))
 
-
         def _parse_monto_total_otra_moneda(data: object) -> float | None | str | Unset:
             if data is None:
                 return data
@@ -197,7 +175,6 @@ class Ecf46OtraMoneda:
             return cast(float | None | str | Unset, data)
 
         monto_total_otra_moneda = _parse_monto_total_otra_moneda(d.pop("montoTotalOtraMoneda", UNSET))
-
 
         ecf_46_otra_moneda = cls(
             tipo_moneda=tipo_moneda,
@@ -208,7 +185,6 @@ class Ecf46OtraMoneda:
             total_itbis3_otra_moneda=total_itbis3_otra_moneda,
             monto_total_otra_moneda=monto_total_otra_moneda,
         )
-
 
         ecf_46_otra_moneda.additional_properties = d
         return ecf_46_otra_moneda

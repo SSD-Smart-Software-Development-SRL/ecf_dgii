@@ -1,17 +1,14 @@
 from http import HTTPStatus
-from typing import Any, cast
+from typing import Any
 from urllib.parse import quote
 
 import httpx
 
-from ...client import AuthenticatedClient, Client
-from ...types import Response, UNSET
 from ... import errors
-
+from ...client import AuthenticatedClient, Client
 from ...models.problem_details import ProblemDetails
 from ...models.respuesta_consulta_rfce import RespuestaConsultaRFCE
-from typing import cast
-
+from ...types import UNSET, Response
 
 
 def _get_kwargs(
@@ -20,11 +17,7 @@ def _get_kwargs(
     rnc_emisor: str,
     encf: str,
     cod_seguridad_e_cf: str,
-
 ) -> dict[str, Any]:
-    
-
-    
 
     params: dict[str, Any] = {}
 
@@ -34,54 +27,44 @@ def _get_kwargs(
 
     params["Cod_Seguridad_eCF"] = cod_seguridad_e_cf
 
-
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
-
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/dgii/{rnc}/consultarfce/consulta".format(rnc=quote(str(rnc), safe=""),),
+        "url": "/dgii/{rnc}/consultarfce/consulta".format(
+            rnc=quote(str(rnc), safe=""),
+        ),
         "params": params,
     }
-
 
     return _kwargs
 
 
-
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ProblemDetails | RespuestaConsultaRFCE | None:
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> ProblemDetails | RespuestaConsultaRFCE | None:
     if response.status_code == 200:
         response_200 = RespuestaConsultaRFCE.from_dict(response.json())
-
-
 
         return response_200
 
     if response.status_code == 400:
         response_400 = ProblemDetails.from_dict(response.json())
 
-
-
         return response_400
 
     if response.status_code == 401:
         response_401 = ProblemDetails.from_dict(response.json())
-
-
 
         return response_401
 
     if response.status_code == 403:
         response_403 = ProblemDetails.from_dict(response.json())
 
-
-
         return response_403
 
     if response.status_code == 500:
         response_500 = ProblemDetails.from_dict(response.json())
-
-
 
         return response_500
 
@@ -91,7 +74,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ProblemDetails | RespuestaConsultaRFCE]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[ProblemDetails | RespuestaConsultaRFCE]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -107,9 +92,8 @@ def sync_detailed(
     rnc_emisor: str,
     encf: str,
     cod_seguridad_e_cf: str,
-
 ) -> Response[ProblemDetails | RespuestaConsultaRFCE]:
-    """ 
+    """
     Args:
         rnc (str):
         rnc_emisor (str):
@@ -122,15 +106,13 @@ def sync_detailed(
 
     Returns:
         Response[ProblemDetails | RespuestaConsultaRFCE]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         rnc=rnc,
-rnc_emisor=rnc_emisor,
-encf=encf,
-cod_seguridad_e_cf=cod_seguridad_e_cf,
-
+        rnc_emisor=rnc_emisor,
+        encf=encf,
+        cod_seguridad_e_cf=cod_seguridad_e_cf,
     )
 
     response = client.get_httpx_client().request(
@@ -139,6 +121,7 @@ cod_seguridad_e_cf=cod_seguridad_e_cf,
 
     return _build_response(client=client, response=response)
 
+
 def sync(
     rnc: str,
     *,
@@ -146,9 +129,8 @@ def sync(
     rnc_emisor: str,
     encf: str,
     cod_seguridad_e_cf: str,
-
 ) -> ProblemDetails | RespuestaConsultaRFCE | None:
-    """ 
+    """
     Args:
         rnc (str):
         rnc_emisor (str):
@@ -161,17 +143,16 @@ def sync(
 
     Returns:
         ProblemDetails | RespuestaConsultaRFCE
-     """
-
+    """
 
     return sync_detailed(
         rnc=rnc,
-client=client,
-rnc_emisor=rnc_emisor,
-encf=encf,
-cod_seguridad_e_cf=cod_seguridad_e_cf,
-
+        client=client,
+        rnc_emisor=rnc_emisor,
+        encf=encf,
+        cod_seguridad_e_cf=cod_seguridad_e_cf,
     ).parsed
+
 
 async def asyncio_detailed(
     rnc: str,
@@ -180,9 +161,8 @@ async def asyncio_detailed(
     rnc_emisor: str,
     encf: str,
     cod_seguridad_e_cf: str,
-
 ) -> Response[ProblemDetails | RespuestaConsultaRFCE]:
-    """ 
+    """
     Args:
         rnc (str):
         rnc_emisor (str):
@@ -195,22 +175,19 @@ async def asyncio_detailed(
 
     Returns:
         Response[ProblemDetails | RespuestaConsultaRFCE]
-     """
-
+    """
 
     kwargs = _get_kwargs(
         rnc=rnc,
-rnc_emisor=rnc_emisor,
-encf=encf,
-cod_seguridad_e_cf=cod_seguridad_e_cf,
-
+        rnc_emisor=rnc_emisor,
+        encf=encf,
+        cod_seguridad_e_cf=cod_seguridad_e_cf,
     )
 
-    response = await client.get_async_httpx_client().request(
-        **kwargs
-    )
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
+
 
 async def asyncio(
     rnc: str,
@@ -219,9 +196,8 @@ async def asyncio(
     rnc_emisor: str,
     encf: str,
     cod_seguridad_e_cf: str,
-
 ) -> ProblemDetails | RespuestaConsultaRFCE | None:
-    """ 
+    """
     Args:
         rnc (str):
         rnc_emisor (str):
@@ -234,14 +210,14 @@ async def asyncio(
 
     Returns:
         ProblemDetails | RespuestaConsultaRFCE
-     """
+    """
 
-
-    return (await asyncio_detailed(
-        rnc=rnc,
-client=client,
-rnc_emisor=rnc_emisor,
-encf=encf,
-cod_seguridad_e_cf=cod_seguridad_e_cf,
-
-    )).parsed
+    return (
+        await asyncio_detailed(
+            rnc=rnc,
+            client=client,
+            rnc_emisor=rnc_emisor,
+            encf=encf,
+            cod_seguridad_e_cf=cod_seguridad_e_cf,
+        )
+    ).parsed

@@ -1,28 +1,19 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="RespuestaEstatusServicio")
-
 
 
 @_attrs_define
 class RespuestaEstatusServicio:
-    """ Modelo de respuesta que representa el estado de un servicio específico de facturación electrónica en un ambiente
+    """Modelo de respuesta que representa el estado de un servicio específico de facturación electrónica en un ambiente
     específico.
     Utilizado por el endpoint /api/estatusservicios/obtenerestatus.
 
@@ -47,16 +38,12 @@ class RespuestaEstatusServicio:
                 - "PreCertificacion": Ambiente de pre-certificación
                 - "Certificacion": Ambiente de certificación
                 - "Produccion": Ambiente de producción
-     """
+    """
 
     servicio: None | str | Unset = UNSET
     status: None | str | Unset = UNSET
     ambiente: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         servicio: None | str | Unset
@@ -77,11 +64,9 @@ class RespuestaEstatusServicio:
         else:
             ambiente = self.ambiente
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if servicio is not UNSET:
             field_dict["servicio"] = servicio
         if status is not UNSET:
@@ -91,11 +76,10 @@ class RespuestaEstatusServicio:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_servicio(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -104,7 +88,6 @@ class RespuestaEstatusServicio:
             return cast(None | str | Unset, data)
 
         servicio = _parse_servicio(d.pop("servicio", UNSET))
-
 
         def _parse_status(data: object) -> None | str | Unset:
             if data is None:
@@ -115,7 +98,6 @@ class RespuestaEstatusServicio:
 
         status = _parse_status(d.pop("status", UNSET))
 
-
         def _parse_ambiente(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -125,13 +107,11 @@ class RespuestaEstatusServicio:
 
         ambiente = _parse_ambiente(d.pop("ambiente", UNSET))
 
-
         respuesta_estatus_servicio = cls(
             servicio=servicio,
             status=status,
             ambiente=ambiente,
         )
-
 
         respuesta_estatus_servicio.additional_properties = d
         return respuesta_estatus_servicio

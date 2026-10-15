@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class UnidadMedidaTypeType1(str, Enum):
+
+class UnidadMedidaTypeType1(StrEnum):
     BARRIL = "Barril"
     BDJBANDEJA = "BDJBandeja"
     BIDON = "Bidon"

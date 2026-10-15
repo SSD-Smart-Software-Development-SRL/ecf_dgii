@@ -1,40 +1,27 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="Ecf47Comprador")
-
 
 
 @_attrs_define
 class Ecf47Comprador:
-    """ 
-        Attributes:
-            identificador_extranjero (None | str | Unset):
-            razon_social_comprador (None | str | Unset):
-     """
+    """
+    Attributes:
+        identificador_extranjero (None | str | Unset):
+        razon_social_comprador (None | str | Unset):
+    """
 
     identificador_extranjero: None | str | Unset = UNSET
     razon_social_comprador: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         identificador_extranjero: None | str | Unset
@@ -49,11 +36,9 @@ class Ecf47Comprador:
         else:
             razon_social_comprador = self.razon_social_comprador
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if identificador_extranjero is not UNSET:
             field_dict["identificadorExtranjero"] = identificador_extranjero
         if razon_social_comprador is not UNSET:
@@ -61,11 +46,10 @@ class Ecf47Comprador:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_identificador_extranjero(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -74,7 +58,6 @@ class Ecf47Comprador:
             return cast(None | str | Unset, data)
 
         identificador_extranjero = _parse_identificador_extranjero(d.pop("identificadorExtranjero", UNSET))
-
 
         def _parse_razon_social_comprador(data: object) -> None | str | Unset:
             if data is None:
@@ -85,12 +68,10 @@ class Ecf47Comprador:
 
         razon_social_comprador = _parse_razon_social_comprador(d.pop("razonSocialComprador", UNSET))
 
-
         ecf_47_comprador = cls(
             identificador_extranjero=identificador_extranjero,
             razon_social_comprador=razon_social_comprador,
         )
-
 
         ecf_47_comprador.additional_properties = d
         return ecf_47_comprador

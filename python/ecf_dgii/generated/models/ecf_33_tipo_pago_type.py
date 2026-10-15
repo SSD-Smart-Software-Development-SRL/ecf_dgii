@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class Ecf33TipoPagoType(str, Enum):
+
+class Ecf33TipoPagoType(StrEnum):
     CONTADO = "Contado"
     CREDITO = "Credito"
     GRATUITO = "Gratuito"

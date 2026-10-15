@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class Ecf33CodigoModificacionType(str, Enum):
+
+class Ecf33CodigoModificacionType(StrEnum):
     ANULAELNCFMODIFICADO = "AnulaElNCFModificado"
     CORRIGEMONTOSDELNCFMODIFICADO = "CorrigeMontosDelNCFModificado"
     CORRIGETEXTODELCOMPROBANTEFISCALMODIFICADO = "CorrigeTextoDelComprobanteFiscalModificado"

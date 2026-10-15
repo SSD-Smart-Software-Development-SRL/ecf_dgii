@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class Ecf32TipoDescuentoRecargoType(str, Enum):
+
+class Ecf32TipoDescuentoRecargoType(StrEnum):
     VALUE_0 = "$"
     VALUE_1 = "%"
 

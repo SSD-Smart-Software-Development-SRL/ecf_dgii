@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class Ecf45IndicadorFacturacionType(str, Enum):
+
+class Ecf45IndicadorFacturacionType(StrEnum):
     EXENTO_E = "Exento_E"
     ITBIS1_18PERCENT = "ITBIS1_18Percent"
     ITBIS2_16PERCENT = "ITBIS2_16Percent"

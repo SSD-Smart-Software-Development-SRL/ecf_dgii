@@ -213,6 +213,8 @@ csx/
 # Microsoft Azure Emulator
 ecf/
 rcf/
+# ...but not the generated Python SDK's /ecf API package
+!python/ecf_dgii/generated/api/ecf/
 
 # Windows Store app package directories and files
 AppPackages/

@@ -1,28 +1,19 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-from ..types import UNSET, Unset
-from typing import cast
-
-
-
-
-
-
 T = TypeVar("T", bound="RespuestaAnulacionRango")
-
 
 
 @_attrs_define
 class RespuestaAnulacionRango:
-    """ Respuesta de anulación de rango de secuencias de e-NCF.
+    """Respuesta de anulación de rango de secuencias de e-NCF.
 
     Representa la respuesta del servicio de anulación de rangos de secuencias de comprobantes
     fiscales electrónicos. Este modelo se utiliza para procesar la respuesta del servicio web
@@ -56,17 +47,13 @@ class RespuestaAnulacionRango:
                 Puede incluir mensajes de éxito, advertencias, o errores específicos que ocurrieron
                 durante el proceso de validación y anulación de las secuencias. Example: ['Las secuencias fueron anuladas
                 correctamente'].
-     """
+    """
 
     rnc: None | str | Unset = UNSET
     codigo: None | str | Unset = UNSET
     nombre: None | str | Unset = UNSET
     mensajes: list[str] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
-
-
-
-
 
     def to_dict(self) -> dict[str, Any]:
         rnc: None | str | Unset
@@ -93,15 +80,12 @@ class RespuestaAnulacionRango:
         elif isinstance(self.mensajes, list):
             mensajes = self.mensajes
 
-
         else:
             mensajes = self.mensajes
 
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({
-        })
+        field_dict.update({})
         if rnc is not UNSET:
             field_dict["rnc"] = rnc
         if codigo is not UNSET:
@@ -113,11 +97,10 @@ class RespuestaAnulacionRango:
 
         return field_dict
 
-
-
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+
         def _parse_rnc(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -126,7 +109,6 @@ class RespuestaAnulacionRango:
             return cast(None | str | Unset, data)
 
         rnc = _parse_rnc(d.pop("rnc", UNSET))
-
 
         def _parse_codigo(data: object) -> None | str | Unset:
             if data is None:
@@ -137,7 +119,6 @@ class RespuestaAnulacionRango:
 
         codigo = _parse_codigo(d.pop("codigo", UNSET))
 
-
         def _parse_nombre(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -146,7 +127,6 @@ class RespuestaAnulacionRango:
             return cast(None | str | Unset, data)
 
         nombre = _parse_nombre(d.pop("nombre", UNSET))
-
 
         def _parse_mensajes(data: object) -> list[str] | None | Unset:
             if data is None:
@@ -165,14 +145,12 @@ class RespuestaAnulacionRango:
 
         mensajes = _parse_mensajes(d.pop("mensajes", UNSET))
 
-
         respuesta_anulacion_rango = cls(
             rnc=rnc,
             codigo=codigo,
             nombre=nombre,
             mensajes=mensajes,
         )
-
 
         respuesta_anulacion_rango.additional_properties = d
         return respuesta_anulacion_rango

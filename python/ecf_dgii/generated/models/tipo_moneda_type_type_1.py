@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
-class TipoMonedaTypeType1(str, Enum):
+
+class TipoMonedaTypeType1(StrEnum):
     BRL = "BRL"
     CAD = "CAD"
     CHF = "CHF"

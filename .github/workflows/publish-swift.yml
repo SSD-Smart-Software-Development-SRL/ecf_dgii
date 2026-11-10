@@ -24,8 +24,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer
+      # Use the runner's default Xcode (Swift 6+); the pinned Xcode_16.app path no
+      # longer exists on macos-latest.
+      - name: Show Swift version
+        run: swift --version
 
       - name: Build Swift package
         run: swift build

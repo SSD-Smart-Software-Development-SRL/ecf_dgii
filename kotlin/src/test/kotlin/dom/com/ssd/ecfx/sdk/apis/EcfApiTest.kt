@@ -39,7 +39,6 @@ import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfAnulacionListResponse
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfResponse
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
 import dom.com.ssd.ecfx.sdk.models.RespuestaAnulacionRango
-import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
 
 class EcfApiTest : ShouldSpec() {
     init {
@@ -185,8 +184,8 @@ class EcfApiTest : ShouldSpec() {
             //val includeEcfContent : kotlin.Boolean = true // kotlin.Boolean | 
             //val fromFechaEmision : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // java.time.OffsetDateTime | 
             //val toFechaEmision : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // java.time.OffsetDateTime | 
-            //val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
-            //val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
+            //val amountFrom : kotlin.Double = 1.2 // kotlin.Double | 
+            //val amountTo : kotlin.Double = 1.2 // kotlin.Double | 
             //val progresses : kotlin.collections.List<EcfProgress> =  // kotlin.collections.List<EcfProgress> | 
             //val dgiiEstados : kotlin.collections.List<EcfEstado> =  // kotlin.collections.List<EcfEstado> | 
             //val page : Int = 56 // Int | 
@@ -205,8 +204,8 @@ class EcfApiTest : ShouldSpec() {
             //val includeEcfContent : kotlin.Boolean = true // kotlin.Boolean | 
             //val fromFechaEmision : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // java.time.OffsetDateTime | 
             //val toFechaEmision : java.time.OffsetDateTime = 2013-10-20T19:20:30+01:00 // java.time.OffsetDateTime | 
-            //val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
-            //val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
+            //val amountFrom : kotlin.Double = 1.2 // kotlin.Double | 
+            //val amountTo : kotlin.Double = 1.2 // kotlin.Double | 
             //val progresses : kotlin.collections.List<EcfProgress> =  // kotlin.collections.List<EcfProgress> | 
             //val dgiiEstados : kotlin.collections.List<EcfEstado> =  // kotlin.collections.List<EcfEstado> | 
             //val page : Int = 56 // Int | 

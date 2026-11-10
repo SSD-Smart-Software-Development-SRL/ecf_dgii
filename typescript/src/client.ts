@@ -1,6 +1,7 @@
 import createClient, { type Client, type Middleware } from 'openapi-fetch';
 import type { paths, components, EcfClientConfig, EcfFrontendClientConfig, PollingOptions } from './types';
 import { pollUntilComplete } from './polling';
+import { canResubmit, isTerminal } from './status';
 
 const ENVIRONMENT_URLS = {
   test: 'https://api.test.ecfx.ssd.com.do',
@@ -38,10 +39,16 @@ type ECFType = components['schemas']['ECFType'];
 
 export class EcfError extends Error {
   public readonly response: EcfResponse;
+  /**
+   * True when DGII confirmed it never received the document (`dgiiSubmissionState` is
+   * `NotReceived`): the same eNCF may be submitted again as a new request.
+   */
+  public readonly canResubmit: boolean;
   constructor(message: string, response: EcfResponse) {
     super(message);
     this.name = 'EcfError';
     this.response = response;
+    this.canResubmit = canResubmit(response);
   }
 }
 
@@ -77,6 +84,8 @@ export class EcfClient {
    *
    * Determines the correct endpoint from `ecf.encabezado.idDoc.tipoeCF`,
    * posts the ECF, then polls until `progress` is `Finished` or `Error`.
+   * `dgiiSubmissionState: 'PendingReconciliation'` keeps polling (never resend meanwhile);
+   * `'NotReceived'` throws an {@link EcfError} with `canResubmit === true`.
    */
   async sendEcf(ecf: ECF, pollingOptions?: PollingOptions): Promise<EcfResponse> {
     const tipoeCF = ecf.encabezado?.idDoc?.tipoeCF;
@@ -118,11 +127,11 @@ export class EcfClient {
         }
         return match;
       },
-      (r) => r.progress === 'Finished' || r.progress === 'Error',
+      isTerminal,
       pollingOptions,
     );
 
-    if (result.progress === 'Error') {
+    if (result.progress === 'Error' || canResubmit(result)) {
       throw new EcfError(
         result.errors ?? result.mensaje ?? 'ECF processing failed',
         result,
@@ -152,6 +161,8 @@ export class EcfClient {
     Names?: string[];
     Page?: number | string;
     Limit?: number | string;
+    /** Free-text search by RNC or name. */
+    Search?: string;
   }) {
     return this.raw.GET('/company', { params: { query: params } });
   }
@@ -290,6 +301,8 @@ export class EcfClient {
     Rncs?: string[];
     Page?: number | string;
     Limit?: number | string;
+    /** Hide received documents that DGII never received. */
+    OcultarNoRecibidas?: boolean;
   }) {
     return this.raw.GET('/recepcion', { params: { query: params } });
   }
@@ -311,6 +324,8 @@ export class EcfClient {
     Encfs?: string[];
     Page?: number | string;
     Limit?: number | string;
+    /** Hide received documents that DGII never received. */
+    OcultarNoRecibidas?: boolean;
   }) {
     return this.raw.GET('/recepcion/{rnc}', {
       params: { path: { rnc }, query: params },
@@ -558,6 +573,8 @@ export class EcfFrontendClient {
     Names?: string[];
     Page?: number | string;
     Limit?: number | string;
+    /** Free-text search by RNC or name. */
+    Search?: string;
   }) {
     return this.raw.GET('/company', { params: { query: params } });
   }

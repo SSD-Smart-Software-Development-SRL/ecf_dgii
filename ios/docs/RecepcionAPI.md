@@ -109,7 +109,7 @@ Name | Type | Description  | Notes
 
 # **searchEcfReceptionRequests**
 ```swift
-    open class func searchEcfReceptionRequests(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: SearchEcfsAmountFromParameter? = nil, amountTo: SearchEcfsAmountFromParameter? = nil, page: GetCompaniesPageParameter? = nil, limit: GetCompaniesLimitParameter? = nil, completion: @escaping (_ data: PaginatedApiResultOfEcfReceptionRequestDto?, _ error: Error?) -> Void)
+    open class func searchEcfReceptionRequests(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: SearchEcfsAmountFromParameter? = nil, amountTo: SearchEcfsAmountFromParameter? = nil, ocultarNoRecibidas: Bool? = nil, page: GetCompaniesPageParameter? = nil, limit: GetCompaniesLimitParameter? = nil, completion: @escaping (_ data: PaginatedApiResultOfEcfReceptionRequestDto?, _ error: Error?) -> Void)
 ```
 
 
@@ -129,10 +129,11 @@ let fromDate = "fromDate_example" // String |  (optional)
 let toDate = "toDate_example" // String |  (optional)
 let amountFrom = SearchEcfs_AmountFrom_parameter() // SearchEcfsAmountFromParameter |  (optional)
 let amountTo = SearchEcfs_AmountFrom_parameter() // SearchEcfsAmountFromParameter |  (optional)
+let ocultarNoRecibidas = true // Bool |  (optional)
 let page = GetCompanies_Page_parameter() // GetCompaniesPageParameter |  (optional) (default to 1)
 let limit = GetCompanies_Limit_parameter() // GetCompaniesLimitParameter |  (optional) (default to 25)
 
-RecepcionAPI.searchEcfReceptionRequests(messageIds: messageIds, encfs: encfs, rncs: rncs, rncEmisors: rncEmisors, tiposEcfs: tiposEcfs, progresses: progresses, fromDate: fromDate, toDate: toDate, amountFrom: amountFrom, amountTo: amountTo, page: page, limit: limit) { (response, error) in
+RecepcionAPI.searchEcfReceptionRequests(messageIds: messageIds, encfs: encfs, rncs: rncs, rncEmisors: rncEmisors, tiposEcfs: tiposEcfs, progresses: progresses, fromDate: fromDate, toDate: toDate, amountFrom: amountFrom, amountTo: amountTo, ocultarNoRecibidas: ocultarNoRecibidas, page: page, limit: limit) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -158,6 +159,7 @@ Name | Type | Description  | Notes
  **toDate** | **String** |  | [optional] 
  **amountFrom** | **SearchEcfsAmountFromParameter** |  | [optional] 
  **amountTo** | **SearchEcfsAmountFromParameter** |  | [optional] 
+ **ocultarNoRecibidas** | **Bool** |  | [optional] 
  **page** | **GetCompaniesPageParameter** |  | [optional] [default to 1]
  **limit** | **GetCompaniesLimitParameter** |  | [optional] [default to 25]
 
@@ -178,7 +180,7 @@ Name | Type | Description  | Notes
 
 # **searchEcfReceptionRequestsByRnc**
 ```swift
-    open class func searchEcfReceptionRequestsByRnc(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: SearchEcfsAmountFromParameter? = nil, amountTo: SearchEcfsAmountFromParameter? = nil, page: GetCompaniesPageParameter? = nil, limit: GetCompaniesLimitParameter? = nil, completion: @escaping (_ data: PaginatedApiResultOfEcfReceptionRequestDto?, _ error: Error?) -> Void)
+    open class func searchEcfReceptionRequestsByRnc(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: SearchEcfsAmountFromParameter? = nil, amountTo: SearchEcfsAmountFromParameter? = nil, ocultarNoRecibidas: Bool? = nil, page: GetCompaniesPageParameter? = nil, limit: GetCompaniesLimitParameter? = nil, completion: @escaping (_ data: PaginatedApiResultOfEcfReceptionRequestDto?, _ error: Error?) -> Void)
 ```
 
 
@@ -198,10 +200,11 @@ let fromDate = "fromDate_example" // String |  (optional)
 let toDate = "toDate_example" // String |  (optional)
 let amountFrom = SearchEcfs_AmountFrom_parameter() // SearchEcfsAmountFromParameter |  (optional)
 let amountTo = SearchEcfs_AmountFrom_parameter() // SearchEcfsAmountFromParameter |  (optional)
+let ocultarNoRecibidas = true // Bool |  (optional)
 let page = GetCompanies_Page_parameter() // GetCompaniesPageParameter |  (optional) (default to 1)
 let limit = GetCompanies_Limit_parameter() // GetCompaniesLimitParameter |  (optional) (default to 25)
 
-RecepcionAPI.searchEcfReceptionRequestsByRnc(rnc: rnc, messageIds: messageIds, encfs: encfs, rncEmisors: rncEmisors, tiposEcfs: tiposEcfs, progresses: progresses, fromDate: fromDate, toDate: toDate, amountFrom: amountFrom, amountTo: amountTo, page: page, limit: limit) { (response, error) in
+RecepcionAPI.searchEcfReceptionRequestsByRnc(rnc: rnc, messageIds: messageIds, encfs: encfs, rncEmisors: rncEmisors, tiposEcfs: tiposEcfs, progresses: progresses, fromDate: fromDate, toDate: toDate, amountFrom: amountFrom, amountTo: amountTo, ocultarNoRecibidas: ocultarNoRecibidas, page: page, limit: limit) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -227,6 +230,7 @@ Name | Type | Description  | Notes
  **toDate** | **String** |  | [optional] 
  **amountFrom** | **SearchEcfsAmountFromParameter** |  | [optional] 
  **amountTo** | **SearchEcfsAmountFromParameter** |  | [optional] 
+ **ocultarNoRecibidas** | **Bool** |  | [optional] 
  **page** | **GetCompaniesPageParameter** |  | [optional] [default to 1]
  **limit** | **GetCompaniesLimitParameter** |  | [optional] [default to 25]
 

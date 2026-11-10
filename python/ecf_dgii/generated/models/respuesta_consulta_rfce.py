@@ -26,7 +26,7 @@ class RespuestaConsultaRFCE:
                 RNC del emisor del comprobante fiscal electrónico consultado.
             encf (str | Unset): Número de secuencia utilizada por el contribuyente en el ENCF.
                 Número de comprobante fiscal electrónico (e-NCF) consultado.
-            secuencia_utilizada (bool | Unset): Indica si el número de secuencia puede ser reutilizado.
+            secuencia_utilizada (bool | None | Unset): Indica si el número de secuencia puede ser reutilizado.
                 `true` si la secuencia NO puede reutilizarse (rechazado por motivos específicos);
                         `false` si la secuencia SÍ puede reutilizarse.
             codigo (None | str | Unset): Código asociado al estado de validación del e-CF recibido.
@@ -43,7 +43,7 @@ class RespuestaConsultaRFCE:
 
     rnc: None | str | Unset = UNSET
     encf: str | Unset = UNSET
-    secuencia_utilizada: bool | Unset = UNSET
+    secuencia_utilizada: bool | None | Unset = UNSET
     codigo: None | str | Unset = UNSET
     estado: None | str | Unset = UNSET
     mensajes: list[Mensaje] | None | Unset = UNSET
@@ -58,7 +58,11 @@ class RespuestaConsultaRFCE:
 
         encf = self.encf
 
-        secuencia_utilizada = self.secuencia_utilizada
+        secuencia_utilizada: bool | None | Unset
+        if isinstance(self.secuencia_utilizada, Unset):
+            secuencia_utilizada = UNSET
+        else:
+            secuencia_utilizada = self.secuencia_utilizada
 
         codigo: None | str | Unset
         if isinstance(self.codigo, Unset):
@@ -119,7 +123,14 @@ class RespuestaConsultaRFCE:
 
         encf = d.pop("encf", UNSET)
 
-        secuencia_utilizada = d.pop("secuenciaUtilizada", UNSET)
+        def _parse_secuencia_utilizada(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        secuencia_utilizada = _parse_secuencia_utilizada(d.pop("secuenciaUtilizada", UNSET))
 
         def _parse_codigo(data: object) -> None | str | Unset:
             if data is None:

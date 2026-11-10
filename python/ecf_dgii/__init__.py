@@ -8,6 +8,7 @@ from .exceptions import (
     EcfConnectionError,
     EcfForbiddenError,
     EcfNotFoundError,
+    EcfNotReceivedError,
     EcfProcessingError,
     EcfRateLimitError,
     EcfServerError,
@@ -15,7 +16,7 @@ from .exceptions import (
     PollingMaxRetriesError,
     PollingTimeoutError,
 )
-from .polling import PollingOptions
+from .polling import PollingOptions, can_resubmit, is_pending_reconciliation, is_terminal, submission_state
 
 # Re-export generated models and enums for convenience
 from .generated.client import AuthenticatedClient, Client
@@ -30,6 +31,7 @@ from .generated.models import (
     DetalleAnulacionRequest,
     DetalleAnulacionRequestDto,
     DGIIEnvironment,
+    DgiiSubmissionStateType1,
     Directorio,
     Ecf31ECF,
     Ecf32ECF,
@@ -77,6 +79,10 @@ __all__ = [
     "Environment",
     "ENVIRONMENT_URLS",
     "PollingOptions",
+    "can_resubmit",
+    "is_pending_reconciliation",
+    "is_terminal",
+    "submission_state",
     # Generated client
     "AuthenticatedClient",
     "Client",
@@ -86,6 +92,7 @@ __all__ = [
     "EcfConnectionError",
     "EcfForbiddenError",
     "EcfNotFoundError",
+    "EcfNotReceivedError",
     "EcfProcessingError",
     "EcfRateLimitError",
     "EcfServerError",
@@ -103,6 +110,7 @@ __all__ = [
     "DetalleAnulacionRequest",
     "DetalleAnulacionRequestDto",
     "DGIIEnvironment",
+    "DgiiSubmissionStateType1",
     "Directorio",
     "Ecf31ECF",
     "Ecf32ECF",

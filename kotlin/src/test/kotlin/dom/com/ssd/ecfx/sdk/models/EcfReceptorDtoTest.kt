@@ -23,7 +23,6 @@ import dom.com.ssd.ecfx.sdk.models.AcecfSummaryDto
 import dom.com.ssd.ecfx.sdk.models.AllTipoECFTypes
 import dom.com.ssd.ecfx.sdk.models.EcfReceptorDtoEstado
 import dom.com.ssd.ecfx.sdk.models.EcfReceptorDtoProgress
-import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
 
 class EcfReceptorDtoTest : ShouldSpec() {
     init {

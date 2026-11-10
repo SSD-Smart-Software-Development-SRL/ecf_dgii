@@ -377,6 +377,7 @@ public class RecepcionApi {
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback Callback for upload/download progress
@@ -391,7 +392,7 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchEcfReceptionRequestsCall(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchEcfReceptionRequestsCall(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable Boolean ocultarNoRecibidas, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -456,6 +457,10 @@ public class RecepcionApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("AmountTo", amountTo));
         }
 
+        if (ocultarNoRecibidas != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("OcultarNoRecibidas", ocultarNoRecibidas));
+        }
+
         if (page != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("Page", page));
         }
@@ -485,8 +490,8 @@ public class RecepcionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchEcfReceptionRequestsValidateBeforeCall(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
-        return searchEcfReceptionRequestsCall(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, _callback);
+    private okhttp3.Call searchEcfReceptionRequestsValidateBeforeCall(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable Boolean ocultarNoRecibidas, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+        return searchEcfReceptionRequestsCall(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit, _callback);
 
     }
 
@@ -503,6 +508,7 @@ public class RecepcionApi {
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfReceptionRequestDto
@@ -516,8 +522,8 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequests(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> localVarResp = searchEcfReceptionRequestsWithHttpInfo(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit);
+    public PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequests(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable Boolean ocultarNoRecibidas, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> localVarResp = searchEcfReceptionRequestsWithHttpInfo(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit);
         return localVarResp.getData();
     }
 
@@ -534,6 +540,7 @@ public class RecepcionApi {
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse&lt;PaginatedApiResultOfEcfReceptionRequestDto&gt;
@@ -547,8 +554,8 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> searchEcfReceptionRequestsWithHttpInfo(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        okhttp3.Call localVarCall = searchEcfReceptionRequestsValidateBeforeCall(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, null);
+    public ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> searchEcfReceptionRequestsWithHttpInfo(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable Boolean ocultarNoRecibidas, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        okhttp3.Call localVarCall = searchEcfReceptionRequestsValidateBeforeCall(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit, null);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfReceptionRequestDto>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -566,6 +573,7 @@ public class RecepcionApi {
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback The callback to be executed when the API call finishes
@@ -580,9 +588,9 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchEcfReceptionRequestsAsync(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfReceptionRequestDto> _callback) throws ApiException {
+    public okhttp3.Call searchEcfReceptionRequestsAsync(@javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable Boolean ocultarNoRecibidas, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfReceptionRequestDto> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = searchEcfReceptionRequestsValidateBeforeCall(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, _callback);
+        okhttp3.Call localVarCall = searchEcfReceptionRequestsValidateBeforeCall(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit, _callback);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfReceptionRequestDto>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -599,6 +607,7 @@ public class RecepcionApi {
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback Callback for upload/download progress
@@ -613,7 +622,7 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchEcfReceptionRequestsByRncCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchEcfReceptionRequestsByRncCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable Boolean ocultarNoRecibidas, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -675,6 +684,10 @@ public class RecepcionApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("AmountTo", amountTo));
         }
 
+        if (ocultarNoRecibidas != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("OcultarNoRecibidas", ocultarNoRecibidas));
+        }
+
         if (page != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("Page", page));
         }
@@ -704,13 +717,13 @@ public class RecepcionApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call searchEcfReceptionRequestsByRncValidateBeforeCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchEcfReceptionRequestsByRncValidateBeforeCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable Boolean ocultarNoRecibidas, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'rnc' is set
         if (rnc == null) {
             throw new ApiException("Missing the required parameter 'rnc' when calling searchEcfReceptionRequestsByRnc(Async)");
         }
 
-        return searchEcfReceptionRequestsByRncCall(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, _callback);
+        return searchEcfReceptionRequestsByRncCall(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit, _callback);
 
     }
 
@@ -727,6 +740,7 @@ public class RecepcionApi {
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfReceptionRequestDto
@@ -740,8 +754,8 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequestsByRnc(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> localVarResp = searchEcfReceptionRequestsByRncWithHttpInfo(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit);
+    public PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequestsByRnc(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable Boolean ocultarNoRecibidas, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> localVarResp = searchEcfReceptionRequestsByRncWithHttpInfo(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit);
         return localVarResp.getData();
     }
 
@@ -758,6 +772,7 @@ public class RecepcionApi {
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse&lt;PaginatedApiResultOfEcfReceptionRequestDto&gt;
@@ -771,8 +786,8 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> searchEcfReceptionRequestsByRncWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        okhttp3.Call localVarCall = searchEcfReceptionRequestsByRncValidateBeforeCall(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, null);
+    public ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto> searchEcfReceptionRequestsByRncWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable Boolean ocultarNoRecibidas, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
+        okhttp3.Call localVarCall = searchEcfReceptionRequestsByRncValidateBeforeCall(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit, null);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfReceptionRequestDto>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -790,6 +805,7 @@ public class RecepcionApi {
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @param _callback The callback to be executed when the API call finishes
@@ -804,9 +820,9 @@ public class RecepcionApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call searchEcfReceptionRequestsByRncAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfReceptionRequestDto> _callback) throws ApiException {
+    public okhttp3.Call searchEcfReceptionRequestsByRncAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nullable List<UUID> messageIds, @javax.annotation.Nullable List<String> encfs, @javax.annotation.Nullable List<String> rncEmisors, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> tiposEcfs, @javax.annotation.Nullable List<SearchEcfReceptionRequestsTiposEcfsParameterInner> progresses, @javax.annotation.Nullable String fromDate, @javax.annotation.Nullable String toDate, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountFrom, @javax.annotation.Nullable SearchEcfsAmountFromParameter amountTo, @javax.annotation.Nullable Boolean ocultarNoRecibidas, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfEcfReceptionRequestDto> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = searchEcfReceptionRequestsByRncValidateBeforeCall(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit, _callback);
+        okhttp3.Call localVarCall = searchEcfReceptionRequestsByRncValidateBeforeCall(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit, _callback);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfEcfReceptionRequestDto>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

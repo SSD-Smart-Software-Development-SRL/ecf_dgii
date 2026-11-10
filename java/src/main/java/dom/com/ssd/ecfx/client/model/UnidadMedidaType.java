@@ -151,7 +151,9 @@ public enum UnidadMedidaType {
   
   OZ_ONZAS("OZOnzas"),
   
-  OZT_ONZAS_TROY("OZTOnzasTroy");
+  OZT_ONZAS_TROY("OZTOnzasTroy"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -174,7 +176,7 @@ public enum UnidadMedidaType {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<UnidadMedidaType> {

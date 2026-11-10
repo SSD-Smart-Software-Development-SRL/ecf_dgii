@@ -15,5 +15,7 @@
 
 * `REFERENCIA_FACTURA_CONSUMO_ELECTRONICA` (value: `"ReferenciaFacturaConsumoElectronica"`)
 
+* `UNKNOWN_DEFAULT_OPEN_API` (value: `"unknown_default_open_api"`)
+
 
 

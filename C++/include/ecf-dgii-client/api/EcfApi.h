@@ -71,7 +71,7 @@ public:
     /// 
     /// </summary>
     /// <remarks>
-    /// 
+    /// Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.
     /// </remarks>
     /// <param name="rnc"></param>
     /// <param name="anulacionRequest"></param>
@@ -143,7 +143,7 @@ public:
     /// 
     /// </summary>
     /// <remarks>
-    /// 
+    /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
     /// </remarks>
     /// <param name="ecf31ECF"></param>
     pplx::task<std::shared_ptr<EcfResponse>> recepcionEcf31(
@@ -153,7 +153,7 @@ public:
     /// 
     /// </summary>
     /// <remarks>
-    /// 
+    /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
     /// </remarks>
     /// <param name="ecf32ECF"></param>
     pplx::task<std::shared_ptr<EcfResponse>> recepcionEcf32(
@@ -163,7 +163,7 @@ public:
     /// 
     /// </summary>
     /// <remarks>
-    /// 
+    /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
     /// </remarks>
     /// <param name="ecf33ECF"></param>
     pplx::task<std::shared_ptr<EcfResponse>> recepcionEcf33(
@@ -173,7 +173,7 @@ public:
     /// 
     /// </summary>
     /// <remarks>
-    /// 
+    /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
     /// </remarks>
     /// <param name="ecf34ECF"></param>
     pplx::task<std::shared_ptr<EcfResponse>> recepcionEcf34(
@@ -183,7 +183,7 @@ public:
     /// 
     /// </summary>
     /// <remarks>
-    /// 
+    /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
     /// </remarks>
     /// <param name="ecf41ECF"></param>
     pplx::task<std::shared_ptr<EcfResponse>> recepcionEcf41(
@@ -193,7 +193,7 @@ public:
     /// 
     /// </summary>
     /// <remarks>
-    /// 
+    /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
     /// </remarks>
     /// <param name="ecf43ECF"></param>
     pplx::task<std::shared_ptr<EcfResponse>> recepcionEcf43(
@@ -203,7 +203,7 @@ public:
     /// 
     /// </summary>
     /// <remarks>
-    /// 
+    /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
     /// </remarks>
     /// <param name="ecf44ECF"></param>
     pplx::task<std::shared_ptr<EcfResponse>> recepcionEcf44(
@@ -213,7 +213,7 @@ public:
     /// 
     /// </summary>
     /// <remarks>
-    /// 
+    /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
     /// </remarks>
     /// <param name="ecf45ECF"></param>
     pplx::task<std::shared_ptr<EcfResponse>> recepcionEcf45(
@@ -223,7 +223,7 @@ public:
     /// 
     /// </summary>
     /// <remarks>
-    /// 
+    /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
     /// </remarks>
     /// <param name="ecf46ECF"></param>
     pplx::task<std::shared_ptr<EcfResponse>> recepcionEcf46(
@@ -233,7 +233,7 @@ public:
     /// 
     /// </summary>
     /// <remarks>
-    /// 
+    /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
     /// </remarks>
     /// <param name="ecf47ECF"></param>
     pplx::task<std::shared_ptr<EcfResponse>> recepcionEcf47(

@@ -33,20 +33,21 @@ namespace EcfDgii.Client.Generated.Dgii.Item.Consultatrackids.Consulta
         public ConsultaRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/dgii/{rnc}/consultatrackids/consulta?encf={encf}&rncEmisor={rncEmisor}", rawUrl)
         {
         }
-        /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.RespuestaConsultaTrackId"/></returns>
+        /// <returns>A List&lt;global::EcfDgii.Client.Generated.Models.TrackingDetalle&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 400 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 401 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 403 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 500 status code</exception>
+        /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::EcfDgii.Client.Generated.Models.RespuestaConsultaTrackId?> GetAsync(Action<RequestConfiguration<global::EcfDgii.Client.Generated.Dgii.Item.Consultatrackids.Consulta.ConsultaRequestBuilder.ConsultaRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::EcfDgii.Client.Generated.Models.TrackingDetalle>?> GetAsync(Action<RequestConfiguration<global::EcfDgii.Client.Generated.Dgii.Item.Consultatrackids.Consulta.ConsultaRequestBuilder.ConsultaRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::EcfDgii.Client.Generated.Models.RespuestaConsultaTrackId> GetAsync(Action<RequestConfiguration<global::EcfDgii.Client.Generated.Dgii.Item.Consultatrackids.Consulta.ConsultaRequestBuilder.ConsultaRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::EcfDgii.Client.Generated.Models.TrackingDetalle>> GetAsync(Action<RequestConfiguration<global::EcfDgii.Client.Generated.Dgii.Item.Consultatrackids.Consulta.ConsultaRequestBuilder.ConsultaRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -56,8 +57,10 @@ namespace EcfDgii.Client.Generated.Dgii.Item.Consultatrackids.Consulta
                 { "401", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "403", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "500", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
+                { "502", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::EcfDgii.Client.Generated.Models.RespuestaConsultaTrackId>(requestInfo, global::EcfDgii.Client.Generated.Models.RespuestaConsultaTrackId.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::EcfDgii.Client.Generated.Models.TrackingDetalle>(requestInfo, global::EcfDgii.Client.Generated.Models.TrackingDetalle.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return collectionResult?.AsList();
         }
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

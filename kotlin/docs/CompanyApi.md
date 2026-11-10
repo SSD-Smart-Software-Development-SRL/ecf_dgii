@@ -59,7 +59,7 @@ Configure Bearer:
 
 <a id="getCompanies"></a>
 # **getCompanies**
-> PaginatedApiResultOfCompanyResponse getCompanies(rncs, names, page, limit)
+> PaginatedApiResultOfCompanyResponse getCompanies(rncs, names, page, limit, search)
 
 
 
@@ -72,10 +72,11 @@ Configure Bearer:
 val apiInstance = CompanyApi()
 val rncs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
 val names : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
-val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
+val page : Int = 56 // Int | 
+val limit : Int = 56 // Int | 
+val search : kotlin.String = search_example // kotlin.String | 
 try {
-    val result : PaginatedApiResultOfCompanyResponse = apiInstance.getCompanies(rncs, names, page, limit)
+    val result : PaginatedApiResultOfCompanyResponse = apiInstance.getCompanies(rncs, names, page, limit, search)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling CompanyApi#getCompanies")
@@ -89,10 +90,11 @@ try {
 ### Parameters
 | **rncs** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
 | **names** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
-| **page** | **GetCompaniesPageParameter**|  | [optional] [default to 1] |
+| **page** | **Int**|  | [optional] [default to 1] |
+| **limit** | **Int**|  | [optional] [default to 25] |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **limit** | **GetCompaniesLimitParameter**|  | [optional] [default to 25] |
+| **search** | **kotlin.String**|  | [optional] |
 
 ### Return type
 

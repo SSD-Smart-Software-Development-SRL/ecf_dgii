@@ -16,3 +16,7 @@ additionalProperties:
   hideGenerationTimestamp: true
   openApiNullable: false
   useOneOfDiscriminatorLookup: false
+  # Tolerate API evolution: unknown enum values map to UNKNOWN_DEFAULT_OPEN_API
+  # and unknown JSON fields are kept in additionalProperties instead of throwing.
+  enumUnknownDefaultCase: true
+  disallowAdditionalPropertiesIfNotPresent: false

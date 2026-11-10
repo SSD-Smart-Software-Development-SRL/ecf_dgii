@@ -22,7 +22,6 @@ import okhttp3.HttpUrl
 import dom.com.ssd.ecfx.sdk.models.EcfReceptorDto
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfReceptionRequestDto
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
-import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
 import dom.com.ssd.ecfx.sdk.models.SendAcecfRequest
 
 import kotlinx.serialization.SerialName
@@ -212,6 +211,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfReceptionRequestDto
@@ -223,8 +223,8 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchEcfReceptionRequests(messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncs: kotlin.collections.List<kotlin.String>? = null, rncEmisors: kotlin.collections.List<kotlin.String>? = null, tiposEcfs: kotlin.collections.List<Int>? = null, progresses: kotlin.collections.List<Int>? = null, fromDate: kotlin.String? = null, toDate: kotlin.String? = null, amountFrom: SearchEcfsAmountFromParameter? = null, amountTo: SearchEcfsAmountFromParameter? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfReceptionRequestDto {
-        val localVarResponse = searchEcfReceptionRequestsWithHttpInfo(messageIds = messageIds, encfs = encfs, rncs = rncs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
+    fun searchEcfReceptionRequests(messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncs: kotlin.collections.List<kotlin.String>? = null, rncEmisors: kotlin.collections.List<kotlin.String>? = null, tiposEcfs: kotlin.collections.List<Int>? = null, progresses: kotlin.collections.List<Int>? = null, fromDate: kotlin.String? = null, toDate: kotlin.String? = null, amountFrom: kotlin.Double? = null, amountTo: kotlin.Double? = null, ocultarNoRecibidas: kotlin.Boolean? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfReceptionRequestDto {
+        val localVarResponse = searchEcfReceptionRequestsWithHttpInfo(messageIds = messageIds, encfs = encfs, rncs = rncs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, ocultarNoRecibidas = ocultarNoRecibidas, page = page, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PaginatedApiResultOfEcfReceptionRequestDto
@@ -255,6 +255,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?>
@@ -263,8 +264,8 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchEcfReceptionRequestsWithHttpInfo(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> {
-        val localVariableConfig = searchEcfReceptionRequestsRequestConfig(messageIds = messageIds, encfs = encfs, rncs = rncs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
+    fun searchEcfReceptionRequestsWithHttpInfo(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: kotlin.Double?, amountTo: kotlin.Double?, ocultarNoRecibidas: kotlin.Boolean?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> {
+        val localVariableConfig = searchEcfReceptionRequestsRequestConfig(messageIds = messageIds, encfs = encfs, rncs = rncs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, ocultarNoRecibidas = ocultarNoRecibidas, page = page, limit = limit)
 
         return request<Unit, PaginatedApiResultOfEcfReceptionRequestDto>(
             localVariableConfig
@@ -284,11 +285,12 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchEcfReceptionRequestsRequestConfig(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : RequestConfig<Unit> {
+    fun searchEcfReceptionRequestsRequestConfig(messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: kotlin.Double?, amountTo: kotlin.Double?, ocultarNoRecibidas: kotlin.Boolean?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -319,6 +321,9 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
                 if (amountFrom != null) {
                 }
                 if (amountTo != null) {
+                }
+                if (ocultarNoRecibidas != null) {
+                    put("OcultarNoRecibidas", listOf(ocultarNoRecibidas.toString()))
                 }
                 if (page != null) {
                 }
@@ -352,6 +357,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return PaginatedApiResultOfEcfReceptionRequestDto
@@ -363,8 +369,8 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchEcfReceptionRequestsByRnc(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncEmisors: kotlin.collections.List<kotlin.String>? = null, tiposEcfs: kotlin.collections.List<Int>? = null, progresses: kotlin.collections.List<Int>? = null, fromDate: kotlin.String? = null, toDate: kotlin.String? = null, amountFrom: SearchEcfsAmountFromParameter? = null, amountTo: SearchEcfsAmountFromParameter? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfReceptionRequestDto {
-        val localVarResponse = searchEcfReceptionRequestsByRncWithHttpInfo(rnc = rnc, messageIds = messageIds, encfs = encfs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
+    fun searchEcfReceptionRequestsByRnc(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>? = null, encfs: kotlin.collections.List<kotlin.String>? = null, rncEmisors: kotlin.collections.List<kotlin.String>? = null, tiposEcfs: kotlin.collections.List<Int>? = null, progresses: kotlin.collections.List<Int>? = null, fromDate: kotlin.String? = null, toDate: kotlin.String? = null, amountFrom: kotlin.Double? = null, amountTo: kotlin.Double? = null, ocultarNoRecibidas: kotlin.Boolean? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfReceptionRequestDto {
+        val localVarResponse = searchEcfReceptionRequestsByRncWithHttpInfo(rnc = rnc, messageIds = messageIds, encfs = encfs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, ocultarNoRecibidas = ocultarNoRecibidas, page = page, limit = limit)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PaginatedApiResultOfEcfReceptionRequestDto
@@ -395,6 +401,7 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?>
@@ -403,8 +410,8 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchEcfReceptionRequestsByRncWithHttpInfo(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> {
-        val localVariableConfig = searchEcfReceptionRequestsByRncRequestConfig(rnc = rnc, messageIds = messageIds, encfs = encfs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, page = page, limit = limit)
+    fun searchEcfReceptionRequestsByRncWithHttpInfo(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: kotlin.Double?, amountTo: kotlin.Double?, ocultarNoRecibidas: kotlin.Boolean?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfReceptionRequestDto?> {
+        val localVariableConfig = searchEcfReceptionRequestsByRncRequestConfig(rnc = rnc, messageIds = messageIds, encfs = encfs, rncEmisors = rncEmisors, tiposEcfs = tiposEcfs, progresses = progresses, fromDate = fromDate, toDate = toDate, amountFrom = amountFrom, amountTo = amountTo, ocultarNoRecibidas = ocultarNoRecibidas, page = page, limit = limit)
 
         return request<Unit, PaginatedApiResultOfEcfReceptionRequestDto>(
             localVariableConfig
@@ -424,11 +431,12 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
      * @param toDate  (optional)
      * @param amountFrom  (optional)
      * @param amountTo  (optional)
+     * @param ocultarNoRecibidas  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchEcfReceptionRequestsByRncRequestConfig(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, page: Int?, limit: Int?) : RequestConfig<Unit> {
+    fun searchEcfReceptionRequestsByRncRequestConfig(rnc: kotlin.String, messageIds: kotlin.collections.List<java.util.UUID>?, encfs: kotlin.collections.List<kotlin.String>?, rncEmisors: kotlin.collections.List<kotlin.String>?, tiposEcfs: kotlin.collections.List<Int>?, progresses: kotlin.collections.List<Int>?, fromDate: kotlin.String?, toDate: kotlin.String?, amountFrom: kotlin.Double?, amountTo: kotlin.Double?, ocultarNoRecibidas: kotlin.Boolean?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -456,6 +464,9 @@ open class RecepcionApi(basePath: kotlin.String = defaultBasePath, client: Call.
                 if (amountFrom != null) {
                 }
                 if (amountTo != null) {
+                }
+                if (ocultarNoRecibidas != null) {
+                    put("OcultarNoRecibidas", listOf(ocultarNoRecibidas.toString()))
                 }
                 if (page != null) {
                 }

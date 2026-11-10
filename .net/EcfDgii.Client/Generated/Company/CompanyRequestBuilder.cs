@@ -35,7 +35,7 @@ namespace EcfDgii.Client.Generated.Company
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompanyRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/company{?Limit*,Names*,Page*,Rncs*}", pathParameters)
+        public CompanyRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/company{?Limit*,Names*,Page*,Rncs*,Search*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,7 +43,7 @@ namespace EcfDgii.Client.Generated.Company
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompanyRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/company{?Limit*,Names*,Page*,Rncs*}", rawUrl)
+        public CompanyRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/company{?Limit*,Names*,Page*,Rncs*,Search*}", rawUrl)
         {
         }
         /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.PaginatedApiResultOfCompanyResponse"/></returns>
@@ -171,6 +171,13 @@ namespace EcfDgii.Client.Generated.Company
 #nullable restore
 #else
             public string[] Rncs { get; set; }
+#endif
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public string? Search { get; set; }
+#nullable restore
+#else
+            public string Search { get; set; }
 #endif
         }
         /// <summary>

@@ -6,7 +6,7 @@
 | ------------ | ------------- | ------------- | ------------- |
 | **tipoeCF** | [**TipoeCFType**](TipoeCFType.md) |  |  |
 | **encf** | **kotlin.String** |  |  |
-| **indicadorNotaCredito** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
+| **indicadorNotaCredito** | **kotlin.Int** |  |  |
 | **tipoPago** | [**Ecf34TipoPagoType**](Ecf34TipoPagoType.md) |  |  |
 | **indicadorEnvioDiferido** | [**IndicadorEnvioDiferidoType**](IndicadorEnvioDiferidoType.md) |  |  [optional] |
 | **indicadorMontoGravado** | [**IndicadorMontoGravadoType**](IndicadorMontoGravadoType.md) |  |  [optional] |

@@ -187,12 +187,13 @@ namespace EcfDgii.Client
 
                     return responses.FirstOrDefault(r => r.MessageId == postResponse.MessageId) ?? responses[0];
                 },
-                r => r.Progress == EcfProgress.Finished || r.Progress == EcfProgress.Error,
+                // PendingReconciliation keeps polling; NotReceived ends it (see EcfStatus).
+                r => r.IsTerminal(),
                 pollingOptions,
                 cancellationToken
             ).ConfigureAwait(false);
 
-            if (result.Progress == EcfProgress.Error)
+            if (result.Progress == EcfProgress.Error || result.CanResubmit())
             {
                 var message = result.Errors ?? result.Mensaje ?? "ECF processing failed";
                 throw new EcfException(message, result);

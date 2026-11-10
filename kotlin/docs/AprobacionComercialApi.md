@@ -69,9 +69,9 @@ val apiInstance = AprobacionComercialApi()
 val messageIds : kotlin.collections.List<java.util.UUID> =  // kotlin.collections.List<java.util.UUID> | 
 val encfs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
 val rncs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
-val progresses : kotlin.collections.List<SearchEcfReceptionRequestsTiposEcfsParameterInner> =  // kotlin.collections.List<SearchEcfReceptionRequestsTiposEcfsParameterInner> | 
-val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
+val progresses : kotlin.collections.List<Int> =  // kotlin.collections.List<Int> | 
+val page : Int = 56 // Int | 
+val limit : Int = 56 // Int | 
 try {
     val result : PaginatedApiResultOfAcecfReceptionRequestDto = apiInstance.searchAcecfReceptionRequests(messageIds, encfs, rncs, progresses, page, limit)
     println(result)
@@ -88,11 +88,11 @@ try {
 | **messageIds** | [**kotlin.collections.List&lt;java.util.UUID&gt;**](java.util.UUID.md)|  | [optional] |
 | **encfs** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
 | **rncs** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
-| **progresses** | [**kotlin.collections.List&lt;SearchEcfReceptionRequestsTiposEcfsParameterInner&gt;**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md)|  | [optional] |
-| **page** | **GetCompaniesPageParameter**|  | [optional] [default to 1] |
+| **progresses** | [**kotlin.collections.List&lt;Int&gt;**](Int.md)|  | [optional] |
+| **page** | **Int**|  | [optional] [default to 1] |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **limit** | **GetCompaniesLimitParameter**|  | [optional] [default to 25] |
+| **limit** | **Int**|  | [optional] [default to 25] |
 
 ### Return type
 

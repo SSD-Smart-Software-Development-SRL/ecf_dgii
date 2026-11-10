@@ -89,6 +89,7 @@ public:
     /// <param name="toDate"> (optional, default to utility::conversions::to_string_t(&quot;&quot;))</param>
     /// <param name="amountFrom"> (optional, default to 0.0)</param>
     /// <param name="amountTo"> (optional, default to 0.0)</param>
+    /// <param name="ocultarNoRecibidas"> (optional, default to false)</param>
     /// <param name="page"> (optional, default to 0)</param>
     /// <param name="limit"> (optional, default to 0)</param>
     pplx::task<std::shared_ptr<PaginatedApiResultOfEcfReceptionRequestDto>> searchEcfReceptionRequests(
@@ -102,6 +103,7 @@ public:
         boost::optional<utility::string_t> toDate,
         boost::optional<SearchEcfs_AmountFrom_parameter> amountFrom,
         boost::optional<SearchEcfs_AmountFrom_parameter> amountTo,
+        boost::optional<bool> ocultarNoRecibidas,
         boost::optional<GetCompanies_Page_parameter> page,
         boost::optional<GetCompanies_Limit_parameter> limit
     ) const;
@@ -121,6 +123,7 @@ public:
     /// <param name="toDate"> (optional, default to utility::conversions::to_string_t(&quot;&quot;))</param>
     /// <param name="amountFrom"> (optional, default to 0.0)</param>
     /// <param name="amountTo"> (optional, default to 0.0)</param>
+    /// <param name="ocultarNoRecibidas"> (optional, default to false)</param>
     /// <param name="page"> (optional, default to 0)</param>
     /// <param name="limit"> (optional, default to 0)</param>
     pplx::task<std::shared_ptr<PaginatedApiResultOfEcfReceptionRequestDto>> searchEcfReceptionRequestsByRnc(
@@ -134,6 +137,7 @@ public:
         boost::optional<utility::string_t> toDate,
         boost::optional<SearchEcfs_AmountFrom_parameter> amountFrom,
         boost::optional<SearchEcfs_AmountFrom_parameter> amountTo,
+        boost::optional<bool> ocultarNoRecibidas,
         boost::optional<GetCompanies_Page_parameter> page,
         boost::optional<GetCompanies_Limit_parameter> limit
     ) const;

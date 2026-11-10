@@ -45,7 +45,7 @@ class RespuestaConsultaTrackId:
             encf (None | str | Unset): Obtiene el número de secuencia utilizada por el contribuyente en el e-CF.
                 El número de comprobante fiscal electrónico (e-NCF). Puede ser null si no está disponible. Example:
                 E310000000001.
-            secuencia_utilizada (bool | Unset): Indica si el número de secuencia puede ser reutilizada en otro e-CF.
+            secuencia_utilizada (bool | None | Unset): Indica si el número de secuencia puede ser reutilizada en otro e-CF.
                 True si la secuencia puede reutilizarse, False si no puede reutilizarse.
 
                 Este parámetro permite dar a conocer si el número de secuencia que fue recibido
@@ -72,7 +72,7 @@ class RespuestaConsultaTrackId:
     estado: None | str | Unset = UNSET
     rnc: None | str | Unset = UNSET
     encf: None | str | Unset = UNSET
-    secuencia_utilizada: bool | Unset = UNSET
+    secuencia_utilizada: bool | None | Unset = UNSET
     fecha_recepcion: None | str | Unset = UNSET
     mensajes: list[Mensaje] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -108,7 +108,11 @@ class RespuestaConsultaTrackId:
         else:
             encf = self.encf
 
-        secuencia_utilizada = self.secuencia_utilizada
+        secuencia_utilizada: bool | None | Unset
+        if isinstance(self.secuencia_utilizada, Unset):
+            secuencia_utilizada = UNSET
+        else:
+            secuencia_utilizada = self.secuencia_utilizada
 
         fecha_recepcion: None | str | Unset
         if isinstance(self.fecha_recepcion, Unset):
@@ -201,7 +205,14 @@ class RespuestaConsultaTrackId:
 
         encf = _parse_encf(d.pop("encf", UNSET))
 
-        secuencia_utilizada = d.pop("secuenciaUtilizada", UNSET)
+        def _parse_secuencia_utilizada(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        secuencia_utilizada = _parse_secuencia_utilizada(d.pop("secuenciaUtilizada", UNSET))
 
         def _parse_fecha_recepcion(data: object) -> None | str | Unset:
             if data is None:

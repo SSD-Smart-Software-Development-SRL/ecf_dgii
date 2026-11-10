@@ -8,14 +8,20 @@ docs/AnulacionRequest.md
 docs/ApiKeyApi.md
 docs/AprobacionComercialApi.md
 docs/CertificateResponse.md
+docs/CertificationStateResponse.md
+docs/CertificationStateResponseStepNumber.md
+docs/CertificationStep.md
 docs/CodificacionTipoImpuestosType.md
 docs/CodigoModificacionType.md
 docs/CompanyApi.md
+docs/CompanyEnvironmentUrls.md
 docs/CompanyResponse.md
+docs/CompanyUrlsResponse.md
 docs/DGIIEnvironment.md
 docs/DetalleAnulacionRequest.md
 docs/DetalleAnulacionRequestDto.md
 docs/DgiiApi.md
+docs/DgiiSubmissionState.md
 docs/Directorio.md
 docs/ECFType.md
 docs/Ecf31CodificacionTipoImpuestosType.md
@@ -329,8 +335,6 @@ docs/EcfReceptorDtoEstado.md
 docs/EcfReceptorDtoProgress.md
 docs/EcfResponse.md
 docs/EstadoType.md
-docs/GetCompaniesLimitParameter.md
-docs/GetCompaniesPageParameter.md
 docs/IndicadorAgenteRetencionoPercepcionType.md
 docs/IndicadorEnvioDiferidoType.md
 docs/IndicadorFacturacionDRType.md
@@ -349,6 +353,7 @@ docs/PaginatedApiResultOfEcfResponse.md
 docs/ProblemDetails.md
 docs/ProvinciaMunicipioType.md
 docs/RecepcionApi.md
+docs/ReceptorDirectoryStatus.md
 docs/RespuestaAnulacionRango.md
 docs/RespuestaConsultaEstado.md
 docs/RespuestaConsultaEstadoCodigo.md
@@ -359,8 +364,6 @@ docs/RespuestaConsultaTimbre.md
 docs/RespuestaConsultaTrackId.md
 docs/RespuestaEstatusServicio.md
 docs/RespuestaVentanaDeMantenimiento.md
-docs/SearchEcfReceptionRequestsTiposEcfsParameterInner.md
-docs/SearchEcfsAmountFromParameter.md
 docs/SecuenciaRequest.md
 docs/SecuenciaRequestDto.md
 docs/SendAcecfRequest.md
@@ -372,6 +375,7 @@ docs/TipoMonedaType.md
 docs/TipoPagoType.md
 docs/TipoeCFType.md
 docs/Token.md
+docs/TrackingDetalle.md
 docs/UnidadMedidaType.md
 docs/UpsertCompanyRequest.md
 docs/VentanaDeMantenimiento.md
@@ -416,12 +420,18 @@ src/main/kotlin/dom/com/ssd/ecfx/sdk/models/AllTipoECFTypes.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/AnulacionListResponse.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/AnulacionRequest.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/CertificateResponse.kt
+src/main/kotlin/dom/com/ssd/ecfx/sdk/models/CertificationStateResponse.kt
+src/main/kotlin/dom/com/ssd/ecfx/sdk/models/CertificationStateResponseStepNumber.kt
+src/main/kotlin/dom/com/ssd/ecfx/sdk/models/CertificationStep.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/CodificacionTipoImpuestosType.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/CodigoModificacionType.kt
+src/main/kotlin/dom/com/ssd/ecfx/sdk/models/CompanyEnvironmentUrls.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/CompanyResponse.kt
+src/main/kotlin/dom/com/ssd/ecfx/sdk/models/CompanyUrlsResponse.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/DGIIEnvironment.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/DetalleAnulacionRequest.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/DetalleAnulacionRequestDto.kt
+src/main/kotlin/dom/com/ssd/ecfx/sdk/models/DgiiSubmissionState.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/Directorio.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/ECFType.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/Ecf31CodificacionTipoImpuestosType.kt
@@ -734,8 +744,6 @@ src/main/kotlin/dom/com/ssd/ecfx/sdk/models/EcfReceptorDtoEstado.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/EcfReceptorDtoProgress.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/EcfResponse.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/EstadoType.kt
-src/main/kotlin/dom/com/ssd/ecfx/sdk/models/GetCompaniesLimitParameter.kt
-src/main/kotlin/dom/com/ssd/ecfx/sdk/models/GetCompaniesPageParameter.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/IndicadorAgenteRetencionoPercepcionType.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/IndicadorEnvioDiferidoType.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/IndicadorFacturacionDRType.kt
@@ -753,6 +761,7 @@ src/main/kotlin/dom/com/ssd/ecfx/sdk/models/PaginatedApiResultOfEcfReceptionRequ
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/PaginatedApiResultOfEcfResponse.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/ProblemDetails.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/ProvinciaMunicipioType.kt
+src/main/kotlin/dom/com/ssd/ecfx/sdk/models/ReceptorDirectoryStatus.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/RespuestaAnulacionRango.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/RespuestaConsultaEstado.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/RespuestaConsultaEstadoCodigo.kt
@@ -763,8 +772,6 @@ src/main/kotlin/dom/com/ssd/ecfx/sdk/models/RespuestaConsultaTimbre.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/RespuestaConsultaTrackId.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/RespuestaEstatusServicio.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/RespuestaVentanaDeMantenimiento.kt
-src/main/kotlin/dom/com/ssd/ecfx/sdk/models/SearchEcfReceptionRequestsTiposEcfsParameterInner.kt
-src/main/kotlin/dom/com/ssd/ecfx/sdk/models/SearchEcfsAmountFromParameter.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/SecuenciaRequest.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/SecuenciaRequestDto.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/SendAcecfRequest.kt
@@ -776,6 +783,7 @@ src/main/kotlin/dom/com/ssd/ecfx/sdk/models/TipoMonedaType.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/TipoPagoType.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/TipoeCFType.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/Token.kt
+src/main/kotlin/dom/com/ssd/ecfx/sdk/models/TrackingDetalle.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/UnidadMedidaType.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/UpsertCompanyRequest.kt
 src/main/kotlin/dom/com/ssd/ecfx/sdk/models/VentanaDeMantenimiento.kt
@@ -1112,8 +1120,6 @@ src/test/kotlin/dom/com/ssd/ecfx/sdk/models/EcfReceptorDtoProgressTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/EcfReceptorDtoTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/EcfResponseTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/EstadoTypeTest.kt
-src/test/kotlin/dom/com/ssd/ecfx/sdk/models/GetCompaniesLimitParameterTest.kt
-src/test/kotlin/dom/com/ssd/ecfx/sdk/models/GetCompaniesPageParameterTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/IndicadorAgenteRetencionoPercepcionTypeTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/IndicadorEnvioDiferidoTypeTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/IndicadorFacturacionDRTypeTest.kt
@@ -1141,8 +1147,6 @@ src/test/kotlin/dom/com/ssd/ecfx/sdk/models/RespuestaConsultaTimbreTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/RespuestaConsultaTrackIdTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/RespuestaEstatusServicioTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/RespuestaVentanaDeMantenimientoTest.kt
-src/test/kotlin/dom/com/ssd/ecfx/sdk/models/SearchEcfReceptionRequestsTiposEcfsParameterInnerTest.kt
-src/test/kotlin/dom/com/ssd/ecfx/sdk/models/SearchEcfsAmountFromParameterTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/SecuenciaRequestDtoTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/SecuenciaRequestTest.kt
 src/test/kotlin/dom/com/ssd/ecfx/sdk/models/SendAcecfRequestTest.kt

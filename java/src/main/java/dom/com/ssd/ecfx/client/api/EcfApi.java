@@ -181,7 +181,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.
      * @param rnc  (required)
      * @param anulacionRequest  (required)
      * @return RespuestaAnulacionRango
@@ -204,7 +204,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.
      * @param rnc  (required)
      * @param anulacionRequest  (required)
      * @return ApiResponse&lt;RespuestaAnulacionRango&gt;
@@ -228,7 +228,7 @@ public class EcfApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.
      * @param rnc  (required)
      * @param anulacionRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -900,6 +900,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -962,7 +963,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf31ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -974,6 +975,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -984,7 +986,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf31ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -996,6 +998,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1007,7 +1010,7 @@ public class EcfApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf31ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -1020,6 +1023,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1044,6 +1048,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1106,7 +1111,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf32ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1118,6 +1123,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1128,7 +1134,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf32ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1140,6 +1146,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1151,7 +1158,7 @@ public class EcfApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf32ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -1164,6 +1171,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1188,6 +1196,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1250,7 +1259,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf33ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1262,6 +1271,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1272,7 +1282,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf33ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1284,6 +1294,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1295,7 +1306,7 @@ public class EcfApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf33ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -1308,6 +1319,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1332,6 +1344,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1394,7 +1407,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf34ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1406,6 +1419,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1416,7 +1430,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf34ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1428,6 +1442,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1439,7 +1454,7 @@ public class EcfApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf34ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -1452,6 +1467,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1476,6 +1492,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1538,7 +1555,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf41ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1550,6 +1567,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1560,7 +1578,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf41ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1572,6 +1590,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1583,7 +1602,7 @@ public class EcfApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf41ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -1596,6 +1615,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1620,6 +1640,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1682,7 +1703,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf43ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1694,6 +1715,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1704,7 +1726,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf43ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1716,6 +1738,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1727,7 +1750,7 @@ public class EcfApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf43ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -1740,6 +1763,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1764,6 +1788,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1826,7 +1851,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf44ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1838,6 +1863,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1848,7 +1874,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf44ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1860,6 +1886,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1871,7 +1898,7 @@ public class EcfApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf44ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -1884,6 +1911,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1908,6 +1936,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1970,7 +1999,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf45ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1982,6 +2011,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -1992,7 +2022,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf45ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2004,6 +2034,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -2015,7 +2046,7 @@ public class EcfApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf45ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -2028,6 +2059,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -2052,6 +2084,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -2114,7 +2147,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf46ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2126,6 +2159,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -2136,7 +2170,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf46ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2148,6 +2182,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -2159,7 +2194,7 @@ public class EcfApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf46ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -2172,6 +2207,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -2196,6 +2232,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -2258,7 +2295,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf47ECF  (required)
      * @return EcfResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2270,6 +2307,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -2280,7 +2318,7 @@ public class EcfApi {
 
     /**
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf47ECF  (required)
      * @return ApiResponse&lt;EcfResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2292,6 +2330,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
@@ -2303,7 +2342,7 @@ public class EcfApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf47ECF  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -2316,6 +2355,7 @@ public class EcfApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */

@@ -43,6 +43,10 @@ EcfReceptionRequestDto::EcfReceptionRequestDto()
     m_ResultInternalFileName = utility::conversions::to_string_t("");
     m_ResultInternalFileNameIsSet = false;
     m_MontoTotalIsSet = false;
+    m_ReprocessedOn = utility::datetime();
+    m_ReprocessedOnIsSet = false;
+    m_Recuperada = false;
+    m_RecuperadaIsSet = false;
 }
 
 EcfReceptionRequestDto::~EcfReceptionRequestDto()
@@ -121,6 +125,16 @@ web::json::value EcfReceptionRequestDto::toJson() const
     {   
         
         val[utility::conversions::to_string_t(_XPLATSTR("montoTotal"))] = ModelBase::toJson(m_MontoTotal);
+    }
+    if(m_ReprocessedOnIsSet)
+    {   
+        
+        val[utility::conversions::to_string_t(_XPLATSTR("reprocessedOn"))] = ModelBase::toJson(m_ReprocessedOn);
+    }
+    if(m_RecuperadaIsSet)
+    {   
+        
+        val[utility::conversions::to_string_t(_XPLATSTR("recuperada"))] = ModelBase::toJson(m_Recuperada);
     }
 
     return val;
@@ -272,6 +286,28 @@ bool EcfReceptionRequestDto::fromJson(const web::json::value& val)
             
         }
     }
+    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("reprocessedOn"))))
+    {
+        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("reprocessedOn")));
+        if(!fieldValue.is_null())
+        {
+            utility::datetime refVal_setReprocessedOn;
+            ok &= ModelBase::fromJson(fieldValue, refVal_setReprocessedOn);
+            setReprocessedOn(refVal_setReprocessedOn);
+            
+        }
+    }
+    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("recuperada"))))
+    {
+        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("recuperada")));
+        if(!fieldValue.is_null())
+        {
+            bool refVal_setRecuperada;
+            ok &= ModelBase::fromJson(fieldValue, refVal_setRecuperada);
+            setRecuperada(refVal_setRecuperada);
+            
+        }
+    }
     return ok;
 }
 
@@ -333,6 +369,14 @@ void EcfReceptionRequestDto::toMultipart(std::shared_ptr<MultipartFormData> mult
     if(m_MontoTotalIsSet)
     {
         multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("montoTotal")), m_MontoTotal));
+    }
+    if(m_ReprocessedOnIsSet)
+    {
+        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("reprocessedOn")), m_ReprocessedOn));
+    }
+    if(m_RecuperadaIsSet)
+    {
+        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("recuperada")), m_Recuperada));
     }
 }
 
@@ -422,6 +466,18 @@ bool EcfReceptionRequestDto::fromMultiPart(std::shared_ptr<MultipartFormData> mu
         std::shared_ptr<EcfReceptionRequestDto_montoTotal> refVal_setMontoTotal;
         ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("montoTotal"))), refVal_setMontoTotal );
         setMontoTotal(refVal_setMontoTotal);
+    }
+    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("reprocessedOn"))))
+    {
+        utility::datetime refVal_setReprocessedOn;
+        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("reprocessedOn"))), refVal_setReprocessedOn );
+        setReprocessedOn(refVal_setReprocessedOn);
+    }
+    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("recuperada"))))
+    {
+        bool refVal_setRecuperada;
+        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("recuperada"))), refVal_setRecuperada );
+        setRecuperada(refVal_setRecuperada);
     }
     return ok;
 }
@@ -699,6 +755,47 @@ bool EcfReceptionRequestDto::montoTotalIsSet() const
 void EcfReceptionRequestDto::unsetMontoTotal()
 {
     m_MontoTotalIsSet = false;
+}
+utility::datetime EcfReceptionRequestDto::getReprocessedOn() const
+{
+    return m_ReprocessedOn;
+}
+
+
+void EcfReceptionRequestDto::setReprocessedOn(const utility::datetime& value)
+{
+    m_ReprocessedOn = value;
+    m_ReprocessedOnIsSet = true;
+}
+
+bool EcfReceptionRequestDto::reprocessedOnIsSet() const
+{
+    return m_ReprocessedOnIsSet;
+}
+
+void EcfReceptionRequestDto::unsetReprocessedOn()
+{
+    m_ReprocessedOnIsSet = false;
+}
+bool EcfReceptionRequestDto::isRecuperada() const
+{
+    return m_Recuperada;
+}
+
+void EcfReceptionRequestDto::setRecuperada(bool value)
+{
+    m_Recuperada = value;
+    m_RecuperadaIsSet = true;
+}
+
+bool EcfReceptionRequestDto::recuperadaIsSet() const
+{
+    return m_RecuperadaIsSet;
+}
+
+void EcfReceptionRequestDto::unsetRecuperada()
+{
+    m_RecuperadaIsSet = false;
 }
 
 }

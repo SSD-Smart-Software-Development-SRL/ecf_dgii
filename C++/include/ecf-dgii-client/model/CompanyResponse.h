@@ -21,13 +21,17 @@
 
 #include "ecf-dgii-client/ModelBase.h"
 
+#include "ecf-dgii-client/model/CompanyUrlsResponse.h"
 #include <cpprest/details/basic_types.h>
+#include "ecf-dgii-client/model/CertificationStateResponse.h"
 
 namespace org {
 namespace openapitools {
 namespace client {
 namespace model {
 
+class CompanyUrlsResponse;
+class CertificationStateResponse;
 
 
 class  CompanyResponse
@@ -98,20 +102,39 @@ public:
     void unsetReceptorId();
     void setReceptorId(const utility::string_t& value);
 
-    utility::string_t getUrlRecepcion() const;
-    bool urlRecepcionIsSet() const;
-    void unsetUrlRecepcion();
-    void setUrlRecepcion(const utility::string_t& value);
+    std::shared_ptr<CompanyUrlsResponse> getUrls() const;
+    bool urlsIsSet() const;
+    void unsetUrls();
+    void setUrls(const std::shared_ptr<CompanyUrlsResponse>& value);
 
-    utility::string_t getUrlAprobacionComercial() const;
-    bool urlAprobacionComercialIsSet() const;
-    void unsetUrlAprobacionComercial();
-    void setUrlAprobacionComercial(const utility::string_t& value);
+    /// <summary>
+    /// CERT-01: the company&#39;s certification state.
+    /// </summary>
+    std::shared_ptr<CertificationStateResponse> getCertification() const;
+    bool certificationIsSet() const;
+    void unsetCertification();
+    void setCertification(const std::shared_ptr<CertificationStateResponse>& value);
 
-    utility::string_t getUrlAutenticacion() const;
-    bool urlAutenticacionIsSet() const;
-    void unsetUrlAutenticacion();
-    void setUrlAutenticacion(const utility::string_t& value);
+    /// <summary>
+    /// When the company was archived; null while it is active.
+    /// </summary>
+    utility::datetime getArchivedAt() const;
+    bool archivedAtIsSet() const;
+    void unsetArchivedAt();
+    void setArchivedAt(const utility::datetime& value);
+
+    /// <summary>
+    /// Who archived it and why, the last time it was archived; kept after a restore as history.
+    /// </summary>
+    utility::string_t getArchivedBy() const;
+    bool archivedByIsSet() const;
+    void unsetArchivedBy();
+    void setArchivedBy(const utility::string_t& value);
+
+    utility::string_t getArchiveReason() const;
+    bool archiveReasonIsSet() const;
+    void unsetArchiveReason();
+    void setArchiveReason(const utility::string_t& value);
 
 
 protected:
@@ -142,14 +165,20 @@ protected:
     utility::string_t m_ReceptorId;
     bool m_ReceptorIdIsSet;
 
-    utility::string_t m_UrlRecepcion;
-    bool m_UrlRecepcionIsSet;
+    std::shared_ptr<CompanyUrlsResponse> m_Urls;
+    bool m_UrlsIsSet;
 
-    utility::string_t m_UrlAprobacionComercial;
-    bool m_UrlAprobacionComercialIsSet;
+    std::shared_ptr<CertificationStateResponse> m_Certification;
+    bool m_CertificationIsSet;
 
-    utility::string_t m_UrlAutenticacion;
-    bool m_UrlAutenticacionIsSet;
+    utility::datetime m_ArchivedAt;
+    bool m_ArchivedAtIsSet;
+
+    utility::string_t m_ArchivedBy;
+    bool m_ArchivedByIsSet;
+
+    utility::string_t m_ArchiveReason;
+    bool m_ArchiveReasonIsSet;
 
 };
 

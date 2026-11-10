@@ -55,11 +55,12 @@ open class CompanyAPI {
      - parameter names: (query)  (optional)
      - parameter page: (query)  (optional, default to 1)
      - parameter limit: (query)  (optional, default to 25)
+     - parameter search: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedApiResultOfCompanyResponse
      */
-    open class func getCompanies(rncs: [String]? = nil, names: [String]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfCompanyResponse {
-        return try await getCompaniesWithRequestBuilder(rncs: rncs, names: names, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
+    open class func getCompanies(rncs: [String]? = nil, names: [String]? = nil, page: Int? = nil, limit: Int? = nil, search: String? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfCompanyResponse {
+        return try await getCompaniesWithRequestBuilder(rncs: rncs, names: names, page: page, limit: limit, search: search, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -71,10 +72,11 @@ open class CompanyAPI {
      - parameter names: (query)  (optional)
      - parameter page: (query)  (optional, default to 1)
      - parameter limit: (query)  (optional, default to 25)
+     - parameter search: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedApiResultOfCompanyResponse> 
      */
-    open class func getCompaniesWithRequestBuilder(rncs: [String]? = nil, names: [String]? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfCompanyResponse> {
+    open class func getCompaniesWithRequestBuilder(rncs: [String]? = nil, names: [String]? = nil, page: Int? = nil, limit: Int? = nil, search: String? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfCompanyResponse> {
         let localVariablePath = "/company"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -85,6 +87,7 @@ open class CompanyAPI {
             "Names": (wrappedValue: names?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "Search": (wrappedValue: search?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ] as [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]))
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [

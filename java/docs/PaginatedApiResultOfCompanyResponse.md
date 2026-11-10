@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**nextPageUri** | **URI** |  |  |
+|**nextPageUri** | **URI** |  |  [optional] |
 |**values** | [**List&lt;CompanyResponse&gt;**](CompanyResponse.md) |  |  [optional] |
 |**total** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  [optional] |
 |**page** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  [optional] |

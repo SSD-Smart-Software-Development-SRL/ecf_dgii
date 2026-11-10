@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **numeroLinea** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
+| **numeroLinea** | **kotlin.Int** |  |  |
 | **tipoAjuste** | [**Ecf41TipoAjusteType**](Ecf41TipoAjusteType.md) |  |  |
 | **descripcionDescuentooRecargo** | **kotlin.String** |  |  [optional] |
 | **tipoValor** | [**TipoDescuentoRecargoType**](TipoDescuentoRecargoType.md) |  |  [optional] |

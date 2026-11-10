@@ -30,6 +30,8 @@ Method | HTTP request | Description
 
 
 
+Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.
+
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
@@ -287,6 +289,8 @@ Name | Type | Description  | Notes
 
 
 
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
+
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
@@ -333,6 +337,8 @@ Name | Type | Description  | Notes
 ```
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```swift
@@ -381,6 +387,8 @@ Name | Type | Description  | Notes
 
 
 
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
+
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
@@ -427,6 +435,8 @@ Name | Type | Description  | Notes
 ```
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```swift
@@ -475,6 +485,8 @@ Name | Type | Description  | Notes
 
 
 
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
+
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
@@ -521,6 +533,8 @@ Name | Type | Description  | Notes
 ```
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```swift
@@ -569,6 +583,8 @@ Name | Type | Description  | Notes
 
 
 
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
+
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
@@ -615,6 +631,8 @@ Name | Type | Description  | Notes
 ```
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```swift
@@ -663,6 +681,8 @@ Name | Type | Description  | Notes
 
 
 
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
+
 ### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
@@ -709,6 +729,8 @@ Name | Type | Description  | Notes
 ```
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```swift

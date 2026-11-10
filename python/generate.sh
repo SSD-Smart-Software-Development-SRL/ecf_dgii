@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Regenerate the Python SDK from the OpenAPI spec.
-# Requires: pipx install openapi-python-client
+# Requires: pipx install "openapi-python-client==0.29.1"
+# (0.30+ generates code for httpx2 instead of httpx; keep the pin until the SDK moves.)
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

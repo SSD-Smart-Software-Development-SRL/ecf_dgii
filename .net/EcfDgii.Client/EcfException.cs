@@ -11,6 +11,12 @@ namespace EcfDgii.Client
         /// <summary>The full ECF response that contains the error details.</summary>
         public EcfResponse Response { get; }
 
+        /// <summary>
+        /// True when DGII confirmed it never received the document (<c>NotReceived</c>):
+        /// the same eNCF may be submitted again as a new request.
+        /// </summary>
+        public bool CanResubmit => Response.CanResubmit();
+
         public EcfException(string message, EcfResponse response)
             : base(message)
         {

@@ -133,6 +133,36 @@ result = await client.send_ecf31_and_poll(
 print(result.estatus, result.cod_sec, result.fecha_firma, result.impresion_url)
 ```
 
+### Estado de envío a la DGII (`dgiiSubmissionState`)
+
+`EcfResponse` incluye `dgiiSubmissionState` (opcional; `null` en documentos creados antes del envío durable). Dos valores cambian lo que debe hacer tu sistema:
+
+| Valor | Significado | Qué hacer |
+|-------|-------------|-----------|
+| `PendingReconciliation` | La DGII todavía no confirma el resultado (`progress = UploadedToDgii`, `estatus = EnProceso`). | Seguir consultando. **No** reenviar el documento ni reutilizar el eNCF. |
+| `NotReceived` | La DGII confirmó que no tiene registro del documento (`progress = Error`, `estatus = null`, `secuenciaUtilizada = false`; `errors` trae el motivo en español). | Es final y **no** fue aceptado, pero el **mismo eNCF** puede enviarse otra vez como una solicitud nueva (`POST /ecf/{tipo}`). |
+
+Los demás valores (`Prepared`, `Sending`, `Accepted`, `Rejected`, `ValidationFailed`, `ReservationBlocked`) son informativos: el resultado se sigue leyendo en `progress`/`estatus`.
+
+Los métodos `send_ecfXX_and_poll` siguen consultando durante `PendingReconciliation`. En `NotReceived` lanzan `EcfNotReceivedError` (subclase de `EcfProcessingError`, con `can_resubmit = True`):
+
+```python
+from ecf_dgii import EcfNotReceivedError, can_resubmit, is_pending_reconciliation, is_terminal
+
+try:
+    result = await client.send_ecf31_and_poll(ecf)
+except EcfNotReceivedError as exc:
+    # La DGII no recibió el documento: se puede enviar de nuevo con el mismo eNCF.
+    print(exc.message)
+
+# Con respuestas que consultas tú mismo (objetos EcfResponse o dicts):
+is_terminal(response)               # False mientras esté en PendingReconciliation
+is_pending_reconciliation(response)  # no reenviar ni reutilizar el eNCF
+can_resubmit(response)               # NotReceived: reenviar con el mismo eNCF
+```
+
+Un valor desconocido de una versión más nueva de la API se conserva como texto en `dgii_submission_state` y no rompe el parseo.
+
 ## Arquitectura Backend / Frontend
 
 ```mermaid

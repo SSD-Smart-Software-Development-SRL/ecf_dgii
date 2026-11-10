@@ -20,6 +20,8 @@
 |**tipoEcf** | **AllTipoECFTypes** |  |  [optional] |
 |**resultInternalFileName** | **String** |  |  [optional] |
 |**montoTotal** | [**EcfReceptionRequestDtoMontoTotal**](EcfReceptionRequestDtoMontoTotal.md) |  |  [optional] |
+|**reprocessedOn** | **Date** | When the reception was run again after it ended without registering the e-CF. |  [optional] |
+|**recuperada** | **Boolean** | True when the first reception failed and the e-CF was registered by running it again, so the UI can flag it as recovered. |  [optional] |
 
 
 

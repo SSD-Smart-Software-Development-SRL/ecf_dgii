@@ -11,7 +11,7 @@
 | **rncEmisor** | **kotlin.String** |  |  [optional] |
 | **rncReceptor** | **kotlin.String** |  |  [optional] |
 | **tipoEcf** | [**AllTipoECFTypes**](AllTipoECFTypes.md) |  |  [optional] |
-| **montoTotal** | [**SearchEcfsAmountFromParameter**](SearchEcfsAmountFromParameter.md) |  |  [optional] |
+| **montoTotal** | **kotlin.Double** |  |  [optional] |
 | **fechaEmision** | [**java.time.LocalDate**](java.time.LocalDate.md) |  |  [optional] |
 | **fileName** | **kotlin.String** |  |  [optional] |
 | **rawJsonData** | **kotlin.String** |  |  [optional] |

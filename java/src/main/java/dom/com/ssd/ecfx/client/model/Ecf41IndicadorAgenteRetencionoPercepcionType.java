@@ -31,7 +31,9 @@ public enum Ecf41IndicadorAgenteRetencionoPercepcionType {
   
   RETENCION("Retencion"),
   
-  PERCEPCION("Percepcion");
+  PERCEPCION("Percepcion"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -54,7 +56,7 @@ public enum Ecf41IndicadorAgenteRetencionoPercepcionType {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<Ecf41IndicadorAgenteRetencionoPercepcionType> {

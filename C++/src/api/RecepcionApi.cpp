@@ -267,7 +267,7 @@ pplx::task<std::shared_ptr<EcfReceptorDto>> RecepcionApi::getEcfReceptorByMessag
         return localVarResult;
     });
 }
-pplx::task<std::shared_ptr<PaginatedApiResultOfEcfReceptionRequestDto>> RecepcionApi::searchEcfReceptionRequests(boost::optional<std::vector<utility::string_t>> messageIds, boost::optional<std::vector<utility::string_t>> encfs, boost::optional<std::vector<utility::string_t>> rncs, boost::optional<std::vector<utility::string_t>> rncEmisors, boost::optional<std::vector<std::shared_ptr<SearchEcfReceptionRequests_TiposEcfs_parameter_inner>>> tiposEcfs, boost::optional<std::vector<std::shared_ptr<SearchEcfReceptionRequests_TiposEcfs_parameter_inner>>> progresses, boost::optional<utility::string_t> fromDate, boost::optional<utility::string_t> toDate, boost::optional<SearchEcfs_AmountFrom_parameter> amountFrom, boost::optional<SearchEcfs_AmountFrom_parameter> amountTo, boost::optional<GetCompanies_Page_parameter> page, boost::optional<GetCompanies_Limit_parameter> limit) const
+pplx::task<std::shared_ptr<PaginatedApiResultOfEcfReceptionRequestDto>> RecepcionApi::searchEcfReceptionRequests(boost::optional<std::vector<utility::string_t>> messageIds, boost::optional<std::vector<utility::string_t>> encfs, boost::optional<std::vector<utility::string_t>> rncs, boost::optional<std::vector<utility::string_t>> rncEmisors, boost::optional<std::vector<std::shared_ptr<SearchEcfReceptionRequests_TiposEcfs_parameter_inner>>> tiposEcfs, boost::optional<std::vector<std::shared_ptr<SearchEcfReceptionRequests_TiposEcfs_parameter_inner>>> progresses, boost::optional<utility::string_t> fromDate, boost::optional<utility::string_t> toDate, boost::optional<SearchEcfs_AmountFrom_parameter> amountFrom, boost::optional<SearchEcfs_AmountFrom_parameter> amountTo, boost::optional<bool> ocultarNoRecibidas, boost::optional<GetCompanies_Page_parameter> page, boost::optional<GetCompanies_Limit_parameter> limit) const
 {
 
 
@@ -348,6 +348,10 @@ pplx::task<std::shared_ptr<PaginatedApiResultOfEcfReceptionRequestDto>> Recepcio
     if (amountTo)
     {
         localVarQueryParams[utility::conversions::to_string_t("AmountTo")] = ApiClient::parameterToString(*amountTo);
+    }
+    if (ocultarNoRecibidas)
+    {
+        localVarQueryParams[utility::conversions::to_string_t("OcultarNoRecibidas")] = ApiClient::parameterToString(*ocultarNoRecibidas);
     }
     if (page)
     {
@@ -439,7 +443,7 @@ pplx::task<std::shared_ptr<PaginatedApiResultOfEcfReceptionRequestDto>> Recepcio
         return localVarResult;
     });
 }
-pplx::task<std::shared_ptr<PaginatedApiResultOfEcfReceptionRequestDto>> RecepcionApi::searchEcfReceptionRequestsByRnc(utility::string_t rnc, boost::optional<std::vector<utility::string_t>> messageIds, boost::optional<std::vector<utility::string_t>> encfs, boost::optional<std::vector<utility::string_t>> rncEmisors, boost::optional<std::vector<std::shared_ptr<SearchEcfReceptionRequests_TiposEcfs_parameter_inner>>> tiposEcfs, boost::optional<std::vector<std::shared_ptr<SearchEcfReceptionRequests_TiposEcfs_parameter_inner>>> progresses, boost::optional<utility::string_t> fromDate, boost::optional<utility::string_t> toDate, boost::optional<SearchEcfs_AmountFrom_parameter> amountFrom, boost::optional<SearchEcfs_AmountFrom_parameter> amountTo, boost::optional<GetCompanies_Page_parameter> page, boost::optional<GetCompanies_Limit_parameter> limit) const
+pplx::task<std::shared_ptr<PaginatedApiResultOfEcfReceptionRequestDto>> RecepcionApi::searchEcfReceptionRequestsByRnc(utility::string_t rnc, boost::optional<std::vector<utility::string_t>> messageIds, boost::optional<std::vector<utility::string_t>> encfs, boost::optional<std::vector<utility::string_t>> rncEmisors, boost::optional<std::vector<std::shared_ptr<SearchEcfReceptionRequests_TiposEcfs_parameter_inner>>> tiposEcfs, boost::optional<std::vector<std::shared_ptr<SearchEcfReceptionRequests_TiposEcfs_parameter_inner>>> progresses, boost::optional<utility::string_t> fromDate, boost::optional<utility::string_t> toDate, boost::optional<SearchEcfs_AmountFrom_parameter> amountFrom, boost::optional<SearchEcfs_AmountFrom_parameter> amountTo, boost::optional<bool> ocultarNoRecibidas, boost::optional<GetCompanies_Page_parameter> page, boost::optional<GetCompanies_Limit_parameter> limit) const
 {
 
 
@@ -517,6 +521,10 @@ pplx::task<std::shared_ptr<PaginatedApiResultOfEcfReceptionRequestDto>> Recepcio
     if (amountTo)
     {
         localVarQueryParams[utility::conversions::to_string_t("AmountTo")] = ApiClient::parameterToString(*amountTo);
+    }
+    if (ocultarNoRecibidas)
+    {
+        localVarQueryParams[utility::conversions::to_string_t("OcultarNoRecibidas")] = ApiClient::parameterToString(*ocultarNoRecibidas);
     }
     if (page)
     {

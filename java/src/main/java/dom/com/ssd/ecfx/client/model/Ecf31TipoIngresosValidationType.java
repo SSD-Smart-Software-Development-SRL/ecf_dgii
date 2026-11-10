@@ -39,7 +39,9 @@ public enum Ecf31TipoIngresosValidationType {
   
   _05("05"),
   
-  _06("06");
+  _06("06"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -62,7 +64,7 @@ public enum Ecf31TipoIngresosValidationType {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<Ecf31TipoIngresosValidationType> {

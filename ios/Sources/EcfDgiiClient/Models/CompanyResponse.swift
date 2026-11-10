@@ -18,11 +18,16 @@ public struct CompanyResponse: Sendable, Codable, Hashable {
     public var updatedBy: String?
     public var tenantId: UUID?
     public var receptorId: String?
-    public var urlRecepcion: String?
-    public var urlAprobacionComercial: String?
-    public var urlAutenticacion: String?
+    public var urls: CompanyUrlsResponse?
+    /** CERT-01: the company's certification state. */
+    public var certification: CertificationStateResponse?
+    /** When the company was archived; null while it is active. */
+    public var archivedAt: Date?
+    /** Who archived it and why, the last time it was archived; kept after a restore as history. */
+    public var archivedBy: String?
+    public var archiveReason: String?
 
-    public init(rnc: String? = nil, legalName: String? = nil, name: String? = nil, createdOn: Date? = nil, updatedOn: Date? = nil, createdBy: String? = nil, updatedBy: String? = nil, tenantId: UUID? = nil, receptorId: String? = nil, urlRecepcion: String? = nil, urlAprobacionComercial: String? = nil, urlAutenticacion: String? = nil) {
+    public init(rnc: String? = nil, legalName: String? = nil, name: String? = nil, createdOn: Date? = nil, updatedOn: Date? = nil, createdBy: String? = nil, updatedBy: String? = nil, tenantId: UUID? = nil, receptorId: String? = nil, urls: CompanyUrlsResponse? = nil, certification: CertificationStateResponse? = nil, archivedAt: Date? = nil, archivedBy: String? = nil, archiveReason: String? = nil) {
         self.rnc = rnc
         self.legalName = legalName
         self.name = name
@@ -32,9 +37,11 @@ public struct CompanyResponse: Sendable, Codable, Hashable {
         self.updatedBy = updatedBy
         self.tenantId = tenantId
         self.receptorId = receptorId
-        self.urlRecepcion = urlRecepcion
-        self.urlAprobacionComercial = urlAprobacionComercial
-        self.urlAutenticacion = urlAutenticacion
+        self.urls = urls
+        self.certification = certification
+        self.archivedAt = archivedAt
+        self.archivedBy = archivedBy
+        self.archiveReason = archiveReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -47,9 +54,11 @@ public struct CompanyResponse: Sendable, Codable, Hashable {
         case updatedBy
         case tenantId
         case receptorId
-        case urlRecepcion
-        case urlAprobacionComercial
-        case urlAutenticacion
+        case urls
+        case certification
+        case archivedAt
+        case archivedBy
+        case archiveReason
     }
 
     // Encodable protocol methods
@@ -65,9 +74,11 @@ public struct CompanyResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
         try container.encodeIfPresent(tenantId, forKey: .tenantId)
         try container.encodeIfPresent(receptorId, forKey: .receptorId)
-        try container.encodeIfPresent(urlRecepcion, forKey: .urlRecepcion)
-        try container.encodeIfPresent(urlAprobacionComercial, forKey: .urlAprobacionComercial)
-        try container.encodeIfPresent(urlAutenticacion, forKey: .urlAutenticacion)
+        try container.encodeIfPresent(urls, forKey: .urls)
+        try container.encodeIfPresent(certification, forKey: .certification)
+        try container.encodeIfPresent(archivedAt, forKey: .archivedAt)
+        try container.encodeIfPresent(archivedBy, forKey: .archivedBy)
+        try container.encodeIfPresent(archiveReason, forKey: .archiveReason)
     }
 }
 

@@ -21,5 +21,7 @@
 
 * `OTRAS_FORMAS_DE_PAGO` (value: `"OtrasFormasDePago"`)
 
+* `UNKNOWN_DEFAULT_OPEN_API` (value: `"unknown_default_open_api"`)
+
 
 

@@ -4,7 +4,7 @@ All URIs are relative to *https://api.test.ecfx.ssd.com.do*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**consultaDirectorioListado**](DgiiAPI.md#consultadirectoriolistado) | **GET** /dgii/{rnc}/consultadirectorio/listado | 
+[**consultaDirectorioListado**](DgiiAPI.md#consultadirectoriolistado) | **GET** /dgii/{rnc}/consultadirectorio/listado | [OBSOLETO] Listado completo del Directorio de la DGII
 [**consultaDirectorioObtenerDirectorioPorRnc**](DgiiAPI.md#consultadirectorioobtenerdirectorioporrnc) | **GET** /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc | 
 [**consultaEstado**](DgiiAPI.md#consultaestado) | **GET** /dgii/{rnc}/consultaestado/estado | 
 [**consultaRFCE**](DgiiAPI.md#consultarfce) | **GET** /dgii/{rnc}/consultarfce/consulta | 
@@ -21,7 +21,9 @@ Method | HTTP request | Description
     open class func consultaDirectorioListado(rnc: String, completion: @escaping (_ data: [Directorio]?, _ error: Error?) -> Void)
 ```
 
+[OBSOLETO] Listado completo del Directorio de la DGII
 
+Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
 
 ### Example
 ```swift
@@ -30,6 +32,7 @@ import EcfDgiiClient
 
 let rnc = "rnc_example" // String | 
 
+// [OBSOLETO] Listado completo del Directorio de la DGII
 DgiiAPI.consultaDirectorioListado(rnc: rnc) { (response, error) in
     guard error == nil else {
         print(error)
@@ -381,7 +384,7 @@ Name | Type | Description  | Notes
 
 # **consultaTrackId**
 ```swift
-    open class func consultaTrackId(rnc: String, rncEmisor: String, encf: String, completion: @escaping (_ data: RespuestaConsultaTrackId?, _ error: Error?) -> Void)
+    open class func consultaTrackId(rnc: String, rncEmisor: String, encf: String, completion: @escaping (_ data: [TrackingDetalle]?, _ error: Error?) -> Void)
 ```
 
 
@@ -417,7 +420,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RespuestaConsultaTrackId**](RespuestaConsultaTrackId.md)
+[**[TrackingDetalle]**](TrackingDetalle.md)
 
 ### Authorization
 

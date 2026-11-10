@@ -33,9 +33,12 @@ public struct EcfResponse: Sendable, Codable, Hashable {
     public var dgiiEnvironment: DGIIEnvironment
     /** ACECFs received from the receptor for this outbound ECF. */
     public var acecfs: [AcecfSummaryDto]?
+    public var receptorDirectoryStatus: ReceptorDirectoryStatus?
+    /** Where the DGII transmission of this ECF stands. Null for documents created before durable submission. `PendingReconciliation`: DGII's answer is not confirmed yet; do not resend or reuse the eNCF. `NotReceived`: DGII confirmed it has no record of the document (Progress is Error, Estatus is null and SecuenciaUtilizada is false); the same eNCF may be submitted again as a new request. */
+    public var dgiiSubmissionState: DgiiSubmissionState?
     public var impresionUrl: String?
 
-    public init(messageId: UUID, timestamp: Date, fechaEmision: Date, queueName: String, includeEcfContent: Bool, ecfContent: String, tipoEcf: AllTipoECFTypes, encf: String, rncEmisor: String, rncReceptor: String?, montoTotal: Double, fileName: String?, tenantId: UUID, estatus: EcfEstado?, codSec: String?, fechaFirma: Date?, mensaje: String?, errors: String?, progress: EcfProgress, emisorReceptorErrors: String?, secuenciaUtilizada: Bool?, dgiiEnvironment: DGIIEnvironment, acecfs: [AcecfSummaryDto]? = nil, impresionUrl: String? = nil) {
+    public init(messageId: UUID, timestamp: Date, fechaEmision: Date, queueName: String, includeEcfContent: Bool, ecfContent: String, tipoEcf: AllTipoECFTypes, encf: String, rncEmisor: String, rncReceptor: String?, montoTotal: Double, fileName: String?, tenantId: UUID, estatus: EcfEstado?, codSec: String?, fechaFirma: Date?, mensaje: String?, errors: String?, progress: EcfProgress, emisorReceptorErrors: String?, secuenciaUtilizada: Bool?, dgiiEnvironment: DGIIEnvironment, acecfs: [AcecfSummaryDto]? = nil, receptorDirectoryStatus: ReceptorDirectoryStatus? = nil, dgiiSubmissionState: DgiiSubmissionState? = nil, impresionUrl: String? = nil) {
         self.messageId = messageId
         self.timestamp = timestamp
         self.fechaEmision = fechaEmision
@@ -59,6 +62,8 @@ public struct EcfResponse: Sendable, Codable, Hashable {
         self.secuenciaUtilizada = secuenciaUtilizada
         self.dgiiEnvironment = dgiiEnvironment
         self.acecfs = acecfs
+        self.receptorDirectoryStatus = receptorDirectoryStatus
+        self.dgiiSubmissionState = dgiiSubmissionState
         self.impresionUrl = impresionUrl
     }
 
@@ -86,6 +91,8 @@ public struct EcfResponse: Sendable, Codable, Hashable {
         case secuenciaUtilizada
         case dgiiEnvironment
         case acecfs
+        case receptorDirectoryStatus
+        case dgiiSubmissionState
         case impresionUrl
     }
 
@@ -116,6 +123,8 @@ public struct EcfResponse: Sendable, Codable, Hashable {
         try container.encode(secuenciaUtilizada, forKey: .secuenciaUtilizada)
         try container.encode(dgiiEnvironment, forKey: .dgiiEnvironment)
         try container.encodeIfPresent(acecfs, forKey: .acecfs)
+        try container.encodeIfPresent(receptorDirectoryStatus, forKey: .receptorDirectoryStatus)
+        try container.encodeIfPresent(dgiiSubmissionState, forKey: .dgiiSubmissionState)
         try container.encodeIfPresent(impresionUrl, forKey: .impresionUrl)
     }
 }

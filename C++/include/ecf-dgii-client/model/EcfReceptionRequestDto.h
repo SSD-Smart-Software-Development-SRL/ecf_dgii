@@ -122,6 +122,22 @@ public:
     void unsetMontoTotal();
     void setMontoTotal(const std::shared_ptr<EcfReceptionRequestDto_montoTotal>& value);
 
+    /// <summary>
+    /// When the reception was run again after it ended without registering the e-CF.
+    /// </summary>
+    utility::datetime getReprocessedOn() const;
+    bool reprocessedOnIsSet() const;
+    void unsetReprocessedOn();
+    void setReprocessedOn(const utility::datetime& value);
+
+    /// <summary>
+    /// True when the first reception failed and the e-CF was registered by running it again, so the UI can flag it as recovered.
+    /// </summary>
+    bool isRecuperada() const;
+    bool recuperadaIsSet() const;
+    void unsetRecuperada();
+    void setRecuperada(bool value);
+
 
 protected:
     utility::string_t m_MessageId;
@@ -162,6 +178,12 @@ protected:
 
     std::shared_ptr<EcfReceptionRequestDto_montoTotal> m_MontoTotal;
     bool m_MontoTotalIsSet;
+
+    utility::datetime m_ReprocessedOn;
+    bool m_ReprocessedOnIsSet;
+
+    bool m_Recuperada;
+    bool m_RecuperadaIsSet;
 
 };
 

@@ -77,6 +77,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial. */
         post: operations["RecepcionEcf31"];
         delete?: never;
         options?: never;
@@ -93,6 +94,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial. */
         post: operations["RecepcionEcf32"];
         delete?: never;
         options?: never;
@@ -109,6 +111,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial. */
         post: operations["RecepcionEcf33"];
         delete?: never;
         options?: never;
@@ -125,6 +128,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial. */
         post: operations["RecepcionEcf34"];
         delete?: never;
         options?: never;
@@ -141,6 +145,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial. */
         post: operations["RecepcionEcf41"];
         delete?: never;
         options?: never;
@@ -157,6 +162,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial. */
         post: operations["RecepcionEcf43"];
         delete?: never;
         options?: never;
@@ -173,6 +179,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial. */
         post: operations["RecepcionEcf44"];
         delete?: never;
         options?: never;
@@ -189,6 +196,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial. */
         post: operations["RecepcionEcf45"];
         delete?: never;
         options?: never;
@@ -205,6 +213,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial. */
         post: operations["RecepcionEcf46"];
         delete?: never;
         options?: never;
@@ -221,6 +230,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial. */
         post: operations["RecepcionEcf47"];
         delete?: never;
         options?: never;
@@ -301,6 +311,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse. */
         post: operations["AnulacionRangos"];
         delete?: never;
         options?: never;
@@ -443,6 +454,11 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
+        /**
+         * [OBSOLETO] Listado completo del Directorio de la DGII
+         * @deprecated
+         * @description Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
+         */
         get: operations["ConsultaDirectorioListado"];
         put?: never;
         post?: never;
@@ -703,6 +719,40 @@ export interface components {
             createdOn: string;
             createdBy: string;
         };
+        CertificationStateResponse: {
+            /** @description One of CertificationStates. */
+            state?: string;
+            /** @description One of CertificationStateSources; null while not started. */
+            source?: null | string;
+            step?: null | components["schemas"]["CertificationStep"];
+            /**
+             * Format: int32
+             * @description Visible step number, 1 to int CertificationStateResponse.TotalSteps.
+             */
+            stepNumber?: null | number | string;
+            /** Format: int32 */
+            totalSteps?: number | string;
+            /** @description One of CertificationResponsibles while in progress. */
+            responsible?: null | string;
+            /** @description In progress without any activity for int CertificationStateCalculator.StalledAfterDays days. */
+            stalled?: boolean;
+            /** Format: date-time */
+            lastActivityOn?: null | string;
+            /**
+             * Format: date
+             * @description DGII authorisation date, when known (DGII listing or declared by the customer).
+             */
+            certifiedOn?: null | string;
+            /**
+             * Format: date-time
+             * @description When the stored state last changed.
+             */
+            changedOn?: null | string;
+            /** @description A step was signed outside the platform and the signature could not be verified (CERT-04). */
+            signatureReviewPending?: boolean;
+        };
+        /** @enum {unknown} */
+        CertificationStep: "Step1" | "Step2" | "Step3" | "Step4" | "Step5" | "Step6" | "Step7" | "Step8" | "Step12" | "Step13" | "Completed" | null;
         /** @enum {unknown} */
         CodificacionTipoImpuestosType: "001" | "002" | "003" | "004" | "005" | "006" | "007" | "008" | "009" | "010" | "011" | "012" | "013" | "014" | "015" | "016" | "017" | "018" | "019" | "020" | "021" | "022" | "023" | "024" | "025" | "026" | "027" | "028" | "029" | "030" | "031" | "032" | "033" | "034" | "035" | "036" | "037" | "038" | "039" | null;
         /** @enum {unknown} */
@@ -726,6 +776,15 @@ export interface components {
             tenantId?: string;
             receptorId?: string;
             urls?: null | components["schemas"]["CompanyUrlsResponse"];
+            certification?: null | components["schemas"]["CertificationStateResponse"];
+            /**
+             * Format: date-time
+             * @description When the company was archived; null while it is active.
+             */
+            archivedAt?: null | string;
+            /** @description Who archived it and why, the last time it was archived; kept after a restore as history. */
+            archivedBy?: null | string;
+            archiveReason?: null | string;
         };
         CompanyUrlsResponse: {
             test?: null | components["schemas"]["CompanyEnvironmentUrls"];
@@ -748,6 +807,8 @@ export interface components {
         };
         /** @enum {unknown} */
         DGIIEnvironment: "Test" | "Certification" | "Production";
+        /** @enum {unknown} */
+        DgiiSubmissionState: "Prepared" | "Sending" | "PendingReconciliation" | "Accepted" | "Rejected" | "ValidationFailed" | "ReservationBlocked" | "NotReceived" | null;
         /**
          * @description Representa una entrada del directorio para contribuyentes electrónicos en el sistema de facturación electrónica
          *     de la República Dominicana. Este modelo contiene las URLs de servicios que los contribuyentes electrónicos
@@ -4032,6 +4093,16 @@ export interface components {
             resultInternalFileName?: null | string;
             /** Format: double */
             montoTotal?: null | number | string;
+            /**
+             * Format: date-time
+             * @description When the reception was run again after it ended without registering the e-CF.
+             */
+            reprocessedOn?: null | string;
+            /**
+             * @description True when the first reception failed and the e-CF was registered by running it again, so the UI can
+             *     flag it as recovered.
+             */
+            recuperada?: boolean;
         };
         EcfReceptorDto: {
             /** Format: uuid */
@@ -4101,6 +4172,8 @@ export interface components {
             dgiiEnvironment: components["schemas"]["DGIIEnvironment"];
             /** @description ACECFs received from the receptor for this outbound ECF. */
             acecfs?: components["schemas"]["AcecfSummaryDto"][];
+            receptorDirectoryStatus?: null | components["schemas"]["ReceptorDirectoryStatus"];
+            dgiiSubmissionState?: null | components["schemas"]["DgiiSubmissionState"];
             impresionUrl?: null | string;
         };
         /** @enum {unknown} */
@@ -4236,6 +4309,8 @@ export interface components {
         };
         /** @enum {unknown} */
         ProvinciaMunicipioType: "010000" | "010100" | "010101" | "020000" | "020100" | "020101" | "020102" | "020103" | "020104" | "020105" | "020106" | "020107" | "020108" | "020109" | "020200" | "020201" | "020202" | "020300" | "020301" | "020302" | "020303" | "020400" | "020401" | "020402" | "020403" | "020404" | "020405" | "020500" | "020501" | "020600" | "020601" | "020602" | "020603" | "020604" | "020700" | "020701" | "020702" | "020800" | "020801" | "020802" | "020803" | "020804" | "020900" | "020901" | "021000" | "021001" | "030000" | "030001" | "030101" | "030102" | "030200" | "030201" | "030202" | "030300" | "030301" | "030302" | "030303" | "030304" | "030305" | "030306" | "030307" | "030400" | "030401" | "030500" | "030501" | "030502" | "040000" | "040100" | "040101" | "040102" | "040103" | "040104" | "040200" | "040201" | "040300" | "040301" | "040302" | "040400" | "040401" | "040402" | "040500" | "040501" | "040502" | "040503" | "040504" | "040600" | "040601" | "040700" | "040701" | "040702" | "040800" | "040801" | "040802" | "040900" | "040901" | "041000" | "041001" | "041100" | "041101" | "041102" | "050000" | "050100" | "050101" | "050102" | "050200" | "050201" | "050202" | "050203" | "050300" | "050301" | "050400" | "050401" | "050500" | "050501" | "050502" | "060000" | "060100" | "060101" | "060102" | "060103" | "060104" | "060105" | "060200" | "060201" | "060202" | "060203" | "060300" | "060301" | "060400" | "060401" | "060500" | "060501" | "060502" | "060503" | "060504" | "060505" | "060600" | "060601" | "060700" | "060701" | "060702" | "070000" | "070100" | "070101" | "070102" | "070103" | "070200" | "070201" | "070202" | "070203" | "070300" | "070301" | "070302" | "070400" | "070401" | "070402" | "070500" | "070501" | "070502" | "070600" | "070601" | "080000" | "080100" | "080101" | "080102" | "080103" | "080104" | "080200" | "080201" | "080202" | "080203" | "090000" | "090100" | "090101" | "090102" | "090103" | "090104" | "090105" | "090106" | "090107" | "090108" | "090109" | "090200" | "090201" | "090300" | "090301" | "090302" | "090303" | "090304" | "090400" | "090401" | "100000" | "100100" | "100101" | "100102" | "100103" | "100200" | "100201" | "100202" | "100300" | "100301" | "100400" | "100401" | "100402" | "100500" | "100501" | "100502" | "100600" | "100601" | "100602" | "110000" | "110100" | "110101" | "110102" | "110103" | "110104" | "110200" | "110201" | "110202" | "110203" | "120000" | "120100" | "120101" | "120102" | "120200" | "120201" | "120300" | "120301" | "120302" | "130000" | "130100" | "130101" | "130102" | "130103" | "130104" | "130105" | "130200" | "130201" | "130202" | "130203" | "130300" | "130301" | "130302" | "130303" | "130400" | "130401" | "130402" | "140000" | "140100" | "140101" | "140102" | "140103" | "140104" | "140200" | "140201" | "140202" | "140203" | "140300" | "140301" | "140302" | "140400" | "140401" | "150000" | "150100" | "150101" | "150200" | "150201" | "150202" | "150300" | "150301" | "150302" | "150303" | "150304" | "150400" | "150401" | "150500" | "150501" | "150502" | "150600" | "150601" | "160000" | "160100" | "160101" | "160102" | "160200" | "160201" | "160202" | "170000" | "170100" | "170101" | "170102" | "170103" | "170104" | "170105" | "170106" | "170107" | "170108" | "170109" | "170110" | "170200" | "170201" | "170202" | "170203" | "170300" | "170301" | "180000" | "180100" | "180101" | "180102" | "180103" | "180200" | "180201" | "180202" | "180300" | "180301" | "180400" | "180401" | "180500" | "180501" | "180502" | "180600" | "180601" | "180602" | "180603" | "180604" | "180700" | "180701" | "180702" | "180703" | "180800" | "180801" | "180802" | "180803" | "180804" | "180900" | "180901" | "190000" | "190100" | "190101" | "190102" | "190200" | "190201" | "190202" | "190300" | "190301" | "200000" | "200100" | "200101" | "200102" | "200103" | "200104" | "200200" | "200201" | "200300" | "200301" | "210000" | "210100" | "210101" | "210102" | "210103" | "210200" | "210201" | "210300" | "210301" | "210302" | "210303" | "210400" | "210401" | "210402" | "210500" | "210501" | "210502" | "210503" | "210504" | "210600" | "210601" | "210602" | "210700" | "210701" | "210800" | "210801" | "220000" | "220100" | "220101" | "220102" | "220103" | "220104" | "220105" | "220106" | "220107" | "220108" | "220109" | "220110" | "220111" | "220200" | "220201" | "220202" | "220203" | "220300" | "220301" | "220302" | "220303" | "220400" | "220401" | "220402" | "220500" | "220501" | "220502" | "220503" | "220600" | "220601" | "220602" | "230000" | "230100" | "230101" | "230200" | "230201" | "230202" | "230203" | "230300" | "230301" | "230400" | "230401" | "230500" | "230501" | "230600" | "230601" | "240000" | "240100" | "240101" | "240102" | "240103" | "240104" | "240105" | "240106" | "240200" | "240201" | "240202" | "240300" | "240301" | "240400" | "240401" | "240402" | "240403" | "240404" | "250000" | "250100" | "250101" | "250102" | "250104" | "250105" | "250106" | "250107" | "250200" | "250201" | "250300" | "250301" | "250302" | "250303" | "250400" | "250401" | "250402" | "250500" | "250501" | "250502" | "250503" | "250504" | "250600" | "250601" | "250602" | "250700" | "250701" | "250702" | "250703" | "250800" | "250801" | "250802" | "250803" | "250900" | "250901" | "251000" | "251001" | "260000" | "260100" | "260101" | "260200" | "260201" | "260300" | "260301" | "270000" | "270100" | "270101" | "270102" | "270103" | "270104" | "270200" | "270201" | "270202" | "270203" | "270204" | "270205" | "270300" | "270301" | "270302" | "270303" | "270304" | "280000" | "280100" | "280101" | "280102" | "280103" | "280104" | "280105" | "280106" | "280200" | "280201" | "280300" | "280301" | "280302" | "280303" | "290000" | "290100" | "290101" | "290102" | "290103" | "290104" | "290200" | "290201" | "290300" | "290301" | "290302" | "290303" | "290400" | "290402" | "290403" | "290500" | "290501" | "300000" | "300100" | "300101" | "300102" | "300103" | "300104" | "300200" | "300201" | "300202" | "300300" | "300301" | "310000" | "310100" | "310101" | "310102" | "310103" | "310104" | "310105" | "310200" | "310201" | "310300" | "310301" | "320000" | "320100" | "320101" | "320102" | "320200" | "320201" | "320300" | "320301" | "320302" | "320400" | "320401" | "320402" | "320500" | "320501" | "320502" | "320600" | "320601" | "320602" | "320603" | "320700" | "320701" | "320702" | "320703" | null;
+        /** @enum {unknown} */
+        ReceptorDirectoryStatus: "Unknown" | "Available" | "NotFound" | "Invalid" | "DeserializationFailed" | null;
         /**
          * @description Respuesta de anulación de rango de secuencias de e-NCF.
          *
@@ -4375,7 +4450,7 @@ export interface components {
              *     `true` si la secuencia NO puede reutilizarse (rechazado por motivos específicos);
              *             `false` si la secuencia SÍ puede reutilizarse.
              */
-            secuenciaUtilizada?: boolean;
+            secuenciaUtilizada?: null | boolean;
             /**
              * @description Código asociado al estado de validación del e-CF recibido.
              *     Código numérico que indica el resultado de la validación:
@@ -4490,7 +4565,7 @@ export interface components {
              *     - El RNC Emisor no existe o no se encuentra activo
              * @example false
              */
-            secuenciaUtilizada?: boolean;
+            secuenciaUtilizada?: null | boolean;
             /**
              * @description Obtiene la fecha en la cual Impuestos Internos recibió el e-CF.
              *     La fecha de recepción del comprobante. Puede ser null si no está disponible.
@@ -4584,6 +4659,11 @@ export interface components {
             /** Format: date-time */
             validTo: string;
         };
+        TrackingDetalle: {
+            trackId?: null | string;
+            estado?: null | string;
+            fechaRecepcion?: null | string;
+        };
         /** @enum {unknown} */
         UnidadMedidaType: "Barril" | "Bolsa" | "Bote" | "Bultos" | "Botella" | "CajaSlashCajon" | "Cajetilla" | "Centimetro" | "Cilindro" | "Conjunto" | "Contenedor" | "Dia" | "Docena" | "Fardo" | "Galones" | "Grado" | "Gramo" | "Granel" | "Hora" | "Huacal" | "Kilogramo" | "KilovatioHora" | "Libra" | "Litro" | "Lote" | "Metro" | "MetroCuadrado" | "MetroCubico" | "MillonesDeUnidadesTermicas" | "Minuto" | "Paquete" | "Par" | "Pie" | "Pieza" | "Rollo" | "Sobre" | "Segundo" | "Tanque" | "Tonelada" | "Tubo" | "Yarda" | "YardaCuadrada" | "Unidad" | "Elemento" | "Millar" | "Saco" | "Lata" | "Display" | "Bidon" | "Racion" | "Quintal" | "ToneladasDeRegistroBruto" | "PieCuadrado" | "Pasajero" | "PULGPulgadas" | "STAYParqueoBarcosEnMuelle" | "BDJBandeja" | "HAHectarea" | "MLMililitro" | "MGMiligramo" | "OZOnzas" | "OZTOnzasTroy" | null;
         UpsertCompanyRequest: {
@@ -4644,6 +4724,7 @@ export interface operations {
                 Names?: string[];
                 Page?: number | string;
                 Limit?: number | string;
+                Search?: string;
             };
             header?: never;
             path?: never;
@@ -5004,6 +5085,15 @@ export interface operations {
                     "application/problem+json": components["schemas"]["ProblemDetails"];
                 };
             };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
             /** @description Internal Server Error */
             500: {
                 headers: {
@@ -5057,6 +5147,15 @@ export interface operations {
             };
             /** @description Forbidden */
             403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Conflict */
+            409: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -5124,6 +5223,15 @@ export interface operations {
                     "application/problem+json": components["schemas"]["ProblemDetails"];
                 };
             };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
             /** @description Internal Server Error */
             500: {
                 headers: {
@@ -5177,6 +5285,15 @@ export interface operations {
             };
             /** @description Forbidden */
             403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Conflict */
+            409: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -5244,6 +5361,15 @@ export interface operations {
                     "application/problem+json": components["schemas"]["ProblemDetails"];
                 };
             };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
             /** @description Internal Server Error */
             500: {
                 headers: {
@@ -5297,6 +5423,15 @@ export interface operations {
             };
             /** @description Forbidden */
             403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Conflict */
+            409: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -5364,6 +5499,15 @@ export interface operations {
                     "application/problem+json": components["schemas"]["ProblemDetails"];
                 };
             };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
             /** @description Internal Server Error */
             500: {
                 headers: {
@@ -5417,6 +5561,15 @@ export interface operations {
             };
             /** @description Forbidden */
             403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Conflict */
+            409: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -5484,6 +5637,15 @@ export interface operations {
                     "application/problem+json": components["schemas"]["ProblemDetails"];
                 };
             };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
             /** @description Internal Server Error */
             500: {
                 headers: {
@@ -5537,6 +5699,15 @@ export interface operations {
             };
             /** @description Forbidden */
             403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Conflict */
+            409: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -5938,6 +6109,7 @@ export interface operations {
                 ToDate?: string;
                 AmountFrom?: number | string;
                 AmountTo?: number | string;
+                OcultarNoRecibidas?: boolean;
                 Page?: number | string;
                 Limit?: number | string;
             };
@@ -6104,6 +6276,7 @@ export interface operations {
                 ToDate?: string;
                 AmountFrom?: number | string;
                 AmountTo?: number | string;
+                OcultarNoRecibidas?: boolean;
                 Page?: number | string;
                 Limit?: number | string;
             };
@@ -6340,6 +6513,15 @@ export interface operations {
                     "application/problem+json": components["schemas"]["ProblemDetails"];
                 };
             };
+            /** @description Bad Gateway */
+            502: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
         };
     };
     ConsultaDirectorioObtenerDirectorioPorRnc: {
@@ -6393,6 +6575,15 @@ export interface operations {
             };
             /** @description Internal Server Error */
             500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Bad Gateway */
+            502: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -6463,6 +6654,15 @@ export interface operations {
                     "application/problem+json": components["schemas"]["ProblemDetails"];
                 };
             };
+            /** @description Bad Gateway */
+            502: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
         };
     };
     ConsultaResultado: {
@@ -6516,6 +6716,15 @@ export interface operations {
             };
             /** @description Internal Server Error */
             500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Bad Gateway */
+            502: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -6578,6 +6787,15 @@ export interface operations {
             };
             /** @description Internal Server Error */
             500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Bad Gateway */
+            502: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -6648,6 +6866,15 @@ export interface operations {
                     "application/problem+json": components["schemas"]["ProblemDetails"];
                 };
             };
+            /** @description Bad Gateway */
+            502: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
         };
     };
     ConsultaTimbreFC: {
@@ -6711,6 +6938,15 @@ export interface operations {
                     "application/problem+json": components["schemas"]["ProblemDetails"];
                 };
             };
+            /** @description Bad Gateway */
+            502: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
         };
     };
     ConsultaTrackId: {
@@ -6733,7 +6969,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["RespuestaConsultaTrackId"];
+                    "application/json": components["schemas"]["TrackingDetalle"][];
                 };
             };
             /** @description Bad Request */
@@ -6765,6 +7001,15 @@ export interface operations {
             };
             /** @description Internal Server Error */
             500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Bad Gateway */
+            502: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -6830,6 +7075,15 @@ export interface operations {
                     "application/problem+json": components["schemas"]["ProblemDetails"];
                 };
             };
+            /** @description Bad Gateway */
+            502: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
         };
     };
     EstatusServiciosObtenerVentanasMantenimiento: {
@@ -6881,6 +7135,15 @@ export interface operations {
             };
             /** @description Internal Server Error */
             500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["ProblemDetails"];
+                };
+            };
+            /** @description Bad Gateway */
+            502: {
                 headers: {
                     [name: string]: unknown;
                 };

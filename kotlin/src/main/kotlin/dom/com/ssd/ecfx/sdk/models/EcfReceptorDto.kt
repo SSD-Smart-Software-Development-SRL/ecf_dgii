@@ -19,7 +19,6 @@ import dom.com.ssd.ecfx.sdk.models.AcecfSummaryDto
 import dom.com.ssd.ecfx.sdk.models.AllTipoECFTypes
 import dom.com.ssd.ecfx.sdk.models.EcfReceptorDtoEstado
 import dom.com.ssd.ecfx.sdk.models.EcfReceptorDtoProgress
-import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
@@ -74,7 +73,7 @@ data class EcfReceptorDto (
     val tipoEcf: AllTipoECFTypes? = null,
 
     @SerialName(value = "montoTotal")
-    val montoTotal: SearchEcfsAmountFromParameter? = null,
+    val montoTotal: kotlin.Double? = null,
 
     @Contextual @SerialName(value = "fechaEmision")
     val fechaEmision: java.time.LocalDate? = null,

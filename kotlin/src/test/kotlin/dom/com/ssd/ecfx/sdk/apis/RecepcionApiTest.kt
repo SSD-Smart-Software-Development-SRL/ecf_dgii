@@ -22,7 +22,6 @@ import dom.com.ssd.ecfx.sdk.apis.RecepcionApi
 import dom.com.ssd.ecfx.sdk.models.EcfReceptorDto
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfReceptionRequestDto
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
-import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
 import dom.com.ssd.ecfx.sdk.models.SendAcecfRequest
 
 class RecepcionApiTest : ShouldSpec() {
@@ -57,8 +56,8 @@ class RecepcionApiTest : ShouldSpec() {
             //val progresses : kotlin.collections.List<Int> =  // kotlin.collections.List<Int> | 
             //val fromDate : kotlin.String = fromDate_example // kotlin.String | 
             //val toDate : kotlin.String = toDate_example // kotlin.String | 
-            //val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
-            //val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
+            //val amountFrom : kotlin.Double = 1.2 // kotlin.Double | 
+            //val amountTo : kotlin.Double = 1.2 // kotlin.Double | 
             //val page : Int = 56 // Int | 
             //val limit : Int = 56 // Int | 
             //val result : PaginatedApiResultOfEcfReceptionRequestDto = apiInstance.searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit)
@@ -76,8 +75,8 @@ class RecepcionApiTest : ShouldSpec() {
             //val progresses : kotlin.collections.List<Int> =  // kotlin.collections.List<Int> | 
             //val fromDate : kotlin.String = fromDate_example // kotlin.String | 
             //val toDate : kotlin.String = toDate_example // kotlin.String | 
-            //val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
-            //val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
+            //val amountFrom : kotlin.Double = 1.2 // kotlin.Double | 
+            //val amountTo : kotlin.Double = 1.2 // kotlin.Double | 
             //val page : Int = 56 // Int | 
             //val limit : Int = 56 // Int | 
             //val result : PaginatedApiResultOfEcfReceptionRequestDto = apiInstance.searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit)

@@ -243,12 +243,26 @@ Al completarse el envío, recibes un `EcfResponse` con los datos necesarios para
 | `CodSec` | Código de seguridad — debe aparecer en el comprobante impreso |
 | `FechaFirma` | Fecha y hora de la firma digital del comprobante |
 | `Estatus` | Estado DGII: `Aceptado`, `AceptadoCondicional`, `Rechazado` |
-| `Progress` | Estado del procesamiento: `Queued`, `Sending`, `Polling`, `Finished`, `Error` |
+| `Progress` | Estado del procesamiento: `New`, `Processing`, `UploadedToDgii`, `Finished`, `Error` |
+| `DgiiSubmissionState` | Estado del envío a la DGII (ver abajo); `PendingReconciliation` y `NotReceived` requieren atención |
 | `Encf` | Número de comprobante fiscal electrónico (eNCF) |
 | `Mensaje` | Mensaje de respuesta de la DGII |
 | `Errors` | Detalle de errores (si los hay) |
 | `MontoTotal` | Monto total del comprobante |
 | `SecuenciaUtilizada` | Indica si la secuencia fue utilizada |
+
+### Estado de envío a la DGII (`dgiiSubmissionState`)
+
+`EcfResponse` incluye `dgiiSubmissionState` (opcional; `null` en documentos creados antes del envío durable). Dos valores cambian lo que debe hacer tu sistema:
+
+| Valor | Significado | Qué hacer |
+|-------|-------------|-----------|
+| `PendingReconciliation` | La DGII todavía no confirma el resultado (`progress = UploadedToDgii`, `estatus = EnProceso`). | Seguir consultando. **No** reenviar el documento ni reutilizar el eNCF. |
+| `NotReceived` | La DGII confirmó que no tiene registro del documento (`progress = Error`, `estatus = null`, `secuenciaUtilizada = false`; `errors` trae el motivo en español). | Es final y **no** fue aceptado, pero el **mismo eNCF** puede enviarse otra vez como una solicitud nueva (`POST /ecf/{tipo}`). |
+
+Los demás valores (`Prepared`, `Sending`, `Accepted`, `Rejected`, `ValidationFailed`, `ReservationBlocked`) son informativos: el resultado se sigue leyendo en `progress`/`estatus`.
+
+Todos los SDKs con polling automático siguen consultando mientras el estado es `PendingReconciliation` y terminan con error en `NotReceived`, indicando que se puede reenviar (`CanResubmit` / `canResubmit` / `can_resubmit`). Un valor desconocido (de una versión más nueva de la API) no rompe la deserialización: se ignora o se expone como valor desconocido y se usa `progress`. Consulta el README de cada SDK para los detalles.
 
 ### QR e Impresión
 

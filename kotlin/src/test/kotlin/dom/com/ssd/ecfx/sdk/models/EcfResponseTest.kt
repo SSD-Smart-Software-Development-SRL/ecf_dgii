@@ -24,7 +24,6 @@ import dom.com.ssd.ecfx.sdk.models.AllTipoECFTypes
 import dom.com.ssd.ecfx.sdk.models.DGIIEnvironment
 import dom.com.ssd.ecfx.sdk.models.EcfEstado
 import dom.com.ssd.ecfx.sdk.models.EcfProgress
-import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
 
 class EcfResponseTest : ShouldSpec() {
     init {

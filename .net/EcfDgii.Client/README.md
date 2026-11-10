@@ -113,7 +113,8 @@ Cuando `SendEcfAsync` termina exitosamente, retorna un `EcfResponse` con toda la
 | `CodSec` | `string` | Código de seguridad — debe aparecer en el comprobante impreso |
 | `FechaFirma` | `DateTimeOffset` | Fecha y hora en que el comprobante fue firmado digitalmente |
 | `Estatus` | `EcfEstado` | Estado asignado por la DGII (`Aceptado`, `AceptadoCondicional`, `Rechazado`) |
-| `Progress` | `EcfProgress` | Estado del procesamiento (`Queued`, `Sending`, `Polling`, `Finished`, `Error`) |
+| `Progress` | `EcfProgress` | Estado del procesamiento (`New`, `Processing`, `UploadedToDgii`, `Finished`, `Error`) |
+| `DgiiSubmissionState` | wrapper (usa `GetDgiiSubmissionState()`) | Estado del envío a la DGII; ver [Estado de envío a la DGII](#estado-de-envío-a-la-dgii-dgiisubmissionstate) |
 | `Encf` | `string` | Número de comprobante fiscal electrónico (eNCF) |
 | `RncEmisor` | `string` | RNC del emisor |
 | `Mensaje` | `string` | Mensaje de respuesta de la DGII |
@@ -362,6 +363,32 @@ await client.Api.Ecf.Anularrango["123456789"]
 // Estatus de servicios DGII
 var estatus = await client.Api.Dgii["123456789"].Estatusservicios.ObtenerEstatus.GetAsync();
 ```
+
+## Estado de envío a la DGII (`dgiiSubmissionState`)
+
+`EcfResponse` incluye `dgiiSubmissionState` (opcional; `null` en documentos creados antes del envío durable). Dos valores cambian lo que debe hacer tu sistema:
+
+| Valor | Significado | Qué hacer |
+|-------|-------------|-----------|
+| `PendingReconciliation` | La DGII todavía no confirma el resultado (`progress = UploadedToDgii`, `estatus = EnProceso`). | Seguir consultando. **No** reenviar el documento ni reutilizar el eNCF. |
+| `NotReceived` | La DGII confirmó que no tiene registro del documento (`progress = Error`, `estatus = null`, `secuenciaUtilizada = false`; `errors` trae el motivo en español). | Es final y **no** fue aceptado, pero el **mismo eNCF** puede enviarse otra vez como una solicitud nueva (`POST /ecf/{tipo}`). |
+
+Los demás valores (`Prepared`, `Sending`, `Accepted`, `Rejected`, `ValidationFailed`, `ReservationBlocked`) son informativos: el resultado se sigue leyendo en `progress`/`estatus`.
+
+`SendEcfAsync` sigue consultando durante `PendingReconciliation`. En `NotReceived` lanza `EcfException` con `CanResubmit == true`:
+
+```csharp
+try
+{
+    var resultado = await client.SendEcfAsync(ecf);
+}
+catch (EcfException ex) when (ex.CanResubmit)
+{
+    // La DGII no recibió el documento: se puede enviar de nuevo con el mismo eNCF.
+}
+```
+
+Para respuestas que consultas tú mismo hay extensiones en `EcfStatus`: `response.GetDgiiSubmissionState()` (null si viene vacío o con un valor que esta versión no conoce), `response.IsPendingReconciliation()`, `response.CanResubmit()` y `response.IsTerminal()`.
 
 ## Manejo de Errores
 

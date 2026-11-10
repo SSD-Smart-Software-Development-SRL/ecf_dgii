@@ -23,10 +23,22 @@ import kotlinx.serialization.Contextual
 /**
  * 
  *
+ * @param trackId 
+ * @param estado 
+ * @param fechaRecepcion 
  */
 @Serializable
 
-class SearchEcfsAmountFromParameter (
+data class TrackingDetalle (
+
+    @SerialName(value = "trackId")
+    val trackId: kotlin.String? = null,
+
+    @SerialName(value = "estado")
+    val estado: kotlin.String? = null,
+
+    @SerialName(value = "fechaRecepcion")
+    val fechaRecepcion: kotlin.String? = null
 
 ) {
 

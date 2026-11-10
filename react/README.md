@@ -182,6 +182,25 @@ function EnviarEcf() {
 }
 ```
 
+## Estado de envío a la DGII (`dgiiSubmissionState`)
+
+`EcfResponse` incluye `dgiiSubmissionState` (opcional; `null` en documentos creados antes del envío durable). Dos valores cambian lo que debe hacer tu sistema:
+
+| Valor | Significado | Qué hacer |
+|-------|-------------|-----------|
+| `PendingReconciliation` | La DGII todavía no confirma el resultado (`progress = UploadedToDgii`, `estatus = EnProceso`). | Seguir consultando. **No** reenviar el documento ni reutilizar el eNCF. |
+| `NotReceived` | La DGII confirmó que no tiene registro del documento (`progress = Error`, `estatus = null`, `secuenciaUtilizada = false`; `errors` trae el motivo en español). | Es final y **no** fue aceptado, pero el **mismo eNCF** puede enviarse otra vez como una solicitud nueva (`POST /ecf/{tipo}`). |
+
+Los demás valores (`Prepared`, `Sending`, `Accepted`, `Rejected`, `ValidationFailed`, `ReservationBlocked`) son informativos: el resultado se sigue leyendo en `progress`/`estatus`.
+
+Los hooks devuelven el `EcfResponse` tal cual. Si haces polling con `refetchInterval`, detente con `isTerminal` del paquete `@ssddo/ecf-sdk` (o la misma lógica) en lugar de mirar solo `progress`:
+
+```tsx
+const pendiente = data?.dgiiSubmissionState === 'PendingReconciliation'; // seguir consultando, no reenviar
+const reenviable = data?.dgiiSubmissionState === 'NotReceived';          // final: reenviar con el mismo eNCF
+const terminado = !pendiente && (reenviable || data?.progress === 'Finished' || data?.progress === 'Error');
+```
+
 ## Entornos
 
 | Entorno | URL |

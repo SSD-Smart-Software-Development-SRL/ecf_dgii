@@ -13,9 +13,11 @@
 | **updatedBy** | **kotlin.String** |  |  [optional] |
 | **tenantId** | [**java.util.UUID**](java.util.UUID.md) |  |  [optional] |
 | **receptorId** | **kotlin.String** |  |  [optional] |
-| **urlRecepcion** | **kotlin.String** |  |  [optional] |
-| **urlAprobacionComercial** | **kotlin.String** |  |  [optional] |
-| **urlAutenticacion** | **kotlin.String** |  |  [optional] |
+| **urls** | [**CompanyUrlsResponse**](CompanyUrlsResponse.md) |  |  [optional] |
+| **certification** | [**CertificationStateResponse**](CertificationStateResponse.md) | CERT-01: the company&#39;s certification state. |  [optional] |
+| **archivedAt** | [**java.time.OffsetDateTime**](java.time.OffsetDateTime.md) | When the company was archived; null while it is active. |  [optional] |
+| **archivedBy** | **kotlin.String** | Who archived it and why, the last time it was archived; kept after a restore as history. |  [optional] |
+| **archiveReason** | **kotlin.String** |  |  [optional] |
 
 
 

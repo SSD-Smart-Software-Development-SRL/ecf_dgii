@@ -39,7 +39,6 @@ import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfAnulacionListResponse
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfResponse
 import dom.com.ssd.ecfx.sdk.models.ProblemDetails
 import dom.com.ssd.ecfx.sdk.models.RespuestaAnulacionRango
-import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -70,7 +69,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/anularrango/{rnc}
      * 
-     * 
+     * Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.
      * @param rnc 
      * @param anulacionRequest 
      * @return RespuestaAnulacionRango
@@ -103,7 +102,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/anularrango/{rnc}
      * 
-     * 
+     * Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.
      * @param rnc 
      * @param anulacionRequest 
      * @return ApiResponse<RespuestaAnulacionRango?>
@@ -495,7 +494,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/31
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf31ECF 
      * @return EcfResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -527,7 +526,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/31
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf31ECF 
      * @return ApiResponse<EcfResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -569,7 +568,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/32
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf32ECF 
      * @return EcfResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -601,7 +600,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/32
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf32ECF 
      * @return ApiResponse<EcfResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -643,7 +642,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/33
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf33ECF 
      * @return EcfResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -675,7 +674,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/33
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf33ECF 
      * @return ApiResponse<EcfResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -717,7 +716,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/34
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf34ECF 
      * @return EcfResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -749,7 +748,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/34
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf34ECF 
      * @return ApiResponse<EcfResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -791,7 +790,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/41
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf41ECF 
      * @return EcfResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -823,7 +822,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/41
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf41ECF 
      * @return ApiResponse<EcfResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -865,7 +864,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/43
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf43ECF 
      * @return EcfResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -897,7 +896,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/43
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf43ECF 
      * @return ApiResponse<EcfResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -939,7 +938,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/44
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf44ECF 
      * @return EcfResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -971,7 +970,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/44
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf44ECF 
      * @return ApiResponse<EcfResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1013,7 +1012,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/45
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf45ECF 
      * @return EcfResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -1045,7 +1044,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/45
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf45ECF 
      * @return ApiResponse<EcfResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1087,7 +1086,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/46
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf46ECF 
      * @return EcfResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -1119,7 +1118,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/46
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf46ECF 
      * @return ApiResponse<EcfResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1161,7 +1160,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/47
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf47ECF 
      * @return EcfResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -1193,7 +1192,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * POST /ecf/47
      * 
-     * 
+     * Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      * @param ecf47ECF 
      * @return ApiResponse<EcfResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1257,7 +1256,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchAllEcfs(encfs: kotlin.collections.List<kotlin.String>? = null, ids: kotlin.collections.List<java.util.UUID>? = null, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>? = null, includeEcfContent: kotlin.Boolean? = false, fromFechaEmision: java.time.OffsetDateTime? = null, toFechaEmision: java.time.OffsetDateTime? = null, amountFrom: SearchEcfsAmountFromParameter? = null, amountTo: SearchEcfsAmountFromParameter? = null, progresses: kotlin.collections.List<EcfProgress>? = null, dgiiEstados: kotlin.collections.List<EcfEstado>? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfResponse {
+    fun searchAllEcfs(encfs: kotlin.collections.List<kotlin.String>? = null, ids: kotlin.collections.List<java.util.UUID>? = null, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>? = null, includeEcfContent: kotlin.Boolean? = false, fromFechaEmision: java.time.OffsetDateTime? = null, toFechaEmision: java.time.OffsetDateTime? = null, amountFrom: kotlin.Double? = null, amountTo: kotlin.Double? = null, progresses: kotlin.collections.List<EcfProgress>? = null, dgiiEstados: kotlin.collections.List<EcfEstado>? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfResponse {
         val localVarResponse = searchAllEcfsWithHttpInfo(encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, progresses = progresses, dgiiEstados = dgiiEstados, page = page, limit = limit)
 
         return when (localVarResponse.responseType) {
@@ -1297,7 +1296,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchAllEcfsWithHttpInfo(encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfResponse?> {
+    fun searchAllEcfsWithHttpInfo(encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: kotlin.Double?, amountTo: kotlin.Double?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfResponse?> {
         val localVariableConfig = searchAllEcfsRequestConfig(encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, progresses = progresses, dgiiEstados = dgiiEstados, page = page, limit = limit)
 
         return request<Unit, PaginatedApiResultOfEcfResponse>(
@@ -1322,7 +1321,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchAllEcfsRequestConfig(encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
+    fun searchAllEcfsRequestConfig(encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: kotlin.Double?, amountTo: kotlin.Double?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1398,7 +1397,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchEcfs(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>? = null, ids: kotlin.collections.List<java.util.UUID>? = null, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>? = null, includeEcfContent: kotlin.Boolean? = false, fromFechaEmision: java.time.OffsetDateTime? = null, toFechaEmision: java.time.OffsetDateTime? = null, amountFrom: SearchEcfsAmountFromParameter? = null, amountTo: SearchEcfsAmountFromParameter? = null, progresses: kotlin.collections.List<EcfProgress>? = null, dgiiEstados: kotlin.collections.List<EcfEstado>? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfResponse {
+    fun searchEcfs(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>? = null, ids: kotlin.collections.List<java.util.UUID>? = null, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>? = null, includeEcfContent: kotlin.Boolean? = false, fromFechaEmision: java.time.OffsetDateTime? = null, toFechaEmision: java.time.OffsetDateTime? = null, amountFrom: kotlin.Double? = null, amountTo: kotlin.Double? = null, progresses: kotlin.collections.List<EcfProgress>? = null, dgiiEstados: kotlin.collections.List<EcfEstado>? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfEcfResponse {
         val localVarResponse = searchEcfsWithHttpInfo(rnc = rnc, encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, progresses = progresses, dgiiEstados = dgiiEstados, page = page, limit = limit)
 
         return when (localVarResponse.responseType) {
@@ -1439,7 +1438,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchEcfsWithHttpInfo(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfResponse?> {
+    fun searchEcfsWithHttpInfo(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: kotlin.Double?, amountTo: kotlin.Double?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfEcfResponse?> {
         val localVariableConfig = searchEcfsRequestConfig(rnc = rnc, encfs = encfs, ids = ids, tiposEcfs = tiposEcfs, includeEcfContent = includeEcfContent, fromFechaEmision = fromFechaEmision, toFechaEmision = toFechaEmision, amountFrom = amountFrom, amountTo = amountTo, progresses = progresses, dgiiEstados = dgiiEstados, page = page, limit = limit)
 
         return request<Unit, PaginatedApiResultOfEcfResponse>(
@@ -1465,7 +1464,7 @@ open class EcfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param limit  (optional, default to 25)
      * @return RequestConfig
      */
-    fun searchEcfsRequestConfig(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: SearchEcfsAmountFromParameter?, amountTo: SearchEcfsAmountFromParameter?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
+    fun searchEcfsRequestConfig(rnc: kotlin.String, encfs: kotlin.collections.List<kotlin.String>?, ids: kotlin.collections.List<java.util.UUID>?, tiposEcfs: kotlin.collections.List<AllTipoECFTypes>?, includeEcfContent: kotlin.Boolean?, fromFechaEmision: java.time.OffsetDateTime?, toFechaEmision: java.time.OffsetDateTime?, amountFrom: kotlin.Double?, amountTo: kotlin.Double?, progresses: kotlin.collections.List<EcfProgress>?, dgiiEstados: kotlin.collections.List<EcfEstado>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {

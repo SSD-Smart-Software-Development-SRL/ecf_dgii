@@ -27,6 +27,7 @@ import dom.com.ssd.ecfx.sdk.models.RespuestaConsultaTimbre
 import dom.com.ssd.ecfx.sdk.models.RespuestaConsultaTrackId
 import dom.com.ssd.ecfx.sdk.models.RespuestaEstatusServicio
 import dom.com.ssd.ecfx.sdk.models.RespuestaVentanaDeMantenimiento
+import dom.com.ssd.ecfx.sdk.models.TrackingDetalle
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -56,8 +57,8 @@ open class DgiiApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /dgii/{rnc}/consultadirectorio/listado
-     * 
-     * 
+     * [OBSOLETO] Listado completo del Directorio de la DGII
+     * Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
      * @param rnc 
      * @return kotlin.collections.List<Directorio>
      * @throws IllegalStateException If the request is not correctly configured
@@ -68,7 +69,9 @@ open class DgiiApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    @Deprecated(message = "This operation is deprecated.")
     fun consultaDirectorioListado(rnc: kotlin.String) : kotlin.collections.List<Directorio> {
+        @Suppress("DEPRECATION")
         val localVarResponse = consultaDirectorioListadoWithHttpInfo(rnc = rnc)
 
         return when (localVarResponse.responseType) {
@@ -88,8 +91,8 @@ open class DgiiApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /dgii/{rnc}/consultadirectorio/listado
-     * 
-     * 
+     * [OBSOLETO] Listado completo del Directorio de la DGII
+     * Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
      * @param rnc 
      * @return ApiResponse<kotlin.collections.List<Directorio>?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -97,7 +100,9 @@ open class DgiiApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
+    @Deprecated(message = "This operation is deprecated.")
     fun consultaDirectorioListadoWithHttpInfo(rnc: kotlin.String) : ApiResponse<kotlin.collections.List<Directorio>?> {
+        @Suppress("DEPRECATION")
         val localVariableConfig = consultaDirectorioListadoRequestConfig(rnc = rnc)
 
         return request<Unit, kotlin.collections.List<Directorio>>(
@@ -111,6 +116,7 @@ open class DgiiApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param rnc 
      * @return RequestConfig
      */
+    @Deprecated(message = "This operation is deprecated.")
     fun consultaDirectorioListadoRequestConfig(rnc: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
@@ -652,7 +658,7 @@ open class DgiiApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param rnc 
      * @param rncEmisor 
      * @param encf 
-     * @return RespuestaConsultaTrackId
+     * @return kotlin.collections.List<TrackingDetalle>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -661,11 +667,11 @@ open class DgiiApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun consultaTrackId(rnc: kotlin.String, rncEmisor: kotlin.String, encf: kotlin.String) : RespuestaConsultaTrackId {
+    fun consultaTrackId(rnc: kotlin.String, rncEmisor: kotlin.String, encf: kotlin.String) : kotlin.collections.List<TrackingDetalle> {
         val localVarResponse = consultaTrackIdWithHttpInfo(rnc = rnc, rncEmisor = rncEmisor, encf = encf)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as RespuestaConsultaTrackId
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<TrackingDetalle>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -686,16 +692,16 @@ open class DgiiApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param rnc 
      * @param rncEmisor 
      * @param encf 
-     * @return ApiResponse<RespuestaConsultaTrackId?>
+     * @return ApiResponse<kotlin.collections.List<TrackingDetalle>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun consultaTrackIdWithHttpInfo(rnc: kotlin.String, rncEmisor: kotlin.String, encf: kotlin.String) : ApiResponse<RespuestaConsultaTrackId?> {
+    fun consultaTrackIdWithHttpInfo(rnc: kotlin.String, rncEmisor: kotlin.String, encf: kotlin.String) : ApiResponse<kotlin.collections.List<TrackingDetalle>?> {
         val localVariableConfig = consultaTrackIdRequestConfig(rnc = rnc, rncEmisor = rncEmisor, encf = encf)
 
-        return request<Unit, RespuestaConsultaTrackId>(
+        return request<Unit, kotlin.collections.List<TrackingDetalle>>(
             localVariableConfig
         )
     }

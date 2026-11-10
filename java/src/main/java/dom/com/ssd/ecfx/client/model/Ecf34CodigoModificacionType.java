@@ -37,7 +37,9 @@ public enum Ecf34CodigoModificacionType {
   
   REEMPLAZO_NCF_EMITIDO_EN_CONTINGENCIA("ReemplazoNCFEmitidoEnContingencia"),
   
-  REFERENCIA_FACTURA_CONSUMO_ELECTRONICA("ReferenciaFacturaConsumoElectronica");
+  REFERENCIA_FACTURA_CONSUMO_ELECTRONICA("ReferenciaFacturaConsumoElectronica"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -60,7 +62,7 @@ public enum Ecf34CodigoModificacionType {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<Ecf34CodigoModificacionType> {

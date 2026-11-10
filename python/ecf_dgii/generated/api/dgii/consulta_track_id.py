@@ -7,7 +7,7 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.problem_details import ProblemDetails
-from ...models.respuesta_consulta_track_id import RespuestaConsultaTrackId
+from ...models.tracking_detalle import TrackingDetalle
 from ...types import UNSET, Response
 
 
@@ -39,9 +39,14 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> ProblemDetails | RespuestaConsultaTrackId | None:
+) -> ProblemDetails | list[TrackingDetalle] | None:
     if response.status_code == 200:
-        response_200 = RespuestaConsultaTrackId.from_dict(response.json())
+        response_200 = []
+        _response_200 = response.json()
+        for response_200_item_data in _response_200:
+            response_200_item = TrackingDetalle.from_dict(response_200_item_data)
+
+            response_200.append(response_200_item)
 
         return response_200
 
@@ -65,6 +70,11 @@ def _parse_response(
 
         return response_500
 
+    if response.status_code == 502:
+        response_502 = ProblemDetails.from_dict(response.json())
+
+        return response_502
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -73,7 +83,7 @@ def _parse_response(
 
 def _build_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[ProblemDetails | RespuestaConsultaTrackId]:
+) -> Response[ProblemDetails | list[TrackingDetalle]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -88,7 +98,7 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     rnc_emisor: str,
     encf: str,
-) -> Response[ProblemDetails | RespuestaConsultaTrackId]:
+) -> Response[ProblemDetails | list[TrackingDetalle]]:
     """
     Args:
         rnc (str):
@@ -100,7 +110,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ProblemDetails | RespuestaConsultaTrackId]
+        Response[ProblemDetails | list[TrackingDetalle]]
     """
 
     kwargs = _get_kwargs(
@@ -122,7 +132,7 @@ def sync(
     client: AuthenticatedClient | Client,
     rnc_emisor: str,
     encf: str,
-) -> ProblemDetails | RespuestaConsultaTrackId | None:
+) -> ProblemDetails | list[TrackingDetalle] | None:
     """
     Args:
         rnc (str):
@@ -134,7 +144,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ProblemDetails | RespuestaConsultaTrackId
+        ProblemDetails | list[TrackingDetalle]
     """
 
     return sync_detailed(
@@ -151,7 +161,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     rnc_emisor: str,
     encf: str,
-) -> Response[ProblemDetails | RespuestaConsultaTrackId]:
+) -> Response[ProblemDetails | list[TrackingDetalle]]:
     """
     Args:
         rnc (str):
@@ -163,7 +173,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ProblemDetails | RespuestaConsultaTrackId]
+        Response[ProblemDetails | list[TrackingDetalle]]
     """
 
     kwargs = _get_kwargs(
@@ -183,7 +193,7 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     rnc_emisor: str,
     encf: str,
-) -> ProblemDetails | RespuestaConsultaTrackId | None:
+) -> ProblemDetails | list[TrackingDetalle] | None:
     """
     Args:
         rnc (str):
@@ -195,7 +205,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ProblemDetails | RespuestaConsultaTrackId
+        ProblemDetails | list[TrackingDetalle]
     """
 
     return (

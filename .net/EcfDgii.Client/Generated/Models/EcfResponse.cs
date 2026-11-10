@@ -33,6 +33,14 @@ namespace EcfDgii.Client.Generated.Models
 #endif
         /// <summary>The dgiiEnvironment property</summary>
         public global::EcfDgii.Client.Generated.Models.DGIIEnvironment? DgiiEnvironment { get; set; }
+        /// <summary>The dgiiSubmissionState property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_dgiiSubmissionState? DgiiSubmissionState { get; set; }
+#nullable restore
+#else
+        public global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_dgiiSubmissionState DgiiSubmissionState { get; set; }
+#endif
         /// <summary>The ecfContent property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -123,6 +131,14 @@ namespace EcfDgii.Client.Generated.Models
 #else
         public string QueueName { get; set; }
 #endif
+        /// <summary>The receptorDirectoryStatus property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_receptorDirectoryStatus? ReceptorDirectoryStatus { get; set; }
+#nullable restore
+#else
+        public global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_receptorDirectoryStatus ReceptorDirectoryStatus { get; set; }
+#endif
         /// <summary>The rncEmisor property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -175,6 +191,7 @@ namespace EcfDgii.Client.Generated.Models
                 { "acecfs", n => { Acecfs = n.GetCollectionOfObjectValues<global::EcfDgii.Client.Generated.Models.AcecfSummaryDto>(global::EcfDgii.Client.Generated.Models.AcecfSummaryDto.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "codSec", n => { CodSec = n.GetStringValue(); } },
                 { "dgiiEnvironment", n => { DgiiEnvironment = n.GetEnumValue<global::EcfDgii.Client.Generated.Models.DGIIEnvironment>(); } },
+                { "dgiiSubmissionState", n => { DgiiSubmissionState = n.GetObjectValue<global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_dgiiSubmissionState>(global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_dgiiSubmissionState.CreateFromDiscriminatorValue); } },
                 { "ecfContent", n => { EcfContent = n.GetStringValue(); } },
                 { "emisorReceptorErrors", n => { EmisorReceptorErrors = n.GetStringValue(); } },
                 { "encf", n => { Encf = n.GetStringValue(); } },
@@ -190,6 +207,7 @@ namespace EcfDgii.Client.Generated.Models
                 { "montoTotal", n => { MontoTotal = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
                 { "progress", n => { Progress = n.GetEnumValue<global::EcfDgii.Client.Generated.Models.EcfProgress>(); } },
                 { "queueName", n => { QueueName = n.GetStringValue(); } },
+                { "receptorDirectoryStatus", n => { ReceptorDirectoryStatus = n.GetObjectValue<global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_receptorDirectoryStatus>(global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_receptorDirectoryStatus.CreateFromDiscriminatorValue); } },
                 { "rncEmisor", n => { RncEmisor = n.GetStringValue(); } },
                 { "rncReceptor", n => { RncReceptor = n.GetStringValue(); } },
                 { "secuenciaUtilizada", n => { SecuenciaUtilizada = n.GetBoolValue(); } },
@@ -208,6 +226,7 @@ namespace EcfDgii.Client.Generated.Models
             writer.WriteCollectionOfObjectValues<global::EcfDgii.Client.Generated.Models.AcecfSummaryDto>("acecfs", Acecfs);
             writer.WriteStringValue("codSec", CodSec);
             writer.WriteEnumValue<global::EcfDgii.Client.Generated.Models.DGIIEnvironment>("dgiiEnvironment", DgiiEnvironment);
+            writer.WriteObjectValue<global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_dgiiSubmissionState>("dgiiSubmissionState", DgiiSubmissionState);
             writer.WriteStringValue("ecfContent", EcfContent);
             writer.WriteStringValue("emisorReceptorErrors", EmisorReceptorErrors);
             writer.WriteStringValue("encf", Encf);
@@ -223,6 +242,7 @@ namespace EcfDgii.Client.Generated.Models
             writer.WriteObjectValue<UntypedNode>("montoTotal", MontoTotal);
             writer.WriteEnumValue<global::EcfDgii.Client.Generated.Models.EcfProgress>("progress", Progress);
             writer.WriteStringValue("queueName", QueueName);
+            writer.WriteObjectValue<global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_receptorDirectoryStatus>("receptorDirectoryStatus", ReceptorDirectoryStatus);
             writer.WriteStringValue("rncEmisor", RncEmisor);
             writer.WriteStringValue("rncReceptor", RncReceptor);
             writer.WriteBoolValue("secuenciaUtilizada", SecuenciaUtilizada);
@@ -230,6 +250,71 @@ namespace EcfDgii.Client.Generated.Models
             writer.WriteDateTimeOffsetValue("timestamp", Timestamp);
             writer.WriteEnumValue<global::EcfDgii.Client.Generated.Models.AllTipoECFTypes>("tipoEcf", TipoEcf);
             writer.WriteAdditionalData(AdditionalData);
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="global::EcfDgii.Client.Generated.Models.DgiiSubmissionState"/>, <see cref="global::EcfDgii.Client.Generated.Models.EcfResponse_dgiiSubmissionStateMember1"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class EcfResponse_dgiiSubmissionState : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="global::EcfDgii.Client.Generated.Models.DgiiSubmissionState"/></summary>
+            public global::EcfDgii.Client.Generated.Models.DgiiSubmissionState? DgiiSubmissionState { get; set; }
+            /// <summary>Composed type representation for type <see cref="global::EcfDgii.Client.Generated.Models.EcfResponse_dgiiSubmissionStateMember1"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::EcfDgii.Client.Generated.Models.EcfResponse_dgiiSubmissionStateMember1? EcfResponseDgiiSubmissionStateMember1 { get; set; }
+#nullable restore
+#else
+            public global::EcfDgii.Client.Generated.Models.EcfResponse_dgiiSubmissionStateMember1 EcfResponseDgiiSubmissionStateMember1 { get; set; }
+#endif
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_dgiiSubmissionState"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_dgiiSubmissionState CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_dgiiSubmissionState();
+                if(parseNode.GetEnumValue<global::EcfDgii.Client.Generated.Models.DgiiSubmissionState>() is global::EcfDgii.Client.Generated.Models.DgiiSubmissionState dgiiSubmissionStateValue)
+                {
+                    result.DgiiSubmissionState = dgiiSubmissionStateValue;
+                }
+                else if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.EcfResponseDgiiSubmissionStateMember1 = new global::EcfDgii.Client.Generated.Models.EcfResponse_dgiiSubmissionStateMember1();
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                if(EcfResponseDgiiSubmissionStateMember1 != null)
+                {
+                    return EcfResponseDgiiSubmissionStateMember1.GetFieldDeserializers();
+                }
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(DgiiSubmissionState != null)
+                {
+                    writer.WriteEnumValue<global::EcfDgii.Client.Generated.Models.DgiiSubmissionState>(null, DgiiSubmissionState);
+                }
+                else if(EcfResponseDgiiSubmissionStateMember1 != null)
+                {
+                    writer.WriteObjectValue<global::EcfDgii.Client.Generated.Models.EcfResponse_dgiiSubmissionStateMember1>(null, EcfResponseDgiiSubmissionStateMember1);
+                }
+            }
         }
         /// <summary>
         /// Composed type wrapper for classes <see cref="global::EcfDgii.Client.Generated.Models.EcfEstado"/>, <see cref="global::EcfDgii.Client.Generated.Models.EcfResponse_estatusMember1"/>
@@ -293,6 +378,71 @@ namespace EcfDgii.Client.Generated.Models
                 else if(EcfResponseEstatusMember1 != null)
                 {
                     writer.WriteObjectValue<global::EcfDgii.Client.Generated.Models.EcfResponse_estatusMember1>(null, EcfResponseEstatusMember1);
+                }
+            }
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="global::EcfDgii.Client.Generated.Models.EcfResponse_receptorDirectoryStatusMember1"/>, <see cref="global::EcfDgii.Client.Generated.Models.ReceptorDirectoryStatus"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class EcfResponse_receptorDirectoryStatus : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="global::EcfDgii.Client.Generated.Models.EcfResponse_receptorDirectoryStatusMember1"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::EcfDgii.Client.Generated.Models.EcfResponse_receptorDirectoryStatusMember1? EcfResponseReceptorDirectoryStatusMember1 { get; set; }
+#nullable restore
+#else
+            public global::EcfDgii.Client.Generated.Models.EcfResponse_receptorDirectoryStatusMember1 EcfResponseReceptorDirectoryStatusMember1 { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::EcfDgii.Client.Generated.Models.ReceptorDirectoryStatus"/></summary>
+            public global::EcfDgii.Client.Generated.Models.ReceptorDirectoryStatus? ReceptorDirectoryStatus { get; set; }
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_receptorDirectoryStatus"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_receptorDirectoryStatus CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::EcfDgii.Client.Generated.Models.EcfResponse.EcfResponse_receptorDirectoryStatus();
+                if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.EcfResponseReceptorDirectoryStatusMember1 = new global::EcfDgii.Client.Generated.Models.EcfResponse_receptorDirectoryStatusMember1();
+                }
+                else if(parseNode.GetEnumValue<global::EcfDgii.Client.Generated.Models.ReceptorDirectoryStatus>() is global::EcfDgii.Client.Generated.Models.ReceptorDirectoryStatus receptorDirectoryStatusValue)
+                {
+                    result.ReceptorDirectoryStatus = receptorDirectoryStatusValue;
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                if(EcfResponseReceptorDirectoryStatusMember1 != null)
+                {
+                    return EcfResponseReceptorDirectoryStatusMember1.GetFieldDeserializers();
+                }
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(EcfResponseReceptorDirectoryStatusMember1 != null)
+                {
+                    writer.WriteObjectValue<global::EcfDgii.Client.Generated.Models.EcfResponse_receptorDirectoryStatusMember1>(null, EcfResponseReceptorDirectoryStatusMember1);
+                }
+                else if(ReceptorDirectoryStatus != null)
+                {
+                    writer.WriteEnumValue<global::EcfDgii.Client.Generated.Models.ReceptorDirectoryStatus>(null, ReceptorDirectoryStatus);
                 }
             }
         }

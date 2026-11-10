@@ -5,8 +5,8 @@
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
 | **tipoEcf** | [**ECFType**](ECFType.md) |  |  |
-| **cantidadeNcfAnulados** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
-| **noLinea** | [**kotlin.collections.List&lt;SearchEcfReceptionRequestsTiposEcfsParameterInner&gt;**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
+| **cantidadeNcfAnulados** | **kotlin.Int** |  |  |
+| **noLinea** | [**kotlin.collections.List&lt;Int&gt;**](Int.md) |  |  |
 | **secuencias** | [**kotlin.collections.List&lt;SecuenciaRequest&gt;**](SecuenciaRequest.md) |  |  |
 
 

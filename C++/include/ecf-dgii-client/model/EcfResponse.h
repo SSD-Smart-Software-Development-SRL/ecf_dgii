@@ -24,10 +24,12 @@
 
 #include "ecf-dgii-client/model/AllTipoECFTypes.h"
 #include "ecf-dgii-client/model/DGIIEnvironment.h"
+#include "ecf-dgii-client/model/ReceptorDirectoryStatus.h"
 #include "ecf-dgii-client/model/SearchEcfs_AmountFrom_parameter.h"
 #include "ecf-dgii-client/model/AcecfSummaryDto.h"
 #include <cpprest/details/basic_types.h>
 #include "ecf-dgii-client/model/EcfProgress.h"
+#include "ecf-dgii-client/model/DgiiSubmissionState.h"
 #include <vector>
 #include "ecf-dgii-client/model/EcfEstado.h"
 
@@ -180,6 +182,19 @@ public:
     void unsetAcecfs();
     void setAcecfs(const std::vector<std::shared_ptr<AcecfSummaryDto>>& value);
 
+    std::shared_ptr<ReceptorDirectoryStatus> getReceptorDirectoryStatus() const;
+    bool receptorDirectoryStatusIsSet() const;
+    void unsetReceptorDirectoryStatus();
+    void setReceptorDirectoryStatus(const std::shared_ptr<ReceptorDirectoryStatus>& value);
+
+    /// <summary>
+    /// Where the DGII transmission of this ECF stands. Null for documents created before durable submission. &#x60;PendingReconciliation&#x60;: DGII&#39;s answer is not confirmed yet; do not resend or reuse the eNCF. &#x60;NotReceived&#x60;: DGII confirmed it has no record of the document (Progress is Error, Estatus is null and SecuenciaUtilizada is false); the same eNCF may be submitted again as a new request.
+    /// </summary>
+    std::shared_ptr<DgiiSubmissionState> getDgiiSubmissionState() const;
+    bool dgiiSubmissionStateIsSet() const;
+    void unsetDgiiSubmissionState();
+    void setDgiiSubmissionState(const std::shared_ptr<DgiiSubmissionState>& value);
+
     utility::string_t getImpresionUrl() const;
     bool impresionUrlIsSet() const;
     void unsetImpresionUrl();
@@ -255,6 +270,12 @@ protected:
 
     std::vector<std::shared_ptr<AcecfSummaryDto>> m_Acecfs;
     bool m_AcecfsIsSet;
+
+    std::shared_ptr<ReceptorDirectoryStatus> m_ReceptorDirectoryStatus;
+    bool m_ReceptorDirectoryStatusIsSet;
+
+    std::shared_ptr<DgiiSubmissionState> m_DgiiSubmissionState;
+    bool m_DgiiSubmissionStateIsSet;
 
     utility::string_t m_ImpresionUrl;
     bool m_ImpresionUrlIsSet;

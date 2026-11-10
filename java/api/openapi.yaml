@@ -53,6 +53,13 @@ paths:
         schema:
           $ref: "#/components/schemas/GetCompanies_Limit_parameter"
         style: form
+      - explode: true
+        in: query
+        name: Search
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -299,6 +306,12 @@ paths:
       - application/json
   /ecf/31:
     post:
+      description: "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve\
+        \ el envío existente si el JSON es idéntico, o 409 si es distinto. Excepció\
+        n: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar\
+        \ la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta\
+        \ como un envío nuevo (idéntico o corregido) con su propio messageId; los\
+        \ envíos anteriores se conservan como historial."
       operationId: RecepcionEcf31
       requestBody:
         content:
@@ -331,6 +344,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Forbidden
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
         "500":
           content:
             application/problem+json:
@@ -345,6 +364,12 @@ paths:
       - application/problem+json
   /ecf/32:
     post:
+      description: "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve\
+        \ el envío existente si el JSON es idéntico, o 409 si es distinto. Excepció\
+        n: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar\
+        \ la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta\
+        \ como un envío nuevo (idéntico o corregido) con su propio messageId; los\
+        \ envíos anteriores se conservan como historial."
       operationId: RecepcionEcf32
       requestBody:
         content:
@@ -377,6 +402,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Forbidden
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
         "500":
           content:
             application/problem+json:
@@ -391,6 +422,12 @@ paths:
       - application/problem+json
   /ecf/33:
     post:
+      description: "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve\
+        \ el envío existente si el JSON es idéntico, o 409 si es distinto. Excepció\
+        n: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar\
+        \ la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta\
+        \ como un envío nuevo (idéntico o corregido) con su propio messageId; los\
+        \ envíos anteriores se conservan como historial."
       operationId: RecepcionEcf33
       requestBody:
         content:
@@ -423,6 +460,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Forbidden
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
         "500":
           content:
             application/problem+json:
@@ -437,6 +480,12 @@ paths:
       - application/problem+json
   /ecf/34:
     post:
+      description: "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve\
+        \ el envío existente si el JSON es idéntico, o 409 si es distinto. Excepció\
+        n: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar\
+        \ la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta\
+        \ como un envío nuevo (idéntico o corregido) con su propio messageId; los\
+        \ envíos anteriores se conservan como historial."
       operationId: RecepcionEcf34
       requestBody:
         content:
@@ -469,6 +518,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Forbidden
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
         "500":
           content:
             application/problem+json:
@@ -483,6 +538,12 @@ paths:
       - application/problem+json
   /ecf/41:
     post:
+      description: "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve\
+        \ el envío existente si el JSON es idéntico, o 409 si es distinto. Excepció\
+        n: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar\
+        \ la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta\
+        \ como un envío nuevo (idéntico o corregido) con su propio messageId; los\
+        \ envíos anteriores se conservan como historial."
       operationId: RecepcionEcf41
       requestBody:
         content:
@@ -515,6 +576,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Forbidden
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
         "500":
           content:
             application/problem+json:
@@ -529,6 +596,12 @@ paths:
       - application/problem+json
   /ecf/43:
     post:
+      description: "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve\
+        \ el envío existente si el JSON es idéntico, o 409 si es distinto. Excepció\
+        n: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar\
+        \ la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta\
+        \ como un envío nuevo (idéntico o corregido) con su propio messageId; los\
+        \ envíos anteriores se conservan como historial."
       operationId: RecepcionEcf43
       requestBody:
         content:
@@ -561,6 +634,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Forbidden
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
         "500":
           content:
             application/problem+json:
@@ -575,6 +654,12 @@ paths:
       - application/problem+json
   /ecf/44:
     post:
+      description: "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve\
+        \ el envío existente si el JSON es idéntico, o 409 si es distinto. Excepció\
+        n: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar\
+        \ la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta\
+        \ como un envío nuevo (idéntico o corregido) con su propio messageId; los\
+        \ envíos anteriores se conservan como historial."
       operationId: RecepcionEcf44
       requestBody:
         content:
@@ -607,6 +692,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Forbidden
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
         "500":
           content:
             application/problem+json:
@@ -621,6 +712,12 @@ paths:
       - application/problem+json
   /ecf/45:
     post:
+      description: "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve\
+        \ el envío existente si el JSON es idéntico, o 409 si es distinto. Excepció\
+        n: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar\
+        \ la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta\
+        \ como un envío nuevo (idéntico o corregido) con su propio messageId; los\
+        \ envíos anteriores se conservan como historial."
       operationId: RecepcionEcf45
       requestBody:
         content:
@@ -653,6 +750,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Forbidden
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
         "500":
           content:
             application/problem+json:
@@ -667,6 +770,12 @@ paths:
       - application/problem+json
   /ecf/46:
     post:
+      description: "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve\
+        \ el envío existente si el JSON es idéntico, o 409 si es distinto. Excepció\
+        n: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar\
+        \ la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta\
+        \ como un envío nuevo (idéntico o corregido) con su propio messageId; los\
+        \ envíos anteriores se conservan como historial."
       operationId: RecepcionEcf46
       requestBody:
         content:
@@ -699,6 +808,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Forbidden
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
         "500":
           content:
             application/problem+json:
@@ -713,6 +828,12 @@ paths:
       - application/problem+json
   /ecf/47:
     post:
+      description: "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve\
+        \ el envío existente si el JSON es idéntico, o 409 si es distinto. Excepció\
+        n: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar\
+        \ la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta\
+        \ como un envío nuevo (idéntico o corregido) con su propio messageId; los\
+        \ envíos anteriores se conservan como historial."
       operationId: RecepcionEcf47
       requestBody:
         content:
@@ -745,6 +866,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Forbidden
+        "409":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
         "500":
           content:
             application/problem+json:
@@ -1171,6 +1298,9 @@ paths:
       - application/problem+json
   /ecf/anularrango/{rnc}:
     post:
+      description: Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII.
+        Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII
+        y su respuesta en la extensión dgiiResponse.
       operationId: AnulacionRangos
       parameters:
       - explode: false
@@ -1392,6 +1522,13 @@ paths:
         style: form
       - explode: true
         in: query
+        name: OcultarNoRecibidas
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
         name: Page
         required: false
         schema:
@@ -1608,6 +1745,13 @@ paths:
         style: form
       - explode: true
         in: query
+        name: OcultarNoRecibidas
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
         name: Page
         required: false
         schema:
@@ -1807,6 +1951,10 @@ paths:
       - application/problem+json
   /dgii/{rnc}/consultadirectorio/listado:
     get:
+      deprecated: true
+      description: "Obsoleto: la DGII deprecó el listado completo del Directorio y\
+        \ puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc\
+        \ para consultar un RNC."
       operationId: ConsultaDirectorioListado
       parameters:
       - explode: false
@@ -1849,6 +1997,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Internal Server Error
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Gateway
+      summary: "[OBSOLETO] Listado completo del Directorio de la DGII"
       tags:
       - Dgii
       x-accepts:
@@ -1903,6 +2058,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Internal Server Error
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Gateway
       tags:
       - Dgii
       x-accepts:
@@ -1978,6 +2139,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Internal Server Error
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Gateway
       tags:
       - Dgii
       x-accepts:
@@ -2032,6 +2199,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Internal Server Error
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Gateway
       tags:
       - Dgii
       x-accepts:
@@ -2100,6 +2273,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Internal Server Error
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Gateway
       tags:
       - Dgii
       x-accepts:
@@ -2175,6 +2354,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Internal Server Error
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Gateway
       tags:
       - Dgii
       x-accepts:
@@ -2250,6 +2435,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Internal Server Error
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Gateway
       tags:
       - Dgii
       x-accepts:
@@ -2285,7 +2476,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RespuestaConsultaTrackId"
+                items:
+                  $ref: "#/components/schemas/TrackingDetalle"
+                type: array
           description: OK
         "400":
           content:
@@ -2311,6 +2504,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Internal Server Error
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Gateway
       tags:
       - Dgii
       x-accepts:
@@ -2360,6 +2559,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Internal Server Error
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Gateway
       tags:
       - Dgii
       x-accepts:
@@ -2407,6 +2612,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
           description: Internal Server Error
+        "502":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Gateway
       tags:
       - Dgii
       x-accepts:
@@ -2709,10 +2920,78 @@ components:
       - issuer
       - notAfterUtc
       - notBeforeUtc
-      - rnc
       - serialNumber
       - subject
       - thumbprint
+    CertificationStateResponse:
+      example:
+        lastActivityOn: 2000-01-23T04:56:07.000+00:00
+        certifiedOn: 2000-01-23
+        responsible: responsible
+        stalled: true
+        totalSteps: 6
+        signatureReviewPending: true
+        step: Step1
+        state: state
+        source: source
+        stepNumber: 0
+        changedOn: 2000-01-23T04:56:07.000+00:00
+      properties:
+        state:
+          description: One of CertificationStates.
+          type: string
+        source:
+          description: One of CertificationStateSources; null while not started.
+          nullable: true
+          type: string
+        step:
+          $ref: "#/components/schemas/CertificationStep"
+        stepNumber:
+          $ref: "#/components/schemas/CertificationStateResponse_stepNumber"
+        totalSteps:
+          $ref: "#/components/schemas/SearchEcfReceptionRequests_TiposEcfs_parameter_inner"
+        responsible:
+          description: One of CertificationResponsibles while in progress.
+          nullable: true
+          type: string
+        stalled:
+          description: In progress without any activity for int CertificationStateCalculator.StalledAfterDays
+            days.
+          type: boolean
+        lastActivityOn:
+          format: date-time
+          nullable: true
+          type: string
+        certifiedOn:
+          description: "DGII authorisation date, when known (DGII listing or declared\
+            \ by the customer)."
+          format: date
+          nullable: true
+          type: string
+        changedOn:
+          description: When the stored state last changed.
+          format: date-time
+          nullable: true
+          type: string
+        signatureReviewPending:
+          description: A step was signed outside the platform and the signature could
+            not be verified (CERT-04).
+          type: boolean
+    CertificationStep:
+      enum:
+      - Step1
+      - Step2
+      - Step3
+      - Step4
+      - Step5
+      - Step6
+      - Step7
+      - Step8
+      - Step12
+      - Step13
+      - Completed
+      - null
+      type: string
     CodificacionTipoImpuestosType:
       enum:
       - "001"
@@ -2765,20 +3044,57 @@ components:
       - ReferenciaFacturaConsumoElectronica
       - null
       type: string
+    CompanyEnvironmentUrls:
+      example:
+        urlRecepcion: urlRecepcion
+        urlAprobacionComercial: urlAprobacionComercial
+        urlAutenticacion: urlAutenticacion
+      properties:
+        urlRecepcion:
+          type: string
+        urlAprobacionComercial:
+          type: string
+        urlAutenticacion:
+          type: string
     CompanyResponse:
       example:
-        legalName: legalName
-        urlRecepcion: urlRecepcion
+        archiveReason: archiveReason
         updatedBy: updatedBy
         receptorId: receptorId
-        createdBy: createdBy
-        urlAprobacionComercial: urlAprobacionComercial
         rnc: rnc
-        urlAutenticacion: urlAutenticacion
-        name: name
-        tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updatedOn: 2000-01-23T04:56:07.000+00:00
         createdOn: 2000-01-23T04:56:07.000+00:00
+        certification:
+          lastActivityOn: 2000-01-23T04:56:07.000+00:00
+          certifiedOn: 2000-01-23
+          responsible: responsible
+          stalled: true
+          totalSteps: 6
+          signatureReviewPending: true
+          step: Step1
+          state: state
+          source: source
+          stepNumber: 0
+          changedOn: 2000-01-23T04:56:07.000+00:00
+        legalName: legalName
+        archivedAt: 2000-01-23T04:56:07.000+00:00
+        urls:
+          prod:
+            urlRecepcion: urlRecepcion
+            urlAprobacionComercial: urlAprobacionComercial
+            urlAutenticacion: urlAutenticacion
+          test:
+            urlRecepcion: urlRecepcion
+            urlAprobacionComercial: urlAprobacionComercial
+            urlAutenticacion: urlAutenticacion
+          cert:
+            urlRecepcion: urlRecepcion
+            urlAprobacionComercial: urlAprobacionComercial
+            urlAutenticacion: urlAutenticacion
+        createdBy: createdBy
+        name: name
+        tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        archivedBy: archivedBy
       properties:
         rnc:
           type: string
@@ -2801,15 +3117,44 @@ components:
           type: string
         receptorId:
           type: string
-        urlRecepcion:
+        urls:
+          $ref: "#/components/schemas/CompanyUrlsResponse"
+        certification:
+          $ref: "#/components/schemas/CertificationStateResponse"
+        archivedAt:
+          description: When the company was archived; null while it is active.
+          format: date-time
           nullable: true
           type: string
-        urlAprobacionComercial:
+        archivedBy:
+          description: "Who archived it and why, the last time it was archived; kept\
+            \ after a restore as history."
           nullable: true
           type: string
-        urlAutenticacion:
+        archiveReason:
           nullable: true
           type: string
+    CompanyUrlsResponse:
+      example:
+        prod:
+          urlRecepcion: urlRecepcion
+          urlAprobacionComercial: urlAprobacionComercial
+          urlAutenticacion: urlAutenticacion
+        test:
+          urlRecepcion: urlRecepcion
+          urlAprobacionComercial: urlAprobacionComercial
+          urlAutenticacion: urlAutenticacion
+        cert:
+          urlRecepcion: urlRecepcion
+          urlAprobacionComercial: urlAprobacionComercial
+          urlAutenticacion: urlAutenticacion
+      properties:
+        test:
+          $ref: "#/components/schemas/CompanyEnvironmentUrls"
+        cert:
+          $ref: "#/components/schemas/CompanyEnvironmentUrls"
+        prod:
+          $ref: "#/components/schemas/CompanyEnvironmentUrls"
     DetalleAnulacionRequest:
       example:
         secuencias:
@@ -2870,6 +3215,18 @@ components:
       - Test
       - Certification
       - Production
+      type: string
+    DgiiSubmissionState:
+      enum:
+      - Prepared
+      - Sending
+      - PendingReconciliation
+      - Accepted
+      - Rejected
+      - ValidationFailed
+      - ReservationBlocked
+      - NotReceived
+      - null
       type: string
     Directorio:
       description: "Representa una entrada del directorio para contribuyentes electró\
@@ -14988,6 +15345,7 @@ components:
       example:
         resultInternalFileName: resultInternalFileName
         fileName: fileName
+        recuperada: true
         encf: encf
         errorMessage: errorMessage
         messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -14995,6 +15353,7 @@ components:
         updatedOn: 2000-01-23T04:56:07.000+00:00
         createdOn: 2000-01-23T04:56:07.000+00:00
         rncEmisor: rncEmisor
+        reprocessedOn: 2000-01-23T04:56:07.000+00:00
         companyRnc: companyRnc
         tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         progress: 0
@@ -15034,6 +15393,17 @@ components:
           type: string
         montoTotal:
           $ref: "#/components/schemas/EcfReceptionRequestDto_montoTotal"
+        reprocessedOn:
+          description: When the reception was run again after it ended without registering
+            the e-CF.
+          format: date-time
+          nullable: true
+          type: string
+        recuperada:
+          description: |-
+            True when the first reception failed and the e-CF was registered by running it again, so the UI can
+            flag it as recovered.
+          type: boolean
     EcfReceptorDto:
       example:
         fileName: fileName
@@ -15133,9 +15503,16 @@ components:
     EcfResponse:
       example:
         fileName: fileName
-        encf: encf
         codSec: codSec
+        dgiiSubmissionState: Prepared
         rncReceptor: rncReceptor
+        ecfContent: ecfContent
+        impresionUrl: impresionUrl
+        rncEmisor: rncEmisor
+        fechaFirma: 2000-01-23T04:56:07.000+00:00
+        receptorDirectoryStatus: Unknown
+        timestamp: 2000-01-23T04:56:07.000+00:00
+        encf: encf
         acecfs:
         - estado: 6
           fileName: fileName
@@ -15164,22 +15541,17 @@ components:
         dgiiEnvironment: Test
         secuenciaUtilizada: true
         messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ecfContent: ecfContent
         tipoEcf: FacturaDeCreditoFiscalElectronica
         fechaEmision: 2000-01-23
-        impresionUrl: impresionUrl
-        rncEmisor: rncEmisor
         emisorReceptorErrors: emisorReceptorErrors
         queueName: queueName
         estatus: NoEncontrado
         includeEcfContent: true
-        fechaFirma: 2000-01-23T04:56:07.000+00:00
         tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         progress: New
         mensaje: mensaje
         montoTotal: 0.8008281904610115
         errors: errors
-        timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         messageId:
           format: uuid
@@ -15243,29 +15615,24 @@ components:
           items:
             $ref: "#/components/schemas/AcecfSummaryDto"
           type: array
+        receptorDirectoryStatus:
+          $ref: "#/components/schemas/ReceptorDirectoryStatus"
+        dgiiSubmissionState:
+          $ref: "#/components/schemas/DgiiSubmissionState"
         impresionUrl:
           nullable: true
           type: string
       required:
-      - codSec
       - dgiiEnvironment
       - ecfContent
-      - emisorReceptorErrors
       - encf
-      - errors
-      - estatus
       - fechaEmision
-      - fechaFirma
-      - fileName
       - includeEcfContent
-      - mensaje
       - messageId
       - montoTotal
       - progress
       - queueName
       - rncEmisor
-      - rncReceptor
-      - secuenciaUtilizada
       - tenantId
       - timestamp
       - tipoEcf
@@ -15406,8 +15773,6 @@ components:
           $ref: "#/components/schemas/Ecf31IdDoc_totalPaginas"
         previousPage:
           $ref: "#/components/schemas/Ecf31IdDoc_totalPaginas"
-      required:
-      - nextPageUri
     PaginatedApiResultOfAnulacionListResponse:
       example:
         total: null
@@ -15512,39 +15877,87 @@ components:
           $ref: "#/components/schemas/Ecf31IdDoc_totalPaginas"
         previousPage:
           $ref: "#/components/schemas/Ecf31IdDoc_totalPaginas"
-      required:
-      - nextPageUri
     PaginatedApiResultOfCompanyResponse:
       example:
-        total: 0
+        total: null
         previousPage: null
         nextPageUri: https://openapi-generator.tech
-        nextPage: 6
+        nextPage: 1
         values:
-        - legalName: legalName
-          urlRecepcion: urlRecepcion
+        - archiveReason: archiveReason
           updatedBy: updatedBy
           receptorId: receptorId
-          createdBy: createdBy
-          urlAprobacionComercial: urlAprobacionComercial
           rnc: rnc
-          urlAutenticacion: urlAutenticacion
-          name: name
-          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updatedOn: 2000-01-23T04:56:07.000+00:00
           createdOn: 2000-01-23T04:56:07.000+00:00
-        - legalName: legalName
-          urlRecepcion: urlRecepcion
+          certification:
+            lastActivityOn: 2000-01-23T04:56:07.000+00:00
+            certifiedOn: 2000-01-23
+            responsible: responsible
+            stalled: true
+            totalSteps: 6
+            signatureReviewPending: true
+            step: Step1
+            state: state
+            source: source
+            stepNumber: 0
+            changedOn: 2000-01-23T04:56:07.000+00:00
+          legalName: legalName
+          archivedAt: 2000-01-23T04:56:07.000+00:00
+          urls:
+            prod:
+              urlRecepcion: urlRecepcion
+              urlAprobacionComercial: urlAprobacionComercial
+              urlAutenticacion: urlAutenticacion
+            test:
+              urlRecepcion: urlRecepcion
+              urlAprobacionComercial: urlAprobacionComercial
+              urlAutenticacion: urlAutenticacion
+            cert:
+              urlRecepcion: urlRecepcion
+              urlAprobacionComercial: urlAprobacionComercial
+              urlAutenticacion: urlAutenticacion
+          createdBy: createdBy
+          name: name
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          archivedBy: archivedBy
+        - archiveReason: archiveReason
           updatedBy: updatedBy
           receptorId: receptorId
-          createdBy: createdBy
-          urlAprobacionComercial: urlAprobacionComercial
           rnc: rnc
-          urlAutenticacion: urlAutenticacion
-          name: name
-          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updatedOn: 2000-01-23T04:56:07.000+00:00
           createdOn: 2000-01-23T04:56:07.000+00:00
+          certification:
+            lastActivityOn: 2000-01-23T04:56:07.000+00:00
+            certifiedOn: 2000-01-23
+            responsible: responsible
+            stalled: true
+            totalSteps: 6
+            signatureReviewPending: true
+            step: Step1
+            state: state
+            source: source
+            stepNumber: 0
+            changedOn: 2000-01-23T04:56:07.000+00:00
+          legalName: legalName
+          archivedAt: 2000-01-23T04:56:07.000+00:00
+          urls:
+            prod:
+              urlRecepcion: urlRecepcion
+              urlAprobacionComercial: urlAprobacionComercial
+              urlAutenticacion: urlAutenticacion
+            test:
+              urlRecepcion: urlRecepcion
+              urlAprobacionComercial: urlAprobacionComercial
+              urlAutenticacion: urlAutenticacion
+            cert:
+              urlRecepcion: urlRecepcion
+              urlAprobacionComercial: urlAprobacionComercial
+              urlAutenticacion: urlAutenticacion
+          createdBy: createdBy
+          name: name
+          tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          archivedBy: archivedBy
         limit: null
         page: null
       properties:
@@ -15566,8 +15979,6 @@ components:
           $ref: "#/components/schemas/Ecf31IdDoc_totalPaginas"
         previousPage:
           $ref: "#/components/schemas/Ecf31IdDoc_totalPaginas"
-      required:
-      - nextPageUri
     PaginatedApiResultOfEcfReceptionRequestDto:
       example:
         total: null
@@ -15577,6 +15988,7 @@ components:
         values:
         - resultInternalFileName: resultInternalFileName
           fileName: fileName
+          recuperada: true
           encf: encf
           errorMessage: errorMessage
           messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -15584,12 +15996,14 @@ components:
           updatedOn: 2000-01-23T04:56:07.000+00:00
           createdOn: 2000-01-23T04:56:07.000+00:00
           rncEmisor: rncEmisor
+          reprocessedOn: 2000-01-23T04:56:07.000+00:00
           companyRnc: companyRnc
           tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           progress: 0
           montoTotal: 6.027456183070403
         - resultInternalFileName: resultInternalFileName
           fileName: fileName
+          recuperada: true
           encf: encf
           errorMessage: errorMessage
           messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -15597,6 +16011,7 @@ components:
           updatedOn: 2000-01-23T04:56:07.000+00:00
           createdOn: 2000-01-23T04:56:07.000+00:00
           rncEmisor: rncEmisor
+          reprocessedOn: 2000-01-23T04:56:07.000+00:00
           companyRnc: companyRnc
           tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           progress: 0
@@ -15622,8 +16037,6 @@ components:
           $ref: "#/components/schemas/Ecf31IdDoc_totalPaginas"
         previousPage:
           $ref: "#/components/schemas/Ecf31IdDoc_totalPaginas"
-      required:
-      - nextPageUri
     PaginatedApiResultOfEcfResponse:
       example:
         total: 0
@@ -15632,9 +16045,16 @@ components:
         nextPage: 6
         values:
         - fileName: fileName
-          encf: encf
           codSec: codSec
+          dgiiSubmissionState: Prepared
           rncReceptor: rncReceptor
+          ecfContent: ecfContent
+          impresionUrl: impresionUrl
+          rncEmisor: rncEmisor
+          fechaFirma: 2000-01-23T04:56:07.000+00:00
+          receptorDirectoryStatus: Unknown
+          timestamp: 2000-01-23T04:56:07.000+00:00
+          encf: encf
           acecfs:
           - estado: 6
             fileName: fileName
@@ -15663,26 +16083,28 @@ components:
           dgiiEnvironment: Test
           secuenciaUtilizada: true
           messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ecfContent: ecfContent
           tipoEcf: FacturaDeCreditoFiscalElectronica
           fechaEmision: 2000-01-23
-          impresionUrl: impresionUrl
-          rncEmisor: rncEmisor
           emisorReceptorErrors: emisorReceptorErrors
           queueName: queueName
           estatus: NoEncontrado
           includeEcfContent: true
-          fechaFirma: 2000-01-23T04:56:07.000+00:00
           tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           progress: New
           mensaje: mensaje
           montoTotal: 0.8008281904610115
           errors: errors
-          timestamp: 2000-01-23T04:56:07.000+00:00
         - fileName: fileName
-          encf: encf
           codSec: codSec
+          dgiiSubmissionState: Prepared
           rncReceptor: rncReceptor
+          ecfContent: ecfContent
+          impresionUrl: impresionUrl
+          rncEmisor: rncEmisor
+          fechaFirma: 2000-01-23T04:56:07.000+00:00
+          receptorDirectoryStatus: Unknown
+          timestamp: 2000-01-23T04:56:07.000+00:00
+          encf: encf
           acecfs:
           - estado: 6
             fileName: fileName
@@ -15711,22 +16133,17 @@ components:
           dgiiEnvironment: Test
           secuenciaUtilizada: true
           messageId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ecfContent: ecfContent
           tipoEcf: FacturaDeCreditoFiscalElectronica
           fechaEmision: 2000-01-23
-          impresionUrl: impresionUrl
-          rncEmisor: rncEmisor
           emisorReceptorErrors: emisorReceptorErrors
           queueName: queueName
           estatus: NoEncontrado
           includeEcfContent: true
-          fechaFirma: 2000-01-23T04:56:07.000+00:00
           tenantId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           progress: New
           mensaje: mensaje
           montoTotal: 0.8008281904610115
           errors: errors
-          timestamp: 2000-01-23T04:56:07.000+00:00
         limit: null
         page: null
       properties:
@@ -15748,8 +16165,6 @@ components:
           $ref: "#/components/schemas/Ecf31IdDoc_totalPaginas"
         previousPage:
           $ref: "#/components/schemas/Ecf31IdDoc_totalPaginas"
-      required:
-      - nextPageUri
     ProblemDetails:
       properties:
         type:
@@ -16352,6 +16767,15 @@ components:
       - "320703"
       - null
       type: string
+    ReceptorDirectoryStatus:
+      enum:
+      - Unknown
+      - Available
+      - NotFound
+      - Invalid
+      - DeserializationFailed
+      - null
+      type: string
     RespuestaAnulacionRango:
       description: |-
         Respuesta de anulación de rango de secuencias de e-NCF.
@@ -16516,6 +16940,7 @@ components:
             Indica si el número de secuencia puede ser reutilizado.
             `true` si la secuencia NO puede reutilizarse (rechazado por motivos específicos);
                     `false` si la secuencia SÍ puede reutilizarse.
+          nullable: true
           type: boolean
         codigo:
           description: |-
@@ -16661,6 +17086,7 @@ components:
             - El RNC Emisor no corresponde a un emisor electrónico
             - El RNC Emisor no existe o no se encuentra activo
           example: false
+          nullable: true
           type: boolean
         fechaRecepcion:
           description: |-
@@ -16865,6 +17291,21 @@ components:
       - jwt
       - validFrom
       - validTo
+    TrackingDetalle:
+      example:
+        estado: estado
+        trackId: trackId
+        fechaRecepcion: fechaRecepcion
+      properties:
+        trackId:
+          nullable: true
+          type: string
+        estado:
+          nullable: true
+          type: string
+        fechaRecepcion:
+          nullable: true
+          type: string
     UnidadMedidaType:
       enum:
       - Barril
@@ -17088,6 +17529,15 @@ components:
         type: integer
       - type: string
       description: HTTP status code from the receptor (set after SendingToEmisor).
+      format: int32
+      nullable: true
+      pattern: "^-?(?:0|[1-9]\\d*)$"
+    CertificationStateResponse_stepNumber:
+      anyOf:
+      - format: int32
+        type: integer
+      - type: string
+      description: "Visible step number, 1 to int CertificationStateResponse.TotalSteps."
       format: int32
       nullable: true
       pattern: "^-?(?:0|[1-9]\\d*)$"

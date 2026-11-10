@@ -189,6 +189,36 @@ EcfClient client = new EcfClient.Builder()
     .build();
 ```
 
+### Estado de envío a la DGII (`dgiiSubmissionState`)
+
+`EcfResponse` incluye `dgiiSubmissionState` (opcional; `null` en documentos creados antes del envío durable). Dos valores cambian lo que debe hacer tu sistema:
+
+| Valor | Significado | Qué hacer |
+|-------|-------------|-----------|
+| `PendingReconciliation` | La DGII todavía no confirma el resultado (`progress = UploadedToDgii`, `estatus = EnProceso`). | Seguir consultando. **No** reenviar el documento ni reutilizar el eNCF. |
+| `NotReceived` | La DGII confirmó que no tiene registro del documento (`progress = Error`, `estatus = null`, `secuenciaUtilizada = false`; `errors` trae el motivo en español). | Es final y **no** fue aceptado, pero el **mismo eNCF** puede enviarse otra vez como una solicitud nueva (`POST /ecf/{tipo}`). |
+
+Los demás valores (`Prepared`, `Sending`, `Accepted`, `Rejected`, `ValidationFailed`, `ReservationBlocked`) son informativos: el resultado se sigue leyendo en `progress`/`estatus`.
+
+`sendEcf` sigue consultando durante `PendingReconciliation`. En `NotReceived` lanza `EcfClientException` con `canResubmit() == true` (y `getResponse()` con la respuesta final):
+
+```java
+try {
+    EcfResponse result = client.sendEcf("123456789", ecf);
+} catch (EcfClientException e) {
+    if (e.canResubmit()) {
+        // La DGII no recibió el documento: se puede enviar de nuevo con el mismo eNCF.
+    }
+}
+
+// Con respuestas que consultas tú mismo:
+EcfStatus.isTerminal(response);              // false mientras esté en PendingReconciliation
+EcfStatus.isPendingReconciliation(response); // no reenviar ni reutilizar el eNCF
+EcfStatus.canResubmit(response);             // NotReceived: reenviar con el mismo eNCF
+```
+
+Los valores de enum desconocidos se leen como `UNKNOWN_DEFAULT_OPEN_API` y los campos nuevos se guardan en `getAdditionalProperties()`, así que una versión más nueva de la API no rompe la deserialización. Los campos `null` que la API omite también se aceptan.
+
 ## Arquitectura Backend / Frontend
 
 ```mermaid

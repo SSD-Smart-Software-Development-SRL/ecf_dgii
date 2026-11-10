@@ -1,6 +1,3 @@
-CMakeLists.txt
-Config.cmake.in
-git_push.sh
 include/ecf-dgii-client/AnyType.h
 include/ecf-dgii-client/ApiClient.h
 include/ecf-dgii-client/ApiConfiguration.h
@@ -25,12 +22,18 @@ include/ecf-dgii-client/model/AllTipoECFTypes.h
 include/ecf-dgii-client/model/AnulacionListResponse.h
 include/ecf-dgii-client/model/AnulacionRequest.h
 include/ecf-dgii-client/model/CertificateResponse.h
+include/ecf-dgii-client/model/CertificationStateResponse.h
+include/ecf-dgii-client/model/CertificationStateResponse_stepNumber.h
+include/ecf-dgii-client/model/CertificationStep.h
 include/ecf-dgii-client/model/CodificacionTipoImpuestosType.h
 include/ecf-dgii-client/model/CodigoModificacionType.h
+include/ecf-dgii-client/model/CompanyEnvironmentUrls.h
 include/ecf-dgii-client/model/CompanyResponse.h
+include/ecf-dgii-client/model/CompanyUrlsResponse.h
 include/ecf-dgii-client/model/DGIIEnvironment.h
 include/ecf-dgii-client/model/DetalleAnulacionRequest.h
 include/ecf-dgii-client/model/DetalleAnulacionRequestDto.h
+include/ecf-dgii-client/model/DgiiSubmissionState.h
 include/ecf-dgii-client/model/Directorio.h
 include/ecf-dgii-client/model/ECFType.h
 include/ecf-dgii-client/model/Ecf31CodificacionTipoImpuestosType.h
@@ -362,6 +365,7 @@ include/ecf-dgii-client/model/PaginatedApiResultOfEcfReceptionRequestDto.h
 include/ecf-dgii-client/model/PaginatedApiResultOfEcfResponse.h
 include/ecf-dgii-client/model/ProblemDetails.h
 include/ecf-dgii-client/model/ProvinciaMunicipioType.h
+include/ecf-dgii-client/model/ReceptorDirectoryStatus.h
 include/ecf-dgii-client/model/RespuestaAnulacionRango.h
 include/ecf-dgii-client/model/RespuestaConsultaEstado.h
 include/ecf-dgii-client/model/RespuestaConsultaEstado_codigo.h
@@ -385,6 +389,7 @@ include/ecf-dgii-client/model/TipoMonedaType.h
 include/ecf-dgii-client/model/TipoPagoType.h
 include/ecf-dgii-client/model/TipoeCFType.h
 include/ecf-dgii-client/model/Token.h
+include/ecf-dgii-client/model/TrackingDetalle.h
 include/ecf-dgii-client/model/UnidadMedidaType.h
 include/ecf-dgii-client/model/UpsertCompanyRequest.h
 include/ecf-dgii-client/model/VentanaDeMantenimiento.h
@@ -412,12 +417,18 @@ src/model/AllTipoECFTypes.cpp
 src/model/AnulacionListResponse.cpp
 src/model/AnulacionRequest.cpp
 src/model/CertificateResponse.cpp
+src/model/CertificationStateResponse.cpp
+src/model/CertificationStateResponse_stepNumber.cpp
+src/model/CertificationStep.cpp
 src/model/CodificacionTipoImpuestosType.cpp
 src/model/CodigoModificacionType.cpp
+src/model/CompanyEnvironmentUrls.cpp
 src/model/CompanyResponse.cpp
+src/model/CompanyUrlsResponse.cpp
 src/model/DGIIEnvironment.cpp
 src/model/DetalleAnulacionRequest.cpp
 src/model/DetalleAnulacionRequestDto.cpp
+src/model/DgiiSubmissionState.cpp
 src/model/Directorio.cpp
 src/model/ECFType.cpp
 src/model/Ecf31CodificacionTipoImpuestosType.cpp
@@ -749,6 +760,7 @@ src/model/PaginatedApiResultOfEcfReceptionRequestDto.cpp
 src/model/PaginatedApiResultOfEcfResponse.cpp
 src/model/ProblemDetails.cpp
 src/model/ProvinciaMunicipioType.cpp
+src/model/ReceptorDirectoryStatus.cpp
 src/model/RespuestaAnulacionRango.cpp
 src/model/RespuestaConsultaEstado.cpp
 src/model/RespuestaConsultaEstado_codigo.cpp
@@ -772,6 +784,7 @@ src/model/TipoMonedaType.cpp
 src/model/TipoPagoType.cpp
 src/model/TipoeCFType.cpp
 src/model/Token.cpp
+src/model/TrackingDetalle.cpp
 src/model/UnidadMedidaType.cpp
 src/model/UpsertCompanyRequest.cpp
 src/model/VentanaDeMantenimiento.cpp

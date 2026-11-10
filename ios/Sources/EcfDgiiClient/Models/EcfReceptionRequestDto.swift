@@ -22,8 +22,12 @@ public struct EcfReceptionRequestDto: Sendable, Codable, Hashable {
     public var tipoEcf: AllTipoECFTypes?
     public var resultInternalFileName: String?
     public var montoTotal: EcfReceptionRequestDtoMontoTotal?
+    /** When the reception was run again after it ended without registering the e-CF. */
+    public var reprocessedOn: Date?
+    /** True when the first reception failed and the e-CF was registered by running it again, so the UI can flag it as recovered. */
+    public var recuperada: Bool?
 
-    public init(messageId: UUID? = nil, tenantId: UUID? = nil, companyRnc: String? = nil, fileName: String? = nil, progress: SearchEcfReceptionRequestsTiposEcfsParameterInner? = nil, createdOn: Date? = nil, updatedOn: Date? = nil, errorMessage: String? = nil, encf: String? = nil, rncEmisor: String? = nil, tipoEcf: AllTipoECFTypes? = nil, resultInternalFileName: String? = nil, montoTotal: EcfReceptionRequestDtoMontoTotal? = nil) {
+    public init(messageId: UUID? = nil, tenantId: UUID? = nil, companyRnc: String? = nil, fileName: String? = nil, progress: SearchEcfReceptionRequestsTiposEcfsParameterInner? = nil, createdOn: Date? = nil, updatedOn: Date? = nil, errorMessage: String? = nil, encf: String? = nil, rncEmisor: String? = nil, tipoEcf: AllTipoECFTypes? = nil, resultInternalFileName: String? = nil, montoTotal: EcfReceptionRequestDtoMontoTotal? = nil, reprocessedOn: Date? = nil, recuperada: Bool? = nil) {
         self.messageId = messageId
         self.tenantId = tenantId
         self.companyRnc = companyRnc
@@ -37,6 +41,8 @@ public struct EcfReceptionRequestDto: Sendable, Codable, Hashable {
         self.tipoEcf = tipoEcf
         self.resultInternalFileName = resultInternalFileName
         self.montoTotal = montoTotal
+        self.reprocessedOn = reprocessedOn
+        self.recuperada = recuperada
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -53,6 +59,8 @@ public struct EcfReceptionRequestDto: Sendable, Codable, Hashable {
         case tipoEcf
         case resultInternalFileName
         case montoTotal
+        case reprocessedOn
+        case recuperada
     }
 
     // Encodable protocol methods
@@ -72,6 +80,8 @@ public struct EcfReceptionRequestDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(tipoEcf, forKey: .tipoEcf)
         try container.encodeIfPresent(resultInternalFileName, forKey: .resultInternalFileName)
         try container.encodeIfPresent(montoTotal, forKey: .montoTotal)
+        try container.encodeIfPresent(reprocessedOn, forKey: .reprocessedOn)
+        try container.encodeIfPresent(recuperada, forKey: .recuperada)
     }
 }
 

@@ -15,6 +15,8 @@
 
 package dom.com.ssd.ecfx.sdk.models
 
+import dom.com.ssd.ecfx.sdk.models.CertificationStateResponse
+import dom.com.ssd.ecfx.sdk.models.CompanyUrlsResponse
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
@@ -32,9 +34,11 @@ import kotlinx.serialization.Contextual
  * @param updatedBy 
  * @param tenantId 
  * @param receptorId 
- * @param urlRecepcion 
- * @param urlAprobacionComercial 
- * @param urlAutenticacion 
+ * @param urls 
+ * @param certification CERT-01: the company's certification state.
+ * @param archivedAt When the company was archived; null while it is active.
+ * @param archivedBy Who archived it and why, the last time it was archived; kept after a restore as history.
+ * @param archiveReason 
  */
 @Serializable
 
@@ -67,14 +71,23 @@ data class CompanyResponse (
     @SerialName(value = "receptorId")
     val receptorId: kotlin.String? = null,
 
-    @SerialName(value = "urlRecepcion")
-    val urlRecepcion: kotlin.String? = null,
+    @SerialName(value = "urls")
+    val urls: CompanyUrlsResponse? = null,
 
-    @SerialName(value = "urlAprobacionComercial")
-    val urlAprobacionComercial: kotlin.String? = null,
+    /* CERT-01: the company's certification state. */
+    @SerialName(value = "certification")
+    val certification: CertificationStateResponse? = null,
 
-    @SerialName(value = "urlAutenticacion")
-    val urlAutenticacion: kotlin.String? = null
+    /* When the company was archived; null while it is active. */
+    @Contextual @SerialName(value = "archivedAt")
+    val archivedAt: java.time.OffsetDateTime? = null,
+
+    /* Who archived it and why, the last time it was archived; kept after a restore as history. */
+    @SerialName(value = "archivedBy")
+    val archivedBy: kotlin.String? = null,
+
+    @SerialName(value = "archiveReason")
+    val archiveReason: kotlin.String? = null
 
 ) {
 

@@ -38,7 +38,7 @@ import kotlinx.serialization.Contextual
 data class PaginatedApiResultOfEcfReceptionRequestDto (
 
     @Contextual @SerialName(value = "nextPageUri")
-    val nextPageUri: java.net.URI?,
+    val nextPageUri: java.net.URI? = null,
 
     @SerialName(value = "values")
     val propertyValues: kotlin.collections.List<EcfReceptionRequestDto>? = null,

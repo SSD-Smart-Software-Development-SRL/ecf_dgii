@@ -8,7 +8,7 @@ from uuid import UUID
 
 import httpx
 
-from .exceptions import EcfConnectionError, EcfProcessingError, raise_for_status
+from .exceptions import EcfConnectionError, EcfNotReceivedError, EcfProcessingError, raise_for_status
 from .generated.client import AuthenticatedClient
 from .generated.types import UNSET
 from .generated.models import (
@@ -98,7 +98,7 @@ from .generated.api.aprobacion_comercial import (
     search_acecf_reception_requests,
 )
 from .generated.api.api_key import new_company_api_key
-from .polling import PollingOptions, poll_until_complete
+from .polling import PollingOptions, can_resubmit, poll_until_complete
 
 Environment = Literal["test", "cert", "prod"]
 
@@ -420,14 +420,16 @@ class EcfClient:
         names: list[str] | None = None,
         page: int = 1,
         limit: int = 25,
+        search: str | None = None,
     ) -> PaginatedApiResultOfCompanyResponse:
-        """List companies with optional filters."""
+        """List companies with optional filters (``search`` matches RNC or name)."""
         response = await get_companies.asyncio_detailed(
             client=self._client,
             rncs=rncs if rncs is not None else UNSET,
             names=names if names is not None else UNSET,
             page=page,
             limit=limit,
+            search=search if search is not None else UNSET,
         )
         return _parse_or_raise(response)
 
@@ -656,6 +658,7 @@ class EcfClient:
         to_date: str | None = None,
         amount_from: float | None = None,
         amount_to: float | None = None,
+        ocultar_no_recibidas: bool | None = None,
         page: int = 1,
         limit: int = 25,
     ) -> PaginatedApiResultOfEcfReceptionRequestDto:
@@ -672,6 +675,7 @@ class EcfClient:
             to_date=to_date if to_date is not None else UNSET,
             amount_from=amount_from if amount_from is not None else UNSET,
             amount_to=amount_to if amount_to is not None else UNSET,
+            ocultar_no_recibidas=ocultar_no_recibidas if ocultar_no_recibidas is not None else UNSET,
             page=page,
             limit=limit,
         )
@@ -690,6 +694,7 @@ class EcfClient:
         to_date: str | None = None,
         amount_from: float | None = None,
         amount_to: float | None = None,
+        ocultar_no_recibidas: bool | None = None,
         page: int = 1,
         limit: int = 25,
     ) -> PaginatedApiResultOfEcfReceptionRequestDto:
@@ -706,6 +711,7 @@ class EcfClient:
             to_date=to_date if to_date is not None else UNSET,
             amount_from=amount_from if amount_from is not None else UNSET,
             amount_to=amount_to if amount_to is not None else UNSET,
+            ocultar_no_recibidas=ocultar_no_recibidas if ocultar_no_recibidas is not None else UNSET,
             page=page,
             limit=limit,
         )
@@ -758,6 +764,12 @@ class EcfClient:
             return results[0] if results else initial
 
         result: EcfResponse = await poll_until_complete(_poll, options=polling_options)
+        if can_resubmit(result):
+            raise EcfNotReceivedError(
+                422,
+                result.errors or result.mensaje or "DGII has no record of the e-CF; the same eNCF may be sent again",
+                detail=result.to_dict(),
+            )
         if result.progress == EcfProgress.ERROR:
             raise EcfProcessingError(
                 422,

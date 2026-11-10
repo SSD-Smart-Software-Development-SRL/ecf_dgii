@@ -40,6 +40,7 @@ namespace EcfDgii.Client.Generated.Dgii.Item.Consultaresultado.Estado
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 401 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 403 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 500 status code</exception>
+        /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 502 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::EcfDgii.Client.Generated.Models.RespuestaConsultaTrackId?> GetAsync(Action<RequestConfiguration<global::EcfDgii.Client.Generated.Dgii.Item.Consultaresultado.Estado.EstadoRequestBuilder.EstadoRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -56,6 +57,7 @@ namespace EcfDgii.Client.Generated.Dgii.Item.Consultaresultado.Estado
                 { "401", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "403", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "500", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
+                { "502", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::EcfDgii.Client.Generated.Models.RespuestaConsultaTrackId>(requestInfo, global::EcfDgii.Client.Generated.Models.RespuestaConsultaTrackId.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

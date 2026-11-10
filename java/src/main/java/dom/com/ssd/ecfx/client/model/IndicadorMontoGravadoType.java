@@ -31,7 +31,9 @@ public enum IndicadorMontoGravadoType {
   
   SIN_ITBIS_INCLUIDO("SinITBISIncluido"),
   
-  CON_ITBIS_INCLUIDO("ConITBISIncluido");
+  CON_ITBIS_INCLUIDO("ConITBISIncluido"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -54,7 +56,7 @@ public enum IndicadorMontoGravadoType {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<IndicadorMontoGravadoType> {

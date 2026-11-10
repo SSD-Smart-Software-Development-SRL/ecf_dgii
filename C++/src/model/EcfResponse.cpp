@@ -59,6 +59,8 @@ EcfResponse::EcfResponse()
     m_SecuenciaUtilizadaIsSet = false;
     m_DgiiEnvironmentIsSet = false;
     m_AcecfsIsSet = false;
+    m_ReceptorDirectoryStatusIsSet = false;
+    m_DgiiSubmissionStateIsSet = false;
     m_ImpresionUrl = utility::conversions::to_string_t("");
     m_ImpresionUrlIsSet = false;
 }
@@ -189,6 +191,16 @@ web::json::value EcfResponse::toJson() const
     {   
         
         val[utility::conversions::to_string_t(_XPLATSTR("acecfs"))] = ModelBase::toJson(m_Acecfs);
+    }
+    if(m_ReceptorDirectoryStatusIsSet)
+    {   
+        
+        val[utility::conversions::to_string_t(_XPLATSTR("receptorDirectoryStatus"))] = ModelBase::toJson(m_ReceptorDirectoryStatus);
+    }
+    if(m_DgiiSubmissionStateIsSet)
+    {   
+        
+        val[utility::conversions::to_string_t(_XPLATSTR("dgiiSubmissionState"))] = ModelBase::toJson(m_DgiiSubmissionState);
     }
     if(m_ImpresionUrlIsSet)
     {   
@@ -455,6 +467,28 @@ bool EcfResponse::fromJson(const web::json::value& val)
             
         }
     }
+    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("receptorDirectoryStatus"))))
+    {
+        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("receptorDirectoryStatus")));
+        if(!fieldValue.is_null())
+        {
+            std::shared_ptr<ReceptorDirectoryStatus> refVal_setReceptorDirectoryStatus;
+            ok &= ModelBase::fromJson(fieldValue, refVal_setReceptorDirectoryStatus);
+            setReceptorDirectoryStatus(refVal_setReceptorDirectoryStatus);
+            
+        }
+    }
+    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("dgiiSubmissionState"))))
+    {
+        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("dgiiSubmissionState")));
+        if(!fieldValue.is_null())
+        {
+            std::shared_ptr<DgiiSubmissionState> refVal_setDgiiSubmissionState;
+            ok &= ModelBase::fromJson(fieldValue, refVal_setDgiiSubmissionState);
+            setDgiiSubmissionState(refVal_setDgiiSubmissionState);
+            
+        }
+    }
     if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("impresionUrl"))))
     {
         const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("impresionUrl")));
@@ -567,6 +601,14 @@ void EcfResponse::toMultipart(std::shared_ptr<MultipartFormData> multipart, cons
     if(m_AcecfsIsSet)
     {
         multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("acecfs")), m_Acecfs));
+    }
+    if(m_ReceptorDirectoryStatusIsSet)
+    {
+        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("receptorDirectoryStatus")), m_ReceptorDirectoryStatus));
+    }
+    if(m_DgiiSubmissionStateIsSet)
+    {
+        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("dgiiSubmissionState")), m_DgiiSubmissionState));
     }
     if(m_ImpresionUrlIsSet)
     {
@@ -720,6 +762,18 @@ bool EcfResponse::fromMultiPart(std::shared_ptr<MultipartFormData> multipart, co
         std::vector<std::shared_ptr<AcecfSummaryDto>> refVal_setAcecfs;
         ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("acecfs"))), refVal_setAcecfs );
         setAcecfs(refVal_setAcecfs);
+    }
+    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("receptorDirectoryStatus"))))
+    {
+        std::shared_ptr<ReceptorDirectoryStatus> refVal_setReceptorDirectoryStatus;
+        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("receptorDirectoryStatus"))), refVal_setReceptorDirectoryStatus );
+        setReceptorDirectoryStatus(refVal_setReceptorDirectoryStatus);
+    }
+    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("dgiiSubmissionState"))))
+    {
+        std::shared_ptr<DgiiSubmissionState> refVal_setDgiiSubmissionState;
+        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("dgiiSubmissionState"))), refVal_setDgiiSubmissionState );
+        setDgiiSubmissionState(refVal_setDgiiSubmissionState);
     }
     if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("impresionUrl"))))
     {
@@ -1211,6 +1265,48 @@ bool EcfResponse::acecfsIsSet() const
 void EcfResponse::unsetAcecfs()
 {
     m_AcecfsIsSet = false;
+}
+std::shared_ptr<ReceptorDirectoryStatus> EcfResponse::getReceptorDirectoryStatus() const
+{
+    return m_ReceptorDirectoryStatus;
+}
+
+
+void EcfResponse::setReceptorDirectoryStatus(const std::shared_ptr<ReceptorDirectoryStatus>& value)
+{
+    m_ReceptorDirectoryStatus = value;
+    m_ReceptorDirectoryStatusIsSet = true;
+}
+
+bool EcfResponse::receptorDirectoryStatusIsSet() const
+{
+    return m_ReceptorDirectoryStatusIsSet;
+}
+
+void EcfResponse::unsetReceptorDirectoryStatus()
+{
+    m_ReceptorDirectoryStatusIsSet = false;
+}
+std::shared_ptr<DgiiSubmissionState> EcfResponse::getDgiiSubmissionState() const
+{
+    return m_DgiiSubmissionState;
+}
+
+
+void EcfResponse::setDgiiSubmissionState(const std::shared_ptr<DgiiSubmissionState>& value)
+{
+    m_DgiiSubmissionState = value;
+    m_DgiiSubmissionStateIsSet = true;
+}
+
+bool EcfResponse::dgiiSubmissionStateIsSet() const
+{
+    return m_DgiiSubmissionStateIsSet;
+}
+
+void EcfResponse::unsetDgiiSubmissionState()
+{
+    m_DgiiSubmissionStateIsSet = false;
 }
 utility::string_t EcfResponse::getImpresionUrl() const
 {

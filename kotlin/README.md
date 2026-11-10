@@ -41,13 +41,13 @@ Esto ejecuta todas las pruebas y empaqueta la biblioteca.
 ### Gradle (Kotlin DSL)
 
 ```kotlin
-implementation("do.com.ssd.ecfx:ecf-dgii-sdk-kotlin:1.0.0")
+implementation("do.com.ssd.ecfx:ecf-dgii-sdk-kotlin:2.1.0")
 ```
 
 ### Gradle (Groovy)
 
 ```groovy
-implementation 'do.com.ssd.ecfx:ecf-dgii-sdk-kotlin:1.0.0'
+implementation 'do.com.ssd.ecfx:ecf-dgii-sdk-kotlin:2.1.0'
 ```
 
 ### Maven
@@ -56,7 +56,7 @@ implementation 'do.com.ssd.ecfx:ecf-dgii-sdk-kotlin:1.0.0'
 <dependency>
     <groupId>do.com.ssd.ecfx</groupId>
     <artifactId>ecf-dgii-sdk-kotlin</artifactId>
-    <version>1.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 
@@ -66,6 +66,36 @@ implementation 'do.com.ssd.ecfx:ecf-dgii-sdk-kotlin:1.0.0'
 * Soporta formatos de colección para parámetros de consulta: csv, tsv, ssv, pipes.
 * Algunos tipos de Kotlin y Java están completamente cualificados para evitar conflictos con tipos definidos en las definiciones de OpenAPI.
 * La implementación de ApiClient está diseñada para reducir el conteo de métodos, específicamente para beneficiar los targets de Android.
+
+## Estado de envío a la DGII (`dgiiSubmissionState`)
+
+`EcfResponse` incluye `dgiiSubmissionState` (opcional; `null` en documentos creados antes del envío durable). Dos valores cambian lo que debe hacer tu sistema:
+
+| Valor | Significado | Qué hacer |
+|-------|-------------|-----------|
+| `PendingReconciliation` | La DGII todavía no confirma el resultado (`progress = UploadedToDgii`, `estatus = EnProceso`). | Seguir consultando. **No** reenviar el documento ni reutilizar el eNCF. |
+| `NotReceived` | La DGII confirmó que no tiene registro del documento (`progress = Error`, `estatus = null`, `secuenciaUtilizada = false`; `errors` trae el motivo en español). | Es final y **no** fue aceptado, pero el **mismo eNCF** puede enviarse otra vez como una solicitud nueva (`POST /ecf/{tipo}`). |
+
+Los demás valores (`Prepared`, `Sending`, `Accepted`, `Rejected`, `ValidationFailed`, `ReservationBlocked`) son informativos: el resultado se sigue leyendo en `progress`/`estatus`.
+
+`sendEcf` sigue consultando durante `PendingReconciliation`. En `NotReceived` lanza `EcfProcessingException` con `canResubmit == true`:
+
+```kotlin
+try {
+    val result = client.sendEcf(ecf31Document)
+} catch (e: EcfProcessingException) {
+    if (e.canResubmit) {
+        // La DGII no recibió el documento: se puede enviar de nuevo con el mismo eNCF.
+    }
+}
+
+// Con respuestas que consultas tú mismo:
+response.isTerminal              // false mientras esté en PendingReconciliation
+response.isPendingReconciliation // no reenviar ni reutilizar el eNCF
+response.canResubmit             // NotReceived: reenviar con el mismo eNCF
+```
+
+`EcfClient` / `EcfFrontendClient` activan `coerceInputValues` en el `Serializer` compartido (salvo que tu app ya lo haya configurado): un valor desconocido en `dgiiSubmissionState`, `receptorDirectoryStatus` o `estatus` se lee como `null`. Los campos `null` que la API omite también se aceptan.
 
 ## Arquitectura Backend / Frontend
 
@@ -228,8 +258,6 @@ Todas las URIs son relativas a *https://api.test.ecfx.ssd.com.do*
  - [dom.com.ssd.ecfx.sdk.models.FormaDePago](docs/FormaDePago.md)
  - [dom.com.ssd.ecfx.sdk.models.FormaDePagoMontoPago](docs/FormaDePagoMontoPago.md)
  - [dom.com.ssd.ecfx.sdk.models.FormaPagoType](docs/FormaPagoType.md)
- - [dom.com.ssd.ecfx.sdk.models.GetCompaniesLimitParameter](docs/GetCompaniesLimitParameter.md)
- - [dom.com.ssd.ecfx.sdk.models.GetCompaniesPageParameter](docs/GetCompaniesPageParameter.md)
  - [dom.com.ssd.ecfx.sdk.models.IdDoc](docs/IdDoc.md)
  - [dom.com.ssd.ecfx.sdk.models.IdDocTotalPaginas](docs/IdDocTotalPaginas.md)
  - [dom.com.ssd.ecfx.sdk.models.ImpuestoAdicional](docs/ImpuestoAdicional.md)
@@ -278,7 +306,6 @@ Todas las URIs son relativas a *https://api.test.ecfx.ssd.com.do*
  - [dom.com.ssd.ecfx.sdk.models.RespuestaEstatusServicio](docs/RespuestaEstatusServicio.md)
  - [dom.com.ssd.ecfx.sdk.models.RespuestaVentanaDeMantenimiento](docs/RespuestaVentanaDeMantenimiento.md)
  - [dom.com.ssd.ecfx.sdk.models.Retencion](docs/Retencion.md)
- - [dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter](docs/SearchEcfsAmountFromParameter.md)
  - [dom.com.ssd.ecfx.sdk.models.SecuenciaRequest](docs/SecuenciaRequest.md)
  - [dom.com.ssd.ecfx.sdk.models.SecuenciaRequestDto](docs/SecuenciaRequestDto.md)
  - [dom.com.ssd.ecfx.sdk.models.SendAcecfRequest](docs/SendAcecfRequest.md)

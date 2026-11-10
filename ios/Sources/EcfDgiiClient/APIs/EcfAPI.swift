@@ -22,6 +22,7 @@ open class EcfAPI {
 
     /**
      - POST /ecf/anularrango/{rnc}
+     - Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.
      - Bearer Token:
        - type: http
        - name: Bearer
@@ -265,6 +266,7 @@ open class EcfAPI {
 
     /**
      - POST /ecf/31
+     - Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      - Bearer Token:
        - type: http
        - name: Bearer
@@ -302,6 +304,7 @@ open class EcfAPI {
 
     /**
      - POST /ecf/32
+     - Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      - Bearer Token:
        - type: http
        - name: Bearer
@@ -339,6 +342,7 @@ open class EcfAPI {
 
     /**
      - POST /ecf/33
+     - Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      - Bearer Token:
        - type: http
        - name: Bearer
@@ -376,6 +380,7 @@ open class EcfAPI {
 
     /**
      - POST /ecf/34
+     - Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      - Bearer Token:
        - type: http
        - name: Bearer
@@ -413,6 +418,7 @@ open class EcfAPI {
 
     /**
      - POST /ecf/41
+     - Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      - Bearer Token:
        - type: http
        - name: Bearer
@@ -450,6 +456,7 @@ open class EcfAPI {
 
     /**
      - POST /ecf/43
+     - Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      - Bearer Token:
        - type: http
        - name: Bearer
@@ -487,6 +494,7 @@ open class EcfAPI {
 
     /**
      - POST /ecf/44
+     - Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      - Bearer Token:
        - type: http
        - name: Bearer
@@ -524,6 +532,7 @@ open class EcfAPI {
 
     /**
      - POST /ecf/45
+     - Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      - Bearer Token:
        - type: http
        - name: Bearer
@@ -561,6 +570,7 @@ open class EcfAPI {
 
     /**
      - POST /ecf/46
+     - Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      - Bearer Token:
        - type: http
        - name: Bearer
@@ -598,6 +608,7 @@ open class EcfAPI {
 
     /**
      - POST /ecf/47
+     - Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
      - Bearer Token:
        - type: http
        - name: Bearer

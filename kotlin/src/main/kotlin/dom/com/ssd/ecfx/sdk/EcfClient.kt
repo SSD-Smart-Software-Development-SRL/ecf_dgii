@@ -66,7 +66,13 @@ class EcfProcessingException(
 ) : RuntimeException(
     "ECF processing failed. MessageId: ${ecfResponse.messageId}, " +
         "errors: ${ecfResponse.errors}, mensaje: ${ecfResponse.mensaje}"
-)
+) {
+    /**
+     * True when DGII confirmed it never received the document (`NotReceived`): the eNCF was not
+     * used and the same eNCF may be submitted again as a new request.
+     */
+    val canResubmit: Boolean get() = ecfResponse.canResubmit
+}
 
 /**
  * High-level client for the ECF DGII API (Dominican Republic Electronic Fiscal Receipts).
@@ -90,6 +96,10 @@ class EcfProcessingException(
  * ```
  */
 class EcfClient(private val config: EcfClientConfig) {
+
+    init {
+        EcfJsonDefaults.install()
+    }
 
     private val authenticatedClient: OkHttpClient = buildAuthenticatedClient()
 
@@ -255,6 +265,11 @@ class EcfClient(private val config: EcfClientConfig) {
 
             val response = responses.firstOrNull { it.messageId == messageId } ?: responses.first()
             lastProgress = response.progress
+
+            // PendingReconciliation: DGII's answer is unconfirmed, keep polling (never resend).
+            // NotReceived: final error; the same eNCF may be submitted again (canResubmit).
+            if (response.isPendingReconciliation) continue
+            if (response.canResubmit) throw EcfProcessingException(response)
 
             when (response.progress) {
                 EcfProgress.Finished -> return response

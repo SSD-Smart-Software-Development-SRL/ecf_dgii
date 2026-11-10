@@ -33,7 +33,9 @@ public enum DGIIEnvironment {
   
   CERTIFICATION("Certification"),
   
-  PRODUCTION("Production");
+  PRODUCTION("Production"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -56,7 +58,7 @@ public enum DGIIEnvironment {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<DGIIEnvironment> {

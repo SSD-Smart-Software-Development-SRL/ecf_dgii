@@ -13,5 +13,7 @@
 
 * `EXENTO_E` (value: `"Exento_E"`)
 
+* `UNKNOWN_DEFAULT_OPEN_API` (value: `"unknown_default_open_api"`)
+
 
 

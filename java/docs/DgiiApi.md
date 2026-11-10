@@ -4,7 +4,7 @@ All URIs are relative to *https://api.test.ecfx.ssd.com.do*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**consultaDirectorioListado**](DgiiApi.md#consultaDirectorioListado) | **GET** /dgii/{rnc}/consultadirectorio/listado |  |
+| [**consultaDirectorioListado**](DgiiApi.md#consultaDirectorioListado) | **GET** /dgii/{rnc}/consultadirectorio/listado | [OBSOLETO] Listado completo del Directorio de la DGII |
 | [**consultaDirectorioObtenerDirectorioPorRnc**](DgiiApi.md#consultaDirectorioObtenerDirectorioPorRnc) | **GET** /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc |  |
 | [**consultaEstado**](DgiiApi.md#consultaEstado) | **GET** /dgii/{rnc}/consultaestado/estado |  |
 | [**consultaRFCE**](DgiiApi.md#consultaRFCE) | **GET** /dgii/{rnc}/consultarfce/consulta |  |
@@ -20,7 +20,9 @@ All URIs are relative to *https://api.test.ecfx.ssd.com.do*
 # **consultaDirectorioListado**
 > List&lt;Directorio&gt; consultaDirectorioListado(rnc)
 
+[OBSOLETO] Listado completo del Directorio de la DGII
 
+Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
 
 ### Example
 ```java
@@ -84,6 +86,7 @@ public class Example {
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Internal Server Error |  -  |
+| **502** | Bad Gateway |  -  |
 
 <a id="consultaDirectorioObtenerDirectorioPorRnc"></a>
 # **consultaDirectorioObtenerDirectorioPorRnc**
@@ -155,6 +158,7 @@ public class Example {
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Internal Server Error |  -  |
+| **502** | Bad Gateway |  -  |
 
 <a id="consultaEstado"></a>
 # **consultaEstado**
@@ -232,6 +236,7 @@ public class Example {
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Internal Server Error |  -  |
+| **502** | Bad Gateway |  -  |
 
 <a id="consultaRFCE"></a>
 # **consultaRFCE**
@@ -307,6 +312,7 @@ public class Example {
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Internal Server Error |  -  |
+| **502** | Bad Gateway |  -  |
 
 <a id="consultaResultado"></a>
 # **consultaResultado**
@@ -378,6 +384,7 @@ public class Example {
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Internal Server Error |  -  |
+| **502** | Bad Gateway |  -  |
 
 <a id="consultaTimbre"></a>
 # **consultaTimbre**
@@ -455,6 +462,7 @@ public class Example {
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Internal Server Error |  -  |
+| **502** | Bad Gateway |  -  |
 
 <a id="consultaTimbreFC"></a>
 # **consultaTimbreFC**
@@ -532,10 +540,11 @@ public class Example {
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Internal Server Error |  -  |
+| **502** | Bad Gateway |  -  |
 
 <a id="consultaTrackId"></a>
 # **consultaTrackId**
-> RespuestaConsultaTrackId consultaTrackId(rnc, rncEmisor, encf)
+> List&lt;TrackingDetalle&gt; consultaTrackId(rnc, rncEmisor, encf)
 
 
 
@@ -563,7 +572,7 @@ public class Example {
     String rncEmisor = "rncEmisor_example"; // String | 
     String encf = "encf_example"; // String | 
     try {
-      RespuestaConsultaTrackId result = apiInstance.consultaTrackId(rnc, rncEmisor, encf);
+      List<TrackingDetalle> result = apiInstance.consultaTrackId(rnc, rncEmisor, encf);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DgiiApi#consultaTrackId");
@@ -586,7 +595,7 @@ public class Example {
 
 ### Return type
 
-[**RespuestaConsultaTrackId**](RespuestaConsultaTrackId.md)
+[**List&lt;TrackingDetalle&gt;**](TrackingDetalle.md)
 
 ### Authorization
 
@@ -605,6 +614,7 @@ public class Example {
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Internal Server Error |  -  |
+| **502** | Bad Gateway |  -  |
 
 <a id="estatusServiciosObtenerEstatus"></a>
 # **estatusServiciosObtenerEstatus**
@@ -674,6 +684,7 @@ public class Example {
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Internal Server Error |  -  |
+| **502** | Bad Gateway |  -  |
 
 <a id="estatusServiciosObtenerVentanasMantenimiento"></a>
 # **estatusServiciosObtenerVentanasMantenimiento**
@@ -743,4 +754,5 @@ public class Example {
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Internal Server Error |  -  |
+| **502** | Bad Gateway |  -  |
 

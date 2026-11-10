@@ -38,6 +38,8 @@ import kotlinx.serialization.Contextual
  * @param tipoEcf 
  * @param resultInternalFileName 
  * @param montoTotal 
+ * @param reprocessedOn When the reception was run again after it ended without registering the e-CF.
+ * @param recuperada True when the first reception failed and the e-CF was registered by running it again, so the UI can flag it as recovered.
  */
 @Serializable
 
@@ -80,7 +82,15 @@ data class EcfReceptionRequestDto (
     val resultInternalFileName: kotlin.String? = null,
 
     @SerialName(value = "montoTotal")
-    val montoTotal: EcfReceptionRequestDtoMontoTotal? = null
+    val montoTotal: EcfReceptionRequestDtoMontoTotal? = null,
+
+    /* When the reception was run again after it ended without registering the e-CF. */
+    @Contextual @SerialName(value = "reprocessedOn")
+    val reprocessedOn: java.time.OffsetDateTime? = null,
+
+    /* True when the first reception failed and the e-CF was registered by running it again, so the UI can flag it as recovered. */
+    @SerialName(value = "recuperada")
+    val recuperada: kotlin.Boolean? = null
 
 ) {
 

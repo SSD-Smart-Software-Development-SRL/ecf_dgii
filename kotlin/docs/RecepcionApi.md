@@ -106,7 +106,7 @@ Configure Bearer:
 
 <a id="searchEcfReceptionRequests"></a>
 # **searchEcfReceptionRequests**
-> PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit)
+> PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit)
 
 
 
@@ -121,16 +121,17 @@ val messageIds : kotlin.collections.List<java.util.UUID> =  // kotlin.collection
 val encfs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
 val rncs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
 val rncEmisors : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
-val tiposEcfs : kotlin.collections.List<SearchEcfReceptionRequestsTiposEcfsParameterInner> =  // kotlin.collections.List<SearchEcfReceptionRequestsTiposEcfsParameterInner> | 
-val progresses : kotlin.collections.List<SearchEcfReceptionRequestsTiposEcfsParameterInner> =  // kotlin.collections.List<SearchEcfReceptionRequestsTiposEcfsParameterInner> | 
+val tiposEcfs : kotlin.collections.List<Int> =  // kotlin.collections.List<Int> | 
+val progresses : kotlin.collections.List<Int> =  // kotlin.collections.List<Int> | 
 val fromDate : kotlin.String = fromDate_example // kotlin.String | 
 val toDate : kotlin.String = toDate_example // kotlin.String | 
-val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
-val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
-val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
+val amountFrom : kotlin.Double = 1.2 // kotlin.Double | 
+val amountTo : kotlin.Double = 1.2 // kotlin.Double | 
+val ocultarNoRecibidas : kotlin.Boolean = true // kotlin.Boolean | 
+val page : Int = 56 // Int | 
+val limit : Int = 56 // Int | 
 try {
-    val result : PaginatedApiResultOfEcfReceptionRequestDto = apiInstance.searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit)
+    val result : PaginatedApiResultOfEcfReceptionRequestDto = apiInstance.searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling RecepcionApi#searchEcfReceptionRequests")
@@ -146,16 +147,17 @@ try {
 | **encfs** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
 | **rncs** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
 | **rncEmisors** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
-| **tiposEcfs** | [**kotlin.collections.List&lt;SearchEcfReceptionRequestsTiposEcfsParameterInner&gt;**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md)|  | [optional] |
-| **progresses** | [**kotlin.collections.List&lt;SearchEcfReceptionRequestsTiposEcfsParameterInner&gt;**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md)|  | [optional] |
+| **tiposEcfs** | [**kotlin.collections.List&lt;Int&gt;**](Int.md)|  | [optional] |
+| **progresses** | [**kotlin.collections.List&lt;Int&gt;**](Int.md)|  | [optional] |
 | **fromDate** | **kotlin.String**|  | [optional] |
 | **toDate** | **kotlin.String**|  | [optional] |
-| **amountFrom** | **SearchEcfsAmountFromParameter**|  | [optional] |
-| **amountTo** | **SearchEcfsAmountFromParameter**|  | [optional] |
-| **page** | **GetCompaniesPageParameter**|  | [optional] [default to 1] |
+| **amountFrom** | **kotlin.Double**|  | [optional] |
+| **amountTo** | **kotlin.Double**|  | [optional] |
+| **ocultarNoRecibidas** | **kotlin.Boolean**|  | [optional] |
+| **page** | **Int**|  | [optional] [default to 1] |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **limit** | **GetCompaniesLimitParameter**|  | [optional] [default to 25] |
+| **limit** | **Int**|  | [optional] [default to 25] |
 
 ### Return type
 
@@ -174,7 +176,7 @@ Configure Bearer:
 
 <a id="searchEcfReceptionRequestsByRnc"></a>
 # **searchEcfReceptionRequestsByRnc**
-> PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit)
+> PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit)
 
 
 
@@ -189,16 +191,17 @@ val rnc : kotlin.String = rnc_example // kotlin.String |
 val messageIds : kotlin.collections.List<java.util.UUID> =  // kotlin.collections.List<java.util.UUID> | 
 val encfs : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
 val rncEmisors : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
-val tiposEcfs : kotlin.collections.List<SearchEcfReceptionRequestsTiposEcfsParameterInner> =  // kotlin.collections.List<SearchEcfReceptionRequestsTiposEcfsParameterInner> | 
-val progresses : kotlin.collections.List<SearchEcfReceptionRequestsTiposEcfsParameterInner> =  // kotlin.collections.List<SearchEcfReceptionRequestsTiposEcfsParameterInner> | 
+val tiposEcfs : kotlin.collections.List<Int> =  // kotlin.collections.List<Int> | 
+val progresses : kotlin.collections.List<Int> =  // kotlin.collections.List<Int> | 
 val fromDate : kotlin.String = fromDate_example // kotlin.String | 
 val toDate : kotlin.String = toDate_example // kotlin.String | 
-val amountFrom : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
-val amountTo : SearchEcfsAmountFromParameter = 1.2 // SearchEcfsAmountFromParameter | 
-val page : GetCompaniesPageParameter = 56 // GetCompaniesPageParameter | 
-val limit : GetCompaniesLimitParameter = 56 // GetCompaniesLimitParameter | 
+val amountFrom : kotlin.Double = 1.2 // kotlin.Double | 
+val amountTo : kotlin.Double = 1.2 // kotlin.Double | 
+val ocultarNoRecibidas : kotlin.Boolean = true // kotlin.Boolean | 
+val page : Int = 56 // Int | 
+val limit : Int = 56 // Int | 
 try {
-    val result : PaginatedApiResultOfEcfReceptionRequestDto = apiInstance.searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit)
+    val result : PaginatedApiResultOfEcfReceptionRequestDto = apiInstance.searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling RecepcionApi#searchEcfReceptionRequestsByRnc")
@@ -214,16 +217,17 @@ try {
 | **messageIds** | [**kotlin.collections.List&lt;java.util.UUID&gt;**](java.util.UUID.md)|  | [optional] |
 | **encfs** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
 | **rncEmisors** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
-| **tiposEcfs** | [**kotlin.collections.List&lt;SearchEcfReceptionRequestsTiposEcfsParameterInner&gt;**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md)|  | [optional] |
-| **progresses** | [**kotlin.collections.List&lt;SearchEcfReceptionRequestsTiposEcfsParameterInner&gt;**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md)|  | [optional] |
+| **tiposEcfs** | [**kotlin.collections.List&lt;Int&gt;**](Int.md)|  | [optional] |
+| **progresses** | [**kotlin.collections.List&lt;Int&gt;**](Int.md)|  | [optional] |
 | **fromDate** | **kotlin.String**|  | [optional] |
 | **toDate** | **kotlin.String**|  | [optional] |
-| **amountFrom** | **SearchEcfsAmountFromParameter**|  | [optional] |
-| **amountTo** | **SearchEcfsAmountFromParameter**|  | [optional] |
-| **page** | **GetCompaniesPageParameter**|  | [optional] [default to 1] |
+| **amountFrom** | **kotlin.Double**|  | [optional] |
+| **amountTo** | **kotlin.Double**|  | [optional] |
+| **ocultarNoRecibidas** | **kotlin.Boolean**|  | [optional] |
+| **page** | **Int**|  | [optional] [default to 1] |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **limit** | **GetCompaniesLimitParameter**|  | [optional] [default to 25] |
+| **limit** | **Int**|  | [optional] [default to 25] |
 
 ### Return type
 

@@ -25,5 +25,7 @@
 
 * `COMPROBANTE_PARA_PAGOS_AL_EXTERIOR_ELECTRONICO` (value: `"ComprobanteParaPagosAlExteriorElectronico"`)
 
+* `UNKNOWN_DEFAULT_OPEN_API` (value: `"unknown_default_open_api"`)
+
 
 

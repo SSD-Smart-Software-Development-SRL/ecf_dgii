@@ -150,7 +150,7 @@ public class Example {
 
 <a id="searchEcfReceptionRequests"></a>
 # **searchEcfReceptionRequests**
-> PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit)
+> PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit)
 
 
 
@@ -184,10 +184,11 @@ public class Example {
     String toDate = "toDate_example"; // String | 
     SearchEcfsAmountFromParameter amountFrom = new SearchEcfsAmountFromParameter(); // SearchEcfsAmountFromParameter | 
     SearchEcfsAmountFromParameter amountTo = new SearchEcfsAmountFromParameter(); // SearchEcfsAmountFromParameter | 
+    Boolean ocultarNoRecibidas = true; // Boolean | 
     GetCompaniesPageParameter page = new GetCompaniesPageParameter(); // GetCompaniesPageParameter | 
     GetCompaniesLimitParameter limit = new GetCompaniesLimitParameter(); // GetCompaniesLimitParameter | 
     try {
-      PaginatedApiResultOfEcfReceptionRequestDto result = apiInstance.searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit);
+      PaginatedApiResultOfEcfReceptionRequestDto result = apiInstance.searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecepcionApi#searchEcfReceptionRequests");
@@ -214,6 +215,7 @@ public class Example {
 | **toDate** | **String**|  | [optional] |
 | **amountFrom** | **SearchEcfsAmountFromParameter**|  | [optional] |
 | **amountTo** | **SearchEcfsAmountFromParameter**|  | [optional] |
+| **ocultarNoRecibidas** | **Boolean**|  | [optional] |
 | **page** | **GetCompaniesPageParameter**|  | [optional] [default to 1] |
 | **limit** | **GetCompaniesLimitParameter**|  | [optional] [default to 25] |
 
@@ -239,7 +241,7 @@ public class Example {
 
 <a id="searchEcfReceptionRequestsByRnc"></a>
 # **searchEcfReceptionRequestsByRnc**
-> PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit)
+> PaginatedApiResultOfEcfReceptionRequestDto searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit)
 
 
 
@@ -273,10 +275,11 @@ public class Example {
     String toDate = "toDate_example"; // String | 
     SearchEcfsAmountFromParameter amountFrom = new SearchEcfsAmountFromParameter(); // SearchEcfsAmountFromParameter | 
     SearchEcfsAmountFromParameter amountTo = new SearchEcfsAmountFromParameter(); // SearchEcfsAmountFromParameter | 
+    Boolean ocultarNoRecibidas = true; // Boolean | 
     GetCompaniesPageParameter page = new GetCompaniesPageParameter(); // GetCompaniesPageParameter | 
     GetCompaniesLimitParameter limit = new GetCompaniesLimitParameter(); // GetCompaniesLimitParameter | 
     try {
-      PaginatedApiResultOfEcfReceptionRequestDto result = apiInstance.searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit);
+      PaginatedApiResultOfEcfReceptionRequestDto result = apiInstance.searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecepcionApi#searchEcfReceptionRequestsByRnc");
@@ -303,6 +306,7 @@ public class Example {
 | **toDate** | **String**|  | [optional] |
 | **amountFrom** | **SearchEcfsAmountFromParameter**|  | [optional] |
 | **amountTo** | **SearchEcfsAmountFromParameter**|  | [optional] |
+| **ocultarNoRecibidas** | **Boolean**|  | [optional] |
 | **page** | **GetCompaniesPageParameter**|  | [optional] [default to 1] |
 | **limit** | **GetCompaniesLimitParameter**|  | [optional] [default to 25] |
 

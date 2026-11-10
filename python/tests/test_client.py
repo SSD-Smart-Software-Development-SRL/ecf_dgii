@@ -12,6 +12,7 @@ import pytest
 from ecf_dgii import (
     EcfClient,
     EcfConnectionError,
+    EcfNotReceivedError,
     EcfProcessingError,
     EcfRateLimitError,
     EcfServerError,
@@ -19,6 +20,7 @@ from ecf_dgii import (
     PollingOptions,
 )
 from ecf_dgii.generated.models import (
+    DgiiSubmissionStateType1,
     Ecf32Comprador,
     Ecf32ECF,
     Ecf32Emisor,
@@ -32,6 +34,7 @@ from ecf_dgii.generated.models import (
     Ecf32Totales,
     Ecf32VersionType,
     EcfProgress,
+    EcfResponse,
     TipoeCFType,
 )
 
@@ -189,6 +192,70 @@ async def test_send_and_poll_raises_on_error_progress(httpx_mock):
         with pytest.raises(EcfProcessingError) as exc:
             await client.send_ecf32_and_poll(minimal_ecf32(), polling_options=FAST)
     assert "Monto total no cuadra" in exc.value.message
+
+
+NOT_RECEIVED_ERROR = "La DGII no tiene registro del comprobante; puede enviarlo de nuevo con el mismo eNCF."
+
+
+async def test_send_and_poll_keeps_polling_while_pending_reconciliation(httpx_mock):
+    httpx_mock.add_response(method="POST", url=f"{BASE}/ecf/32", json=ecf_response())
+    status_url = re.compile(rf"{BASE}/ecf/{RNC}/message/{MESSAGE_ID}.*")
+    httpx_mock.add_response(
+        method="GET", url=status_url,
+        json=[ecf_response("UploadedToDgii", "EnProceso", dgiiSubmissionState="PendingReconciliation")],
+    )
+    httpx_mock.add_response(
+        method="GET", url=status_url, json=[ecf_response("Finished", "Aceptado", dgiiSubmissionState="Accepted")],
+    )
+    async with EcfClient(api_key="k") as client:
+        result = await client.send_ecf32_and_poll(minimal_ecf32(), polling_options=FAST)
+    assert result.dgii_submission_state == DgiiSubmissionStateType1.ACCEPTED
+
+
+async def test_send_and_poll_raises_resubmittable_error_on_not_received(httpx_mock):
+    httpx_mock.add_response(method="POST", url=f"{BASE}/ecf/32", json=ecf_response())
+    httpx_mock.add_response(
+        method="GET",
+        url=re.compile(rf"{BASE}/ecf/{RNC}/message/{MESSAGE_ID}.*"),
+        json=[ecf_response("Error", None, dgiiSubmissionState="NotReceived", secuenciaUtilizada=False,
+                           errors=NOT_RECEIVED_ERROR)],
+    )
+    async with EcfClient(api_key="k") as client:
+        with pytest.raises(EcfNotReceivedError) as exc:
+            await client.send_ecf32_and_poll(minimal_ecf32(), polling_options=FAST)
+    assert isinstance(exc.value, EcfProcessingError)
+    assert exc.value.can_resubmit
+    assert exc.value.message == NOT_RECEIVED_ERROR
+
+
+async def test_rejection_is_not_resubmittable(httpx_mock):
+    httpx_mock.add_response(method="POST", url=f"{BASE}/ecf/32", json=ecf_response())
+    httpx_mock.add_response(
+        method="GET",
+        url=re.compile(rf"{BASE}/ecf/{RNC}/message/{MESSAGE_ID}.*"),
+        json=[ecf_response("Error", "Rechazado", dgiiSubmissionState="Rejected", errors="Rechazado")],
+    )
+    async with EcfClient(api_key="k") as client:
+        with pytest.raises(EcfProcessingError) as exc:
+            await client.send_ecf32_and_poll(minimal_ecf32(), polling_options=FAST)
+    assert not isinstance(exc.value, EcfNotReceivedError)
+    assert not exc.value.can_resubmit
+
+
+@pytest.mark.parametrize("state", [None, "SomeFutureState"])
+def test_submission_state_tolerates_null_and_unknown_values(state):
+    parsed = EcfResponse.from_dict(ecf_response("Finished", "Aceptado", dgiiSubmissionState=state))
+    assert parsed.progress == EcfProgress.FINISHED
+    if state is None:
+        assert not parsed.dgii_submission_state
+    else:
+        assert parsed.dgii_submission_state == state
+
+
+def test_explicit_null_submission_state_parses():
+    body = ecf_response("Finished", "Aceptado")
+    body["dgiiSubmissionState"] = None
+    assert EcfResponse.from_dict(body).dgii_submission_state is None
 
 
 @pytest.mark.parametrize("tipo", ["31", "32", "33", "34", "41", "43", "44", "45", "46", "47"])

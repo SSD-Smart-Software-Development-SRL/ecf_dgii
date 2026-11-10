@@ -57,7 +57,8 @@ public class CompanyApiTest {
         List<String> names = null;
         GetCompaniesPageParameter page = null;
         GetCompaniesLimitParameter limit = null;
-        PaginatedApiResultOfCompanyResponse response = api.getCompanies(rncs, names, page, limit);
+        String search = null;
+        PaginatedApiResultOfCompanyResponse response = api.getCompanies(rncs, names, page, limit, search);
         // TODO: test validations
     }
 

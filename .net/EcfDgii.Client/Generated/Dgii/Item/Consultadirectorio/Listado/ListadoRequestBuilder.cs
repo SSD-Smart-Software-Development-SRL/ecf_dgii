@@ -33,6 +33,9 @@ namespace EcfDgii.Client.Generated.Dgii.Item.Consultadirectorio.Listado
         public ListadoRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/dgii/{rnc}/consultadirectorio/listado", rawUrl)
         {
         }
+        /// <summary>
+        /// Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
+        /// </summary>
         /// <returns>A List&lt;global::EcfDgii.Client.Generated.Models.Directorio&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -40,6 +43,8 @@ namespace EcfDgii.Client.Generated.Dgii.Item.Consultadirectorio.Listado
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 401 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 403 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 500 status code</exception>
+        /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 502 status code</exception>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<List<global::EcfDgii.Client.Generated.Models.Directorio>?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -56,12 +61,17 @@ namespace EcfDgii.Client.Generated.Dgii.Item.Consultadirectorio.Listado
                 { "401", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "403", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "500", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
+                { "502", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
             };
             var collectionResult = await RequestAdapter.SendCollectionAsync<global::EcfDgii.Client.Generated.Models.Directorio>(requestInfo, global::EcfDgii.Client.Generated.Models.Directorio.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
+        /// <summary>
+        /// Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
+        /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        [Obsolete("")]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
@@ -81,6 +91,7 @@ namespace EcfDgii.Client.Generated.Dgii.Item.Consultadirectorio.Listado
         /// </summary>
         /// <returns>A <see cref="global::EcfDgii.Client.Generated.Dgii.Item.Consultadirectorio.Listado.ListadoRequestBuilder"/></returns>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
+        [Obsolete("")]
         public global::EcfDgii.Client.Generated.Dgii.Item.Consultadirectorio.Listado.ListadoRequestBuilder WithUrl(string rawUrl)
         {
             return new global::EcfDgii.Client.Generated.Dgii.Item.Consultadirectorio.Listado.ListadoRequestBuilder(rawUrl, RequestAdapter);

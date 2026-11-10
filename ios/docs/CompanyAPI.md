@@ -61,7 +61,7 @@ Void (empty response body)
 
 # **getCompanies**
 ```swift
-    open class func getCompanies(rncs: [String]? = nil, names: [String]? = nil, page: GetCompaniesPageParameter? = nil, limit: GetCompaniesLimitParameter? = nil, completion: @escaping (_ data: PaginatedApiResultOfCompanyResponse?, _ error: Error?) -> Void)
+    open class func getCompanies(rncs: [String]? = nil, names: [String]? = nil, page: GetCompaniesPageParameter? = nil, limit: GetCompaniesLimitParameter? = nil, search: String? = nil, completion: @escaping (_ data: PaginatedApiResultOfCompanyResponse?, _ error: Error?) -> Void)
 ```
 
 
@@ -75,8 +75,9 @@ let rncs = ["inner_example"] // [String] |  (optional)
 let names = ["inner_example"] // [String] |  (optional)
 let page = GetCompanies_Page_parameter() // GetCompaniesPageParameter |  (optional) (default to 1)
 let limit = GetCompanies_Limit_parameter() // GetCompaniesLimitParameter |  (optional) (default to 25)
+let search = "search_example" // String |  (optional)
 
-CompanyAPI.getCompanies(rncs: rncs, names: names, page: page, limit: limit) { (response, error) in
+CompanyAPI.getCompanies(rncs: rncs, names: names, page: page, limit: limit, search: search) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -96,6 +97,7 @@ Name | Type | Description  | Notes
  **names** | [**[String]**](String.md) |  | [optional] 
  **page** | **GetCompaniesPageParameter** |  | [optional] [default to 1]
  **limit** | **GetCompaniesLimitParameter** |  | [optional] [default to 25]
+ **search** | **String** |  | [optional] 
 
 ### Return type
 

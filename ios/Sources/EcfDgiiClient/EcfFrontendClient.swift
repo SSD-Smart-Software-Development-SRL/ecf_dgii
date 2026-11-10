@@ -272,15 +272,16 @@ public final class EcfFrontendClient: Sendable {
 
     // MARK: - Company Operations
 
-    /// List companies with optional filters.
+    /// List companies with optional filters (`search` matches RNC or name).
     public func getCompanies(
         rncs: [String]? = nil,
         names: [String]? = nil,
         page: Int? = nil,
-        limit: Int? = nil
+        limit: Int? = nil,
+        search: String? = nil
     ) async throws -> PaginatedApiResultOfCompanyResponse {
         try await withAuth { config in
-            try await CompanyAPI.getCompanies(rncs: rncs, names: names, page: page, limit: limit, apiConfiguration: config)
+            try await CompanyAPI.getCompanies(rncs: rncs, names: names, page: page, limit: limit, search: search, apiConfiguration: config)
         }
     }
 

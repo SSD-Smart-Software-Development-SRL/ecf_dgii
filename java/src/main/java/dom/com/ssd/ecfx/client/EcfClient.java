@@ -139,14 +139,14 @@ public class EcfClient {
             List<EcfResponse> responses = ecfApi.getEcfById(rnc, messageId, false);
             if (responses != null && !responses.isEmpty()) {
                 EcfResponse response = responses.get(0);
-                EcfProgress progress = response.getProgress();
 
-                if (progress == EcfProgress.FINISHED) {
-                    return response;
-                }
-                if (progress == EcfProgress.ERROR) {
+                // PendingReconciliation keeps polling; NotReceived ends it as a resubmittable error.
+                if (EcfStatus.isTerminal(response)) {
+                    if (response.getProgress() == EcfProgress.FINISHED && !EcfStatus.canResubmit(response)) {
+                        return response;
+                    }
                     String errorMsg = response.getErrors() != null ? response.getErrors() : "ECF processing failed";
-                    throw new EcfClientException(errorMsg, null, messageId.toString(), response.getCodSec());
+                    throw new EcfClientException(errorMsg, null, messageId.toString(), response.getCodSec(), response);
                 }
             }
 

@@ -130,6 +130,7 @@ open class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @param names  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
+     * @param search  (optional)
      * @return PaginatedApiResultOfCompanyResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -139,8 +140,8 @@ open class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getCompanies(rncs: kotlin.collections.List<kotlin.String>? = null, names: kotlin.collections.List<kotlin.String>? = null, page: Int? = 1, limit: Int? = 25) : PaginatedApiResultOfCompanyResponse {
-        val localVarResponse = getCompaniesWithHttpInfo(rncs = rncs, names = names, page = page, limit = limit)
+    fun getCompanies(rncs: kotlin.collections.List<kotlin.String>? = null, names: kotlin.collections.List<kotlin.String>? = null, page: Int? = 1, limit: Int? = 25, search: kotlin.String? = null) : PaginatedApiResultOfCompanyResponse {
+        val localVarResponse = getCompaniesWithHttpInfo(rncs = rncs, names = names, page = page, limit = limit, search = search)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PaginatedApiResultOfCompanyResponse
@@ -165,14 +166,15 @@ open class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @param names  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
+     * @param search  (optional)
      * @return ApiResponse<PaginatedApiResultOfCompanyResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getCompaniesWithHttpInfo(rncs: kotlin.collections.List<kotlin.String>?, names: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : ApiResponse<PaginatedApiResultOfCompanyResponse?> {
-        val localVariableConfig = getCompaniesRequestConfig(rncs = rncs, names = names, page = page, limit = limit)
+    fun getCompaniesWithHttpInfo(rncs: kotlin.collections.List<kotlin.String>?, names: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?, search: kotlin.String?) : ApiResponse<PaginatedApiResultOfCompanyResponse?> {
+        val localVariableConfig = getCompaniesRequestConfig(rncs = rncs, names = names, page = page, limit = limit, search = search)
 
         return request<Unit, PaginatedApiResultOfCompanyResponse>(
             localVariableConfig
@@ -186,9 +188,10 @@ open class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @param names  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
+     * @param search  (optional)
      * @return RequestConfig
      */
-    fun getCompaniesRequestConfig(rncs: kotlin.collections.List<kotlin.String>?, names: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?) : RequestConfig<Unit> {
+    fun getCompaniesRequestConfig(rncs: kotlin.collections.List<kotlin.String>?, names: kotlin.collections.List<kotlin.String>?, page: Int?, limit: Int?, search: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -201,6 +204,9 @@ open class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
                 if (page != null) {
                 }
                 if (limit != null) {
+                }
+                if (search != null) {
+                    put("Search", listOf(search.toString()))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

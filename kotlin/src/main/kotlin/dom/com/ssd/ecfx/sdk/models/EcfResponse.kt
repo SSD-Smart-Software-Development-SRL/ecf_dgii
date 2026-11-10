@@ -18,9 +18,10 @@ package dom.com.ssd.ecfx.sdk.models
 import dom.com.ssd.ecfx.sdk.models.AcecfSummaryDto
 import dom.com.ssd.ecfx.sdk.models.AllTipoECFTypes
 import dom.com.ssd.ecfx.sdk.models.DGIIEnvironment
+import dom.com.ssd.ecfx.sdk.models.DgiiSubmissionState
 import dom.com.ssd.ecfx.sdk.models.EcfEstado
 import dom.com.ssd.ecfx.sdk.models.EcfProgress
-import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
+import dom.com.ssd.ecfx.sdk.models.ReceptorDirectoryStatus
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
@@ -38,20 +39,22 @@ import kotlinx.serialization.Contextual
  * @param tipoEcf 
  * @param encf 
  * @param rncEmisor 
- * @param rncReceptor 
  * @param montoTotal 
- * @param fileName 
  * @param tenantId 
+ * @param progress 
+ * @param dgiiEnvironment 
+ * @param rncReceptor 
+ * @param fileName 
  * @param estatus 
  * @param codSec 
  * @param fechaFirma 
  * @param mensaje 
  * @param errors 
- * @param progress 
  * @param emisorReceptorErrors 
  * @param secuenciaUtilizada 
- * @param dgiiEnvironment 
  * @param acecfs ACECFs received from the receptor for this outbound ECF.
+ * @param receptorDirectoryStatus 
+ * @param dgiiSubmissionState Where the DGII transmission of this ECF stands. Null for documents created before durable submission. `PendingReconciliation`: DGII's answer is not confirmed yet; do not resend or reuse the eNCF. `NotReceived`: DGII confirmed it has no record of the document (Progress is Error, Estatus is null and SecuenciaUtilizada is false); the same eNCF may be submitted again as a new request.
  * @param impresionUrl 
  */
 @Serializable
@@ -85,48 +88,55 @@ data class EcfResponse (
     @SerialName(value = "rncEmisor")
     val rncEmisor: kotlin.String,
 
-    @SerialName(value = "rncReceptor")
-    val rncReceptor: kotlin.String?,
-
     @SerialName(value = "montoTotal")
-    val montoTotal: SearchEcfsAmountFromParameter,
-
-    @SerialName(value = "fileName")
-    val fileName: kotlin.String?,
+    val montoTotal: kotlin.Double,
 
     @Contextual @SerialName(value = "tenantId")
     val tenantId: java.util.UUID,
 
-    @Contextual @SerialName(value = "estatus")
-    val estatus: EcfEstado?,
-
-    @SerialName(value = "codSec")
-    val codSec: kotlin.String?,
-
-    @Contextual @SerialName(value = "fechaFirma")
-    val fechaFirma: java.time.OffsetDateTime?,
-
-    @SerialName(value = "mensaje")
-    val mensaje: kotlin.String?,
-
-    @SerialName(value = "errors")
-    val errors: kotlin.String?,
-
     @Contextual @SerialName(value = "progress")
     val progress: EcfProgress,
-
-    @SerialName(value = "emisorReceptorErrors")
-    val emisorReceptorErrors: kotlin.String?,
-
-    @SerialName(value = "secuenciaUtilizada")
-    val secuenciaUtilizada: kotlin.Boolean?,
 
     @Contextual @SerialName(value = "dgiiEnvironment")
     val dgiiEnvironment: DGIIEnvironment,
 
+    @SerialName(value = "rncReceptor")
+    val rncReceptor: kotlin.String? = null,
+
+    @SerialName(value = "fileName")
+    val fileName: kotlin.String? = null,
+
+    @SerialName(value = "estatus")
+    val estatus: EcfEstado? = null,
+
+    @SerialName(value = "codSec")
+    val codSec: kotlin.String? = null,
+
+    @Contextual @SerialName(value = "fechaFirma")
+    val fechaFirma: java.time.OffsetDateTime? = null,
+
+    @SerialName(value = "mensaje")
+    val mensaje: kotlin.String? = null,
+
+    @SerialName(value = "errors")
+    val errors: kotlin.String? = null,
+
+    @SerialName(value = "emisorReceptorErrors")
+    val emisorReceptorErrors: kotlin.String? = null,
+
+    @SerialName(value = "secuenciaUtilizada")
+    val secuenciaUtilizada: kotlin.Boolean? = null,
+
     /* ACECFs received from the receptor for this outbound ECF. */
     @SerialName(value = "acecfs")
     val acecfs: kotlin.collections.List<AcecfSummaryDto>? = null,
+
+    @SerialName(value = "receptorDirectoryStatus")
+    val receptorDirectoryStatus: ReceptorDirectoryStatus? = null,
+
+    /* Where the DGII transmission of this ECF stands. Null for documents created before durable submission. `PendingReconciliation`: DGII's answer is not confirmed yet; do not resend or reuse the eNCF. `NotReceived`: DGII confirmed it has no record of the document (Progress is Error, Estatus is null and SecuenciaUtilizada is false); the same eNCF may be submitted again as a new request. */
+    @SerialName(value = "dgiiSubmissionState")
+    val dgiiSubmissionState: DgiiSubmissionState? = null,
 
     @SerialName(value = "impresionUrl")
     val impresionUrl: kotlin.String? = null

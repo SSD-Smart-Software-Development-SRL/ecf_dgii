@@ -38,12 +38,14 @@ CompanyResponse::CompanyResponse()
     m_TenantIdIsSet = false;
     m_ReceptorId = utility::conversions::to_string_t("");
     m_ReceptorIdIsSet = false;
-    m_UrlRecepcion = utility::conversions::to_string_t("");
-    m_UrlRecepcionIsSet = false;
-    m_UrlAprobacionComercial = utility::conversions::to_string_t("");
-    m_UrlAprobacionComercialIsSet = false;
-    m_UrlAutenticacion = utility::conversions::to_string_t("");
-    m_UrlAutenticacionIsSet = false;
+    m_UrlsIsSet = false;
+    m_CertificationIsSet = false;
+    m_ArchivedAt = utility::datetime();
+    m_ArchivedAtIsSet = false;
+    m_ArchivedBy = utility::conversions::to_string_t("");
+    m_ArchivedByIsSet = false;
+    m_ArchiveReason = utility::conversions::to_string_t("");
+    m_ArchiveReasonIsSet = false;
 }
 
 CompanyResponse::~CompanyResponse()
@@ -103,20 +105,30 @@ web::json::value CompanyResponse::toJson() const
         
         val[utility::conversions::to_string_t(_XPLATSTR("receptorId"))] = ModelBase::toJson(m_ReceptorId);
     }
-    if(m_UrlRecepcionIsSet)
+    if(m_UrlsIsSet)
     {   
         
-        val[utility::conversions::to_string_t(_XPLATSTR("urlRecepcion"))] = ModelBase::toJson(m_UrlRecepcion);
+        val[utility::conversions::to_string_t(_XPLATSTR("urls"))] = ModelBase::toJson(m_Urls);
     }
-    if(m_UrlAprobacionComercialIsSet)
+    if(m_CertificationIsSet)
     {   
         
-        val[utility::conversions::to_string_t(_XPLATSTR("urlAprobacionComercial"))] = ModelBase::toJson(m_UrlAprobacionComercial);
+        val[utility::conversions::to_string_t(_XPLATSTR("certification"))] = ModelBase::toJson(m_Certification);
     }
-    if(m_UrlAutenticacionIsSet)
+    if(m_ArchivedAtIsSet)
     {   
         
-        val[utility::conversions::to_string_t(_XPLATSTR("urlAutenticacion"))] = ModelBase::toJson(m_UrlAutenticacion);
+        val[utility::conversions::to_string_t(_XPLATSTR("archivedAt"))] = ModelBase::toJson(m_ArchivedAt);
+    }
+    if(m_ArchivedByIsSet)
+    {   
+        
+        val[utility::conversions::to_string_t(_XPLATSTR("archivedBy"))] = ModelBase::toJson(m_ArchivedBy);
+    }
+    if(m_ArchiveReasonIsSet)
+    {   
+        
+        val[utility::conversions::to_string_t(_XPLATSTR("archiveReason"))] = ModelBase::toJson(m_ArchiveReason);
     }
 
     return val;
@@ -224,36 +236,58 @@ bool CompanyResponse::fromJson(const web::json::value& val)
             
         }
     }
-    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("urlRecepcion"))))
+    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("urls"))))
     {
-        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("urlRecepcion")));
+        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("urls")));
         if(!fieldValue.is_null())
         {
-            utility::string_t refVal_setUrlRecepcion;
-            ok &= ModelBase::fromJson(fieldValue, refVal_setUrlRecepcion);
-            setUrlRecepcion(refVal_setUrlRecepcion);
+            std::shared_ptr<CompanyUrlsResponse> refVal_setUrls;
+            ok &= ModelBase::fromJson(fieldValue, refVal_setUrls);
+            setUrls(refVal_setUrls);
             
         }
     }
-    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("urlAprobacionComercial"))))
+    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("certification"))))
     {
-        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("urlAprobacionComercial")));
+        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("certification")));
         if(!fieldValue.is_null())
         {
-            utility::string_t refVal_setUrlAprobacionComercial;
-            ok &= ModelBase::fromJson(fieldValue, refVal_setUrlAprobacionComercial);
-            setUrlAprobacionComercial(refVal_setUrlAprobacionComercial);
+            std::shared_ptr<CertificationStateResponse> refVal_setCertification;
+            ok &= ModelBase::fromJson(fieldValue, refVal_setCertification);
+            setCertification(refVal_setCertification);
             
         }
     }
-    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("urlAutenticacion"))))
+    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("archivedAt"))))
     {
-        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("urlAutenticacion")));
+        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("archivedAt")));
         if(!fieldValue.is_null())
         {
-            utility::string_t refVal_setUrlAutenticacion;
-            ok &= ModelBase::fromJson(fieldValue, refVal_setUrlAutenticacion);
-            setUrlAutenticacion(refVal_setUrlAutenticacion);
+            utility::datetime refVal_setArchivedAt;
+            ok &= ModelBase::fromJson(fieldValue, refVal_setArchivedAt);
+            setArchivedAt(refVal_setArchivedAt);
+            
+        }
+    }
+    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("archivedBy"))))
+    {
+        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("archivedBy")));
+        if(!fieldValue.is_null())
+        {
+            utility::string_t refVal_setArchivedBy;
+            ok &= ModelBase::fromJson(fieldValue, refVal_setArchivedBy);
+            setArchivedBy(refVal_setArchivedBy);
+            
+        }
+    }
+    if(val.has_field(utility::conversions::to_string_t(_XPLATSTR("archiveReason"))))
+    {
+        const web::json::value& fieldValue = val.at(utility::conversions::to_string_t(_XPLATSTR("archiveReason")));
+        if(!fieldValue.is_null())
+        {
+            utility::string_t refVal_setArchiveReason;
+            ok &= ModelBase::fromJson(fieldValue, refVal_setArchiveReason);
+            setArchiveReason(refVal_setArchiveReason);
             
         }
     }
@@ -303,17 +337,25 @@ void CompanyResponse::toMultipart(std::shared_ptr<MultipartFormData> multipart, 
     {
         multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("receptorId")), m_ReceptorId));
     }
-    if(m_UrlRecepcionIsSet)
+    if(m_UrlsIsSet)
     {
-        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("urlRecepcion")), m_UrlRecepcion));
+        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("urls")), m_Urls));
     }
-    if(m_UrlAprobacionComercialIsSet)
+    if(m_CertificationIsSet)
     {
-        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("urlAprobacionComercial")), m_UrlAprobacionComercial));
+        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("certification")), m_Certification));
     }
-    if(m_UrlAutenticacionIsSet)
+    if(m_ArchivedAtIsSet)
     {
-        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("urlAutenticacion")), m_UrlAutenticacion));
+        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("archivedAt")), m_ArchivedAt));
+    }
+    if(m_ArchivedByIsSet)
+    {
+        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("archivedBy")), m_ArchivedBy));
+    }
+    if(m_ArchiveReasonIsSet)
+    {
+        multipart->add(ModelBase::toHttpContent(namePrefix + utility::conversions::to_string_t(_XPLATSTR("archiveReason")), m_ArchiveReason));
     }
 }
 
@@ -380,23 +422,35 @@ bool CompanyResponse::fromMultiPart(std::shared_ptr<MultipartFormData> multipart
         ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("receptorId"))), refVal_setReceptorId );
         setReceptorId(refVal_setReceptorId);
     }
-    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("urlRecepcion"))))
+    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("urls"))))
     {
-        utility::string_t refVal_setUrlRecepcion;
-        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("urlRecepcion"))), refVal_setUrlRecepcion );
-        setUrlRecepcion(refVal_setUrlRecepcion);
+        std::shared_ptr<CompanyUrlsResponse> refVal_setUrls;
+        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("urls"))), refVal_setUrls );
+        setUrls(refVal_setUrls);
     }
-    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("urlAprobacionComercial"))))
+    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("certification"))))
     {
-        utility::string_t refVal_setUrlAprobacionComercial;
-        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("urlAprobacionComercial"))), refVal_setUrlAprobacionComercial );
-        setUrlAprobacionComercial(refVal_setUrlAprobacionComercial);
+        std::shared_ptr<CertificationStateResponse> refVal_setCertification;
+        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("certification"))), refVal_setCertification );
+        setCertification(refVal_setCertification);
     }
-    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("urlAutenticacion"))))
+    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("archivedAt"))))
     {
-        utility::string_t refVal_setUrlAutenticacion;
-        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("urlAutenticacion"))), refVal_setUrlAutenticacion );
-        setUrlAutenticacion(refVal_setUrlAutenticacion);
+        utility::datetime refVal_setArchivedAt;
+        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("archivedAt"))), refVal_setArchivedAt );
+        setArchivedAt(refVal_setArchivedAt);
+    }
+    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("archivedBy"))))
+    {
+        utility::string_t refVal_setArchivedBy;
+        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("archivedBy"))), refVal_setArchivedBy );
+        setArchivedBy(refVal_setArchivedBy);
+    }
+    if(multipart->hasContent(utility::conversions::to_string_t(_XPLATSTR("archiveReason"))))
+    {
+        utility::string_t refVal_setArchiveReason;
+        ok &= ModelBase::fromHttpContent(multipart->getContent(utility::conversions::to_string_t(_XPLATSTR("archiveReason"))), refVal_setArchiveReason );
+        setArchiveReason(refVal_setArchiveReason);
     }
     return ok;
 }
@@ -591,68 +645,110 @@ void CompanyResponse::unsetReceptorId()
 {
     m_ReceptorIdIsSet = false;
 }
-utility::string_t CompanyResponse::getUrlRecepcion() const
+std::shared_ptr<CompanyUrlsResponse> CompanyResponse::getUrls() const
 {
-    return m_UrlRecepcion;
+    return m_Urls;
 }
 
 
-void CompanyResponse::setUrlRecepcion(const utility::string_t& value)
+void CompanyResponse::setUrls(const std::shared_ptr<CompanyUrlsResponse>& value)
 {
-    m_UrlRecepcion = value;
-    m_UrlRecepcionIsSet = true;
+    m_Urls = value;
+    m_UrlsIsSet = true;
 }
 
-bool CompanyResponse::urlRecepcionIsSet() const
+bool CompanyResponse::urlsIsSet() const
 {
-    return m_UrlRecepcionIsSet;
+    return m_UrlsIsSet;
 }
 
-void CompanyResponse::unsetUrlRecepcion()
+void CompanyResponse::unsetUrls()
 {
-    m_UrlRecepcionIsSet = false;
+    m_UrlsIsSet = false;
 }
-utility::string_t CompanyResponse::getUrlAprobacionComercial() const
+std::shared_ptr<CertificationStateResponse> CompanyResponse::getCertification() const
 {
-    return m_UrlAprobacionComercial;
-}
-
-
-void CompanyResponse::setUrlAprobacionComercial(const utility::string_t& value)
-{
-    m_UrlAprobacionComercial = value;
-    m_UrlAprobacionComercialIsSet = true;
-}
-
-bool CompanyResponse::urlAprobacionComercialIsSet() const
-{
-    return m_UrlAprobacionComercialIsSet;
-}
-
-void CompanyResponse::unsetUrlAprobacionComercial()
-{
-    m_UrlAprobacionComercialIsSet = false;
-}
-utility::string_t CompanyResponse::getUrlAutenticacion() const
-{
-    return m_UrlAutenticacion;
+    return m_Certification;
 }
 
 
-void CompanyResponse::setUrlAutenticacion(const utility::string_t& value)
+void CompanyResponse::setCertification(const std::shared_ptr<CertificationStateResponse>& value)
 {
-    m_UrlAutenticacion = value;
-    m_UrlAutenticacionIsSet = true;
+    m_Certification = value;
+    m_CertificationIsSet = true;
 }
 
-bool CompanyResponse::urlAutenticacionIsSet() const
+bool CompanyResponse::certificationIsSet() const
 {
-    return m_UrlAutenticacionIsSet;
+    return m_CertificationIsSet;
 }
 
-void CompanyResponse::unsetUrlAutenticacion()
+void CompanyResponse::unsetCertification()
 {
-    m_UrlAutenticacionIsSet = false;
+    m_CertificationIsSet = false;
+}
+utility::datetime CompanyResponse::getArchivedAt() const
+{
+    return m_ArchivedAt;
+}
+
+
+void CompanyResponse::setArchivedAt(const utility::datetime& value)
+{
+    m_ArchivedAt = value;
+    m_ArchivedAtIsSet = true;
+}
+
+bool CompanyResponse::archivedAtIsSet() const
+{
+    return m_ArchivedAtIsSet;
+}
+
+void CompanyResponse::unsetArchivedAt()
+{
+    m_ArchivedAtIsSet = false;
+}
+utility::string_t CompanyResponse::getArchivedBy() const
+{
+    return m_ArchivedBy;
+}
+
+
+void CompanyResponse::setArchivedBy(const utility::string_t& value)
+{
+    m_ArchivedBy = value;
+    m_ArchivedByIsSet = true;
+}
+
+bool CompanyResponse::archivedByIsSet() const
+{
+    return m_ArchivedByIsSet;
+}
+
+void CompanyResponse::unsetArchivedBy()
+{
+    m_ArchivedByIsSet = false;
+}
+utility::string_t CompanyResponse::getArchiveReason() const
+{
+    return m_ArchiveReason;
+}
+
+
+void CompanyResponse::setArchiveReason(const utility::string_t& value)
+{
+    m_ArchiveReason = value;
+    m_ArchiveReasonIsSet = true;
+}
+
+bool CompanyResponse::archiveReasonIsSet() const
+{
+    return m_ArchiveReasonIsSet;
+}
+
+void CompanyResponse::unsetArchiveReason()
+{
+    m_ArchiveReasonIsSet = false;
 }
 
 }

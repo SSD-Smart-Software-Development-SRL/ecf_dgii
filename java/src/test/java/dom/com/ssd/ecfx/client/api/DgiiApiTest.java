@@ -22,6 +22,7 @@ import dom.com.ssd.ecfx.client.model.RespuestaConsultaTimbre;
 import dom.com.ssd.ecfx.client.model.RespuestaConsultaTrackId;
 import dom.com.ssd.ecfx.client.model.RespuestaEstatusServicio;
 import dom.com.ssd.ecfx.client.model.RespuestaVentanaDeMantenimiento;
+import dom.com.ssd.ecfx.client.model.TrackingDetalle;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -133,7 +134,7 @@ public class DgiiApiTest {
         String rnc = null;
         String rncEmisor = null;
         String encf = null;
-        RespuestaConsultaTrackId response = api.consultaTrackId(rnc, rncEmisor, encf);
+        List<TrackingDetalle> response = api.consultaTrackId(rnc, rncEmisor, encf);
         // TODO: test validations
     }
 

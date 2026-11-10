@@ -31,7 +31,9 @@ public enum EstadoType {
   
   ECF_ACEPTADO("ECFAceptado"),
   
-  ECF_RECHAZADO("ECFRechazado");
+  ECF_RECHAZADO("ECFRechazado"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -54,7 +56,7 @@ public enum EstadoType {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<EstadoType> {

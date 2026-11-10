@@ -10,17 +10,21 @@ import Foundation
 open class DgiiAPI {
 
     /**
-
+     [OBSOLETO] Listado completo del Directorio de la DGII
+     
      - parameter rnc: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [Directorio]
      */
+    @available(*, deprecated, message: "This operation is deprecated.")
     open class func consultaDirectorioListado(rnc: String, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> [Directorio] {
         return try await consultaDirectorioListadoWithRequestBuilder(rnc: rnc, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
+     [OBSOLETO] Listado completo del Directorio de la DGII
      - GET /dgii/{rnc}/consultadirectorio/listado
+     - Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
      - Bearer Token:
        - type: http
        - name: Bearer
@@ -28,6 +32,7 @@ open class DgiiAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[Directorio]> 
      */
+    @available(*, deprecated, message: "This operation is deprecated.")
     open class func consultaDirectorioListadoWithRequestBuilder(rnc: String, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<[Directorio]> {
         var localVariablePath = "/dgii/{rnc}/consultadirectorio/listado"
         let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
@@ -358,9 +363,9 @@ open class DgiiAPI {
      - parameter rncEmisor: (query)  
      - parameter encf: (query)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RespuestaConsultaTrackId
+     - returns: [TrackingDetalle]
      */
-    open class func consultaTrackId(rnc: String, rncEmisor: String, encf: String, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> RespuestaConsultaTrackId {
+    open class func consultaTrackId(rnc: String, rncEmisor: String, encf: String, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> [TrackingDetalle] {
         return try await consultaTrackIdWithRequestBuilder(rnc: rnc, rncEmisor: rncEmisor, encf: encf, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -373,9 +378,9 @@ open class DgiiAPI {
      - parameter rncEmisor: (query)  
      - parameter encf: (query)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<RespuestaConsultaTrackId> 
+     - returns: RequestBuilder<[TrackingDetalle]> 
      */
-    open class func consultaTrackIdWithRequestBuilder(rnc: String, rncEmisor: String, encf: String, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<RespuestaConsultaTrackId> {
+    open class func consultaTrackIdWithRequestBuilder(rnc: String, rncEmisor: String, encf: String, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<[TrackingDetalle]> {
         var localVariablePath = "/dgii/{rnc}/consultatrackids/consulta"
         let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
         let rncPostEscape = rncPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -395,7 +400,7 @@ open class DgiiAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<RespuestaConsultaTrackId>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<[TrackingDetalle]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }

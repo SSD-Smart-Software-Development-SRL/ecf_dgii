@@ -69,6 +69,13 @@
               "format": "int32",
               "default": 25
             }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -459,6 +466,7 @@
         "tags": [
           "Ecf"
         ],
+        "description": "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.",
         "operationId": "RecepcionEcf31",
         "requestBody": {
           "content": {
@@ -511,6 +519,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -529,6 +547,7 @@
         "tags": [
           "Ecf"
         ],
+        "description": "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.",
         "operationId": "RecepcionEcf32",
         "requestBody": {
           "content": {
@@ -581,6 +600,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -599,6 +628,7 @@
         "tags": [
           "Ecf"
         ],
+        "description": "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.",
         "operationId": "RecepcionEcf33",
         "requestBody": {
           "content": {
@@ -651,6 +681,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -669,6 +709,7 @@
         "tags": [
           "Ecf"
         ],
+        "description": "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.",
         "operationId": "RecepcionEcf34",
         "requestBody": {
           "content": {
@@ -721,6 +762,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -739,6 +790,7 @@
         "tags": [
           "Ecf"
         ],
+        "description": "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.",
         "operationId": "RecepcionEcf41",
         "requestBody": {
           "content": {
@@ -791,6 +843,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -809,6 +871,7 @@
         "tags": [
           "Ecf"
         ],
+        "description": "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.",
         "operationId": "RecepcionEcf43",
         "requestBody": {
           "content": {
@@ -861,6 +924,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -879,6 +952,7 @@
         "tags": [
           "Ecf"
         ],
+        "description": "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.",
         "operationId": "RecepcionEcf44",
         "requestBody": {
           "content": {
@@ -931,6 +1005,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -949,6 +1033,7 @@
         "tags": [
           "Ecf"
         ],
+        "description": "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.",
         "operationId": "RecepcionEcf45",
         "requestBody": {
           "content": {
@@ -1001,6 +1086,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -1019,6 +1114,7 @@
         "tags": [
           "Ecf"
         ],
+        "description": "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.",
         "operationId": "RecepcionEcf46",
         "requestBody": {
           "content": {
@@ -1071,6 +1167,16 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "content": {
@@ -1089,6 +1195,7 @@
         "tags": [
           "Ecf"
         ],
+        "description": "Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.",
         "operationId": "RecepcionEcf47",
         "requestBody": {
           "content": {
@@ -1133,6 +1240,16 @@
           },
           "403": {
             "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -1720,6 +1837,7 @@
         "tags": [
           "Ecf"
         ],
+        "description": "Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.",
         "operationId": "AnulacionRangos",
         "parameters": [
           {
@@ -2018,6 +2136,13 @@
                 "string"
               ],
               "format": "double"
+            }
+          },
+          {
+            "name": "OcultarNoRecibidas",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
             }
           },
           {
@@ -2334,6 +2459,13 @@
             }
           },
           {
+            "name": "OcultarNoRecibidas",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "Page",
             "in": "query",
             "schema": {
@@ -2629,6 +2761,8 @@
         "tags": [
           "Dgii"
         ],
+        "summary": "[OBSOLETO] Listado completo del Directorio de la DGII",
+        "description": "Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.",
         "operationId": "ConsultaDirectorioListado",
         "parameters": [
           {
@@ -2693,8 +2827,19 @@
                 }
               }
             }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc": {
@@ -2764,6 +2909,16 @@
           },
           "500": {
             "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -2873,6 +3028,16 @@
                 }
               }
             }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -2944,6 +3109,16 @@
           },
           "500": {
             "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -3038,6 +3213,16 @@
           },
           "500": {
             "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -3147,6 +3332,16 @@
                 }
               }
             }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -3249,6 +3444,16 @@
                 }
               }
             }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -3291,7 +3496,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RespuestaConsultaTrackId"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TrackingDetalle"
+                  }
                 }
               }
             }
@@ -3328,6 +3536,16 @@
           },
           "500": {
             "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -3408,6 +3626,16 @@
                 }
               }
             }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -3471,6 +3699,16 @@
           },
           "500": {
             "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -3841,6 +4079,105 @@
           }
         }
       },
+      "CertificationStateResponse": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "One of CertificationStates."
+          },
+          "source": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "One of CertificationStateSources; null while not started."
+          },
+          "step": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Internal step (in progress, error).",
+                "$ref": "#/components/schemas/CertificationStep"
+              }
+            ]
+          },
+          "stepNumber": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "description": "Visible step number, 1 to int CertificationStateResponse.TotalSteps.",
+            "format": "int32"
+          },
+          "totalSteps": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "responsible": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "One of CertificationResponsibles while in progress."
+          },
+          "stalled": {
+            "type": "boolean",
+            "description": "In progress without any activity for int CertificationStateCalculator.StalledAfterDays days."
+          },
+          "lastActivityOn": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "certifiedOn": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "DGII authorisation date, when known (DGII listing or declared by the customer).",
+            "format": "date"
+          },
+          "changedOn": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "When the stored state last changed.",
+            "format": "date-time"
+          },
+          "signatureReviewPending": {
+            "type": "boolean",
+            "description": "A step was signed outside the platform and the signature could not be verified (CERT-04)."
+          }
+        }
+      },
+      "CertificationStep": {
+        "enum": [
+          "Step1",
+          "Step2",
+          "Step3",
+          "Step4",
+          "Step5",
+          "Step6",
+          "Step7",
+          "Step8",
+          "Step12",
+          "Step13",
+          "Completed",
+          null
+        ]
+      },
       "CodificacionTipoImpuestosType": {
         "enum": [
           "001",
@@ -3895,6 +4232,20 @@
           null
         ]
       },
+      "CompanyEnvironmentUrls": {
+        "type": "object",
+        "properties": {
+          "urlRecepcion": {
+            "type": "string"
+          },
+          "urlAprobacionComercial": {
+            "type": "string"
+          },
+          "urlAutenticacion": {
+            "type": "string"
+          }
+        }
+      },
       "CompanyResponse": {
         "type": "object",
         "properties": {
@@ -3928,22 +4279,81 @@
           "receptorId": {
             "type": "string"
           },
-          "urlRecepcion": {
+          "urls": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CompanyUrlsResponse"
+              }
+            ]
+          },
+          "certification": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "CERT-01: the company's certification state.",
+                "$ref": "#/components/schemas/CertificationStateResponse"
+              }
+            ]
+          },
+          "archivedAt": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "When the company was archived; null while it is active.",
+            "format": "date-time"
+          },
+          "archivedBy": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Who archived it and why, the last time it was archived; kept after a restore as history."
+          },
+          "archiveReason": {
             "type": [
               "null",
               "string"
             ]
-          },
-          "urlAprobacionComercial": {
-            "type": [
-              "null",
-              "string"
+          }
+        }
+      },
+      "CompanyUrlsResponse": {
+        "type": "object",
+        "properties": {
+          "test": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CompanyEnvironmentUrls"
+              }
             ]
           },
-          "urlAutenticacion": {
-            "type": [
-              "null",
-              "string"
+          "cert": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CompanyEnvironmentUrls"
+              }
+            ]
+          },
+          "prod": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CompanyEnvironmentUrls"
+              }
             ]
           }
         }
@@ -4025,6 +4435,19 @@
           "Test",
           "Certification",
           "Production"
+        ]
+      },
+      "DgiiSubmissionState": {
+        "enum": [
+          "Prepared",
+          "Sending",
+          "PendingReconciliation",
+          "Accepted",
+          "Rejected",
+          "ValidationFailed",
+          "ReservationBlocked",
+          "NotReceived",
+          null
         ]
       },
       "Directorio": {
@@ -20670,6 +21093,18 @@
               "string"
             ],
             "format": "double"
+          },
+          "reprocessedOn": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "When the reception was run again after it ended without registering the e-CF.",
+            "format": "date-time"
+          },
+          "recuperada": {
+            "type": "boolean",
+            "description": "True when the first reception failed and the e-CF was registered by running it again, so the UI can\nflag it as recovered."
           }
         }
       },
@@ -20912,6 +21347,27 @@
               "$ref": "#/components/schemas/AcecfSummaryDto"
             },
             "description": "ACECFs received from the receptor for this outbound ECF."
+          },
+          "receptorDirectoryStatus": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ReceptorDirectoryStatus"
+              }
+            ]
+          },
+          "dgiiSubmissionState": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Where the DGII transmission of this ECF stands. Null for documents created before durable submission.\n`PendingReconciliation`: DGII's answer is not confirmed yet; do not resend or reuse the eNCF.\n`NotReceived`: DGII confirmed it has no record of the document (Progress is Error, Estatus is null and\nSecuenciaUtilizada is false); the same eNCF may be submitted again as a new request.",
+                "$ref": "#/components/schemas/DgiiSubmissionState"
+              }
+            ]
           },
           "impresionUrl": {
             "type": [
@@ -21969,6 +22425,16 @@
           null
         ]
       },
+      "ReceptorDirectoryStatus": {
+        "enum": [
+          "Unknown",
+          "Available",
+          "NotFound",
+          "Invalid",
+          "DeserializationFailed",
+          null
+        ]
+      },
       "RespuestaAnulacionRango": {
         "type": "object",
         "properties": {
@@ -22118,7 +22584,10 @@
             "description": "Número de secuencia utilizada por el contribuyente en el ENCF.\nNúmero de comprobante fiscal electrónico (e-NCF) consultado."
           },
           "secuenciaUtilizada": {
-            "type": "boolean",
+            "type": [
+              "null",
+              "boolean"
+            ],
             "description": "Indica si el número de secuencia puede ser reutilizado.\n`true` si la secuencia NO puede reutilizarse (rechazado por motivos específicos);\n        `false` si la secuencia SÍ puede reutilizarse."
           },
           "codigo": {
@@ -22226,7 +22695,10 @@
             "example": "E310000000001"
           },
           "secuenciaUtilizada": {
-            "type": "boolean",
+            "type": [
+              "null",
+              "boolean"
+            ],
             "description": "Indica si el número de secuencia puede ser reutilizada en otro e-CF.\nTrue si la secuencia puede reutilizarse, False si no puede reutilizarse.\n\nEste parámetro permite dar a conocer si el número de secuencia que fue recibido\npor Impuestos Internos puede reutilizarse en otro Comprobante Fiscal Electrónico (e-CF)\nen el escenario de que el resultado de la validación haya sido \"Rechazado\" por los siguientes motivos:\n- Certificado y/o firma inválida\n- Estructura del comprobante (XML) no es válida\n- Firmante del comprobante fiscal electrónico no corresponde a un delegado autorizado\n- El e-NCF no está autorizado para el RNC Emisor\n- El e-NCF autorizado se encuentra vencido\n- El RNC Emisor no corresponde a un emisor electrónico\n- El RNC Emisor no existe o no se encuentra activo",
             "example": false
           },
@@ -22426,6 +22898,29 @@
           "validTo": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "TrackingDetalle": {
+        "type": "object",
+        "properties": {
+          "trackId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "estado": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "fechaRecepcion": {
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },

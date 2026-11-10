@@ -220,6 +220,7 @@ public class CompanyApi {
      * @param names  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
+     * @param search  (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -233,7 +234,7 @@ public class CompanyApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getCompaniesCall(@javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> names, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getCompaniesCall(@javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> names, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, @javax.annotation.Nullable String search, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -274,6 +275,10 @@ public class CompanyApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("Limit", limit));
         }
 
+        if (search != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Search", search));
+        }
+
         final String[] localVarAccepts = {
             "application/json",
             "application/problem+json"
@@ -295,8 +300,8 @@ public class CompanyApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getCompaniesValidateBeforeCall(@javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> names, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback _callback) throws ApiException {
-        return getCompaniesCall(rncs, names, page, limit, _callback);
+    private okhttp3.Call getCompaniesValidateBeforeCall(@javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> names, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, @javax.annotation.Nullable String search, final ApiCallback _callback) throws ApiException {
+        return getCompaniesCall(rncs, names, page, limit, search, _callback);
 
     }
 
@@ -307,6 +312,7 @@ public class CompanyApi {
      * @param names  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
+     * @param search  (optional)
      * @return PaginatedApiResultOfCompanyResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -319,8 +325,8 @@ public class CompanyApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public PaginatedApiResultOfCompanyResponse getCompanies(@javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> names, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        ApiResponse<PaginatedApiResultOfCompanyResponse> localVarResp = getCompaniesWithHttpInfo(rncs, names, page, limit);
+    public PaginatedApiResultOfCompanyResponse getCompanies(@javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> names, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, @javax.annotation.Nullable String search) throws ApiException {
+        ApiResponse<PaginatedApiResultOfCompanyResponse> localVarResp = getCompaniesWithHttpInfo(rncs, names, page, limit, search);
         return localVarResp.getData();
     }
 
@@ -331,6 +337,7 @@ public class CompanyApi {
      * @param names  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
+     * @param search  (optional)
      * @return ApiResponse&lt;PaginatedApiResultOfCompanyResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -343,8 +350,8 @@ public class CompanyApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PaginatedApiResultOfCompanyResponse> getCompaniesWithHttpInfo(@javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> names, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit) throws ApiException {
-        okhttp3.Call localVarCall = getCompaniesValidateBeforeCall(rncs, names, page, limit, null);
+    public ApiResponse<PaginatedApiResultOfCompanyResponse> getCompaniesWithHttpInfo(@javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> names, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, @javax.annotation.Nullable String search) throws ApiException {
+        okhttp3.Call localVarCall = getCompaniesValidateBeforeCall(rncs, names, page, limit, search, null);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfCompanyResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -356,6 +363,7 @@ public class CompanyApi {
      * @param names  (optional)
      * @param page  (optional, default to 1)
      * @param limit  (optional, default to 25)
+     * @param search  (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -369,9 +377,9 @@ public class CompanyApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getCompaniesAsync(@javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> names, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, final ApiCallback<PaginatedApiResultOfCompanyResponse> _callback) throws ApiException {
+    public okhttp3.Call getCompaniesAsync(@javax.annotation.Nullable List<String> rncs, @javax.annotation.Nullable List<String> names, @javax.annotation.Nullable GetCompaniesPageParameter page, @javax.annotation.Nullable GetCompaniesLimitParameter limit, @javax.annotation.Nullable String search, final ApiCallback<PaginatedApiResultOfCompanyResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getCompaniesValidateBeforeCall(rncs, names, page, limit, _callback);
+        okhttp3.Call localVarCall = getCompaniesValidateBeforeCall(rncs, names, page, limit, search, _callback);
         Type localVarReturnType = new TypeToken<PaginatedApiResultOfCompanyResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

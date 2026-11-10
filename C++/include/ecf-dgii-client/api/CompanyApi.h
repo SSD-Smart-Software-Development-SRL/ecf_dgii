@@ -71,11 +71,13 @@ public:
     /// <param name="names"> (optional, default to std::vector&lt;std::shared_ptr&lt;utility::string_t&gt;&gt;())</param>
     /// <param name="page"> (optional, default to 0)</param>
     /// <param name="limit"> (optional, default to 0)</param>
+    /// <param name="search"> (optional, default to utility::conversions::to_string_t(&quot;&quot;))</param>
     pplx::task<std::shared_ptr<PaginatedApiResultOfCompanyResponse>> getCompanies(
         boost::optional<std::vector<utility::string_t>> rncs,
         boost::optional<std::vector<utility::string_t>> names,
         boost::optional<GetCompanies_Page_parameter> page,
-        boost::optional<GetCompanies_Limit_parameter> limit
+        boost::optional<GetCompanies_Limit_parameter> limit,
+        boost::optional<utility::string_t> search
     ) const;
     /// <summary>
     /// 

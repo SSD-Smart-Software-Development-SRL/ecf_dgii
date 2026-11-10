@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
 | **acecfId** | [**java.util.UUID**](java.util.UUID.md) |  |  [optional] |
-| **estado** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  [optional] |
+| **estado** | **kotlin.Int** |  |  [optional] |
 | **detalleMotivoRechazo** | **kotlin.String** |  |  [optional] |
 | **fechaHoraAprobacionComercial** | [**java.time.OffsetDateTime**](java.time.OffsetDateTime.md) |  |  [optional] |
 | **fileName** | **kotlin.String** |  |  [optional] |

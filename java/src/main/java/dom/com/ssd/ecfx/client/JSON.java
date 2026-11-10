@@ -96,7 +96,11 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.AnulacionListResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.AnulacionRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.CertificateResponse.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.CertificationStateResponse.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.CertificationStateResponseStepNumber.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.CompanyEnvironmentUrls.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.CompanyResponse.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.CompanyUrlsResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.DetalleAnulacionRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.DetalleAnulacionRequestDto.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.Directorio.CustomTypeAdapterFactory());
@@ -358,6 +362,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.SecuenciaRequestDto.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.SendAcecfRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.Token.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.TrackingDetalle.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.UpsertCompanyRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new dom.com.ssd.ecfx.client.model.VentanaDeMantenimiento.CustomTypeAdapterFactory());
         gson = gsonBuilder.create();

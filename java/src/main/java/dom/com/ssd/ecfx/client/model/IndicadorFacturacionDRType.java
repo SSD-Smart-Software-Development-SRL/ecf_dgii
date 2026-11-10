@@ -35,7 +35,9 @@ public enum IndicadorFacturacionDRType {
   
   ITBIS3_0_PERCENT("ITBIS3_0Percent"),
   
-  EXENTO_E("Exento_E");
+  EXENTO_E("Exento_E"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -58,7 +60,7 @@ public enum IndicadorFacturacionDRType {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<IndicadorFacturacionDRType> {

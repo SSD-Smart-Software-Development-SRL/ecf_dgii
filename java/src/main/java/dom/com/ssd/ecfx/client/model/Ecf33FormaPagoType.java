@@ -43,7 +43,9 @@ public enum Ecf33FormaPagoType {
   
   NOTA_DE_CREDITO("NotaDeCredito"),
   
-  OTRAS_FORMAS_DE_PAGO("OtrasFormasDePago");
+  OTRAS_FORMAS_DE_PAGO("OtrasFormasDePago"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -66,7 +68,7 @@ public enum Ecf33FormaPagoType {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<Ecf33FormaPagoType> {

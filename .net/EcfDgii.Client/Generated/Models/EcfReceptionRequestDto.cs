@@ -66,6 +66,10 @@ namespace EcfDgii.Client.Generated.Models
 #else
         public UntypedNode Progress { get; set; }
 #endif
+        /// <summary>True when the first reception failed and the e-CF was registered by running it again, so the UI canflag it as recovered.</summary>
+        public bool? Recuperada { get; set; }
+        /// <summary>When the reception was run again after it ended without registering the e-CF.</summary>
+        public DateTimeOffset? ReprocessedOn { get; set; }
         /// <summary>The resultInternalFileName property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -127,6 +131,8 @@ namespace EcfDgii.Client.Generated.Models
                 { "messageId", n => { MessageId = n.GetGuidValue(); } },
                 { "montoTotal", n => { MontoTotal = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
                 { "progress", n => { Progress = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
+                { "recuperada", n => { Recuperada = n.GetBoolValue(); } },
+                { "reprocessedOn", n => { ReprocessedOn = n.GetDateTimeOffsetValue(); } },
                 { "resultInternalFileName", n => { ResultInternalFileName = n.GetStringValue(); } },
                 { "rncEmisor", n => { RncEmisor = n.GetStringValue(); } },
                 { "tenantId", n => { TenantId = n.GetGuidValue(); } },
@@ -149,6 +155,8 @@ namespace EcfDgii.Client.Generated.Models
             writer.WriteGuidValue("messageId", MessageId);
             writer.WriteObjectValue<UntypedNode>("montoTotal", MontoTotal);
             writer.WriteObjectValue<UntypedNode>("progress", Progress);
+            writer.WriteBoolValue("recuperada", Recuperada);
+            writer.WriteDateTimeOffsetValue("reprocessedOn", ReprocessedOn);
             writer.WriteStringValue("resultInternalFileName", ResultInternalFileName);
             writer.WriteStringValue("rncEmisor", RncEmisor);
             writer.WriteGuidValue("tenantId", TenantId);

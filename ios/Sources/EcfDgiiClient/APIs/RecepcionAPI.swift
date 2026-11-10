@@ -106,13 +106,14 @@ open class RecepcionAPI {
      - parameter toDate: (query)  (optional)
      - parameter amountFrom: (query)  (optional)
      - parameter amountTo: (query)  (optional)
+     - parameter ocultarNoRecibidas: (query)  (optional)
      - parameter page: (query)  (optional, default to 1)
      - parameter limit: (query)  (optional, default to 25)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedApiResultOfEcfReceptionRequestDto
      */
-    open class func searchEcfReceptionRequests(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfReceptionRequestDto {
-        return try await searchEcfReceptionRequestsWithRequestBuilder(messageIds: messageIds, encfs: encfs, rncs: rncs, rncEmisors: rncEmisors, tiposEcfs: tiposEcfs, progresses: progresses, fromDate: fromDate, toDate: toDate, amountFrom: amountFrom, amountTo: amountTo, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
+    open class func searchEcfReceptionRequests(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, ocultarNoRecibidas: Bool? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfReceptionRequestDto {
+        return try await searchEcfReceptionRequestsWithRequestBuilder(messageIds: messageIds, encfs: encfs, rncs: rncs, rncEmisors: rncEmisors, tiposEcfs: tiposEcfs, progresses: progresses, fromDate: fromDate, toDate: toDate, amountFrom: amountFrom, amountTo: amountTo, ocultarNoRecibidas: ocultarNoRecibidas, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -130,12 +131,13 @@ open class RecepcionAPI {
      - parameter toDate: (query)  (optional)
      - parameter amountFrom: (query)  (optional)
      - parameter amountTo: (query)  (optional)
+     - parameter ocultarNoRecibidas: (query)  (optional)
      - parameter page: (query)  (optional, default to 1)
      - parameter limit: (query)  (optional, default to 25)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> 
      */
-    open class func searchEcfReceptionRequestsWithRequestBuilder(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> {
+    open class func searchEcfReceptionRequestsWithRequestBuilder(messageIds: [UUID]? = nil, encfs: [String]? = nil, rncs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, ocultarNoRecibidas: Bool? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> {
         let localVariablePath = "/recepcion"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -152,6 +154,7 @@ open class RecepcionAPI {
             "ToDate": (wrappedValue: toDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "AmountFrom": (wrappedValue: amountFrom?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "AmountTo": (wrappedValue: amountTo?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "OcultarNoRecibidas": (wrappedValue: ocultarNoRecibidas?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ] as [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]))
@@ -179,13 +182,14 @@ open class RecepcionAPI {
      - parameter toDate: (query)  (optional)
      - parameter amountFrom: (query)  (optional)
      - parameter amountTo: (query)  (optional)
+     - parameter ocultarNoRecibidas: (query)  (optional)
      - parameter page: (query)  (optional, default to 1)
      - parameter limit: (query)  (optional, default to 25)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedApiResultOfEcfReceptionRequestDto
      */
-    open class func searchEcfReceptionRequestsByRnc(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfReceptionRequestDto {
-        return try await searchEcfReceptionRequestsByRncWithRequestBuilder(rnc: rnc, messageIds: messageIds, encfs: encfs, rncEmisors: rncEmisors, tiposEcfs: tiposEcfs, progresses: progresses, fromDate: fromDate, toDate: toDate, amountFrom: amountFrom, amountTo: amountTo, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
+    open class func searchEcfReceptionRequestsByRnc(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, ocultarNoRecibidas: Bool? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedApiResultOfEcfReceptionRequestDto {
+        return try await searchEcfReceptionRequestsByRncWithRequestBuilder(rnc: rnc, messageIds: messageIds, encfs: encfs, rncEmisors: rncEmisors, tiposEcfs: tiposEcfs, progresses: progresses, fromDate: fromDate, toDate: toDate, amountFrom: amountFrom, amountTo: amountTo, ocultarNoRecibidas: ocultarNoRecibidas, page: page, limit: limit, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -203,12 +207,13 @@ open class RecepcionAPI {
      - parameter toDate: (query)  (optional)
      - parameter amountFrom: (query)  (optional)
      - parameter amountTo: (query)  (optional)
+     - parameter ocultarNoRecibidas: (query)  (optional)
      - parameter page: (query)  (optional, default to 1)
      - parameter limit: (query)  (optional, default to 25)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> 
      */
-    open class func searchEcfReceptionRequestsByRncWithRequestBuilder(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> {
+    open class func searchEcfReceptionRequestsByRncWithRequestBuilder(rnc: String, messageIds: [UUID]? = nil, encfs: [String]? = nil, rncEmisors: [String]? = nil, tiposEcfs: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, progresses: [SearchEcfReceptionRequestsTiposEcfsParameterInner]? = nil, fromDate: String? = nil, toDate: String? = nil, amountFrom: Double? = nil, amountTo: Double? = nil, ocultarNoRecibidas: Bool? = nil, page: Int? = nil, limit: Int? = nil, apiConfiguration: EcfDgiiClientAPIConfiguration = EcfDgiiClientAPIConfiguration.shared) -> RequestBuilder<PaginatedApiResultOfEcfReceptionRequestDto> {
         var localVariablePath = "/recepcion/{rnc}"
         let rncPreEscape = "\(APIHelper.mapValueToPathItem(rnc))"
         let rncPostEscape = rncPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -227,6 +232,7 @@ open class RecepcionAPI {
             "ToDate": (wrappedValue: toDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "AmountFrom": (wrappedValue: amountFrom?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "AmountTo": (wrappedValue: amountTo?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "OcultarNoRecibidas": (wrappedValue: ocultarNoRecibidas?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "Limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ] as [String: (wrappedValue: (any Sendable)?, isExplode: Bool)]))

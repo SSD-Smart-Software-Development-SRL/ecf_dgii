@@ -120,6 +120,16 @@ public class EcfReceptionRequestDto {
   @javax.annotation.Nullable
   private EcfReceptionRequestDtoMontoTotal montoTotal;
 
+  public static final String SERIALIZED_NAME_REPROCESSED_ON = "reprocessedOn";
+  @SerializedName(SERIALIZED_NAME_REPROCESSED_ON)
+  @javax.annotation.Nullable
+  private Date reprocessedOn;
+
+  public static final String SERIALIZED_NAME_RECUPERADA = "recuperada";
+  @SerializedName(SERIALIZED_NAME_RECUPERADA)
+  @javax.annotation.Nullable
+  private Boolean recuperada;
+
   public EcfReceptionRequestDto() {
   }
 
@@ -370,6 +380,88 @@ public class EcfReceptionRequestDto {
   }
 
 
+  public EcfReceptionRequestDto reprocessedOn(@javax.annotation.Nullable Date reprocessedOn) {
+    this.reprocessedOn = reprocessedOn;
+    return this;
+  }
+
+  /**
+   * When the reception was run again after it ended without registering the e-CF.
+   * @return reprocessedOn
+   */
+  @javax.annotation.Nullable
+  public Date getReprocessedOn() {
+    return reprocessedOn;
+  }
+
+  public void setReprocessedOn(@javax.annotation.Nullable Date reprocessedOn) {
+    this.reprocessedOn = reprocessedOn;
+  }
+
+
+  public EcfReceptionRequestDto recuperada(@javax.annotation.Nullable Boolean recuperada) {
+    this.recuperada = recuperada;
+    return this;
+  }
+
+  /**
+   * True when the first reception failed and the e-CF was registered by running it again, so the UI can flag it as recovered.
+   * @return recuperada
+   */
+  @javax.annotation.Nullable
+  public Boolean getRecuperada() {
+    return recuperada;
+  }
+
+  public void setRecuperada(@javax.annotation.Nullable Boolean recuperada) {
+    this.recuperada = recuperada;
+  }
+
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   *
+   * @param key name of the property
+   * @param value value of the property
+   * @return the EcfReceptionRequestDto instance itself
+   */
+  public EcfReceptionRequestDto putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   *
+   * @return a map of objects
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   *
+   * @param key name of the property
+   * @return an object
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -392,12 +484,15 @@ public class EcfReceptionRequestDto {
         Objects.equals(this.rncEmisor, ecfReceptionRequestDto.rncEmisor) &&
         Objects.equals(this.tipoEcf, ecfReceptionRequestDto.tipoEcf) &&
         Objects.equals(this.resultInternalFileName, ecfReceptionRequestDto.resultInternalFileName) &&
-        Objects.equals(this.montoTotal, ecfReceptionRequestDto.montoTotal);
+        Objects.equals(this.montoTotal, ecfReceptionRequestDto.montoTotal) &&
+        Objects.equals(this.reprocessedOn, ecfReceptionRequestDto.reprocessedOn) &&
+        Objects.equals(this.recuperada, ecfReceptionRequestDto.recuperada)&&
+        Objects.equals(this.additionalProperties, ecfReceptionRequestDto.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(messageId, tenantId, companyRnc, fileName, progress, createdOn, updatedOn, errorMessage, encf, rncEmisor, tipoEcf, resultInternalFileName, montoTotal);
+    return Objects.hash(messageId, tenantId, companyRnc, fileName, progress, createdOn, updatedOn, errorMessage, encf, rncEmisor, tipoEcf, resultInternalFileName, montoTotal, reprocessedOn, recuperada, additionalProperties);
   }
 
   @Override
@@ -417,6 +512,9 @@ public class EcfReceptionRequestDto {
     sb.append("    tipoEcf: ").append(toIndentedString(tipoEcf)).append("\n");
     sb.append("    resultInternalFileName: ").append(toIndentedString(resultInternalFileName)).append("\n");
     sb.append("    montoTotal: ").append(toIndentedString(montoTotal)).append("\n");
+    sb.append("    reprocessedOn: ").append(toIndentedString(reprocessedOn)).append("\n");
+    sb.append("    recuperada: ").append(toIndentedString(recuperada)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -438,7 +536,7 @@ public class EcfReceptionRequestDto {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("messageId", "tenantId", "companyRnc", "fileName", "progress", "createdOn", "updatedOn", "errorMessage", "encf", "rncEmisor", "tipoEcf", "resultInternalFileName", "montoTotal"));
+    openapiFields = new HashSet<String>(Arrays.asList("messageId", "tenantId", "companyRnc", "fileName", "progress", "createdOn", "updatedOn", "errorMessage", "encf", "rncEmisor", "tipoEcf", "resultInternalFileName", "montoTotal", "reprocessedOn", "recuperada"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(0);
@@ -454,14 +552,6 @@ public class EcfReceptionRequestDto {
       if (jsonElement == null) {
         if (!EcfReceptionRequestDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in EcfReceptionRequestDto is not found in the empty JSON string", EcfReceptionRequestDto.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!EcfReceptionRequestDto.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `EcfReceptionRequestDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -518,6 +608,28 @@ public class EcfReceptionRequestDto {
            @Override
            public void write(JsonWriter out, EcfReceptionRequestDto value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additional properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                   if (jsonElement.isJsonArray()) {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                   } else {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                   }
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -525,7 +637,28 @@ public class EcfReceptionRequestDto {
            public EcfReceptionRequestDto read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
+             JsonObject jsonObj = jsonElement.getAsJsonObject();
+             // store additional fields in the deserialized instance
+             EcfReceptionRequestDto instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else if (entry.getValue().isJsonArray()) {
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), List.class));
+                 } else { // JSON object
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), HashMap.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();

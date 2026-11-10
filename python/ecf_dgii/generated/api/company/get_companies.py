@@ -16,6 +16,7 @@ def _get_kwargs(
     names: list[str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
+    search: str | Unset = UNSET,
 ) -> dict[str, Any]:
 
     params: dict[str, Any] = {}
@@ -45,6 +46,8 @@ def _get_kwargs(
     else:
         json_limit = limit
     params["Limit"] = json_limit
+
+    params["Search"] = search
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -104,6 +107,7 @@ def sync_detailed(
     names: list[str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
+    search: str | Unset = UNSET,
 ) -> Response[PaginatedApiResultOfCompanyResponse | ProblemDetails]:
     """
     Args:
@@ -111,6 +115,7 @@ def sync_detailed(
         names (list[str] | Unset):
         page (int | str | Unset):  Default: 1.
         limit (int | str | Unset):  Default: 25.
+        search (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -125,6 +130,7 @@ def sync_detailed(
         names=names,
         page=page,
         limit=limit,
+        search=search,
     )
 
     response = client.get_httpx_client().request(
@@ -141,6 +147,7 @@ def sync(
     names: list[str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
+    search: str | Unset = UNSET,
 ) -> PaginatedApiResultOfCompanyResponse | ProblemDetails | None:
     """
     Args:
@@ -148,6 +155,7 @@ def sync(
         names (list[str] | Unset):
         page (int | str | Unset):  Default: 1.
         limit (int | str | Unset):  Default: 25.
+        search (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -163,6 +171,7 @@ def sync(
         names=names,
         page=page,
         limit=limit,
+        search=search,
     ).parsed
 
 
@@ -173,6 +182,7 @@ async def asyncio_detailed(
     names: list[str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
+    search: str | Unset = UNSET,
 ) -> Response[PaginatedApiResultOfCompanyResponse | ProblemDetails]:
     """
     Args:
@@ -180,6 +190,7 @@ async def asyncio_detailed(
         names (list[str] | Unset):
         page (int | str | Unset):  Default: 1.
         limit (int | str | Unset):  Default: 25.
+        search (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -194,6 +205,7 @@ async def asyncio_detailed(
         names=names,
         page=page,
         limit=limit,
+        search=search,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -208,6 +220,7 @@ async def asyncio(
     names: list[str] | Unset = UNSET,
     page: int | str | Unset = 1,
     limit: int | str | Unset = 25,
+    search: str | Unset = UNSET,
 ) -> PaginatedApiResultOfCompanyResponse | ProblemDetails | None:
     """
     Args:
@@ -215,6 +228,7 @@ async def asyncio(
         names (list[str] | Unset):
         page (int | str | Unset):  Default: 1.
         limit (int | str | Unset):  Default: 25.
+        search (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -231,5 +245,6 @@ async def asyncio(
             names=names,
             page=page,
             limit=limit,
+            search=search,
         )
     ).parsed

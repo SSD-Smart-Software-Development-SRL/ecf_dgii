@@ -19,6 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import dom.com.ssd.ecfx.client.model.CertificationStateResponse;
+import dom.com.ssd.ecfx.client.model.CompanyUrlsResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
@@ -97,20 +99,30 @@ public class CompanyResponse {
   @javax.annotation.Nullable
   private String receptorId;
 
-  public static final String SERIALIZED_NAME_URL_RECEPCION = "urlRecepcion";
-  @SerializedName(SERIALIZED_NAME_URL_RECEPCION)
+  public static final String SERIALIZED_NAME_URLS = "urls";
+  @SerializedName(SERIALIZED_NAME_URLS)
   @javax.annotation.Nullable
-  private String urlRecepcion;
+  private CompanyUrlsResponse urls;
 
-  public static final String SERIALIZED_NAME_URL_APROBACION_COMERCIAL = "urlAprobacionComercial";
-  @SerializedName(SERIALIZED_NAME_URL_APROBACION_COMERCIAL)
+  public static final String SERIALIZED_NAME_CERTIFICATION = "certification";
+  @SerializedName(SERIALIZED_NAME_CERTIFICATION)
   @javax.annotation.Nullable
-  private String urlAprobacionComercial;
+  private CertificationStateResponse certification;
 
-  public static final String SERIALIZED_NAME_URL_AUTENTICACION = "urlAutenticacion";
-  @SerializedName(SERIALIZED_NAME_URL_AUTENTICACION)
+  public static final String SERIALIZED_NAME_ARCHIVED_AT = "archivedAt";
+  @SerializedName(SERIALIZED_NAME_ARCHIVED_AT)
   @javax.annotation.Nullable
-  private String urlAutenticacion;
+  private Date archivedAt;
+
+  public static final String SERIALIZED_NAME_ARCHIVED_BY = "archivedBy";
+  @SerializedName(SERIALIZED_NAME_ARCHIVED_BY)
+  @javax.annotation.Nullable
+  private String archivedBy;
+
+  public static final String SERIALIZED_NAME_ARCHIVE_REASON = "archiveReason";
+  @SerializedName(SERIALIZED_NAME_ARCHIVE_REASON)
+  @javax.annotation.Nullable
+  private String archiveReason;
 
   public CompanyResponse() {
   }
@@ -286,62 +298,144 @@ public class CompanyResponse {
   }
 
 
-  public CompanyResponse urlRecepcion(@javax.annotation.Nullable String urlRecepcion) {
-    this.urlRecepcion = urlRecepcion;
+  public CompanyResponse urls(@javax.annotation.Nullable CompanyUrlsResponse urls) {
+    this.urls = urls;
     return this;
   }
 
   /**
-   * Get urlRecepcion
-   * @return urlRecepcion
+   * Get urls
+   * @return urls
    */
   @javax.annotation.Nullable
-  public String getUrlRecepcion() {
-    return urlRecepcion;
+  public CompanyUrlsResponse getUrls() {
+    return urls;
   }
 
-  public void setUrlRecepcion(@javax.annotation.Nullable String urlRecepcion) {
-    this.urlRecepcion = urlRecepcion;
+  public void setUrls(@javax.annotation.Nullable CompanyUrlsResponse urls) {
+    this.urls = urls;
   }
 
 
-  public CompanyResponse urlAprobacionComercial(@javax.annotation.Nullable String urlAprobacionComercial) {
-    this.urlAprobacionComercial = urlAprobacionComercial;
+  public CompanyResponse certification(@javax.annotation.Nullable CertificationStateResponse certification) {
+    this.certification = certification;
     return this;
   }
 
   /**
-   * Get urlAprobacionComercial
-   * @return urlAprobacionComercial
+   * CERT-01: the company&#39;s certification state.
+   * @return certification
    */
   @javax.annotation.Nullable
-  public String getUrlAprobacionComercial() {
-    return urlAprobacionComercial;
+  public CertificationStateResponse getCertification() {
+    return certification;
   }
 
-  public void setUrlAprobacionComercial(@javax.annotation.Nullable String urlAprobacionComercial) {
-    this.urlAprobacionComercial = urlAprobacionComercial;
+  public void setCertification(@javax.annotation.Nullable CertificationStateResponse certification) {
+    this.certification = certification;
   }
 
 
-  public CompanyResponse urlAutenticacion(@javax.annotation.Nullable String urlAutenticacion) {
-    this.urlAutenticacion = urlAutenticacion;
+  public CompanyResponse archivedAt(@javax.annotation.Nullable Date archivedAt) {
+    this.archivedAt = archivedAt;
     return this;
   }
 
   /**
-   * Get urlAutenticacion
-   * @return urlAutenticacion
+   * When the company was archived; null while it is active.
+   * @return archivedAt
    */
   @javax.annotation.Nullable
-  public String getUrlAutenticacion() {
-    return urlAutenticacion;
+  public Date getArchivedAt() {
+    return archivedAt;
   }
 
-  public void setUrlAutenticacion(@javax.annotation.Nullable String urlAutenticacion) {
-    this.urlAutenticacion = urlAutenticacion;
+  public void setArchivedAt(@javax.annotation.Nullable Date archivedAt) {
+    this.archivedAt = archivedAt;
   }
 
+
+  public CompanyResponse archivedBy(@javax.annotation.Nullable String archivedBy) {
+    this.archivedBy = archivedBy;
+    return this;
+  }
+
+  /**
+   * Who archived it and why, the last time it was archived; kept after a restore as history.
+   * @return archivedBy
+   */
+  @javax.annotation.Nullable
+  public String getArchivedBy() {
+    return archivedBy;
+  }
+
+  public void setArchivedBy(@javax.annotation.Nullable String archivedBy) {
+    this.archivedBy = archivedBy;
+  }
+
+
+  public CompanyResponse archiveReason(@javax.annotation.Nullable String archiveReason) {
+    this.archiveReason = archiveReason;
+    return this;
+  }
+
+  /**
+   * Get archiveReason
+   * @return archiveReason
+   */
+  @javax.annotation.Nullable
+  public String getArchiveReason() {
+    return archiveReason;
+  }
+
+  public void setArchiveReason(@javax.annotation.Nullable String archiveReason) {
+    this.archiveReason = archiveReason;
+  }
+
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   *
+   * @param key name of the property
+   * @param value value of the property
+   * @return the CompanyResponse instance itself
+   */
+  public CompanyResponse putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   *
+   * @return a map of objects
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   *
+   * @param key name of the property
+   * @return an object
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
 
 
   @Override
@@ -362,14 +456,17 @@ public class CompanyResponse {
         Objects.equals(this.updatedBy, companyResponse.updatedBy) &&
         Objects.equals(this.tenantId, companyResponse.tenantId) &&
         Objects.equals(this.receptorId, companyResponse.receptorId) &&
-        Objects.equals(this.urlRecepcion, companyResponse.urlRecepcion) &&
-        Objects.equals(this.urlAprobacionComercial, companyResponse.urlAprobacionComercial) &&
-        Objects.equals(this.urlAutenticacion, companyResponse.urlAutenticacion);
+        Objects.equals(this.urls, companyResponse.urls) &&
+        Objects.equals(this.certification, companyResponse.certification) &&
+        Objects.equals(this.archivedAt, companyResponse.archivedAt) &&
+        Objects.equals(this.archivedBy, companyResponse.archivedBy) &&
+        Objects.equals(this.archiveReason, companyResponse.archiveReason)&&
+        Objects.equals(this.additionalProperties, companyResponse.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(rnc, legalName, name, createdOn, updatedOn, createdBy, updatedBy, tenantId, receptorId, urlRecepcion, urlAprobacionComercial, urlAutenticacion);
+    return Objects.hash(rnc, legalName, name, createdOn, updatedOn, createdBy, updatedBy, tenantId, receptorId, urls, certification, archivedAt, archivedBy, archiveReason, additionalProperties);
   }
 
   @Override
@@ -385,9 +482,12 @@ public class CompanyResponse {
     sb.append("    updatedBy: ").append(toIndentedString(updatedBy)).append("\n");
     sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    receptorId: ").append(toIndentedString(receptorId)).append("\n");
-    sb.append("    urlRecepcion: ").append(toIndentedString(urlRecepcion)).append("\n");
-    sb.append("    urlAprobacionComercial: ").append(toIndentedString(urlAprobacionComercial)).append("\n");
-    sb.append("    urlAutenticacion: ").append(toIndentedString(urlAutenticacion)).append("\n");
+    sb.append("    urls: ").append(toIndentedString(urls)).append("\n");
+    sb.append("    certification: ").append(toIndentedString(certification)).append("\n");
+    sb.append("    archivedAt: ").append(toIndentedString(archivedAt)).append("\n");
+    sb.append("    archivedBy: ").append(toIndentedString(archivedBy)).append("\n");
+    sb.append("    archiveReason: ").append(toIndentedString(archiveReason)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -409,7 +509,7 @@ public class CompanyResponse {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("rnc", "legalName", "name", "createdOn", "updatedOn", "createdBy", "updatedBy", "tenantId", "receptorId", "urlRecepcion", "urlAprobacionComercial", "urlAutenticacion"));
+    openapiFields = new HashSet<String>(Arrays.asList("rnc", "legalName", "name", "createdOn", "updatedOn", "createdBy", "updatedBy", "tenantId", "receptorId", "urls", "certification", "archivedAt", "archivedBy", "archiveReason"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(0);
@@ -425,14 +525,6 @@ public class CompanyResponse {
       if (jsonElement == null) {
         if (!CompanyResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in CompanyResponse is not found in the empty JSON string", CompanyResponse.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!CompanyResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CompanyResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -457,14 +549,19 @@ public class CompanyResponse {
       if ((jsonObj.get("receptorId") != null && !jsonObj.get("receptorId").isJsonNull()) && !jsonObj.get("receptorId").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `receptorId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("receptorId").toString()));
       }
-      if ((jsonObj.get("urlRecepcion") != null && !jsonObj.get("urlRecepcion").isJsonNull()) && !jsonObj.get("urlRecepcion").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `urlRecepcion` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlRecepcion").toString()));
+      // validate the optional field `urls`
+      if (jsonObj.get("urls") != null && !jsonObj.get("urls").isJsonNull()) {
+        CompanyUrlsResponse.validateJsonElement(jsonObj.get("urls"));
       }
-      if ((jsonObj.get("urlAprobacionComercial") != null && !jsonObj.get("urlAprobacionComercial").isJsonNull()) && !jsonObj.get("urlAprobacionComercial").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `urlAprobacionComercial` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlAprobacionComercial").toString()));
+      // validate the optional field `certification`
+      if (jsonObj.get("certification") != null && !jsonObj.get("certification").isJsonNull()) {
+        CertificationStateResponse.validateJsonElement(jsonObj.get("certification"));
       }
-      if ((jsonObj.get("urlAutenticacion") != null && !jsonObj.get("urlAutenticacion").isJsonNull()) && !jsonObj.get("urlAutenticacion").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `urlAutenticacion` to be a primitive type in the JSON string but got `%s`", jsonObj.get("urlAutenticacion").toString()));
+      if ((jsonObj.get("archivedBy") != null && !jsonObj.get("archivedBy").isJsonNull()) && !jsonObj.get("archivedBy").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `archivedBy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("archivedBy").toString()));
+      }
+      if ((jsonObj.get("archiveReason") != null && !jsonObj.get("archiveReason").isJsonNull()) && !jsonObj.get("archiveReason").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `archiveReason` to be a primitive type in the JSON string but got `%s`", jsonObj.get("archiveReason").toString()));
       }
   }
 
@@ -483,6 +580,28 @@ public class CompanyResponse {
            @Override
            public void write(JsonWriter out, CompanyResponse value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additional properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                   if (jsonElement.isJsonArray()) {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                   } else {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                   }
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -490,7 +609,28 @@ public class CompanyResponse {
            public CompanyResponse read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
+             JsonObject jsonObj = jsonElement.getAsJsonObject();
+             // store additional fields in the deserialized instance
+             CompanyResponse instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else if (entry.getValue().isJsonArray()) {
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), List.class));
+                 } else { // JSON object
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), HashMap.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();

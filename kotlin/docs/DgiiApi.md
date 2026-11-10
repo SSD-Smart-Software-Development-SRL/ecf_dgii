@@ -4,7 +4,7 @@ All URIs are relative to *https://api.test.ecfx.ssd.com.do*
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**consultaDirectorioListado**](DgiiApi.md#consultaDirectorioListado) | **GET** /dgii/{rnc}/consultadirectorio/listado |  |
+| [**consultaDirectorioListado**](DgiiApi.md#consultaDirectorioListado) | **GET** /dgii/{rnc}/consultadirectorio/listado | [OBSOLETO] Listado completo del Directorio de la DGII |
 | [**consultaDirectorioObtenerDirectorioPorRnc**](DgiiApi.md#consultaDirectorioObtenerDirectorioPorRnc) | **GET** /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc |  |
 | [**consultaEstado**](DgiiApi.md#consultaEstado) | **GET** /dgii/{rnc}/consultaestado/estado |  |
 | [**consultaRFCE**](DgiiApi.md#consultaRFCE) | **GET** /dgii/{rnc}/consultarfce/consulta |  |
@@ -20,7 +20,9 @@ All URIs are relative to *https://api.test.ecfx.ssd.com.do*
 # **consultaDirectorioListado**
 > kotlin.collections.List&lt;Directorio&gt; consultaDirectorioListado(rnc)
 
+[OBSOLETO] Listado completo del Directorio de la DGII
 
+Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
 
 ### Example
 ```kotlin
@@ -374,7 +376,7 @@ Configure Bearer:
 
 <a id="consultaTrackId"></a>
 # **consultaTrackId**
-> RespuestaConsultaTrackId consultaTrackId(rnc, rncEmisor, encf)
+> kotlin.collections.List&lt;TrackingDetalle&gt; consultaTrackId(rnc, rncEmisor, encf)
 
 
 
@@ -389,7 +391,7 @@ val rnc : kotlin.String = rnc_example // kotlin.String |
 val rncEmisor : kotlin.String = rncEmisor_example // kotlin.String | 
 val encf : kotlin.String = encf_example // kotlin.String | 
 try {
-    val result : RespuestaConsultaTrackId = apiInstance.consultaTrackId(rnc, rncEmisor, encf)
+    val result : kotlin.collections.List<TrackingDetalle> = apiInstance.consultaTrackId(rnc, rncEmisor, encf)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling DgiiApi#consultaTrackId")
@@ -409,7 +411,7 @@ try {
 
 ### Return type
 
-[**RespuestaConsultaTrackId**](RespuestaConsultaTrackId.md)
+[**kotlin.collections.List&lt;TrackingDetalle&gt;**](TrackingDetalle.md)
 
 ### Authorization
 

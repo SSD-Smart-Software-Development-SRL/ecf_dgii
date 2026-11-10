@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**nextPageUri** | **URI** |  |  |
+|**nextPageUri** | **URI** |  |  [optional] |
 |**values** | [**List&lt;EcfReceptionRequestDto&gt;**](EcfReceptionRequestDto.md) |  |  [optional] |
 |**total** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  [optional] |
 |**page** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  [optional] |

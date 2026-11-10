@@ -9,7 +9,6 @@ import dom.com.ssd.ecfx.sdk.models.EcfProgress
 import dom.com.ssd.ecfx.sdk.models.EcfResponse
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfCompanyResponse
 import dom.com.ssd.ecfx.sdk.models.PaginatedApiResultOfEcfResponse
-import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -107,6 +106,10 @@ internal object DefaultTokenCache {
  */
 class EcfFrontendClient(private val config: EcfFrontendClientConfig) {
 
+    init {
+        EcfJsonDefaults.install()
+    }
+
     private val resolvedBaseUrl: String = config.baseUrl ?: when (config.environment) {
         "test" -> Environment.TEST.url
         "cert" -> Environment.CERTIFICATION.url
@@ -163,8 +166,8 @@ class EcfFrontendClient(private val config: EcfFrontendClientConfig) {
         includeEcfContent: Boolean? = false,
         fromFechaEmision: OffsetDateTime? = null,
         toFechaEmision: OffsetDateTime? = null,
-        amountFrom: SearchEcfsAmountFromParameter? = null,
-        amountTo: SearchEcfsAmountFromParameter? = null,
+        amountFrom: kotlin.Double? = null,
+        amountTo: kotlin.Double? = null,
         progresses: List<EcfProgress>? = null,
         dgiiEstados: List<EcfEstado>? = null,
         page: Int? = null,
@@ -199,8 +202,8 @@ class EcfFrontendClient(private val config: EcfFrontendClientConfig) {
         includeEcfContent: Boolean? = false,
         fromFechaEmision: OffsetDateTime? = null,
         toFechaEmision: OffsetDateTime? = null,
-        amountFrom: SearchEcfsAmountFromParameter? = null,
-        amountTo: SearchEcfsAmountFromParameter? = null,
+        amountFrom: kotlin.Double? = null,
+        amountTo: kotlin.Double? = null,
         progresses: List<EcfProgress>? = null,
         dgiiEstados: List<EcfEstado>? = null,
         page: Int? = null,
@@ -236,6 +239,7 @@ class EcfFrontendClient(private val config: EcfFrontendClientConfig) {
      * @param names Filter by company names.
      * @param page Page number for pagination.
      * @param limit Number of results per page.
+     * @param search Free-text search by RNC or name.
      * @return A paginated result of [CompanyResponse] objects.
      */
     fun getCompanies(
@@ -243,8 +247,9 @@ class EcfFrontendClient(private val config: EcfFrontendClientConfig) {
         names: List<String>? = null,
         page: Int? = null,
         limit: Int? = null,
+        search: String? = null,
     ): PaginatedApiResultOfCompanyResponse = runBlocking {
-        companyApi.getCompanies(rncs, names, page, limit)
+        companyApi.getCompanies(rncs, names, page, limit, search)
     }
 
     /**

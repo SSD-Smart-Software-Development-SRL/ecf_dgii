@@ -35,6 +35,7 @@ import dom.com.ssd.ecfx.client.model.RespuestaConsultaTimbre;
 import dom.com.ssd.ecfx.client.model.RespuestaConsultaTrackId;
 import dom.com.ssd.ecfx.client.model.RespuestaEstatusServicio;
 import dom.com.ssd.ecfx.client.model.RespuestaVentanaDeMantenimiento;
+import dom.com.ssd.ecfx.client.model.TrackingDetalle;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -94,8 +95,11 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call consultaDirectorioListadoCall(@javax.annotation.Nonnull String rnc, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -142,6 +146,7 @@ public class DgiiApi {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call consultaDirectorioListadoValidateBeforeCall(@javax.annotation.Nonnull String rnc, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'rnc' is set
@@ -154,8 +159,8 @@ public class DgiiApi {
     }
 
     /**
-     * 
-     * 
+     * [OBSOLETO] Listado completo del Directorio de la DGII
+     * Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
      * @param rnc  (required)
      * @return List&lt;Directorio&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -168,16 +173,19 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public List<Directorio> consultaDirectorioListado(@javax.annotation.Nonnull String rnc) throws ApiException {
         ApiResponse<List<Directorio>> localVarResp = consultaDirectorioListadoWithHttpInfo(rnc);
         return localVarResp.getData();
     }
 
     /**
-     * 
-     * 
+     * [OBSOLETO] Listado completo del Directorio de la DGII
+     * Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
      * @param rnc  (required)
      * @return ApiResponse&lt;List&lt;Directorio&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -190,8 +198,11 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ApiResponse<List<Directorio>> consultaDirectorioListadoWithHttpInfo(@javax.annotation.Nonnull String rnc) throws ApiException {
         okhttp3.Call localVarCall = consultaDirectorioListadoValidateBeforeCall(rnc, null);
         Type localVarReturnType = new TypeToken<List<Directorio>>(){}.getType();
@@ -199,8 +210,8 @@ public class DgiiApi {
     }
 
     /**
-     *  (asynchronously)
-     * 
+     * [OBSOLETO] Listado completo del Directorio de la DGII (asynchronously)
+     * Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
      * @param rnc  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -214,8 +225,11 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public okhttp3.Call consultaDirectorioListadoAsync(@javax.annotation.Nonnull String rnc, final ApiCallback<List<Directorio>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = consultaDirectorioListadoValidateBeforeCall(rnc, _callback);
@@ -239,6 +253,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaDirectorioObtenerDirectorioPorRncCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String RNC, final ApiCallback _callback) throws ApiException {
@@ -323,6 +338,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public Directorio consultaDirectorioObtenerDirectorioPorRnc(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String RNC) throws ApiException {
@@ -346,6 +362,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<Directorio> consultaDirectorioObtenerDirectorioPorRncWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String RNC) throws ApiException {
@@ -371,6 +388,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaDirectorioObtenerDirectorioPorRncAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String RNC, final ApiCallback<Directorio> _callback) throws ApiException {
@@ -399,6 +417,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaEstadoCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncEmisor, @javax.annotation.Nonnull String ncfElectronico, @javax.annotation.Nonnull String rncComprador, @javax.annotation.Nonnull String codigoSeguridad, final ApiCallback _callback) throws ApiException {
@@ -513,6 +532,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public RespuestaConsultaEstado consultaEstado(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncEmisor, @javax.annotation.Nonnull String ncfElectronico, @javax.annotation.Nonnull String rncComprador, @javax.annotation.Nonnull String codigoSeguridad) throws ApiException {
@@ -539,6 +559,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<RespuestaConsultaEstado> consultaEstadoWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncEmisor, @javax.annotation.Nonnull String ncfElectronico, @javax.annotation.Nonnull String rncComprador, @javax.annotation.Nonnull String codigoSeguridad) throws ApiException {
@@ -567,6 +588,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaEstadoAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncEmisor, @javax.annotation.Nonnull String ncfElectronico, @javax.annotation.Nonnull String rncComprador, @javax.annotation.Nonnull String codigoSeguridad, final ApiCallback<RespuestaConsultaEstado> _callback) throws ApiException {
@@ -594,6 +616,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaRFCECall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rnCEmisor, @javax.annotation.Nonnull String ENCF, @javax.annotation.Nonnull String codSeguridadECF, final ApiCallback _callback) throws ApiException {
@@ -698,6 +721,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public RespuestaConsultaRFCE consultaRFCE(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rnCEmisor, @javax.annotation.Nonnull String ENCF, @javax.annotation.Nonnull String codSeguridadECF) throws ApiException {
@@ -723,6 +747,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<RespuestaConsultaRFCE> consultaRFCEWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rnCEmisor, @javax.annotation.Nonnull String ENCF, @javax.annotation.Nonnull String codSeguridadECF) throws ApiException {
@@ -750,6 +775,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaRFCEAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rnCEmisor, @javax.annotation.Nonnull String ENCF, @javax.annotation.Nonnull String codSeguridadECF, final ApiCallback<RespuestaConsultaRFCE> _callback) throws ApiException {
@@ -775,6 +801,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaResultadoCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String trackId, final ApiCallback _callback) throws ApiException {
@@ -859,6 +886,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public RespuestaConsultaTrackId consultaResultado(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String trackId) throws ApiException {
@@ -882,6 +910,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<RespuestaConsultaTrackId> consultaResultadoWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String trackId) throws ApiException {
@@ -907,6 +936,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaResultadoAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String trackId, final ApiCallback<RespuestaConsultaTrackId> _callback) throws ApiException {
@@ -935,6 +965,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaTimbreCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncemisor, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull String montototal, @javax.annotation.Nonnull String codigoseguridad, final ApiCallback _callback) throws ApiException {
@@ -1049,6 +1080,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public RespuestaConsultaTimbre consultaTimbre(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncemisor, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull String montototal, @javax.annotation.Nonnull String codigoseguridad) throws ApiException {
@@ -1075,6 +1107,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<RespuestaConsultaTimbre> consultaTimbreWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncemisor, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull String montototal, @javax.annotation.Nonnull String codigoseguridad) throws ApiException {
@@ -1103,6 +1136,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaTimbreAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncemisor, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull String montototal, @javax.annotation.Nonnull String codigoseguridad, final ApiCallback<RespuestaConsultaTimbre> _callback) throws ApiException {
@@ -1131,6 +1165,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaTimbreFCCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncemisor, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull String montototal, @javax.annotation.Nonnull String codigoseguridad, final ApiCallback _callback) throws ApiException {
@@ -1245,6 +1280,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public RespuestaConsultaTimbre consultaTimbreFC(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncemisor, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull String montototal, @javax.annotation.Nonnull String codigoseguridad) throws ApiException {
@@ -1271,6 +1307,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<RespuestaConsultaTimbre> consultaTimbreFCWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncemisor, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull String montototal, @javax.annotation.Nonnull String codigoseguridad) throws ApiException {
@@ -1299,6 +1336,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaTimbreFCAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncemisor, @javax.annotation.Nonnull String encf, @javax.annotation.Nonnull String montototal, @javax.annotation.Nonnull String codigoseguridad, final ApiCallback<RespuestaConsultaTimbre> _callback) throws ApiException {
@@ -1325,6 +1363,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call consultaTrackIdCall(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncEmisor, @javax.annotation.Nonnull String encf, final ApiCallback _callback) throws ApiException {
@@ -1408,7 +1447,7 @@ public class DgiiApi {
      * @param rnc  (required)
      * @param rncEmisor  (required)
      * @param encf  (required)
-     * @return RespuestaConsultaTrackId
+     * @return List&lt;TrackingDetalle&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -1419,10 +1458,11 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
-    public RespuestaConsultaTrackId consultaTrackId(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncEmisor, @javax.annotation.Nonnull String encf) throws ApiException {
-        ApiResponse<RespuestaConsultaTrackId> localVarResp = consultaTrackIdWithHttpInfo(rnc, rncEmisor, encf);
+    public List<TrackingDetalle> consultaTrackId(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncEmisor, @javax.annotation.Nonnull String encf) throws ApiException {
+        ApiResponse<List<TrackingDetalle>> localVarResp = consultaTrackIdWithHttpInfo(rnc, rncEmisor, encf);
         return localVarResp.getData();
     }
 
@@ -1432,7 +1472,7 @@ public class DgiiApi {
      * @param rnc  (required)
      * @param rncEmisor  (required)
      * @param encf  (required)
-     * @return ApiResponse&lt;RespuestaConsultaTrackId&gt;
+     * @return ApiResponse&lt;List&lt;TrackingDetalle&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -1443,11 +1483,12 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<RespuestaConsultaTrackId> consultaTrackIdWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncEmisor, @javax.annotation.Nonnull String encf) throws ApiException {
+    public ApiResponse<List<TrackingDetalle>> consultaTrackIdWithHttpInfo(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncEmisor, @javax.annotation.Nonnull String encf) throws ApiException {
         okhttp3.Call localVarCall = consultaTrackIdValidateBeforeCall(rnc, rncEmisor, encf, null);
-        Type localVarReturnType = new TypeToken<RespuestaConsultaTrackId>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<TrackingDetalle>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -1469,12 +1510,13 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call consultaTrackIdAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncEmisor, @javax.annotation.Nonnull String encf, final ApiCallback<RespuestaConsultaTrackId> _callback) throws ApiException {
+    public okhttp3.Call consultaTrackIdAsync(@javax.annotation.Nonnull String rnc, @javax.annotation.Nonnull String rncEmisor, @javax.annotation.Nonnull String encf, final ApiCallback<List<TrackingDetalle>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = consultaTrackIdValidateBeforeCall(rnc, rncEmisor, encf, _callback);
-        Type localVarReturnType = new TypeToken<RespuestaConsultaTrackId>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<TrackingDetalle>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -1493,6 +1535,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call estatusServiciosObtenerEstatusCall(@javax.annotation.Nonnull String rnc, final ApiCallback _callback) throws ApiException {
@@ -1567,6 +1610,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public List<RespuestaEstatusServicio> estatusServiciosObtenerEstatus(@javax.annotation.Nonnull String rnc) throws ApiException {
@@ -1589,6 +1633,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<List<RespuestaEstatusServicio>> estatusServiciosObtenerEstatusWithHttpInfo(@javax.annotation.Nonnull String rnc) throws ApiException {
@@ -1613,6 +1658,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call estatusServiciosObtenerEstatusAsync(@javax.annotation.Nonnull String rnc, final ApiCallback<List<RespuestaEstatusServicio>> _callback) throws ApiException {
@@ -1637,6 +1683,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call estatusServiciosObtenerVentanasMantenimientoCall(@javax.annotation.Nonnull String rnc, final ApiCallback _callback) throws ApiException {
@@ -1711,6 +1758,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public RespuestaVentanaDeMantenimiento estatusServiciosObtenerVentanasMantenimiento(@javax.annotation.Nonnull String rnc) throws ApiException {
@@ -1733,6 +1781,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<RespuestaVentanaDeMantenimiento> estatusServiciosObtenerVentanasMantenimientoWithHttpInfo(@javax.annotation.Nonnull String rnc) throws ApiException {
@@ -1757,6 +1806,7 @@ public class DgiiApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 502 </td><td> Bad Gateway </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call estatusServiciosObtenerVentanasMantenimientoAsync(@javax.annotation.Nonnull String rnc, final ApiCallback<RespuestaVentanaDeMantenimiento> _callback) throws ApiException {

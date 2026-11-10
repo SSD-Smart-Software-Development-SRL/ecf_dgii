@@ -6,7 +6,7 @@ import os
 
 class EcfDgiiClientConan(ConanFile):
     name = "ecf-dgii-client"
-    version = "0.1.0"
+    version = "0.2.0"
     license = "MIT"
     author = "SSD Smart Software Development SRL"
     url = "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii"

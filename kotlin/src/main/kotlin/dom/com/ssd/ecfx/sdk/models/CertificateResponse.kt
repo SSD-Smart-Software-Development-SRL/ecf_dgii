@@ -29,9 +29,9 @@ import kotlinx.serialization.Contextual
  * @param notBeforeUtc 
  * @param notAfterUtc 
  * @param serialNumber 
- * @param rnc 
  * @param createdOn 
  * @param createdBy 
+ * @param rnc 
  */
 @Serializable
 
@@ -55,14 +55,14 @@ data class CertificateResponse (
     @SerialName(value = "serialNumber")
     val serialNumber: kotlin.String,
 
-    @SerialName(value = "rnc")
-    val rnc: kotlin.String?,
-
     @Contextual @SerialName(value = "createdOn")
     val createdOn: java.time.OffsetDateTime,
 
     @SerialName(value = "createdBy")
-    val createdBy: kotlin.String
+    val createdBy: kotlin.String,
+
+    @SerialName(value = "rnc")
+    val rnc: kotlin.String? = null
 
 ) {
 

@@ -29,7 +29,9 @@ import com.google.gson.stream.JsonWriter;
 @JsonAdapter(IndicadorServicioTodoIncluidoType.Adapter.class)
 public enum IndicadorServicioTodoIncluidoType {
   
-  INDICADOR_SERVICIO_TODO_INCLUIDO("IndicadorServicioTodoIncluido");
+  INDICADOR_SERVICIO_TODO_INCLUIDO("IndicadorServicioTodoIncluido"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -52,7 +54,7 @@ public enum IndicadorServicioTodoIncluidoType {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<IndicadorServicioTodoIncluidoType> {

@@ -33,6 +33,9 @@ namespace EcfDgii.Client.Generated.Ecf.Anularrango.Item
         public WithRncItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecf/anularrango/{rnc}", rawUrl)
         {
         }
+        /// <summary>
+        /// Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.
+        /// </summary>
         /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.RespuestaAnulacionRango"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -61,6 +64,9 @@ namespace EcfDgii.Client.Generated.Ecf.Anularrango.Item
             };
             return await RequestAdapter.SendAsync<global::EcfDgii.Client.Generated.Models.RespuestaAnulacionRango>(requestInfo, global::EcfDgii.Client.Generated.Models.RespuestaAnulacionRango.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
+        /// <summary>
+        /// Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.
+        /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

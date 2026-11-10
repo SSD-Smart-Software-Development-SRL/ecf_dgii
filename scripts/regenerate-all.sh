@@ -14,7 +14,9 @@
 # Environment overrides:
 #   SPEC_PATH            absolute path to ECF_DGII.EcfApi v1.json (default: sibling repo)
 #   RECEPTOR_SPEC_PATH   absolute path to ECF_DGII.ReceptorApi v1.json (default: sibling repo)
-#   OPENAPI_GEN_VERSION  openapi-generator JAR version (default: 7.14.0)
+#   OPENAPI_GEN_VERSION  openapi-generator JAR version for java (pinned in java/openapitools.json: 7.14.0)
+#   KOTLIN_GEN_VERSION / IOS_GEN_VERSION / CPP_GEN_VERSION
+#                        generator versions for kotlin/ios/cpp (default: 7.20.0 / 7.20.0 / 7.14.0)
 #
 # Exit code: 0 if all attempted SDKs passed; 1 if any failed (skipped does not count).
 #
@@ -23,9 +25,12 @@ set -o pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
-SPEC_PATH="${SPEC_PATH:-$HOME/Developer/puntoos/ecf_dgii/src/Apis/ECF_DGII.EcfApi/wwwroot/openapi/v1.json}"
-RECEPTOR_SPEC_PATH="${RECEPTOR_SPEC_PATH:-$HOME/Developer/puntoos/ecf_dgii/src/Apis/ECF_DGII.ReceptorApi/wwwroot/openapi/v1.json}"
+SPEC_PATH="${SPEC_PATH:-$HOME/Developer/ssd/saas_ecf_dgii/src/Apis/ECF_DGII.EcfApi/wwwroot/openapi/v1.json}"
+RECEPTOR_SPEC_PATH="${RECEPTOR_SPEC_PATH:-$HOME/Developer/ssd/saas_ecf_dgii/src/Apis/ECF_DGII.ReceptorApi/wwwroot/openapi/v1.json}"
 OPENAPI_GEN_VERSION="${OPENAPI_GEN_VERSION:-7.14.0}"
+KOTLIN_GEN_VERSION="${KOTLIN_GEN_VERSION:-7.20.0}"
+IOS_GEN_VERSION="${IOS_GEN_VERSION:-7.20.0}"
+CPP_GEN_VERSION="${CPP_GEN_VERSION:-7.14.0}"
 NPX_PKG="@openapitools/openapi-generator-cli@2.32.0"
 
 PASS=()
@@ -44,6 +49,27 @@ require_spec() {
     exit 2
   fi
 }
+
+# The API omits null values, so nullable properties marked `required` are often
+# missing; the JVM parsers reject that. Generate them from a relaxed copy.
+make_relaxed_spec() {
+  RELAXED_SPEC="$(mktemp -t ecf-openapi-relaxed.XXXXXX)"
+  python3 "$REPO_ROOT/python/relax_spec.py" "$SPEC_PATH" "$RELAXED_SPEC" >/dev/null
+}
+
+# openapi-generator-cli ignores OPENAPI_GENERATOR_VERSION and reads the JAR
+# version from ./openapitools.json; write a temporary one for the run.
+pin_generator() {  # <dir> <version>; leaves an existing openapitools.json alone
+  [[ -f "$1/openapitools.json" ]] && return
+  printf '{ "generator-cli": { "version": "%s" } }\n' "$2" > "$1/openapitools.json"
+  PINNED_DIR="$1"
+}
+unpin_generator() {
+  [[ -n "${PINNED_DIR:-}" ]] && rm -f "$PINNED_DIR/openapitools.json"
+  PINNED_DIR=""
+}
+cleanup() { unpin_generator; rm -f "${RELAXED_SPEC:-}"; }
+trap cleanup EXIT
 
 regen_dotnet() {
   step "dotnet (kiota)"
@@ -85,9 +111,10 @@ regen_python() {
 regen_java() {
   step "java (openapi-generator java/okhttp-gson)"
   command -v npx >/dev/null && command -v java >/dev/null || { skip "java" "npx or java missing"; return; }
+  make_relaxed_spec
   ( cd "$REPO_ROOT/java" \
       && JAVA_OPTS="-Xmx4g" OPENAPI_GENERATOR_VERSION=$OPENAPI_GEN_VERSION \
-         npx -y $NPX_PKG generate -c openapi-generator-config.yaml -i "$SPEC_PATH" ) \
+         npx -y $NPX_PKG generate -c openapi-generator-config.yaml -i "$RELAXED_SPEC" ) \
     && ( cd "$REPO_ROOT/java" && ./mvnw -B -q -DskipTests=false test ) \
     && ok "java" || bad "java"
 }
@@ -95,15 +122,21 @@ regen_java() {
 regen_kotlin() {
   step "kotlin (openapi-generator kotlin/jvm-okhttp4)"
   command -v npx >/dev/null && command -v java >/dev/null || { skip "kotlin" "npx or java missing"; return; }
+  make_relaxed_spec
+  pin_generator "$REPO_ROOT" "$KOTLIN_GEN_VERSION"
   ( cd "$REPO_ROOT" \
-      && JAVA_OPTS="-Xmx4g" OPENAPI_GENERATOR_VERSION=$OPENAPI_GEN_VERSION \
+      && JAVA_OPTS="-Xmx4g" OPENAPI_GENERATOR_VERSION=$KOTLIN_GEN_VERSION \
          npx -y $NPX_PKG generate \
-           -i "$SPEC_PATH" \
+           -i "$RELAXED_SPEC" \
            -g kotlin \
            -o kotlin/ \
            --library jvm-okhttp4 \
-           --additional-properties=groupId=do.com.ssd.ecfx,artifactId=ecf-dgii-sdk-kotlin,packageName=dom.com.ssd.ecfx.sdk,serializationLibrary=kotlinx_serialization,dateLibrary=java8 ) \
-    && ( cd "$REPO_ROOT/kotlin" && ./gradlew -q build -x test ) \
+           --additional-properties=groupId=do.com.ssd.ecfx,artifactId=ecf-dgii-sdk-kotlin,packageName=dom.com.ssd.ecfx.sdk,serializationLibrary=kotlinx_serialization,dateLibrary=java8 )
+  local rc=$?
+  unpin_generator
+  [[ $rc -eq 0 ]] \
+    && "$REPO_ROOT/kotlin/postprocess.sh" \
+    && ( cd "$REPO_ROOT/kotlin" && ./gradlew -q build ) \
     && ok "kotlin" || bad "kotlin"
 }
 
@@ -116,13 +149,18 @@ regen_ios() {
   command -v swift >/dev/null || { skip "ios" "swift not installed"; return; }
   command -v npx >/dev/null && command -v java >/dev/null || { skip "ios" "npx or java missing"; return; }
   cp "$SPEC_PATH" "$REPO_ROOT/ios/openapi-v1-processed.json"
+  pin_generator "$REPO_ROOT/ios" "$IOS_GEN_VERSION"
   ( cd "$REPO_ROOT/ios" \
-      && JAVA_OPTS="-Xmx4g" OPENAPI_GENERATOR_VERSION=$OPENAPI_GEN_VERSION \
+      && JAVA_OPTS="-Xmx4g" OPENAPI_GENERATOR_VERSION=$IOS_GEN_VERSION \
          npx -y $NPX_PKG generate \
            -i ./openapi-v1-processed.json \
            -g swift6 \
            -o . \
-           --additional-properties=projectName=EcfDgiiClient,responseAs=AsyncAwait,useSPMFileStructure=true,swiftPackagePath=Sources/EcfDgiiClient ) \
+           --additional-properties=projectName=EcfDgiiClient,responseAs=AsyncAwait,useSPMFileStructure=true,swiftPackagePath=Sources/EcfDgiiClient )
+  local rc=$?
+  unpin_generator
+  [[ $rc -eq 0 ]] \
+    && "$REPO_ROOT/ios/postprocess.sh" \
     && ( cd "$REPO_ROOT/ios" && swift build ) \
     && ok "ios" || bad "ios"
 }
@@ -134,14 +172,16 @@ regen_cpp() {
          "$REPO_ROOT/C++/include/ecf-dgii-client/model" \
          "$REPO_ROOT/C++/src/api" \
          "$REPO_ROOT/C++/src/model"
+  pin_generator "$REPO_ROOT" "$CPP_GEN_VERSION"
   ( cd "$REPO_ROOT" \
-      && JAVA_OPTS="-Xmx4g" OPENAPI_GENERATOR_VERSION=$OPENAPI_GEN_VERSION \
+      && JAVA_OPTS="-Xmx4g" OPENAPI_GENERATOR_VERSION=$CPP_GEN_VERSION \
          npx -y $NPX_PKG generate \
            -i "$SPEC_PATH" \
            -g cpp-restsdk \
            -o C++ \
            --additional-properties=packageName=ecf-dgii-client ) \
     && ok "cpp" || bad "cpp"
+  unpin_generator
 }
 
 refresh_bruno() {
@@ -176,7 +216,7 @@ main() {
   echo "Repo root:      $REPO_ROOT"
   echo "Spec:           $SPEC_PATH"
   echo "Receptor spec:  $RECEPTOR_SPEC_PATH"
-  echo "Generator:      $NPX_PKG  (JAR $OPENAPI_GEN_VERSION)"
+  echo "Generator:      $NPX_PKG  (java $OPENAPI_GEN_VERSION, kotlin $KOTLIN_GEN_VERSION, ios $IOS_GEN_VERSION, cpp $CPP_GEN_VERSION)"
 
   if [[ $# -gt 0 ]]; then
     for t in "$@"; do run_target "$t"; done

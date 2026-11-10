@@ -532,6 +532,50 @@ public class Ecf44Item {
     this.montoItem = montoItem;
   }
 
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   *
+   * @param key name of the property
+   * @param value value of the property
+   * @return the Ecf44Item instance itself
+   */
+  public Ecf44Item putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   *
+   * @return a map of objects
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   *
+   * @param key name of the property
+   * @return an object
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
 
 
   @Override
@@ -560,12 +604,13 @@ public class Ecf44Item {
         Objects.equals(this.tablaSubRecargo, ecf44Item.tablaSubRecargo) &&
         Objects.equals(this.tablaImpuestoAdicional, ecf44Item.tablaImpuestoAdicional) &&
         Objects.equals(this.otraMonedaDetalle, ecf44Item.otraMonedaDetalle) &&
-        Objects.equals(this.montoItem, ecf44Item.montoItem);
+        Objects.equals(this.montoItem, ecf44Item.montoItem)&&
+        Objects.equals(this.additionalProperties, ecf44Item.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(numeroLinea, tablaCodigosItem, indicadorFacturacion, nombreItem, indicadorBienoServicio, descripcionItem, cantidadItem, unidadMedida, fechaElaboracion, fechaVencimientoItem, precioUnitarioItem, descuentoMonto, tablaSubDescuento, recargoMonto, tablaSubRecargo, tablaImpuestoAdicional, otraMonedaDetalle, montoItem);
+    return Objects.hash(numeroLinea, tablaCodigosItem, indicadorFacturacion, nombreItem, indicadorBienoServicio, descripcionItem, cantidadItem, unidadMedida, fechaElaboracion, fechaVencimientoItem, precioUnitarioItem, descuentoMonto, tablaSubDescuento, recargoMonto, tablaSubRecargo, tablaImpuestoAdicional, otraMonedaDetalle, montoItem, additionalProperties);
   }
 
   @Override
@@ -590,6 +635,7 @@ public class Ecf44Item {
     sb.append("    tablaImpuestoAdicional: ").append(toIndentedString(tablaImpuestoAdicional)).append("\n");
     sb.append("    otraMonedaDetalle: ").append(toIndentedString(otraMonedaDetalle)).append("\n");
     sb.append("    montoItem: ").append(toIndentedString(montoItem)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -627,14 +673,6 @@ public class Ecf44Item {
       if (jsonElement == null) {
         if (!Ecf44Item.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in Ecf44Item is not found in the empty JSON string", Ecf44Item.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!Ecf44Item.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Ecf44Item` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
@@ -752,6 +790,28 @@ public class Ecf44Item {
            @Override
            public void write(JsonWriter out, Ecf44Item value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additional properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                   if (jsonElement.isJsonArray()) {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                   } else {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                   }
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -759,7 +819,28 @@ public class Ecf44Item {
            public Ecf44Item read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
+             JsonObject jsonObj = jsonElement.getAsJsonObject();
+             // store additional fields in the deserialized instance
+             Ecf44Item instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else if (entry.getValue().isJsonArray()) {
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), List.class));
+                 } else { // JSON object
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), HashMap.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();

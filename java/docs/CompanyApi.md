@@ -81,7 +81,7 @@ null (empty response body)
 
 <a id="getCompanies"></a>
 # **getCompanies**
-> PaginatedApiResultOfCompanyResponse getCompanies(rncs, names, page, limit)
+> PaginatedApiResultOfCompanyResponse getCompanies(rncs, names, page, limit, search)
 
 
 
@@ -109,8 +109,9 @@ public class Example {
     List<String> names = Arrays.asList(); // List<String> | 
     GetCompaniesPageParameter page = new GetCompaniesPageParameter(); // GetCompaniesPageParameter | 
     GetCompaniesLimitParameter limit = new GetCompaniesLimitParameter(); // GetCompaniesLimitParameter | 
+    String search = "search_example"; // String | 
     try {
-      PaginatedApiResultOfCompanyResponse result = apiInstance.getCompanies(rncs, names, page, limit);
+      PaginatedApiResultOfCompanyResponse result = apiInstance.getCompanies(rncs, names, page, limit, search);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CompanyApi#getCompanies");
@@ -131,6 +132,7 @@ public class Example {
 | **names** | [**List&lt;String&gt;**](String.md)|  | [optional] |
 | **page** | **GetCompaniesPageParameter**|  | [optional] [default to 1] |
 | **limit** | **GetCompaniesLimitParameter**|  | [optional] [default to 25] |
+| **search** | **String**|  | [optional] |
 
 ### Return type
 

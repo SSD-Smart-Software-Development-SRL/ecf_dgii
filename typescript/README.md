@@ -107,6 +107,38 @@ console.log(result.progress); // 'Finished'
 console.log(result.encf);
 ```
 
+## Estado de envío a la DGII (`dgiiSubmissionState`)
+
+`EcfResponse` incluye `dgiiSubmissionState` (opcional; `null` en documentos creados antes del envío durable). Dos valores cambian lo que debe hacer tu sistema:
+
+| Valor | Significado | Qué hacer |
+|-------|-------------|-----------|
+| `PendingReconciliation` | La DGII todavía no confirma el resultado (`progress = UploadedToDgii`, `estatus = EnProceso`). | Seguir consultando. **No** reenviar el documento ni reutilizar el eNCF. |
+| `NotReceived` | La DGII confirmó que no tiene registro del documento (`progress = Error`, `estatus = null`, `secuenciaUtilizada = false`; `errors` trae el motivo en español). | Es final y **no** fue aceptado, pero el **mismo eNCF** puede enviarse otra vez como una solicitud nueva (`POST /ecf/{tipo}`). |
+
+Los demás valores (`Prepared`, `Sending`, `Accepted`, `Rejected`, `ValidationFailed`, `ReservationBlocked`) son informativos: el resultado se sigue leyendo en `progress`/`estatus`.
+
+`sendEcf` sigue consultando durante `PendingReconciliation`. En `NotReceived` lanza `EcfError` con `canResubmit === true`:
+
+```typescript
+import { EcfError, canResubmit, isPendingReconciliation, isTerminal } from '@ssddo/ecf-sdk';
+
+try {
+  await client.sendEcf(ecf);
+} catch (err) {
+  if (err instanceof EcfError && err.canResubmit) {
+    // La DGII no recibió el documento: se puede enviar de nuevo con el mismo eNCF.
+  }
+}
+
+// Con respuestas que consultas tú mismo:
+isTerminal(response);              // false mientras esté en PendingReconciliation
+isPendingReconciliation(response); // no reenviar ni reutilizar el eNCF
+canResubmit(response);             // NotReceived: reenviar con el mismo eNCF
+```
+
+Un valor desconocido de una versión más nueva de la API simplemente no coincide con ninguno de los dos y se usa `progress`.
+
 ## Configuración de entorno
 
 ```typescript

@@ -33,6 +33,9 @@ namespace EcfDgii.Client.Generated.Ecf.FourThree
         public FourThreeRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecf/43", rawUrl)
         {
         }
+        /// <summary>
+        /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
+        /// </summary>
         /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.EcfResponse"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -40,6 +43,7 @@ namespace EcfDgii.Client.Generated.Ecf.FourThree
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 400 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 401 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 403 status code</exception>
+        /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 409 status code</exception>
         /// <exception cref="global::EcfDgii.Client.Generated.Models.ProblemDetails">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -57,10 +61,14 @@ namespace EcfDgii.Client.Generated.Ecf.FourThree
                 { "400", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "401", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "403", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
+                { "409", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
                 { "500", global::EcfDgii.Client.Generated.Models.ProblemDetails.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::EcfDgii.Client.Generated.Models.EcfResponse>(requestInfo, global::EcfDgii.Client.Generated.Models.EcfResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
+        /// <summary>
+        /// Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada = false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
+        /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

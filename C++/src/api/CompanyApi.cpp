@@ -141,7 +141,7 @@ pplx::task<void> CompanyApi::deleteCompany(utility::string_t rnc) const
         return void();
     });
 }
-pplx::task<std::shared_ptr<PaginatedApiResultOfCompanyResponse>> CompanyApi::getCompanies(boost::optional<std::vector<utility::string_t>> rncs, boost::optional<std::vector<utility::string_t>> names, boost::optional<GetCompanies_Page_parameter> page, boost::optional<GetCompanies_Limit_parameter> limit) const
+pplx::task<std::shared_ptr<PaginatedApiResultOfCompanyResponse>> CompanyApi::getCompanies(boost::optional<std::vector<utility::string_t>> rncs, boost::optional<std::vector<utility::string_t>> names, boost::optional<GetCompanies_Page_parameter> page, boost::optional<GetCompanies_Limit_parameter> limit, boost::optional<utility::string_t> search) const
 {
 
 
@@ -198,6 +198,10 @@ pplx::task<std::shared_ptr<PaginatedApiResultOfCompanyResponse>> CompanyApi::get
     if (limit)
     {
         localVarQueryParams[utility::conversions::to_string_t("Limit")] = ApiClient::parameterToString(*limit);
+    }
+    if (search)
+    {
+        localVarQueryParams[utility::conversions::to_string_t("Search")] = ApiClient::parameterToString(*search);
     }
 
     std::shared_ptr<IHttpBody> localVarHttpBody;

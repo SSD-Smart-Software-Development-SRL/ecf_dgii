@@ -12,7 +12,7 @@ Agrega a tu `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git", from: "1.0.0")
+    .package(url: "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii.git", from: "1.1.0")
 ]
 ```
 
@@ -21,7 +21,7 @@ O en Xcode: **File > Add Package Dependencies** e ingresa la URL del repositorio
 ### CocoaPods
 
 ```ruby
-pod 'EcfDgiiClient', '~> 1.0.0'
+pod 'EcfDgiiClient', '~> 1.1.0'
 ```
 
 ## Inicio rápido
@@ -89,6 +89,34 @@ let options = PollingOptions(
 
 let result = try await client.sendEcf(ecf: ecf, pollingOptions: options)
 ```
+
+### Estado de envío a la DGII (`dgiiSubmissionState`)
+
+`EcfResponse` incluye `dgiiSubmissionState` (opcional; `null` en documentos creados antes del envío durable). Dos valores cambian lo que debe hacer tu sistema:
+
+| Valor | Significado | Qué hacer |
+|-------|-------------|-----------|
+| `PendingReconciliation` | La DGII todavía no confirma el resultado (`progress = UploadedToDgii`, `estatus = EnProceso`). | Seguir consultando. **No** reenviar el documento ni reutilizar el eNCF. |
+| `NotReceived` | La DGII confirmó que no tiene registro del documento (`progress = Error`, `estatus = null`, `secuenciaUtilizada = false`; `errors` trae el motivo en español). | Es final y **no** fue aceptado, pero el **mismo eNCF** puede enviarse otra vez como una solicitud nueva (`POST /ecf/{tipo}`). |
+
+Los demás valores (`Prepared`, `Sending`, `Accepted`, `Rejected`, `ValidationFailed`, `ReservationBlocked`) son informativos: el resultado se sigue leyendo en `progress`/`estatus`.
+
+`sendEcf` sigue consultando durante `PendingReconciliation`. En `NotReceived` lanza `EcfProcessingError` con `canResubmit == true`:
+
+```swift
+do {
+    let result = try await client.sendEcf(ecf: ecf)
+} catch let error as EcfProcessingError where error.canResubmit {
+    // La DGII no recibió el documento: se puede enviar de nuevo con el mismo eNCF.
+}
+
+// Con respuestas que consultas tú mismo:
+response.isTerminal              // false mientras esté en PendingReconciliation
+response.isPendingReconciliation // no reenviar ni reutilizar el eNCF
+response.canResubmit             // NotReceived: reenviar con el mismo eNCF
+```
+
+Un valor desconocido se decodifica como `.unknownDefaultOpenApi` en lugar de fallar.
 
 ## Arquitectura Backend / Frontend
 

@@ -170,6 +170,19 @@ options.timeout = std::chrono::milliseconds(300000);  // 5 minutos
 auto result = client.sendEcf(ecf, options).get();
 ```
 
+### Estado de envío a la DGII (`dgiiSubmissionState`)
+
+`EcfResponse` incluye `dgiiSubmissionState` (opcional; `null` en documentos creados antes del envío durable). Dos valores cambian lo que debe hacer tu sistema:
+
+| Valor | Significado | Qué hacer |
+|-------|-------------|-----------|
+| `PendingReconciliation` | La DGII todavía no confirma el resultado (`progress = UploadedToDgii`, `estatus = EnProceso`). | Seguir consultando. **No** reenviar el documento ni reutilizar el eNCF. |
+| `NotReceived` | La DGII confirmó que no tiene registro del documento (`progress = Error`, `estatus = null`, `secuenciaUtilizada = false`; `errors` trae el motivo en español). | Es final y **no** fue aceptado, pero el **mismo eNCF** puede enviarse otra vez como una solicitud nueva (`POST /ecf/{tipo}`). |
+
+Los demás valores (`Prepared`, `Sending`, `Accepted`, `Rejected`, `ValidationFailed`, `ReservationBlocked`) son informativos: el resultado se sigue leyendo en `progress`/`estatus`.
+
+El cliente C++ no hace polling automático: al consultar `EcfResponse` revisa `getDgiiSubmissionState()` antes que `getProgress()`. Sigue consultando con `PENDINGRECONCILIATION` y trata `NOTRECEIVED` como final pero reenviable. Nota: el generador convierte un valor desconocido en el primer valor del enum (`PREPARED`), que no es terminal.
+
 ## Arquitectura Backend / Frontend
 
 ```mermaid

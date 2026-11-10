@@ -965,7 +965,7 @@ pplx::task<std::shared_ptr<RespuestaConsultaTimbre>> DgiiApi::consultaTimbreFC(u
         return localVarResult;
     });
 }
-pplx::task<std::shared_ptr<RespuestaConsultaTrackId>> DgiiApi::consultaTrackId(utility::string_t rnc, utility::string_t rncEmisor, utility::string_t encf) const
+pplx::task<std::vector<std::shared_ptr<TrackingDetalle>>> DgiiApi::consultaTrackId(utility::string_t rnc, utility::string_t rncEmisor, utility::string_t encf) const
 {
 
 
@@ -1075,13 +1075,17 @@ pplx::task<std::shared_ptr<RespuestaConsultaTrackId>> DgiiApi::consultaTrackId(u
     })
     .then([=, this](utility::string_t localVarResponse)
     {
-        std::shared_ptr<RespuestaConsultaTrackId> localVarResult(new RespuestaConsultaTrackId());
+        std::vector<std::shared_ptr<TrackingDetalle>> localVarResult;
 
         if(localVarResponseHttpContentType == utility::conversions::to_string_t("application/json"))
         {
             web::json::value localVarJson = web::json::value::parse(localVarResponse);
-
-            ModelBase::fromJson(localVarJson, localVarResult);
+            for( auto& localVarItem : localVarJson.as_array() )
+            {
+                std::shared_ptr<TrackingDetalle> localVarItemObj;
+                ModelBase::fromJson(localVarItem, localVarItemObj);
+                localVarResult.push_back(localVarItemObj);
+            }
         }
         // else if(localVarResponseHttpContentType == utility::conversions::to_string_t("multipart/form-data"))
         // {

@@ -105,7 +105,9 @@ public enum Ecf34CodificacionTipoImpuestosType {
   
   _038("038"),
   
-  _039("039");
+  _039("039"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -128,7 +130,7 @@ public enum Ecf34CodificacionTipoImpuestosType {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<Ecf34CodificacionTipoImpuestosType> {

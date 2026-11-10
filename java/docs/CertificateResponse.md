@@ -13,7 +13,7 @@
 |**notBeforeUtc** | **Date** |  |  |
 |**notAfterUtc** | **Date** |  |  |
 |**serialNumber** | **String** |  |  |
-|**rnc** | **String** |  |  |
+|**rnc** | **String** |  |  [optional] |
 |**createdOn** | **Date** |  |  |
 |**createdBy** | **String** |  |  |
 

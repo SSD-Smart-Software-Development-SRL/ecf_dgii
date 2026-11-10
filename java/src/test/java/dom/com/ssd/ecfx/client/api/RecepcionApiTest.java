@@ -75,9 +75,10 @@ public class RecepcionApiTest {
         String toDate = null;
         SearchEcfsAmountFromParameter amountFrom = null;
         SearchEcfsAmountFromParameter amountTo = null;
+        Boolean ocultarNoRecibidas = null;
         GetCompaniesPageParameter page = null;
         GetCompaniesLimitParameter limit = null;
-        PaginatedApiResultOfEcfReceptionRequestDto response = api.searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit);
+        PaginatedApiResultOfEcfReceptionRequestDto response = api.searchEcfReceptionRequests(messageIds, encfs, rncs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit);
         // TODO: test validations
     }
 
@@ -96,9 +97,10 @@ public class RecepcionApiTest {
         String toDate = null;
         SearchEcfsAmountFromParameter amountFrom = null;
         SearchEcfsAmountFromParameter amountTo = null;
+        Boolean ocultarNoRecibidas = null;
         GetCompaniesPageParameter page = null;
         GetCompaniesLimitParameter limit = null;
-        PaginatedApiResultOfEcfReceptionRequestDto response = api.searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, page, limit);
+        PaginatedApiResultOfEcfReceptionRequestDto response = api.searchEcfReceptionRequestsByRnc(rnc, messageIds, encfs, rncEmisors, tiposEcfs, progresses, fromDate, toDate, amountFrom, amountTo, ocultarNoRecibidas, page, limit);
         // TODO: test validations
     }
 

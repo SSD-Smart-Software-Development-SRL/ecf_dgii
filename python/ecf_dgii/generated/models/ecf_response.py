@@ -10,8 +10,10 @@ from attrs import field as _attrs_field
 
 from ..models.all_tipo_ecf_types import AllTipoECFTypes
 from ..models.dgii_environment import DGIIEnvironment
+from ..models.dgii_submission_state_type_1 import DgiiSubmissionStateType1
 from ..models.ecf_estado_type_1 import EcfEstadoType1
 from ..models.ecf_progress import EcfProgress
+from ..models.receptor_directory_status_type_1 import ReceptorDirectoryStatusType1
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -48,6 +50,8 @@ class EcfResponse:
         emisor_receptor_errors (None | str | Unset):
         secuencia_utilizada (bool | None | Unset):
         acecfs (list[AcecfSummaryDto] | Unset): ACECFs received from the receptor for this outbound ECF.
+        receptor_directory_status (None | ReceptorDirectoryStatusType1 | Unset):
+        dgii_submission_state (DgiiSubmissionStateType1 | None | Unset):
         impresion_url (None | str | Unset):
     """
 
@@ -74,6 +78,8 @@ class EcfResponse:
     emisor_receptor_errors: None | str | Unset = UNSET
     secuencia_utilizada: bool | None | Unset = UNSET
     acecfs: list[AcecfSummaryDto] | Unset = UNSET
+    receptor_directory_status: None | ReceptorDirectoryStatusType1 | Unset = UNSET
+    dgii_submission_state: DgiiSubmissionStateType1 | None | Unset = UNSET
     impresion_url: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -170,6 +176,22 @@ class EcfResponse:
                 acecfs_item = acecfs_item_data.to_dict()
                 acecfs.append(acecfs_item)
 
+        receptor_directory_status: None | str | Unset
+        if isinstance(self.receptor_directory_status, Unset):
+            receptor_directory_status = UNSET
+        elif isinstance(self.receptor_directory_status, ReceptorDirectoryStatusType1):
+            receptor_directory_status = self.receptor_directory_status.value
+        else:
+            receptor_directory_status = self.receptor_directory_status
+
+        dgii_submission_state: None | str | Unset
+        if isinstance(self.dgii_submission_state, Unset):
+            dgii_submission_state = UNSET
+        elif isinstance(self.dgii_submission_state, DgiiSubmissionStateType1):
+            dgii_submission_state = self.dgii_submission_state.value
+        else:
+            dgii_submission_state = self.dgii_submission_state
+
         impresion_url: None | str | Unset
         if isinstance(self.impresion_url, Unset):
             impresion_url = UNSET
@@ -215,6 +237,10 @@ class EcfResponse:
             field_dict["secuenciaUtilizada"] = secuencia_utilizada
         if acecfs is not UNSET:
             field_dict["acecfs"] = acecfs
+        if receptor_directory_status is not UNSET:
+            field_dict["receptorDirectoryStatus"] = receptor_directory_status
+        if dgii_submission_state is not UNSET:
+            field_dict["dgiiSubmissionState"] = dgii_submission_state
         if impresion_url is not UNSET:
             field_dict["impresionUrl"] = impresion_url
 
@@ -360,6 +386,40 @@ class EcfResponse:
 
                 acecfs.append(acecfs_item)
 
+        def _parse_receptor_directory_status(data: object) -> None | ReceptorDirectoryStatusType1 | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                componentsschemas_receptor_directory_status_type_1 = ReceptorDirectoryStatusType1(data)
+
+                return componentsschemas_receptor_directory_status_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | ReceptorDirectoryStatusType1 | Unset, data)
+
+        receptor_directory_status = _parse_receptor_directory_status(d.pop("receptorDirectoryStatus", UNSET))
+
+        def _parse_dgii_submission_state(data: object) -> DgiiSubmissionStateType1 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                componentsschemas_dgii_submission_state_type_1 = DgiiSubmissionStateType1(data)
+
+                return componentsschemas_dgii_submission_state_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(DgiiSubmissionStateType1 | None | Unset, data)
+
+        dgii_submission_state = _parse_dgii_submission_state(d.pop("dgiiSubmissionState", UNSET))
+
         def _parse_impresion_url(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -393,6 +453,8 @@ class EcfResponse:
             emisor_receptor_errors=emisor_receptor_errors,
             secuencia_utilizada=secuencia_utilizada,
             acecfs=acecfs,
+            receptor_directory_status=receptor_directory_status,
+            dgii_submission_state=dgii_submission_state,
             impresion_url=impresion_url,
         )
 

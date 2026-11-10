@@ -305,13 +305,33 @@ public class EcfFrontendClient {
             List<String> names,
             GetCompaniesPageParameter page,
             GetCompaniesLimitParameter limit) throws ApiException {
+        return getCompanies(rncs, names, page, limit, null);
+    }
+
+    /**
+     * List companies with optional filters and a free-text search.
+     *
+     * @param rncs   Filter by RNCs (optional)
+     * @param names  Filter by names (optional)
+     * @param page   Page number (optional, default 1)
+     * @param limit  Page size (optional, default 25)
+     * @param search Free-text search by RNC or name (optional)
+     * @return Paginated company responses
+     * @throws ApiException if the HTTP request fails
+     */
+    public PaginatedApiResultOfCompanyResponse getCompanies(
+            List<String> rncs,
+            List<String> names,
+            GetCompaniesPageParameter page,
+            GetCompaniesLimitParameter limit,
+            String search) throws ApiException {
         ensureToken();
         try {
-            return companyApi.getCompanies(rncs, names, page, limit);
+            return companyApi.getCompanies(rncs, names, page, limit, search);
         } catch (ApiException e) {
             if (e.getCode() == 401) {
                 refreshToken();
-                return companyApi.getCompanies(rncs, names, page, limit);
+                return companyApi.getCompanies(rncs, names, page, limit, search);
             }
             throw e;
         }

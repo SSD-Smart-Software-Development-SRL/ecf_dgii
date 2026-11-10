@@ -11,6 +11,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.certification_state_response import CertificationStateResponse
     from ..models.company_urls_response import CompanyUrlsResponse
 
 
@@ -31,6 +32,11 @@ class CompanyResponse:
         tenant_id (UUID | Unset):
         receptor_id (str | Unset):
         urls (CompanyUrlsResponse | None | Unset):
+        certification (CertificationStateResponse | None | Unset):
+        archived_at (datetime.datetime | None | Unset): When the company was archived; null while it is active.
+        archived_by (None | str | Unset): Who archived it and why, the last time it was archived; kept after a restore
+            as history.
+        archive_reason (None | str | Unset):
     """
 
     rnc: str | Unset = UNSET
@@ -43,9 +49,14 @@ class CompanyResponse:
     tenant_id: UUID | Unset = UNSET
     receptor_id: str | Unset = UNSET
     urls: CompanyUrlsResponse | None | Unset = UNSET
+    certification: CertificationStateResponse | None | Unset = UNSET
+    archived_at: datetime.datetime | None | Unset = UNSET
+    archived_by: None | str | Unset = UNSET
+    archive_reason: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.certification_state_response import CertificationStateResponse  # noqa: PLC0415
         from ..models.company_urls_response import CompanyUrlsResponse  # noqa: PLC0415
 
         rnc = self.rnc
@@ -80,6 +91,34 @@ class CompanyResponse:
         else:
             urls = self.urls
 
+        certification: dict[str, Any] | None | Unset
+        if isinstance(self.certification, Unset):
+            certification = UNSET
+        elif isinstance(self.certification, CertificationStateResponse):
+            certification = self.certification.to_dict()
+        else:
+            certification = self.certification
+
+        archived_at: None | str | Unset
+        if isinstance(self.archived_at, Unset):
+            archived_at = UNSET
+        elif isinstance(self.archived_at, datetime.datetime):
+            archived_at = self.archived_at.isoformat()
+        else:
+            archived_at = self.archived_at
+
+        archived_by: None | str | Unset
+        if isinstance(self.archived_by, Unset):
+            archived_by = UNSET
+        else:
+            archived_by = self.archived_by
+
+        archive_reason: None | str | Unset
+        if isinstance(self.archive_reason, Unset):
+            archive_reason = UNSET
+        else:
+            archive_reason = self.archive_reason
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -103,11 +142,20 @@ class CompanyResponse:
             field_dict["receptorId"] = receptor_id
         if urls is not UNSET:
             field_dict["urls"] = urls
+        if certification is not UNSET:
+            field_dict["certification"] = certification
+        if archived_at is not UNSET:
+            field_dict["archivedAt"] = archived_at
+        if archived_by is not UNSET:
+            field_dict["archivedBy"] = archived_by
+        if archive_reason is not UNSET:
+            field_dict["archiveReason"] = archive_reason
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.certification_state_response import CertificationStateResponse  # noqa: PLC0415
         from ..models.company_urls_response import CompanyUrlsResponse  # noqa: PLC0415
 
         d = dict(src_dict)
@@ -161,6 +209,58 @@ class CompanyResponse:
 
         urls = _parse_urls(d.pop("urls", UNSET))
 
+        def _parse_certification(data: object) -> CertificationStateResponse | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                certification_type_1 = CertificationStateResponse.from_dict(data)
+
+                return certification_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(CertificationStateResponse | None | Unset, data)
+
+        certification = _parse_certification(d.pop("certification", UNSET))
+
+        def _parse_archived_at(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                archived_at_type_1 = datetime.datetime.fromisoformat(data)
+
+                return archived_at_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        archived_at = _parse_archived_at(d.pop("archivedAt", UNSET))
+
+        def _parse_archived_by(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        archived_by = _parse_archived_by(d.pop("archivedBy", UNSET))
+
+        def _parse_archive_reason(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        archive_reason = _parse_archive_reason(d.pop("archiveReason", UNSET))
+
         company_response = cls(
             rnc=rnc,
             legal_name=legal_name,
@@ -172,6 +272,10 @@ class CompanyResponse:
             tenant_id=tenant_id,
             receptor_id=receptor_id,
             urls=urls,
+            certification=certification,
+            archived_at=archived_at,
+            archived_by=archived_by,
+            archive_reason=archive_reason,
         )
 
         company_response.additional_properties = d

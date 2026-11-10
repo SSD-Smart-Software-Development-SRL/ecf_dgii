@@ -54,7 +54,7 @@ namespace EcfDgii.Client.Generated.Recepcion
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RecepcionRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/recepcion{?AmountFrom*,AmountTo*,Encfs*,FromDate*,Limit*,MessageIds*,Page*,Progresses*,RncEmisors*,Rncs*,TiposEcfs*,ToDate*}", pathParameters)
+        public RecepcionRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/recepcion{?AmountFrom*,AmountTo*,Encfs*,FromDate*,Limit*,MessageIds*,OcultarNoRecibidas*,Page*,Progresses*,RncEmisors*,Rncs*,TiposEcfs*,ToDate*}", pathParameters)
         {
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace EcfDgii.Client.Generated.Recepcion
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RecepcionRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/recepcion{?AmountFrom*,AmountTo*,Encfs*,FromDate*,Limit*,MessageIds*,Page*,Progresses*,RncEmisors*,Rncs*,TiposEcfs*,ToDate*}", rawUrl)
+        public RecepcionRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/recepcion{?AmountFrom*,AmountTo*,Encfs*,FromDate*,Limit*,MessageIds*,OcultarNoRecibidas*,Page*,Progresses*,RncEmisors*,Rncs*,TiposEcfs*,ToDate*}", rawUrl)
         {
         }
         /// <returns>A <see cref="global::EcfDgii.Client.Generated.Models.PaginatedApiResultOfEcfReceptionRequestDto"/></returns>
@@ -159,6 +159,7 @@ namespace EcfDgii.Client.Generated.Recepcion
 #else
             public Guid?[] MessageIds { get; set; }
 #endif
+            public bool? OcultarNoRecibidas { get; set; }
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             public string? Page { get; set; }

@@ -30,6 +30,7 @@
 #include "ecf-dgii-client/model/RespuestaConsultaTrackId.h"
 #include "ecf-dgii-client/model/RespuestaEstatusServicio.h"
 #include "ecf-dgii-client/model/RespuestaVentanaDeMantenimiento.h"
+#include "ecf-dgii-client/model/TrackingDetalle.h"
 #include <vector>
 #include <cpprest/details/basic_types.h>
 #include <boost/optional.hpp>
@@ -52,10 +53,10 @@ public:
     virtual ~DgiiApi();
 
     /// <summary>
-    /// 
+    /// [OBSOLETO] Listado completo del Directorio de la DGII
     /// </summary>
     /// <remarks>
-    /// 
+    /// Obsoleto: la DGII deprecó el listado completo del Directorio y puede dejar de responder. Use GET /dgii/{rnc}/consultadirectorio/obtener-directorio-por-rnc para consultar un RNC.
     /// </remarks>
     /// <param name="rnc"></param>
     pplx::task<std::vector<std::shared_ptr<Directorio>>> consultaDirectorioListado(
@@ -164,7 +165,7 @@ public:
     /// <param name="rnc"></param>
     /// <param name="rncEmisor"></param>
     /// <param name="encf"></param>
-    pplx::task<std::shared_ptr<RespuestaConsultaTrackId>> consultaTrackId(
+    pplx::task<std::vector<std::shared_ptr<TrackingDetalle>>> consultaTrackId(
         utility::string_t rnc,
         utility::string_t rncEmisor,
         utility::string_t encf

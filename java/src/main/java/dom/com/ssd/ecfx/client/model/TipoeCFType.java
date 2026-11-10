@@ -47,7 +47,9 @@ public enum TipoeCFType {
   
   COMPROBANTE_DE_EXPORTACIONES_ELECTRONICO("ComprobanteDeExportacionesElectronico"),
   
-  COMPROBANTE_PARA_PAGOS_AL_EXTERIOR_ELECTRONICO("ComprobanteParaPagosAlExteriorElectronico");
+  COMPROBANTE_PARA_PAGOS_AL_EXTERIOR_ELECTRONICO("ComprobanteParaPagosAlExteriorElectronico"),
+  
+  UNKNOWN_DEFAULT_OPEN_API("unknown_default_open_api");
 
   private String value;
 
@@ -70,7 +72,7 @@ public enum TipoeCFType {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNKNOWN_DEFAULT_OPEN_API;
   }
 
   public static class Adapter extends TypeAdapter<TipoeCFType> {

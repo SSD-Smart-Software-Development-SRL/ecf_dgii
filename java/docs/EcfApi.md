@@ -29,6 +29,8 @@ All URIs are relative to *https://api.test.ecfx.ssd.com.do*
 
 
 
+Anula rangos de e-NCF no utilizados enviando un ANECF a la DGII. Si la DGII rechaza la anulación responde con el mismo código HTTP de la DGII y su respuesta en la extensión dgiiResponse.
+
 ### Example
 ```java
 // Import classes:
@@ -389,6 +391,8 @@ public class Example {
 
 
 
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
+
 ### Example
 ```java
 // Import classes:
@@ -450,6 +454,7 @@ public class Example {
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal Server Error |  -  |
 
 <a id="recepcionEcf32"></a>
@@ -457,6 +462,8 @@ public class Example {
 > EcfResponse recepcionEcf32(ecf32ECF)
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```java
@@ -519,6 +526,7 @@ public class Example {
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal Server Error |  -  |
 
 <a id="recepcionEcf33"></a>
@@ -526,6 +534,8 @@ public class Example {
 > EcfResponse recepcionEcf33(ecf33ECF)
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```java
@@ -588,6 +598,7 @@ public class Example {
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal Server Error |  -  |
 
 <a id="recepcionEcf34"></a>
@@ -595,6 +606,8 @@ public class Example {
 > EcfResponse recepcionEcf34(ecf34ECF)
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```java
@@ -657,6 +670,7 @@ public class Example {
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal Server Error |  -  |
 
 <a id="recepcionEcf41"></a>
@@ -664,6 +678,8 @@ public class Example {
 > EcfResponse recepcionEcf41(ecf41ECF)
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```java
@@ -726,6 +742,7 @@ public class Example {
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal Server Error |  -  |
 
 <a id="recepcionEcf43"></a>
@@ -733,6 +750,8 @@ public class Example {
 > EcfResponse recepcionEcf43(ecf43ECF)
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```java
@@ -795,6 +814,7 @@ public class Example {
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal Server Error |  -  |
 
 <a id="recepcionEcf44"></a>
@@ -802,6 +822,8 @@ public class Example {
 > EcfResponse recepcionEcf44(ecf44ECF)
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```java
@@ -864,6 +886,7 @@ public class Example {
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal Server Error |  -  |
 
 <a id="recepcionEcf45"></a>
@@ -871,6 +894,8 @@ public class Example {
 > EcfResponse recepcionEcf45(ecf45ECF)
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```java
@@ -933,6 +958,7 @@ public class Example {
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal Server Error |  -  |
 
 <a id="recepcionEcf46"></a>
@@ -940,6 +966,8 @@ public class Example {
 > EcfResponse recepcionEcf46(ecf46ECF)
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```java
@@ -1002,6 +1030,7 @@ public class Example {
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal Server Error |  -  |
 
 <a id="recepcionEcf47"></a>
@@ -1009,6 +1038,8 @@ public class Example {
 > EcfResponse recepcionEcf47(ecf47ECF)
 
 
+
+Envía el e-CF a la DGII. Reenviar un e-NCF ya recibido devuelve el envío existente si el JSON es idéntico, o 409 si es distinto. Excepción: si la DGII rechazó todos los envíos anteriores de ese e-NCF sin utilizar la secuencia (secuenciaUtilizada &#x3D; false), el e-NCF sigue libre y se acepta como un envío nuevo (idéntico o corregido) con su propio messageId; los envíos anteriores se conservan como historial.
 
 ### Example
 ```java
@@ -1071,6 +1102,7 @@ public class Example {
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
 | **500** | Internal Server Error |  -  |
 
 <a id="searchAllEcfs"></a>

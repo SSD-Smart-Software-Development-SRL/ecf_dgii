@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **numeroLinea** | [**SearchEcfReceptionRequestsTiposEcfsParameterInner**](SearchEcfReceptionRequestsTiposEcfsParameterInner.md) |  |  |
+| **numeroLinea** | **kotlin.Int** |  |  |
 | **indicadorFacturacion** | [**Ecf34IndicadorFacturacionType**](Ecf34IndicadorFacturacionType.md) |  |  |
 | **nombreItem** | **kotlin.String** |  |  |
 | **indicadorBienoServicio** | [**Ecf34IndicadorBienoServicioType**](Ecf34IndicadorBienoServicioType.md) |  |  |

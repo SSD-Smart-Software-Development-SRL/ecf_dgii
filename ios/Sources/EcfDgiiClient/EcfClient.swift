@@ -236,12 +236,11 @@ public final class EcfClient: Sendable {
                 }
                 return match
             },
-            isComplete: { response in
-                response.progress == .finished || response.progress == .error
-            }
+            // PendingReconciliation keeps polling; NotReceived ends it (see EcfStatus.swift).
+            isComplete: { response in response.isTerminal }
         )
 
-        if result.progress == .error {
+        if result.progress == .error || result.canResubmit {
             throw EcfProcessingError(
                 message: result.errors ?? result.mensaje ?? "ECF processing failed",
                 response: result

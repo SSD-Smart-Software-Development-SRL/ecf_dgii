@@ -18,12 +18,12 @@ package dom.com.ssd.ecfx.sdk.models
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
-import dom.com.ssd.ecfx.sdk.models.SearchEcfsAmountFromParameter
+import dom.com.ssd.ecfx.sdk.models.CertificationStateResponseStepNumber
 
-class SearchEcfsAmountFromParameterTest : ShouldSpec() {
+class CertificationStateResponseStepNumberTest : ShouldSpec() {
     init {
-        // uncomment below to create an instance of SearchEcfsAmountFromParameter
-        //val modelInstance = SearchEcfsAmountFromParameter()
+        // uncomment below to create an instance of CertificationStateResponseStepNumber
+        //val modelInstance = CertificationStateResponseStepNumber()
 
     }
 }

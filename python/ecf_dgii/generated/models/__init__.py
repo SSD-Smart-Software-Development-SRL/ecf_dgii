@@ -6,6 +6,8 @@ from .all_tipo_ecf_types import AllTipoECFTypes
 from .anulacion_list_response import AnulacionListResponse
 from .anulacion_request import AnulacionRequest
 from .certificate_response import CertificateResponse
+from .certification_state_response import CertificationStateResponse
+from .certification_step_type_1 import CertificationStepType1
 from .codificacion_tipo_impuestos_type_type_1 import CodificacionTipoImpuestosTypeType1
 from .codigo_modificacion_type_type_1 import CodigoModificacionTypeType1
 from .company_environment_urls import CompanyEnvironmentUrls
@@ -14,6 +16,7 @@ from .company_urls_response import CompanyUrlsResponse
 from .detalle_anulacion_request import DetalleAnulacionRequest
 from .detalle_anulacion_request_dto import DetalleAnulacionRequestDto
 from .dgii_environment import DGIIEnvironment
+from .dgii_submission_state_type_1 import DgiiSubmissionStateType1
 from .directorio import Directorio
 from .ecf_31_codificacion_tipo_impuestos_type import Ecf31CodificacionTipoImpuestosType
 from .ecf_31_codigos_item import Ecf31CodigosItem
@@ -329,6 +332,7 @@ from .paginated_api_result_of_ecf_reception_request_dto import PaginatedApiResul
 from .paginated_api_result_of_ecf_response import PaginatedApiResultOfEcfResponse
 from .problem_details import ProblemDetails
 from .provincia_municipio_type_type_1 import ProvinciaMunicipioTypeType1
+from .receptor_directory_status_type_1 import ReceptorDirectoryStatusType1
 from .respuesta_anulacion_rango import RespuestaAnulacionRango
 from .respuesta_consulta_estado import RespuestaConsultaEstado
 from .respuesta_consulta_rfce import RespuestaConsultaRFCE
@@ -347,6 +351,7 @@ from .tipo_moneda_type_type_1 import TipoMonedaTypeType1
 from .tipo_pago_type_type_1 import TipoPagoTypeType1
 from .tipoe_cf_type import TipoeCFType
 from .token import Token
+from .tracking_detalle import TrackingDetalle
 from .unidad_medida_type_type_1 import UnidadMedidaTypeType1
 from .update_certificate_company_body import UpdateCertificateCompanyBody
 from .upsert_company_request import UpsertCompanyRequest
@@ -360,6 +365,8 @@ __all__ = (
     "AnulacionListResponse",
     "AnulacionRequest",
     "CertificateResponse",
+    "CertificationStateResponse",
+    "CertificationStepType1",
     "CodificacionTipoImpuestosTypeType1",
     "CodigoModificacionTypeType1",
     "CompanyEnvironmentUrls",
@@ -368,6 +375,7 @@ __all__ = (
     "DetalleAnulacionRequest",
     "DetalleAnulacionRequestDto",
     "DGIIEnvironment",
+    "DgiiSubmissionStateType1",
     "Directorio",
     "Ecf31CodificacionTipoImpuestosType",
     "Ecf31CodigosItem",
@@ -683,6 +691,7 @@ __all__ = (
     "PaginatedApiResultOfEcfResponse",
     "ProblemDetails",
     "ProvinciaMunicipioTypeType1",
+    "ReceptorDirectoryStatusType1",
     "RespuestaAnulacionRango",
     "RespuestaConsultaEstado",
     "RespuestaConsultaRFCE",
@@ -701,6 +710,7 @@ __all__ = (
     "TipoMonedaTypeType1",
     "TipoPagoTypeType1",
     "Token",
+    "TrackingDetalle",
     "UnidadMedidaTypeType1",
     "UpdateCertificateCompanyBody",
     "UpsertCompanyRequest",

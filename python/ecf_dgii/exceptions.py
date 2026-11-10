@@ -53,7 +53,20 @@ class EcfConnectionError(EcfApiError):
 
 
 class EcfProcessingError(EcfApiError):
-    """ECF was rejected by DGII during processing."""
+    """ECF processing ended in error (e.g. rejected by DGII)."""
+
+    #: True when the same eNCF may be submitted again (see :class:`EcfNotReceivedError`).
+    can_resubmit: bool = False
+
+
+class EcfNotReceivedError(EcfProcessingError):
+    """DGII confirmed it has no record of the e-CF (``dgii_submission_state == "NotReceived"``).
+
+    The document was not accepted and its eNCF was not used (``secuencia_utilizada``
+    is false), so the same eNCF can be submitted again as a new request.
+    """
+
+    can_resubmit = True
 
 
 class PollingTimeoutError(EcfApiError):

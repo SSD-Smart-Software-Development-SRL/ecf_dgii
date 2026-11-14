@@ -1,0 +1,11 @@
+{
+  "name": "ecf-dgii-delphi",
+  "description": "ECF SSD API SDK for Delphi / Object Pascal",
+  "version": "1.0.0",
+  "homepage": "https://github.com/SSD-Smart-Software-Development-SRL/ecf_dgii/tree/main/delphi",
+  "license": "Apache-2.0",
+  "mainsrc": "delphi/src/",
+  "browsingpath": "delphi/src/",
+  "projects": [],
+  "dependencies": {}
+}

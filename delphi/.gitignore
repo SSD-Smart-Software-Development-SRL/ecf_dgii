@@ -1,0 +1,12 @@
+/build/
+/dist/
+*.dcu
+*.dcp
+*.bpl
+*.exe
+*.dproj.local
+*.identcache
+*.stat
+__history/
+__recovery/
+/site-docs/

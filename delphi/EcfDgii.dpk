@@ -1,0 +1,16 @@
+package EcfDgii;
+
+{$RUNONLY}
+{$DESCRIPTION 'ECF SSD API SDK for Delphi'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl;
+
+contains
+  EcfDgii.Types in 'src\EcfDgii.Types.pas',
+  EcfDgii.Http in 'src\EcfDgii.Http.pas',
+  EcfDgii.Api in 'src\EcfDgii.Api.pas',
+  EcfDgii.Client in 'src\EcfDgii.Client.pas';
+
+end.

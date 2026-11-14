@@ -1,0 +1,133 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: publish-delphi
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'delphi/**'
+      - 'boss.json'
+      - '.github/workflows/publish-delphi.yml'
+  pull_request:
+    paths:
+      - 'delphi/**'
+      - 'boss.json'
+      - '.github/workflows/publish-delphi.yml'
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-delphi-${{ github.event.release.tag_name || github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'release' }}
+
+jobs:
+  validate_and_pack:
+    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'delphi-v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      version: ${{ steps.metadata.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate package and release versions
+        id: metadata
+        run: node delphi/scripts/check-release.mjs
+        env:
+          RELEASE_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || '' }}
+
+      - name: Check generated API and release contracts
+        run: node --test delphi/tests/*.test.mjs
+
+      - name: Package source archive
+        run: bash delphi/scripts/package.sh
+
+      - name: Verify the packaged archive
+        run: node delphi/scripts/check-package.mjs
+
+      # Releases and manual runs need the native build; a push to main without the runner only warns
+      # (the native job is skipped, so nothing can be published without it).
+      - name: Require native CI configuration
+        if: github.event_name != 'pull_request'
+        run: |
+          if [ -z "$DELPHI_RSVARS" ]; then
+            if [ "$EVENT_NAME" = "push" ]; then
+              echo '::warning::Native Delphi CI is not configured (Windows x64 runner labeled delphi + DELPHI_RSVARS); skipping compilation.'
+            else
+              echo '::error::Configure a Windows x64 runner labeled delphi and the DELPHI_RSVARS repository variable before running native CI.'
+              exit 1
+            fi
+          fi
+        env:
+          DELPHI_RSVARS: ${{ vars.DELPHI_RSVARS }}
+          EVENT_NAME: ${{ github.event_name }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: delphi-source
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            delphi/dist/*.zip
+            delphi/dist/*.sha256
+
+  compile_and_test:
+    # Public PR code never executes on a licensed self-hosted runner; without the runner configured
+    # the job is skipped instead of waiting forever for one.
+    if: github.event_name != 'pull_request' && vars.DELPHI_RSVARS != ''
+    needs: validate_and_pack
+    runs-on: [self-hosted, Windows, X64, delphi]
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: cmd
+        working-directory: delphi
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Compile package, run offline tests and compile example (Win32 and Win64)
+        run: scripts\ci-test.cmd
+        env:
+          DELPHI_RSVARS: ${{ vars.DELPHI_RSVARS }}
+
+  deploy:
+    if: github.event_name == 'release' && startsWith(github.event.release.tag_name, 'delphi-v')
+    needs: [validate_and_pack, compile_and_test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: delphi-source
+          path: dist
+
+      - name: Verify release artifact checksum
+        working-directory: dist
+        run: sha256sum --check -- *.sha256
+
+      - name: Publish Delphi source package
+        run: gh release upload "$RELEASE_TAG" dist/*.zip dist/*.sha256 --repo "$GITHUB_REPOSITORY" --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+
+  # Boss installs from the Git tag using the repository-root boss.json.
+  # GitHub Actions publishes the tested ZIP and checksum; no Boss registry/API key is needed.

@@ -184,6 +184,17 @@ regen_cpp() {
   unpin_generator
 }
 
+regen_delphi() {
+  step "delphi (native RTL client / generated API routes)"
+  command -v node >/dev/null || { skip "delphi" "node missing"; return; }
+  if [[ "$SPEC_PATH" != "$REPO_ROOT/delphi/openapi-v1.json" ]]; then
+    cp "$SPEC_PATH" "$REPO_ROOT/delphi/openapi-v1.json" || { bad "delphi contract snapshot"; return; }
+  fi
+  node "$REPO_ROOT/delphi/scripts/generate.mjs" \
+    && ok "delphi generation" || bad "delphi generation"
+  skip "delphi compilation" "run delphi/scripts/test.cmd dcc32 and dcc64 in a RAD Studio Command Prompt"
+}
+
 refresh_bruno() {
   step "bruno (bru import openapi)"
   command -v bru >/dev/null || { skip "bruno" "bru CLI not installed (pnpm add -g @usebruno/cli)"; return; }
@@ -206,6 +217,7 @@ run_target() {
     kotlin)     regen_kotlin ;;
     ios)        regen_ios ;;
     cpp|c++)    regen_cpp ;;
+    delphi)     regen_delphi ;;
     bruno)      refresh_bruno ;;
     *)          echo "Unknown target: $1" >&2; exit 2 ;;
   esac
@@ -229,6 +241,7 @@ main() {
     regen_kotlin
     regen_ios
     regen_cpp
+    regen_delphi
     refresh_bruno
   fi
 

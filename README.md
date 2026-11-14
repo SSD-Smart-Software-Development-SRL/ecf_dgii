@@ -21,6 +21,7 @@
 | Kotlin | [![Maven Central](https://img.shields.io/maven-central/v/do.com.ssd.ecfx/ecf-dgii-sdk-kotlin)](https://central.sonatype.com/artifact/do.com.ssd.ecfx/ecf-dgii-sdk-kotlin) | `implementation("do.com.ssd.ecfx:ecf-dgii-sdk-kotlin:1.0.0")` | [README](kotlin/README.md) |
 | iOS/Swift | [Swift Package Manager](https://swift.org/package-manager/) | Ver [ios/README.md](ios/README.md) | [README](ios/README.md) |
 | C++ | [vcpkg](https://vcpkg.io/) / [Conan](https://conan.io/) | Ver [C++/README.md](C++/README.md) | [README](C++/README.md) |
+| Delphi / Object Pascal | Boss / GitHub Releases | Configurar dependencia y ejecutar `boss install` | [README](delphi/README.md) |
 
 ---
 
@@ -452,6 +453,7 @@ Cada SDK tiene su propia documentación con ejemplos específicos:
 | Kotlin | [kotlin/README.md](kotlin/README.md) |
 | iOS/Swift | [ios/README.md](ios/README.md) |
 | C++ | [C++/README.md](C++/README.md) |
+| Delphi / Object Pascal | [delphi/README.md](delphi/README.md) · [Publicación automática](delphi/PUBLISHING.md) |
 | React | [react/README.md](react/README.md) |
 
 ## Migración desde versiones anteriores
